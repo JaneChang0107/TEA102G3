@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,6 +36,8 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			+ ",m_account=?,m_accountname=?,b_code=?,m_bank_pic=?,m_moneytrandate= CURRENT_TIMESTAMP,m_storename=?,m_info=?,m_cover=?,m_hi=?,m_offlinehi=?,m_coin=? where m_id=?";
 
 	private static final String GET_Mems_ByStatus_STMT ="SELECT * FROM member WHERE m_status =?";
+	
+	private static final String GET_Mems_Password_STMT="SELECT m_email,m_password FROM member WHERE m_email=?" ;
 	
 	@Override
 	public void insert(MemberVO memberVO) {
@@ -380,38 +383,90 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 
 		return set;
 	}
+	
+	@Override
+	public MemberVO getMemberPw(String m_email) {
+
+		    MemberVO memberVO = null;
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+				try {
+					Class.forName(driver);
+					con = DriverManager.getConnection(url, userid, passwd);
+					pstmt = con.prepareStatement(GET_Mems_Password_STMT);
+					
+					pstmt.setString(1 , m_email);
+					
+					rs = pstmt.executeQuery();
+					
+			    while (rs.next()) {
+				    memberVO = new MemberVO();
+				    memberVO.setM_email(rs.getString("m_email"));
+					memberVO.setM_password(rs.getString("m_password"));
+					}
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					if (rs != null) {
+						try {
+							rs.close();
+						} catch (SQLException se) {
+							se.printStackTrace(System.err);
+						}
+					}
+					if (pstmt != null) {
+						try {
+							pstmt.close();
+						} catch (SQLException se) {
+							se.printStackTrace(System.err);
+						}
+					}
+					if (con != null) {
+						try {
+							con.close();
+						} catch (Exception e) {
+							e.printStackTrace(System.err);
+						}
+					}
+				}
+		return memberVO;
+			
+	}
 
 	
 	public static void main(String[] args) {
 		MemberJDBCDAO dao =new MemberJDBCDAO();
 		
 //		//新增
-		MemberVO memberVO1=new MemberVO();		
-		memberVO1.setM_email("a111@yahoo.com.tw");
-		memberVO1.setM_password("123456");
-		memberVO1.setM_name("游阿坤");
-		memberVO1.setM_gender("男");
-		memberVO1.setM_phone("0911111111");
-		memberVO1.setM_address("台北市中正區濟南路一段321號");
-		memberVO1.setM_birth(java.sql.Date.valueOf("1981-11-17"));
-		byte[] pic=getPic("WebContent/images/apple.jpg");
-		memberVO1.setM_headpic(pic);
-		memberVO1.setM_status(1);
-		memberVO1.setM_identity("F123456789");
-		memberVO1.setM_id_pic(null);
-		memberVO1.setM_account("12345678901234");
-		memberVO1.setM_accountName("游阿坤");
-		memberVO1.setB_code("700");
-		memberVO1.setM_bank_pic(null);
-		memberVO1.setM_moneyTranDate(null);
-		memberVO1.setM_storename("阿坤市集");
-		memberVO1.setM_info(null);
-		memberVO1.setM_cover(null);
-		memberVO1.setM_hi("Hello我現在在線上");
-		memberVO1.setM_offlineHi("Sorry我現在不在線上");
-		memberVO1.setM_coin(new Integer(100));
-		dao.insert(memberVO1);
-		System.out.println("插入成功");
+//		MemberVO memberVO1=new MemberVO();		
+//		memberVO1.setM_email("a111@yahoo.com.tw");
+//		memberVO1.setM_password("123456");
+//		memberVO1.setM_name("游阿坤");
+//		memberVO1.setM_gender("男");
+//		memberVO1.setM_phone("0911111111");
+//		memberVO1.setM_address("台北市中正區濟南路一段321號");
+//		memberVO1.setM_birth(java.sql.Date.valueOf("1981-11-17"));
+//		byte[] pic=getPic("WebContent/images/apple.jpg");
+//		memberVO1.setM_headpic(pic);
+//		memberVO1.setM_status(1);
+//		memberVO1.setM_identity("F123456789");
+//		memberVO1.setM_id_pic(null);
+//		memberVO1.setM_account("12345678901234");
+//		memberVO1.setM_accountName("游阿坤");
+//		memberVO1.setB_code("700");
+//		memberVO1.setM_bank_pic(null);
+//		memberVO1.setM_moneyTranDate(null);
+//		memberVO1.setM_storename("阿坤市集");
+//		memberVO1.setM_info(null);
+//		memberVO1.setM_cover(null);
+//		memberVO1.setM_hi("Hello我現在在線上");
+//		memberVO1.setM_offlineHi("Sorry我現在不在線上");
+//		memberVO1.setM_coin(new Integer(100));
+//		dao.insert(memberVO1);
+//		System.out.println("插入成功");
 //		
 //		//修改
 //		MemberVO memberVO2=new MemberVO();
@@ -531,6 +586,10 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 //			System.out.println("----------------------");
 //		}
 		
+		MemberVO memberVO4= dao.getMemberPw("a111@yahoo.com.tw");	
+		System.out.println(memberVO4.getM_email());
+		System.out.println(memberVO4.getM_password());
+		
 	}
 	
 
@@ -551,5 +610,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		}
 		return buffer;
 	}
+
+
 
 }

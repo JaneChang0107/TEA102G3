@@ -1,4 +1,4 @@
-package com.member.login;
+package com.member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,17 +10,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.member.model.MemberJDBCDAO;
+import com.member.model.MemberVO;
+
 @WebServlet("/MemberLogin")
 public class MemberLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	protected boolean loginAccess(String account, String password) {
-		if ("xxx".equals(account) && "xxx".equals(password))
+		MemberJDBCDAO dao =new MemberJDBCDAO();
+		MemberVO memberLogin=dao.getMemberPw(account);
+		try {
+		if (memberLogin.getM_email().equals(account) && memberLogin.getM_password().equals(password))
 			return true;
 		else
 			return false;
-	}
-
+		}catch(Exception e ) {
+			System.out.println("重新登入");
+		}
+		return false;
+}
+		
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
 	}
@@ -30,14 +40,15 @@ public class MemberLogin extends HttpServlet {
 		res.setContentType("text/html; charset=Big5");
 
 		PrintWriter out = res.getWriter();
-		String account = req.getParameter("account");
-		String password = req.getParameter("password");
+		String account = req.getParameter("account").trim();
+		String password = req.getParameter("password").trim();
 		if (!loginAccess(account, password)) {
 			out.println("<HTML><HEAD><TITLE>Access Denied</TITLE></HEAD>");
 			out.println("<BODY>帳號或密碼有誤，請重新輸入!<BR>");
-			out.println("請重新登入 <A HREF=" + req.getContextPath() + "/login.html>重新登入</A>");
+			out.println("請重新登入 <A HREF=" + req.getContextPath() + "/loginPage.html>重新登入</A>");
 			out.println("</BODY></HTML>");
-		} else {
+		}
+		else {
 			HttpSession session = req.getSession();
 			session.setAttribute("account", account);
 			try {
@@ -50,7 +61,6 @@ public class MemberLogin extends HttpServlet {
 			} catch (Exception ignored) {
 			}
 			res.sendRedirect(req.getContextPath() + "/loginSuccess.jsp");
-
 		}
 
 	}
