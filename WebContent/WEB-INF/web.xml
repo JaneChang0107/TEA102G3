@@ -9,6 +9,7 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+<<<<<<< HEAD
   	<servlet>
 		<servlet-name>MemberServlet</servlet-name>
 		<servlet-class>com.member.controller.MemberServlet</servlet-class>
@@ -20,4 +21,15 @@
   
   
   
+=======
+  
+  <servlet>
+  	<servlet-name>EmployeeServlet</servlet-name>
+  	<servlet-class>com.employee.controller</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>EmployeeServlet</servlet-name>
+  	<url-pattern>/front_end/</url-pattern>
+  </servlet-mapping>
+>>>>>>> f3528d0b8fed620072f7621b1dbb16c7097315a5
 </web-app>
