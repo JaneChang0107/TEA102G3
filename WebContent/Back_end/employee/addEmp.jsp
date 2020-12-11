@@ -92,7 +92,7 @@
 			 value="${param.comm}"/></td><td>${errorMsgs.comm}</td>
 	</tr>
 
-	<jsp:useBean id="deptSvc" scope="page" class="com.dept.model.DeptService" />
+<%-- 	<jsp:useBean id="deptSvc" scope="page" class="com.dept.model.DeptService" /> --%>
 	<tr>
 		<td>³¡ªù:<font color=red><b>*</b></font></td>
 		<td><select size="1" name="deptno">
