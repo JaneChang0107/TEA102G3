@@ -38,14 +38,14 @@
 			<td>${ptVO.pt_platform}</td>
 			<td>${ptVO.pt_kind}</td>
 			<td>
-				<form action="<%= request.getContextPath() %>/Back_end/productType/addProductType.jsp" method="post">
+				<form action="<%= request.getContextPath() %>/ProductTypeServlet" method="post">
 					<input type="hidden" name="action" value="updateOne">
 					<input type="hidden" name="pt_id" value="${ptVO.pt_id}">
 					<input type="submit" value="­×§ï">
 				</form>
 			</td>
 			<td>
-				<form action="<%= request.getContextPath() %>/Back_end/productType/addProductType.jsp" method="post">
+				<form action="<%= request.getContextPath() %>/ProductTypeServlet" method="post">
 					<input type="hidden" name="action" value="delete">
 					<input type="hidden" name="pt_id" value="${ptVO.pt_id}">
 					<input type="submit" value="§R°£">
