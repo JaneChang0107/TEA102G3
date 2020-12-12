@@ -11,22 +11,22 @@ public class ProductTypeService {
 	}
 	
 	
-	public ProductTypeVO addProductType(String platForm, String kind) {
+	public ProductTypeVO addProductType(String platform, String kind) {
 		
 		ProductTypeVO ptVO = new ProductTypeVO();
 		
-		ptVO.setPt_platform(platForm);
+		ptVO.setPt_platform(platform);
 		ptVO.setPt_kind(kind);
 		dao.insert(ptVO);
 		return ptVO;
 	}
 	
-	public void updateProductType(String ptid, String platForm, String kind) {
+	public void updateProductType(String ptid, String platform, String kind) {
 		
 		ProductTypeVO ptVO = new ProductTypeVO();
 		
 		ptVO.setPt_id(ptid);
-		ptVO.setPt_platform(platForm);
+		ptVO.setPt_platform(platform);
 		ptVO.setPt_kind(kind);
 		
 		dao.update(ptVO);
