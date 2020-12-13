@@ -44,5 +44,10 @@ public class ProductTypeService {
 	public List<ProductTypeVO> getAll() {
 		return dao.getAll();
 	}
+//	public static void main(String[] args) {
+//		ProductTypeService pts = new ProductTypeService();
+//		ProductTypeVO ptVO = pts.getOneProductType("PT00001");
+//		System.out.println(ptVO);
+//	}
 	
 }

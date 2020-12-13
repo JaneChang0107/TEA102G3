@@ -41,7 +41,7 @@ public class ProductTypeJDBCDAO implements ProductTypeDAOInterface{
 		
 		
 //		// 取一
-//		ProductTypeVO ptvoGetOne = pt.findByPrimaryKey("PT00011");
+//		ProductTypeVO ptvoGetOne = pt.findByPrimaryKey("PT00001");
 //		String id = ptvoGetOne.getPt_id();
 //		String platform = ptvoGetOne.getPt_platform();
 //		String kind = ptvoGetOne.getPt_kind();
@@ -50,16 +50,16 @@ public class ProductTypeJDBCDAO implements ProductTypeDAOInterface{
 //		System.out.println("kind:" + kind);
 		
 		// 取全部
-		List<ProductTypeVO> list = pt.getAll();
-		for(ProductTypeVO ptVO : list) {
-			String id = ptVO.getPt_id();
-			String platform = ptVO.getPt_platform();
-			String kind = ptVO.getPt_kind();
-			System.out.println("id:" + id);
-			System.out.println("platform:" + platform);
-			System.out.println("kind:" + kind);
-			System.out.println("===============================");
-		}
+//		List<ProductTypeVO> list = pt.getAll();
+//		for(ProductTypeVO ptVO : list) {
+//			String id = ptVO.getPt_id();
+//			String platform = ptVO.getPt_platform();
+//			String kind = ptVO.getPt_kind();
+//			System.out.println("id:" + id);
+//			System.out.println("platform:" + platform);
+//			System.out.println("kind:" + kind);
+//			System.out.println("===============================");
+//		}
 		
 	}
 	

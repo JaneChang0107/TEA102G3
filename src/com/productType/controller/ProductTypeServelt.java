@@ -3,6 +3,8 @@ package com.productType.controller;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -71,9 +73,10 @@ public class ProductTypeServelt extends HttpServlet {
 			// ¨S¿ù»~°T®§
 			ProductTypeService ptService = new ProductTypeService();
 			ptService.addProductType(platform, kind);
-			String url = "/Back_end/productType/allProductType.jsp";
-			RequestDispatcher ok = request.getRequestDispatcher(url);
-			ok.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/Back_end/productType/allProductType.jsp");
+//			String url = "/Back_end/productType/allProductType.jsp";
+//			RequestDispatcher ok = request.getRequestDispatcher(url);
+//			ok.forward(request, response);
 		}
 		
 		// ­×§ï
@@ -112,8 +115,10 @@ public class ProductTypeServelt extends HttpServlet {
 			ptVO.setPt_platform(platform);
 			ptVO.setPt_kind(kind);
 			
-			RequestDispatcher ok = request.getRequestDispatcher("/Back_end/productType/allProductType.jsp");
-			ok.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/Back_end/productType/allProductType.jsp");
+			
+//			RequestDispatcher ok = request.getRequestDispatcher("/Back_end/productType/allProductType.jsp");
+//			ok.forward(request, response);
 		}
 		
 		if("updateOne".equals(action)) {
@@ -132,6 +137,21 @@ public class ProductTypeServelt extends HttpServlet {
 			String ptid = request.getParameter("pt_id");
 			ptService.deleteProductType(ptid);
 			response.sendRedirect(request.getContextPath() + "/Back_end/productType/allProductType.jsp");
+		}
+		
+		if("getOne".equals(action)) {
+			ProductTypeService ptService = new ProductTypeService();
+			
+			Map<String, String[]> m = request.getParameterMap();
+			Set<String> s = m.keySet();
+			for(String a : s) 
+			System.out.println(a);
+			System.out.println(s.size());
+			ProductTypeVO ptVO = ptService.getOneProductType(request.getParameter("ptid"));
+			System.out.println(ptVO);
+			request.setAttribute("ptVO", ptVO);
+			RequestDispatcher ok = request.getRequestDispatcher("/Back_end/productType/oneProductType.jsp");
+			ok.forward(request, response);
 		}
 	}
 }
