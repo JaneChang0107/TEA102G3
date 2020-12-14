@@ -37,7 +37,7 @@ public class ProductPictureJDBCDAO implements ProductPictureDAOInterface{
 			b = new byte[fis.available()];
 			fis.read(b);
 			ppVOInsert.setPp_picture(b);
-			ppVOInsert.setP_id("P00013");
+			ppVOInsert.setP_id("P00003");
 			pt.insert(ppVOInsert);
 			fis.close();
 		} catch (Exception e) {

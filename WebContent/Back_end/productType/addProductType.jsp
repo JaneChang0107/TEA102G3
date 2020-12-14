@@ -18,7 +18,7 @@
 		</c:forEach>
 	</div>
 </c:if>
-
+	<h1>新增商品種類</h1>
 	<form action="<%= request.getContextPath() %>/ProductTypeServlet" method="post">
 		<div>
 			<label>平台名稱:</label>
@@ -38,7 +38,6 @@
 		
 	</form>
 	<br>
-	<p><a href="<%= request.getContextPath() %>/Back_end/productType/allProductType.jsp">全部類型</a>
-
+	<a href="<%= request.getContextPath() %>/Back_end/productType/oneProductType.jsp">滾回單一查詢</a>
 </body>
 </html>

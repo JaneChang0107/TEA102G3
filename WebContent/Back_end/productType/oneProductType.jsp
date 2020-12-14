@@ -8,8 +8,15 @@
 <head>
 <meta charset="BIG5">
 <title>one product type</title>
+<style>
+	table, tr, th, td{
+		border: 1px solid black;
+	}
+
+</style>
 </head>
 <body>
+	<h1>單一查詢</h1>
 <jsp:useBean id="ptService" scope="page" class="com.productType.model.ProductTypeService" />
 	<form action="<%= request.getContextPath() %>/ProductTypeServlet" method="post">
 		<div>
@@ -26,8 +33,8 @@
 			<input type="submit" value="搜尋">
 		</div>
 	</form>
-		<% System.out.println((ProductTypeVO) request.getAttribute("ptVO")); %>
-	<% System.out.println(ptVO); %>
+	<a href="<%= request.getContextPath() %>/Back_end/productType/allProductType.jsp">全部類型</a>
+	<a href="<%= request.getContextPath() %>/Back_end/productType/addProductType.jsp">新增類型</a>
 	<c:if test="${ptVO != null}">
 		<table>
 			<tr>

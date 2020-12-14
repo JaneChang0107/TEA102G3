@@ -54,7 +54,7 @@
 		</tr>
 		</c:forEach>
 	</table>
-	<a href="<%= request.getContextPath() %>/Back_end/productType/addProductType.jsp">滾回首頁</a>
+	<a href="<%= request.getContextPath() %>/Back_end/productType/oneProductType.jsp">滾回單一查詢</a>
 
 </body>
 </html>

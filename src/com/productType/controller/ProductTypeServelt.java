@@ -3,8 +3,6 @@ package com.productType.controller;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,9 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.productType.model.ProductTypeService;
 import com.productType.model.ProductTypeVO;
-
-import jdk.internal.net.http.ResponseTimerEvent;
-
 
 @WebServlet("/ProductTypeServlet")
 public class ProductTypeServelt extends HttpServlet {
@@ -47,7 +42,7 @@ public class ProductTypeServelt extends HttpServlet {
 			if(platform == null || platform.isEmpty()) {
 				error.add("請輸入平台");
 			} else if(!platform.matches(platformRegex)) {
-					error.add("平台格式不正確");
+				error.add("平台格式不正確");
 			}
 			
 			String kind = request.getParameter("kind");
@@ -84,7 +79,7 @@ public class ProductTypeServelt extends HttpServlet {
 			List<String> error = new LinkedList<String>();
 			request.setAttribute("error", error);
 			
-			String pt_id = request.getParameter("pt_id");
+			String ptid = request.getParameter("pt_id");
 			String platform = request.getParameter("platform");
 			String platformRegex = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,100}$";
 			
@@ -110,45 +105,35 @@ public class ProductTypeServelt extends HttpServlet {
 				return;
 			}
 			
-			ProductTypeVO ptVO = new ProductTypeVO();
-			ptVO.setPt_id(pt_id);
-			ptVO.setPt_platform(platform);
-			ptVO.setPt_kind(kind);
-			
+			ProductTypeService ptService = new ProductTypeService();
+			ptService.updateProductType(ptid, platform, kind);
 			response.sendRedirect(request.getContextPath() + "/Back_end/productType/allProductType.jsp");
 			
 //			RequestDispatcher ok = request.getRequestDispatcher("/Back_end/productType/allProductType.jsp");
 //			ok.forward(request, response);
 		}
-		
+		//  更新單一
 		if("updateOne".equals(action)) {
 			// 拿取修改id
 			String ptid = (String) request.getParameter("pt_id");
 			// 用id拿資料
-			System.out.println("sss"+ptid);
 			ProductTypeService ptService = new ProductTypeService();
 			ProductTypeVO ptVO = ptService.getOneProductType(ptid);
 			request.setAttribute("ptVO", ptVO);
 			RequestDispatcher ok = request.getRequestDispatcher("/Back_end/productType/updateProductType.jsp");
 			ok.forward(request, response);
 		}
+		// 刪除
 		if("delete".equals(action)) {
 			ProductTypeService ptService = new ProductTypeService();
 			String ptid = request.getParameter("pt_id");
 			ptService.deleteProductType(ptid);
 			response.sendRedirect(request.getContextPath() + "/Back_end/productType/allProductType.jsp");
 		}
-		
+		// 搜尋一個
 		if("getOne".equals(action)) {
 			ProductTypeService ptService = new ProductTypeService();
-			
-			Map<String, String[]> m = request.getParameterMap();
-			Set<String> s = m.keySet();
-			for(String a : s) 
-			System.out.println(a);
-			System.out.println(s.size());
 			ProductTypeVO ptVO = ptService.getOneProductType(request.getParameter("ptid"));
-			System.out.println(ptVO);
 			request.setAttribute("ptVO", ptVO);
 			RequestDispatcher ok = request.getRequestDispatcher("/Back_end/productType/oneProductType.jsp");
 			ok.forward(request, response);

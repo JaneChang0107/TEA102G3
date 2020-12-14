@@ -1,5 +1,7 @@
 package com.productPicture.model;
 
+import java.util.Base64;
+
 public class ProductPictureVO {
 	
 	private String pp_id;
@@ -25,7 +27,11 @@ public class ProductPictureVO {
 	public void setP_id(String p_id) {
 		this.p_id = p_id;
 	}
-	
+	public String getPp_picture64() {
+		pp_picture = Base64.getEncoder().encode(pp_picture);
+		String picture = new String(pp_picture);
+		return picture;
+	}
 	
 
 }

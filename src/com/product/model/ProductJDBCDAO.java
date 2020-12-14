@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.data.database;
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 public class ProductJDBCDAO implements ProductInterface{
 	
@@ -18,6 +19,8 @@ public class ProductJDBCDAO implements ProductInterface{
 			"UPDATE PRODUCT SET P_NAME = ?, P_PRICE = ?, P_DETAIL = ?, PT_ID = ?, P_COUNT = ?, P_REVISEDATE = ?, P_STATUS = ? WHERE P_ID = ?";
 	private final String DELETE =
 			"DELETE FROM PRODUCT WHERE P_ID = ?";
+	private final String FINDONE =
+			"SELECT * FROM PRODUCT WHERE P_ID = ?";
 	private final String FINDBYPNAME =
 			"SELECT * FROM PRODUCT WHERE P_NAME = ?";
 	private final String FINDBYPNAMETPYE =
@@ -144,6 +147,61 @@ public class ProductJDBCDAO implements ProductInterface{
 			}
 		}
 		
+	}
+	
+	@Override
+	public ProductVO findOneProduct (String p_id) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ProductVO pVO = null;
+		try {
+			Class.forName(database.DRIVER);
+			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			ps = con.prepareStatement(FINDONE);
+			ps.setString(1, p_id);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				pVO = new ProductVO();
+				pVO.setP_id(rs.getString("p_id"));
+				pVO.setP_name(rs.getString("p_name"));
+				pVO.setP_price(rs.getInt("p_price"));
+				pVO.setP_detail(rs.getString("p_detail"));
+				pVO.setPt_id(rs.getString("pt_id"));
+				pVO.setP_count(rs.getInt("p_count"));
+				pVO.setP_addDate(rs.getTimestamp("p_addDate"));
+				pVO.setP_reviseDate(rs.getTimestamp("p_reviseDate"));
+				pVO.setP_status(rs.getInt("p_status"));
+				pVO.setM_id(rs.getString("m_id"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null) {
+					rs.close();
+				}
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(ps != null) {
+					ps.close();
+				}
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(con != null) {
+					con.close();
+				}
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return pVO;
 	}
 
 	@Override
