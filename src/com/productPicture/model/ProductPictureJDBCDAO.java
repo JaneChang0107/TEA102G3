@@ -29,21 +29,21 @@ public class ProductPictureJDBCDAO implements ProductPictureDAOInterface{
 //		// ·s¼W
 		byte[] b = null;
 //		
-//		ProductPictureVO ppVOInsert = new ProductPictureVO();
-//		
-//		try {
-//			File f = new File("I:\\Users\\user\\Google ¶³ºÝµwºÐ\\Pictures\\0a85978e19fcb6c8319c52ca9434fa8f.JPG");
-//			FileInputStream fis = new FileInputStream(f);
-//			b = new byte[fis.available()];
-//			fis.read(b);
-//			ppVOInsert.setPp_picture(b);
-//			ppVOInsert.setP_id("P00013");
-//			pt.insert(ppVOInsert);
-//			fis.close();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		
+		ProductPictureVO ppVOInsert = new ProductPictureVO();
+		
+		try {
+			File f = new File("I:\\Users\\user\\Google ¶³ºÝµwºÐ\\Pictures\\0a85978e19fcb6c8319c52ca9434fa8f.JPG");
+			FileInputStream fis = new FileInputStream(f);
+			b = new byte[fis.available()];
+			fis.read(b);
+			ppVOInsert.setPp_picture(b);
+			ppVOInsert.setP_id("P00013");
+			pt.insert(ppVOInsert);
+			fis.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		
 		
 		// §ó·s

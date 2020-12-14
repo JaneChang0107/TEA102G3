@@ -469,32 +469,33 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 //		System.out.println("插入成功");
 //		
 //		//修改
-//		MemberVO memberVO2=new MemberVO();
-//		memberVO2.setM_id("M00002");
-//		memberVO2.setM_email("yoyoyo@yahoo.com.tw");
-//		memberVO2.setM_password("123456");
-//		memberVO2.setM_name("游鴻明");
-//		memberVO2.setM_gender("男");
-//		memberVO2.setM_phone("0911111111");
-//		memberVO2.setM_address("台北市中正區濟南路一段321號");
-//		memberVO2.setM_birth(java.sql.Date.valueOf("1981-11-17"));
-//		memberVO2.setM_headpic(null);
-//		memberVO2.setM_status(1);
-//		memberVO2.setM_identity("F123456789");
-//		memberVO2.setM_id_pic(null);
-//		memberVO2.setM_account("12345678901234");
-//		memberVO2.setM_accountName("游阿坤");
-//		memberVO2.setB_code("700");
-//		memberVO2.setM_bank_pic(null);
-////	memberVO2.setM_moneyTranDate(null);     //如送出修改時由CURRENT_TIMESTAMP送出現在時間
-//		memberVO2.setM_storename("阿坤市集");
-//		memberVO2.setM_info(null);
-//		memberVO2.setM_cover(null);
-//		memberVO2.setM_hi("Hello我現在在線上");
-//		memberVO2.setM_offlineHi("Sorry我現在不在線上");
-//		memberVO2.setM_coin(new Integer(100));
-//		dao.update(memberVO2);
-//		System.out.println("修改成功");
+		MemberVO memberVO2=new MemberVO();
+		memberVO2.setM_id("M00002");
+		memberVO2.setM_email("yoyoyo@yahoo.com.tw");
+		memberVO2.setM_password("123456");
+		memberVO2.setM_name("游鴻明");
+		memberVO2.setM_gender("男");
+		memberVO2.setM_phone("0911111111");
+		memberVO2.setM_address("台北市中正區濟南路一段321號");
+		memberVO2.setM_birth(java.sql.Date.valueOf("1981-11-17"));
+		byte[] pic=getPic("WebContent/images/apple.jpg");
+		memberVO2.setM_headpic(pic);
+		memberVO2.setM_status(1);
+		memberVO2.setM_identity("F123456789");
+		memberVO2.setM_id_pic(null);
+		memberVO2.setM_account("12345678901234");
+		memberVO2.setM_accountName("游阿坤");
+		memberVO2.setB_code("700");
+		memberVO2.setM_bank_pic(null);
+//	memberVO2.setM_moneyTranDate(null);     //如送出修改時由CURRENT_TIMESTAMP送出現在時間
+		memberVO2.setM_storename("阿坤市集");
+		memberVO2.setM_info(null);
+		memberVO2.setM_cover(null);
+		memberVO2.setM_hi("Hello我現在在線上");
+		memberVO2.setM_offlineHi("Sorry我現在不在線上");
+		memberVO2.setM_coin(new Integer(100));
+		dao.update(memberVO2);
+		System.out.println("修改成功");
 		
 		//刪除
 //		dao.delete("M00005");
@@ -586,9 +587,10 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 //			System.out.println("----------------------");
 //		}
 		
-		MemberVO memberVO4= dao.getMemberPw("a111@yahoo.com.tw");	
-		System.out.println(memberVO4.getM_email());
-		System.out.println(memberVO4.getM_password());
+		//查密碼
+//		MemberVO memberVO4= dao.getMemberPw("a111@yahoo.com.tw");	
+//		System.out.println(memberVO4.getM_email());
+//		System.out.println(memberVO4.getM_password());
 		
 	}
 	

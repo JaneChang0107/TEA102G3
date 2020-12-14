@@ -25,6 +25,7 @@ package com.member.model;
 		private String m_hi;
 		private String m_offlineHi;
 		private Integer m_coin;
+		
 		public String getM_id() {
 			return m_id;
 		}
