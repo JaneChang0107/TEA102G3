@@ -3,6 +3,8 @@ package com.employee.model;
 import java.sql.Date;
 import java.util.List;
 
+import javax.servlet.annotation.WebServlet;
+
 
 public class EmployeeService {
 	private EmployeeDAO_interface dao;
@@ -11,7 +13,7 @@ public class EmployeeService {
 		dao = new EmployeeJDBCDAO();
 	}
 
-	public EmployeeVO addEmployee(String e_id, String e_password, String e_identity, String e_name, String e_gender, java.sql.Date e_birth, 
+	public EmployeeVO addEmployee(String e_password, String e_identity, String e_name, String e_gender, java.sql.Date e_birth, 
 			String e_email, String e_phone, String e_address, String e_title, int e_status, String st_id) {
 
 		EmployeeVO employeeVO = new EmployeeVO();

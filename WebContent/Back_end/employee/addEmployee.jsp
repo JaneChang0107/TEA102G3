@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>員工資料新增 - addEmp.jsp</title>
+<title>員工資料新增 - addEmployee.jsp</title>
 
 <style>
   table#table-1 {
@@ -48,7 +48,7 @@
 
 <table id="table-1">
 	<tr><td>
-		 <h3>員工資料新增 - addEmp.jsp</h3></td><td style="text-align: center">
+		 <h3>員工資料新增 - addEmployee.jsp</h3></td><td style="text-align: center">
 		 <h4><a href="select_page.jsp"><img src="images/tomcat.png" width="100" height="100" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
@@ -65,21 +65,31 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="emp.do" name="form1">
+<FORM METHOD="post" ACTION="<%= request.getContextPath()%>>/employee/controller/employeeServlet.do" name="form1">
 <table>
 	<tr>
+		<td>員工密碼:</td>
+		<td><input type="TEXT" name="e_password" size="45" 
+			 value="${param.e_password}" /></td><td>${errorMsgs.e_password}</td>
+	</tr>
+	<tr>
+		<td>身分證字號:</td>
+		<td><input type="TEXT" name="e_identity" size="45"
+			 value="${param.e_identity}"/></td><td>${errorMsgs.e_identity}</td>
+	</tr>
+	<tr>
 		<td>員工姓名:</td>
-		<td><input type="TEXT" name="ename" size="45" 
-			 value="${param.ename}" /></td><td>${errorMsgs.ename}</td>
+		<td><input type="TEXT" name="e_name" size="45"
+			 value="${param.e_name}"/></td><td>${errorMsgs.e_name}</td>
 	</tr>
 	<tr>
-		<td>職位:</td>
-		<td><input type="TEXT" name="job" size="45"
-			 value="${param.job}"/></td><td>${errorMsgs.job}</td>
+		<td>性別:</td>
+		<td><input type="radio" name="e_gender" size="45"
+			 value="${param.e_gender}"/></td><td>${errorMsgs.e_gender}</td>
 	</tr>
 	<tr>
-		<td>雇用日期:</td>
-		<td><input name="hiredate" id="f_date1" type="text"/></td><td>${errorMsgs.hiredate}</td>
+		<td>生日:</td>
+		<td><input name="e_birth" id="f_date1" type="text"/></td><td>${errorMsgs.e_birth}</td>
 	</tr>
 	<tr>
 		<td>薪水:</td>
@@ -87,9 +97,19 @@
 			 value="${param.sal}"/></td><td>${errorMsgs.sal}</td>
 	</tr>
 	<tr>
-		<td>獎金:</td>
-		<td><input type="TEXT" name="comm" size="45"
-			 value="${param.comm}"/></td><td>${errorMsgs.comm}</td>
+		<td>信箱:</td>
+		<td><input type="TEXT" name="e_email" size="45"
+			 value="${param.e_email}"/></td><td>${errorMsgs.e_email}</td>
+	</tr>
+	<tr>
+		<td>信箱:</td>
+		<td><input type="TEXT" name="e_phone" size="45"
+			 value="${param.e_phone}"/></td><td>${errorMsgs.e_phone}</td>
+	</tr>
+	<tr>
+		<td>地址:</td>
+		<td><input type="TEXT" name="e_address" size="45"
+			 value="${param.e_address}"/></td><td>${errorMsgs.e_address}</td>
 	</tr>
 
 <%-- 	<jsp:useBean id="deptSvc" scope="page" class="com.dept.model.DeptService" /> --%>

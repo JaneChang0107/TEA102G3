@@ -103,13 +103,13 @@
 			<td>${employeeVO.e_status}</td>
 			<td>${employeeVO.st_id}</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/employee/employeeServlet" style="margin-bottom: 0px;">
 			     <input type="submit" value="­×§ï">
 			     <input type="hidden" name="e_id"  value="${employeeVO.e_id}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/employee/employeeServlet" style="margin-bottom: 0px;">
 			     <input type="submit" value="§R°£">
 			     <input type="hidden" name="e_id"  value="${employeeVO.e_id}">
 			     <input type="hidden" name="action" value="delete"></FORM>
