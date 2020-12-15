@@ -86,7 +86,7 @@ input:read-only {
 			</td>
 			<td>
 				<h4>
-					<a href="<%=request.getContextPath()%>/back_end/Rent/index.jsp"><img
+					<a href="<%=request.getContextPath()%>/Back_end/Rent/index.jsp"><img
 						src="images/tomcat.png" width="100" height="100" border="0">回首頁</a>
 				</h4>
 			</td>

@@ -75,7 +75,7 @@ input:read-only {
 			<td>
 				<h3>員工資料修改 - update_emp_input.jsp</h3>
 				<h4>
-					<a href="<%=request.getContextPath()%>/back_end/Rent/index.jsp"><img
+					<a href="<%=request.getContextPath()%>/Back_end/Rent/index.jsp"><img
 						src="images/back1.png" width="40" height="40" border="0">回首頁</a>
 				</h4>
 			</td>

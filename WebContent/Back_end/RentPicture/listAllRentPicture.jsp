@@ -62,7 +62,7 @@ th, td {
 				<h3>所有員工資料 - listAllEmp.jsp</h3>
 				<h4>
 					<a
-						href="<%=request.getContextPath()%>/back_end/RentPicture/index_rentpicture.jsp">
+						href="<%=request.getContextPath()%>/Back_end/RentPicture/index_rentpicture.jsp">
 						<img src="images/back1.png" width="100" height="32" border="0">回首頁
 					</a>
 				</h4>

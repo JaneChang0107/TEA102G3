@@ -57,7 +57,7 @@ th, td {
 				<h3>出租品資料 - ListOneEmp.jsp</h3>
 				<h4>
 					<a
-						href="<%=request.getContextPath()%>/back_end/RentPicture/index_rentpicture.jsp">
+						href="<%=request.getContextPath()%>/Back_end/RentPicture/index_rentpicture.jsp">
 						<img src="images/back1.png" width="40" weight="40" border="0">回首頁
 					</a>
 				</h4>
