@@ -1,101 +1,93 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
 <head>
-<title>·|­ûºŞ²zµe­±</title>
+<title>æœƒå“¡ç®¡ç†ç•«é¢</title>
 
 <style>
-  table#table-1 {
+table#table-1 {
 	width: 450px;
 	background-color: #CCCCFF;
 	margin-top: 5px;
 	margin-bottom: 10px;
-    border: 3px ridge Gray;
-    height: 80px;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
+	border: 3px ridge Gray;
+	height: 80px;
+	text-align: center;
+}
+
+table#table-1 h4 {
+	color: red;
+	display: block;
+	margin-bottom: 1px;
+}
+
+h4 {
+	color: blue;
+	display: inline;
+}
 </style>
 
 </head>
 <body bgcolor='#E3F8F6'>
 
-<table id="table-1">
-   <tr><td><h4>·|­û¬d¸ß¤¤¤ß</h4></td></tr>
-</table>
+	<table id="table-1">
+		<tr>
+			<td><h4>æœƒå“¡æŸ¥è©¢ä¸­å¿ƒ</h4></td>
+		</tr>
+	</table>
 
 
-<h3>¸ê®Æ¬d¸ß:</h3>
-	
-<%-- ¿ù»~ªí¦C --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
-	<ul>
-	    <c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
+	<h3>è³‡æ–™æŸ¥è©¢:</h3>
 
-
-<!-- ¿ï¥ş³¡ -->
-<!-- <ul> -->
-<!--   <li><a href='listAllEmp.jsp'>List</a> all Emps.  <br><br></li> -->
-  
-  
-<!--   <li> -->
-<!--     <FORM METHOD="post" ACTION="emp.do" > -->
-<!--         <b>¿é¤J­û¤u½s¸¹ (¦p7001):</b> -->
-<!--         <input type="text" name="empno"> -->
-<!--         <input type="hidden" name="action" value="getOne_For_Display"> -->
-<!--         <input type="submit" value="°e¥X"> -->
-<!--     </FORM> -->
-<!--   </li> -->
-
-  <jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService" />
-   
-<!--   <li> -->
-<!--      <FORM METHOD="post" ACTION="emp.do" > -->
-<!--        <b>¿ï¾Ü­û¤u½s¸¹:</b> -->
-<!--        <select size="1" name="empno"> -->
-<%--          <c:forEach var="empVO" items="${empSvc.all}" >  --%>
-<%--           <option value="${empVO.empno}">${empVO.empno} --%>
-<%--          </c:forEach>    --%>
-<!--        </select> -->
-<!--        <input type="hidden" name="action" value="getOne_For_Display"> -->
-<!--        <input type="submit" value="°e¥X"> -->
-<!--     </FORM> -->
-<!--   </li> -->
-  
-<!--   <li> -->
-<!--      <FORM METHOD="post" ACTION="emp.do" > -->
-<!--        <b>¿ï¾Ü­û¤u©m¦W:</b> -->
-<!--        <select size="1" name="empno"> -->
-<%--          <c:forEach var="empVO" items="${empSvc.all}" >  --%>
-<%--           <option value="${empVO.empno}">${empVO.ename} --%>
-<%--          </c:forEach>    --%>
-<!--        </select> -->
-<!--        <input type="hidden" name="action" value="getOne_For_Display"> -->
-<!--        <input type="submit" value="°e¥X"> -->
-<!--      </FORM> -->
-<!--   </li> -->
-<!-- </ul> -->
-
-
-<h3>·s¼W·|­û</h3>
-
+	<%-- éŒ¯èª¤è¡¨åˆ— --%>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
+		
 <ul>
-  <li><a href='addMem.jsp'>·s¼W·|­û</a></li>
-</ul>
+	   <li><a href='listAllMem.jsp'>æŸ¥è©¢å…¨éƒ¨æœƒå“¡</a><br><br></li>
+
+       <li>
+	    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/MemberServlet" >
+	        <b>è¼¸å…¥æœƒå“¡ID(å¦‚M00001):</b>
+	        <input type="text" name="m_id">
+	        <input type="hidden" name="action" value="getOne_For_Display">
+	        <input type="submit" value="é€å‡ºæŸ¥è©¢">
+	    </FORM>
+       </li>
+   
+<jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService" />   
+
+   <li>
+       <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/MemberServlet" >
+            <b>é¸æ“‡æœƒå“¡ID:</b>       
+              <select size="1" name="m_id">
+               <c:forEach var="memberVO" items="${memSvc.all}">
+                 <option value="${memberVO.m_id}">${memberVO.m_id}
+               </c:forEach>
+              </select> 
+            <input type="hidden" name="action" value="getOne_For_Display">
+            <input type="submit" value="é€å‡ºæŸ¥è©¢">      
+       </FORM>
+    </li>     
+   </ul>
+   
+
+	<h3>æ–°å¢æœƒå“¡</h3>
+
+	<ul>
+		<li><a href='addMem.jsp'>æ–°å¢ä¸€èˆ¬æœƒå“¡</a></li>
+	</ul>
+
+	<ul>
+		<li><a href='addMemSeller.jsp'>æ–°å¢è³£å®¶æœƒå“¡</a></li>
+	</ul>
 
 </body>
 </html>

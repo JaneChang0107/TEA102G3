@@ -1,6 +1,7 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.member.model.*"%>
+
 
 <%
 	MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
@@ -8,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>·s¼W·|­û</title>
+<title>æ–°å¢žæœƒå“¡</title>
 
 <style>
 table {
@@ -31,10 +32,10 @@ b{
 </style>
 </head>
 <body>
-	<h3>¸ê®Æ·s¼W:</h3>
+	<h3>è³‡æ–™æ–°å¢ž:</h3><b>*</b>æœƒå“¡å¿…å¡«æ¬„ä½
      
 	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">½Ð­×¥¿¥H¤U¿ù»~:</font>
+		<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 		<ul>
 			<c:forEach var="message" items="${errorMsgs}">
 				<li style="color: red">${message}</li>
@@ -42,120 +43,56 @@ b{
 		</ul>
 	</c:if>
 
-	<FORM METHOD="post" ACTION="memberServlet.do" name="form1">
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/MemberServlet" name="form1">
 		<table>
 			<tr>
-				<td>¹q¤l¶l¥ó:<b>*</b></td>
+				<td>é›»å­éƒµä»¶:<b>*</b></td>
 				<td><input type="text" name="m_email" size="40"
-					value="<%=(memberVO == null) ? "½Ð¶ñ¤J¶l½c" : memberVO.getM_address()%>" /></td>
+					value="<%=(memberVO == null) ? "a123@yahoo.com" : memberVO.getM_email()%>" /></td>
 
 			</tr>
 			<tr>
-				<td>±K½X:<b>*</b></td>
+				<td>å¯†ç¢¼:<b>*</b></td>
 				<td><input type="password" name="m_password" size="40"
 					value="<%=(memberVO == null) ? "" : memberVO.getM_password()%>" /></td>
 			</tr>
 			<tr>
-				<td>©m¦W:<b>*</b></td>
+				<td>å§“å:<b>*</b></td>
 				<td><input type="text" name="m_name" size="40"
-					value="<%=(memberVO == null) ? "½Ð¶ñ¤J©m¦W" : memberVO.getM_name()%>" /></td>
+					value="<%=(memberVO == null) ? "MrJava" : memberVO.getM_name()%>" /></td>
 			</tr>
 			<tr>
-				<td>©Ê§O:<b>*</b></td>
-				<td><input type="radio" name="m_gender" value="¨k">¨k <input
-					type="radio" name="m_gender" value="¤k">¤k</td>
+				<td>æ€§åˆ¥:<b>*</b></td>
+				<td>
+				<input type="radio" name="m_gender" checked
+				value="ç”·">ç”· 
+				<input type="radio" name="m_gender" 
+				value="å¥³">å¥³
+				</td>
 			</tr>
 			<tr>
-				<td>¹q¸Ü:<b>*</b></td>
+				<td>é›»è©±:<b>*</b></td>
 				<td><input type="text" name="m_phone" size="40"
-					value="<%=(memberVO == null) ? "½Ð¶ñ¤J¹q¸Ü" : memberVO.getM_phone()%>" /></td>
+					value="<%=(memberVO == null) ? "0999999999" : memberVO.getM_phone()%>" /></td>
 			</tr>
 			<tr>
-				<td>¦a§}:<b>*</b></td>
+				<td>åœ°å€:<b>*</b></td>
 				<td><input type="text" name="m_address" size="40"
-					value="<%=(memberVO == null) ? "½Ð¶ñ¤J¦a§}" : memberVO.getM_address()%>" /></td>
+					value="<%=(memberVO == null) ? "è«‹å¡«å…¥åœ°å€" : memberVO.getM_address()%>" /></td>
 			</tr>
 			<tr>
-				<td>¥Í¤é:<b>*</b></td>
+				<td>ç”Ÿæ—¥:<b>*</b></td>
 				<td><input name="m_birth" id="f_date1" type="text"></td>
 			</tr>
-			<tr>
-				<td>¤jÀY·Ó:</td>
-				<td><input type="file" name="m_headpic"
-					value="<%=(memberVO == null) ? "½Ð¤W¶Ç¤jÀY·Ó" : memberVO.getM_headpic()%>" /></td>
-			</tr>
-			<tr>
-				<td>·|­ûª¬ºA:</td>
-				<td><input type="text" name="m_status" value="1"></td>
-			</tr>
-			<tr>
-				<td>¨­¤ÀÃÒ¦r¸¹:</td>
-				<td><input type="text" name="m_identity"
-					value="<%=(memberVO == null) ? "½Ð¶ñ¤J¨­¤ÀÃÒ¦r¸¹" : memberVO.getM_identity()%>"></td>
-			</tr>
-			<tr>
-				<td>¨­¤ÀÃÒ·Ó¤ù:</td>
-				<td><input type="file" name="m_id_pic"
-					value="<%=(memberVO == null) ? "½Ð¤W¶Ç¨­¤ÀÃÒ·Ó" : memberVO.getM_id_pic()%>" /></td>
-			</tr>
-			<tr>
-				<td>»È¦æ±b¤á:</td>
-				<td><input type="text" name="m_account"
-					value="<%=(memberVO == null) ? "½Ð¿é¤J»È¦æ±b¤á" : memberVO.getM_account()%>"></td>
-			</tr>
-			<tr>
-				<td>»È¦æ¤á¦W:</td>
-				<td><input type="text" name="m_accountname"
-					value="<%=(memberVO == null) ? "½Ð¿é¤J»È¦æ¤á¦W" : memberVO.getM_accountName()%>"></td>
-			</tr>
-			<tr>
-				<td>»È¦æ¥N¸¹:</td>
-				<td><input type="text" name="b_code"
-					value="<%=(memberVO == null) ? "½Ð¿é¤J»È¦æ¥N¸¹" : memberVO.getB_code()%>"></td>
-			</tr>
-			<tr>
-				<td>¦sºP·Ó¤ù:</td>
-				<td><input type="file" name="m_id_pic"
-					value="<%=(memberVO == null) ? "¤W¶Ç¦sºP·Ó" : memberVO.getM_id_pic()%>">
-			</tr>
-			<tr>
-				<td>½æ³õ¦WºÙ:</td>
-				<td><input type="text" name="m_storename"
-					value="<%=(memberVO == null) ? "½Ð¿é¤J°Ó³õ¦W¦r" : memberVO.getM_storename()%>"></td>
-			</tr>
-			<tr>
-				<td>½æ³õÂ²¤¶:</td>
-				<td><input type="text" name="m_info"
-					value="<%=(memberVO == null) ? "½Ð¿é¤J°Ó³õ¤¶²Ð" : memberVO.getM_info()%>"></td>
-			</tr>
-			<tr>
-				<td>½æ³õ«Ê­±:</td>
-				<td><input type="file" name="m_cover"
-					value="<%=(memberVO == null) ? "½Ð¤W¶Ç½æ³õ·Ó¤ù" : memberVO.getM_cover()%>"></td>
-			</tr>
-			<tr>
-				<td>²á¤Ñ°Ý­Ô»y:</td>
-				<td><input type="text" name="m_hi"
-					value="<%=(memberVO == null) ? "½Ð¿é¤J°Ý­Ô»y" : memberVO.getM_hi()%>"></td>
-			</tr>
-			<tr>
-				<td>Â÷½u°Ý­Ô»y:</td>
-				<td><input type="text" name="m_offlinehi"
-					value="<%=(memberVO == null) ? "½Ð¿é¤JÂ÷½u°Ý­Ô»y" : memberVO.getM_offlineHi()%>"></td>
-			</tr>
-			<tr>
-				<td>¥N¹ô:</td>
-				<td><input type="text" name="m_coin"
-					value="<%=(memberVO == null) ? 0 : memberVO.getM_coin()%>"></td>
-			</tr>
+
 		</table>
 		<br> 
 		<input type="hidden" name="action" value="insert"> 
-		<input type="submit" value="°e¥X·s¼W"></FORM>
+		<input type="submit" value="é€å‡ºæ–°å¢ž"></FORM>
 </body>
 
 
-<!-- =====Date time picker³]©w======== -->
+<!-- =====Date time pickerè¨­å®š======== -->
 <%
 	java.sql.Date m_birth = null;
 	try {
@@ -185,11 +122,10 @@ b{
         $('#f_date1').datetimepicker({
 	       theme: '',              //theme: 'dark',
 	       timepicker:false,       //timepicker:true,
-	       step: 1,                //step: 60 (³o¬Otimepickerªº¹w³]¶¡¹j60¤ÀÄÁ)
+	       step: 1,                //step: 60 (é€™æ˜¯timepickerçš„é è¨­é–“éš”60åˆ†é˜)
 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-<%-- 		   // value: '<%=m_birth%>',    --%>
 		   value:   new Date(),
-           maxDate:               '+1970-01-01'  // ¥h°£¤µ¤é(¤£§t)¤§«á
+           maxDate:               '+1970-01-01'  // åŽ»é™¤ä»Šæ—¥(ä¸å«)ä¹‹å¾Œ
         });
 </script>
 </html>

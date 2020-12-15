@@ -20,6 +20,7 @@ public class MemberLogin extends HttpServlet {
 	protected boolean loginAccess(String account, String password) {
 		MemberJDBCDAO dao =new MemberJDBCDAO();
 		MemberVO memberLogin=dao.getMemberPw(account);
+		
 		try {
 		if (memberLogin.getM_email().equals(account) && memberLogin.getM_password().equals(password))
 			return true;
