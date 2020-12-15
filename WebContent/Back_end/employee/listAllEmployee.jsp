@@ -55,7 +55,7 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>所有員工資料 - listAllEmployee.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/1.png" width="100" height="32" border="0">回首頁</a></h4>
+		 <h4><a href="<%=request.getContextPath()%>/Back_end/employee/select_page.jsp"><img src="<%=request.getContextPath()%>/Back_end/employee/images/1.png" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -103,13 +103,13 @@
 			<td>${employeeVO.e_status}</td>
 			<td>${employeeVO.st_id}</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/employee/employeeServlet" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/employee/controller/employeeServlet.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
 			     <input type="hidden" name="e_id"  value="${employeeVO.e_id}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/employee/employeeServlet" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/employee/controller/employeeServlet.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="刪除">
 			     <input type="hidden" name="e_id"  value="${employeeVO.e_id}">
 			     <input type="hidden" name="action" value="delete"></FORM>

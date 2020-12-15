@@ -39,7 +39,8 @@ public class EmployeeService {
 			String e_email, String e_phone, String e_address, String e_title, int e_status, String st_id) {
 
 		EmployeeVO employeeVO = new EmployeeVO();
-
+		
+		employeeVO.setE_id(e_id);
 		employeeVO.setE_password(e_password);
 		employeeVO.setE_identity(e_identity);
 		employeeVO.setE_name(e_name);

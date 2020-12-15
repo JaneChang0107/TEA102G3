@@ -3,43 +3,46 @@
 <%@ page import="com.employee.model.*"%>
 
 <%
-  // EmpVO empVO = (EmpVO) request.getAttribute("empVO");
+	EmployeeVO employeeVO = (EmployeeVO) request.getAttribute("employeeVO");
 %>
-
 <html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>員工資料新增 - addEmployee.jsp</title>
 
 <style>
   table#table-1 {
-    width: 450px;
 	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
+	border: 2px solid black;
+	text-align: center;
   }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
 
-<style>
+  table#table-1 h4 {
+	color: red;
+	display: block;
+	margin-bottom: 1px;
+  }
+
+  h4 {
+	color: blue;
+	display: inline;
+  }
+  </style>
+
+  <style>
   table {
+	width: 450px;
 	background-color: white;
 	margin-top: 1px;
 	margin-bottom: 1px;
   }
+
   table, th, td {
-    border: 0px solid #CCCCFF;
+	border: 0px solid #CCCCFF;
   }
+
   th, td {
-    padding: 1px;
+	padding: 1px;
   }
 </style>
 
@@ -48,8 +51,8 @@
 
 <table id="table-1">
 	<tr><td>
-		 <h3>員工資料新增 - addEmployee.jsp</h3></td><td style="text-align: center">
-		 <h4><a href="select_page.jsp"><img src="images/tomcat.png" width="100" height="100" border="0">回首頁</a></h4>
+			<h3>員工資料新增 - addEmployee.jsp</h3></td><td>
+			<h4><a href="<%=request.getContextPath()%>/Back_end/employee/select_page.jsp"><img src="<%=request.getContextPath()%>/Back_end/employee/images/1.png" width="100" height="100" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -57,73 +60,80 @@
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
+	<font style="color: red">請修正以下錯誤:</font>
 	<ul>
 		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message.value}</li>
+			<li style="color: red">${message}</li>
 		</c:forEach>
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="<%= request.getContextPath()%>>/employee/controller/employeeServlet.do" name="form1">
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/employee/controller/employeeServlet.do" name="form1">
 <table>
 	<tr>
-		<td>員工密碼:</td>
-		<td><input type="TEXT" name="e_password" size="45" 
-			 value="${param.e_password}" /></td><td>${errorMsgs.e_password}</td>
+		<td>密碼:</td>
+		<td><input type="TEXT" name="e_password" size="45"
+			 value="<%= (employeeVO == null) ? "" : employeeVO.getE_password()%>" /></td>
 	</tr>
 	<tr>
 		<td>身分證字號:</td>
 		<td><input type="TEXT" name="e_identity" size="45"
-			 value="${param.e_identity}"/></td><td>${errorMsgs.e_identity}</td>
+			 value="<%= (employeeVO == null) ? "A123456789" : employeeVO.getE_identity()%>" /></td>
 	</tr>
 	<tr>
 		<td>員工姓名:</td>
 		<td><input type="TEXT" name="e_name" size="45"
-			 value="${param.e_name}"/></td><td>${errorMsgs.e_name}</td>
+			 value="<%=(employeeVO == null) ? "吳永志" : employeeVO.getE_name()%>" /></td>
 	</tr>
 	<tr>
 		<td>性別:</td>
-		<td><input type="radio" name="e_gender" size="45"
-			 value="${param.e_gender}"/></td><td>${errorMsgs.e_gender}</td>
+		<td><input type="radio" name="e_gender" size="45" value="MEN" checked />
+			<input type="radio" name="e_gender" size="45" value="WOMEN" />
+		</td>
 	</tr>
 	<tr>
 		<td>生日:</td>
-		<td><input name="e_birth" id="f_date1" type="text"/></td><td>${errorMsgs.e_birth}</td>
+		<td><input name="e_birth" id="f_date1" type="text"></td>
 	</tr>
+
 	<tr>
-		<td>薪水:</td>
-		<td><input type="TEXT" name="sal" size="45"
-			 value="${param.sal}"/></td><td>${errorMsgs.sal}</td>
-	</tr>
-	<tr>
-		<td>信箱:</td>
+		<td>電子信箱:</td>
 		<td><input type="TEXT" name="e_email" size="45"
-			 value="${param.e_email}"/></td><td>${errorMsgs.e_email}</td>
+		 	 value="<%=(employeeVO == null) ? "s@abc.com" : employeeVO.getE_email()%>" /></td>
 	</tr>
 	<tr>
-		<td>信箱:</td>
+		<td>電話:</td>
 		<td><input type="TEXT" name="e_phone" size="45"
-			 value="${param.e_phone}"/></td><td>${errorMsgs.e_phone}</td>
+		   	 value="<%=(employeeVO == null) ? "0987654321" : employeeVO.getE_phone()%>" /></td>
 	</tr>
 	<tr>
 		<td>地址:</td>
 		<td><input type="TEXT" name="e_address" size="45"
-			 value="${param.e_address}"/></td><td>${errorMsgs.e_address}</td>
+			 value="<%=(employeeVO == null) ? "123" : employeeVO.getE_address()%>" /></td>
+	</tr>
+	<tr>
+		<td>職稱:</td>
+		<td><input type="TEXT" name="e_title" size="45"
+			 value="<%=(employeeVO == null) ? "456" : employeeVO.getE_title()%>" /></td>
+	</tr>
+	<tr>
+		<td>狀態:</td>
+		<td><input type="TEXT" name="e_status" size="45"
+			 value="<%=(employeeVO == null) ? 2 : employeeVO.getE_status()%>" /></td>
 	</tr>
 
-<%-- 	<jsp:useBean id="deptSvc" scope="page" class="com.dept.model.DeptService" /> --%>
+	<jsp:useBean id="storeSvc" scope="page"	class="com.store.model.StoreService" />
 	<tr>
 		<td>部門:<font color=red><b>*</b></font></td>
-		<td><select size="1" name="deptno">
-			<c:forEach var="deptVO" items="${deptSvc.all}">
-				<option value="${deptVO.deptno}" ${(param.deptno==deptVO.deptno)? 'selected':'' } >${deptVO.dname}
-			</c:forEach>
+		<td><select size="1" name="st_id">
+			<c:forEach var="storeVO" items="${storeSvc.all}">
+				<option value="${storeVO.st_id}" ${(employeeVO.st_id==storeVO.st_id)? 'selected':'' }>${storeVO.st_id}
+		</c:forEach>
 		</select></td>
 	</tr>
 
 </table>
-<br>
+<br> 
 <input type="hidden" name="action" value="insert">
 <input type="submit" value="送出新增"></FORM>
 </body>
@@ -132,90 +142,86 @@
 
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 
-<% 
-  java.sql.Date hiredate = null;
-  try {
-	    hiredate = java.sql.Date.valueOf(request.getParameter("hiredate").trim());
-   } catch (Exception e) {
-	    hiredate = new java.sql.Date(System.currentTimeMillis());
-   }
+<%
+	java.sql.Date e_birth = null;
+	try {
+		e_birth = employeeVO.getE_birth();
+	} catch (Exception e) {
+		e_birth = new java.sql.Date(System.currentTimeMillis());
+	}
 %>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+<link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+<script	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <style>
-  .xdsoft_datetimepicker .xdsoft_datepicker {
-           width:  300px;   /* width:  300px; */
-  }
-  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-           height: 151px;   /* height:  151px; */
-  }
+.xdsoft_datetimepicker .xdsoft_datepicker {
+	width: 300px; /* width:  300px; */
+}
+
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+	height: 151px; /* height:  151px; */
+}
 </style>
 
 <script>
         $.datetimepicker.setLocale('zh');
         $('#f_date1').datetimepicker({
- 	       theme: '',              //theme: 'dark',
+	       theme: '',              //theme: 'dark',
 	       timepicker:false,       //timepicker:true,
 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-		   value: '<%=hiredate%>', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
-           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        });
-        
-        
-   
-        // ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------
+		   value: '<%=e_birth%>', // value:   new Date(),
+	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+	//startDate:	            '2017/07/10',  // 起始日
+	//minDate:               '-1970-01-01', // 去除今日(不含)之前
+	//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+	});
 
-        //      1.以下為某一天之前的日期無法選擇
-        //      var somedate1 = new Date('2017-06-15');
-        //      $('#f_date1').datetimepicker({
-        //          beforeShowDay: function(date) {
-        //        	  if (  date.getYear() <  somedate1.getYear() || 
-        //		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
-        //		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
-        //              ) {
-        //                   return [false, ""]
-        //              }
-        //              return [true, ""];
-        //      }});
+	// ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------
 
-        
-        //      2.以下為某一天之後的日期無法選擇
-        //      var somedate2 = new Date('2017-06-15');
-        //      $('#f_date1').datetimepicker({
-        //          beforeShowDay: function(date) {
-        //        	  if (  date.getYear() >  somedate2.getYear() || 
-        //		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
-        //		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
-        //              ) {
-        //                   return [false, ""]
-        //              }
-        //              return [true, ""];
-        //      }});
+	//      1.以下為某一天之前的日期無法選擇
+	//      var somedate1 = new Date('2017-06-15');
+	//      $('#f_date1').datetimepicker({
+	//          beforeShowDay: function(date) {
+	//        	  if (  date.getYear() <  somedate1.getYear() || 
+	//		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
+	//		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
+	//              ) {
+	//                   return [false, ""]
+	//              }
+	//              return [true, ""];
+	//      }});
 
+	//      2.以下為某一天之後的日期無法選擇
+	//      var somedate2 = new Date('2017-06-15');
+	//      $('#f_date1').datetimepicker({
+	//          beforeShowDay: function(date) {
+	//        	  if (  date.getYear() >  somedate2.getYear() || 
+	//		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
+	//		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
+	//              ) {
+	//                   return [false, ""]
+	//              }
+	//              return [true, ""];
+	//      }});
 
-        //      3.以下為兩個日期之外的日期無法選擇 (也可按需要換成其他日期)
-        //      var somedate1 = new Date('2017-06-15');
-        //      var somedate2 = new Date('2017-06-25');
-        //      $('#f_date1').datetimepicker({
-        //          beforeShowDay: function(date) {
-        //        	  if (  date.getYear() <  somedate1.getYear() || 
-        //		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
-        //		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
-        //		             ||
-        //		            date.getYear() >  somedate2.getYear() || 
-        //		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
-        //		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
-        //              ) {
-        //                   return [false, ""]
-        //              }
-        //              return [true, ""];
-        //      }});
-        
+	//      3.以下為兩個日期之外的日期無法選擇 (也可按需要換成其他日期)
+	//      var somedate1 = new Date('2017-06-15');
+	//      var somedate2 = new Date('2017-06-25');
+	//      $('#f_date1').datetimepicker({
+	//          beforeShowDay: function(date) {
+	//        	  if (  date.getYear() <  somedate1.getYear() || 
+	//		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
+	//		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
+	//		             ||
+	//		            date.getYear() >  somedate2.getYear() || 
+	//		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
+	//		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
+	//              ) {
+	//                   return [false, ""]
+	//              }
+	//              return [true, ""];
+	//      }});
 </script>
 </html>

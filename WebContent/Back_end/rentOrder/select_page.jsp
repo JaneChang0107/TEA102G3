@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>IBM Employee: Home</title>
+<title>IBM Emp: Home</title>
 
 <style>
   table#table-1 {
@@ -30,10 +30,10 @@
 <body bgcolor='white'>
 
 <table id="table-1">
-   <tr><td><h3>IBM Employee: Home</h3><h4>( MVC )</h4></td></tr>
+   <tr><td><h3>IBM Emp: Home</h3><h4>( MVC )</h4></td></tr>
 </table>
 
-<p>This is the Home page for IBM Employee: Home</p>
+<p>This is the Home page for IBM Emp: Home</p>
 
 <h3>資料查詢:</h3>
 	
@@ -48,26 +48,26 @@
 </c:if>
 
 <ul>
-  <li><a href='<%=request.getContextPath()%>/Back_end/employee/listAllEmployee.jsp'>List</a> all Employees.  <br><br></li>
+  <li><a href='listAllEmp.jsp'>List</a> all Emps.  <br><br></li>
   
   
   <li>
-    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/employee/controller/employeeServlet.do" >
-        <b>輸入員工編號 (如E00001):</b>
-        <input type="text" name="e_id">
+    <FORM METHOD="post" ACTION="emp.do" >
+        <b>輸入員工編號 (如7001):</b>
+        <input type="text" name="empno">
         <input type="hidden" name="action" value="getOne_For_Display">
         <input type="submit" value="送出">
     </FORM>
   </li>
 
-  <jsp:useBean id="employeeSvc" scope="page" class="com.employee.model.EmployeeService" />
+<%--   <jsp:useBean id="empSvc" scope="page" class="com.emp.model.EmpService" /> --%>
    
   <li>
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/employee/controller/employeeServlet.do" >
+     <FORM METHOD="post" ACTION="emp.do" >
        <b>選擇員工編號:</b>
-       <select size="1" name="e_id">
-         <c:forEach var="employeeVO" items="${employeeSvc.all}" > 
-          <option value="${employeeVO.e_id}">${employeeVO.e_id}
+       <select size="1" name="empno">
+         <c:forEach var="empVO" items="${empSvc.all}" > 
+          <option value="${empVO.empno}">${empVO.empno}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">
@@ -76,11 +76,11 @@
   </li>
   
   <li>
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/employee/controller/employeeServlet.do" >
+     <FORM METHOD="post" ACTION="emp.do" >
        <b>選擇員工姓名:</b>
-       <select size="1" name="e_id">
-         <c:forEach var="employeeVO" items="${employeeSvc.all}" > 
-          <option value="${employeeVO.e_id}">${employeeVO.e_name}
+       <select size="1" name="empno">
+         <c:forEach var="empVO" items="${empSvc.all}" > 
+          <option value="${empVO.empno}">${empVO.ename}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">
@@ -93,7 +93,7 @@
 <h3>員工管理</h3>
 
 <ul>
-  <li><a href='<%=request.getContextPath() %>/Back_end/employee/addEmployee.jsp'>Add</a> a new Employee.</li>
+  <li><a href='addEmp.jsp'>Add</a> a new Emp.</li>
 </ul>
 
 </body>
