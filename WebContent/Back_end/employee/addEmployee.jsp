@@ -72,59 +72,60 @@
 <table>
 	<tr>
 		<td>密碼:</td>
-		<td><input type="TEXT" name="e_password" size="45"
+		<td><input type="PASSWORD" name="e_password" size="45" placeholder="請輸入密碼"
 			 value="<%= (employeeVO == null) ? "" : employeeVO.getE_password()%>" /></td>
 	</tr>
 	<tr>
 		<td>身分證字號:</td>
-		<td><input type="TEXT" name="e_identity" size="45"
+		<td><input type="TEXT" name="e_identity" size="45" placeholder="請輸入身分證字號"
 			 value="<%= (employeeVO == null) ? "A123456789" : employeeVO.getE_identity()%>" /></td>
 	</tr>
 	<tr>
-		<td>員工姓名:</td>
-		<td><input type="TEXT" name="e_name" size="45"
+		<td>姓名:</td>
+		<td><input type="TEXT" name="e_name" size="45" placeholder="請輸入姓名"
 			 value="<%=(employeeVO == null) ? "吳永志" : employeeVO.getE_name()%>" /></td>
 	</tr>
 	<tr>
 		<td>性別:</td>
-		<td><input type="radio" name="e_gender" size="45" value="MEN" checked />
-			<input type="radio" name="e_gender" size="45" value="WOMEN" />
+		<td><input type="radio" name="e_gender" size="45" value="MEN" checked />MEN
+			<input type="radio" name="e_gender" size="45" value="WOMEN" />WOMEN
 		</td>
 	</tr>
 	<tr>
 		<td>生日:</td>
-		<td><input name="e_birth" id="f_date1" type="text"></td>
+		<td><input name="e_birth" id="f_date1" type="text" placeholder="請選擇日期"></td>
 	</tr>
 
 	<tr>
 		<td>電子信箱:</td>
-		<td><input type="TEXT" name="e_email" size="45"
-		 	 value="<%=(employeeVO == null) ? "s@abc.com" : employeeVO.getE_email()%>" /></td>
+		<td><input type="TEXT" name="e_email" size="45" placeholder="請輸入電子信箱"
+		 	 value="<%=(employeeVO == null) ? "123@yahoo.com.tw" : employeeVO.getE_email()%>" /></td>
 	</tr>
 	<tr>
 		<td>電話:</td>
-		<td><input type="TEXT" name="e_phone" size="45"
+		<td><input type="TEXT" name="e_phone" size="45" placeholder="請輸入電話"
 		   	 value="<%=(employeeVO == null) ? "0987654321" : employeeVO.getE_phone()%>" /></td>
 	</tr>
 	<tr>
-		<td>地址:</td>
-		<td><input type="TEXT" name="e_address" size="45"
-			 value="<%=(employeeVO == null) ? "123" : employeeVO.getE_address()%>" /></td>
+		<td>住址:</td>
+		<td><input type="TEXT" name="e_address" size="45" placeholder="請輸入住址"
+			 value="<%=(employeeVO == null) ? "新北市北投區大安路49號" : employeeVO.getE_address()%>" /></td>
 	</tr>
 	<tr>
 		<td>職稱:</td>
-		<td><input type="TEXT" name="e_title" size="45"
-			 value="<%=(employeeVO == null) ? "456" : employeeVO.getE_title()%>" /></td>
+		<td><input type="radio" name="e_title" size="45" value="0" checked />EMPLOYEE
+			<input type="radio" name="e_title" size="45" value="1" />BOSS</td>
 	</tr>
 	<tr>
 		<td>狀態:</td>
-		<td><input type="TEXT" name="e_status" size="45"
-			 value="<%=(employeeVO == null) ? 2 : employeeVO.getE_status()%>" /></td>
+		<td><input type="radio" name="e_status" size="45" value="0" checked />在職
+			<input type="radio" name="e_status" size="45" value="1" />離職
+			<input type="radio" name="e_status" size="45" value="2" />留職停薪</td>
 	</tr>
 
 	<jsp:useBean id="storeSvc" scope="page"	class="com.store.model.StoreService" />
 	<tr>
-		<td>部門:<font color=red><b>*</b></font></td>
+		<td>分店:<font color=red><b>*</b></font></td>
 		<td><select size="1" name="st_id">
 			<c:forEach var="storeVO" items="${storeSvc.all}">
 				<option value="${storeVO.st_id}" ${(employeeVO.st_id==storeVO.st_id)? 'selected':'' }>${storeVO.st_id}

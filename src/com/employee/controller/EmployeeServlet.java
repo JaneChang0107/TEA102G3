@@ -135,28 +135,28 @@ public class EmployeeServlet extends HttpServlet {
 				String e_id =req.getParameter("e_id").trim();
 								
 				String e_password = req.getParameter("e_password");
-				String e_passwordReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+				String e_passwordReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{6,30}$";
 				if (e_password == null || e_password.trim().length() == 0) {
 					errorMsgs.add("員工密碼: 請勿空白");
 				} else if(!e_password.trim().matches(e_passwordReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("員工密碼: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+					errorMsgs.add("員工密碼: 只能是英文字母、數字和_ , 且長度必需在6到30之間");
 				}
 				
 				String e_identity = req.getParameter("e_identity");
-				String e_identityReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+				String e_identityReg = "^[A-Z]{1}[1-2]{1}[0-9]{8}$";
 				if (e_identity == null || e_identity.trim().length() == 0) {
 					errorMsgs.add("身分證字號: 請勿空白");
 				} else if(!e_identity.trim().matches(e_identityReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("身分證字號: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+					errorMsgs.add("請輸入正確身分證格式");
 				}
 				
 				
 				String e_name = req.getParameter("e_name");
-				String e_nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+				String e_nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z)]{2,10}$";
 				if (e_name == null || e_name.trim().length() == 0) {
 					errorMsgs.add("員工姓名: 請勿空白");
 				} else if(!e_name.trim().matches(e_nameReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("員工姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+					errorMsgs.add("員工姓名: 只能是中、英文字母, 且長度必需在2到10之間");
 	            }
 				
 				String e_gender = req.getParameter("e_gender").trim();
@@ -185,30 +185,30 @@ public class EmployeeServlet extends HttpServlet {
 				if (e_phone == null || e_phone.trim().length() == 0) {
 					errorMsgs.add("電話: 請勿空白");
 				} else if(!e_phone.trim().matches(e_phoneReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("電話: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+					errorMsgs.add("電話: 只能是數字 , 且必需09開頭 , 長度為10");
 				}
 				
 				String e_address = req.getParameter("e_address");
-				String e_addressReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+				String e_addressReg = "^[(\u4e00-\u9fa5)(0-9)]{5,30}$";
 				if (e_address == null || e_address.trim().length() == 0) {
 					errorMsgs.add("住址: 請勿空白");
 				} else if(!e_address.trim().matches(e_addressReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("住址: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+					errorMsgs.add("住址: 只能是中文、數字 , 且長度必需在5到30之間");
 				}
 				
 				String e_title = req.getParameter("e_title");
-				String e_titleReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+				String e_titleReg = "^[(0-1)]{1}$";
 				if (e_title == null || e_title.trim().length() == 0) {
 					errorMsgs.add("職稱: 請勿空白");
 				} else if(!e_title.trim().matches(e_titleReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("職稱: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+					errorMsgs.add("職稱: 0或1");
 				}
 
 
 				Integer e_status = new Integer(req.getParameter("e_status").trim());
 				
 				
-				String st_id = new String(req.getParameter("st_id").trim());
+				String st_id =req.getParameter("st_id").trim();
 
 
 
@@ -265,28 +265,28 @@ public class EmployeeServlet extends HttpServlet {
 				System.out.println("insert");
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 				String e_password = req.getParameter("e_password");
-				String e_passwordReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+				String e_passwordReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{6,30}$";
 				if (e_password == null || e_password.trim().length() == 0) {
 					errorMsgs.add("員工密碼: 請勿空白");
 				} else if(!e_password.trim().matches(e_passwordReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("員工密碼: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+					errorMsgs.add("員工密碼: 只能是英文字母、數字和_ , 且長度必需在6到30之間");
 				}
 				
 				String e_identity = req.getParameter("e_identity");
-				String e_identityReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+				String e_identityReg = "^[A-Z]{1}[1-2]{1}[0-9]{8}$";
 				if (e_identity == null || e_identity.trim().length() == 0) {
 					errorMsgs.add("身分證字號: 請勿空白");
 				} else if(!e_identity.trim().matches(e_identityReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("身分證字號: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+					errorMsgs.add("請輸入正確身分證格式");
 				}
 				
 				
 				String e_name = req.getParameter("e_name");
-				String e_nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+				String e_nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z)]{2,10}$";
 				if (e_name == null || e_name.trim().length() == 0) {
 					errorMsgs.add("員工姓名: 請勿空白");
 				} else if(!e_name.trim().matches(e_nameReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("員工姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+					errorMsgs.add("員工姓名: 只能是中、英文字母, 且長度必需在2到10之間");
 	            }
 				
 				String e_gender = req.getParameter("e_gender").trim();
@@ -301,49 +301,44 @@ public class EmployeeServlet extends HttpServlet {
 					e_birth=new java.sql.Date(System.currentTimeMillis());
 					errorMsgs.add("請輸入日期!");
 				}
-							
 				
 				String e_email = req.getParameter("e_email");
 				String e_emailReg = "^([A-Za-z0-9_\\-\\.])+\\@([A-Za-z0-9_\\-\\.])+\\.([A-Za-z]{2,4})$";
 				if (e_email == null || e_email.trim().length() == 0) {
 					errorMsgs.add("電子信箱: 請勿空白");
 				} else if(!e_email.trim().matches(e_emailReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("電子信箱: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+					errorMsgs.add("電子信箱: 請依照電子郵件格式輸入");
 	            }
 				
 				String e_phone = req.getParameter("e_phone");
-				String e_phoneReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+				String e_phoneReg = "^09[0-9]{8}$";
 				if (e_phone == null || e_phone.trim().length() == 0) {
 					errorMsgs.add("電話: 請勿空白");
 				} else if(!e_phone.trim().matches(e_phoneReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("電話: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+					errorMsgs.add("電話: 只能是數字 , 且必需09開頭 , 長度為10");
 				}
 				
 				String e_address = req.getParameter("e_address");
-				String e_addressReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+				String e_addressReg = "^[(\u4e00-\u9fa5)(0-9)]{5,30}$";
 				if (e_address == null || e_address.trim().length() == 0) {
-					errorMsgs.add("地址: 請勿空白");
+					errorMsgs.add("住址: 請勿空白");
 				} else if(!e_address.trim().matches(e_addressReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("地址: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+					errorMsgs.add("住址: 只能是中文、數字 , 且長度必需在5到30之間");
 				}
 				
 				String e_title = req.getParameter("e_title");
-				String e_titleReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+				String e_titleReg = "^[(0-1)]{1}$";
 				if (e_title == null || e_title.trim().length() == 0) {
 					errorMsgs.add("職稱: 請勿空白");
 				} else if(!e_title.trim().matches(e_titleReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("職稱: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
-				}
-				
-				Integer e_status = null;
-				try {
-					e_status = new Integer(req.getParameter("e_status").trim());
-				} catch (NumberFormatException e) {
-					e_status = 0;
-					errorMsgs.add("請填狀態.");
+					errorMsgs.add("職稱: 0或1");
 				}
 
-				String st_id = new String(req.getParameter("st_id").trim());
+
+				Integer e_status = new Integer(req.getParameter("e_status").trim());
+								
+				
+				String st_id =req.getParameter("st_id").trim();
 
 				EmployeeVO employeeVO = new EmployeeVO();
 				employeeVO.setE_password(e_password);

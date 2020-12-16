@@ -73,43 +73,47 @@
 	</tr>
 	<tr>
 		<td>密碼:</td>
-		<td><input type="PASSWORD" name="e_password" size="45" value="<%=employeeVO.getE_password()%>" /></td>
+		<td><input type="PASSWORD" name="e_password" size="45" value="<%=employeeVO.getE_password()%>" placeholder="請輸入密碼"/></td>
 	</tr>
 	<tr>
 		<td>身分證字號:</td>
-		<td><input type="TEXT" name="e_identity" size="45"	value="<%=employeeVO.getE_identity()%>" /></td>
+		<td><input type="TEXT" name="e_identity" size="45"	value="<%=employeeVO.getE_identity()%>" placeholder="請輸入身分證字號"/></td>
 	</tr>
 	<tr>
 		<td>姓名:</td>
-		<td><input type="TEXT" name="e_name" size="45"	value="<%=employeeVO.getE_name()%>" /></td>
+		<td><input type="TEXT" name="e_name" size="45"	value="<%=employeeVO.getE_name()%>" placeholder="請輸入姓名"/></td>
 	</tr>
 	<tr>
 		<td>性別:</td>
-		<td><%=employeeVO.getE_gender()%></td>
+		<td><input type="radio" name="e_gender" size="45"	value="MEN" <%=employeeVO.getE_gender().equals("MEN") ? "checked" : "" %>/>MEN
+			<input type="radio" name="e_gender" size="45"	value="WOMEN" <%=employeeVO.getE_gender().equals("WOMEN") ? "checked" : "" %>/>WOMEN</td>
 	</tr> 
 	<tr>
 		<td>生日:</td>
-		<td><input name="e_birth" id="f_date1" type="text" ></td>
+		<td><input name="e_birth" id="f_date1" type="text" placeholder="請填入生日"></td>
 	</tr>
 	<tr>
 		<td>電子信箱:</td>
-		<td><input type="TEXT" name="e_email" size="45"	value="<%=employeeVO.getE_email()%>" /></td>
+		<td><input type="TEXT" name="e_email" size="45"	value="<%=employeeVO.getE_email()%>" placeholder="請輸入電子信箱"/></td>
 	</tr>
 	<tr>
 		<td>電話:</td>
-		<td><input type="TEXT" name="e_phone" size="45" value="<%=employeeVO.getE_phone()%>" /></td>
+		<td><input type="TEXT" name="e_phone" size="45" value="<%=employeeVO.getE_phone()%>" placeholder="請輸入電話"/></td>
 	</tr>
 	<tr>
-		<td>地址:</td>
-		<td><input type="TEXT" name="e_address" size="45" value="<%=employeeVO.getE_address()%>" /></td>
+		<td>住址:</td>
+		<td><input type="TEXT" name="e_address" size="45" value="<%=employeeVO.getE_address()%>" placeholder="請輸入地址"/></td>
 	</tr>
 	<tr>
 		<td>職稱:</td>
-		<td><input type="TEXT" name="e_title" size="45" value="<%=employeeVO.getE_title()%>" /></td>
+		<td><input type="radio" name="e_title" size="45" value="0" <%=employeeVO.getE_title().equals("0") ? "checked" : "" %> />EMPLOYEE
+			<input type="radio" name="e_title" size="45" value="1" <%=employeeVO.getE_title().equals("1") ? "checked" : "" %> />BOSS</td>
 	</tr>
 	<tr>
 		<td>狀態:</td>
-		<td><input type="TEXT" name="e_status" size="45" value="<%=employeeVO.getE_status()%>" /></td>
+		<td><input type="radio" name="e_status" size="45" value="0" <%=employeeVO.getE_status()==0 ? "checked" : "" %> />在職
+			<input type="radio" name="e_status" size="45" value="1" <%=employeeVO.getE_status()==1 ? "checked" : "" %> />離職
+			<input type="radio" name="e_status" size="45" value="2" <%=employeeVO.getE_status()==2 ? "checked" : "" %> />留職停薪</td>
 	</tr>
 
 	<jsp:useBean id="storeSvc" scope="page" class="com.store.model.StoreService" />
@@ -118,7 +122,7 @@
 		<td><select size="1" name="st_id">
 			<c:forEach var="storeVO" items="${storeSvc.all}">
 				<option value="${storeVO.st_id}" ${(employeeVO.st_id==storeVO.st_id)? 'selected':'' }>${storeVO.st_id}
-		</c:forEach>
+			</c:forEach>
 		</select></td>
 	</tr>
 
@@ -126,7 +130,6 @@
 <br>
 <input type="hidden" name="action" value="update">
 <input type="hidden" name="e_id" value="<%=employeeVO.getE_id()%>">
-<input type="hidden" name="e_gender" value="<%=employeeVO.getE_gender()%>">
 <input type="submit" value="送出修改"></FORM>
 </body>
 
