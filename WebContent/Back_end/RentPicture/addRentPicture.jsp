@@ -85,6 +85,7 @@ th, td {
 		ACTION="<%=request.getContextPath()%>/RentPictureServlet" name="form1"
 		enctype="multipart/form-data">
 		<table>
+		 <div id="preview"><span class="text"></span></div>
 			<tr>
 				<td>出租品圖片:</td>
 				<td><input type="file" name="rp_picture" /></td>
@@ -97,23 +98,12 @@ th, td {
 
 
 
-
-			<%-- 			<jsp:useBean id="rentSvc" scope="page" --%>
-			<%-- 				class="com.rent.model.RentService" /> --%>
-			<!-- 			<tr> -->
-			<!-- 				<td>部門:<font color=red><b>*</b></font></td> -->
-			<!-- 				<td><select size="1" name="rent_type"> -->
-			<%-- 						<c:forEach var="rent_type" items="${rentSvc.all}"> --%>
-			<%-- 							<option value="${rentVO.r_type}" --%>
-			<%-- 								${(rentVO.r_type==rentVO.r_type)? 'selected':'' }>${rentVO.r_type} --%>
-			<%-- 						</c:forEach> --%>
-			<!-- 				</select></td> -->
-			<!-- 			</tr> -->
-
 		</table>
 		<br> <input type="hidden" name="action" value="insert"> <input
 			type="submit" value="送出新增">
 	</FORM>
+	
+	
 </body>
 
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->

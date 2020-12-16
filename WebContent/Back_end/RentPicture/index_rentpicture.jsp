@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
@@ -35,11 +35,11 @@
 
 <p>This is the Home page for IBM Rentpicture: Home</p>
 
-<h3>¸ê®Æ¬d¸ß:</h3>
+<h3>è³‡æ–™æŸ¥è©¢:</h3>
 	
-<%-- ¿ù»~ªí¦C --%>
+<%-- éŒ¯èª¤è¡¨åˆ— --%>
 <c:if test="${not empty errorMsgs}">
-	<font style="color:red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
+	<font style="color:red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 	<ul>
 	    <c:forEach var="message" items="${errorMsgs}">
 			<li style="color:red">${message}</li>
@@ -53,10 +53,10 @@
   
   <li>
     <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/RentPictureServlet" >
-        <b>¿é¤J¥X¯²«~¹Ï¤ù½s¸¹ (¦pRP00001):</b>
+        <b>è¼¸å…¥å‡ºç§Ÿå“åœ–ç‰‡ç·¨è™Ÿ (å¦‚RP00001):</b>
         <input type="text" name="rp_id">
         <input type="hidden" name="action" value="getOne_For_Display">
-        <input type="submit" value="°e¥X">
+        <input type="submit" value="é€å‡º">
     </FORM>
   </li>
 
@@ -64,33 +64,33 @@
    
   <li>
      <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/RentPictureServlet" >
-       <b>¿ï¾Ü¥X¯²«~¹Ï¤ù½s¸¹:</b>
+       <b>é¸æ“‡å‡ºç§Ÿå“åœ–ç‰‡ç·¨è™Ÿ:</b>
        <select size="1" name="rp_id">
          <c:forEach var="rentpictureVO" items="${rentpictureSvc.all}" > 
           <option value="${rentpictureVO.rp_id}">${rentpictureVO.rp_id}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">
-       <input type="submit" value="°e¥X">
+       <input type="submit" value="é€å‡º">
     </FORM>
   </li>
   
 <!--   <li> -->
 <!--      <FORM METHOD="post" ACTION="rentpicture.do" > -->
-<!--        <b>¿ï¾Ü­û¤u©m¦W:</b> -->
+<!--        <b>é¸æ“‡å“¡å·¥å§“å:</b> -->
 <!--        <select size="1" name="r_name"> -->
 <%--          <c:forEach var="rentVO" items="${rentSvc.all}" >  --%>
 <%--           <option value="${rentVO.r_name}">${rentVO.r_name} --%>
 <%--          </c:forEach>    --%>
 <!--        </select> -->
 <!--        <input type="hidden" name="action" value="getOne_For_Display"> -->
-<!--        <input type="submit" value="°e¥X"> -->
+<!--        <input type="submit" value="é€å‡º"> -->
 <!--      </FORM> -->
 <!--   </li> -->
 </ul>
 
 
-<h3>¥X¯²«~¹Ï¤ùºŞ²z</h3>
+<h3>å‡ºç§Ÿå“åœ–ç‰‡ç®¡ç†</h3>
 
 <ul>
   <li><a href='addRentPicture.jsp'>Add</a> a new Rentpicture.</li>

@@ -145,6 +145,10 @@ public class RentServlet extends HttpServlet {
 					errorMsgs.add("出租品種類: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
 	            }
 				String pt_id = req.getParameter("pt_id");
+				if (pt_id == null || pt_id.trim().length() == 0) {
+					errorMsgs.add("種類ID請勿空白");
+				}
+				
 				String r_name = req.getParameter("r_name").trim();
 				if (r_name == null || r_name.trim().length() == 0) {
 					errorMsgs.add("出租品名稱請勿空白");
@@ -189,10 +193,21 @@ public class RentServlet extends HttpServlet {
 					errorMsgs.add("請輸入修改日期!");
 				}
 				String e_editorid = req.getParameter("e_editorid");
+				if (e_editorid == null || e_editorid.trim().length() == 0) {
+					errorMsgs.add("修改者ID請勿空白");
+				}
 				String st_id = req.getParameter("st_id");
+				if (st_id == null || st_id.trim().length() == 0) {
+					errorMsgs.add("門市ID請勿空白");
+				}
 				String e_addid = req.getParameter("e_addid");
+				if (e_addid == null || e_addid.trim().length() == 0) {
+					errorMsgs.add("新增者ID請勿空白");
+				}
+				
 				
 				RentVO rentVO = new RentVO();
+				rentVO.setR_id(r_id);
 				rentVO.setR_type(r_type);
 				rentVO.setR_name(r_name);
 				rentVO.setPt_id(pt_id);
@@ -297,10 +312,21 @@ public class RentServlet extends HttpServlet {
 				
 				
 				String pt_id = req.getParameter("pt_id").trim();
+				if (pt_id == null || pt_id.trim().length() == 0) {
+					errorMsgs.add("種類ID請勿空白");
+				}
 				String e_addid = req.getParameter("e_addid").trim();
+				if (e_addid == null || e_addid.trim().length() == 0) {
+					errorMsgs.add("新增者ID請勿空白");
+				}
 				String e_editorid = req.getParameter("e_editorid").trim();
+				if (e_editorid == null || e_editorid.trim().length() == 0) {
+					errorMsgs.add("修改者ID請勿空白");
+				}
 				String st_id = req.getParameter("st_id").trim();
-
+				if (st_id == null || st_id.trim().length() == 0) {
+					errorMsgs.add("門市ID請勿空白");
+				}
 				RentVO rentVO = new RentVO();
 				rentVO.setR_type(r_type);
 				rentVO.setR_name(r_name);
@@ -315,21 +341,6 @@ public class RentServlet extends HttpServlet {
 				rentVO.setE_editorid(e_editorid);
 				rentVO.setSt_id(st_id);
 				
-//				rentVO.setR_type("遊戲");
-//				rentVO.setR_name("Switch 動物森友會");
-//				rentVO.setPt_id("PT00001");
-//				rentVO.setR_describe("保存良好");
-//				rentVO.setR_situation("新品");
-//				rentVO.setR_status("未上架");
-//				rentVO.setR_price(100);
-//				Timestamp add = new Timestamp(System.currentTimeMillis());
-//				rentVO.setR_adddate(add);
-//				Timestamp revise = new Timestamp(System.currentTimeMillis());
-//				rentVO.setR_revisedate(revise);		
-//				rentVO.setE_addid("E00001");
-//				rentVO.setE_editorid("E00001");
-//				rentVO.setSt_id("ST00001");
-
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("rentVO", rentVO); // 含有輸入格式錯誤的empVO物件,也存入req

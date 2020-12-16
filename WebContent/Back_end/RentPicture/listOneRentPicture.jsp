@@ -1,14 +1,14 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.rentpicture.model.*"%>
-<%-- ¦¹­¶¼È½m²ß±Ä¥Î Script ªº¼gªk¨ú­È --%>
+<%-- æ­¤é æš«ç·´ç¿’æ¡ç”¨ Script çš„å¯«æ³•å–å€¼ --%>
 
 <%
-	RentPictureVO rentpictureVO = (RentPictureVO) request.getAttribute("rentpictureVO"); //EmpServlet.java(Concroller), ¦s¤JreqªºempVOª«¥ó
+	RentPictureVO rentpictureVO = (RentPictureVO) request.getAttribute("rentpictureVO"); //EmpServlet.java(Concroller), å­˜å…¥reqçš„empVOç‰©ä»¶
 %>
 
 <html>
 <head>
-<title>¥X¯²«~¹Ï¤ù¸ê®Æ - listOneRentPicture.jsp</title>
+<title>å‡ºç§Ÿå“åœ–ç‰‡è³‡æ–™ - listOneRentPicture.jsp</title>
 
 <style>
 table#table-1 {
@@ -50,15 +50,15 @@ th, td {
 </head>
 <body bgcolor='white'>
 
-<!-- 	<h4>¦¹­¶¼È½m²ß±Ä¥Î Script ªº¼gªk¨ú­È:</h4> -->
+<!-- 	<h4>æ­¤é æš«ç·´ç¿’æ¡ç”¨ Script çš„å¯«æ³•å–å€¼:</h4> -->
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>¥X¯²«~¹Ï¤ù¸ê®Æ - ListOneRentpicture.jsp</h3>
+				<h3>å‡ºç§Ÿå“åœ–ç‰‡è³‡æ–™ - ListOneRentpicture.jsp</h3>
 				<h4>
 					<a
 						href="<%=request.getContextPath()%>/Back_end/RentPicture/index_rentpicture.jsp">
-						<img src="<%=request.getContextPath() %>/images/back1.png" width="40" weight="40" border="0">¦^­º­¶
+						<img src="<%=request.getContextPath() %>/images/back1.png" width="40" weight="40" border="0">å›é¦–é 
 					</a>
 				</h4>
 			</td>
@@ -68,9 +68,9 @@ th, td {
 	<table>
 		<tr>
 		<tr>
-			<th>¥X¯²«~¹Ï¤ùID</th>
-			<th>¥X¯²«~¹Ï¤ù</th>
-			<th>¥X¯²«~ID</th>
+			<th>å‡ºç§Ÿå“åœ–ç‰‡ID</th>
+			<th>å‡ºç§Ÿå“åœ–ç‰‡</th>
+			<th>å‡ºç§Ÿå“ID</th>
 		</tr>
 
 		<tr>

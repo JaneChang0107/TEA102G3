@@ -4,7 +4,7 @@
 <%@ page import="com.rent.model.*"%>
 
 <%
-	RentPictureVO rentpictureVO = (RentPictureVO) request.getAttribute("rentpictureVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+	RentPictureVO rentpictureVO = (RentPictureVO) request.getAttribute("rentpictureVO"); // EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
 	RentVO rentVO = (RentVO) request.getAttribute("rentVO");
 %>
 

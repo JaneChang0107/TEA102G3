@@ -144,7 +144,6 @@ input:read-only {
 						<option value="未上架">未上架</option>
 						<option value="上架中">上架中</option>
 						<option value="出租中">出租中</option>
-						<option value="已歸還">已歸還</option>
 						
 			</select> 
 			</tr>
@@ -160,10 +159,10 @@ input:read-only {
 				<td><%=(rentVO == null) ? r_adddate : rentVO.getR_adddate()%></td>
 			</tr>
 
-			<tr>
-				<td>上次修改:</td>
-				<td><%=(rentVO == null) ? r_revisedate : rentVO.getR_revisedate()%></td>
-			</tr>
+<!-- 			<tr> -->
+<!-- 				<td>上次修改:</td> -->
+<%-- 				<td><%=(rentVO == null) ? r_revisedate : rentVO.getR_revisedate()%></td> --%>
+<!-- 			</tr> -->
 
 			<tr>
 				<td>種類ID:</td>

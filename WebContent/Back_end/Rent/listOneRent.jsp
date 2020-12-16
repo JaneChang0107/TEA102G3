@@ -1,14 +1,14 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.rent.model.*"%>
-<%-- ¦¹­¶¼È½m²ß±Ä¥Î Script ªº¼gªk¨ú­È --%>
+<%-- æ­¤é æš«ç·´ç¿’æŽ¡ç”¨ Script çš„å¯«æ³•å–å€¼ --%>
 
 <%
-	RentVO rentVO = (RentVO) request.getAttribute("rentVO"); //EmpServlet.java(Concroller), ¦s¤JreqªºempVOª«¥ó
+	RentVO rentVO = (RentVO) request.getAttribute("rentVO"); //EmpServlet.java(Concroller), å­˜å…¥reqçš„empVOç‰©ä»¶
 %>
 
 <html>
 <head>
-<title>­û¤u¸ê®Æ - listOneRent.jsp</title>
+<title>å“¡å·¥è³‡æ–™ - listOneRent.jsp</title>
 
 <style>
 table#table-1 {
@@ -50,14 +50,14 @@ th, td {
 </head>
 <body bgcolor='white'>
 
-	<h4>¦¹­¶¼È½m²ß±Ä¥Î Script ªº¼gªk¨ú­È:</h4>
+	<h4>æ­¤é æš«ç·´ç¿’æŽ¡ç”¨ Script çš„å¯«æ³•å–å€¼:</h4>
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>­û¤u¸ê®Æ - ListOneRent.jsp</h3>
+				<h3>å“¡å·¥è³‡æ–™ - ListOneRent.jsp</h3>
 				<h4>
 					<a href="<%=request.getContextPath()%>/Back_end/Rent/index.jsp"><img src="images/back1.png" width="40"
-						height="40" border="0">¦^­º­¶</a>
+						height="40" border="0">å›žé¦–é </a>
 				</h4>
 			</td>
 		</tr>
@@ -66,19 +66,19 @@ th, td {
 	<table>
 		<tr>
 		<tr>
-			<th>¥X¯²«~½s¸¹</th>
-			<th>¥X¯²«~ºØÃþ</th>
-			<th>¥X¯²«~¦WºÙ</th>
-			<th>Ãþ§O½s¸¹</th>
-			<th>°Ó«~´y­z</th>
-			<th>³fªp</th>
-			<th>³fª«ª¬ºA</th>
-			<th>¥X¯²«~»ù®æ</th>
-			<th>·s¼W¤é´Á</th>
-			<th>¤W¦¸­×§ï</th>
-			<th>·s¼WªÌ</th>
-			<th>­×§ïªÌ</th>
-			<th>©Ò¦bªù¥«</th>
+			<th>å‡ºç§Ÿå“ç·¨è™Ÿ</th>
+			<th>å‡ºç§Ÿå“ç¨®é¡ž</th>
+			<th>å‡ºç§Ÿå“åç¨±</th>
+			<th>é¡žåˆ¥ç·¨è™Ÿ</th>
+			<th>å•†å“æè¿°</th>
+			<th>è²¨æ³</th>
+			<th>è²¨ç‰©ç‹€æ…‹</th>
+			<th>å‡ºç§Ÿå“åƒ¹æ ¼</th>
+			<th>æ–°å¢žæ—¥æœŸ</th>
+			<th>ä¸Šæ¬¡ä¿®æ”¹</th>
+			<th>æ–°å¢žè€…</th>
+			<th>ä¿®æ”¹è€…</th>
+			<th>æ‰€åœ¨é–€å¸‚</th>
 		</tr>
 		
 		<tr>

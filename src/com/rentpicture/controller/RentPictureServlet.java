@@ -1,6 +1,5 @@
 package com.rentpicture.controller;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedList;
@@ -134,27 +133,20 @@ public class RentPictureServlet extends HttpServlet {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				String rp_id = req.getParameter("rp_id");
 
-				// ----------------------------------------------------------------------------------//
+// ----------大吳神code----------------------------------------------------------------------//				
 				// obtains the upload file part in this multipart request
+				RentPictureService rentpictureSvc = new RentPictureService();
+				
 				Part rp_picture = req.getPart("rp_picture");
-				if (rp_picture == null || rp_picture.getSize() == 0) {
-					errorMsgs.add("請上傳圖片");
-				}
-
-				// obtains input stream of the upload file
-				InputStream inputStream = rp_picture.getInputStream();
-				byte[] data = new byte[inputStream.available()];
-				inputStream.read(data);
-
-//				ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-//				int nRead;
-//				
-//				while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
-//					buffer.write(data, 0, nRead);
-//				}
-//
-//				buffer.flush();
-//				byte[] byteArray = buffer.toByteArray();
+				InputStream in = rp_picture.getInputStream();
+				byte[] data = null;
+	if(in.available()!=0)	{		
+				data = new byte[in.available()];
+				in.read(data);
+				in.close();
+	} else
+		data = rentpictureSvc.getOneRentPicture(rp_id).getRp_picture();
+	
 //--------------------------------------------------------------------------------//
 
 				String r_id = req.getParameter("r_id");
@@ -174,7 +166,7 @@ public class RentPictureServlet extends HttpServlet {
 				}
 
 				/*************************** 2.開始修改資料 *****************************************/
-				RentPictureService rentpictureSvc = new RentPictureService();
+				
 				rentpictureVO = rentpictureSvc.updateRentPicture(data, r_id, rp_id);
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("rentpictureVO", rentpictureVO); // 資料庫update成功後,正確的的empVO物件,存入req
@@ -205,7 +197,9 @@ public class RentPictureServlet extends HttpServlet {
 //----------------------------------------------------------------------------------//
 				// obtains the upload file part in this multipart request
 				Part rp_picture = req.getPart("rp_picture");
-
+				if (rp_picture == null || rp_picture.getSize() == 0) {
+					errorMsgs.add("請上傳圖片");
+				}
 				// obtains input stream of the upload file
 				InputStream inputStream = rp_picture.getInputStream();
 				byte[] data = new byte[inputStream.available()];
@@ -223,7 +217,7 @@ public class RentPictureServlet extends HttpServlet {
 //--------------------------------------------------------------------------------//
 				String r_id = req.getParameter("r_id").trim();
 				if (r_id == null || r_id.trim().length() == 0) {
-					errorMsgs.add("出租品編號請勿空白");
+					errorMsgs.add("出租品ID請勿空白");
 				}
 
 				RentPictureVO rentpictureVO = new RentPictureVO();

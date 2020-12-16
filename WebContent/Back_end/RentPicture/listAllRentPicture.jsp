@@ -1,8 +1,8 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.rentpicture.model.*"%>
-<%-- ¦¹­¶½m²ß±Ä¥Î EL ªº¼gªk¨ú­È --%>
+<%-- æ­¤é ç·´ç¿’æ¡ç”¨ EL çš„å¯«æ³•å–å€¼ --%>
 
 <%
 	RentPictureVO rpv = new RentPictureVO();
@@ -13,7 +13,7 @@
 
 <html>
 <head>
-<title>©Ò¦³¥X¯²«~¹Ï¤ù¸ê®Æ - listAllRentpicture.jsp</title>
+<title>æ‰€æœ‰å‡ºç§Ÿå“åœ–ç‰‡è³‡æ–™ - listAllRentpicture.jsp</title>
 
 <style>
 table#table-1 {
@@ -55,24 +55,24 @@ th, td {
 </head>
 <body bgcolor='white'>
 
-	<h4>¦¹­¶½m²ß±Ä¥Î EL ªº¼gªk¨ú­È:</h4>
+	<h4>æ­¤é ç·´ç¿’æ¡ç”¨ EL çš„å¯«æ³•å–å€¼:</h4>
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>©Ò¦³¥X¯²«~¹Ï¤ù¸ê®Æ - listAllRentpicture.jsp</h3>
+				<h3>æ‰€æœ‰å‡ºç§Ÿå“åœ–ç‰‡è³‡æ–™ - listAllRentpicture.jsp</h3>
 				<h4>
 					<a
 						href="<%=request.getContextPath()%>/Back_end/RentPicture/index_rentpicture.jsp">
-						<img src="<%=request.getContextPath() %>/images/back1.png" width="100" height="32" border="0">¦^­º­¶
+						<img src="<%=request.getContextPath() %>/images/back1.png" width="100" height="32" border="0">å›é¦–é 
 					</a>
 				</h4>
 			</td>
 		</tr>
 	</table>
 
-	<!--  ¿ù»~ªí¦C  -->
+	<!--  éŒ¯èª¤è¡¨åˆ—  -->
 	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
+		<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 		<ul>
 			<c:forEach var="message" items="${errorMsgs}">
 				<li style="color: red">${message}</li>
@@ -82,9 +82,9 @@ th, td {
 
 	<table>
 		<tr>
-			<th>¥X¯²«~¹Ï¤ù½s¸¹</th>
-			<th>¥X¯²«~¹Ï¤ù</th>
-			<th>¥X¯²«~½s¸¹</th>
+			<th>å‡ºç§Ÿå“åœ–ç‰‡ç·¨è™Ÿ</th>
+			<th>å‡ºç§Ÿå“åœ–ç‰‡</th>
+			<th>å‡ºç§Ÿå“ç·¨è™Ÿ</th>
 
 		</tr>
 		<%@ include file="page1.file"%>
@@ -102,7 +102,7 @@ th, td {
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath() %>/RentPictureServlet"
 						style="margin-bottom: 0px;">
-						<input type="submit" value="­×§ï"> <input type="hidden"
+						<input type="submit" value="ä¿®æ”¹"> <input type="hidden"
 							name="rp_id" value="${RentPictureVO.rp_id}"> <input
 							type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
@@ -111,7 +111,7 @@ th, td {
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath() %>/RentPictureServlet"
 						style="margin-bottom: 0px;">
-						<input type="submit" value="§R°£"> <input type="hidden"
+						<input type="submit" value="åˆªé™¤"> <input type="hidden"
 							name="rp_id" value="${RentPictureVO.rp_id}"> <input
 							type="hidden" name="action" value="delete">
 					</FORM>
