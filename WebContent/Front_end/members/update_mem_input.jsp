@@ -50,7 +50,7 @@ a {
 	</c:if>
 
 	<FORM METHOD="post"
-		ACTION="<%=request.getContextPath()%>/member/MemberServlet"
+		ACTION="<%=request.getContextPath()%>/member/controller/MemberServlet"
 		name="form1">
 		<table>
 		    <tr>

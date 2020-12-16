@@ -1,8 +1,5 @@
 package com.member.controller;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedList;
@@ -20,7 +17,7 @@ import javax.servlet.http.Part;
 import com.member.model.MemberService;
 import com.member.model.MemberVO;
 
-@WebServlet("/member/MemberServlet")
+@WebServlet("/member/controller/MemberServlet")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class MemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -46,7 +43,7 @@ public class MemberServlet extends HttpServlet {
 					errorMsgs.add("請輸入會員ID");
 				}
 				if(!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView =req.getRequestDispatcher("/Members/select_page.jsp");
+					RequestDispatcher failureView =req.getRequestDispatcher("/Front_end/members/select_page.jsp");
 				    failureView.forward(req, res);
 				    return;
 				}
@@ -59,7 +56,7 @@ public class MemberServlet extends HttpServlet {
 					errorMsgs.add("會員ID格式不正確");
 				}
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/Members/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/members/select_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -72,21 +69,21 @@ public class MemberServlet extends HttpServlet {
 				}
 				
 				if(!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView =req.getRequestDispatcher("/Members/select_page.jsp");
+					RequestDispatcher failureView =req.getRequestDispatcher("/Front_end/members/select_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
 				
 				//3.交接完成，準備轉交
 				req.setAttribute("memberVO", memberVO);
-				String url ="/Members/listOneMem.jsp";
+				String url ="/Front_end/members/listOneMem.jsp";
 				RequestDispatcher successView =req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			    
 				//4.其他可能的錯誤處理
 			}catch(Exception e) {	
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView=req.getRequestDispatcher("/Members/select_page.jsp");
+				RequestDispatcher failureView=req.getRequestDispatcher("/Front_end/members/select_page.jsp");
 				failureView.forward(req, res);
 			
 			}
@@ -107,12 +104,12 @@ public class MemberServlet extends HttpServlet {
 				MemberVO memberVO=memSvc.findOneMem(m_id);
                 // 3.查詢完成,準備轉交
 				req.setAttribute("memberVO", memberVO);
-				String url ="/Members/update_mem_input.jsp";
+				String url ="/Front_end/members/update_mem_input.jsp";
 				RequestDispatcher successView =req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch(Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/Members/listAllMem.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/members/listAllMem.jsp");
 				failureView.forward(req, res);				
 			}
 		}
@@ -125,14 +122,17 @@ public class MemberServlet extends HttpServlet {
 			// 1.接收請求參數，輸入格式錯誤處理
 			try {
 			String m_id =new String(req.getParameter("m_id").trim());
+			
 			String m_email = req.getParameter("m_email");
-//			String m_emailReg = "\\\\p{Alpha}\\\\w{2,15}[@][a-z0-9]{3,}[.]\\\\p{Lower}{2,}";
+//			String m_emailReg = "\\p{Alpha}\\w{2,15}[@][a-z0-9]{3,}[.]\\p{Lower}{2,}";
 			if (m_email == null || m_email.trim().length() == 0) {
 				errorMsgs.add("郵箱請勿空白");
 			} 
 //			else if (!m_email.trim().matches(m_emailReg)) {
 //				errorMsgs.add("郵箱不符合格式!請重新輸入");
 //			}
+			
+			
 			String m_password = req.getParameter("m_password").trim();
 			if (m_password == null || m_password.trim().length() == 0) {
 				errorMsgs.add("密碼請勿空白");
@@ -190,6 +190,7 @@ public class MemberServlet extends HttpServlet {
 			
 			String b_code =req.getParameter("b_code");
 			
+			
 			byte[] m_bank_pic  =(byte[]) req.getAttribute("m_bank_pic");
 			
 			String m_storename =req.getParameter("m_storename");
@@ -227,12 +228,12 @@ public class MemberServlet extends HttpServlet {
 			
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("memberVO", memberVO);
-				RequestDispatcher failureView = req.getRequestDispatcher("/Members/update_mem_input.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/members/update_mem_input.jsp");
 				failureView.forward(req, res);
 				return;
 			}
 
-			// 2.開始新增資料
+			// 2.開始修改資料
 			System.out.println("開始修改");
 			MemberService memberSvc = new MemberService();
 			memberVO = memberSvc.updateMem( m_email,  m_password,  m_name,  m_gender,  m_phone,
@@ -240,9 +241,9 @@ public class MemberServlet extends HttpServlet {
 					 m_storename,  m_info,  m_cover,  m_hi, m_offlineHi, m_id);//得到memberVO物件以做後續處理
             System.out.println("修改完成");
             
-			// 3.新增完成，準備轉交
+			// 3.修改完成，準備轉交
             req.setAttribute("memberVO", memberVO);  //資料庫update完成，將memberVO物件存入req
-			String url= "/Members/listOneMem.jsp";
+			String url= "/Front_end/members/listOneMem.jsp";
 			RequestDispatcher successView =req.getRequestDispatcher(url);
 			successView.forward(req, res);
 			
@@ -250,7 +251,7 @@ public class MemberServlet extends HttpServlet {
 			}catch(Exception e) {
 				System.out.println("例外發生");
 				errorMsgs.add("資料修改失敗"+e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/Members/update_mem_input.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/members/update_mem_input.jsp");
 				failureView.forward(req, res);
 			}
 			
@@ -261,18 +262,17 @@ public class MemberServlet extends HttpServlet {
 		if ("insert".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			
 			try {
 				
 		    // 1.接收請求參數，輸入格式錯誤處理
 			String m_email = req.getParameter("m_email");
-//			String m_emailReg = "\\\\p{Alpha}\\\\w{2,15}[@][a-z0-9]{3,}[.]\\\\p{Lower}{2,}";
+			String m_emailReg = "\\p{Alpha}\\w{2,15}[@][a-z0-9]{3,}[.]\\p{Lower}{2,}";
 			if (m_email == null || m_email.trim().length() == 0) {
 				errorMsgs.add("郵箱請勿空白");
 			} 
-//			else if (!m_email.trim().matches(m_emailReg)) {
-//				errorMsgs.add("郵箱不符合格式!請重新輸入");
-//			}
+			else if (!m_email.trim().matches(m_emailReg)) {
+				errorMsgs.add("郵箱不符合格式!請重新輸入");
+			}
 
 			String m_password = req.getParameter("m_password").trim();
 			if (m_password == null || m_password.trim().length() == 0) {
@@ -320,7 +320,7 @@ public class MemberServlet extends HttpServlet {
 
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("memberVO", memberVO);
-				RequestDispatcher failureView = req.getRequestDispatcher("/Members/addMem.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/members/addMem.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -332,14 +332,14 @@ public class MemberServlet extends HttpServlet {
             System.out.println("新增完成");
             
 			// 3.新增完成，準備轉交
-			String url= "/Members/listAllMem.jsp";
+			String url= "/Front_end/members/listAllMem.jsp";
 			RequestDispatcher successView =req.getRequestDispatcher(url);
 			successView.forward(req, res);
 			
 			// 抓到其他例外
 			}catch(Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/Members/addMem.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/members/addMem.jsp");
 				failureView.forward(req, res);
 			}
 			
@@ -353,13 +353,13 @@ public class MemberServlet extends HttpServlet {
 			// 1.接收請求參數，輸入格式錯誤處理
 			try {
 			String m_email = req.getParameter("m_email");
-//			String m_emailReg = "\\\\p{Alpha}\\\\w{2,15}[@][a-z0-9]{3,}[.]\\\\p{Lower}{2,}";
-			if (m_email == null || m_email.trim().length() == 0) {
-				errorMsgs.add("郵箱請勿空白");
+	        String m_emailReg = "\\p{Alpha}\\w{2,15}[@][a-z0-9]{3,}[.]\\p{Lower}{2,}";
+		    if (m_email == null || m_email.trim().length() == 0) {
+					errorMsgs.add("郵箱請勿空白");
 			} 
-//			else if (!m_email.trim().matches(m_emailReg)) {
-//				errorMsgs.add("郵箱不符合格式!請重新輸入");
-//			}
+			else if (!m_email.trim().matches(m_emailReg)) {
+					errorMsgs.add("郵箱不符合格式!請重新輸入");
+			}
 			String m_password = req.getParameter("m_password").trim();
 			if (m_password == null || m_password.trim().length() == 0) {
 				errorMsgs.add("密碼請勿空白");
@@ -395,48 +395,38 @@ public class MemberServlet extends HttpServlet {
 				errorMsgs.add("請選擇生日");
 			}
 			
-//			byte[] m_headpic = (byte[])req.getAttribute("m_headpic");
 			Part m_headpic = req.getPart("m_headpic");
 			InputStream is =m_headpic.getInputStream();
+			
+			byte[] m_headpicbuffer=null;
 			try {
-				byte[] buffer = new byte[is.available()];
-				is.read(buffer);
+				m_headpicbuffer = new byte[is.available()];
+				is.read(m_headpicbuffer);
 				is.close();
-			} catch (FileNotFoundException e) {
-				System.out.println("找不到檔案");
-				e.printStackTrace();
-			} catch (IOException e) {
-				System.out.println("傳輸過程發生問題");
+			} catch (Exception e) {
+				errorMsgs.add("傳輸過程發生問題");
 				e.printStackTrace();
 			}
 			
-//			ByteArrayOutputStream buffer=new ByteArrayOutputStream();
-			
-//			public static byte[] getPic(String path) {
-//				byte[] buffer = null;
-//				try {
-//					FileInputStream fis = new FileInputStream(path);
-//					buffer = new byte[fis.available()];
-//					fis.read(buffer);
-//					fis.close();
-//				} catch (FileNotFoundException e) {
-//					System.out.println("找不到檔案");
-//					e.printStackTrace();
-//				} catch (IOException e) {
-//					System.out.println("傳輸過程發生問題");
-//					e.printStackTrace();
-//				}
-//				return buffer;
-//			}
-			
-
 			String m_identity = req.getParameter("m_identity");
 			if (m_identity == null || m_identity.trim().length() == 0) {
 				errorMsgs.add("身分證字號請勿空白");
 			}
 			
 			
-			byte[] m_id_pic =(byte[]) req.getAttribute("m_id_pic");		
+			Part m_id_pic=req.getPart("m_id_pic");
+			InputStream is2 =m_id_pic.getInputStream();
+			
+			byte[] m_id_picbuffer=null;
+			try {
+				m_id_picbuffer = new byte[is2.available()];
+				is2.read(m_id_picbuffer);
+				is2.close();
+			} catch (Exception e) {
+				errorMsgs.add("傳輸過程發生問題");
+				e.printStackTrace();
+			}
+			
 			
 			String m_account = req.getParameter("m_account");
 			if (m_account == null || m_account.trim().length() == 0) {
@@ -472,9 +462,9 @@ public class MemberServlet extends HttpServlet {
 			memberVO.setM_phone(m_phone);
 			memberVO.setM_address(m_address);
 			memberVO.setM_birth(m_birth);
-			memberVO.setM_headpic(m_headpic);
+			memberVO.setM_headpic(m_headpicbuffer);
 			memberVO.setM_identity(m_identity);
-			memberVO.setM_id_pic(m_id_pic);
+			memberVO.setM_id_pic(m_id_picbuffer);
 			memberVO.setM_account(m_account);
 			memberVO.setM_accountName(m_accountName);
 			memberVO.setB_code(b_code);
@@ -487,7 +477,7 @@ public class MemberServlet extends HttpServlet {
 			
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("memberVO", memberVO);
-				RequestDispatcher failureView = req.getRequestDispatcher("/Members/addMemSeller.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/members/addMemSeller.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -496,19 +486,19 @@ public class MemberServlet extends HttpServlet {
 			System.out.println("開始新增");
 			MemberService memberSvc = new MemberService();
 			memberVO = memberSvc.addMem2( m_email,  m_password,  m_name,  m_gender,  m_phone,
-					 m_address, m_birth, m_headpic,  m_identity, m_id_pic,  m_account,  m_accountName,  b_code, m_bank_pic,
+					 m_address, m_birth, m_headpicbuffer,  m_identity, m_id_picbuffer,  m_account,  m_accountName,  b_code, m_bank_pic,
 					 m_storename,  m_info,  m_cover,  m_hi, m_offlineHi);//得到memberVO物件以做後續處理
             System.out.println("新增完成");
             
 			// 3.新增完成，準備轉交
-			String url= "/Members/listAllMem.jsp";
+			String url= "/Front_end/members/listAllMem.jsp";
 			RequestDispatcher successView =req.getRequestDispatcher(url);
 			successView.forward(req, res);
 			
 			// 抓到其他例外
 			}catch(Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/Members/addMemSeller.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/members/addMemSeller.jsp");
 				failureView.forward(req, res);
 			}
 			
@@ -527,34 +517,18 @@ public class MemberServlet extends HttpServlet {
 				memSvc.deleteMem(m_id);
 			
 			    // 3. 刪除完成，準備轉交
-		        String url ="/Members/listAllMem.jsp";	
+		        String url ="/Front_end/members/listAllMem.jsp";	
 		        RequestDispatcher successView =req.getRequestDispatcher(url);
 		        successView.forward(req, res);			
 			    
 		        // 其他錯誤處理
 			}catch(Exception e) {
 				errorMsgs.add("資料刪除失敗"+e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/Members/listAllMem.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/members/listAllMem.jsp");
 			    failureView.forward(req, res);
 			}
 		}
 
-	}
-	public static byte[] getPic(String path) {
-		byte[] buffer = null;
-		try {
-			FileInputStream fis = new FileInputStream(path);
-			buffer = new byte[fis.available()];
-			fis.read(buffer);
-			fis.close();
-		} catch (FileNotFoundException e) {
-			System.out.println("找不到檔案");
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("傳輸過程發生問題");
-			e.printStackTrace();
-		}
-		return buffer;
 	}
 
 }

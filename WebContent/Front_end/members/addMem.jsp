@@ -43,7 +43,7 @@ b{
 		</ul>
 	</c:if>
 
-	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/MemberServlet" name="form1">
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/controller/MemberServlet" name="form1">
 		<table>
 			<tr>
 				<td>電子郵件:<b>*</b></td>
@@ -64,10 +64,8 @@ b{
 			<tr>
 				<td>性別:<b>*</b></td>
 				<td>
-				<input type="radio" name="m_gender" checked
-				value="男">男 
-				<input type="radio" name="m_gender" 
-				value="女">女
+				<input type="radio" name="m_gender" value="男">男 
+				<input type="radio" name="m_gender" value="女">女
 				</td>
 			</tr>
 			<tr>

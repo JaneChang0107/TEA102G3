@@ -53,7 +53,7 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>所有會員資料</h3>
-		 <h4><a href="<%=request.getContextPath()%>/Members/select_page.jsp">回首頁</a></h4>
+		 <h4><a href="<%=request.getContextPath()%>/Front_end/members/select_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -105,10 +105,10 @@
      <td>${memberVO.m_phone}</td>
      <td>${memberVO.m_address}</td>
      <td>${memberVO.m_birth}</td>
-     <td>${memberVO.m_headpic}</td>
+     <td><img src="data:image/jpg;base64,${memberVO.m_headpic2}" width="100" height="100"></td>
      <td>${memberVO.m_status}</td>
      <td>${memberVO.m_identity}</td>
-     <td>${memberVO.m_id_pic}</td>
+     <td><img src="data:image/jpg;base64,${memberVO.m_id_pic2}" width="100" height="100"></td>
      <td>${memberVO.m_account}</td>
      <td>${memberVO.m_accountName}</td>
      <td>${memberVO.b_code}</td>
@@ -121,14 +121,14 @@
      <td>${memberVO.m_offlineHi}</td>
      <td>${memberVO.m_coin}</td>
        <td>
-	     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/MemberServlet" style="margin-bottom: 0px;">
+	     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/controller/MemberServlet" style="margin-bottom: 0px;">
 		     <input type="submit" value="修改">
 		     <input type="hidden" name="m_id"  value="${memberVO.m_id}">
 		     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
        </td>
 	   
 	    <td>
-		  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/MemberServlet" style="margin-bottom: 0px;">
+		  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/controller/MemberServlet" style="margin-bottom: 0px;">
 			  <input type="submit" value="刪除">
 	          <input type="hidden" name="m_id"  value="${memberVO.m_id}">
 		      <input type="hidden" name="action" value="delete"></FORM>

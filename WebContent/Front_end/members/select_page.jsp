@@ -54,7 +54,7 @@ h4 {
 	   <li><a href='listAllMem.jsp'>查詢全部會員</a><br><br></li>
 
        <li>
-	    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/MemberServlet" >
+	    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/controller/MemberServlet" >
 	        <b>輸入會員ID(如M00001):</b>
 	        <input type="text" name="m_id">
 	        <input type="hidden" name="action" value="getOne_For_Display">
@@ -65,7 +65,7 @@ h4 {
 <jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService" />   
 
    <li>
-       <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/MemberServlet" >
+       <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/controller/MemberServlet" >
             <b>選擇會員ID:</b>       
               <select size="1" name="m_id">
                <c:forEach var="memberVO" items="${memSvc.all}">
