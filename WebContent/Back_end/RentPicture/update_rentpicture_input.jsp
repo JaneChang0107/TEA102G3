@@ -68,7 +68,7 @@ input:read-only {
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>員工資料修改 - update_emp_input.jsp</h3>
+				<h3>出租品圖片資料修改 - update_rentpicture_input.jsp</h3>
 				<h4>
 					<a
 						href="<%=request.getContextPath()%>/Back_end/RentPicture/index_rentpicture.jsp"><img

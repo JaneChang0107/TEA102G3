@@ -61,7 +61,7 @@
 <h4>此頁練習採用 EL 的寫法取值:</h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>所有出租品資料 - listAllEmp.jsp</h3>
+		 <h3>所有出租品資料 - listAllRentEmp.jsp</h3>
 		 <h4><a href="<%=request.getContextPath()%>/Back_end/Rent/index.jsp"><img src="<%=request.getContextPath() %>/images/back1.png" width="40" height="40" border="0">回首頁</a></h4>
 	</td></tr>
 </table>

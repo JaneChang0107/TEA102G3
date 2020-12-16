@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>員工資料新增 - addEmp.jsp</title>
+<title>出租品圖片新增 - AddRentPicture.jsp</title>
 
 <style>
 table#table-1 {
@@ -57,7 +57,7 @@ th, td {
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>員工資料新增 - addEmp.jsp</h3>
+				<h3>出租品圖片資料新增 -AddRentPicture.jsp</h3>
 			</td>
 			<td>
 				<h4>

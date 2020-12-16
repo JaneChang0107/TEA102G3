@@ -45,7 +45,8 @@ public class RentPictureServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/Back_end/RentPicture/index_rentpicture.jsp");
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/Back_end/RentPicture/index_rentpicture.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -58,7 +59,8 @@ public class RentPictureServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/Back_end/RentPicture/index_rentpicture.jsp");
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/Back_end/RentPicture/index_rentpicture.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -71,7 +73,8 @@ public class RentPictureServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/Back_end/RentPicture/index_rentpicture.jsp");
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/Back_end/RentPicture/index_rentpicture.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -114,7 +117,8 @@ public class RentPictureServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/Back_end/RentPicture/update_rentpicture_input.jsp");
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/Back_end/RentPicture/update_rentpicture_input.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -129,45 +133,49 @@ public class RentPictureServlet extends HttpServlet {
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				String rp_id = req.getParameter("rp_id");
-				//----------------------------------------------------------------------------------//
+
+				// ----------------------------------------------------------------------------------//
 				// obtains the upload file part in this multipart request
 				Part rp_picture = req.getPart("rp_picture");
+				if (rp_picture == null || rp_picture.getSize() == 0) {
+					errorMsgs.add("請上傳圖片");
+				}
 
 				// obtains input stream of the upload file
 				InputStream inputStream = rp_picture.getInputStream();
-
-				ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-				int nRead;
 				byte[] data = new byte[inputStream.available()];
-				
-				while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
-					buffer.write(data, 0, nRead);
-				}
-				System.out.println(nRead);
+				inputStream.read(data);
 
-				buffer.flush();
-				byte[] byteArray = buffer.toByteArray();
+//				ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+//				int nRead;
+//				
+//				while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
+//					buffer.write(data, 0, nRead);
+//				}
+//
+//				buffer.flush();
+//				byte[] byteArray = buffer.toByteArray();
 //--------------------------------------------------------------------------------//
-				
-				
+
 				String r_id = req.getParameter("r_id");
 
 				RentPictureVO rentpictureVO = new RentPictureVO();
 				rentpictureVO.setRp_id(rp_id);
-				rentpictureVO.setRp_picture(byteArray);
+				rentpictureVO.setRp_picture(data);
 				rentpictureVO.setR_id(r_id);
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("rentpictureVO", rentpictureVO); // 含有輸入格式錯誤的empVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/Back_end/RentPicture/update_rentpicture_input.jsp");
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/Back_end/RentPicture/update_rentpicture_input.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
 
 				/*************************** 2.開始修改資料 *****************************************/
 				RentPictureService rentpictureSvc = new RentPictureService();
-				rentpictureVO = rentpictureSvc.updateRentPicture(byteArray, r_id , rp_id);
+				rentpictureVO = rentpictureSvc.updateRentPicture(data, r_id, rp_id);
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("rentpictureVO", rentpictureVO); // 資料庫update成功後,正確的的empVO物件,存入req
 				String url = "/Back_end/RentPicture/listOneRentPicture.jsp";
@@ -177,7 +185,8 @@ public class RentPictureServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/Back_end/RentPicture/update_rentpicture_input.jsp");
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/Back_end/RentPicture/update_rentpicture_input.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -201,7 +210,7 @@ public class RentPictureServlet extends HttpServlet {
 				InputStream inputStream = rp_picture.getInputStream();
 				byte[] data = new byte[inputStream.available()];
 				inputStream.read(data);
-				
+
 //				ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 //				int nRead;
 //				
@@ -225,7 +234,8 @@ public class RentPictureServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("rentpictureVO", rentpictureVO); // 含有輸入格式錯誤的empVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/Back_end/RentPicture/addRentPicture.jsp");
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/Back_end/RentPicture/addRentPicture.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -233,7 +243,7 @@ public class RentPictureServlet extends HttpServlet {
 				/*************************** 2.開始新增資料 ***************************************/
 				RentPictureService rentpictureSvc = new RentPictureService();
 				rentpictureVO = rentpictureSvc.addRentPicture(rp_id, data, r_id);
-				
+
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				String url = "/Back_end/RentPicture/listAllRentPicture.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
@@ -271,7 +281,8 @@ public class RentPictureServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/Back_end/RentPicture/listAllRentPicture.jsp");
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/Back_end/RentPicture/listAllRentPicture.jsp");
 				failureView.forward(req, res);
 			}
 		}

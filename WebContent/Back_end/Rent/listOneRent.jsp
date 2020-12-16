@@ -8,7 +8,7 @@
 
 <html>
 <head>
-<title>員工資料 - listOneEmp.jsp</title>
+<title>員工資料 - listOneRent.jsp</title>
 
 <style>
 table#table-1 {
@@ -54,7 +54,7 @@ th, td {
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>員工資料 - ListOneEmp.jsp</h3>
+				<h3>員工資料 - ListOneRent.jsp</h3>
 				<h4>
 					<a href="<%=request.getContextPath()%>/Back_end/Rent/index.jsp"><img src="images/back1.png" width="40"
 						height="40" border="0">回首頁</a>

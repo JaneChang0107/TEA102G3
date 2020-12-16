@@ -25,7 +25,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>員工資料新增 - addEmp.jsp</title>
+<title>員工資料新增 - addRent.jsp</title>
 
 <style>
 table#table-1 {
@@ -82,7 +82,7 @@ input:read-only {
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>員工資料新增 - addEmp.jsp</h3>
+				<h3>出租品資料新增 - addRent.jsp</h3>
 			</td>
 			<td>
 				<h4>
@@ -131,8 +131,11 @@ input:read-only {
 
 			<tr>
 				<td>貨況:</td>
-				<td><input type="TEXT" name="r_situation" size="45"
-					value="<%=(rentVO == null) ? "二手品" : rentVO.getR_situation()%>" /></td>
+				<td><select name="r_situation">
+						<option value="全新品">全新品</option>
+						<option value="二手品">二手品</option>
+					
+			</select> 
 			</tr>
 
 			<tr>

@@ -170,7 +170,7 @@ public class RentServlet extends HttpServlet {
 					r_price = new Integer(req.getParameter("r_price").trim());
 				} catch (NumberFormatException e) {
 					r_price = 0;
-					errorMsgs.add("薪水請填數字.");
+					errorMsgs.add("價格請填數字.");
 				}
 				
 				Timestamp r_adddate=Timestamp.valueOf(req.getParameter("r_adddate").trim());
@@ -276,7 +276,7 @@ public class RentServlet extends HttpServlet {
 					r_price = new Integer(req.getParameter("r_price").trim());
 				} catch (NumberFormatException e) {
 					r_price = 0;
-					errorMsgs.add("薪水請填數字.");
+					errorMsgs.add("價格請填數字.");
 				}
 				
 				Timestamp r_adddate= null;

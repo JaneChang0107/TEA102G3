@@ -8,7 +8,7 @@
 
 <html>
 <head>
-<title>員工資料 - listOneEmp.jsp</title>
+<title>出租品圖片資料 - listOneRentPicture.jsp</title>
 
 <style>
 table#table-1 {
@@ -50,11 +50,11 @@ th, td {
 </head>
 <body bgcolor='white'>
 
-	<h4>此頁暫練習採用 Script 的寫法取值:</h4>
+<!-- 	<h4>此頁暫練習採用 Script 的寫法取值:</h4> -->
 	<table id="table-1">
 		<tr>
 			<td>
-				<h3>出租品資料 - ListOneEmp.jsp</h3>
+				<h3>出租品圖片資料 - ListOneRentpicture.jsp</h3>
 				<h4>
 					<a
 						href="<%=request.getContextPath()%>/Back_end/RentPicture/index_rentpicture.jsp">

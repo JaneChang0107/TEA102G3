@@ -99,15 +99,18 @@ input:read-only {
 		name="form1">
 		<table>
 			<tr>
-				<td>出租品種類:</td>
+				<td>出租品ID:</td>
 				<td><%=rentVO.getR_id()%></td>
 			</tr>
 			<tr>
 				<td>出租品種類:</td>
 				<td><select name="r_type">
-						<option value="遊戲主機">遊戲主機</option>
-						<option value="遊戲片">遊戲片</option>
-						<option value="遊戲周邊">遊戲周邊</option>
+						<option value="遊戲主機"
+							<%=rentVO.getR_type().equals("遊戲主機") ? "selected" : ""%>>遊戲主機</option>
+						<option value="遊戲片"
+							<%=rentVO.getR_type().equals("遊戲片") ? "selected" : ""%>>遊戲片</option>
+						<option value="遊戲周邊"
+							<%=rentVO.getR_type().equals("遊戲周邊") ? "selected" : ""%>>遊戲周邊</option>
 				</select>
 			<tr>
 				<td>出租品名稱:</td>
@@ -126,19 +129,27 @@ input:read-only {
 				<td><input type="TEXT" name="r_describe" size="45"
 					value="<%=rentVO.getR_describe()%>" /></td>
 			</tr>
+
+
 			<tr>
 				<td>貨況:</td>
-				<td><input type="TEXT" name="r_situation" size="45"
-					value="<%=rentVO.getR_situation()%>" /></td>
+				<td><select name="r_situation">
+						<option value="全新品"
+							<%=rentVO.getR_situation().equals("未上架") ? "selected" : ""%>>全新品</option>
+						<option value="二手品"
+							<%=rentVO.getR_situation().equals("未上架") ? "selected" : ""%>>二手品</option>
+
+				</select>
 			</tr>
 			<tr>
 				<td>貨物狀態:</td>
 				<td><select name="r_status">
-						<option value="未上架">未上架</option>
-						<option value="上架中">上架中</option>
-						<option value="出租中">出租中</option>
-						<option value="已歸還">已歸還</option>
-
+						<option value="未上架"
+							<%=rentVO.getR_status().equals("未上架") ? "selected" : ""%>>未上架</option>
+						<option value="上架中"
+							<%=rentVO.getR_status().equals("上架中") ? "selected" : ""%>>上架中</option>
+						<option value="出租中"
+							<%=rentVO.getR_status().equals("出租中") ? "selected" : ""%>>出租中</option>
 				</select>
 			</tr>
 			<tr>
@@ -172,9 +183,9 @@ input:read-only {
 
 
 		</table>
-		<br> <input type="hidden" name="action" value="update">
-		 <input type="hidden" name="r_id" value="<%=rentVO.getR_id()%>"> 
-		<input type="hidden" name="r_adddate" value="<%=rentVO.getR_adddate()%>">
+		<br> <input type="hidden" name="action" value="update"> <input
+			type="hidden" name="r_id" value="<%=rentVO.getR_id()%>"> <input
+			type="hidden" name="r_adddate" value="<%=rentVO.getR_adddate()%>">
 		<input type="hidden" name="r_revisedate" value="<%=r_revisedate%>">
 		<input type="hidden" name="e_addid" value="<%=rentVO.getE_addid()%>">
 		<input type="submit" value="送出修改">

@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>IBM Emp: Home</title>
+<title>IBM Rentpicture: Home</title>
 
 <style>
   table#table-1 {
@@ -30,10 +30,10 @@
 <body bgcolor='white'>
 
 <table id="table-1">
-   <tr><td><h3>IBM Emp: Home</h3><h4>( MVC )</h4></td></tr>
+   <tr><td><h3>IBM Rentpicture: Home</h3><h4>( MVC )</h4></td></tr>
 </table>
 
-<p>This is the Home page for IBM Emp: Home</p>
+<p>This is the Home page for IBM Rentpicture: Home</p>
 
 <h3>資料查詢:</h3>
 	
@@ -48,7 +48,7 @@
 </c:if>
 
 <ul>
-  <li><a href='listAllRentPicture.jsp'>List</a> all Emps.  <br><br></li>
+  <li><a href='listAllRentPicture.jsp'>List</a> all Rentpicture.  <br><br></li>
   
   
   <li>
@@ -93,7 +93,7 @@
 <h3>出租品圖片管理</h3>
 
 <ul>
-  <li><a href='addRentPicture.jsp'>Add</a> a new Emp.</li>
+  <li><a href='addRentPicture.jsp'>Add</a> a new Rentpicture.</li>
 </ul>
 
 </body>
