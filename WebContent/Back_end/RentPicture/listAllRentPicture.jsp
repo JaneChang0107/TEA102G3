@@ -63,7 +63,7 @@ th, td {
 				<h4>
 					<a
 						href="<%=request.getContextPath()%>/Back_end/RentPicture/index_rentpicture.jsp">
-						<img src="images/back1.png" width="100" height="32" border="0">回首頁
+						<img src="<%=request.getContextPath() %>/images/back1.png" width="100" height="32" border="0">回首頁
 					</a>
 				</h4>
 			</td>

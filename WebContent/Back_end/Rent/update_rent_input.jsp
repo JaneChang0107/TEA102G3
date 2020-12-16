@@ -76,7 +76,8 @@ input:read-only {
 				<h3>員工資料修改 - update_emp_input.jsp</h3>
 				<h4>
 					<a href="<%=request.getContextPath()%>/Back_end/Rent/index.jsp"><img
-						src="images/back1.png" width="40" height="40" border="0">回首頁</a>
+						src="<%=request.getContextPath()%>/images/back1.png" width="40"
+						height="40" border="0">回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -137,8 +138,8 @@ input:read-only {
 						<option value="上架中">上架中</option>
 						<option value="出租中">出租中</option>
 						<option value="已歸還">已歸還</option>
-						
-			</select> 
+
+				</select>
 			</tr>
 			<tr>
 				<td>出租品價格:</td>
@@ -155,8 +156,7 @@ input:read-only {
 			</tr>
 			<tr>
 				<td>新增者ID:</td>
-				<td><input type="TEXT" name="e_addid" size="45"
-					value="<%=rentVO.getE_addid()%>" /></td>
+				<td><%=rentVO.getE_addid()%></td>
 			</tr>
 			<tr>
 				<td>修改者ID:</td>
@@ -172,12 +172,12 @@ input:read-only {
 
 
 		</table>
-		<br> <input type="hidden" name="action" value="update"> <input
-			type="hidden" name="r_id" value="<%=rentVO.getR_id()%>"> <input
-			type="hidden" name="r_adddate" value="<%=rentVO.getR_adddate()%>">
-		<input type="hidden" name="r_revisedate"
-			value="<%=r_revisedate %>"> <input type="submit"
-			value="送出修改">
+		<br> <input type="hidden" name="action" value="update">
+		 <input type="hidden" name="r_id" value="<%=rentVO.getR_id()%>"> 
+		<input type="hidden" name="r_adddate" value="<%=rentVO.getR_adddate()%>">
+		<input type="hidden" name="r_revisedate" value="<%=r_revisedate%>">
+		<input type="hidden" name="e_addid" value="<%=rentVO.getE_addid()%>">
+		<input type="submit" value="送出修改">
 	</FORM>
 </body>
 
