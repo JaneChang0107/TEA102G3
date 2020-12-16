@@ -28,7 +28,7 @@ public class ProductTypeServelt extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("Big5");
 		String action = request.getParameter("action");
 		
 		// 新增用
@@ -81,7 +81,7 @@ public class ProductTypeServelt extends HttpServlet {
 			
 			String ptid = request.getParameter("pt_id");
 			String platform = request.getParameter("platform");
-			String platformRegex = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,100}$";
+			String platformRegex = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{1,100}$";
 			
 			// 驗證
 			if(platform == null || platform.isEmpty()) {
@@ -96,10 +96,14 @@ public class ProductTypeServelt extends HttpServlet {
 				error.add("請輸入種類");
 			} else if (!kind.matches(platformRegex)){
 				error.add("種類格式不正確");
+				System.out.println(kind);
 			}
+			ProductTypeVO ptVO = new ProductTypeVO();
+			ptVO.setPt_platform(platform);
+			ptVO.setPt_kind(kind);
 			
 			if(!error.isEmpty()) {
-				request.setAttribute("error", error);
+				request.setAttribute("ptVO", ptVO);
 				RequestDispatcher fail = request.getRequestDispatcher("/Back_end/productType/updateProductType.jsp");
 				fail.forward(request, response);
 				return;

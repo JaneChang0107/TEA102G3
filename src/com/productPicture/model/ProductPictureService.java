@@ -29,8 +29,12 @@ public class ProductPictureService {
 		dao.delete(pid);
 	}
 	
-	public void findOneProductPocture(String pid) {
-		dao.findByPrimaryKey(pid);
+	public ProductPictureVO findOneProductPicture(String ppid) {
+		return dao.findByPrimaryKey(ppid);
+	}
+	
+	public List<ProductPictureVO> findProductPicture(String pid) {
+		return dao.findByProduct(pid);
 	}
 	
 	public List<ProductPictureVO> getAll() {

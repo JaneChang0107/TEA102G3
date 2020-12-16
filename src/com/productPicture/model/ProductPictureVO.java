@@ -2,7 +2,7 @@ package com.productPicture.model;
 
 import java.util.Base64;
 
-public class ProductPictureVO {
+public class ProductPictureVO implements java.io.Serializable {
 	
 	private String pp_id;
 	private byte[] pp_picture;
@@ -28,9 +28,12 @@ public class ProductPictureVO {
 		this.p_id = p_id;
 	}
 	public String getPp_picture64() {
-		pp_picture = Base64.getEncoder().encode(pp_picture);
-		String picture = new String(pp_picture);
-		return picture;
+		if(pp_picture != null) {
+			pp_picture = Base64.getEncoder().encode(pp_picture);
+			String picture = new String(pp_picture);
+			return picture;
+		}
+		return "";
 	}
 	
 

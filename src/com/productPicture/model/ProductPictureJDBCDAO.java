@@ -21,6 +21,7 @@ public class ProductPictureJDBCDAO implements ProductPictureDAOInterface{
 	private final String UPDATE = "UPDATE ProductPicture SET PP_PICTURE=? WHERE PP_ID=?";
 	private final String DELETE = "DELETE FROM ProductPicture WHERE PP_ID=?";
 	private final String GETONE = "SELECT * FROM ProductPicture WHERE PP_ID=?";
+	private final String GETPP = "SELECT * FROM ProductPicture WHERE P_ID=?";
 	private final String GETALL = "SELECT * FROM ProductPicture ORDER BY PP_ID";
 	
 	
@@ -233,9 +234,6 @@ public class ProductPictureJDBCDAO implements ProductPictureDAOInterface{
 				productPicture.setPp_picture(rs.getBytes("pp_picture"));
 				productPicture.setP_id(rs.getString("p_id"));
 			}
-			
-			
-			
 		} catch(ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch(SQLException e) {
@@ -267,6 +265,60 @@ public class ProductPictureJDBCDAO implements ProductPictureDAOInterface{
 		return productPicture;
 	}
 
+	@Override
+	public List<ProductPictureVO> findByProduct (String p_id) {
+		ProductPictureVO productPicture = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<ProductPictureVO> list = new LinkedList<ProductPictureVO>();
+		
+		try {
+			Class.forName(database.DRIVER);
+			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			ps = con.prepareStatement(GETPP);
+			ps.setString(1, p_id);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				productPicture = new ProductPictureVO();
+				productPicture.setPp_id(rs.getString("pp_id"));
+				productPicture.setPp_picture(rs.getBytes("pp_picture"));
+				productPicture.setP_id(rs.getString("p_id"));
+				list.add(productPicture);
+			}
+		} catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null) {
+					rs.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(ps != null) {
+					ps.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(con != null) {
+					con.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+	}
+	
 	@Override
 	public List<ProductPictureVO> getAll() {
 		List<ProductPictureVO> listppVO = new LinkedList<ProductPictureVO>();
@@ -317,8 +369,6 @@ public class ProductPictureJDBCDAO implements ProductPictureDAOInterface{
 				e.printStackTrace();
 			}
 		}
-		
-		
 		return listppVO;
 	}
 

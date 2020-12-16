@@ -42,11 +42,11 @@ public class ProductPictureServlet extends HttpServlet {
 				String pid = request.getParameter("pid");
 				
 				// 驗證
-				if(pid == null || pid.isBlank()) {
+				if(pid == null || pid.isEmpty()) {
 					errors.add("請輸入商品編號");
 				}
 	
-				if(request.getPart("picture") == null) {
+				if(request.getPart("picture").getSize() == 0) {
 					errors.add("請上傳商品圖片");
 				}
 	
@@ -73,6 +73,93 @@ public class ProductPictureServlet extends HttpServlet {
 				}
 				response.sendRedirect(request.getContextPath() + "/Back_end/productPicture/allProductPicture.jsp");
 			}
+			// 刪除
+			if("delete".equals(action)) {
+				List<String> errors = new LinkedList<String>();
+				request.setAttribute("errors", errors);
+				String ppid = request.getParameter("ppid");
+
+				ProductPictureService ppService = new ProductPictureService();
+				ppService.deleteProductPocture(ppid);
+
+				response.sendRedirect(request.getContextPath() + "/Back_end/productPicture/allProductPicture.jsp");
+			}
+
+			// 選擇一個產品
+			if("getOne".equals(action)) {
+				
+				String pid = request.getParameter("pid");
+				ProductPictureService ppService = new ProductPictureService();
+				List<ProductPictureVO> ppVOs = ppService.findProductPicture(pid);
+				System.out.println(pid);
+				
+				request.setAttribute("ppVOs", ppVOs);
+				for(ProductPictureVO p : ppVOs) {
+					System.out.println("getone" + p);
+				}
+				RequestDispatcher ok = request.getRequestDispatcher("/Back_end/productPicture/oneProductPicture.jsp");
+				ok.forward(request, response);
+			}
+			
+			// 更新拿資料
+			if("updateOne".equals(action)) {
+				List<String> errors = new LinkedList<String>();
+				request.setAttribute("errors", errors);
+				String ppid = request.getParameter("ppid");
+				String pid = request.getParameter("pid");
+				if(ppid == null || ppid.isEmpty()) {
+					errors.add("圖片選擇錯誤");
+				}
+				if(!errors.isEmpty()) {
+					RequestDispatcher dr = request.getRequestDispatcher("/Back_end/productPicture/oneProductPicture.jsp");
+					dr.forward(request, response);
+					return;
+				}
+				ProductPictureVO ppVO = new ProductPictureVO();
+				ppVO.setP_id(pid);
+				ppVO.setPp_id(ppid);
+				request.setAttribute("ppVO", ppVO);
+				
+				RequestDispatcher dr = request.getRequestDispatcher("/Back_end/productPicture/updateProductPicture.jsp");
+				dr.forward(request, response);
+			}
+			
+			// 更新
+			if("update".equals(action)) {
+//				List<String> errors = new LinkedList<String>();
+//				request.setAttribute("errors", errors);
+//				
+//				if(request.getPart("picture").getSize() == 0) {
+//					errors.add("請上傳圖片");
+//				}
+				String ppid = request.getParameter("ppid");
+				ProductPictureService ppService = new ProductPictureService();
+				
+//				if(!errors.isEmpty()) {
+//					request.setAttribute("ppVO", ppVO);
+//					RequestDispatcher fail = request.getRequestDispatcher("/Back_end/productPicture/updateProductPicture.jsp");
+//					fail.forward(request, response);
+//					return;
+//				}
+				
+				
+				for(Part pt : request.getParts()) {
+					if("picture".equals(pt.getName()) && pt.getSize() == 0) {
+						ppService.updateProductPocture(ppid, ppService.findOneProductPicture(ppid).getPp_picture());
+					}
+					
+					if("picture".equals(pt.getName()) && pt.getSize() != 0) {
+						InputStream is = pt.getInputStream();
+						byte[] b = new byte[is.available()];
+						is.read(b);
+						ppService.updateProductPocture(ppid, b);
+					}
+				}
+				response.sendRedirect(request.getContextPath() + "/Back_end/productPicture/allProductPicture.jsp");
+//				RequestDispatcher dr = request.getRequestDispatcher("/Back_end/productPicture/allProductPicture.jsp");
+//				dr.forward(request, response);
+			}
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -30,6 +30,7 @@
 		</div>
 	</form>
 	
-	<a href="<%= request.getContextPath() %>/back_end/productPicture/allProductPicture.jsp">全部清單</a>
+	<a href="<%= request.getContextPath() %>/Back_end/productPicture/allProductPicture.jsp">全部清單</a>
+	
 </body>
 </html>

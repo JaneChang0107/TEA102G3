@@ -8,5 +8,6 @@ public interface ProductPictureDAOInterface {
 	public void update(ProductPictureVO productPicture);
 	public void delete(String pp_id);
 	public ProductPictureVO findByPrimaryKey(String pp_id);
+	public List<ProductPictureVO> findByProduct(String p_id);
 	public List<ProductPictureVO> getAll();
 }

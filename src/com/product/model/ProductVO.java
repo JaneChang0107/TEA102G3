@@ -1,6 +1,6 @@
 package com.product.model;
 
-public class ProductVO {
+public class ProductVO implements java.io.Serializable {
 	
 	private String p_id;
 	private String p_name;
