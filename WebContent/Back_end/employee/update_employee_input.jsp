@@ -109,11 +109,19 @@
 		<td><input type="radio" name="e_title" size="45" value="0" <%=employeeVO.getE_title().equals("0") ? "checked" : "" %> />EMPLOYEE
 			<input type="radio" name="e_title" size="45" value="1" <%=employeeVO.getE_title().equals("1") ? "checked" : "" %> />BOSS</td>
 	</tr>
+<!-- 	<tr> -->
+<!-- 		<td>ª¬ºA:</td> -->
+<%-- 		<td><input type="radio" name="e_status" size="45" value="0" <%=employeeVO.getE_status()==0 ? "checked" : "" %> />¦bÂ¾ --%>
+<%-- 			<input type="radio" name="e_status" size="45" value="1" <%=employeeVO.getE_status()==1 ? "checked" : "" %> />Â÷Â¾ --%>
+<%-- 			<input type="radio" name="e_status" size="45" value="2" <%=employeeVO.getE_status()==2 ? "checked" : "" %> />¯dÂ¾°±Á~</td> --%>
+<!-- 	</tr> -->
 	<tr>
-		<td>ª¬ºA:</td>
-		<td><input type="radio" name="e_status" size="45" value="0" <%=employeeVO.getE_status()==0 ? "checked" : "" %> />¦bÂ¾
-			<input type="radio" name="e_status" size="45" value="1" <%=employeeVO.getE_status()==1 ? "checked" : "" %> />Â÷Â¾
-			<input type="radio" name="e_status" size="45" value="2" <%=employeeVO.getE_status()==2 ? "checked" : "" %> />¯dÂ¾°±Á~</td>
+		<td>¤À©±:<font color=red><b>*</b></font></td>
+		<td><select size="1" name="e_status">
+				<option value="0" <%=employeeVO.getE_status()==0 ? "selected" : "" %>>¦bÂ¾
+				<option value="1" <%=employeeVO.getE_status()==1 ? "selected" : "" %>>Â÷Â¾
+				<option value="2" <%=employeeVO.getE_status()==2 ? "selected" : "" %>>¯dÂ¾°±Á~
+		</select></td>
 	</tr>
 
 	<jsp:useBean id="storeSvc" scope="page" class="com.store.model.StoreService" />

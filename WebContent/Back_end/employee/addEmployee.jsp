@@ -116,12 +116,19 @@
 		<td><input type="radio" name="e_title" size="45" value="0" checked />EMPLOYEE
 			<input type="radio" name="e_title" size="45" value="1" />BOSS</td>
 	</tr>
-	<tr>
-		<td>ª¬ºA:</td>
-		<td><input type="radio" name="e_status" size="45" value="0" checked />¦bÂ¾
-			<input type="radio" name="e_status" size="45" value="1" />Â÷Â¾
-			<input type="radio" name="e_status" size="45" value="2" />¯dÂ¾°±Á~</td>
-	</tr>
+<!-- 	<tr> -->
+<!-- 		<td>ª¬ºA:</td> -->
+<!-- 		<td><input type="radio" name="e_status" size="45" value="0" checked />¦bÂ¾ -->
+<!-- 			<input type="radio" name="e_status" size="45" value="1" />Â÷Â¾ -->
+<!-- 			<input type="radio" name="e_status" size="45" value="2" />¯dÂ¾°±Á~</td> -->
+<!-- 	</tr> -->
+
+	<td>¤À©±:<font color=red><b>*</b></font></td>
+		<td><select size="1" name="e_status">			
+				<option value="0">¦bÂ¾
+				<option value="1">Â÷Â¾
+				<option value="2">¯dÂ¾°±Á~
+	</select></td>
 
 	<jsp:useBean id="storeSvc" scope="page"	class="com.store.model.StoreService" />
 	<tr>
