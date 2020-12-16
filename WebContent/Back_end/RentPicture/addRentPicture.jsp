@@ -5,7 +5,7 @@
 
 <%
 	RentPictureVO rentpictureVO = (RentPictureVO) request.getAttribute("rentpictureVO");
-    RentVO rentVO = (RentVO) request.getAttribute("rentVO");
+	RentVO rentVO = (RentVO) request.getAttribute("rentVO");
 %>
 
 
@@ -63,7 +63,8 @@ th, td {
 				<h4>
 					<a
 						href="<%=request.getContextPath()%>/Back_end/RentPicture/index_rentpicture.jsp"><img
-						src="<%=request.getContextPath()%>/images/back1.png" width="40" height="40" border="0">回首頁</a>
+						src="<%=request.getContextPath()%>/images/back1.png" width="40"
+						height="40" border="0">回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -85,16 +86,30 @@ th, td {
 		ACTION="<%=request.getContextPath()%>/RentPictureServlet" name="form1"
 		enctype="multipart/form-data">
 		<table>
-		 <div id="preview"><span class="text"></span></div>
+
+			<tr>
+				<td>圖片預覽:</td>
+				<td><img id="blah" height="200" width="200" /></td>
+			</tr>
+
 			<tr>
 				<td>出租品圖片:</td>
-				<td><input type="file" name="rp_picture" /></td>
+				<td><input type="file" id="imgInp" name="rp_picture" multiple /></td>
 			</tr>
+			<jsp:useBean id="rentSvc" scope="page"
+				class="com.rent.model.RentService" />
 			<tr>
 				<td>出租品ID:</td>
-				<td><input type="TEXT" name="r_id" size="45"
-					value="<%=(rentpictureVO == null) ? "R00001" : rentpictureVO.getR_id()%>" /></td>
+				<td><select size="1" name="r_id">
+						<c:forEach var="rentVO" items="${rentSvc.all}">
+							<option value="${rentVO.r_id}"
+								${(rentpictureVO.r_id==rentVO.r_id)? 'selected':'' }>${rentVO.r_id}
+						</c:forEach>
+				</select></td>
 			</tr>
+
+
+
 
 
 
@@ -102,20 +117,11 @@ th, td {
 		<br> <input type="hidden" name="action" value="insert"> <input
 			type="submit" value="送出新增">
 	</FORM>
-	
-	
+
+
 </body>
 
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
-
-<%
-	// 	java.sql.Timestamp r_adddate = null;
-	//   try {
-	// 	  r_adddate = rentVO.getR_adddate();
-	//    } catch (Exception e) {
-	// 	   r_adddate = new java.sql.Timestamp(System.currentTimeMillis());
-	//    }
-%>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
@@ -131,7 +137,21 @@ th, td {
 	height: 151px; /* height:  151px; */
 }
 </style>
+<script>
+	$(function() {
+		$("#imgInp").change(function() {
+			if (this.files && this.files[0]) {
+				var reader = new FileReader();
 
+				reader.onload = function(e) {
+					$('#blah').attr('src', e.target.result);
+				}
+
+				reader.readAsDataURL(this.files[0]);
+			}
+		});
+	});
+</script>
 
 
 </html>

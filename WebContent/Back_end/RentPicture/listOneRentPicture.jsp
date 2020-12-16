@@ -68,19 +68,18 @@ th, td {
 	<table>
 		<tr>
 		<tr>
-			<th>出租品圖片ID</th>
-			<th>出租品圖片</th>
 			<th>出租品ID</th>
+			<th>出租品圖片</th>
+			
 		</tr>
 
 		<tr>
 		<tr>
-			<td><%=rentpictureVO.getRp_id()%></td>
+			<td><%=rentpictureVO.getR_id()%></td>
 			<td><img
 				src="data:image/jpg;base64,<%=rentpictureVO.getRp_picture2()%>"
 				width="200" height="150" /></td>
-			<td><%=rentpictureVO.getR_id()%></td>
-
+			
 
 		</tr>
 	</table>

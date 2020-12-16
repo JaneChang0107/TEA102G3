@@ -82,9 +82,10 @@ th, td {
 
 	<table>
 		<tr>
-			<th>出租品圖片編號</th>
+		
+			<th>出租品ID</th>
 			<th>出租品圖片</th>
-			<th>出租品編號</th>
+			
 
 		</tr>
 		<%@ include file="page1.file"%>
@@ -92,11 +93,12 @@ th, td {
 			end="<%=pageIndex+rowsPerPage-1%>">
 
 			<tr>
-				<td>${RentPictureVO.rp_id}</td>
+				
+				<td>${RentPictureVO.r_id}</td>
 				<td><img
 					src="data:image/jpg;base64,${RentPictureVO.rp_picture2}"
 					width="200" height="150" /></td>
-				<td>${RentPictureVO.r_id}</td>
+				
 
 				<td>
 					<FORM METHOD="post"

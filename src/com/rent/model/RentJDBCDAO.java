@@ -21,7 +21,7 @@ public class RentJDBCDAO implements RentDAO_interface {
 	String userid = "TEA102G3";
 	String passwd = "102G3";
 
-	private static final String INSERT_STMT = "INSERT INTO rent (r_id,r_type,r_name,pt_id,r_describe,r_situation,r_status,r_price,r_adddate,r_revisedate,e_addid,e_editorid,st_id) VALUES ('R' || lpad(RENT_SEQ.NEXTVAL, 5, '0'), ?, ?, ?, ?, ? ,? ,? ,?,?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT INTO rent (r_id,r_type,r_name,pt_id,r_describe,r_situation,r_status,r_price,r_adddate,e_addid,st_id) VALUES ('R' || lpad(RENT_SEQ.NEXTVAL, 5, '0'), ?, ?, ?, ?, ? ,? ,?,?,?,?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM rent order by r_id";
 	private static final String GET_ONE_STMT = "SELECT * FROM rent where r_id = ?";
 	private static final String DELETE = "DELETE FROM rent where r_id = ?";
@@ -48,10 +48,8 @@ public class RentJDBCDAO implements RentDAO_interface {
 			pstmt.setString(6, rentVO.getR_status());
 			pstmt.setInt(7, rentVO.getR_price());
 			pstmt.setTimestamp(8, rentVO.getR_adddate());
-			pstmt.setTimestamp(9, rentVO.getR_revisedate());
-			pstmt.setString(10, rentVO.getE_addid());
-			pstmt.setString(11, rentVO.getE_editorid());
-			pstmt.setString(12, rentVO.getSt_id());
+			pstmt.setString(9, rentVO.getE_addid());
+			pstmt.setString(10, rentVO.getSt_id());
 			pstmt.executeUpdate();
 
 			// Handle any driver errors

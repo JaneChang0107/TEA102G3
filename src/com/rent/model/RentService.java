@@ -12,8 +12,7 @@ public class RentService {
 	}
 
 	public RentVO addRent(String r_type, String r_name, String pt_id, String r_describe, String r_situation,
-			String r_status, Integer r_price, Timestamp r_adddate, Timestamp r_revisedate, String e_addid,
-			String e_editorid, String st_id) {
+			String r_status, Integer r_price, Timestamp r_adddate, String e_addid, String st_id) {
 
 		RentVO rentVO = new RentVO();
 
@@ -25,9 +24,7 @@ public class RentService {
 		rentVO.setR_status(r_status);
 		rentVO.setR_price(r_price);
 		rentVO.setR_adddate(r_adddate);
-		rentVO.setR_revisedate(r_revisedate);
 		rentVO.setE_addid(e_addid);
-		rentVO.setE_editorid(e_editorid);
 		rentVO.setSt_id(st_id);
 
 		dao.insert(rentVO);

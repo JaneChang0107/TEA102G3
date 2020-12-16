@@ -302,14 +302,6 @@ public class RentServlet extends HttpServlet {
 					errorMsgs.add("請輸入新增日期!");
 				}
 				
-				Timestamp r_revisedate= null;
-				try {
-					r_revisedate = Timestamp.valueOf(req.getParameter("r_revisedate").trim());
-				} catch (IllegalArgumentException e) {
-					r_revisedate=new Timestamp(System.currentTimeMillis());
-					errorMsgs.add("請輸入修改日期!");
-				}
-				
 				
 				String pt_id = req.getParameter("pt_id").trim();
 				if (pt_id == null || pt_id.trim().length() == 0) {
@@ -319,10 +311,7 @@ public class RentServlet extends HttpServlet {
 				if (e_addid == null || e_addid.trim().length() == 0) {
 					errorMsgs.add("新增者ID請勿空白");
 				}
-				String e_editorid = req.getParameter("e_editorid").trim();
-				if (e_editorid == null || e_editorid.trim().length() == 0) {
-					errorMsgs.add("修改者ID請勿空白");
-				}
+
 				String st_id = req.getParameter("st_id").trim();
 				if (st_id == null || st_id.trim().length() == 0) {
 					errorMsgs.add("門市ID請勿空白");
@@ -336,9 +325,7 @@ public class RentServlet extends HttpServlet {
 				rentVO.setR_status(r_status);
 				rentVO.setR_price(r_price);
 				rentVO.setR_adddate(r_adddate);
-				rentVO.setR_revisedate(r_revisedate);
 				rentVO.setE_addid(e_addid);
-				rentVO.setE_editorid(e_editorid);
 				rentVO.setSt_id(st_id);
 				
 				// Send the use back to the form, if there were errors
@@ -352,7 +339,7 @@ public class RentServlet extends HttpServlet {
 				
 				/***************************2.開始新增資料***************************************/
 				RentService rentSvc = new RentService();
-				rentVO = rentSvc.addRent(r_type, r_name, pt_id, r_describe, r_situation, r_status, r_price, r_adddate, r_revisedate, e_addid, e_editorid, st_id);
+				rentVO = rentSvc.addRent(r_type, r_name, pt_id, r_describe, r_situation, r_status, r_price, r_adddate, e_addid, st_id);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "/Back_end/Rent/listAllRent.jsp";

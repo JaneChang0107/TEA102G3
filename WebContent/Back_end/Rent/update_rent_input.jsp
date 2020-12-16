@@ -1,9 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.rent.model.*"%>
-
+<%@ page import="com.store.model.*"%>
+<%@ page import="com.productType.model.*"%>
+<%@ page import="com.employee.model.*"%>
 <%
 	RentVO rentVO = (RentVO) request.getAttribute("rentVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+	ProductTypeVO ptVO = (ProductTypeVO) request.getAttribute("ptVO");
+	StoreVO storeVO = (StoreVO) request.getAttribute("storeVO");
+	EmployeeVO employeeVO = (EmployeeVO) request.getAttribute("employeeVO");
 %>
 <%
 	java.sql.Timestamp r_revisedate = null;
@@ -118,10 +123,16 @@ input:read-only {
 					value="<%=rentVO.getR_name()%>" /></td>
 			</tr>
 
+			<jsp:useBean id="ptSvc" scope="page"
+				class="com.productType.model.ProductTypeService" />
 			<tr>
 				<td>種類ID:</td>
-				<td><input type="TEXT" name="pt_id" size="45"
-					value="<%=rentVO.getPt_id()%>" /></td>
+				<td><select size="1" name="pt_id">
+						<c:forEach var="ptVO" items="${ptSvc.all}">
+							<option value="${ptVO.pt_id}"
+								${(rentVO.pt_id==ptVO.pt_id)? 'selected':'' }>${ptVO.pt_id}
+						</c:forEach>
+				</select></td>
 			</tr>
 
 			<tr>
@@ -169,15 +180,28 @@ input:read-only {
 				<td>新增者ID:</td>
 				<td><%=rentVO.getE_addid()%></td>
 			</tr>
+			<jsp:useBean id="empSvc" scope="page"
+				class="com.employee.model.EmployeeService" />
 			<tr>
 				<td>修改者ID:</td>
-				<td><input type="TEXT" name="e_editorid" size="45"
-					value="<%=rentVO.getE_editorid()%>" /></td>
+				<td><select size="1" name="e_editorid">
+						<c:forEach var="employeeVO" items="${empSvc.all}">
+							<option value="${employeeVO.e_id}"
+								${(rentVO.e_editorid==employeeVO.e_id)? 'selected':'' }>${employeeVO.e_id}
+						</c:forEach>
+				</select></td>
 			</tr>
+
+			<jsp:useBean id="storeSvc" scope="page"
+				class="com.store.model.StoreService" />
 			<tr>
-				<td>門市ID:</td>
-				<td><input type="TEXT" name="st_id" size="45"
-					value="<%=rentVO.getSt_id()%>" /></td>
+				<td>門市ID:</font></td>
+				<td><select size="1" name="st_id">
+						<c:forEach var="storeVO" items="${storeSvc.all}">
+							<option value="${storeVO.st_id}"
+								${(rentVO.st_id==storeVO.st_id)? 'selected':'' }>${storeVO.st_id}
+						</c:forEach>
+				</select></td>
 			</tr>
 
 

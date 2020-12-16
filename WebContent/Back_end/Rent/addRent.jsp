@@ -1,9 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.rent.model.*"%>
+<%@ page import="com.store.model.*"%>
+<%@ page import="com.productType.model.*"%>
+<%@ page import="com.employee.model.*"%>
 
 <%
 	RentVO rentVO = (RentVO) request.getAttribute("rentVO");
+	ProductTypeVO ptVO = (ProductTypeVO) request.getAttribute("ptVO");
+	StoreVO storeVO = (StoreVO) request.getAttribute("storeVO");
+	EmployeeVO employeeVO = (EmployeeVO) request.getAttribute("employeeVO");
 %>
 
 <%
@@ -87,7 +93,8 @@ input:read-only {
 			<td>
 				<h4>
 					<a href="<%=request.getContextPath()%>/Back_end/Rent/index.jsp"><img
-						src="<%=request.getContextPath() %>/images/back1.png" width="40" height="40" border="0">回首頁</a>
+						src="<%=request.getContextPath()%>/images/back1.png" width="40"
+						height="40" border="0">回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -116,7 +123,7 @@ input:read-only {
 						<option value="遊戲主機">遊戲主機</option>
 						<option value="遊戲片">遊戲片</option>
 						<option value="遊戲周邊">遊戲周邊</option>
-			</select> 
+				</select>
 			</tr>
 			<tr>
 				<td>出租品名稱:</td>
@@ -134,8 +141,8 @@ input:read-only {
 				<td><select name="r_situation">
 						<option value="全新品">全新品</option>
 						<option value="二手品">二手品</option>
-					
-			</select> 
+
+				</select>
 			</tr>
 
 			<tr>
@@ -144,8 +151,8 @@ input:read-only {
 						<option value="未上架">未上架</option>
 						<option value="上架中">上架中</option>
 						<option value="出租中">出租中</option>
-						
-			</select> 
+
+				</select>
 			</tr>
 
 			<tr>
@@ -158,53 +165,44 @@ input:read-only {
 				<td>新增日期:</td>
 				<td><%=(rentVO == null) ? r_adddate : rentVO.getR_adddate()%></td>
 			</tr>
-
-<!-- 			<tr> -->
-<!-- 				<td>上次修改:</td> -->
-<%-- 				<td><%=(rentVO == null) ? r_revisedate : rentVO.getR_revisedate()%></td> --%>
-<!-- 			</tr> -->
-
 			<tr>
+				<jsp:useBean id="ptSvc" scope="page"
+					class="com.productType.model.ProductTypeService" />
 				<td>種類ID:</td>
-				<td><input type="Text" name="pt_id" size="45"
-					value="<%=(rentVO == null) ? "PT00001" : rentVO.getPt_id()%>" /></td>
+				<td><select size="1" name="pt_id">
+						<c:forEach var="ptVO" items="${ptSvc.all}">
+							<option value="${ptVO.pt_id}"
+								${(rentVO.pt_id==ptVO.pt_id)? 'selected':'' }>${ptVO.pt_id}
+						</c:forEach>
+				</select></td>
 			</tr>
 
+			<jsp:useBean id="empSvc" scope="page"
+				class="com.employee.model.EmployeeService" />
 			<tr>
 				<td>新增者ID:</td>
-				<td><input type="Text" name="e_addid" size="45"
-					value="<%=(rentVO == null) ? "E00001" : rentVO.getE_addid()%>" /></td>
+				<td><select size="1" name="e_addid">
+						<c:forEach var="employeeVO" items="${empSvc.all}">
+							<option value="${employeeVO.e_id}"
+								${(rentVO.e_addid==employeeVO.e_id)? 'selected':'' }>${employeeVO.e_id}
+						</c:forEach>
+				</select></td>
 			</tr>
 
-			<tr>
-				<td>修改者ID:</td>
-				<td><input type="Text" name="e_editorid" size="45"
-					value="<%=(rentVO == null) ? "E00001" : rentVO.getE_editorid()%>" /></td>
-			</tr>
-
+			<jsp:useBean id="storeSvc" scope="page"
+				class="com.store.model.StoreService" />
 			<tr>
 				<td>門市ID:</td>
-				<td><input type="Text" name="st_id" size="45"
-					value="<%=(rentVO == null) ? "ST00001" : rentVO.getSt_id()%>" /></td>
+				<td><select size="1" name="st_id">
+						<c:forEach var="storeVO" items="${storeSvc.all}">
+							<option value="${storeVO.st_id}"
+								${(rentVO.st_id==storeVO.st_id)? 'selected':'' }>${storeVO.st_id}
+						</c:forEach>
+				</select></td>
 			</tr>
-
-
-
-			<%-- 			<jsp:useBean id="rentSvc" scope="page" --%>
-			<%-- 				class="com.rent.model.RentService" /> --%>
-			<!-- 			<tr> -->
-			<!-- 				<td>部門:<font color=red><b>*</b></font></td> -->
-			<!-- 				<td><select size="1" name="rent_type"> -->
-			<%-- 						<c:forEach var="rent_type" items="${rentSvc.all}"> --%>
-			<%-- 							<option value="${rentVO.r_type}" --%>
-			<%-- 								${(rentVO.r_type==rentVO.r_type)? 'selected':'' }>${rentVO.r_type} --%>
-			<%-- 						</c:forEach> --%>
-			<!-- 				</select></td> -->
-			<!-- 			</tr> -->
 
 		</table>
 		<br> <input type="hidden" name="r_adddate" value="<%=r_adddate%>">
-		<input type="hidden" name="r_revisedate" value="<%=r_revisedate%>">
 		<input type="hidden" name="action" value="insert"> <input
 			type="submit" value="送出新增">
 	</FORM>
