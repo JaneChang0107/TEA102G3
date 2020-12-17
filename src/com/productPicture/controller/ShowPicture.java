@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.jasper.tagplugins.jstl.core.Out;
+
 import com.productPicture.model.ProductPictureService;
 import com.productPicture.model.ProductPictureVO;
 
@@ -24,13 +26,13 @@ public class ShowPicture extends HttpServlet {
 		
 		String type =request.getParameter("type");
 		String id = request.getParameter("id");
+		ServletOutputStream os = response.getOutputStream();
 		// 找哪種類型的圖片
 		if("pp".equals(type)) {
 			ProductPictureService ppService = new ProductPictureService();
 			ProductPictureVO ppVO = ppService.findOneProductPicture(id);
 			
 			byte[] b = ppVO.getPp_picture();
-			ServletOutputStream os = response.getOutputStream();
 			os.write(b);
 			os.close();
 		}

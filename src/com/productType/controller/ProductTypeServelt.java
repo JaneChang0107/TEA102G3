@@ -39,7 +39,7 @@ public class ProductTypeServelt extends HttpServlet {
 			String platform = request.getParameter("platform").trim();
 			String platformRegex = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,100}$";
 			// 驗證
-			if(platform == null || platform.isEmpty()) {
+			if(platform == null || platform.trim().isEmpty()) {
 				error.add("請輸入平台");
 			} else if(!platform.matches(platformRegex)) {
 				error.add("平台格式不正確");
@@ -48,7 +48,7 @@ public class ProductTypeServelt extends HttpServlet {
 			String kind = request.getParameter("kind");
 			String kindRegex = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,100}$";
 			// 驗證
-			if(kind == null || kind.isEmpty()) {
+			if(kind == null || kind.trim().isEmpty()) {
 				error.add("請輸入種類");
 			} else if(!platform.matches(kindRegex)) {
 					error.add("種類格式不正確");

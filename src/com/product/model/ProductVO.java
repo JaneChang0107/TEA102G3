@@ -1,5 +1,9 @@
 package com.product.model;
 
+import java.sql.Date;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+
 public class ProductVO implements java.io.Serializable {
 	
 	private String p_id;
@@ -53,11 +57,23 @@ public class ProductVO implements java.io.Serializable {
 	public java.sql.Timestamp getP_addDate() {
 		return p_addDate;
 	}
+	public String getP_addDateSec() {
+		Date d = new Date(p_addDate.getTime());
+		Format f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String date = f.format(d);
+		return date;
+	}
 	public void setP_addDate(java.sql.Timestamp p_addDate) {
 		this.p_addDate = p_addDate;
 	}
 	public java.sql.Timestamp getP_reviseDate() {
 		return p_reviseDate;
+	}
+	public String getP_reviseDateSec() {
+		Date d = new Date(p_addDate.getTime());
+		Format f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String date = f.format(d);
+		return date;
 	}
 	public void setP_reviseDate(java.sql.Timestamp p_reviseDate) {
 		this.p_reviseDate = p_reviseDate;

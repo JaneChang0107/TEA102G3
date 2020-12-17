@@ -21,7 +21,7 @@ public class ProductPictureJDBCDAO implements ProductPictureDAOInterface{
 	private final String UPDATE = "UPDATE ProductPicture SET PP_PICTURE=? WHERE PP_ID=?";
 	private final String DELETE = "DELETE FROM ProductPicture WHERE PP_ID=?";
 	private final String GETONE = "SELECT * FROM ProductPicture WHERE PP_ID=?";
-	private final String GETPP = "SELECT * FROM ProductPicture WHERE P_ID=?";
+	private final String GETPP = "SELECT * FROM ProductPicture WHERE P_ID=? ORDER BY PP_ID";
 	private final String GETALL = "SELECT * FROM ProductPicture ORDER BY PP_ID";
 	
 	

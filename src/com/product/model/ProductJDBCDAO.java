@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.data.database;
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 public class ProductJDBCDAO implements ProductInterface{
 	
@@ -21,14 +20,18 @@ public class ProductJDBCDAO implements ProductInterface{
 			"DELETE FROM PRODUCT WHERE P_ID = ?";
 	private final String FINDONE =
 			"SELECT * FROM PRODUCT WHERE P_ID = ?";
+	private final String FINDBYSELLER =
+			"SELECT * FROM PRODUCT WHERE M_ID = ? ORDER BY P_ID";
 	private final String FINDBYPNAME =
-			"SELECT * FROM PRODUCT WHERE P_NAME = ?";
+			"SELECT * FROM PRODUCT WHERE P_NAME like ? AND P_STATUS = 1 ORDER BY P_ID";
 	private final String FINDBYPNAMETPYE =
-			"SELECT * FROM PRODUCT WHERE P_NAME = ? AND PT_ID = ?";
+			"SELECT * FROM PRODUCT WHERE P_NAME like ? AND PT_ID = ? AND P_STATUS = 1 ORDER BY P_ID";
 	private final String FINDBYPSTATUS =
-			"SELECT * FROM PRODUCT WHERE P_STATUS= ?";
+			"SELECT * FROM PRODUCT WHERE P_STATUS= ? ORDER BY P_ID";
+	private final String GETALLSELL =
+			"SELECT * FROM PRODUCT WHERE P_STATUS = 1 ORDER BY P_ID";
 	private final String GETALL =
-			"SELECT * FROM PRODUCT";
+			"SELECT * FROM PRODUCT ORDER BY P_ID";
 	
 	@Override
 	public void insert(ProductVO product) {
@@ -54,6 +57,7 @@ public class ProductJDBCDAO implements ProductInterface{
 			
 		} catch(Exception e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} finally {
 			try {
 				if(ps != null) {
@@ -96,6 +100,7 @@ public class ProductJDBCDAO implements ProductInterface{
 		
 		} catch(Exception e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} finally {
 			try {
 				if(ps != null) {
@@ -130,6 +135,7 @@ public class ProductJDBCDAO implements ProductInterface{
 		
 		} catch(Exception e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} finally {
 			try {
 				if(ps != null) {
@@ -177,6 +183,7 @@ public class ProductJDBCDAO implements ProductInterface{
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} finally {
 			try {
 				if(rs != null) {
@@ -205,7 +212,7 @@ public class ProductJDBCDAO implements ProductInterface{
 	}
 
 	@Override
-	public List<ProductVO> findByProductName(String p_name) {
+	public List<ProductVO> findBySeller(String m_id) {
 		
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -215,8 +222,8 @@ public class ProductJDBCDAO implements ProductInterface{
 		try {
 			Class.forName(database.DRIVER);
 			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
-			ps = con.prepareStatement(FINDBYPNAME);
-			ps.setString(1, p_name);
+			ps = con.prepareStatement(FINDBYSELLER);
+			ps.setString(1, m_id);
 			
 			rs = ps.executeQuery();
 			
@@ -237,6 +244,67 @@ public class ProductJDBCDAO implements ProductInterface{
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+		} finally {
+			try {
+				if(rs != null) {
+					rs.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(ps != null) {
+					ps.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(con != null) {
+					con.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<ProductVO> findByProductName(String p_name) {
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<ProductVO> list = new LinkedList<ProductVO>();
+		
+		try {
+			Class.forName(database.DRIVER);
+			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			ps = con.prepareStatement(FINDBYPNAME);
+			ps.setString(1, "%" + p_name + "%");
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				ProductVO pVO = new ProductVO();
+				pVO.setP_id(rs.getString("p_id"));
+				pVO.setP_name(rs.getString("p_name"));
+				pVO.setP_price(rs.getInt("p_price"));
+				pVO.setP_detail(rs.getString("p_detail"));
+				pVO.setPt_id(rs.getString("pt_id"));
+				pVO.setP_count(rs.getInt("p_count"));
+				pVO.setP_addDate(rs.getTimestamp("p_addDate"));
+				pVO.setP_reviseDate(rs.getTimestamp("p_reviseDate"));
+				pVO.setP_status(rs.getInt("p_status"));
+				pVO.setM_id(rs.getString("m_id"));
+				
+				list.add(pVO);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} finally {
 			try {
 				if(rs != null) {
@@ -276,7 +344,7 @@ public class ProductJDBCDAO implements ProductInterface{
 			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
 			ps = con.prepareStatement(FINDBYPNAMETPYE);
 			
-			ps.setString(1, p_name);
+			ps.setString(1, "%" + p_name + "%");
 			ps.setString(2, pt_id);
 			
 			rs = ps.executeQuery();
@@ -298,6 +366,7 @@ public class ProductJDBCDAO implements ProductInterface{
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} finally {
 			try {
 				if(rs != null) {
@@ -357,6 +426,7 @@ public class ProductJDBCDAO implements ProductInterface{
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} finally {
 			try {
 				if(rs != null) {
@@ -383,6 +453,65 @@ public class ProductJDBCDAO implements ProductInterface{
 		return list;
 	}
 
+	@Override
+	public List<ProductVO> getAllSell() {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<ProductVO> list = new LinkedList<ProductVO>();
+		
+		try {
+			Class.forName(database.DRIVER);
+			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			ps = con.prepareStatement(GETALLSELL);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				ProductVO pVO = new ProductVO();
+				pVO.setP_id(rs.getString("p_id"));
+				pVO.setP_name(rs.getString("p_name"));
+				pVO.setP_price(rs.getInt("p_price"));
+				pVO.setP_detail(rs.getString("p_detail"));
+				pVO.setPt_id(rs.getString("pt_id"));
+				pVO.setP_count(rs.getInt("p_count"));
+				pVO.setP_addDate(rs.getTimestamp("p_addDate"));
+				pVO.setP_reviseDate(rs.getTimestamp("p_reviseDate"));
+				pVO.setP_status(rs.getInt("p_status"));
+				pVO.setM_id(rs.getString("m_id"));
+				
+				list.add(pVO);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+		} finally {
+			try {
+				if(rs != null) {
+					rs.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(ps != null) {
+					ps.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(con != null) {
+					con.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
 	@Override
 	public List<ProductVO> getAll() {
 
@@ -415,6 +544,7 @@ public class ProductJDBCDAO implements ProductInterface{
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} finally {
 			try {
 				if(rs != null) {

@@ -13,23 +13,23 @@ public class ProductService {
 	}
 	
 	public static void main(String[] args) {
-//		ProductService ps = new ProductService();
+		ProductService ps = new ProductService();
 //		Date d = new Date();
 //		Timestamp st = new Timestamp(d.getTime());
 //		ps.addProduct("bfbre", 1000, "cu cucisniegneingdgoneiw", "PT00011", 1, st, 0, "1");
 //		ps.updateProduct("P00021", "vv", 500, "Idontknow", "PT00011", 2, st, 0);
 //		ps.deleteProduct("P00021");
-//		List<ProductVO> list = ps.findProduct("動物森友會");
-//		List<ProductVO> list = ps.findProduct("nngded", "PT00011");
+		List<ProductVO> list = ps.findProduct("刺客");
+//		List<ProductVO> list = ps.findProduct("動物", "PT00011");
 //		List<ProductVO> list = ps.getAll();
 	
 		
-//		for(ProductVO pvo : list) {
-//			System.out.println("pid:" + pvo.getP_id());
-//			System.out.println("pname:" + pvo.getP_name());
-//			System.out.println("ptid:" + pvo.getPt_id());
-//			System.out.println("===========================");
-//		}
+		for(ProductVO pvo : list) {
+			System.out.println("pid:" + pvo.getP_id());
+			System.out.println("pname:" + pvo.getP_name());
+			System.out.println("ptid:" + pvo.getPt_id());
+			System.out.println("===========================");
+		}
 		
 	}
 	
@@ -78,12 +78,20 @@ public class ProductService {
 		return dao.findOneProduct(pId);
 	}
 	
+	public List<ProductVO> findBySeller(String m_id) {
+		return dao.findBySeller(m_id);
+	}
+	
 	public List<ProductVO> findProduct(String name) {
 		return dao.findByProductName(name);
 	}
 	
 	public List<ProductVO> findProduct(String name, String ptId) {
 		return dao.findByProductName(name, ptId);
+	}
+	
+	public List<ProductVO> getAllSell() {
+		return dao.getAllSell();
 	}
 	
 	public List<ProductVO> getAll() {
