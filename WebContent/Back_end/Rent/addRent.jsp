@@ -13,19 +13,16 @@
 %>
 
 <%
-	java.sql.Timestamp r_adddate = null;
+	java.sql.Timestamp ts = null;
 	try {
-		r_adddate = rentVO.getR_adddate();
+		ts = rentVO.getR_adddate();
 	} catch (Exception e) {
-		r_adddate = new java.sql.Timestamp(System.currentTimeMillis());
+		ts = new java.sql.Timestamp(System.currentTimeMillis());
 	}
 
-	java.sql.Timestamp r_revisedate = null;
-	try {
-		r_revisedate = rentVO.getR_adddate();
-	} catch (Exception e) {
-		r_revisedate = new java.sql.Timestamp(System.currentTimeMillis());
-	}
+	java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	String nowTime = df.format(ts);
+	java.sql.Timestamp r_adddate = java.sql.Timestamp.valueOf(nowTime);
 %>
 
 <html>

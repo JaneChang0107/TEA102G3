@@ -76,6 +76,7 @@ th, td {
 		<tr>
 		<tr>
 			<td><%=rentpictureVO.getR_id()%></td>
+			
 			<td><img
 				src="data:image/jpg;base64,<%=rentpictureVO.getRp_picture2()%>"
 				width="200" height="150" /></td>
