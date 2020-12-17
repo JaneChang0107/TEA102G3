@@ -116,8 +116,10 @@ public class ProductPictureJDBCDAO implements ProductPictureDAOInterface{
 			
 		} catch(ClassNotFoundException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} catch(SQLException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} finally {
 			try {
 				if(ps != null) {
@@ -155,8 +157,10 @@ public class ProductPictureJDBCDAO implements ProductPictureDAOInterface{
 			
 		} catch(ClassNotFoundException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} catch(SQLException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} finally {
 			try {
 				if(ps != null) {
@@ -193,8 +197,10 @@ public class ProductPictureJDBCDAO implements ProductPictureDAOInterface{
 			System.out.println(d);
 		} catch(ClassNotFoundException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} catch(SQLException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} finally {
 			try {
 				if(ps != null) {
@@ -236,8 +242,10 @@ public class ProductPictureJDBCDAO implements ProductPictureDAOInterface{
 			}
 		} catch(ClassNotFoundException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} catch(SQLException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} finally {
 			try {
 				if(rs != null) {
@@ -290,8 +298,10 @@ public class ProductPictureJDBCDAO implements ProductPictureDAOInterface{
 			}
 		} catch(ClassNotFoundException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} catch(SQLException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} finally {
 			try {
 				if(rs != null) {
@@ -344,8 +354,10 @@ public class ProductPictureJDBCDAO implements ProductPictureDAOInterface{
 			
 		} catch(ClassNotFoundException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} catch(SQLException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} finally {
 			try {
 				if(rs != null) {

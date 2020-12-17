@@ -81,8 +81,10 @@ public class ProductTypeJDBCDAO implements ProductTypeDAOInterface{
 			
 		} catch(ClassNotFoundException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} catch(SQLException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} finally {
 			try {
 				if(ps != null) {
@@ -121,8 +123,10 @@ public class ProductTypeJDBCDAO implements ProductTypeDAOInterface{
 			
 		} catch(ClassNotFoundException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} catch(SQLException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} finally {
 			try {
 				if(ps != null) {
@@ -159,8 +163,10 @@ public class ProductTypeJDBCDAO implements ProductTypeDAOInterface{
 			
 		} catch(ClassNotFoundException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} catch(SQLException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} finally {
 			try {
 				if(ps != null) {
@@ -205,8 +211,10 @@ public class ProductTypeJDBCDAO implements ProductTypeDAOInterface{
 			
 		} catch(ClassNotFoundException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} catch(SQLException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} finally {
 			try {
 				if(rs != null) {
@@ -259,8 +267,10 @@ public class ProductTypeJDBCDAO implements ProductTypeDAOInterface{
 			
 		} catch(ClassNotFoundException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} catch(SQLException e) {
 			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		} finally {
 			try {
 				if(rs != null) {
