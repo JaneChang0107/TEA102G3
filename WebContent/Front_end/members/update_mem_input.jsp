@@ -51,7 +51,7 @@ a {
 
 	<FORM METHOD="post"
 		ACTION="<%=request.getContextPath()%>/member/controller/MemberServlet"
-		name="form1">
+		name="form1" enctype="multipart/form-data">
 		<table>
 		    <tr>
 		       <td>會員id:<font color=red><b>*</b></font></td>

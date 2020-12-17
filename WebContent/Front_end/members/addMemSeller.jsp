@@ -51,7 +51,8 @@ a {
 	</c:if>
 
 	<FORM METHOD="post" enctype="multipart/form-data" 
-	ACTION="<%=request.getContextPath()%>/member/controller/MemberServlet"	name="form1">
+	ACTION="<%=request.getContextPath()%>/member/controller/MemberServlet"	name="form1"
+	enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>電子郵件:<b>*</b></td>

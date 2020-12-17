@@ -171,44 +171,40 @@ public class MemberVO implements java.io.Serializable{
 		public String getM_headpic2() {
 			if(m_headpic!=null) {
 				m_headpic=Base64.getEncoder().encode(m_headpic);
-			    String str =new String(m_headpic);
+			    String str ="data:image/jpg;base64,"+new String(m_headpic);
 			    return str;
-			}
-			else {
-				return "";
+			} else {
+				return "../../images/LOGO找不到圖片.png";
 			}
 		}
 		
 		public String getM_id_pic2() {
 			if(m_id_pic!=null) {
 				m_id_pic=Base64.getEncoder().encode(m_id_pic);
-			    String str =new String(m_id_pic);
+			    String str ="data:image/jpg;base64,"+new String(m_id_pic);
 			    return str;
-			}
-			else {
-				return "";
+			} else {
+				return "../../images/LOGO找不到圖片.png";
 			}
 		}
 		
 		public String getM_bank_pic2() {
 			if(m_bank_pic!=null) {
 				m_bank_pic=Base64.getEncoder().encode(m_bank_pic);
-			    String str =new String(m_bank_pic);
+			    String str ="data:image/jpg;base64,"+new String(m_bank_pic);
 			    return str;
-			}
-			else {
-				return "";
+			} else {
+				return "../../images/LOGO找不到圖片.png";
 			}
 		}
 		
 		public String getM_cover2() {
 			if(m_cover!=null) {
 				m_cover=Base64.getEncoder().encode(m_cover);
-			    String str =new String(m_cover);
+			    String str ="data:image/jpg;base64,"+new String(m_cover);
 			    return str;
-			}
-			else {
-				return "";
+			} else {
+				return "../../images/LOGO找不到圖片.png";
 			}
 		}
 		

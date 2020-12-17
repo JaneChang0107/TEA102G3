@@ -105,18 +105,18 @@
      <td>${memberVO.m_phone}</td>
      <td>${memberVO.m_address}</td>
      <td>${memberVO.m_birth}</td>
-     <td><img src="data:image/jpg;base64,${memberVO.m_headpic2}" width="100" height="100"></td>
+     <td><img src="${memberVO.m_headpic2}" width="100" height="100"></td>
      <td>${memberVO.m_status}</td>
      <td>${memberVO.m_identity}</td>
-     <td><img src="data:image/jpg;base64,${memberVO.m_id_pic2}" width="100" height="100"></td>
+     <td><img src="${memberVO.m_id_pic2}"  width="100" height="100"></td>
      <td>${memberVO.m_account}</td>
      <td>${memberVO.m_accountName}</td>
      <td>${memberVO.b_code}</td>
-     <td>${memberVO.m_bank_pic}</td>
+     <td><img src="${memberVO.m_bank_pic2}" width="100" height="100"></td>
      <td>${memberVO.m_moneyTranDate}</td>
      <td>${memberVO.m_storename}</td>
      <td>${memberVO.m_info}</td>
-     <td>${memberVO.m_cover}</td>
+     <td><img src="${memberVO.m_cover2}" width="100" height="100"></td>
      <td>${memberVO.m_hi}</td>
      <td>${memberVO.m_offlineHi}</td>
      <td>${memberVO.m_coin}</td>

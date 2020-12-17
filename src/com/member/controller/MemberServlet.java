@@ -31,7 +31,7 @@ public class MemberServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 
-		//查單個
+//查詢單個會員
 		if("getOne_For_Display".equals(action)) {
 			List<String> errorMsgs =new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -47,7 +47,6 @@ public class MemberServlet extends HttpServlet {
 				    failureView.forward(req, res);
 				    return;
 				}
-				
 				
 				String m_id = null;
 				try {
@@ -85,14 +84,11 @@ public class MemberServlet extends HttpServlet {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView=req.getRequestDispatcher("/Front_end/members/select_page.jsp");
 				failureView.forward(req, res);
-			
 			}
-						
         }
 		
-		//取一個進行修改
+//取一個進行修改
 		if ("getOne_For_Update".equals(action)) {
-			
 			List<String> errorMsgs =new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			
@@ -114,9 +110,9 @@ public class MemberServlet extends HttpServlet {
 			}
 		}
 		
-		
-		//修改會員資料
+//update行為符合，修改會員資料
 		if ("update".equals(action)) {
+			System.out.println("進入修改");
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			// 1.接收請求參數，輸入格式錯誤處理
@@ -124,14 +120,13 @@ public class MemberServlet extends HttpServlet {
 			String m_id =new String(req.getParameter("m_id").trim());
 			
 			String m_email = req.getParameter("m_email");
-//			String m_emailReg = "\\p{Alpha}\\w{2,15}[@][a-z0-9]{3,}[.]\\p{Lower}{2,}";
+			String m_emailReg = "\\p{Alpha}\\w{2,15}[@][a-z0-9]{3,}[.]\\p{Lower}{2,}";
 			if (m_email == null || m_email.trim().length() == 0) {
 				errorMsgs.add("郵箱請勿空白");
 			} 
-//			else if (!m_email.trim().matches(m_emailReg)) {
-//				errorMsgs.add("郵箱不符合格式!請重新輸入");
-//			}
-			
+			else if (!m_email.trim().matches(m_emailReg)) {
+				errorMsgs.add("郵箱不符合格式!請重新輸入");
+			}
 			
 			String m_password = req.getParameter("m_password").trim();
 			if (m_password == null || m_password.trim().length() == 0) {
@@ -151,7 +146,7 @@ public class MemberServlet extends HttpServlet {
 			String m_phone = req.getParameter("m_phone");
 			if (m_phone == null || m_phone.trim().length() == 0) {
 				errorMsgs.add("電話請勿空白");
-			} if(m_phone.length() <=8 || m_phone.length()>10 ) {
+			}else if(m_phone.length() <=8 || m_phone.length()>10 ) {
 				errorMsgs.add("電話號碼位數不符");
 			}
 
@@ -168,7 +163,16 @@ public class MemberServlet extends HttpServlet {
 				errorMsgs.add("請選擇生日");
 			}
 			
-			byte[] m_headpic = (byte[])req.getAttribute("m_headpic");
+			MemberService memSvc =new MemberService();  //宣告Service物件來用
+			Part m_headpicpart =req.getPart("m_headpic");   //上傳必使用Part xxx=req.getPart("某個參數") 拿到Part
+			InputStream is =m_headpicpart.getInputStream();		//用part連接InputSream高階管
+			byte[] m_headpic =null;                             //宣告byte[]陣列
+			if(is.available()!=0) {                               //如果管子接的來源不是0
+				m_headpic =new byte[is.available()];                
+			    is.read(m_headpic);
+			    is.close();
+			} else 
+				m_headpic = memSvc.findOneMem(m_id).getM_headpic();
 			
 			String m_identity = req.getParameter("m_identity");
 			if (m_identity == null || m_identity.trim().length() == 0) {
@@ -176,7 +180,15 @@ public class MemberServlet extends HttpServlet {
 			}
 			
 			
-			byte[] m_id_pic =(byte[]) req.getAttribute("m_id_pic");		
+			Part m_id_picpart = req.getPart("m_id_pic");
+            InputStream is2 = m_id_picpart.getInputStream();
+            byte[] m_id_pic =null;
+            if(is2.available()!=0) {
+            	m_id_pic=new byte[is2.available()];
+            	is2.read(m_id_pic);
+            	is2.close();
+            }
+            m_id_pic = memSvc.findOneMem(m_id).getM_id_pic();
 			
 			String m_account = req.getParameter("m_account");
 			if (m_account == null || m_account.trim().length() == 0) {
@@ -190,20 +202,35 @@ public class MemberServlet extends HttpServlet {
 			
 			String b_code =req.getParameter("b_code");
 			
-			
-			byte[] m_bank_pic  =(byte[]) req.getAttribute("m_bank_pic");
+            Part m_bank_picpart =req.getPart("m_bank_pic");
+            InputStream is3 = m_bank_picpart.getInputStream();
+            byte[] m_bank_pic=null;
+            if(is3.available()!=0) {
+            	m_bank_pic = new byte[is3.available()];
+            	is3.read(m_bank_pic);
+            	is3.close();
+            }else
+            	m_bank_pic = memSvc.findOneMem(m_id).getM_bank_pic();
+            
 			
 			String m_storename =req.getParameter("m_storename");
 			
 			String m_info =req.getParameter("m_info");
 			
-			byte[] m_cover =(byte[]) req.getAttribute("m_cover");
+			Part m_coverpart =req.getPart("m_cover");
+			InputStream is4 = m_coverpart.getInputStream();
+			byte[] m_cover=null;
+			if(is4.available()!=0) {
+				m_cover =new byte[is4.available()];
+				is4.read(m_cover);
+				is4.close();
+			}else
+			    m_cover = memSvc.findOneMem(m_id).getM_cover();
 			
 			String m_hi =req.getParameter("m_hi");
 			
 			String m_offlineHi =req.getParameter("m_offlineHi");
-			
-			
+					
 			MemberVO memberVO = new MemberVO();
 			memberVO.setM_id(m_id);
 			memberVO.setM_email(m_email);
@@ -254,11 +281,9 @@ public class MemberServlet extends HttpServlet {
 				RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/members/update_mem_input.jsp");
 				failureView.forward(req, res);
 			}
-			
 		}
-		
 	
-		// insert參數符合，執行新增一般會員
+// insert參數符合，執行新增一般會員
 		if ("insert".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -346,7 +371,7 @@ public class MemberServlet extends HttpServlet {
 		}
 		
 		
-		//insert2參數行為符合，新增賣家會員
+//insert2參數行為符合，新增賣家會員
 		if ("insert2".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -404,7 +429,7 @@ public class MemberServlet extends HttpServlet {
 				is.read(m_headpicbuffer);
 				is.close();
 			} catch (Exception e) {
-				errorMsgs.add("傳輸過程發生問題");
+				errorMsgs.add("大頭貼上傳失敗，請再試一次");
 				e.printStackTrace();
 			}
 			
@@ -413,20 +438,20 @@ public class MemberServlet extends HttpServlet {
 				errorMsgs.add("身分證字號請勿空白");
 			}
 			
-			
 			Part m_id_pic=req.getPart("m_id_pic");
 			InputStream is2 =m_id_pic.getInputStream();
-			
 			byte[] m_id_picbuffer=null;
 			try {
 				m_id_picbuffer = new byte[is2.available()];
 				is2.read(m_id_picbuffer);
 				is2.close();
 			} catch (Exception e) {
-				errorMsgs.add("傳輸過程發生問題");
+				errorMsgs.add("身分證照片上傳失敗，請再試一次");
 				e.printStackTrace();
 			}
-			
+			if(m_id_picbuffer==null || m_id_picbuffer.length==0) {
+				errorMsgs.add("請上傳身分證照片");
+			}
 			
 			String m_account = req.getParameter("m_account");
 			if (m_account == null || m_account.trim().length() == 0) {
@@ -439,19 +464,46 @@ public class MemberServlet extends HttpServlet {
 			}
 			
 			String b_code =req.getParameter("b_code");
+			if(b_code==null || b_code.trim().length()==0) {
+				errorMsgs.add("銀行代號請勿空白");
+			}if(b_code.length()!=3) {
+				errorMsgs.add("銀行代號位數錯誤，請重新輸入");
+			}
 			
-			byte[] m_bank_pic  =(byte[]) req.getAttribute("m_bank_pic");
+			Part m_bank_pic =req.getPart("m_bank_pic");
+			InputStream is3 = m_bank_pic.getInputStream();
+			byte[] m_bank_picbuffer=null;
+			try {
+				m_bank_picbuffer =new byte[is3.available()];
+				is3.read(m_bank_picbuffer);
+				is3.close();
+			} catch (Exception e) {
+				errorMsgs.add("存摺照片上傳失敗，請再試一次");
+				e.printStackTrace();
+			}
+			
+			if(m_bank_picbuffer==null || m_bank_picbuffer.length==0) {
+				errorMsgs.add("請上傳銀行帳戶照片");
+			}
 			
 			String m_storename =req.getParameter("m_storename");
 			
 			String m_info =req.getParameter("m_info");
 			
-			byte[] m_cover =(byte[]) req.getAttribute("m_cover");
-			
+            Part m_cover=req.getPart("m_cover");
+            InputStream is4 = m_cover.getInputStream();
+            byte[] m_coverbuffer =null;
+            try {
+            	m_coverbuffer =new byte[is4.available()];
+            	is4.read(m_coverbuffer);
+            	is4.close();
+            }catch(Exception e) {
+            	errorMsgs.add("賣場封面上傳失敗，請再試一次");
+            	e.printStackTrace();
+            }
+            
 			String m_hi =req.getParameter("m_hi");
-			
 			String m_offlineHi =req.getParameter("m_offlineHi");
-			
 			
 			MemberVO memberVO = new MemberVO();
 			
@@ -468,10 +520,10 @@ public class MemberServlet extends HttpServlet {
 			memberVO.setM_account(m_account);
 			memberVO.setM_accountName(m_accountName);
 			memberVO.setB_code(b_code);
-			memberVO.setM_bank_pic(m_bank_pic);
+			memberVO.setM_bank_pic(m_bank_picbuffer);
 			memberVO.setM_storename(m_storename);
 			memberVO.setM_info(m_info);
-			memberVO.setM_cover(m_cover);
+			memberVO.setM_cover(m_coverbuffer);
 			memberVO.setM_hi(m_hi);
 			memberVO.setM_offlineHi(m_offlineHi);
 			
@@ -486,8 +538,8 @@ public class MemberServlet extends HttpServlet {
 			System.out.println("開始新增");
 			MemberService memberSvc = new MemberService();
 			memberVO = memberSvc.addMem2( m_email,  m_password,  m_name,  m_gender,  m_phone,
-					 m_address, m_birth, m_headpicbuffer,  m_identity, m_id_picbuffer,  m_account,  m_accountName,  b_code, m_bank_pic,
-					 m_storename,  m_info,  m_cover,  m_hi, m_offlineHi);//得到memberVO物件以做後續處理
+					 m_address, m_birth, m_headpicbuffer,  m_identity, m_id_picbuffer,  m_account,  m_accountName,  b_code, m_bank_picbuffer,
+					 m_storename,  m_info,  m_coverbuffer,  m_hi, m_offlineHi);//得到memberVO物件以做後續處理
             System.out.println("新增完成");
             
 			// 3.新增完成，準備轉交
@@ -503,7 +555,7 @@ public class MemberServlet extends HttpServlet {
 			}
 			
 		}
-		
+//delete參數行為符合，刪除會員
 		if("delete".equals(action)) {
 			List<String> errorMsgs =new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
