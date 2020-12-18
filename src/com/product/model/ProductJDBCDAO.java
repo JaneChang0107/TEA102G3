@@ -34,15 +34,17 @@ public class ProductJDBCDAO implements ProductInterface{
 			"SELECT * FROM PRODUCT ORDER BY P_ID";
 	
 	@Override
-	public void insert(ProductVO product) {
+	public String insert(ProductVO product) {
 
 		Connection con = null;
 		PreparedStatement ps = null;
+		ResultSet rs = null;
 		
 		try {
 			Class.forName(database.DRIVER);
 			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
-			ps = con.prepareStatement(INSERT);
+			String[] getpid = {"P_ID"};
+			ps = con.prepareStatement(INSERT, getpid);
 			
 			ps.setString(1, product.getP_name());
 			ps.setInt(2, product.getP_price());
@@ -53,12 +55,24 @@ public class ProductJDBCDAO implements ProductInterface{
 			ps.setInt(7, product.getP_status());
 			ps.setString(8, product.getM_id());
 			
-			ps.executeQuery();
-			
+			ps.executeUpdate();
+			rs = ps.getGeneratedKeys();
+			String pid = null;
+			while(rs.next()) {
+				pid = rs.getString(1);
+			}
+			return pid;
 		} catch(Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
 		} finally {
+			try {
+				if(rs != null) {
+					rs.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
 			try {
 				if(ps != null) {
 					ps.close();

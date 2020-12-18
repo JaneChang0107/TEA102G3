@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface ProductInterface {
 
-	public void insert(ProductVO product);
+	public String insert(ProductVO product);
 	public void update(ProductVO product);
 	public void delete(String p_id);
 	public ProductVO findOneProduct (String p_id);
