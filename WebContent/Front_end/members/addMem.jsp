@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.member.model.*"%>
 
-
 <%
 	MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
 %>
@@ -10,86 +9,119 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>新增會員</title>
-
 <style>
-table {
-	width: 400px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
-}
+        .mybody{
+            background-color: #E3F8F6;
+        }
+        .myform{
+            border:1px solid gray;
+            background-color: rgb(243, 241, 241);
+            width: 400px;
+            height: auto;
+            margin: 20px auto;
+			text-align: center;
+        }
+        .topcol{
+            width:auto;
+            height: 80px;
+            background-color: #6CCFF3;
+            margin:0px 0px 20px 0px;
+            font-size: 24px;  
+        }
+		.gender{
+			text-align: left;
+			position: relative;
+			
+		}
+		.gender>label{
+			padding-right: 35px
+		}
 
-table, th, td {
-	border: 0px solid #CCCCFF;
-}
-
-th, td {
-	padding: 1px;
-}
-b{
-     color: red;
-}
+		input.form-control{
+			width:250px;
+		}
+		b{
+         color: red;
+        }
+        ul{
+        text-align: left;
+        }
 </style>
 </head>
-<body>
-	<h3>資料新增:</h3><b>*</b>會員必填欄位
-     
-	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
+<body class="mybody">
+    <link rel="stylesheet" href="../../vendors/bootstrap/css/bootstrap.min.css">
+ 
+    <form class="myform" ACTION="<%=request.getContextPath()%>/member/controller/MemberServlet" method="post">
+        <div class="topcol">
+            <br>
+            <u>會員註冊</u>
+        </div>
+          	<c:if test="${not empty errorMsgs}">
+<!-- 		<font style="color: red">請修正以下錯誤:</font> -->
 		<ul>
 			<c:forEach var="message" items="${errorMsgs}">
 				<li style="color: red">${message}</li>
 			</c:forEach>
 		</ul>
 	</c:if>
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-2 col-form-label" >Email<b>*</b></label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="mail" name="m_email" value="<%=(memberVO == null) ? "a123@yahoo.com" : memberVO.getM_email()%>" />
+          </div>
+		</div>
+		
+		<div class="form-group row">
+			<label for="inputEmail3" class="col-sm-2 col-form-label" >密碼<b>*</b></label>
+			<div class="col-sm-10">
+			  <input type="password" class="form-control" id="password" name="m_password" value="<%=(memberVO == null) ? "" : memberVO.getM_password()%>" />
+			</div>
+		  </div>
 
-	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/controller/MemberServlet" name="form1">
-		<table>
-			<tr>
-				<td>電子郵件:<b>*</b></td>
-				<td><input type="text" name="m_email" size="40"
-					value="<%=(memberVO == null) ? "a123@yahoo.com" : memberVO.getM_email()%>" /></td>
+		  <div class="form-group row">
+			<label for="inputEmail3" class="col-sm-2 col-form-label" >姓名<b>*</b></label>
+			<div class="col-sm-10">
+			  <input type="text" class="form-control" id="name" name="m_name" value="<%=(memberVO == null) ? "MrJava" : memberVO.getM_name()%>" />
+			</div>
+		  </div>
 
-			</tr>
-			<tr>
-				<td>密碼:<b>*</b></td>
-				<td><input type="password" name="m_password" size="40"
-					value="<%=(memberVO == null) ? "" : memberVO.getM_password()%>" /></td>
-			</tr>
-			<tr>
-				<td>姓名:<b>*</b></td>
-				<td><input type="text" name="m_name" size="40"
-					value="<%=(memberVO == null) ? "MrJava" : memberVO.getM_name()%>" /></td>
-			</tr>
-			<tr>
-				<td>性別:<b>*</b></td>
-				<td>
-				<input type="radio" name="m_gender" value="男">男 
-				<input type="radio" name="m_gender" value="女">女
-				</td>
-			</tr>
-			<tr>
-				<td>電話:<b>*</b></td>
-				<td><input type="text" name="m_phone" size="40"
-					value="<%=(memberVO == null) ? "0999999999" : memberVO.getM_phone()%>" /></td>
-			</tr>
-			<tr>
-				<td>地址:<b>*</b></td>
-				<td><input type="text" name="m_address" size="40"
-					value="<%=(memberVO == null) ? "請填入地址" : memberVO.getM_address()%>" /></td>
-			</tr>
-			<tr>
-				<td>生日:<b>*</b></td>
-				<td><input name="m_birth" id="f_date1" type="text"></td>
-			</tr>
+		  <div class="gender">
+			<label>性別<b>*</b></label>
+        <label>
+			<input type="radio" name="m_gender" value="男">男 
+	    </label>
+		<label>
+			<input type="radio" name="m_gender" value="女">女
+		</label>
+ 		  </div>
 
-		</table>
-		<br> 
-		<input type="hidden" name="action" value="insert"> 
-		<input type="submit" value="送出新增"></FORM>
+		  <div class="form-group row">
+			<label for="inputEmail3" class="col-sm-2 col-form-label" >電話<b>*</b></label>
+			<div class="col-sm-10">
+			  <input type="text" class="form-control"  name="m_phone" id="phone" value="<%=(memberVO == null) ? "0999999999" : memberVO.getM_phone()%>" />
+			</div>
+		  </div>
+
+		  <div class="form-group row">
+			<label for="inputEmail3" class="col-sm-2 col-form-label">地址<b>*</b></label>
+			<div class="col-sm-10">
+			  <input type="text" class="form-control" id="address" name="m_address" value="<%=(memberVO == null) ? "請填入地址" : memberVO.getM_address()%>" />
+			</div>
+		  </div>
+
+		  <div class="form-group row">
+			<label for="inputEmail3" class="col-sm-2 col-form-label">生日<b>*</b></label>
+			<div class="col-sm-10">
+			  <input type="text" class="form-control" id="f_date1" name="m_birth">
+			</div>
+		  </div>
+
+		  <input type="hidden" name="action" value="insert"> 
+		  <input type="submit" value="送出新增"></FORM>
+
+	  </form>
+
 </body>
-
-
 <!-- =====Date time picker設定======== -->
 <%
 	java.sql.Date m_birth = null;
@@ -126,4 +158,7 @@ b{
            maxDate:               '+1970-01-01'  // 去除今日(不含)之後
         });
 </script>
+
+
+
 </html>
