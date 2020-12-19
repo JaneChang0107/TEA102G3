@@ -142,6 +142,7 @@ public class ProductServlet extends HttpServlet {
 			
 			pVO = pService.addProduct(pname, pprice, pdetail, ptid, pcount, addDate, pstatus, mid);
 			
+			// 新增圖片
 			Collection<Part> parts = request.getParts();
 			for(Part p : parts) {
 				if("img".equals(p.getName()) && p.getSize() != 0) {
