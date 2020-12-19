@@ -13,7 +13,7 @@ public class RentOrderService {
 		dao = new RentOrderJDBCDAO();
 	}
 
-	public RentOrderVO addEmployee(Timestamp ro_date, String ro_status, String st_id, Timestamp ro_outdate,
+	public RentOrderVO addRentOrder(Timestamp ro_date, String ro_status, String st_id, Timestamp ro_outdate,
 			Timestamp ro_backdate, Integer ro_deposit, Integer ro_total, byte[] ro_sign, Integer ro_pm, String m_id) {
 
 		RentOrderVO rentOrderVO = new RentOrderVO();
@@ -34,11 +34,12 @@ public class RentOrderService {
 		return rentOrderVO;
 	}
 
-	public RentOrderVO updateEmployee(Timestamp ro_date, String ro_status, String st_id, Timestamp ro_outdate,
+	public RentOrderVO updateRentOrder(String ro_id, Timestamp ro_date, String ro_status, String st_id, Timestamp ro_outdate,
 			Timestamp ro_backdate, Integer ro_deposit, Integer ro_total, byte[] ro_sign, Integer ro_pm, String m_id) {
 
 		RentOrderVO rentOrderVO = new RentOrderVO();
 
+		rentOrderVO.setRo_id(ro_id);
 		rentOrderVO.setRo_date(ro_date);
 		rentOrderVO.setRo_status(ro_status);
 		rentOrderVO.setSt_id(st_id);
@@ -58,7 +59,7 @@ public class RentOrderService {
 		dao.delete(rentOrderVO);
 	}
 
-	public RentOrderVO getOneEmployee(String rentOrderVO) {
+	public RentOrderVO getOneRentOrder(String rentOrderVO) {
 		return dao.findByPrimaryKey(rentOrderVO);
 	}
 

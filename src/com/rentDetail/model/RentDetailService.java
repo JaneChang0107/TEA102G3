@@ -13,7 +13,7 @@ public class RentDetailService {
 		dao = new RentDetailJDBCDAO();
 	}
 
-	public RentDetailVO addEmployee(String rd_id, String ro_id, String r_id, Integer r_count) {
+	public RentDetailVO addRentDetail(String ro_id, String r_id, Integer r_count) {
 
 		RentDetailVO rentDetailVO = new RentDetailVO();
 
@@ -26,10 +26,11 @@ public class RentDetailService {
 		return rentDetailVO;
 	}
 
-	public RentDetailVO updateEmployee(String rd_id, String ro_id, String r_id, Integer r_count) {
+	public RentDetailVO updateRentDetail(String rd_id, String ro_id, String r_id, Integer r_count) {
 
 		RentDetailVO rentDetailVO = new RentDetailVO();
 
+		rentDetailVO.setRd_id(rd_id);
 		rentDetailVO.setRo_id(ro_id);
 		rentDetailVO.setR_id(r_id);
 		rentDetailVO.setRd_count(r_count);

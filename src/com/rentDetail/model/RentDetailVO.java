@@ -1,6 +1,6 @@
 package com.rentDetail.model;
 
-public class RentDetailVO {
+public class RentDetailVO implements java.io.Serializable{
 	private String rd_id;
 	private String ro_id;
 	private String r_id;

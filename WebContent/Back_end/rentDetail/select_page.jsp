@@ -48,26 +48,26 @@
 </c:if>
 
 <ul>
-  <li><a href='<%=request.getContextPath()%>/Back_end/rentOrder/listAllRentOrder.jsp'>List</a> all RentDetails.  <br><br></li>
+  <li><a href='<%=request.getContextPath() %>/Back_end/rentDetail/listAllRentDetail.jsp'>List</a> all RentDetails.  <br><br></li>
   
   
   <li>
-    <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/rentOrder/RentOrderServlet" >
+    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/rentDetail/RentDetailServlet" >
         <b>輸入員工編號 (如7001):</b>
-        <input type="text" name="ro_id">
+        <input type="text" name="rd_id">
         <input type="hidden" name="action" value="getOne_For_Display">
         <input type="submit" value="送出">
     </FORM>
   </li>
 
-  <jsp:useBean id="rentOrderSvc" scope="page" class="com.rentOrder.model.RentOrderService" />
+  <jsp:useBean id="rentDetailSvc" scope="page" class="com.rentDetail.model.RentDetailService" />
    
   <li>
-     <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/rentOrder/RentOrderServlet" >
+     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/rentDetail/RentDetailServlet" >
        <b>選擇員工編號:</b>
-       <select size="1" name="ro_id">
-         <c:forEach var="rentOrderVO" items="${rentOrderSvc.all}" > 
-          <option value="${rentOrderVO.ro_id}">${rentOrderVO.ro_id}
+       <select size="1" name="rd_id">
+         <c:forEach var="rentDetailVO" items="${rentDetailSvc.all}" > 
+          <option value="${rentDetailVO.rd_id}">${rentDetailVO.rd_id}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">
@@ -76,11 +76,11 @@
   </li>
   
   <li>
-     <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/rentOrder/RentOrderServlet" >
+     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/rentDetail/RentDetailServlet" >
        <b>選擇員工姓名:</b>
-       <select size="1" name="ro_id">
-         <c:forEach var="rentOrderVO" items="${rentOrderSvc.all}" > 
-          <option value="${rentOrderVO.ro_id}">${rentOrderVO.ro_id}
+       <select size="1" name="rd_id">
+         <c:forEach var="rentDetailVO" items="${rentDetailSvc.all}" > 
+          <option value="${rentDetailVO.rd_id}">${rentDetailVO.rd_id}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">
@@ -93,7 +93,7 @@
 <h3>員工管理</h3>
 
 <ul>
-  <li><a href='<%=request.getContextPath()%>/Back_end/rentOrder/addRentOrder.jsp'>Add</a> a new RentOrde.</li>
+  <li><a href='<%=request.getContextPath() %>/Back_end/rentDetail/addRentDetail.jsp'>Add</a> a new RentDetail.</li>
 </ul>
 
 </body>

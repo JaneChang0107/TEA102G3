@@ -2,7 +2,7 @@ package com.rentOrder.model;
 
 import java.sql.Timestamp;
 
-public class RentOrderVO {
+public class RentOrderVO implements java.io.Serializable{
 	private String ro_id;
 	private Timestamp ro_date;
 	private String ro_status;
