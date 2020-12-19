@@ -152,7 +152,15 @@ public class ProductServlet extends HttpServlet {
 					ppService.addProductPicture(b, pVO.getP_id());
 				}
 			}
+			response.sendRedirect("/Front_end/product/sellerProduct.jsp");
+		}
+		
+		if("showSell".equals(action)) {
+			String mid = request.getParameter("mid");
+			ProductService pService = new ProductService();
 			
+			List<ProductVO> pVOs = pService.findBySeller(mid);
+			request.setAttribute("pVOs", pVOs);
 			
 			
 		}

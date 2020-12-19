@@ -25,12 +25,17 @@
 	  </tr>
 	  <tr>
 	    <td>${pVO.p_name}</td>
-	    <td>${pVO.p_name}</td>
-	    <td>${pVO.p_name}</td>
-	    <td>${pVO.p_name}</td>
-	    <td>${pVO.p_name}</td>
-	    <td>${pVO.p_name}</td>
-	    <td>${pVO.p_name}</td>
+	    <td>${pVO.pt_id}</td>
+	    <td>${pVO.p_count}</td>
+	    <td>${pVO.p_price}</td>
+	    <td>${pVO.p_addDate}</td>
+	    <td>${pVO.p_status}</td>
+	<c:forEach var="ppid" items="${ppService.}">
+	    <td>
+	    	<img src="<%= request.getContextPath() %>/ShowPicture?type=pp&id=${ppid}">
+	    </td>
+	</c:forEach>
+	    <td>${pVO.p_detail}</td>
 	  </tr>
 	</table>
 

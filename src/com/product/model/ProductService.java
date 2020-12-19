@@ -4,6 +4,9 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class ProductService {
 
 	private ProductInterface dao;
@@ -14,16 +17,25 @@ public class ProductService {
 	
 	public static void main(String[] args) {
 		ProductService ps = new ProductService();
-		Date d = new Date();
-		Timestamp st = new Timestamp(d.getTime());
-		ProductVO pVO = ps.addProduct("bfbre", 1000, "cu cucisniegneingdgoneiw", "PT00001", 1, st, 0, "M00001");
+//		Date d = new Date();
+//		Timestamp st = new Timestamp(d.getTime());
+//		ProductVO pVO = ps.addProduct("bfbre", 1000, "cu cucisniegneingdgoneiw", "PT00001", 1, st, 0, "M00001");
 //		ps.updateProduct("P00021", "vv", 500, "Idontknow", "PT00011", 2, st, 0);
 //		ps.deleteProduct("P00021");
 //		List<ProductVO> list = ps.findProduct("¨ë«È");
 //		List<ProductVO> list = ps.findProduct("°Êª«", "PT00011");
-//		List<ProductVO> list = ps.getAll();
+		List<ProductVO> list = ps.getAll();
 	
-		System.out.println("pid" + pVO.getP_id());
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			String a = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
+			System.out.println(a);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+//		System.out.println("pid" + pVO.getP_id());
 //		for(ProductVO pvo : list) {
 //			System.out.println("pid:" + pvo.getP_id());
 //			System.out.println("pname:" + pvo.getP_name());
