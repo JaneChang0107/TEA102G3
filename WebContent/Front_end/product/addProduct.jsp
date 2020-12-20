@@ -31,9 +31,9 @@
         <div>
             <label>商品種類</label>            
             <select name="ptid">
-            	<option>請選擇</option>
+            	<option value="">請選擇</option>
             <c:forEach var="ptVO" items="${ptService.all}">
-                <option value="${ptVO.pt_id}"${ptVO.pt_id == pVO.pt_id ? "select" : ""}>${ptVO.pt_platform} ${ptVO.pt_kind}</option>
+                <option value="${ptVO.pt_id}"${ptVO.pt_id == pVO.pt_id ? "selected" : ""}>${ptVO.pt_platform} ${ptVO.pt_kind}</option>
              </c:forEach>
             </select>
         </div>

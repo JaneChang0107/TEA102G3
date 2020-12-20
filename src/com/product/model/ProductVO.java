@@ -70,7 +70,10 @@ public class ProductVO implements java.io.Serializable {
 		return p_reviseDate;
 	}
 	public String getP_reviseDateSec() {
-		Date d = new Date(p_addDate.getTime());
+		if(p_reviseDate == null) {
+			return "";
+		}
+		Date d = new Date(p_reviseDate.getTime());
 		Format f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String date = f.format(d);
 		return date;

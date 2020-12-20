@@ -25,8 +25,12 @@ public class ProductPictureService {
 		dao.update(ppVO);
 	}
 	
-	public void deleteProductPocture(String pid) {
-		dao.delete(pid);
+	public void deleteProductPocture(String ppid) {
+		dao.delete(ppid);
+	}
+	
+	public void deleteProductPictureByProduct(String pid) {
+		dao.deleteByProduct(pid);
 	}
 	
 	public ProductPictureVO findOneProductPicture(String ppid) {

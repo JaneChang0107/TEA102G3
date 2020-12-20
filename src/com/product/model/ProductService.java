@@ -4,8 +4,8 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.fasterxml.jackson.core.JsonProcessingException;
+//import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ProductService {
 
@@ -26,14 +26,15 @@ public class ProductService {
 //		List<ProductVO> list = ps.findProduct("°Êª«", "PT00011");
 		List<ProductVO> list = ps.getAll();
 	
-		ObjectMapper mapper = new ObjectMapper();
-		try {
-			String a = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
-			System.out.println(a);
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		ObjectMapper mapper = new ObjectMapper();
+//		try {
+//			String a = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
+//			
+//			System.out.println(a);
+//		} catch (JsonProcessingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 //		System.out.println("pid" + pVO.getP_id());
 //		for(ProductVO pvo : list) {
@@ -82,24 +83,24 @@ public class ProductService {
 		return pVO;
 	}
 
-	public void deleteProduct(String pId) {
-		dao.delete(pId);
+	public void deleteProduct(String pid) {
+		dao.delete(pid);
 	}
 	
-	public ProductVO oneProduct(String pId) {
-		return dao.findOneProduct(pId);
+	public ProductVO oneProduct(String pid) {
+		return dao.findOneProduct(pid);
 	}
 	
-	public List<ProductVO> findBySeller(String m_id) {
-		return dao.findBySeller(m_id);
+	public List<ProductVO> findBySeller(String mid) {
+		return dao.findBySeller(mid);
 	}
 	
 	public List<ProductVO> findProduct(String name) {
 		return dao.findByProductName(name);
 	}
 	
-	public List<ProductVO> findProduct(String name, String ptId) {
-		return dao.findByProductName(name, ptId);
+	public List<ProductVO> findProduct(String name, String ptid) {
+		return dao.findByProductName(name, ptid);
 	}
 	
 	public List<ProductVO> getAllSell() {

@@ -20,6 +20,7 @@ public class ProductPictureJDBCDAO implements ProductPictureDAOInterface{
 	private final String INSERT = "INSERT INTO ProductPicture (PP_ID,PP_PICTURE,P_ID) VALUES ('PP' || LPAD(ProductPicture_SEQ.NEXTVAL, 5, 0), ?, ?)";
 	private final String UPDATE = "UPDATE ProductPicture SET PP_PICTURE=? WHERE PP_ID=?";
 	private final String DELETE = "DELETE FROM ProductPicture WHERE PP_ID=?";
+	private final String DELETEPRODUCT = "DELETE FROM ProductPicture WHERE P_ID=?";
 	private final String GETONE = "SELECT * FROM ProductPicture WHERE PP_ID=?";
 	private final String GETPP = "SELECT * FROM ProductPicture WHERE P_ID=? ORDER BY PP_ID";
 	private final String GETALL = "SELECT * FROM ProductPicture ORDER BY PP_ID";
@@ -191,6 +192,46 @@ public class ProductPictureJDBCDAO implements ProductPictureDAOInterface{
 			ps = con.prepareStatement(DELETE);
 			
 			ps.setString(1, pp_id);
+			
+			int d = ps.executeUpdate();
+			
+			System.out.println(d);
+		} catch(ClassNotFoundException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+		} catch(SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+		} finally {
+			try {
+				if(ps != null) {
+					ps.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(con != null) {
+					con.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Override
+	public void deleteByProduct(String p_id) {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		try {
+			Class.forName(database.DRIVER);
+			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			ps = con.prepareStatement(DELETEPRODUCT);
+			
+			ps.setString(1, p_id);
 			
 			int d = ps.executeUpdate();
 			
