@@ -27,7 +27,6 @@ public class MemberServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 
@@ -140,9 +139,12 @@ public class MemberServlet extends HttpServlet {
 				errorMsgs.add("姓名只能為中英文、數字和_ , 且長度必需在2到10之間");
 			}
 			String m_gender = req.getParameter("m_gender");
+			
 			if (m_gender == null || m_gender.trim().length() == 0) {
 				errorMsgs.add("請選擇性別欄");
 			}
+		
+			
 			String m_phone = req.getParameter("m_phone");
 			if (m_phone == null || m_phone.trim().length() == 0) {
 				errorMsgs.add("電話請勿空白");
@@ -298,6 +300,8 @@ public class MemberServlet extends HttpServlet {
 			else if (!m_email.trim().matches(m_emailReg)) {
 				errorMsgs.add("郵箱不符合格式!請重新輸入");
 			}
+			
+			
 
 			String m_password = req.getParameter("m_password").trim();
 			if (m_password == null || m_password.trim().length() == 0) {
@@ -310,10 +314,13 @@ public class MemberServlet extends HttpServlet {
 			} else if (!m_name.trim().matches(m_nameReg)) {
 				errorMsgs.add("姓名只能為中英文、數字和_ , 且長度必需在2到10之間");
 			}
+
 			String m_gender = req.getParameter("m_gender");
 			if (m_gender == null || m_gender.trim().length() == 0) {
+				m_gender="";
 				errorMsgs.add("請選擇性別欄");
 			}
+
 			String m_phone = req.getParameter("m_phone");
 			if (m_phone == null || m_phone.trim().length() == 0) {
 				errorMsgs.add("電話請勿空白");
@@ -344,10 +351,10 @@ public class MemberServlet extends HttpServlet {
 			memberVO.setM_birth(m_birth);
 
 			if (!errorMsgs.isEmpty()) {
-				req.setAttribute("memberVO", memberVO);
+				req.setAttribute("memberVO", memberVO);			
 				RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/members/addMem.jsp");
 				failureView.forward(req, res);
-				return;
+				return ;
 			}
 
 			// 2.開始新增資料
@@ -398,6 +405,7 @@ public class MemberServlet extends HttpServlet {
 			}
 			String m_gender = req.getParameter("m_gender");
 			if (m_gender == null || m_gender.trim().length() == 0) {
+				m_gender="";
 				errorMsgs.add("請選擇性別欄");
 			}
 			String m_phone = req.getParameter("m_phone");
@@ -490,6 +498,7 @@ public class MemberServlet extends HttpServlet {
 			
 			String m_info =req.getParameter("m_info");
 			
+			
             Part m_cover=req.getPart("m_cover");
             InputStream is4 = m_cover.getInputStream();
             byte[] m_coverbuffer =null;
@@ -521,6 +530,7 @@ public class MemberServlet extends HttpServlet {
 			memberVO.setM_accountName(m_accountName);
 			memberVO.setB_code(b_code);
 			memberVO.setM_bank_pic(m_bank_picbuffer);
+			
 			memberVO.setM_storename(m_storename);
 			memberVO.setM_info(m_info);
 			memberVO.setM_cover(m_coverbuffer);
@@ -550,6 +560,7 @@ public class MemberServlet extends HttpServlet {
 			// 抓到其他例外
 			}catch(Exception e) {
 				errorMsgs.add(e.getMessage());
+				e.printStackTrace();
 				RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/members/addMemSeller.jsp");
 				failureView.forward(req, res);
 			}

@@ -3,7 +3,7 @@ package com.orderdetail.model;
 public class OrderdetailVO {
 	private String od_id;
 	private String o_id;
-	private String p_id;
+	private String P_id;
 	private Integer od_count;
 	
 	public String getOd_id() {
@@ -19,10 +19,10 @@ public class OrderdetailVO {
 		this.o_id = o_id;
 	}
 	public String getP_id() {
-		return p_id;
+		return P_id;
 	}
 	public void setP_id(String p_id) {
-		this.p_id = p_id;
+		P_id = p_id;
 	}
 	public Integer getOd_count() {
 		return od_count;

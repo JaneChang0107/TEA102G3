@@ -16,7 +16,7 @@
         .myform{
             border:1px solid gray;
             background-color: rgb(243, 241, 241);
-            width: 400px;
+            width: 500px;
             height: auto;
             margin: 20px auto;
 			text-align: center;
@@ -31,14 +31,27 @@
 		.gender{
 			text-align: left;
 			position: relative;
+			padding: 10px 10px;
 			
 		}
 		.gender>label{
-			padding-right: 35px
+			padding-right: 45px
 		}
-
+		#seller{
+		    position:relative;
+		    left:5px;
+		    text-align:left;
+		}
+		#signup{
+            background-color: #FFA000;
+            width: 100px;
+            border: 1px solid #707070;
+            margin-left: 20px;
+        }
+        
 		input.form-control{
-			width:250px;
+			width:300px;
+			margin-left:20px;
 		}
 		b{
          color: red;
@@ -55,6 +68,7 @@
         <div class="topcol">
             <br>
             <u>會員註冊</u>
+            
         </div>
           	<c:if test="${not empty errorMsgs}">
 <!-- 		<font style="color: red">請修正以下錯誤:</font> -->
@@ -88,10 +102,10 @@
 		  <div class="gender">
 			<label>性別<b>*</b></label>
         <label>
-			<input type="radio" name="m_gender" value="男">男 
+			<input type="radio" name="m_gender" value="男" <%= memberVO != null && memberVO.getM_gender().equals("男") ? "checked" : "" %>>男 
 	    </label>
 		<label>
-			<input type="radio" name="m_gender" value="女">女
+			<input type="radio" name="m_gender" value="女" <%= memberVO != null && memberVO.getM_gender().equals("女") ? "checked" : "" %> >女
 		</label>
  		  </div>
 
@@ -115,9 +129,11 @@
 			  <input type="text" class="form-control" id="f_date1" name="m_birth">
 			</div>
 		  </div>
-
+          <div id="seller">
+		  <input type="checkbox" class="btn btn-primary"value="成為賣家" onclick="location.href='addMemSeller.jsp'"><label>我要成為賣家</label>
+          </div>
 		  <input type="hidden" name="action" value="insert"> 
-		  <input type="submit" value="送出新增"></FORM>
+		  <button type="submit" class="btn btn-primary" value="註冊" id="signup">註冊</button>
 
 	  </form>
 

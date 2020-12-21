@@ -5,6 +5,7 @@ import java.sql.*;
 import java.util.*;
 
 
+import oracle.sql.*;
 
 public class OrderlistJDBCDAO implements OrderlistDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";

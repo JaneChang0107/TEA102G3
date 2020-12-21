@@ -105,7 +105,7 @@
      <td>${memberVO.m_phone}</td>
      <td>${memberVO.m_address}</td>
      <td>${memberVO.m_birth}</td>
-     <td><img src="${memberVO.m_headpic2}" width="100" height="100"></td>
+     <td><img src="${memberVO.m_headpic2()}" width="100" height="100"></td>
      <td>${memberVO.m_status}</td>
      <td>${memberVO.m_identity}</td>
      <td><img src="${memberVO.m_id_pic2}"  width="100" height="100"></td>
