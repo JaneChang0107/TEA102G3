@@ -5,7 +5,7 @@
         <title>sellerProduct</title>
     </head>
     <body>
-        <table>
+        <!-- <table>
         <tr>
             <th>商品名稱</th>
             <th>商品種類</th>
@@ -29,26 +29,35 @@
             <td>${pVO.p_detail}</td>
         </tr>
         </table>
+ -->
 
-
-        <script src="../vendors/jquery/jquery-3.5.1.min.js"></script>
+        <!-- <script src="../vendors/jquery/jquery-3.5.1.min.js"></script> -->
         <script>
 
-            var data = {
-                "action" : "showSell",
-                "mid" : "M00001"
-            }
-
-            $.ajax({
-                url: "http://localhost:8081/TEA102G3//Productajax",
-                type : "POST",
-                dataType : "json",
-                data : data,
-                success : function(data) {
+            let url = new URL(document.URL);
+            console.log(url.protocol);
+            console.log(url.hostname);
+            console.log(url.host);
+            console.log(url.href);
+            console.log(url.origin);
+            console.log(url.pathname);
 
 
-                }
-            })
+            // var data = {
+            //     "action" : "showSell",
+            //     "mid" : "M00001"
+            // }
+
+            // $.ajax({
+            //     url: "http://localhost:8081/TEA102G3/Productajax",
+            //     type : "POST",
+            //     dataType : "json",
+            //     data : data,
+            //     success : function(data) {
+
+
+            //     }
+            // })
         </script>
     </body>
 </html>

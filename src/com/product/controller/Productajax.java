@@ -1,6 +1,7 @@
 package com.product.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -28,6 +29,7 @@ public class Productajax extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
+		PrintWriter writer = response.getWriter();
 		String action = request.getParameter("action");
 		
 		if("showSell".equals(action)) {
@@ -37,8 +39,9 @@ public class Productajax extends HttpServlet {
 			List<ProductVO> pVOs = pService.findBySeller(mid);
 			
 			ObjectMapper mapper = new ObjectMapper();
-			mapper.writeValueAsString(pVOs);
+			mapper.writerWithDefaultPrettyPrinter().writeValueAsString(pVOs);
 			
+			writer.println();
 			request.setAttribute("pVOs", pVOs);
 			
 			
