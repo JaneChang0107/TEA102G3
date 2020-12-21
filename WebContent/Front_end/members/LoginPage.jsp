@@ -55,7 +55,7 @@
     
     <link rel="stylesheet" href="../../vendors/bootstrap/css/bootstrap.min.css">
     
-    <form class="myform" ACTION="<%=request.getContextPath()%>/member/controller/MemberServlet" method="post">
+    <form class="myform" ACTION="<%=request.getContextPath()%>/member/controller/MemberLogin" method="post">
         <div class="topcol">
             <br>
             <u>遊戲堃會員登入</u>
