@@ -63,33 +63,6 @@ public class MemberService {
 
 		return memberVO;
 	}
-	
-	//新增賣家會員(註冊用)
-//	public MemberVO addMem3(String m_email, String m_password, String m_name, String m_gender, String m_phone,
-//			String m_address, java.sql.Date m_birth, byte[] m_headpic, String m_identity, byte[] m_id_pic,
-//			String m_account, String m_accountName, String b_code, byte[] m_bank_pic) {
-//
-//		MemberVO memberVO = new MemberVO();
-//
-//		memberVO.setM_email(m_email);
-//		memberVO.setM_password(m_password);
-//		memberVO.setM_name(m_name);
-//		memberVO.setM_gender(m_gender);
-//		memberVO.setM_phone(m_phone);
-//		memberVO.setM_address(m_address);
-//		memberVO.setM_birth(m_birth);
-//		memberVO.setM_headpic(m_headpic);
-//		memberVO.setM_identity(m_identity);
-//		memberVO.setM_id_pic(m_id_pic);
-//		memberVO.setM_account(m_account);
-//		memberVO.setM_accountName(m_accountName);
-//		memberVO.setB_code(b_code);
-//		memberVO.setM_bank_pic(m_bank_pic);
-//
-//		dao.insertSeller(memberVO);
-//		return memberVO;
-//	}
-	
 
 	//修改會員
 	public MemberVO updateMem(String m_email, String m_password, String m_name, String m_gender, String m_phone,

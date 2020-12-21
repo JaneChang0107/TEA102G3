@@ -584,36 +584,32 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		List<MemberVO> list =dao.getAll();
 		
 		for(MemberVO aMember : list) {
-//			System.out.println(aMember.getM_id()+",");
-			
-//			System.out.println(aMember.getM_email()+",");
-//			System.out.println(aMember.getM_password()+",");
-//			System.out.println(aMember.getM_name()+",");
-//			System.out.println(aMember.getM_gender()+",");
-//			System.out.println(aMember.getM_phone()+",");
-//			System.out.println(aMember.getM_address()+",");
-//			System.out.println(aMember.getM_birth()+",");
-//			System.out.println(aMember.getM_headpic()+",");
-//			System.out.println(aMember.getM_status()+",");
-//			System.out.println(aMember.getM_identity()+",");
-//			System.out.println(aMember.getM_id_pic()+",");
-//			System.out.println(aMember.getM_account()+",");
-//			System.out.println(aMember.getM_accountName()+",");
-//			System.out.println(aMember.getB_code()+",");
-//			System.out.println(aMember.getM_bank_pic()+",");
-//			System.out.println(aMember.getM_moneyTranDate()+",");
-//			System.out.println(aMember.getM_storename()+",");
-//			System.out.println(aMember.getM_info()+",");
-//			System.out.println(aMember.getM_cover()+",");
-//			System.out.println(aMember.getM_hi()+",");
-//			System.out.println(aMember.getM_offlineHi()+",");
-//			System.out.println(aMember.getM_coin()+",");
+			System.out.println(aMember.getM_id()+",");
+			System.out.println(aMember.getM_email()+",");
+			System.out.println(aMember.getM_password()+",");
+			System.out.println(aMember.getM_name()+",");
+			System.out.println(aMember.getM_gender()+",");
+			System.out.println(aMember.getM_phone()+",");
+			System.out.println(aMember.getM_address()+",");
+			System.out.println(aMember.getM_birth()+",");
+			System.out.println(aMember.getM_headpic()+",");
+			System.out.println(aMember.getM_status()+",");
+			System.out.println(aMember.getM_identity()+",");
+			System.out.println(aMember.getM_id_pic()+",");
+			System.out.println(aMember.getM_account()+",");
+			System.out.println(aMember.getM_accountName()+",");
+			System.out.println(aMember.getB_code()+",");
+			System.out.println(aMember.getM_bank_pic()+",");
+			System.out.println(aMember.getM_moneyTranDate()+",");
+			System.out.println(aMember.getM_storename()+",");
+			System.out.println(aMember.getM_info()+",");
+			System.out.println(aMember.getM_cover()+",");
+			System.out.println(aMember.getM_hi()+",");
+			System.out.println(aMember.getM_offlineHi()+",");
+			System.out.println(aMember.getM_coin()+",");
 			System.out.println("----------------------");
-			if(aMember.getM_email().contains("a123@yahoo.com")) {
-				System.out.println(true);
-			}
+			
 		}
-		
 //		System.out.println("=====查詢全部完畢======");
 //		
 //		Set<MemberVO> set = dao.getMemberByStatus(2);

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.member.model.MemberJDBCDAO;
 import com.member.model.MemberVO;
 
-@WebServlet("/member/controller/MemberLogin")
+@WebServlet("/MemberLogin")
 public class MemberLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -46,7 +46,7 @@ public class MemberLogin extends HttpServlet {
 		if (!loginAccess(account, password)) {
 			out.println("<HTML><HEAD><TITLE>Access Denied</TITLE></HEAD>");
 			out.println("<BODY>帳號或密碼有誤，請重新輸入!<BR>");
-			out.println("請重新登入 <A HREF=" + req.getContextPath() + "/Front_end/members/LoginPage.jsp>重新登入</A>");
+			out.println("請重新登入 <A HREF=" + req.getContextPath() + "/loginPage.html>重新登入</A>");
 			out.println("</BODY></HTML>");
 		}
 		else {
@@ -61,7 +61,7 @@ public class MemberLogin extends HttpServlet {
 				}
 			} catch (Exception ignored) {
 			}
-			res.sendRedirect(req.getContextPath() + "/Front_end/members/loginSuccess.jsp");
+			res.sendRedirect(req.getContextPath() + "/loginSuccess.jsp");
 		}
 
 	}

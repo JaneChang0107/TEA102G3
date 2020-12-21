@@ -12,199 +12,121 @@
 <title>新增會員</title>
 
 <style>
-        b{
-         color: red;
-        }
-        c{
-	     color: orange;
-        }
-        .mybody{
-            background-color: #E3F8F6;
-        }
-        .myform{
-            border:1px solid gray;
-            background-color: rgb(243, 241, 241);
-            width: 500px;
-            height: auto;
-            margin: 20px auto;
-			text-align: center;
-        }
-        .topcol{
-            width:auto;
-            height: 80px;
-            background-color: #6CCFF3;
-            margin:0px 0px 20px 0px;
-            font-size: 24px;  
-        }
-		.gender{
-			text-align: left;
-			position: relative;
-			padding: 10px 10px;
-		}
-		.gender>label{
-			padding-right: 45px
-		}
-		#seller{
-		    position:relative;
-		    left:5px;
-		    text-align:left;
-		}
-		#signup{
-            background-color: #FFA000;
-            width: 100px;
-            border: 1px solid #707070;
-            margin-left: 20px;
-        }
-        
-		input.form-control{
-			width:300px;
-			margin-left:20px;
-		}
+table {
+	width: 400px;
+	background-color: white;
+	margin-top: 1px;
+	margin-bottom: 1px;
+}
 
-        ul{
-        text-align: left;
-        }
-        
-        .myclass{
-        width:120px;
-        padding-left:25px;
-        text-align:left;
-        }
-        
+table, th, td {
+	border: 0px solid #CCCCFF;
+}
+
+th, td {
+	padding: 1px;
+}
+
+b {
+	color: red;
+}
+
+a {
+	color: orange;
+}
 </style>
 </head>
-<body class="mybody">
-    <link rel="stylesheet" href="../../vendors/bootstrap/css/bootstrap.min.css">
+<body>
+	<h3>資料新增:</h3>
+	<b>*</b>會員必填欄位
+	<a>*</a>賣家必填欄位
 
-	<FORM class="myform" METHOD="post" enctype="multipart/form-data" 
-	ACTION="<%=request.getContextPath()%>/member/controller/MemberServlet"	name="form1"
-	enctype="multipart/form-data">        
-	<div class="topcol">
-            <br>
-            <u>會員註冊</u>
-            
-        </div>
-          	<c:if test="${not empty errorMsgs}">
-<!-- 		<font style="color: red">請修正以下錯誤:</font> -->
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
 		<ul>
 			<c:forEach var="message" items="${errorMsgs}">
 				<li style="color: red">${message}</li>
 			</c:forEach>
 		</ul>
 	</c:if>
-        <div class="form-group row">
-          <label for="inputEmail3" class="col-sm-2 col-form-label" >Email<b>*</b></label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="mail" name="m_email" value="<%=(memberVO == null) ? "a123@yahoo.com" : memberVO.getM_email()%>" />
-          </div>
-		</div>
-		
-		<div class="form-group row">
-			<label for="inputEmail3" class="col-sm-2 col-form-label" >密碼<b>*</b></label>
-			<div class="col-sm-10">
-			  <input type="password" class="form-control" id="password" name="m_password" value="<%=(memberVO == null) ? "" : memberVO.getM_password()%>" />
-			</div>
-		  </div>
 
-		  <div class="form-group row">
-			<label for="inputEmail3" class="col-sm-2 col-form-label" >姓名<b>*</b></label>
-			<div class="col-sm-10">
-			  <input type="text" class="form-control" id="name" name="m_name" value="<%=(memberVO == null) ? "MrJava" : memberVO.getM_name()%>" />
-			</div>
-		  </div>
+	<FORM METHOD="post" enctype="multipart/form-data" 
+	ACTION="<%=request.getContextPath()%>/member/controller/MemberServlet"	name="form1"
+	enctype="multipart/form-data">
+		<table>
+			<tr>
+				<td>電子郵件:<b>*</b></td>
+				<td><input type="text" name="m_email" size="40"
+					value="<%=(memberVO == null) ? "a123@yahoo.com" : memberVO.getM_email()%>" /></td>
 
-		  <div class="gender">
-			<label>性別<b>*</b></label>
-        <label>
-			<input type="radio" name="m_gender" value="男" <%= memberVO != null && memberVO.getM_gender().equals("男") ? "checked" : "" %>>男 
-	    </label>
-		<label>
-			<input type="radio" name="m_gender" value="女" <%= memberVO != null && memberVO.getM_gender().equals("女") ? "checked" : "" %> >女
-		</label>
- 		  </div>
-
-		  <div class="form-group row">
-			<label for="inputEmail3" class="col-sm-2 col-form-label" >電話<b>*</b></label>
-			<div class="col-sm-10">
-			  <input type="text" class="form-control"  name="m_phone" id="phone" value="<%=(memberVO == null) ? "0999999999" : memberVO.getM_phone()%>" />
-			</div>
-		  </div>
-
-		  <div class="form-group row">
-			<label for="inputEmail3" class="col-sm-2 col-form-label">地址<b>*</b></label>
-			<div class="col-sm-10">
-			  <input type="text" class="form-control" id="address" name="m_address" value="<%=(memberVO == null) ? "請填入地址" : memberVO.getM_address()%>" />
-			</div>
-		  </div>
-
-		  <div class="form-group row">
-			<label for="inputEmail3" class="col-sm-2 col-form-label">生日<b>*</b></label>
-			<div class="col-sm-10">
-			  <input type="text" class="form-control" id="f_date1" name="m_birth">
-			</div>
-		  </div>
-          <div id="seller">
-		  <input type="checkbox" class="btn btn-primary"value="成為賣家" onclick="location.href='addMem.jsp'" checked><label>我要成為賣家</label>
-          </div>		  
-		  
-		 <div class="form-group row">
-			<label for="inputEmail3" class="myclass" id="head">大頭照<c>*</c></label>
-			<div class="col-sm-10">
-			  <input type="file" name="m_headpic"  class="upld"
-					value="<%=(memberVO == null) ? "" : memberVO.getM_headpic()%>" />
-			</div>
-		  </div>
-		  
-		 <div class="form-group row">
-			<label for="inputEmail3" class="myclass">身分證字號<c>*</c></label>
-			<div class="col-sm-10">
-			  <input type="text" name="m_identity"
-					value="<%=(memberVO == null) ? "F123456789" : memberVO.getM_identity()%>" class="form-control" />
-			</div>
-		  </div>
-		  <div class="form-group row">
-			<label for="inputEmail3" class="myclass" id="head">身分證照片<c>*</c></label>
-			<div class="col-sm-10">
-			  <input type="file" name="m_id_pic"
-					value="<%=(memberVO == null) ? "請上傳身分證照" : memberVO.getM_id_pic()%>" />
-			</div>
-		  </div>
-		  
-		  <div class="form-group row">
-			<label for="inputEmail3" class="myclass">銀行戶名<c>*</c></label>
-			<div class="col-sm-10">
-			  <input type="text" name="m_accountName"
-					value="<%=(memberVO == null) ? "阿坤" : memberVO.getM_accountName()%>" class="form-control" />
-			</div>
-		  </div>
-		  
-		  <div class="form-group row">
-			<label for="inputEmail3" class="myclass">銀行帳戶<c>*</c></label>
-			<div class="col-sm-10">
-			  <input type="text" name="m_account"
-					value="<%=(memberVO == null) ? "12341234123412" : memberVO.getM_account()%>" class="form-control" />
-			</div>
-		  </div>
-		  
-		  <div class="form-group row">
-			<label for="inputEmail3" class="myclass">銀行代號<c>*</c></label>
-			<div class="col-sm-10">
-			  <input type="text" name="b_code"
-					value="<%=(memberVO == null) ? "700" : memberVO.getB_code()%>" class="form-control" />
-			</div>
-		  </div>
-		  
-		  <div class="form-group row">
-			<label for="inputEmail3" class="myclass" id="head">存摺照片<c>*</c></label>
-			<div class="col-sm-10">
-			  <input type="file" name="m_bank_pic"
-					value="<%=(memberVO == null) ? "請上傳存摺照" : memberVO.getM_bank_pic()%>" />
-			</div>
-		  </div>
-          <div style="display:none">
-          	<tr>
+			</tr>
+			<tr>
+				<td>密碼:<b>*</b></td>
+				<td><input type="password" name="m_password" size="40"
+					value="<%=(memberVO == null) ? "" : memberVO.getM_password()%>" /></td>
+			</tr>
+			<tr>
+				<td>姓名:<b>*</b></td>
+				<td><input type="text" name="m_name" size="40"
+					value="<%=(memberVO == null) ? "MrJava" : memberVO.getM_name()%>" /></td>
+			</tr>
+			<tr>
+				<td>性別:<b>*</b></td>
+				<td><input type="radio" name="m_gender" checked value="男">男
+					<input type="radio" name="m_gender" value="女">女</td>
+			</tr>
+			<tr>
+				<td>電話:<b>*</b></td>
+				<td><input type="text" name="m_phone" size="40"
+					value="<%=(memberVO == null) ? "0999999999" : memberVO.getM_phone()%>" /></td>
+			</tr>
+			<tr>
+				<td>地址:<b>*</b></td>
+				<td><input type="text" name="m_address" size="40"
+					value="<%=(memberVO == null) ? "請填入地址" : memberVO.getM_address()%>" /></td>
+			</tr>
+			<tr>
+				<td>生日:<b>*</b></td>
+				<td><input name="m_birth" id="f_date1" type="text"></td>
+			</tr>
+			<tr>
+				<td>大頭照:</td>
+				<td><input type="file" name="m_headpic"
+					value="<%=(memberVO == null) ? "" : memberVO.getM_headpic()%>" /></td>
+			</tr>
+			<tr>
+				<td>身分證字號:<a>*</a></td>
+				<td><input type="text" name="m_identity"
+					value="<%=(memberVO == null) ? "F123456789" : memberVO.getM_identity()%>"></td>
+			</tr>
+			<tr>
+				<td>身分證照片:<a>*</a></td>
+				<td><input type="file" name="m_id_pic"
+					value="<%=(memberVO == null) ? "請上傳身分證照" : memberVO.getM_id_pic()%>" /></td>
+			</tr>
+			<tr>
+				<td>銀行帳戶:<a>*</a></td>
+				<td><input type="text" name="m_account"
+					value="<%=(memberVO == null) ? "12341234123412" : memberVO.getM_account()%>"></td>
+			</tr>
+			<tr>
+				<td>銀行戶名:<a>*</a></td>
+				<td><input type="text" name="m_accountName"
+					value="<%=(memberVO == null) ? "阿坤" : memberVO.getM_accountName()%>"></td>
+			</tr>
+			<tr>
+				<td>銀行代號:<a>*</a></td>
+				<td><input type="text" name="b_code"
+					value="<%=(memberVO == null) ? "700" : memberVO.getB_code()%>"></td>
+			</tr>
+			<tr>
+				<td>存摺照片:<a>*</a></td>
+				<td><input type="file" name="m_bank_pic"
+					value="<%=(memberVO == null) ? "上傳存摺照" : memberVO.getM_id_pic()%>">
+			</tr>
+			<tr>
 				<td>賣場名稱:<a>*</a></td>
-				<td><input type="hi" name="m_storename"
+				<td><input type="text" name="m_storename"
 					value="<%=(memberVO == null) ? "商場名字" : memberVO.getM_storename()%>"></td>
 			</tr>
 			<tr>
@@ -227,11 +149,9 @@
 				<td><input type="text" name="m_offlineHi"
 					value="<%=(memberVO == null) ? "請輸入離線問候語" : memberVO.getM_offlineHi()%>"></td>
 			</tr>
-          </div>
-          
-          
-		  <input type="hidden" name="action" value="insert2">
-		  <button type="submit" class="btn btn-primary" value="註冊" id="signup">註冊</button>
+		</table>
+		<br> <input type="hidden" name="action" value="insert2">
+		<input type="submit" value="送出新增">
 	</FORM>
 </body>
 

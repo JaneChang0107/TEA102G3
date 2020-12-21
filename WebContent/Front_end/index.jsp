@@ -305,7 +305,7 @@
 
 <body>
 
-  <div class="article">
+  <div class="article" style="border:1px solid red;">
 
     
     <button type="button" class="btn btn-success btn-circle-xl" id="buybtn">我要買</button>
