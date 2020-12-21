@@ -10,5 +10,6 @@ public interface RentPictureDAO_interface {
 	public void delete(String rp_id);
 	public RentPictureVO findByPrimaryKey(String rp_id);
 	public List<RentPictureVO> getAll();
+	public List<RentPictureVO> getRidPic(String r_id);
 
 }

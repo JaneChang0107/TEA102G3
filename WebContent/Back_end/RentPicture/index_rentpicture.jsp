@@ -73,6 +73,21 @@
        <input type="hidden" name="action" value="getOne_For_Display">
        <input type="submit" value="送出">
     </FORM>
+    
+   
+  </li>
+  
+  <li>
+     <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/RentPictureServlet" >
+       <b>選擇出租品圖片編號:</b>
+       <select size="1" name="r_id">
+         <c:forEach var="rentpictureVO" items="${rentpictureSvc.all}" > 
+          <option value="${rentpictureVO.r_id}">${rentpictureVO.r_id}
+         </c:forEach>   
+       </select>
+       <input type="hidden" name="action" value="getRid_For_Display">
+       <input type="submit" value="送出">
+    </FORM>
   </li>
   
 <!--   <li> -->
