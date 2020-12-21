@@ -32,21 +32,34 @@
 		</tr>
 	<c:forEach var="pVO" items="${pVOs}">		
 		<tr>
-			<th>${pVO.p_id}</th>
-			<th>${pVO.p_name}</th>
-			<th>${pVO.p_price}</th>
-			<th>${pVO.p_detail}</th>
-			<th>${pVO.pt_id}</th>
-			<th>${pVO.p_count}</th>
-			<th>${pVO.p_addDateSec}</th>
-			<th>${pVO.p_reviseDateSec}</th>
-			<th>${pVO.p_status}</th>
-			<th>${pVO.m_id}</th>
-			<th>
+			<td>${pVO.p_id}</td>
+			<td>${pVO.p_name}</td>
+			<td>${pVO.p_price}</td>
+			<td>${pVO.p_detail}</td>
+			<td>${pVO.pt_id}</td>
+			<td>${pVO.p_count}</td>
+			<td>${pVO.p_addDateSec}</td>
+			<td>${pVO.p_reviseDateSec}</td>
+			<td>${pVO.p_status}</td>
+			<td>${pVO.m_id}</td>
+			<td>
 		<c:forEach var="ppVO" items="${ppService.findProductPicture(pVO.p_id)}">
 			<img src="<%= request.getContextPath() %>/ShowPicture?type=pp&id=${ppVO.pp_id}" class="showImg">
 		</c:forEach>
-			</th>
+			<td>
+				<form action="<%= request.getContextPath() %>/ProductServlet" method="post">
+					<input type="hidden" name="pid" value="${pVO.p_id}">
+					<input type="hidden" name="action" value="updateOne">
+					<input type="submit" value="­×§ï">
+				</form>
+			</td>
+			<td>
+				<form action="<%= request.getContextPath() %>/ProductServlet" method="post">
+					<input type="hidden" name="pid" value="${pVO.p_id}">
+					<input type="hidden" name="action" value="delete">
+					<input type="submit" value="§R°£">
+				</form>
+			</td>
 		</tr>
 	</c:forEach>
 	</table>

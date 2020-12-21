@@ -25,7 +25,7 @@ public class ProductPictureService {
 		dao.update(ppVO);
 	}
 	
-	public void deleteProductPocture(String pid) {
+	public void deleteProductPicture(String pid) {
 		dao.delete(pid);
 	}
 	

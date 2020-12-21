@@ -80,7 +80,7 @@ public class ProductPictureServlet extends HttpServlet {
 				String ppid = request.getParameter("ppid");
 
 				ProductPictureService ppService = new ProductPictureService();
-				ppService.deleteProductPocture(ppid);
+				ppService.deleteProductPicture(ppid);
 
 				response.sendRedirect(request.getContextPath() + "/Back_end/productPicture/allProductPicture.jsp");
 			}
