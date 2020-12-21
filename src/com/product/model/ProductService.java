@@ -4,6 +4,9 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 //import com.fasterxml.jackson.core.JsonProcessingException;
 //import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -26,15 +29,15 @@ public class ProductService {
 //		List<ProductVO> list = ps.findProduct("°Êª«", "PT00011");
 		List<ProductVO> list = ps.getAll();
 	
-//		ObjectMapper mapper = new ObjectMapper();
-//		try {
-//			String a = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
-//			
-//			System.out.println(a);
-//		} catch (JsonProcessingException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			String a = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
+			
+			System.out.println(a);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 //		System.out.println("pid" + pVO.getP_id());
 //		for(ProductVO pvo : list) {
