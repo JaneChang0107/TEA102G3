@@ -294,15 +294,23 @@ public class MemberServlet extends HttpServlet {
 		    // 1.接收請求參數，輸入格式錯誤處理
 			String m_email = req.getParameter("m_email");
 			String m_emailReg = "\\p{Alpha}\\w{2,15}[@][a-z0-9]{3,}[.]\\p{Lower}{2,}";
+			
+			MemberService memSvc =new MemberService();
+			MemberVO memberVO2=memSvc.getMemberPw(m_email);
+			String signedmail = "";
+			if(memberVO2 != null) {
+				signedmail = memberVO2.getM_email();
+			}
+			
 			if (m_email == null || m_email.trim().length() == 0) {
 				errorMsgs.add("郵箱請勿空白");
 			} 
-			else if (!m_email.trim().matches(m_emailReg)) {
+			if (!m_email.trim().matches(m_emailReg)) {
 				errorMsgs.add("郵箱不符合格式!請重新輸入");
-			}
-			
-			
-
+			} 
+			if(signedmail != null && m_email.equals(signedmail)) {
+				errorMsgs.add("郵箱已存在，請重新註冊");
+			}			
 			String m_password = req.getParameter("m_password").trim();
 			if (m_password == null || m_password.trim().length() == 0) {
 				errorMsgs.add("密碼請勿空白");

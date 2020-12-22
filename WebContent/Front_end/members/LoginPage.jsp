@@ -48,37 +48,56 @@
             position: relative;
             left:100px;
         }
-        
+        .content{
+            margin-top:100px;
+            margin-bottom:200px;
+        }
     </style>
+
 </head>
 <body class="mybody">
-    
     <link rel="stylesheet" href="../../vendors/bootstrap/css/bootstrap.min.css">
+   
+    <div class="header">
+    <jsp:include page="../header.jsp"></jsp:include>
+    </div>
     
+    <div class="content">
     <form class="myform" ACTION="<%=request.getContextPath()%>/member/controller/MemberLogin" method="post">
         <div class="topcol">
-            <br>
-            <u>遊戲堃會員登入</u>
+            <br><u>遊戲堃會員登入</u>
         </div>
+        
         <div class="form-group row">
           <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
           <div class="col-sm-10">
             <input type="email" class="form-control" id="inputEmail3" name="account">
           </div>
         </div>
+        
         <div class="form-group row">
           <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
           <div class="col-sm-10">
             <input type="password" class="form-control" id="inputPassword3" name="password">
           </div>
         </div>
+        
           <div class="col-sm-10">
             <input type="button" class="btn btn-primary" id="signup" value="註冊新帳號" onclick="location.href='addMem.jsp'"/>
             <button type="submit" class="btn btn-primary" id="signin" value="登入">登入</button>
             <br>
-            <div id="forget">忘記密碼?</div>    
           </div>
+          
+            <div id="forget">忘記密碼?</div>    
+
       </form>
-      
+    </div>
+    
+    <div class="footer">
+    <jsp:include page="../footer.jsp"></jsp:include>
+    </div>
 </body>
+
+
+
 </html>

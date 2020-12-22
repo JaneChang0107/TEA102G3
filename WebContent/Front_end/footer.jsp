@@ -30,11 +30,11 @@
     #id_footer {
       box-sizing: border-box;
       position: relative;
+      margin-top:200px;
       bottom: 0px;
       width: 100%;
       height: 200px;
       background: #6CCFF3;
-      
     }
 
     /*RWD開始--------------------------------------------*/
@@ -284,77 +284,11 @@
 
     }
   </style>
-
-
-  <div class="header">
-    <i class="fas fa-bars" id="ham"></i>
- 
-    <img src="<%=request.getContextPath()%>/images/white_LOGO字在外版(revised).png" class="logo" id="headerlogo">
-    <input type="text" id="searchBar">
-    <i class="fas fa-angle-down" id="arrowdown"></i>
-    <i class="fas fa-search" id="search"></i>
-    <i class="fas fa-user-circle" id="user"></i>
-    <i class="far fa-bell" id="bell"></i>
-    <i class="fas fa-shopping-cart" id="cart"></i>
-
-  </div>
-
 </head>
 
 
-
-<body>
-
-  <div class="article">
-
-    
-    <button type="button" class="btn btn-success btn-circle-xl" id="buybtn">我要買</button>
-    <button type="button" class="btn btn-danger btn-circle-xl" id="rentbtn">我要租</button>
-    <button type="button" class="btn btn-warning btn-circle-xl" id="sellbtn">我要賣</button>
-
-
-  </div>
-
-
-  <div class="swiper-container">
-    <H1>熱銷商品</H1>
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">Slide 1</div>
-      <div class="swiper-slide">Slide 2</div>
-      <div class="swiper-slide">Slide 3</div>
-      <div class="swiper-slide">Slide 4</div>
-      <div class="swiper-slide">Slide 5</div>
-      <div class="swiper-slide">Slide 6</div>
-      <div class="swiper-slide">Slide 7</div>
-      <div class="swiper-slide">Slide 8</div>
-    </div>
-    <div class="swiper-pagination"></div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-  </div>
-
-
-  <div class="swiper-container">
-    <H1>熱銷出租品</H1>
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">Slide 1</div>
-      <div class="swiper-slide">Slide 2</div>
-      <div class="swiper-slide">Slide 3</div>
-      <div class="swiper-slide">Slide 4</div>
-      <div class="swiper-slide">Slide 5</div>
-      <div class="swiper-slide">Slide 6</div>
-      <div class="swiper-slide">Slide 7</div>
-      <div class="swiper-slide">Slide 8</div>
-    </div>
-    <div class="swiper-pagination"></div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-  </div>
-
-
   <footer id="id_footer">
-
-    <img src="../images/white_LOGO字在外版(revised).png" class="logo" id="footerlogo">
+    <img src="<%=request.getContextPath()%>/images/white_LOGO字在外版(revised).png" class="logo" id="footerlogo">
     <div class="footerwords" id="footerwords">
       <span class="footerwords">關於我們</span><span class="footerwords">隱私權政策</span><br>
       <span class="footerwords">網站地圖</span><span class="footerwords">常用問答</span><br>
@@ -362,9 +296,6 @@
     </div>
 
     <div class="copyright">Copyright © 2020 YuXiKun Co. ,Ltd. All rights reserved</div>
-
-
-
   </footer>
 
 
