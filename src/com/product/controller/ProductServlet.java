@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import com.productPicture.model.ProductPictureService;
 import com.productPicture.model.ProductPictureVO;
 
 @WebServlet("/ProductServlet")
+@MultipartConfig
 public class ProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,40 +41,43 @@ public class ProductServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		
 		if("findByName".equals(action)) {
+			
 			List<String> errors = new LinkedList<String>();
 			request.setAttribute("errors", errors);
+			ProductService pService = new ProductService();
 			String type = request.getParameter("type");
 			String name = request.getParameter("name");
+			List<ProductVO> pVOs = null;
+			
 			// 有類別
 			if(name.trim().isEmpty()) {
-				errors.add("請輸入產品名稱");
-			}
-			ProductService pService = new ProductService();
-			// 搜尋不含種類
-			if("no".equals(type)) {
-				List<ProductVO> pVOs = pService.findProduct(name);
+				pVOs = pService.getAll();
 				request.setAttribute("pVOs", pVOs);
-				if(pVOs == null || pVOs.isEmpty()) {
-					errors.add("查無商品");
-				}
 			}
 			
-			if(!"no".equals(type)) {
-				List<ProductVO> pVOs = pService.findProduct(name, type);
-				request.setAttribute("pVOs", pVOs);
-				if(pVOs == null || pVOs.isEmpty()) {
-					errors.add("查無商品");
-				}
+			// 搜尋不含種類
+			if("no".equals(type) && !name.isEmpty()) {
+				pVOs = pService.findProduct(name);
 			}
+			
+			if(!"no".equals(type) && !name.isEmpty()) {
+				pVOs = pService.findProduct(name, type);
+			}
+			
+			if(pVOs == null || pVOs.isEmpty()) {
+				errors.add("查無商品");
+			}
+			
 			if(!errors.isEmpty()) {
 				RequestDispatcher fail = request.getRequestDispatcher("/Back_end/product/searchProduct.jsp");
 				fail.forward(request, response);
 				return;
 			}
+			
+			request.setAttribute("pVOs", pVOs);
 			RequestDispatcher send = request.getRequestDispatcher("/Back_end/product/showProduct.jsp");
 			send.forward(request, response);
 		}
-		
 		if("insert".equals(action)) {
 			
 			List<String> errors = new LinkedList<String>();
@@ -102,8 +107,8 @@ public class ProductServlet extends HttpServlet {
 			Integer pcount = null;
 			try {
 				pcount = Integer.parseInt(request.getParameter("pcount").trim());
-				if(pcount < 0) {
-					errors.add("產品價格輸入有誤");
+				if(pcount <= 0) {
+					errors.add("產品數量需大於0");
 				}
 			} catch(NumberFormatException e) {
 				pcount = 0;
@@ -112,11 +117,11 @@ public class ProductServlet extends HttpServlet {
 			Integer pstatus = null;
 			try {
 				pstatus = Integer.parseInt(request.getParameter("pstatus"));
-				if(pstatus != 0 || pstatus != 1) {
-					errors.add("請選擇商品狀態");
+				if(pstatus < 0 || pstatus > 1) {
+					errors.add("請選擇商品上下架");
 				}
 			} catch(NumberFormatException e) {
-				errors.add("請選擇商品狀態");
+				errors.add("請選擇商品上下架");
 				e.printStackTrace();
 			}
 			String pdetail = request.getParameter("pdetail");
@@ -144,7 +149,6 @@ public class ProductServlet extends HttpServlet {
 			pVO = pService.addProduct(pname, pprice, pdetail, ptid, pcount, addDate, pstatus, mid);
 			
 			// 新增 圖片
-
 			Collection<Part> parts = request.getParts();
 			for(Part p : parts) {
 				if("img".equals(p.getName()) && p.getSize() != 0) {
@@ -164,22 +168,25 @@ public class ProductServlet extends HttpServlet {
 		}
 		
 		if("delete".equals(action)) {
+			
 			String pid = request.getParameter("pid");
+			
 			ProductService pService = new ProductService();
 			ProductPictureService ppService = new ProductPictureService();
 			ppService.deleteProductPicture(pid);
 			pService.deleteProduct(pid);
-
+			
+			response.sendRedirect(request.getContextPath() + "/ProductServlet?action=showAll");
 		}
 		
 		if("updateOne".equals(action)) {
+			
 			String pid = request.getParameter("pid");
 			
 			ProductPictureService ppService = new ProductPictureService(); 
 			ProductService pService = new ProductService();
 			ProductVO pVO = pService.oneProduct(pid);
 			List<ProductPictureVO> ppVOs = ppService.findProductPicture(pid);
-			
 			request.setAttribute("ppVOs", ppVOs);
 			request.setAttribute("pVO", pVO);
 			RequestDispatcher rd = request.getRequestDispatcher("/Front_end/product/editProduct.jsp");
@@ -187,10 +194,9 @@ public class ProductServlet extends HttpServlet {
 		}
 		
 		if("update".equals(action)) {
-
+			
 			List<String> errors = new LinkedList<String>();
 			String pid = request.getParameter("pid");
-			
 			request.setAttribute("errors", errors);
 			// 驗證格式
 			String pname = request.getParameter("pname");
@@ -225,6 +231,7 @@ public class ProductServlet extends HttpServlet {
 				pcount = 0;
 				errors.add("數量輸入錯誤");
 			}
+			
 			Integer pstatus = null;
 			try {
 				pstatus = Integer.parseInt(request.getParameter("pstatus"));
@@ -235,10 +242,13 @@ public class ProductServlet extends HttpServlet {
 				errors.add("請選擇商品狀態");
 				e.printStackTrace();
 			}
+			
 			String pdetail = request.getParameter("pdetail");
+			
 			if(pdetail == null || pdetail.isEmpty()) {
 				errors.add("請輸入商品介紹");
 			}
+			
 			Date d = new Date();
 			Timestamp reviseDate = new Timestamp(d.getTime());
 			
@@ -251,7 +261,7 @@ public class ProductServlet extends HttpServlet {
 			// 有問題退回
 			if(!errors.isEmpty()) {
 				request.setAttribute("pVO", pVO);
-				RequestDispatcher fail = request.getRequestDispatcher("/Front_end/product/addProduct.jsp");
+				RequestDispatcher fail = request.getRequestDispatcher("/Front_end/product/editProduct.jsp");
 				fail.forward(request, response);
 				return;
 			}
@@ -300,15 +310,12 @@ public class ProductServlet extends HttpServlet {
 		}
 		
 		if("showAll".equals(action)) {
-			
 			ProductService pService = new ProductService();
-			
 			List<ProductVO> pVOs = pService.getAll();
 			request.setAttribute("pVOs", pVOs);
-			RequestDispatcher ok = request.getRequestDispatcher("/Back_end/product/showProduct.jsp");
-			ok.forward(request, response);
+			RequestDispatcher rd = request.getRequestDispatcher("/Back_end/product/showProduct.jsp");
+			rd.forward(request, response);
 		}
-		
 		
 	}
 }
