@@ -7,6 +7,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style>
+	#cke_editor{
+		width: 50%
+	}
+	div#dbImg > img{
+		width:200px;
+	}
+	div#showImg > img.viewImg{
+		width:200px;
+	}
+</style>
 </head>
 <body>
 	<h1>修改</h1>
@@ -44,27 +56,38 @@
             <%! Integer i = 0; %>
             <% i = 0; %>
         <c:forEach var="ppVO" items="${ppVOs}">
-        	<div>
+        	<div id="dbImg">
 	        	<img src="<%= request.getContextPath() %>/ShowPicture?type=pp&id=${ppVO.pp_id}" class="showImg">
 	        	<input type="hidden" name="<%= "ppid" + ++i %>" value="${ppVO.pp_id}">
-	            <input type="file" name="<%= "img" + i %>" id="uploadImg" accept="image/*">
+	            <input type="file" name="<%= "img" + i %>" class="uploadImgBtn" accept="image/*">
             </div>
         </c:forEach>
         	<input type="file" name="img" id="uploadImg" accept="image/*" multiple>
+        	<div id="showImg">
+            </div>
         </div>
         <div>
-            <label>商品狀態</label>            
+            <label>商品上下架</label>            
             <input type="radio" id="0" name="pstatus" value="0" checked><label for="0">下架</label>
             <input type="radio" id="1" name="pstatus" value="1"><label for="1">上架</label>
         </div>
         <div>
             <label>商品介紹</label>            
-            <textarea name="pdetail" cols="30" rows="10">${pVO == null ? "" : pVO.getP_count()}</textarea>
+            <textarea name="pdetail" id="editor" cols="30" rows="10">${pVO == null ? "" : pVO.getP_detail()}</textarea>
         </div>
         
         <input type="hidden" name="pid" value="${pVO.p_id}">
         <input type="hidden" name="action" value="update">
         <input type="submit" value="送出">
     </form>
+    
+    
+    <script src="<%= request.getContextPath() %>/vendors/jquery/jquery-3.5.1.min.js"></script>
+    <script src="<%= request.getContextPath() %>/vendors/ckeditor/ckeditor.js"></script>
+    <script src="<%= request.getContextPath() %>/js/previewImg.js"></script>
+	<script>
+		CKEDITOR.replace('editor');
+	
+	</script>
 </body>
 </html>
