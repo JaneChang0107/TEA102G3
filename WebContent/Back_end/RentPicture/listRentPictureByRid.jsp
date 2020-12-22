@@ -7,7 +7,8 @@
 <%
 	RentPictureVO rpv = new RentPictureVO();
 	RentPictureService rpSvc = new RentPictureService();
-	List<RentPictureVO> list = rpSvc.getAll();
+	String r_id = request.getParameter("r_id");
+	List<RentPictureVO> list = rpSvc.getRentPictureByRid(r_id);
 	pageContext.setAttribute("list", list);
 %>
 
@@ -98,25 +99,6 @@ th, td {
 					src="data:image/jpg;base64,${RentPictureVO.rp_picture2}"
 					width="200" height="150" /></td>
 				
-
-				<td>
-					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath() %>/RentPictureServlet"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="修改"> <input type="hidden"
-							name="rp_id" value="${RentPictureVO.rp_id}"> <input
-							type="hidden" name="action" value="getOne_For_Update">
-					</FORM>
-				</td>
-				<td>
-					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath() %>/RentPictureServlet"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="刪除"> <input type="hidden"
-							name="rp_id" value="${RentPictureVO.rp_id}"> <input
-							type="hidden" name="action" value="delete">
-					</FORM>
-				</td>
 			</tr>
 		</c:forEach>
 	</table>
