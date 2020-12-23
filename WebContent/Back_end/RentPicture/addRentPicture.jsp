@@ -49,6 +49,7 @@ table, th, td {
 th, td {
 	padding: 1px;
 }
+
 </style>
 
 </head>
@@ -71,6 +72,7 @@ th, td {
 	</table>
 
 	<h3>資料新增:</h3>
+	  <h4>圖片預覽:</h4>
 
 	<!-- 	 錯誤表列 -->
 	<c:if test="${not empty errorMsgs}">
@@ -86,12 +88,11 @@ th, td {
 		ACTION="<%=request.getContextPath()%>/RentPictureServlet" name="form1"
 		enctype="multipart/form-data">
 		<table>
-
 			<tr>
-				<td>圖片預覽:</td>
-				<td><img id="blah" height="200" width="200" /></td>
+				<div id="blah"></div>
 			</tr>
-
+		</table>
+		<table>
 			<tr>
 				<td>出租品圖片:</td>
 				<td><input type="file" id="imgInp" name="rp_picture" multiple /></td>
@@ -138,20 +139,30 @@ th, td {
 }
 </style>
 <script>
-	$(function() {
-		$("#imgInp").change(function() {
-			if (this.files && this.files[0]) {
-				var reader = new FileReader();
 
-				reader.onload = function(e) {
-					$('#blah').attr('src', e.target.result);
-				}
-
-				reader.readAsDataURL(this.files[0]);
-			}
-		});
+	$("#imgInp").change(function() {
+		$("#blah").html(""); // 清除預覽
+		readURL(this);
 	});
+
+	function readURL(input) {
+		if (input.files && input.files.length >= 0) {
+			for (var i = 0; i < input.files.length; i++) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					var img = $("<img width='150' height='150'>").attr('src',
+							e.target.result);
+					$("#blah").append(img);
+				}
+				reader.readAsDataURL(input.files[i]);
+			}
+		} else {
+			var noPictures = $("<p>目前沒有圖片</p>");
+			$("#blah").append(noPictures);
+		}
+	}
 </script>
+
 
 
 </html>
