@@ -12,7 +12,7 @@
 	#cke_editor{
 		width: 50%
 	}
-	div#dbImg > img{
+	div.dbImg > img{
 		width:200px;
 	}
 	div#showImg > img.viewImg{
@@ -56,10 +56,10 @@
             <%! Integer i = 0; %>
             <% i = 0; %>
         <c:forEach var="ppVO" items="${ppVOs}">
-        	<div id="dbImg">
+        	<div class="dbImg">
 	        	<img src="<%= request.getContextPath() %>/ShowPicture?type=pp&id=${ppVO.pp_id}" class="showImg">
 	        	<input type="hidden" name="<%= "ppid" + ++i %>" value="${ppVO.pp_id}">
-	            <input type="file" name="<%= "img" + i %>" class="uploadImgBtn" accept="image/*">
+	            <input type="file" name="<%= "img" + i %>" class="uploadImg" accept="image/*">
             </div>
         </c:forEach>
         	<input type="file" name="img" id="uploadImg" accept="image/*" multiple>
