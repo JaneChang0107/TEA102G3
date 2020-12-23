@@ -27,26 +27,46 @@ public class Productajax extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		PrintWriter writer = response.getWriter();
-		String action = request.getParameter("action");
-		
-		if("showSell".equals(action)) {
-			String mid = request.getParameter("mid");
+		String type = request.getParameter("type");
+		String name = request.getParameter("pname");
+		System.out.println(type);
+		System.out.println(name);
+		if("".equals(type)) {
 			ProductService pService = new ProductService();
+			List<ProductVO> pVOs = null;
 			
-			List<ProductVO> pVOs = pService.findBySeller(mid);
+			if("".equals(name)) {
+				pVOs = pService.getAll();
+			}
+			
+			if(!"".equals(name)) {
+				pVOs = pService.findProduct(name);
+			}
 			
 			ObjectMapper mapper = new ObjectMapper();
-			mapper.writerWithDefaultPrettyPrinter().writeValueAsString(pVOs);
+			String productJSON = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(pVOs);
 			
-			writer.println();
-			request.setAttribute("pVOs", pVOs);
-			
+			System.out.println(productJSON);
+			writer.println(productJSON);
 			
 		}
 		
+		if(!"".equals(type)) {
+			ProductService pService = new ProductService();
+			
+			List<ProductVO> pVOs = pService.findProduct(name, type);
+			
+			ObjectMapper mapper = new ObjectMapper();
+			String productJSON = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(pVOs);
+			
+			System.out.println(productJSON);
+			writer.println(productJSON);
+			
+		}
 	}
 
 }

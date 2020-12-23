@@ -40,6 +40,10 @@ public class RentPictureService {
 	public RentPictureVO getOneRentPicture(String rp_id) {
 		return dao.findByPrimaryKey(rp_id);
 	}
+	
+	public List<RentPictureVO> getRentPictureByRid(String r_id) {
+		return dao.getRidPic(r_id);
+	}
 
 	public List<RentPictureVO> getAll() {
 		return dao.getAll();

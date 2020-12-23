@@ -70,13 +70,13 @@ public class ProductVO implements java.io.Serializable {
 		return p_reviseDate;
 	}
 	public String getP_reviseDateSec() {
-		if(p_reviseDate == null) {
-			return "";
+		if(p_reviseDate != null) {
+			Date d = new Date(p_reviseDate.getTime());
+			Format f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String date = f.format(d);
+			return date;
 		}
-		Date d = new Date(p_reviseDate.getTime());
-		Format f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String date = f.format(d);
-		return date;
+		return "";
 	}
 	public void setP_reviseDate(java.sql.Timestamp p_reviseDate) {
 		this.p_reviseDate = p_reviseDate;

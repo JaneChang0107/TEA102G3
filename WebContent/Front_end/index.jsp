@@ -30,7 +30,7 @@
     #id_footer {
       box-sizing: border-box;
       position: relative;
-      bottom: -300px;
+      bottom: 0px;
       width: 100%;
       height: 200px;
       background: #6CCFF3;
@@ -199,7 +199,7 @@
       background: #6CCFF3;
     }
 
-    input {
+    #searchBar {
       position: relative;
       height: 40px;
       width: 600px;
@@ -231,7 +231,7 @@
       font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
       font-size: 10px;
       color: #000;
-      margin: 20px auto;
+      margin: 40px auto;
       padding: 0;
     }
 
@@ -289,7 +289,7 @@
   <div class="header">
     <i class="fas fa-bars" id="ham"></i>
  
-    <img src="../images/white_LOGO字在外版(revised).png" class="logo" id="headerlogo">
+    <img src="<%=request.getContextPath()%>/images/white_LOGO字在外版(revised).png" class="logo" id="headerlogo">
     <input type="text" id="searchBar">
     <i class="fas fa-angle-down" id="arrowdown"></i>
     <i class="fas fa-search" id="search"></i>

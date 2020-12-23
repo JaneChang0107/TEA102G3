@@ -10,7 +10,12 @@
 <meta charset="UTF-8">
 <title>addProduct</title>
 <style>
-	
+	div#cke_editor{
+		width: 50%;
+	}
+	div#showImg > img.viewImg{
+		width:200px;
+	}
 </style>
 </head>
 <body>
@@ -48,20 +53,32 @@
         <div>
             <label>商品圖片</label>            
             <input type="file" name="img" id="uploadImg" accept="image/*" multiple>
+            <div id="showImg">
+            </div>
         </div>
         <div>
-            <label>商品狀態</label>            
+            <label>商品上下架</label>            
             <input type="radio" id="0" name="pstatus" value="0" checked><label for="0">下架</label>
             <input type="radio" id="1" name="pstatus" value="1"><label for="1">上架</label>
         </div>
         <div>
             <label>商品介紹</label>            
-            <textarea name="pdetail" cols="30" rows="10"><%= pVO == null ? "" : pVO.getP_detail() %></textarea>
+            <textarea name="pdetail" id="editor" cols="30" rows="10"><%= pVO == null ? "" : pVO.getP_detail() %></textarea>
         </div>
-        
-        <input type="hidden" name="mid" value="M00001">
-        <input type="hidden" name="action" value="insert">
-        <input type="submit" value="送出">
+        <div>
+	        <input type="hidden" name="mid" value="M00001">
+	        <input type="hidden" name="action" value="insert">
+	        <input type="submit" value="送出">
+        </div>
     </form>
+    
+    
+    <script src="<%= request.getContextPath() %>/vendors/jquery/jquery-3.5.1.min.js"></script>
+    <script src="<%= request.getContextPath() %>/vendors/ckeditor/ckeditor.js"></script>
+	<script src="<%= request.getContextPath() %>/js/previewImg.js"></script>
+	<script>
+		CKEDITOR.replace('editor');
+		
+	</script>
 </body>
 </html>

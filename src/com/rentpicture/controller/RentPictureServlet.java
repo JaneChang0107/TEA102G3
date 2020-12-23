@@ -2,6 +2,7 @@ package com.rentpicture.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -136,17 +137,17 @@ public class RentPictureServlet extends HttpServlet {
 // ----------大吳神code----------------------------------------------------------------------//				
 				// obtains the upload file part in this multipart request
 				RentPictureService rentpictureSvc = new RentPictureService();
-				
+
 				Part rp_picture = req.getPart("rp_picture");
 				InputStream in = rp_picture.getInputStream();
 				byte[] data = null;
-	if(in.available()!=0)	{		
-				data = new byte[in.available()];
-				in.read(data);
-				in.close();
-	} else
-		data = rentpictureSvc.getOneRentPicture(rp_id).getRp_picture();
-	
+				if (in.available() != 0) {
+					data = new byte[in.available()];
+					in.read(data);
+					in.close();
+				} else
+					data = rentpictureSvc.getOneRentPicture(rp_id).getRp_picture();
+
 //--------------------------------------------------------------------------------//
 
 				String r_id = req.getParameter("r_id");
@@ -166,7 +167,7 @@ public class RentPictureServlet extends HttpServlet {
 				}
 
 				/*************************** 2.開始修改資料 *****************************************/
-				
+
 				rentpictureVO = rentpictureSvc.updateRentPicture(data, r_id, rp_id);
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("rentpictureVO", rentpictureVO); // 資料庫update成功後,正確的的empVO物件,存入req
@@ -193,36 +194,45 @@ public class RentPictureServlet extends HttpServlet {
 			try {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 				String rp_id = req.getParameter("rp_id");
-
-//----------------------------------------------------------------------------------//
-				// obtains the upload file part in this multipart request
-				Part rp_picture = req.getPart("rp_picture");
-				if (rp_picture == null || rp_picture.getSize() == 0) {
-					errorMsgs.add("請上傳圖片");
-				}
-				// obtains input stream of the upload file
-				InputStream inputStream = rp_picture.getInputStream();
-				byte[] data = new byte[inputStream.available()];
-				inputStream.read(data);
-
-//				ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-//				int nRead;
-//				
-//				while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
-//					buffer.write(data, 0, nRead);
-//				}
-//
-//				buffer.flush();
-//				byte[] byteArray = buffer.toByteArray();
-//--------------------------------------------------------------------------------//
 				String r_id = req.getParameter("r_id").trim();
 				if (r_id == null || r_id.trim().length() == 0) {
 					errorMsgs.add("出租品ID請勿空白");
 				}
+//----------------------------------------------------------------------------------//
+
+				Collection<Part> rp_picture = req.getParts();
+				if (req.getPart("rp_picture") == null||req.getPart("rp_picture").getSize()==0) {
+					errorMsgs.add("請上傳圖片");
+				}
+				RentPictureService rentpictureSvc = new RentPictureService();
+				for (Part part : rp_picture) {
+					if ("rp_picture".equals(part.getName()) && part.getSize() != 0) {
+						InputStream inputStream = part.getInputStream();
+						byte[] data = new byte[inputStream.available()];
+						inputStream.read(data);
+						rentpictureSvc.addRentPicture(rp_id, data, r_id);
+						inputStream.close();
+					}
+
+				}
+
+				// obtains the upload file part in this multipart request
+//				Part rp_picture = req.getPart("rp_picture");
+//				if (rp_picture == null || rp_picture.getSize() == 0) {
+//					errorMsgs.add("請上傳圖片");
+//				}
+//				// obtains input stream of the upload file
+//				InputStream inputStream = rp_picture.getInputStream();
+//				byte[] data = new byte[inputStream.available()];
+//				inputStream.read(data);
+
+
+//--------------------------------------------------------------------------------//
+				
 
 				RentPictureVO rentpictureVO = new RentPictureVO();
 				rentpictureVO.setR_id(rp_id);
-				rentpictureVO.setRp_picture(data);
+//				rentpictureVO.setRp_picture(data);
 				rentpictureVO.setR_id(r_id);
 
 				// Send the use back to the form, if there were errors
@@ -235,14 +245,13 @@ public class RentPictureServlet extends HttpServlet {
 				}
 
 				/*************************** 2.開始新增資料 ***************************************/
-				RentPictureService rentpictureSvc = new RentPictureService();
-				rentpictureVO = rentpictureSvc.addRentPicture(rp_id, data, r_id);
+				
+				
 
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				String url = "/Back_end/RentPicture/listAllRentPicture.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
-				inputStream.close();
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
@@ -251,6 +260,38 @@ public class RentPictureServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		//=============================================================
+		if ("getRid_For_Display".equals(action)) { // 來自listAllEmp.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 ****************************************/
+				String r_id = req.getParameter("r_id");
+
+				/*************************** 2.開始查詢資料 ****************************************/
+				RentPictureService rentpictureSvc = new RentPictureService();
+				List rentpictureVO = rentpictureSvc.getRentPictureByRid(r_id);
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+				req.setAttribute("rentpictureVO", rentpictureVO); // 資料庫取出的empVO物件,存入req
+				String url = "/Back_end/RentPicture/listRentPictureByRid.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/Back_end/RentPicture/update_rentpicture_input.jsp");
+				failureView.forward(req, res);
+			}
+		}
+
+		//================================================================
 
 		if ("delete".equals(action)) { // 來自listAllEmp.jsp
 

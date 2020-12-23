@@ -586,7 +586,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		for(MemberVO aMember : list) {
 //			System.out.println(aMember.getM_id()+",");
 			
-//			System.out.println(aMember.getM_email()+",");
+			System.out.println(aMember.getM_email()+",");
 //			System.out.println(aMember.getM_password()+",");
 //			System.out.println(aMember.getM_name()+",");
 //			System.out.println(aMember.getM_gender()+",");
@@ -609,11 +609,8 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 //			System.out.println(aMember.getM_offlineHi()+",");
 //			System.out.println(aMember.getM_coin()+",");
 			System.out.println("----------------------");
-			if(aMember.getM_email().contains("a123@yahoo.com")) {
-				System.out.println(true);
-			}
+			
 		}
-		
 //		System.out.println("=====查詢全部完畢======");
 //		
 //		Set<MemberVO> set = dao.getMemberByStatus(2);

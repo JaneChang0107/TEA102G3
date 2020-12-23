@@ -21,6 +21,7 @@ public class RentPictureJDBCDAO implements RentPictureDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO rentpicture (rp_id,rp_picture,r_id) VALUES ( 'RP' || lpad(RENTPICTURE_SEQ.NEXTVAL, 5, '0'),?,?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM rentpicture order by rp_id";
 	private static final String GET_ONE_STMT = "SELECT * FROM rentpicture where rp_id = ?";
+	private static final String GET_RID_STMT = "SELECT * FROM rentpicture where r_id = ?";
 	private static final String DELETE = "DELETE FROM rentpicture where rp_id = ?";
 	private static final String UPDATE = "UPDATE rentpicture set rp_picture=?,r_id=? where rp_id = ?";
 
@@ -266,6 +267,68 @@ public class RentPictureJDBCDAO implements RentPictureDAO_interface {
 		}
 		return list;
 	}
+	
+	@Override
+	public List<RentPictureVO> getRidPic(String r_id) {
+		
+		List<RentPictureVO> list = new ArrayList<RentPictureVO>();
+		RentPictureVO rentPictureVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_RID_STMT);
+			pstmt.setString(1, r_id);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
+				rentPictureVO = new RentPictureVO();
+				rentPictureVO.setRp_id(rs.getString("rp_id"));
+				rentPictureVO.setRp_picture(rs.getBytes("rp_picture"));
+				rentPictureVO.setR_id(rs.getString("r_id"));
+
+				list.add(rentPictureVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
 
 	// 插入圖片
 	public static byte[] getPic(String path) {
@@ -321,7 +384,20 @@ public class RentPictureJDBCDAO implements RentPictureDAO_interface {
 //delete
 //		dao.delete("RP00003");
 //		System.out.println("delete success");
+		
+		//getAll;
+		List<RentPictureVO> list = dao.getRidPic("R00002");
+		for (RentPictureVO rpv : list) {
+			System.out.print(rpv.getRp_id().toString() + ",");
+			System.out.print(rpv.getRp_picture() + ",");
+			System.out.print(rpv.getR_id() );
+			
+			System.out.println();  
+		}
 //		
 	}
 
+	
+
+	
 }
