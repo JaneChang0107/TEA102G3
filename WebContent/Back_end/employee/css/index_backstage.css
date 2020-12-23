@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: #E3F8F6;
+}
+img{
+    max-width: 100%;
+    vertical-align : middle;
+}
+.container-fluid{
+    border: 1px solid red;
+}
+.header{
+    background-color: #6CCFF3;
+}
+.row{
+    height: 50%;
+    border: 1px solid green;
+}
+
+.col{
+    border: 1px solid black;
+    font-size: 50px;
+}
+.img-div{
+    text-align: center;
+}
+.btn-danger{
+    margin-left: 40px;
+    width: 110px;
+    height: 75px;
+    font-size: 25px;
+}
+.btn-div{
+    text-align: center;
+}
+.login_col{
+    background-color: white;
+    width: 50%;
+    margin: auto;
+}
