@@ -7,7 +7,7 @@
   <title>YuXiKun</title>
 
   <!-- Bootstrap 的 CSS -->
-  <link rel="stylesheet" href="../vendors/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/vendors/bootstrap/css/bootstrap.min.css">
   <!-- Link Swiper's CSS -->
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
   <!-- Font awesome -->
@@ -302,30 +302,10 @@
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 
-
-  <script>
-    var swiper = new Swiper('.swiper-container', {
-      slidesPerView: 4,
-      spaceBetween: 30,
-      slidesPerGroup: 4,
-      loop: true,
-      loopFillGroupWithBlank: true,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-    });
-  </script>
-
-
   <!-- body 結束標籤之前，載入Bootstrap 的 JS 及其相依性安裝(jQuery、Popper) -->
-  <script src="../vendors/jquery/jquery-3.5.1.min.js"></script>
-  <script src="../vendors/popper/popper.min.js"></script>
-  <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
+  <script src="<%=request.getContextPath()%>/vendors/jquery/jquery-3.5.1.min.js"></script>
+  <script src="<%=request.getContextPath()%>/vendors/popper/popper.min.js"></script>
+  <script src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>
