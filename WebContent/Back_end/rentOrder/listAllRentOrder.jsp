@@ -6,7 +6,7 @@
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
-RentOrderService rentOrderSvc = new RentOrderService();
+	RentOrderService rentOrderSvc = new RentOrderService();
     List<RentOrderVO> list = rentOrderSvc.getAll();
     pageContext.setAttribute("list",list);
 %>
@@ -14,7 +14,7 @@ RentOrderService rentOrderSvc = new RentOrderService();
 
 <html>
 <head>
-<title>所有出租單資料 - listAllRentOrder.jsp</title>
+<title>所有員工資料 - listAllRentOrder.jsp</title>
 
 <style>
   table#table-1 {
@@ -51,12 +51,11 @@ RentOrderService rentOrderSvc = new RentOrderService();
 
 </head>
 <body bgcolor='white'>
-
 <h4>此頁練習採用 EL 的寫法取值:</h4>
 <table id="table-1">
 	<tr><td>
 		 <h3>所有員工資料 - listAllRentOrder.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h4><a href="<%=request.getContextPath()%>/Back_end/rentOrder/select_page.jsp"><img src="<%=request.getContextPath()%>/Back_end/employee/images/1.png" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -72,7 +71,7 @@ RentOrderService rentOrderSvc = new RentOrderService();
 
 <table>
 	<tr>
-		<th>出租訂單編號</th>
+		<th>出租單編號</th>
 		<th>訂單日期</th>
 		<th>訂單狀態</th>
 		<th>門市id</th>
@@ -81,30 +80,36 @@ RentOrderService rentOrderSvc = new RentOrderService();
 		<th>押金</th>
 		<th>總金額</th>
 		<th>合約簽名</th>
-		<th>坤幣+-</th>
+		<th>坤幣</th>
 		<th>會員</th>
+		<th>修改</th>
+		<th>刪除</th>
 	</tr>
 	<%@ include file="page1.file" %> 
 	<c:forEach var="rentOrderVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
 		<tr>
-			<td>${empVO.empno}</td>
-			<td>${empVO.ename}</td>
-			<td>${empVO.job}</td>
-			<td><fmt:formatDate value="${hiredate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-			<td>${empVO.sal}</td>
-			<td>${empVO.comm}</td> 
-			<td>${empVO.deptno}</td>
+			<td>${rentOrderVO.ro_id}</td>
+			<td>${rentOrderVO.ro_date}</td>
+			<td>${rentOrderVO.ro_status}</td>
+			<td>${rentOrderVO.st_id}</td>
+			<td>${rentOrderVO.ro_outdate}</td>
+			<td>${rentOrderVO.ro_backdate}</td>
+			<td>${rentOrderVO.ro_deposit}</td>
+			<td>${rentOrderVO.ro_total}</td> 
+			<td><img src="${rentOrderVO.ro_sign2}" width="100" height="100"></td>
+			<td>${rentOrderVO.ro_pm}</td>
+			<td>${rentOrderVO.m_id}</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/rentOrder/RentOrderServlet" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
-			     <input type="hidden" name="empno"  value="${empVO.empno}">
+			     <input type="hidden" name="ro_id"  value="${rentOrderVO.ro_id}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="/rentOrder/RentOrderServlet" style="margin-bottom: 0px;">
 			     <input type="submit" value="刪除">
-			     <input type="hidden" name="empno"  value="${empVO.empno}">
+			     <input type="hidden" name="ro_id"  value="${rentOrderVO.ro_id}">
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
 		</tr>

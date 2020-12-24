@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>IBM Emp: Home</title>
+<title>IBM RentDetail: Home</title>
 
 <style>
   table#table-1 {
@@ -30,10 +30,10 @@
 <body bgcolor='white'>
 
 <table id="table-1">
-   <tr><td><h3>IBM Emp: Home</h3><h4>( MVC )</h4></td></tr>
+   <tr><td><h3>IBM RentDetail: Home</h3><h4>( MVC )</h4></td></tr>
 </table>
 
-<p>This is the Home page for IBM Emp: Home</p>
+<p>This is the Home page for IBM RentDetail: Home</p>
 
 <h3>資料查詢:</h3>
 	
@@ -48,26 +48,26 @@
 </c:if>
 
 <ul>
-  <li><a href='listAllEmp.jsp'>List</a> all Emps.  <br><br></li>
+  <li><a href='<%=request.getContextPath()%>/Back_end/rentOrder/listAllRentOrder.jsp'>List</a> all RentDetails.  <br><br></li>
   
   
   <li>
-    <FORM METHOD="post" ACTION="emp.do" >
+    <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/rentOrder/RentOrderServlet" >
         <b>輸入員工編號 (如7001):</b>
-        <input type="text" name="empno">
+        <input type="text" name="ro_id">
         <input type="hidden" name="action" value="getOne_For_Display">
         <input type="submit" value="送出">
     </FORM>
   </li>
 
-<%--   <jsp:useBean id="empSvc" scope="page" class="com.emp.model.EmpService" /> --%>
+  <jsp:useBean id="rentOrderSvc" scope="page" class="com.rentOrder.model.RentOrderService" />
    
   <li>
-     <FORM METHOD="post" ACTION="emp.do" >
+     <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/rentOrder/RentOrderServlet" >
        <b>選擇員工編號:</b>
-       <select size="1" name="empno">
-         <c:forEach var="empVO" items="${empSvc.all}" > 
-          <option value="${empVO.empno}">${empVO.empno}
+       <select size="1" name="ro_id">
+         <c:forEach var="rentOrderVO" items="${rentOrderSvc.all}" > 
+          <option value="${rentOrderVO.ro_id}">${rentOrderVO.ro_id}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">
@@ -76,11 +76,11 @@
   </li>
   
   <li>
-     <FORM METHOD="post" ACTION="emp.do" >
+     <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/rentOrder/RentOrderServlet" >
        <b>選擇員工姓名:</b>
-       <select size="1" name="empno">
-         <c:forEach var="empVO" items="${empSvc.all}" > 
-          <option value="${empVO.empno}">${empVO.ename}
+       <select size="1" name="ro_id">
+         <c:forEach var="rentOrderVO" items="${rentOrderSvc.all}" > 
+          <option value="${rentOrderVO.ro_id}">${rentOrderVO.ro_id}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">
@@ -93,7 +93,7 @@
 <h3>員工管理</h3>
 
 <ul>
-  <li><a href='addEmp.jsp'>Add</a> a new Emp.</li>
+  <li><a href='<%=request.getContextPath()%>/Back_end/rentOrder/addRentOrder.jsp'>Add</a> a new RentOrde.</li>
 </ul>
 
 </body>

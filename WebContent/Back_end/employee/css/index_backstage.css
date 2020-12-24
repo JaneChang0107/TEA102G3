@@ -7,25 +7,26 @@ body{
 }
 img{
     max-width: 100%;
-    vertical-align : middle;
 }
 .container-fluid{
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    margin: 5% auto;
 }
 .header{
     background-color: #6CCFF3;
 }
 .row{
     height: 50%;
-    border: 1px solid green;
+    /* border: 1px solid green; */
 }
 
 .col{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     font-size: 50px;
 }
 .img-div{
     text-align: center;
+    margin: auto;
 }
 .btn-danger{
     margin-left: 40px;
@@ -38,6 +39,21 @@ img{
 }
 .login_col{
     background-color: white;
-    width: 50%;
     margin: auto;
+}
+.login-container{
+    width: 60%;
+    margin-top: 10%;
+}
+.account-row{
+    /* display: inline-block; */
+    margin: 10% 10%;
+}
+.forget-row{
+    text-align: right;
+}
+.forget-btn{
+    margin: 5% auto;
+    width: 10%;
+    height: 30%;
 }

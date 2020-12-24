@@ -87,8 +87,8 @@
 	</tr>
 	<tr>
 		<td>©Ê§O:</td>
-		<td><input type="radio" name="e_gender" size="45" value="MEN" checked />MEN
-			<input type="radio" name="e_gender" size="45" value="WOMEN" />WOMEN
+		<td><input type="radio" name="e_gender" size="45" value="MEN" <%=employeeVO!=null && "MEN".equals(employeeVO.getE_gender()) ? "checked" : ""%> />MEN
+			<input type="radio" name="e_gender" size="45" value="WOMEN" <%=employeeVO!=null && "WOMEN".equals(employeeVO.getE_gender()) ? "checked" : ""%> />WOMEN
 		</td>
 	</tr>
 	<tr>
@@ -113,8 +113,8 @@
 	</tr>
 	<tr>
 		<td>Â¾ºÙ:</td>
-		<td><input type="radio" name="e_title" size="45" value="0" checked />EMPLOYEE
-			<input type="radio" name="e_title" size="45" value="1" />BOSS</td>
+		<td><input type="radio" name="e_title" size="45" value="0" <%=employeeVO!=null && "0".equals(employeeVO.getE_title()) ? "checked" : ""%> />EMPLOYEE
+			<input type="radio" name="e_title" size="45" value="1" <%=employeeVO!=null && "1".equals(employeeVO.getE_title()) ? "checked" : ""%> />BOSS</td>
 	</tr>
 <!-- 	<tr> -->
 <!-- 		<td>ª¬ºA:</td> -->
