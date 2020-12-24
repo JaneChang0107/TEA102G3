@@ -1,14 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="BIG5">
+<title>Insert title here</title>
     <link rel="stylesheet" href="../../vendors/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet type" href="./css/index_backstage.css">
 </head>
 <body>
-    <div class="container-fluid login-container">
+	<div class="container-fluid login-container">
         <div class="row">
             <div class="col login_col">
                 <div class="row header">
@@ -21,14 +22,12 @@
                 </div>
                 <div class="row account-row">
                     <div class="col">
-                        <p>帳號:</p><input type="text"></input>
-                        <p>密碼:</p><input type="text"></input>
+                        <p>新密碼已發送至您的信箱</p>
                     </div>
                 </div>
                 <div class="row forget-row">
                     <div class="col-10">
-                        <button type="button" class="btn btn-warning forget-btn">登入</button>
-                        <button type="button" class="btn btn-warning forget-btn">忘記密碼</button>
+                        <button type="button" class="btn btn-light forget-btn">回首頁</button>
                     </div>
                     
                 </div>
