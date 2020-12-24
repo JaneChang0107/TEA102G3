@@ -61,6 +61,7 @@
   </li>
 
   <jsp:useBean id="rentpictureSvc" scope="page" class="com.rentpicture.model.RentPictureService" />
+  <jsp:useBean id="rentSvc" scope="page" class="com.rent.model.RentService" />
    
   <li>
      <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/RentPictureServlet" >
@@ -79,10 +80,10 @@
   
   <li>
      <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/RentPictureServlet" >
-       <b>選擇出租品圖片編號:</b>
+       <b>選擇出租品編號:</b>
        <select size="1" name="r_id">
-         <c:forEach var="rentpictureVO" items="${rentpictureSvc.all}" > 
-          <option value="${rentpictureVO.r_id}">${rentpictureVO.r_id}
+         <c:forEach var="rentVO" items="${rentSvc.all}" > 
+          <option value="${rentVO.r_id}">${rentVO.r_id}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getRid_For_Display">

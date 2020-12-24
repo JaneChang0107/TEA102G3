@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>SearchSellProduct</title>
+    </head>
+    <body>
+        <div id="search">
+            <span>商品種類:</span>
+            <input type="text" name="type" id="ptype">
+            <span>商品名稱:</span>
+            <input type="text" name="pname" id="pname">
+            <input type="button" id="searchBtn" value="搜尋">
+        </div>
+
+        <div class="product">
+            <table id="allProduct">
+            
+            </table>
+        </div>
+
+        <script src="../../vendors/jquery/jquery-3.5.1.min.js"></script>
+        <script>
+
+            let url = new URL(document.URL);
+            console.log(url.protocol);
+            console.log(url.hostname);
+            console.log(url.host);
+            console.log(url.href);
+            console.log(url.origin);
+            console.log(url.pathname);
+
+            
+            $("#searchBtn").click(function() {
+                let type = $("#ptype").text();
+                let pname = $("#pname").text();
+                var data = {
+                    "type" : type,
+                    "pname" : pname
+                }
+                $.ajax({
+                    url: "http://localhost:8081/TEA102G3/Productajax",
+                    type : "POST",
+                    dataType : "json",
+                    data : data,
+                    success : function(data) {
+                        console.log(data);
+                        $.each(data, function(index, value) {
+                            $("#allProduct").append(
+                                `<tr>
+                                    <td>${value.p_name}</td>
+                                    <td>${value.pt_id}</td>
+                                    <td>${value.p_count}</td>
+                                    <td>${value.p_price}</td>
+                                    <td>${value.p_addDateSec}</td>
+                                </tr>`
+                            )
+                        });
+                    }
+                })
+            });
+            
+        </script>
+    </body>
+</html>

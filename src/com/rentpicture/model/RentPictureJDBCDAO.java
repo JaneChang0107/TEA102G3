@@ -386,7 +386,7 @@ public class RentPictureJDBCDAO implements RentPictureDAO_interface {
 //		System.out.println("delete success");
 		
 		//getAll;
-		List<RentPictureVO> list = dao.getRidPic("R00001");
+		List<RentPictureVO> list = dao.getRidPic("R00002");
 		for (RentPictureVO rpv : list) {
 			System.out.print(rpv.getRp_id().toString() + ",");
 			System.out.print(rpv.getRp_picture() + ",");

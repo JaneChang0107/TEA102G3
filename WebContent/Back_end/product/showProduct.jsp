@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=BIG5" pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -18,17 +18,17 @@
 <jsp:useBean id="ppService" scope="page" class="com.productPicture.model.ProductPictureService"></jsp:useBean>
 	<table>
 		<tr>
-			<th>�ӫ~�s��</th>
-			<th>�ӫ~�W��</th>
-			<th>�ӫ~����</th>
-			<th>�ӫ~�Բ�</th>
-			<th>�ӫ~����</th>
-			<th>�ӫ~�ƶq</th>
-			<th>�ӫ~�s�W�ɶ�</th>
-			<th>�ӫ~�ק�ɶ�</th>
-			<th>�ӫ~���A</th>
-			<th>��a</th>
-			<th>�Ϥ�</th>
+			<th>商品編號</th>
+			<th>商品名稱</th>
+			<th>商品價格</th>
+			<th>商品詳細</th>
+			<th>商品種類</th>
+			<th>商品數量</th>
+			<th>商品新增時間</th>
+			<th>商品修改時間</th>
+			<th>商品狀態</th>
+			<th>賣家</th>
+			<th>圖片</th>
 		</tr>
 	<c:forEach var="pVO" items="${pVOs}">		
 		<tr>
@@ -50,14 +50,14 @@
 				<form action="<%= request.getContextPath() %>/ProductServlet" method="post">
 					<input type="hidden" name="pid" value="${pVO.p_id}">
 					<input type="hidden" name="action" value="updateOne">
-					<input type="submit" value="�ק�">
+					<input type="submit" value="修改">
 				</form>
 			</td>
 			<td>
 				<form action="<%= request.getContextPath() %>/ProductServlet" method="post">
 					<input type="hidden" name="pid" value="${pVO.p_id}">
 					<input type="hidden" name="action" value="delete">
-					<input type="submit" value="�R��">
+					<input type="submit" value="刪除">
 				</form>
 			</td>
 		</tr>
