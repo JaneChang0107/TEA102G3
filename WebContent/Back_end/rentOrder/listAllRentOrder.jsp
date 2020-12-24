@@ -97,7 +97,7 @@
 			<td>${rentOrderVO.ro_backdate}</td>
 			<td>${rentOrderVO.ro_deposit}</td>
 			<td>${rentOrderVO.ro_total}</td> 
-			<td>${rentOrderVO.ro_sign}</td>
+			<td><img src="${rentOrderVO.ro_sign2}" width="100" height="100"></td>
 			<td>${rentOrderVO.ro_pm}</td>
 			<td>${rentOrderVO.m_id}</td>
 			<td>

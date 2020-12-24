@@ -1,6 +1,7 @@
 package com.rentOrder.model;
 
 import java.sql.Timestamp;
+import java.util.Base64;
 
 public class RentOrderVO {
 	private String ro_id;
@@ -104,6 +105,16 @@ public class RentOrderVO {
 
 	public void setM_id(String m_id) {
 		this.m_id = m_id;
+	}
+	
+	public String getRo_sign2() {
+		if(ro_sign!=null) {
+			ro_sign=Base64.getEncoder().encode(ro_sign);
+		    String str ="data:image/jpg;base64,"+new String(ro_sign);
+		    return str;
+		} else {
+			return "../../images/LOGO找不到圖片.png";
+		}
 	}
 
 }
