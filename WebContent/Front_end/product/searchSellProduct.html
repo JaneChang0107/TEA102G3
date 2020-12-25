@@ -7,7 +7,9 @@
     <body>
         <div id="search">
             <span>商品種類:</span>
-            <input type="text" name="type" id="ptype">
+            <select name="ptype" id="ptype">
+                <option value="">請選擇</option>
+            </select>
             <span>商品名稱:</span>
             <input type="text" name="pname" id="pname">
             <input type="button" id="searchBtn" value="搜尋">
@@ -22,6 +24,8 @@
         <script src="../../vendors/jquery/jquery-3.5.1.min.js"></script>
         <script>
 
+            console.log(window.location.origin);
+
             let url = new URL(document.URL);
             console.log(url.protocol);
             console.log(url.hostname);
@@ -30,17 +34,33 @@
             console.log(url.origin);
             console.log(url.pathname);
 
+           
+            $.ajax({
+                url: "http://localhost:8081/TEA102G3/ProductTypeAjax",
+                type : "GET",
+                dataType : "json",
+                success : function(data) {
+                    $.each(data, function(index, value) {
+                        $("#ptype").append(
+                            `<option value="${value.pt_id}">${value.pt_platform} ${value.pt_kind}</option>`
+                        )
+                    })
+                
+                }
+            })
+        
             
             $("#searchBtn").click(function() {
-                let type = $("#ptype").text();
-                let pname = $("#pname").text();
+                let type = $("#ptype").val();
+                let pname = $("#pname").val();
+                console.log(pname)
                 var data = {
                     "type" : type,
                     "pname" : pname
                 }
                 $.ajax({
                     url: "http://localhost:8081/TEA102G3/Productajax",
-                    type : "POST",
+                    type : "GET",
                     dataType : "json",
                     data : data,
                     success : function(data) {

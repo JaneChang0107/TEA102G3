@@ -2,6 +2,8 @@ package com.productPicture.model;
 
 import java.util.Base64;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class ProductPictureVO implements java.io.Serializable {
 	
 	private String pp_id;
@@ -15,6 +17,7 @@ public class ProductPictureVO implements java.io.Serializable {
 	public void setPp_id(String pp_id) {
 		this.pp_id = pp_id;
 	}
+	@JsonIgnore
 	public byte[] getPp_picture() {
 		return pp_picture;
 	}
@@ -27,6 +30,7 @@ public class ProductPictureVO implements java.io.Serializable {
 	public void setP_id(String p_id) {
 		this.p_id = p_id;
 	}
+	@JsonIgnore
 	public String getPp_picture64() {
 		if(pp_picture != null) {
 			pp_picture = Base64.getEncoder().encode(pp_picture);

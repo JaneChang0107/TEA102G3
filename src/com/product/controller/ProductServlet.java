@@ -317,5 +317,16 @@ public class ProductServlet extends HttpServlet {
 			rd.forward(request, response);
 		}
 		
+		if("findthis".equals(action)) {
+			String pid = request.getParameter("pid");
+			
+			ProductService pService = new ProductService();
+			ProductVO pVO = pService.oneProduct(pid);
+			if(pVO != null) {
+				request.setAttribute("pVO", pVO);
+				RequestDispatcher rd = request.getRequestDispatcher("/Front_end/product/ProductDetail.jsp");
+				rd.forward(request, response);
+			}
+		}
 	}
 }
