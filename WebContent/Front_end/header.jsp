@@ -264,6 +264,7 @@ div.copyright {
 	position: fixed;
 }
 
+
 .overlay {
 	height: 100%;
 	width: 0;
@@ -320,7 +321,7 @@ div.header {
 	z-index: 3
 }
 
-.nav{
+#nav{
 position:absolute;
  top:0;
  right:0;
@@ -339,34 +340,40 @@ position:absolute;
 		</div>
 	</div>
 
-	<img
+	<a href="<%=request.getContextPath()%>/Front_end/index.jsp"><img
 		src="<%=request.getContextPath()%>/images/white_LOGO字在外版(revised).png"
-		class="logo" id="headerlogo"> <input type="text" id="searchBar">
+		class="logo" id="headerlogo"> </a>
+		<input type="text" id="searchBar">
 
 	<i class="fas fa-angle-down" id="arrowdown"></i> <i
 		class="fas fa-search" id="search"></i>
 
 
 	<table>
-		<tr class="nav">
+		<tr class="nav" id="nav">
 
 			<td>
-				<!-- cart下拉 開始--> <i class="fas fa-shopping-cart" type="button"
+				<!-- cart下拉 開始--> 
+				<i class="fas fa-shopping-cart" type="button"
 				id="cart" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="true"></i>
 				<div class="dropdown-menu" aria-labelledby="cart">
 					<a class="dropdown-item" href="#">租用車</a> <a class="dropdown-item"
 						href="#">購買車</a>
-				</div> <!-- cart下拉結束 -->
+				</div> 
+				<!-- cart下拉結束 -->
 			</td>
 
 			<td><i class="far fa-bell" id="bell"></i></td>
+			
+			
 			<td>
-				<!-- user下拉開始 --> <i class="fas fa-user-circle" id="user"
+				<!-- user下拉開始 --> 
+				<i class="fas fa-user-circle" id="user"
 				type="button" id="dropdownMenuButton2" data-toggle="dropdown"
 				aria-haspopup="true" aria-expanded="false"></i>
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-					<a class="dropdown-item" href="#">我的帳戶</a>
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/Front_end/members/MyAccount.jsp">我的帳戶</a>
 					<!--如有登入改為XXX的帳戶   -->
 					<hr>
 					<a class="dropdown-item"
@@ -374,7 +381,8 @@ position:absolute;
 					<!--如已有登入則改為另一個連結 -->
 					<a class="dropdown-item" href="#">賣家中心</a> <a class="dropdown-item"
 						href="#">登出</a>
-				</div> <!-- user下拉結束 -->
+				</div> 
+				<!-- user下拉結束 -->
 			</td>
 
 		</tr>

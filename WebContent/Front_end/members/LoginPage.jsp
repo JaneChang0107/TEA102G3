@@ -65,7 +65,6 @@
 
 </head>
 <body class="mybody">
-	<link rel="stylesheet"	href="../../vendors/bootstrap/css/bootstrap.min.css">
 
 	<div class="header">
 		<jsp:include page="../header.jsp"></jsp:include>
@@ -76,8 +75,7 @@
 			ACTION="<%=request.getContextPath()%>/member/controller/MemberLogin"
 			method="post">
 			<div class="topcol">
-				<br>
-				<u>遊戲堃會員登入</u>
+				<br> <u>遊戲堃會員登入</u>
 			</div>
 
 			<div class="form-group row">
