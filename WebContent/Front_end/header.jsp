@@ -319,6 +319,13 @@ div.copyright {
 div.header {
 	z-index: 3
 }
+
+.nav{
+position:absolute;
+ top:0;
+ right:0;
+ width:200px;
+}
 </style>
 
 <div class="header">
@@ -335,43 +342,58 @@ div.header {
 	<img
 		src="<%=request.getContextPath()%>/images/white_LOGO字在外版(revised).png"
 		class="logo" id="headerlogo"> <input type="text" id="searchBar">
-	
-	<i class="fas fa-angle-down" id="arrowdown"></i>
-	
-	 <i
+
+	<i class="fas fa-angle-down" id="arrowdown"></i> <i
 		class="fas fa-search" id="search"></i>
-		
-<!-- user下拉開始 -->		
-     <i class="fas fa-user-circle" id="user" type="button" id="dropdownMenuButton2" 
-		 data-toggle="dropdown" aria-haspopup="true"
-		aria-expanded="false"></i>
-	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-		<a class="dropdown-item" href="#">我的帳戶</a>  <!-- 如有登入改為XXX的帳戶 --> 
-		<hr> 
-		<a class="dropdown-item" href="<%=request.getContextPath()%>/Front_end/members/LoginPage.jsp">登入/註冊</a>  <!--如已有登入則改為另一個連結 -->
-		<a class="dropdown-item" href="#">賣家中心</a> 
-		<a class="dropdown-item" href="#">登出</a>
-	</div>
-<!-- user下拉結束 -->		
 
 
-		<i class="far fa-bell" id="bell"></i>
-		
-		
-<!-- cart下拉 開始-->
-    <i class="fas fa-shopping-cart" id="cart" type="button" id="dropdownMenuButton" 
-		 data-toggle="dropdown" aria-haspopup="true"
-		aria-expanded="false"></i>
-	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		<a class="dropdown-item" href="#">Action</a> 
-		<a class="dropdown-item" href="#">Another action</a> 
-		<a class="dropdown-item" href="#">Something  else here</a>
-	</div>
-<!-- cart下拉結束 -->	
-	
-	
-</div>
+	<table>
+		<tr class="nav">
 
+			<td>
+				<!-- cart下拉 開始--> <i class="fas fa-shopping-cart" type="button"
+				id="cart" data-toggle="dropdown" aria-haspopup="true"
+				aria-expanded="true"></i>
+				<div class="dropdown-menu" aria-labelledby="cart">
+					<a class="dropdown-item" href="#">租用車</a> <a class="dropdown-item"
+						href="#">購買車</a>
+				</div> <!-- cart下拉結束 -->
+			</td>
+
+			<td><i class="far fa-bell" id="bell"></i></td>
+			<td>
+				<!-- user下拉開始 --> <i class="fas fa-user-circle" id="user"
+				type="button" id="dropdownMenuButton2" data-toggle="dropdown"
+				aria-haspopup="true" aria-expanded="false"></i>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+					<a class="dropdown-item" href="#">我的帳戶</a>
+					<!--如有登入改為XXX的帳戶   -->
+					<hr>
+					<a class="dropdown-item"
+						href="<%=request.getContextPath()%>/Front_end/members/LoginPage.jsp">登入/註冊</a>
+					<!--如已有登入則改為另一個連結 -->
+					<a class="dropdown-item" href="#">賣家中心</a> <a class="dropdown-item"
+						href="#">登出</a>
+				</div> <!-- user下拉結束 -->
+			</td>
+
+		</tr>
+		<tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+	<span></span>
+
+	<div></div>
+	<div></div>
 </head>
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
