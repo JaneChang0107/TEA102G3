@@ -61,6 +61,11 @@
         }
 </style>
 </head>
+	<div class="header">
+		<jsp:include page="../header.jsp"></jsp:include>
+	</div>
+
+
 <body class="mybody">
     <link rel="stylesheet" href="../../vendors/bootstrap/css/bootstrap.min.css">
  
@@ -136,8 +141,15 @@
 		  <button type="submit" class="btn btn-primary" value="註冊" id="signup">註冊</button>
 
 	  </form>
+	  
+
 
 </body>
+
+	  	<div class="footer">
+		<jsp:include page="../footer.jsp"></jsp:include>
+	</div>
+
 <!-- =====Date time picker設定======== -->
 <%
 	java.sql.Date m_birth = null;

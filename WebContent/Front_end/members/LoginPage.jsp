@@ -65,8 +65,7 @@
 
 </head>
 <body class="mybody">
-	<link rel="stylesheet"
-		href="../../vendors/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet"	href="../../vendors/bootstrap/css/bootstrap.min.css">
 
 	<div class="header">
 		<jsp:include page="../header.jsp"></jsp:include>
