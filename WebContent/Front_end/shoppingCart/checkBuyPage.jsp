@@ -8,7 +8,7 @@
 <title>您的購物車-我要買</title>
 <style>
 * {
-	border: 0px solid gray;
+	border: 1px solid gray;
 }
 
 .mybody {
@@ -36,7 +36,7 @@
 .buttonarea {
 	margin: 10px auto;
 	background-color:;
-	width: 1000px;
+	width:1000px;
 	height: 100px;
 /* 	border: solid 1px */
 }
@@ -77,8 +77,8 @@
 }
 
 .minus {
-	width: 10px;
-	height: 10px;
+	width: 15px;
+	height: 15px;
 	padding: 8px 5px 8px 5px;
 	background: #f2f2f2;
 	border-radius: 4px 0 0 4px;
@@ -89,8 +89,8 @@
 }
 
 .plus {
-	width: 10px;
-	height: 10px;
+	width: 15px;
+	height: 15px;
 	padding: 8px 5px 8px 5px;
 	background: #f2f2f2;
 	border-radius: 0 4px 4px 0;
@@ -157,7 +157,7 @@
 	</div>
 
 	<div>
-		<h2 class="title">您的購物車 我要買</h2>
+		<h2 class="title">您的購物車-我要買</h2>
 	</div>
 	<div class="content">
 
