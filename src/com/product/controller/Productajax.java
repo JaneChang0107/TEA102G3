@@ -2,7 +2,10 @@ package com.product.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.product.model.ProductService;
 import com.product.model.ProductVO;
+import com.productPicture.model.ProductPictureService;
+import com.productPicture.model.ProductPictureVO;
 
 @WebServlet("/Productajax")
 public class Productajax extends HttpServlet {
@@ -26,6 +33,7 @@ public class Productajax extends HttpServlet {
 		doPost(request, response);
 	}
 
+	@SuppressWarnings("unused")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
@@ -33,9 +41,9 @@ public class Productajax extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 		String type = request.getParameter("type");
 		String name = request.getParameter("pname");
-		System.out.println(type);
-		System.out.println(name);
-		if("".equals(type)) {
+
+		
+		if(type != null && "no".equals(type)) {
 			ProductService pService = new ProductService();
 			List<ProductVO> pVOs = null;
 			
@@ -44,18 +52,19 @@ public class Productajax extends HttpServlet {
 			}
 			
 			if(!"".equals(name)) {
+				System.out.println(name);
 				pVOs = pService.findProduct(name);
 			}
-			
+
 			ObjectMapper mapper = new ObjectMapper();
+
 			String productJSON = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(pVOs);
 			
 			System.out.println(productJSON);
 			writer.println(productJSON);
-			
 		}
 		
-		if(!"".equals(type)) {
+		if(type != null && !"no".equals(type)) {
 			ProductService pService = new ProductService();
 			
 			List<ProductVO> pVOs = pService.findProduct(name, type);
@@ -63,10 +72,28 @@ public class Productajax extends HttpServlet {
 			ObjectMapper mapper = new ObjectMapper();
 			String productJSON = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(pVOs);
 			
-			System.out.println(productJSON);
 			writer.println(productJSON);
 			
 		}
+		
+		String pid = request.getParameter("pid");
+		System.out.println(pid);
+		if(pid != null) {
+			
+			ProductPictureService ppService = new ProductPictureService();
+			
+			int which = 0;
+			List<ProductPictureVO> ppVOs = ppService.findProductPicture(pid);
+			if(!ppVOs.isEmpty()) {
+				which = (int) (Math.random() * ppVOs.size());
+				System.out.println(pid);
+				System.out.println(which);
+				System.out.println(ppVOs.get(which).getPp_id());
+				writer.println(ppVOs.get(which).getPp_id());
+			} else {
+				writer.println("");
+			}
+			
+		}
 	}
-
 }

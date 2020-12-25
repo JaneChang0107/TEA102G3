@@ -23,12 +23,22 @@ public class ShowPicture extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		response.setContentType("image/gif");
 		String type =request.getParameter("type");
 		String id = request.getParameter("id");
 		ServletOutputStream os = response.getOutputStream();
 		// 找哪種類型的圖片
 		if("pp".equals(type)) {
+			ProductPictureService ppService = new ProductPictureService();
+			ProductPictureVO ppVO = ppService.findOneProductPicture(id);
+			
+			byte[] b = ppVO.getPp_picture();
+			byte[] smallPicture = ImageUtil.shrink(b, 200);
+			os.write(smallPicture);
+			os.close();
+		}
+		
+		if("ppid".equals(type)) {
 			ProductPictureService ppService = new ProductPictureService();
 			ProductPictureVO ppVO = ppService.findOneProductPicture(id);
 			
@@ -42,4 +52,5 @@ public class ShowPicture extends HttpServlet {
 		doGet(request, response);
 	}
 
+	
 }
