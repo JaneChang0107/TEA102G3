@@ -14,367 +14,22 @@
   <script src="https://kit.fontawesome.com/a72ac34f47.js" crossorigin="anonymous"></script>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
 
-    body {
-      background: #E3F8F6;
-    }
-
-    h1 {
-      color: rgba(236, 76, 76, 0.548);
-      shape-rendering: auto;
-    }
-
-    #id_footer {
-      box-sizing: border-box;
-      position: relative;
-      bottom: 0px;
-      width: 100%;
-      height: 200px;
-      background: #6CCFF3;
-      
-    }
-
-    /*RWD開始--------------------------------------------*/
-    @media screen and (max-width: 576px) {
-      div.header {
-        max-width: 100%;
-      }
-
-      #searchBar {
-        max-width: 100px;
-      }
-
-      div.swiper-container {
-        max-width: 100%;
-        max-height: fit-content;
-      }
-
-      .logo {
-        width: 20%;
-        position: absolute;
-        right: 5px;
-        width:95px;
-        height:35px;
-      }
-      #footerlogo {
-        display: none;
-      }
-      div>span.footerwords{
-        font-size: 20px;
-        padding:5px;
-      }
-      
-      #ham,
-      #search {
-        display: none;
-      }
-
-      #buybtn,
-      #rentbtn,
-      #sellbtn {
-        width: 150px;
-        height: 150px;
-        left: 10px;
-        font-size: 30px;
-      }
-
-    }
-
-    @media screen and (min-width: 576px) and (max-width:768px) {
-      #searchBar {
-        max-width: 100px;
-      }
-
-      #ham {
-        display: none;
-
-      }
-      .logo{
-        width:95px;
-        height:35px;
-      }
-
-      #footerlogo {
-        display: none;
-      }
-      div>span.footerwords{
-        font-size: 20px;
-        padding:5px;
-      }
-
-      div.swiper-container {
-        max-width: 100%;
-        max-height: fit-content;
-      }
-
-      #buybtn,
-      #rentbtn,
-      #sellbtn {
-        width: 150px;
-        height: 150px;
-        left: 10px;
-        font-size: 30px;
-      }
-    }
-
-    @media screen and (min-width: 768px) and (max-width: 1199px) {
-      div.header {
-        width: 100%;
-      }
-
-      div.swiper-container {
-        max-width: 100%;
-        max-height: fit-content;
-      }
-
-      #searchBar {
-        max-width: 200px;
-      }
-
-      #buybtn,
-      #rentbtn,
-      #sellbtn {
-        width: 180px;
-        height: 180px;
-        left: 50px;
-      }
-    }
-
-    @media screen and (min-width: 1200px) {
-      div.header {
-        width: 100%;
-      }
-
-      #searchBar {
-        max-width: 100%;
-      }
-    }
-
-    /*RWD結束----------------------------------------------------*/
-
-    i {
-      font-size: 5ex;
-      position: relative;
-      left: 20px;
-      top: 15px;
-      padding: 5px;
-    }
-
-    #user,
-    #bell,
-    #cart {
-      float: right;
-      position: relative;
-      left: -20px;
-      padding: 10px;
-    }
-
-    #arrowdown {
-      position: relative;
-      left: -20px;
-      top: 20px;
-    }
-
-    #search {
-      font-size: 4ex;
-      left: -15px;
-    }
-
-    .logo {
-      position: relative;
-      left: 50px;
-      top: 10px;
-    }
-
-    #footerlogo {
-      width: 300px;
-    }
-
-    div.header {
-      widows: 1280px;
-      height: 80px;
-      background: #6CCFF3;
-    }
-
-    #searchBar {
-      position: relative;
-      height: 40px;
-      width: 600px;
-      left: 70px;
-      top: 10px;
-    }
-
-    .btn-circle-xl {
-      position: relative;
-      width: 270px;
-      height: 270px;
-      padding: 30px;
-      font-size: 50px;
-      line-height: 1.33;
-      border-radius: 135px;
-      margin: 30px;
-      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    }
-
-    div.article{
-      text-align: center;
-    }
-
-    div.swiper-container {
-      position: relative;
-      height: 300px;
-      width: 1000px;
-      background: #eee;
-      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-      font-size: 10px;
-      color: #000;
-      margin: 40px auto;
-      padding: 0;
-    }
-
-    .swiper-container {
-      width: 50%;
-      height: 50%;
-    }
-
-    .swiper-slide {
-      text-align: center;
-      font-size: 60px;
-      background: rgb(255, 255, 255);
-
-      /* Center slide text vertically */
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-box-pack: center;
-      -ms-flex-pack: center;
-      -webkit-justify-content: center;
-      justify-content: center;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      -webkit-align-items: center;
-      align-items: center;
-    }
-
-    div.footerwords {
-      position: absolute;
-      display: inline;
-      top: 20px;
-      left: 50%;
-    }
-
-    span.footerwords {
-      font-size: 30px;
-      padding: 20px 30px;
-
-    }
-
-    div.copyright {
-      position: absolute;
-      bottom: 0px;
-      left: 50%;
-      padding: 10px;
-      transform: translateX(-50%);
-      color: gray;
-
-
-    }
-    
-    
-    .overlay {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: rgb(0,0,0);
-  background-color: rgba(28,65,145, 0.9);
-  overflow-x: hidden;
-  transition: 0.5s;
-}
-
-.overlay-content {
-  position: relative;
-  top: 25%;
-  width: 100%;
-  text-align: center;
-  margin-top: 30px;
-}
-
-.overlay a {
-  padding: 8px;
-  text-decoration: none;
-  font-size: 36px;
-  color: #FFFFFF;
-  display: block;
-  transition: 0.3s;
-}
-
-.overlay a:hover, .overlay a:focus {
-  color: #f1f1f1;
-}
-
-.overlay .closebtn {
-  position: absolute;
-  top: 20px;
-  right: 45px;
-  font-size: 60px;
-}
-
-@media screen and (max-height: 450px) {
-  .overlay a {font-size: 20px}
-  .overlay .closebtn {
-  font-size: 40px;
-  top: 15px;
-  right: 35px;
-  }
-}
   </style>
 
 
-  <div class="header">
-    <i class="fas fa-bars" id="ham" onclick="openNav()"></i>
- <div id="myNav" class="overlay">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <div class="overlay-content">
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
-  </div>
-</div>
- 
-    <img src="<%=request.getContextPath()%>/images/white_LOGO字在外版(revised).png" class="logo" id="headerlogo">
-    <input type="text" id="searchBar">
-    <i class="fas fa-angle-down" id="arrowdown"></i>
-    <i class="fas fa-search" id="search"></i>
-    <i class="fas fa-user-circle" id="user"></i>
-    <i class="far fa-bell" id="bell"></i>
-    <i class="fas fa-shopping-cart" id="cart"></i>
-
-  </div>
-
+<div class="header">
+    <jsp:include page="header.jsp"></jsp:include>
 </head>
 
-
-
 <body>
+<div class="content">
 
   <div class="article">
-
-    
     <button type="button" class="btn btn-success btn-circle-xl" id="buybtn">我要買</button>
     <button type="button" class="btn btn-danger btn-circle-xl" id="rentbtn">我要租</button>
     <button type="button" class="btn btn-warning btn-circle-xl" id="sellbtn">我要賣</button>
-
-
   </div>
-
 
   <div class="swiper-container">
     <H1>熱銷商品</H1>
@@ -393,7 +48,6 @@
     <div class="swiper-button-prev"></div>
   </div>
 
-
   <div class="swiper-container">
     <H1>熱銷出租品</H1>
     <div class="swiper-wrapper">
@@ -410,28 +64,15 @@
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
   </div>
+</div>
 
 
-  <footer id="id_footer">
-
-    <img src="../images/white_LOGO字在外版(revised).png" class="logo" id="footerlogo">
-    <div class="footerwords" id="footerwords">
-      <span class="footerwords">關於我們</span><span class="footerwords">隱私權政策</span><br>
-      <span class="footerwords">網站地圖</span><span class="footerwords">常用問答</span><br>
-      <span class="footerwords">服務條款</span>
+    <div class="footer">
+    <jsp:include page="footer.jsp"></jsp:include>
     </div>
-
-    <div class="copyright">Copyright © 2020 YuXiKun Co. ,Ltd. All rights reserved</div>
-
-
-
-  </footer>
 
 
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-
-
   <script>
     var swiper = new Swiper('.swiper-container', {
       slidesPerView: 4,
@@ -449,13 +90,7 @@
       },
     });
     
-    function openNav() {
-    	  document.getElementById("myNav").style.width = "35%";
-    	}
 
-    	function closeNav() {
-    	  document.getElementById("myNav").style.width = "0%";
-    	}
   </script>
 
 

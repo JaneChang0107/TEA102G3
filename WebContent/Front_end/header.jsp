@@ -280,15 +280,71 @@
       padding: 10px;
       transform: translateX(-50%);
       color: gray;
+    }    
+    
+    .overlay {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(28,65,145, 0.9);
+  overflow-x: hidden;
+  transition: 0.5s;
+  z-index:3;
+}
 
+.overlay-content {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
 
-    }
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #FFFFFF;
+  display: block;
+  transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+  color: #f1f1f1;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+  font-size: 40px;
+  top: 15px;
+  right: 35px;
+  }
+}
   </style>
 
 
-  <div class="header">
-    <i class="fas fa-bars" id="ham"></i>
- 
+    <div class="header">
+    <i class="fas fa-bars" id="ham" onclick="openNav()"></i>
+ <div id="myNav" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="overlay-content">
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+  </div>
+</div>
     <img src="<%=request.getContextPath()%>/images/white_LOGO字在外版(revised).png" class="logo" id="headerlogo">
     <input type="text" id="searchBar">
     <i class="fas fa-angle-down" id="arrowdown"></i>
@@ -321,8 +377,18 @@
         prevEl: '.swiper-button-prev',
       },
     });
-  </script>
+    
+    function openNav() {
+  	  document.getElementById("myNav").style.width = "35%";
+  	}
 
+  	function closeNav() {
+  	  document.getElementById("myNav").style.width = "0%";
+  	}
+  </script>
+  <script src="<%=request.getContextPath()%>/vendors/jquery/jquery-3.5.1.min.js"></script>
+  <script src="<%=request.getContextPath()%>/vendors/popper/popper.min.js"></script>
+  <script src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 

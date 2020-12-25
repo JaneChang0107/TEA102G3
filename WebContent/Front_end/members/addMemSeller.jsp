@@ -77,8 +77,7 @@
     <link rel="stylesheet" href="../../vendors/bootstrap/css/bootstrap.min.css">
 
 	<FORM class="myform" METHOD="post" enctype="multipart/form-data" 
-	ACTION="<%=request.getContextPath()%>/member/controller/MemberServlet"	name="form1"
-	enctype="multipart/form-data">        
+	ACTION="<%=request.getContextPath()%>/member/controller/MemberServlet"	name="form1">        
 	<div class="topcol">
             <br>
             <u>會員註冊</u>

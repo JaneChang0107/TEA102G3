@@ -97,10 +97,8 @@
 			</button>
 		</div>
 		
-		
+<!--標頭-->	
 		<div>
-		
-		
 			<ul class="nav nav-pills mb-3" id="page" role="tablist">
 			
 				<li class="nav-item" role="presentation"><a
@@ -114,50 +112,26 @@
 				</li>
 			</ul>
 
-
+<!-- 第一頁 -->
 			<div class="tab-content" id="pills-tabContent">
 				<div class="tab-pane fade show active" id="pills-home"
 					role="tabpanel" aria-labelledby="pills-home-tab">
-					
-					<table class="table">
- 
-  <div>
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
+					第一頁
+				</div>
+				
+				
+<!-- 第一頁尾 -->
 
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
 
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
 
-    </tr>
-  </tbody>
-</table>
-</div>
-
-							
-			</div>
-
-	
-		<div class="tab-pane fade" id="pills-profile" role="tabpanel"
+<!-- 第二頁 -->
+				<div class="tab-pane fade" id="pills-profile" role="tabpanel"
 					aria-labelledby="pills-profile-tab">第二頁</div>
+
+<!-- 第二頁尾-->
+
+
+
 
 
 			</div>
