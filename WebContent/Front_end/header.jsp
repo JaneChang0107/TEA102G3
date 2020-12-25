@@ -286,13 +286,20 @@
   height: 100%;
   width: 0;
   position: fixed;
+
+    }
+    
+        .overlay {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 3;
   top: 0;
   left: 0;
   background-color: rgb(0,0,0);
   background-color: rgba(28,65,145, 0.9);
   overflow-x: hidden;
   transition: 0.5s;
-  z-index:3;
 }
 
 .overlay-content {
@@ -333,8 +340,8 @@
 }
   </style>
 
-
     <div class="header">
+
     <i class="fas fa-bars" id="ham" onclick="openNav()"></i>
  <div id="myNav" class="overlay">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -345,14 +352,20 @@
     <a href="#">Contact</a>
   </div>
 </div>
+
     <img src="<%=request.getContextPath()%>/images/white_LOGO字在外版(revised).png" class="logo" id="headerlogo">
     <input type="text" id="searchBar">
     <i class="fas fa-angle-down" id="arrowdown"></i>
     <i class="fas fa-search" id="search"></i>
     <i class="fas fa-user-circle" id="user"></i>
     <i class="far fa-bell" id="bell"></i>
-    <i class="fas fa-shopping-cart" id="cart"></i>
-
+    <i class="fas fa-shopping-cart" id="cart" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+</div>
   </div>
 
 </head>
