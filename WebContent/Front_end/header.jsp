@@ -320,11 +320,11 @@ div.header {
 	z-index: 3
 }
 
-.nav{
-position:absolute;
- top:0;
- right:0;
- width:200px;
+.nav {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 200px;
 }
 </style>
 
