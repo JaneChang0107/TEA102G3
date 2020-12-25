@@ -321,19 +321,12 @@ div.header {
 	z-index: 3
 }
 
-<<<<<<< HEAD
+
 #nav{
 position:absolute;
  top:0;
  right:0;
  width:200px;
-=======
-.nav {
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 200px;
->>>>>>> fbf5d7a73f04a8157748a0b2765a246611003d94
 }
 </style>
 
