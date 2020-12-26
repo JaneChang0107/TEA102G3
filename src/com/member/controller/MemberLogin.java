@@ -17,9 +17,15 @@ import com.member.model.MemberVO;
 public class MemberLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
+	//宣告登入Id及Name之後存入session
+	String loginId;
+	String loginName;
+	
 	protected boolean loginAccess(String account, String password) {
 		MemberJDBCDAO dao =new MemberJDBCDAO();
 		MemberVO memberLogin=dao.getMemberPw(account);
+		loginId = memberLogin.getM_id();
+		loginName = memberLogin.getM_name();
 		
 		try {
 		if (memberLogin.getM_email().equals(account) && memberLogin.getM_password().equals(password))
@@ -52,6 +58,9 @@ public class MemberLogin extends HttpServlet {
 		else {
 			HttpSession session = req.getSession();
 			session.setAttribute("account", account);
+			session.setAttribute("loginId", loginId);
+			session.setAttribute("loginName", loginName);
+			
 			try {
 				String location = (String) session.getAttribute("location");
 				if (location != null) {

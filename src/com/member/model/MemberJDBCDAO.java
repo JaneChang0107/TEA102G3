@@ -37,7 +37,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 
 	private static final String GET_Mems_ByStatus_STMT = "SELECT * FROM member WHERE m_status =?";
 
-	private static final String GET_Mems_Password_STMT = "SELECT m_email,m_password FROM member WHERE m_email=?";
+	private static final String GET_Mems_Password_STMT = "SELECT m_id,m_name,m_email,m_password FROM member WHERE m_email=?";
 
 	// 新增一般會員
 	@Override
@@ -441,6 +441,8 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 
 			while (rs.next()) {
 				memberVO = new MemberVO();
+				memberVO.setM_id(rs.getString("m_id"));
+				memberVO.setM_name(rs.getString("m_name"));
 				memberVO.setM_email(rs.getString("m_email"));
 				memberVO.setM_password(rs.getString("m_password"));
 			}
@@ -642,9 +644,11 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 //		}
 
 		// 查密碼
-//		MemberVO memberVO4= dao.getMemberPw("a111@yahoo.com.tw");	
-//		System.out.println(memberVO4.getM_email());
-//		System.out.println(memberVO4.getM_password());
+		MemberVO memberVO4= dao.getMemberPw("a111@yahoo.com.tw");	
+		System.out.println(memberVO4.getM_id());
+		System.out.println(memberVO4.getM_name());
+		System.out.println(memberVO4.getM_email());
+		System.out.println(memberVO4.getM_password());
 
 	}
 

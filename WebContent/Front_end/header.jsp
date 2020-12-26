@@ -374,8 +374,10 @@ position:absolute;
 				type="button" id="dropdownMenuButton2" data-toggle="dropdown"
 				aria-haspopup="true" aria-expanded="false"></i>
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-					<a class="dropdown-item" href="<%=request.getContextPath()%>/Front_end/members/MyAccount.jsp">我的帳戶</a>
-					<!--如有登入改為XXX的帳戶   -->
+					<a class="dropdown-item" href="<%=request.getContextPath()%>/Front_end/members/MyAccount.jsp">
+					${loginName}的帳戶
+					</a>
+					
 					<hr>
 					<a class="dropdown-item"
 						href="<%=request.getContextPath()%>/Front_end/members/LoginPage.jsp">登入/註冊</a>

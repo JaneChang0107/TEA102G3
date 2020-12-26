@@ -1,3 +1,12 @@
+<%
+    Object account = session.getAttribute("account");                  // 從 session內取出 (key) account的值
+    if (account == null) {                                             // 如為 null, 代表此user未登入過 , 才做以下工作
+      session.setAttribute("location", request.getRequestURI());       //*工作1 : 同時記下目前位置 , 以便於login.html登入成功後 , 能夠直接導至此網頁(須配合LoginHandler.java)
+      response.sendRedirect(request.getContextPath()+"/Front_end/members/LoginPage.jsp");   //*工作2 : 請該user去登入網頁(login.html) , 進行登入
+      return;
+    }
+%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -116,7 +125,9 @@
 		
 		<div class="tab-content" id="pills-tabContent">
 			<div class="tab-pane fade show active" id="pills-home"
-				role="tabpanel" aria-labelledby="pills-home-tab">...</div>
+				role="tabpanel" aria-labelledby="pills-home-tab">...
+				 的帳戶
+				</div>
 			<div class="tab-pane fade" id="pills-profile" role="tabpanel"
 				aria-labelledby="pills-profile-tab">...</div>
 
