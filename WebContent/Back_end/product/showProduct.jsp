@@ -29,6 +29,8 @@
 			<th>商品狀態</th>
 			<th>賣家</th>
 			<th>圖片</th>
+			<th>修改</th>
+			<th>刪除</th>
 		</tr>
 	<c:forEach var="pVO" items="${pVOs}">		
 		<tr>
@@ -46,6 +48,7 @@
 		<c:forEach var="ppVO" items="${ppService.findProductPicture(pVO.p_id)}">
 			<img src="<%= request.getContextPath() %>/ShowPicture?type=pp&id=${ppVO.pp_id}" class="showImg">
 		</c:forEach>
+			</td>
 			<td>
 				<form action="<%= request.getContextPath() %>/ProductServlet" method="post">
 					<input type="hidden" name="pid" value="${pVO.p_id}">

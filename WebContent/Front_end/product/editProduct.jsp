@@ -23,9 +23,27 @@
 	div#showImg > img.viewImg{
 		width:200px;
 	}
+	div#editProduct{
+		display: contents;
+		position: absolute;
+		width: 50%;
+		left: 50%;
+		height: 100%;
+		transform: translateX(-50%);
+	}
+	h1, form{
+		left: 50%;
+		position: relative;
+		transform: translate(-50%);
+		width: 50%;
+	}
 </style>
 </head>
 <body>
+	<div class="header">
+		<jsp:include page="/Front_end/header.jsp"></jsp:include>
+	</div>
+
 	<div id="editProduct">
 		<h1>修改</h1>
 	    
@@ -86,13 +104,16 @@
 	        <input type="hidden" name="action" value="update">
 	        <input type="submit" class="btn btn-primary" value="送出">
 	    </form>
-	    
+	</div>
+	
+	<div class="footer">
+			<jsp:include page="/Front_end/footer.jsp"></jsp:include>
 	</div>
     <script src="<%= request.getContextPath() %>/vendors/jquery/jquery-3.5.1.min.js"></script>
     <script src="<%= request.getContextPath() %>/vendors/popper/popper.min.js"></script>
     <script src="<%= request.getContextPath() %>/vendors/bootstrap-4.5.3-dist/js/bootstrap.min.js"></script>
     <script src="<%= request.getContextPath() %>/vendors/ckeditor/ckeditor.js"></script>
-    <script src="<%= request.getContextPath() %>/js/previewImg.js"></script>
+    <script src="<%= request.getContextPath() %>/Front_end/product/js/previewImg.js"></script>
 	<script>
 		CKEDITOR.replace('editor');
 	

@@ -2,7 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.product.model.ProductVO" %>
 
-<% ProductVO pVO = (ProductVO) request.getAttribute("pVO"); %>
+<% 
+	ProductVO pVO = (ProductVO) request.getAttribute("pVO"); 
+	session.setAttribute("mid", "M00001");
+
+%>
 
 <!DOCTYPE html>
 <html>
@@ -16,19 +20,30 @@
 		width:200px;
 	}
 	div#addProductPlace{
-		display: block;
+		display: contents;
 		position: absolute;
 		width: 50%;
 		left: 50%;
+		height: 100%;
 		transform: translateX(-50%);
 	}
+	h1, form{
+		left: 50%;
+		position: relative;
+		transform: translate(-50%);
+		width: 50%;
+	}
+	
 </style>
 </head>
 <body>
-
+	<div class="header">
+		<jsp:include page="/Front_end/header.jsp"></jsp:include>
+	</div>
 
 	<div id="addProductPlace">
 	<jsp:useBean id="ptService" scope="page" class="com.productType.model.ProductTypeService"></jsp:useBean>
+	    
 	    <h1>新增</h1>
 	    
 	    <c:if test="${!errors.isEmpty()}">
@@ -75,18 +90,21 @@
 	            <textarea name="pdetail" id="editor" cols="30" rows="10"><%= pVO == null ? "" : pVO.getP_detail() %></textarea>
 	        </div>
 	        <div>
-		        <input type="hidden" name="mid" value="M00001">
 		        <input type="hidden" name="action" value="insert">
 		        <input type="submit" class="btn btn-primary" value="送出">
 	        </div>
 	    </form>
 	</div>    
     
+    <div class="footer">
+		<jsp:include page="/Front_end/footer.jsp"></jsp:include>
+	</div>
+    
     <script src="<%= request.getContextPath() %>/vendors/jquery/jquery-3.5.1.min.js"></script>
 	<script src="<%= request.getContextPath() %>/vendors/popper/popper.min.js"></script>
     <script src="<%= request.getContextPath() %>/vendors/bootstrap-4.5.3-dist/js/bootstrap.min.js"></script>
     <script src="<%= request.getContextPath() %>/vendors/ckeditor/ckeditor.js"></script>
-	<script src="<%= request.getContextPath() %>/js/previewImg.js"></script>
+	<script src="<%= request.getContextPath() %>/Front_end/product/js/previewImg.js"></script>
 	<script>
 		CKEDITOR.replace('editor');
 		

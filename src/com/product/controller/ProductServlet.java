@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.product.model.ProductService;
@@ -127,7 +128,9 @@ public class ProductServlet extends HttpServlet {
 			String pdetail = request.getParameter("pdetail");
 			Date d = new Date();
 			Timestamp addDate = new Timestamp(d.getTime());
-			String mid = request.getParameter("mid");
+			HttpSession session = request.getSession();
+			String mid = (String) session.getAttribute("mid");
+			System.out.println(mid);
 			
 			ProductVO pVO = new ProductVO();
 			pVO.setP_name(pname);
@@ -173,7 +176,7 @@ public class ProductServlet extends HttpServlet {
 			
 			ProductService pService = new ProductService();
 			ProductPictureService ppService = new ProductPictureService();
-			ppService.deleteProductPicture(pid);
+			ppService.deleteProductPictureByProduct(pid);
 			pService.deleteProduct(pid);
 			
 			response.sendRedirect(request.getContextPath() + "/ProductServlet?action=showAll");

@@ -10,7 +10,17 @@
 		<style>
 			p#productName{
 				font-size: 60px;
-			}		
+			}
+			div#productDetail{
+				display: contents;
+				position: absolute;
+				width: 50%;
+				left: 50%;
+				height: 100%;
+				transform: translateX(-50%);
+			}
+			
+	
 		</style>
 	</head>
 	<body>
@@ -19,7 +29,7 @@
 	</div>
 	
 	
-		<div class="">
+		<div id="productDetail">
 			<jsp:useBean id="ppService" scope="page" class="com.productPicture.model.ProductPictureService"></jsp:useBean>
 			<div id="pImg">
 			<c:forEach var="ppVO" items="${ppService.findProductPicture(pVO.p_id)}">

@@ -24,7 +24,9 @@
             </table>
         </div>
 		<input type="hidden" id="contextPath" value="<%= request.getContextPath() %>">
-        <script src="../../vendors/jquery/jquery-3.5.1.min.js"></script>
-        <script src="../../js/searchSellProduct.js"></script>
+        <script src="<%= request.getContextPath() %>/vendors/jquery/jquery-3.5.1.min.js"></script>
+		<script src="<%= request.getContextPath() %>/vendors/popper/popper.min.js"></script>
+	    <script src="<%= request.getContextPath() %>/vendors/bootstrap-4.5.3-dist/js/bootstrap.min.js"></script>
+	    <script src="<%= request.getContextPath() %>/Front_end/product/js/searchSellProduct.js"></script>
     </body>
 </html>
