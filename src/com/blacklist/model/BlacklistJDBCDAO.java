@@ -17,8 +17,9 @@ public class BlacklistJDBCDAO implements BlacklistDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO blacklist (bl_id,m_id,m_blackid) VALUES ('BL'|| lpad(BLACKLIST_SEQ.NEXTVAL,5,'0'),?,?)";
 	private static final String GET_ALL_STMT = "SELECT bl_id,m_id,m_blackid FROM blacklist order by bl_id";
 	private static final String GET_ONE_STMT = "SELECT bl_id,m_id,m_blackid FROM blacklist where bl_id = ?";
-//	private static final String DELETE = "DELETE FROM blacklist where bl_id = ?";
-	private static final String UPDATE = "UPDATE blacklist set bl_id=?, m_id=?, m_blackid where bl_id = ?";
+	private static final String DELETE = "DELETE FROM blacklist where bl_id = ?";
+	private static final String UPDATE = "UPDATE blacklist set m_id=?, m_blackId=? where bl_id = ?";
+
 
 	@Override
 	public void insert(BlacklistVO blacklistVO1) {
@@ -73,9 +74,9 @@ public class BlacklistJDBCDAO implements BlacklistDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
-
 			pstmt.setString(1, blacklistVO3.getM_id());
 			pstmt.setString(2, blacklistVO3.getM_blackId());
+			pstmt.setString(3, blacklistVO3.getBl_id());
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -113,7 +114,7 @@ public class BlacklistJDBCDAO implements BlacklistDAO_interface {
 
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-//			pstmt = con.prepareStatement(DELETE);
+			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setString(1, bl_id);
 

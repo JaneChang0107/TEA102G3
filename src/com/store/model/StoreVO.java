@@ -4,8 +4,8 @@ public class StoreVO implements java.io.Serializable{
 
 	private String st_id  ;
 	private String st_name;
+	private String st_tel;
 	private String st_address ;
-	
 	public String getSt_id() {
 		return st_id;
 	}
@@ -18,6 +18,12 @@ public class StoreVO implements java.io.Serializable{
 	public void setSt_name(String st_name) {
 		this.st_name = st_name;
 	}
+	public String getSt_tel() {
+		return st_tel;
+	}
+	public void setSt_tel(String st_tel) {
+		this.st_tel = st_tel;
+	}
 	public String getSt_address() {
 		return st_address;
 	}
@@ -28,6 +34,4 @@ public class StoreVO implements java.io.Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 }

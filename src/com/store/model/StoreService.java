@@ -10,12 +10,12 @@ public class StoreService {
 		dao = new StoreJDBCDAO();
 	}
 
-	public StoreVO addStore(String st_id, String st_name, String st_address) {
+	public StoreVO addStore(String st_name,String st_tel, String st_address) {
 
 		StoreVO storeVO = new StoreVO();
 
-		storeVO.setSt_id(st_id);
 		storeVO.setSt_name(st_name);
+		storeVO.setSt_tel(st_tel);
 		storeVO.setSt_address(st_address);
 
 		dao.insert(storeVO);
@@ -23,12 +23,13 @@ public class StoreService {
 		return storeVO;
 	}
 
-	public StoreVO updateStore(String st_id, String st_name, String st_address) {
+	public StoreVO updateStore(String st_id, String st_name,String st_tel, String st_address) {
 
 		StoreVO storeVO = new StoreVO();
 
 		storeVO.setSt_id(st_id);
 		storeVO.setSt_name(st_name);
+		storeVO.setSt_tel(st_tel);
 		storeVO.setSt_address(st_address);
 
 		dao.update(storeVO);

@@ -10,11 +10,10 @@ public class BlacklistService {
 		dao = new BlacklistJDBCDAO();
 	}
 
-	public BlacklistVO addBlacklist(String bl_id, String m_id, String m_blackId) {
+	public BlacklistVO addBlacklist(String m_id, String m_blackId) {
 
 		BlacklistVO blacklistVO = new BlacklistVO();
 
-		blacklistVO.setBl_id(bl_id);
 		blacklistVO.setM_id(m_id);
 		blacklistVO.setM_blackId(m_blackId);
 
@@ -23,10 +22,9 @@ public class BlacklistService {
 		return blacklistVO;
 	}
 
-	public BlacklistVO updateBlacklist(String bl_id, String m_id, String m_blackId) {
+	public BlacklistVO updateBlacklist(String bl_id,String m_id, String m_blackId) {
 
 		BlacklistVO blacklistVO = new BlacklistVO();
-
 		blacklistVO.setBl_id(bl_id);
 		blacklistVO.setM_id(m_id);
 		blacklistVO.setM_blackId(m_blackId);
@@ -47,4 +45,8 @@ public class BlacklistService {
 	public List<BlacklistVO> getAll() {
 		return dao.getAll();
 	}
+//	public static void main(String[] args) {
+//		BlacklistService blacklistService= new BlacklistService();
+//		blacklistService.updateBlacklist("BL00001", "M00001", "M00003");
+//	}
 }

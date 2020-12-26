@@ -6,7 +6,7 @@ public interface CouponDAO_interface {
 
     public void insert(CouponVO couponVO);
     public void update(CouponVO couponVO);
-    public void delete(String b_code);
+    public void delete(String co_id);
     public CouponVO findByPrimaryKey(String co_id);
     public List<CouponVO> getAll();
     //萬用複合查詢(傳入參數型態Map)(回傳 List)

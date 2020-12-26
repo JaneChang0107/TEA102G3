@@ -14,11 +14,11 @@ public class CouponJDBCDAO implements CouponDAO_interface {
 	String userid = "TEA102G3";
 	String passwd = "102G3";
 
-	private static final String INSERT_STMT = "INSERT INTO coupon (co_id,co_code,co_amount,co_start,co_expire,co_status) VALUES ('CO'|| lpad(COUPON_SEQ.NEXTVAL,5,'0'),?,?,?,?,?)";
-	private static final String GET_ALL_STMT = "SELECT co_id,co_code,co_amount,co_start,co_expire,co_status FROM coupon order by co_id";
-	private static final String GET_ONE_STMT = "SELECT co_id,co_code,co_amount,co_start,co_expire,co_status FROM coupon where co_id = ?";
-//	private static final String DELETE = "DELETE FROM coupon where co_id = ?";
-	private static final String UPDATE = "UPDATE coupon set co_id,co_code,co_amount,co_start,co_expire,co_status where co_id = ?";
+	private static final String INSERT_STMT = "INSERT INTO coupon (co_id,co_code,co_amount,co_start,co_expire,co_status,m_id) VALUES ('CO'|| lpad(COUPON_SEQ.NEXTVAL,5,'0'),?,?,?,?,?,?)";
+	private static final String GET_ALL_STMT = "SELECT co_id,co_code,co_amount,co_start,co_expire,co_status,m_id FROM coupon order by co_id";
+	private static final String GET_ONE_STMT = "SELECT co_id,co_code,co_amount,co_start,co_expire,co_status,m_id FROM coupon where co_id = ?";
+	private static final String DELETE = "DELETE FROM coupon where co_id = ?";
+	private static final String UPDATE = "UPDATE coupon set co_code=?,co_amount=?,co_start=?,co_expire=?,co_status=?,m_id=? where co_id =?";
 
 	@Override
 	public void insert(CouponVO couponVO1) {
@@ -36,6 +36,7 @@ public class CouponJDBCDAO implements CouponDAO_interface {
 			pstmt.setTimestamp(3, couponVO1.getCo_start());
 			pstmt.setTimestamp(4, couponVO1.getCo_expire());
 			pstmt.setString(5, couponVO1.getCo_status());
+			pstmt.setString(6, couponVO1.getM_id());
 
 			pstmt.executeUpdate();
 
@@ -82,7 +83,9 @@ public class CouponJDBCDAO implements CouponDAO_interface {
 			pstmt.setTimestamp(3, couponVO3.getCo_start());
 			pstmt.setTimestamp(4, couponVO3.getCo_expire());
 			pstmt.setString(5, couponVO3.getCo_status());
-			
+			pstmt.setString(6, couponVO3.getM_id());
+			pstmt.setString(7, couponVO3.getCo_id());
+
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -120,7 +123,7 @@ public class CouponJDBCDAO implements CouponDAO_interface {
 
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-//			pstmt = con.prepareStatement(DELETE);
+			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setString(1, co_id);
 
@@ -178,6 +181,7 @@ public class CouponJDBCDAO implements CouponDAO_interface {
 				couponVO2.setCo_start(rs.getTimestamp("co_start"));
 				couponVO2.setCo_expire(rs.getTimestamp("co_expire"));
 				couponVO2.setCo_status(rs.getString("co_status"));
+				couponVO2.setM_id(rs.getString("m_id"));
 			}
 
 			// Handle any driver errors
@@ -238,6 +242,7 @@ public class CouponJDBCDAO implements CouponDAO_interface {
 				couponVO2.setCo_start(rs.getTimestamp("co_start"));
 				couponVO2.setCo_expire(rs.getTimestamp("co_expire"));
 				couponVO2.setCo_status(rs.getString("co_status"));
+				couponVO2.setM_id(rs.getString("m_id"));
 				list.add(couponVO2); // Store the row in the list
 			}
 
@@ -284,6 +289,7 @@ public class CouponJDBCDAO implements CouponDAO_interface {
 //		couponVO1.setCo_start("");
 //		couponVO1.setCo_expire("");
 //		couponVO1.setCo_status("");
+//		couponVO1.setM_id("");
 //
 //		dao.insert(couponVO1);
 
@@ -295,6 +301,7 @@ public class CouponJDBCDAO implements CouponDAO_interface {
 		System.out.print(couponVO2.getCo_start() + ",");
 		System.out.print(couponVO2.getCo_expire() + ",");
 		System.out.println(couponVO2.getCo_status());
+		System.out.println(couponVO2.getM_id());
 		System.out.println("---------------------");
 
 //		// ¬d¸ß
@@ -306,6 +313,7 @@ public class CouponJDBCDAO implements CouponDAO_interface {
 //			System.out.print(aCo.getCo_start() + ",");
 //			System.out.print(aCo.getCo_expire()+ ",");
 //			System.out.print(aCo.getCo_status());
+//		    System.out.print(aCo.getM_id());
 //			System.out.println();
 //		}
 		// §R°£
@@ -319,6 +327,7 @@ public class CouponJDBCDAO implements CouponDAO_interface {
 //		couponVO3.setCo_start("");
 //		couponVO3.setCo_expire("");
 //		couponVO3.setCo_status("");
+//		couponVO3.setM_id("");
 //		dao.update(couponVO3);
 	}
 

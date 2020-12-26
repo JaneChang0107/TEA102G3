@@ -11,17 +11,17 @@ public class CouponService {
 		dao = new CouponJDBCDAO();
 	}
 
-	public CouponVO addCoupon(String co_id, String co_code, Integer co_amount, Timestamp co_start, Timestamp co_expire,
-			String co_status) {
+	public CouponVO addCoupon(String co_code, Integer co_amount, Timestamp co_start, Timestamp co_expire,
+			String co_status,String m_id) {
 
 		CouponVO couponVO = new CouponVO();
 
-		couponVO.setCo_id(co_id);
 		couponVO.setCo_code(co_code);
 		couponVO.setCo_amount(co_amount);
 		couponVO.setCo_start(co_start);
 		couponVO.setCo_expire(co_expire);
 		couponVO.setCo_status(co_status);
+		couponVO.setM_id(m_id);
 
 		dao.insert(couponVO);
 
@@ -29,7 +29,7 @@ public class CouponService {
 	}
 
 	public CouponVO updateCoupon(String co_id, String co_code, Integer co_amount, Timestamp co_start,
-			Timestamp co_expire, String co_status) {
+			Timestamp co_expire, String co_status,String m_id) {
 
 		CouponVO couponVO = new CouponVO();
 
@@ -39,6 +39,7 @@ public class CouponService {
 		couponVO.setCo_start(co_start);
 		couponVO.setCo_expire(co_expire);
 		couponVO.setCo_status(co_status);
+		couponVO.setM_id(m_id);
 		dao.update(couponVO);
 
 		return couponVO;

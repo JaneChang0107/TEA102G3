@@ -14,11 +14,11 @@ public class StoreJDBCDAO implements StoreDAO_interface {
 	String userid = "TEA102G3";
 	String passwd = "102G3";
 
-	private static final String INSERT_STMT = "INSERT INTO store (st_id,st_name,st_address) VALUES ('ST'|| lpad(STORE_SEQ.NEXTVAL,5,'0'),?,?)";
-	private static final String GET_ALL_STMT = "SELECT st_id,st_name,st_address FROM store order by st_id";
-	private static final String GET_ONE_STMT = "SELECT st_id,st_name,st_address FROM store where st_id = ?";
-//	private static final String DELETE = "DELETE FROM store where st_id = ?";
-	private static final String UPDATE = "UPDATE store set st_id=?, st_name=?,st_address=? where st_id = ?";
+	private static final String INSERT_STMT = "INSERT INTO store (st_id,st_name,st_tel,st_address) VALUES ('ST'|| lpad(STORE_SEQ.NEXTVAL,5,'0'),?,?,?)";
+	private static final String GET_ALL_STMT = "SELECT st_id,st_name,st_tel,st_address FROM store order by st_id";
+	private static final String GET_ONE_STMT = "SELECT st_id,st_name,st_tel,st_address FROM store where st_id = ?";
+	private static final String DELETE = "DELETE FROM store where st_id = ?";
+	private static final String UPDATE = "UPDATE store set st_name=?,st_tel=?,st_address=? where st_id =?";
 
 	@Override
 	public void insert(StoreVO storeVO1) {
@@ -31,8 +31,8 @@ public class StoreJDBCDAO implements StoreDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setString(1,storeVO1.getSt_id());
-			pstmt.setString(2,storeVO1.getSt_name());
+			pstmt.setString(1,storeVO1.getSt_name());
+			pstmt.setString(2,storeVO1.getSt_tel());
 			pstmt.setString(3,storeVO1.getSt_address());
 
 			pstmt.executeUpdate();
@@ -74,10 +74,11 @@ public class StoreJDBCDAO implements StoreDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
-
-			pstmt.setString(1, storeVO3.getSt_id());
-			pstmt.setString(2, storeVO3.getSt_name());
+			
+			pstmt.setString(1, storeVO3.getSt_name());
+			pstmt.setString(2, storeVO3.getSt_tel());
 			pstmt.setString(3, storeVO3.getSt_address());
+			pstmt.setString(4, storeVO3.getSt_id());
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -118,7 +119,7 @@ public class StoreJDBCDAO implements StoreDAO_interface {
 
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-//			pstmt = con.prepareStatement(DELETE);
+			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setString(1, st_id);
 
@@ -174,6 +175,7 @@ public class StoreJDBCDAO implements StoreDAO_interface {
 				storeVO2 = new StoreVO();
 				storeVO2.setSt_id(rs.getString("st_id"));
 				storeVO2.setSt_name(rs.getString("st_name"));
+				storeVO2.setSt_tel(rs.getString("st_tel"));
 				storeVO2.setSt_address(rs.getString("st_address"));
 			}
 
@@ -231,6 +233,7 @@ public class StoreJDBCDAO implements StoreDAO_interface {
 				storeVO2 = new StoreVO();
 				storeVO2.setSt_id(rs.getString("st_id"));
 				storeVO2.setSt_name(rs.getString("st_name"));
+				storeVO2.setSt_tel(rs.getString("st_tel"));
 				storeVO2.setSt_address(rs.getString("st_address"));
 				list.add(storeVO2); // Store the row in the list
 			}
@@ -275,12 +278,14 @@ public class StoreJDBCDAO implements StoreDAO_interface {
 		// 新增
 //		StoreVO storeVO1 = new StoreVO();
 //		storeVO1.setSt_name("台北101門市");
+//		storeVO1.setSt_tel("02-2937-1107");
 //		storeVO1.setSt_address("台北市信義區信義路五段七號");
 //		dao.insert(storeVO1);
 
 		// 查詢
 		StoreVO storeVO2 = dao.findByPrimaryKey("ST00001");
 		System.out.print(storeVO2.getSt_name() + ",");
+		System.out.print(storeVO2.getSt_tel() + ",");
 		System.out.println(storeVO2.getSt_address());
 		System.out.println("---------------------");
 
@@ -288,6 +293,7 @@ public class StoreJDBCDAO implements StoreDAO_interface {
 //		List<StoreVO> list = dao.getAll();
 //		for (StoreVO aSt : list) {
 //			System.out.print(aSt.getSt_name() + ",");
+//			System.out.print(aSt.getSt_tel() + ",");	
 //			System.out.print(aSt.getSt_address());
 //			System.out.println();
 //		}
@@ -296,7 +302,9 @@ public class StoreJDBCDAO implements StoreDAO_interface {
 		
 		// 修改
 //		StoreVO storeVO3 = new StoreVO();
-//		storeVO3.setSt_name("大直美麗華門市);
+//		storeVO3.setSt_id("ST00001");
+//		storeVO3.setSt_name("大直美麗華門市");
+//		storeVO3.setSt_tel("02-2935-1106");
 //		storeVO3.setSt_address("台北市中山區敬業三路20號");
 //		dao.update(storeVO3);
 	}

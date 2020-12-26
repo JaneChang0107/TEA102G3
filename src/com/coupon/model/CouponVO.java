@@ -10,6 +10,7 @@ public class CouponVO implements java.io.Serializable{
 	private Timestamp co_start  ;
 	private Timestamp co_expire;
 	private String co_status ;
+	private String m_id ;
 	public String getCo_id() {
 		return co_id;
 	}
@@ -46,9 +47,16 @@ public class CouponVO implements java.io.Serializable{
 	public void setCo_status(String co_status) {
 		this.co_status = co_status;
 	}
+	public String getM_id() {
+		return m_id;
+	}
+	public void setM_id(String m_id) {
+		this.m_id = m_id;
+	}
 	public CouponVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 
 }
