@@ -30,34 +30,55 @@ $("#searchBtn").click(function() {
         data : data,
         success : function(data) {
             // console.log(data);
-            $("#allProduct").html("");
+            $(".row").html("");
             $.each(data, function(index, value) {
 
                 findPicture(value.p_id).then((data) => {
                     
                     let ppid = data;
-                    $("#allProduct").append(
-                        `<tr>
-                            <td>${value.p_name}</td>
-                            <td>${value.pt_id}</td>
-                            <td>${value.p_count}</td>
-                            <td>${value.p_price}</td>
-                            <td>${value.p_addDateSec}</td>
-                            <td><img src="${contextPath}/ShowPicture?type=pp&id=${ppid}"></td>
-                            <td>
-                                <form action="${contextPath}/ProductServlet" method="POST">
-                                    <input type="hidden" name="pid" value="${value.p_id}">
-                                    <input type="hidden" name="action" value="findthis">
-                                    <input type="submit" value="詳細">
-                                </form>
-                            </td>
-                        </tr>`
+                    $(".row").append(
+                        `<div class="col-md-4">
+                            <div class="card" style="width: 18rem;">
+                                <img src="${contextPath}/ShowPicture?type=pp&id=${ppid}" class="card-img-top" alt="沒...沒圖片">
+                                <div class="card-body">
+                                    <h5 class="card-title">${value.p_name}</h5>
+                                    <p class="card-text">平台:${value.pt_idName}</p>
+                                    <p class="card-text">價格:${value.p_price}</p>
+                                    <small>上架時間:${value.p_addDateSec}</small>
+                                    <div>
+                                        <form action="${contextPath}/ProductServlet" method="POST">
+                                            <input type="hidden" name="pid" value="${value.p_id}">
+                                            <input type="hidden" name="action" value="findthis">
+                                            <input type="submit" class="btn btn-primary" value="詳細">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`
                     );
                 })
             });
         }
     });
 });
+
+
+
+/* <tr>
+    <td>${value.p_name}</td>
+    <td>${value.pt_id}</td>
+    <td>${value.p_count}</td>
+    <td>${value.p_price}</td>
+    <td>${value.p_addDateSec}</td>
+    <td><img src="${contextPath}/ShowPicture?type=pp&id=${ppid}"></td>
+    <td>
+        <form action="${contextPath}/ProductServlet" method="POST">
+            <input type="hidden" name="pid" value="${value.p_id}">
+            <input type="hidden" name="action" value="findthis">
+            <input type="submit" value="詳細">
+        </form>
+    </td>
+</tr> */
 
 function findPicture(pid) {
     return new Promise(function(resolve, reject) {

@@ -5,6 +5,20 @@
     <head>
         <meta charset="UTF-8">
         <title>SearchSellProduct</title>
+        
+        <link rel="stylesheet" href="<%= request.getContextPath() %>/vendors/bootstrap-4.5.3-dist/css/bootstrap.min.css">
+        <style>
+        	img{
+        		width: 100px;
+        		height: 200px;
+        		overflow: hidden;
+        		text-align: center;
+				line-height: 200px;
+        	}
+        	div.col-md-4{
+        		margin: 70px 0 auto 0;
+        	}
+        </style>
     </head>
     <body>
     
@@ -18,10 +32,10 @@
             <input type="button" id="searchBtn" value="搜尋">
         </div>
 
-        <div class="product">
-            <table id="allProduct">
-            
-            </table>
+        <div class="container">
+	      	 <div class="row align-items-center">
+	      	 
+	      	 </div>
         </div>
 		<input type="hidden" id="contextPath" value="<%= request.getContextPath() %>">
         <script src="<%= request.getContextPath() %>/vendors/jquery/jquery-3.5.1.min.js"></script>

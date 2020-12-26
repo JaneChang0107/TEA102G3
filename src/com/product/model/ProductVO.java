@@ -4,6 +4,9 @@ import java.sql.Date;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 
+import com.productType.model.ProductTypeService;
+import com.productType.model.ProductTypeVO;
+
 public class ProductVO implements java.io.Serializable {
 	
 	private String p_id;
@@ -44,6 +47,11 @@ public class ProductVO implements java.io.Serializable {
 	}
 	public String getPt_id() {
 		return pt_id;
+	}
+	public String getPt_idName() {
+		ProductTypeService ptService = new ProductTypeService();
+		ProductTypeVO ptVO = ptService.getOneProductType(pt_id);
+		return ptVO.getPt_platform();
 	}
 	public void setPt_id(String pt_id) {
 		this.pt_id = pt_id;
