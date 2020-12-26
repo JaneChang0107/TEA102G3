@@ -374,8 +374,9 @@ position:absolute;
 				type="button" id="dropdownMenuButton2" data-toggle="dropdown"
 				aria-haspopup="true" aria-expanded="false"></i>
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+
 					<a class="dropdown-item" href="<%=request.getContextPath()%>/Front_end/members/MyAccount.jsp">
-					${loginName}的帳戶
+					<%=session.getAttribute("loginName")==null ? "我": session.getAttribute("loginName")  %>的帳戶
 					</a>
 					
 					<hr>

@@ -84,7 +84,7 @@ public class MemberServlet extends HttpServlet {
 				RequestDispatcher failureView=req.getRequestDispatcher("/Front_end/members/select_page.jsp");
 				failureView.forward(req, res);
 			}
-        }
+        }	
 		
 //取一個進行修改
 		if ("getOne_For_Update".equals(action)) {
