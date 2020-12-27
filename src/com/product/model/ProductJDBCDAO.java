@@ -24,6 +24,8 @@ public class ProductJDBCDAO implements ProductInterface{
 			"SELECT * FROM PRODUCT WHERE M_ID = ? ORDER BY P_ID";
 	private final String FINDBYPNAME =
 			"SELECT * FROM PRODUCT WHERE P_NAME like ? AND P_STATUS = 1 ORDER BY P_ID";
+	private final String FINDBYPTYPE =
+			"SELECT * FROM PRODUCT WHERE PT_ID = ? AND P_STATUS = 1 ORDER BY P_ID";
 	private final String FINDBYPNAMETPYE =
 			"SELECT * FROM PRODUCT WHERE P_NAME like ? AND PT_ID = ? AND P_STATUS = 1 ORDER BY P_ID";
 	private final String FINDBYPSTATUS =
@@ -345,6 +347,66 @@ public class ProductJDBCDAO implements ProductInterface{
 		return list;
 	}
 
+	@Override
+	public List<ProductVO> findByProductType(String pt_id) {
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<ProductVO> list = new LinkedList<ProductVO>();
+		
+		try {
+			Class.forName(database.DRIVER);
+			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			ps = con.prepareStatement(FINDBYPTYPE);
+			ps.setString(1, pt_id);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				ProductVO pVO = new ProductVO();
+				pVO.setP_id(rs.getString("p_id"));
+				pVO.setP_name(rs.getString("p_name"));
+				pVO.setP_price(rs.getInt("p_price"));
+				pVO.setP_detail(rs.getString("p_detail"));
+				pVO.setPt_id(rs.getString("pt_id"));
+				pVO.setP_count(rs.getInt("p_count"));
+				pVO.setP_addDate(rs.getTimestamp("p_addDate"));
+				pVO.setP_reviseDate(rs.getTimestamp("p_reviseDate"));
+				pVO.setP_status(rs.getInt("p_status"));
+				pVO.setM_id(rs.getString("m_id"));
+				
+				list.add(pVO);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+		} finally {
+			try {
+				if(rs != null) {
+					rs.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(ps != null) {
+					ps.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(con != null) {
+					con.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
 	@Override
 	public List<ProductVO> findByProductName(String p_name, String pt_id) {
 		

@@ -20,7 +20,7 @@
 		<div>
 			<label>商品種類</label>
 			<select name="type">
-				<option value="no">請選擇</option>
+				<option value="no"></option>
 			<c:forEach var="ptVO" items="${ptService.all}">				
 				<option value="${ptVO.pt_id}">${ptVO.pt_platform} ${ptVO.pt_kind}</option>
 			</c:forEach>
@@ -31,7 +31,7 @@
 			<input type="text" name="name">
 		</div>
 		<input type="hidden" name="action" value="findByName">
-		<input type="submit" value="搜尋">
+		<input type="submit">
 	</form>
 
 </body>

@@ -46,12 +46,15 @@ public class ProductServlet extends HttpServlet {
 			List<String> errors = new LinkedList<String>();
 			request.setAttribute("errors", errors);
 			ProductService pService = new ProductService();
-			String type = request.getParameter("type");
+			String type = request.getParameter("ptype");
 			String name = request.getParameter("name");
 			List<ProductVO> pVOs = null;
 			
-			// 有類別
-			if(name.trim().isEmpty()) {
+			System.out.println(type);
+			System.out.println(name);
+			
+			// 都沒有
+			if("no".equals(type) && name.trim().isEmpty()) {
 				pVOs = pService.getAll();
 				request.setAttribute("pVOs", pVOs);
 			}
@@ -65,18 +68,21 @@ public class ProductServlet extends HttpServlet {
 				pVOs = pService.findProduct(name, type);
 			}
 			
+			if(!"no".equals(type) && name.isEmpty()) {
+				pVOs = pService.findTypeProduct(type);
+			}
+			
 			if(pVOs == null || pVOs.isEmpty()) {
 				errors.add("查無商品");
 			}
 			
 			if(!errors.isEmpty()) {
-				RequestDispatcher fail = request.getRequestDispatcher("/Back_end/product/searchProduct.jsp");
+				RequestDispatcher fail = request.getRequestDispatcher("/Front_end/product/searchSellProduct.jsp");
 				fail.forward(request, response);
 				return;
 			}
-			
 			request.setAttribute("pVOs", pVOs);
-			RequestDispatcher send = request.getRequestDispatcher("/Back_end/product/showProduct.jsp");
+			RequestDispatcher send = request.getRequestDispatcher("/Front_end/product/searchSellProduct.jsp");
 			send.forward(request, response);
 		}
 		if("insert".equals(action)) {

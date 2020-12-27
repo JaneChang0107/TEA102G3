@@ -33,16 +33,16 @@ public class Productajax extends HttpServlet {
 		doPost(request, response);
 	}
 
-	@SuppressWarnings("unused")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
+		
 		PrintWriter writer = response.getWriter();
 		String type = request.getParameter("type");
 		String name = request.getParameter("pname");
 
-		
+//		商品資訊
 		if(type != null && "no".equals(type)) {
 			ProductService pService = new ProductService();
 			List<ProductVO> pVOs = null;
@@ -75,7 +75,7 @@ public class Productajax extends HttpServlet {
 			writer.println(productJSON);
 			
 		}
-		
+//		拿商品圖片
 		String pid = request.getParameter("pid");
 		System.out.println(pid);
 		if(pid != null) {

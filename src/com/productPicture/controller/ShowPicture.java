@@ -32,9 +32,11 @@ public class ShowPicture extends HttpServlet {
 			ProductPictureService ppService = new ProductPictureService();
 			ProductPictureVO ppVO = ppService.findOneProductPicture(id);
 			
-			byte[] b = ppVO.getPp_picture();
-			byte[] smallPicture = ImageUtil.shrink(b, 200);
-			os.write(smallPicture);
+			if(ppVO != null) {
+				byte[] b = ppVO.getPp_picture();
+				byte[] smallPicture = ImageUtil.shrink(b, 200);
+				os.write(smallPicture);
+			}
 			os.close();
 		}
 		

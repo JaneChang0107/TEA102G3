@@ -41,6 +41,16 @@ public class ProductPictureService {
 		return dao.findByProduct(pid);
 	}
 	
+	public String findProductRandomPicture(String pid) {
+		List<ProductPictureVO> ppVOs = dao.findByProduct(pid);
+		if(ppVOs.size() > 0 ) {
+			int randnum = (int) (Math.random() * ppVOs.size());
+			
+			return ppVOs.get(randnum).getPp_id();
+		}
+			return "";
+	}
+	
 	public List<ProductPictureVO> getAll() {
 		return dao.getAll();
 	}

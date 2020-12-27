@@ -102,6 +102,10 @@ public class ProductService {
 		return dao.findByProductName(name);
 	}
 	
+	public List<ProductVO> findTypeProduct(String ptid) {
+		return dao.findByProductType(ptid);
+	}
+	
 	public List<ProductVO> findProduct(String name, String ptid) {
 		return dao.findByProductName(name, ptid);
 	}
