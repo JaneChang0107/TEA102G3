@@ -24,19 +24,13 @@
 		width:200px;
 	}
 	div#editProduct{
-		display: contents;
-		position: absolute;
+		position: relative;
 		width: 50%;
 		left: 50%;
-		height: 100%;
+		top: 10%;
 		transform: translateX(-50%);
 	}
-	h1, form{
-		left: 50%;
-		position: relative;
-		transform: translate(-50%);
-		width: 50%;
-	}
+	
 </style>
 </head>
 <body>

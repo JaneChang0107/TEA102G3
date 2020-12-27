@@ -22,15 +22,23 @@
 	box-sizing: border-box;
 }
 
+html {
+	height: 100%;
+}
+
 body {
 	background: #E3F8F6;
+	height: 100%;
 }
 
 h1 {
 	color: rgba(236, 76, 76, 0.548);
 	shape-rendering: auto;
 }
-
+.footer {
+	position: relative;
+	top: 20%
+}
 #id_footer {
 	box-sizing: border-box;
 	position: relative;
@@ -158,7 +166,6 @@ i {
 
 #search {
 	font-size: 4ex;
-	left: -15px;
 }
 
 .logo {
@@ -328,7 +335,23 @@ position:absolute;
  right:0;
  width:200px;
 }
+
+.search{
+	display: inline-block;
+
+}
+select#ptype{
+	position: relative;
+	font-size: 20px;
+	top: 12px;
+	height: 40px;
+	left: 75px;
+	z-index: 1;
+}
 </style>
+</head>
+
+<body>
 
 <div class="header">
 
@@ -344,10 +367,22 @@ position:absolute;
 	<a href="<%=request.getContextPath()%>/Front_end/index.jsp"><img
 		src="<%=request.getContextPath()%>/images/white_LOGO字在外版(revised).png"
 		class="logo" id="headerlogo"> </a>
-		<input type="text" id="searchBar">
+		
+	<div class="search">
+		<form action="<%= request.getContextPath() %>/ProductServlet" method="get" id="searchForm">
+			<select name="ptype" id="ptype">
+	            <option value="no"></option>
+	        </select>
+			<input type="text" id="searchBar" name="name">
+	
+			
+			<i class="fas fa-search" id="search">
+				<input type="hidden" name="action" value="findByName">
+			</i>
+		
+		</form>	
+	</div>
 
-	<i class="fas fa-angle-down" id="arrowdown"></i> <i
-		class="fas fa-search" id="search"></i>
 
 
 	<table>
@@ -393,21 +428,8 @@ position:absolute;
 		<tr>
 	</table>
 
-
-
-
-
-
-
-
-
-
-	<span></span>
-
-	<div></div>
-	<div></div>
-</head>
-
+</div>
+<input type="hidden" id="contextPath" value="<%= request.getContextPath() %>">
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 
@@ -442,7 +464,7 @@ position:absolute;
 <script src="<%=request.getContextPath()%>/vendors/popper/popper.min.js"></script>
 <script
 	src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script>
-
+<script src="<%= request.getContextPath() %>/Front_end/product/js/getType.js"></script>
 </body>
 
 </html>

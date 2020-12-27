@@ -1,5 +1,4 @@
 let contextPath = $("#contextPath").val();
-console.log(contextPath)
 $.ajax({
     url: contextPath + "/ProductTypeAjax",
     type : "GET",
@@ -10,6 +9,9 @@ $.ajax({
                 `<option value="${value.pt_id}">${value.pt_platform} ${value.pt_kind}</option>`
             )
         })
-    
     }
 })
+
+$("#search").click(function() {
+    $("#searchForm").submit();
+});

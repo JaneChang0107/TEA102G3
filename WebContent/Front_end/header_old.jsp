@@ -328,14 +328,6 @@ position:absolute;
  right:0;
  width:200px;
 }
-
-.search{
-	display: inline-block;
-
-}
-select{
-	
-}
 </style>
 
 <div class="header">
@@ -352,25 +344,10 @@ select{
 	<a href="<%=request.getContextPath()%>/Front_end/index.jsp"><img
 		src="<%=request.getContextPath()%>/images/white_LOGO字在外版(revised).png"
 		class="logo" id="headerlogo"> </a>
-		
-	<div class="search">
-		<form action="<%= request.getContextPath() %>/ProductServlet" method="get">
-			
-		<input type="text" id="searchBar" name="name">
-	
-		<i class="fas fa-angle-down" id="arrowdown">
-			<select name="ptype" id="ptype">
-	            <option value="no"></option>
-	        </select>
-		</i> 
-		<i class="fas fa-search" id="search">
-			<input type="hidden" name="action" value="findByName">
-			<input type="submit">
-		</i>
-	
-		</form>	
-	</div>
+		<input type="text" id="searchBar">
 
+	<i class="fas fa-angle-down" id="arrowdown"></i> <i
+		class="fas fa-search" id="search"></i>
 
 
 	<table>
@@ -430,7 +407,7 @@ select{
 	<div></div>
 	<div></div>
 </head>
-<input type="hidden" id="contextPath" value="<%= request.getContextPath() %>">
+
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 
@@ -465,7 +442,7 @@ select{
 <script src="<%=request.getContextPath()%>/vendors/popper/popper.min.js"></script>
 <script
 	src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script>
-<script src="<%= request.getContextPath() %>/Front_end/product/js/getType.js"></script>
+
 </body>
 
 </html>
