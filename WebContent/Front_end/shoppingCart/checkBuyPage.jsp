@@ -8,7 +8,7 @@
 <title>您的購物車-我要買</title>
 <style>
 * {
-	border: 1px solid gray;
+	border: 0px solid gray;
 }
 
 .mybody {
@@ -276,6 +276,8 @@
 
 			</tr>
 		</table>
+		
+
 
 	</div>
 	<div class="total">
