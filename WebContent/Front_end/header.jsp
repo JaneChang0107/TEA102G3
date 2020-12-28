@@ -35,10 +35,12 @@ h1 {
 	color: rgba(236, 76, 76, 0.548);
 	shape-rendering: auto;
 }
+
 .footer {
 	position: relative;
 	top: 20%
 }
+
 #id_footer {
 	box-sizing: border-box;
 	position: relative;
@@ -269,13 +271,6 @@ div.copyright {
 	height: 100%;
 	width: 0;
 	position: fixed;
-}
-
-
-.overlay {
-	height: 100%;
-	width: 0;
-	position: fixed;
 	z-index: 3;
 	top: 0;
 	left: 0;
@@ -328,19 +323,19 @@ div.header {
 	z-index: 3
 }
 
-
-#nav{
-position:absolute;
- top:0;
- right:0;
- width:200px;
+#nav {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 200px;
+	z-index: 4;
 }
 
-.search{
+.search {
 	display: inline-block;
-
 }
-select#ptype{
+
+select#ptype {
 	position: relative;
 	font-size: 20px;
 	top: 12px;
@@ -348,123 +343,125 @@ select#ptype{
 	left: 75px;
 	z-index: 1;
 }
+
+#searchBar {
+	width: 470px;
+}
 </style>
 </head>
 
 <body>
 
-<div class="header">
+	<div class="header">
 
-	<i class="fas fa-bars" id="ham" onclick="openNav()"></i>
-	<div id="myNav" class="overlay">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<div class="overlay-content">
-			<a href="#">About</a> <a href="#">Services</a> <a href="#">Clients</a>
-			<a href="#">Contact</a>
+		<i class="fas fa-bars" id="ham" onclick="openNav()"></i>
+		<div id="myNav" class="overlay">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			<div class="overlay-content">
+				<a href="#">About</a> <a href="#">Services</a> <a href="#">Clients</a>
+				<a href="#">Contact</a>
+			</div>
 		</div>
+
+		<a href="<%=request.getContextPath()%>/Front_end/index.jsp"><img
+			src="<%=request.getContextPath()%>/images/white_LOGO字在外版(revised).png"
+			class="logo" id="headerlogo" type="button"> </a>
+
+		<div class="search">
+			<form action="<%=request.getContextPath()%>/ProductServlet"
+				method="get" id="searchForm">
+				<select name="ptype" id="ptype">
+					<option value="no"></option>
+				</select> <input type="text" id="searchBar" name="name"> <i
+					class="fas fa-search" id="search"> <input type="hidden"
+					name="action" value="findByName">
+				</i>
+
+			</form>
+		</div>
+
+
+
+		<table>
+			<tr class="nav" id="nav">
+
+				<td>
+					<!-- cart下拉 開始--> <i class="fas fa-shopping-cart" type="button"
+					id="cart" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="true"></i>
+					<div class="dropdown-menu" aria-labelledby="cart">
+						<a class="dropdown-item" href="#">租用車</a> <a class="dropdown-item"
+							href="#">購買車</a>
+					</div> <!-- cart下拉結束 -->
+				</td>
+
+				<td><i class="far fa-bell" id="bell"></i></td>
+
+
+				<td>
+					<!-- user下拉開始 --> <i class="fas fa-user-circle" id="user"
+					type="button" id="dropdownMenuButton2" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false"></i>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+
+						<a class="dropdown-item"
+							href="<%=request.getContextPath()%>/Front_end/members/MyAccount.jsp">
+							<%=session.getAttribute("loginName") == null ? "我" : session.getAttribute("loginName")%>的帳戶
+						</a>
+
+						<hr>
+						<a class="dropdown-item"
+							href="<%=request.getContextPath()%>/Front_end/members/LoginPage.jsp">登入/註冊</a>
+						<!--如已有登入則改為另一個連結 -->
+						<a class="dropdown-item" href="#">賣家中心</a> <a
+							class="dropdown-item" href="#">登出</a>
+					</div> <!-- user下拉結束 -->
+				</td>
+
+			</tr>
+			<tr>
+		</table>
+
 	</div>
-
-	<a href="<%=request.getContextPath()%>/Front_end/index.jsp"><img
-		src="<%=request.getContextPath()%>/images/white_LOGO字在外版(revised).png"
-		class="logo" id="headerlogo"> </a>
-		
-	<div class="search">
-		<form action="<%= request.getContextPath() %>/ProductServlet" method="get" id="searchForm">
-			<select name="ptype" id="ptype">
-	            <option value="no"></option>
-	        </select>
-			<input type="text" id="searchBar" name="name">
-	
-			
-			<i class="fas fa-search" id="search">
-				<input type="hidden" name="action" value="findByName">
-			</i>
-		
-		</form>	
-	</div>
+	<input type="hidden" id="contextPath"
+		value="<%=request.getContextPath()%>">
+	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 
 
-	<table>
-		<tr class="nav" id="nav">
+	<script>
+		var swiper = new Swiper('.swiper-container', {
+			slidesPerView : 4,
+			spaceBetween : 30,
+			slidesPerGroup : 4,
+			loop : true,
+			loopFillGroupWithBlank : true,
+			pagination : {
+				el : '.swiper-pagination',
+				clickable : true,
+			},
+			navigation : {
+				nextEl : '.swiper-button-next',
+				prevEl : '.swiper-button-prev',
+			},
+		});
 
-			<td>
-				<!-- cart下拉 開始--> 
-				<i class="fas fa-shopping-cart" type="button"
-				id="cart" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="true"></i>
-				<div class="dropdown-menu" aria-labelledby="cart">
-					<a class="dropdown-item" href="#">租用車</a> <a class="dropdown-item"
-						href="#">購買車</a>
-				</div> 
-				<!-- cart下拉結束 -->
-			</td>
+		function openNav() {
+			document.getElementById("myNav").style.width = "35%";
+		}
 
-			<td><i class="far fa-bell" id="bell"></i></td>
-			
-			
-			<td>
-				<!-- user下拉開始 --> 
-				<i class="fas fa-user-circle" id="user"
-				type="button" id="dropdownMenuButton2" data-toggle="dropdown"
-				aria-haspopup="true" aria-expanded="false"></i>
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-
-					<a class="dropdown-item" href="<%=request.getContextPath()%>/Front_end/members/MyAccount.jsp">
-					<%=session.getAttribute("loginName")==null ? "我": session.getAttribute("loginName")  %>的帳戶
-					</a>
-					
-					<hr>
-					<a class="dropdown-item"
-						href="<%=request.getContextPath()%>/Front_end/members/LoginPage.jsp">登入/註冊</a>
-					<!--如已有登入則改為另一個連結 -->
-					<a class="dropdown-item" href="#">賣家中心</a> <a class="dropdown-item"
-						href="#">登出</a>
-				</div> 
-				<!-- user下拉結束 -->
-			</td>
-
-		</tr>
-		<tr>
-	</table>
-
-</div>
-<input type="hidden" id="contextPath" value="<%= request.getContextPath() %>">
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-
-
-<script>
-	var swiper = new Swiper('.swiper-container', {
-		slidesPerView : 4,
-		spaceBetween : 30,
-		slidesPerGroup : 4,
-		loop : true,
-		loopFillGroupWithBlank : true,
-		pagination : {
-			el : '.swiper-pagination',
-			clickable : true,
-		},
-		navigation : {
-			nextEl : '.swiper-button-next',
-			prevEl : '.swiper-button-prev',
-		},
-	});
-
-	function openNav() {
-		document.getElementById("myNav").style.width = "35%";
-	}
-
-	function closeNav() {
-		document.getElementById("myNav").style.width = "0%";
-	}
-</script>
-<script
-	src="<%=request.getContextPath()%>/vendors/jquery/jquery-3.5.1.min.js"></script>
-<script src="<%=request.getContextPath()%>/vendors/popper/popper.min.js"></script>
-<script
-	src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script>
-<script src="<%= request.getContextPath() %>/Front_end/product/js/getType.js"></script>
+		function closeNav() {
+			document.getElementById("myNav").style.width = "0%";
+		}
+	</script>
+	<script
+		src="<%=request.getContextPath()%>/vendors/jquery/jquery-3.5.1.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/vendors/popper/popper.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/Front_end/product/js/getType.js"></script>
 </body>
 
 </html>
