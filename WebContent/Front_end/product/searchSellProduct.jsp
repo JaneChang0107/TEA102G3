@@ -28,8 +28,10 @@
         
 <jsp:useBean id="ppService" scope="page" class="com.productPicture.model.ProductPictureService"></jsp:useBean>
         <div class="container">
-	      	<div class="row align-items-center">
-	      	
+        
+        <input type="hidden" id="type" value="${type}">
+        <input type="hidden" id="name" value="${name}">
+     	<div class="row align-items-center">  	
 		<c:forEach var="value" items="${pVOs}">
 			<div class="col-md-3">
 			        <div class="card" style="width: 18rem;">
@@ -40,7 +42,7 @@
 			            <p class="card-text">價格:${value.p_price}</p>
 			            <small>上架時間:${value.p_addDateSec}</small>
 			            <div>
-			                <form action="${contextPath}/ProductServlet" method="POST">
+			                <form action="<%= request.getContextPath() %>/ProductServlet" method="GET">
 			                    <input type="hidden" name="pid" value="${value.p_id}">
 			                    <input type="hidden" name="action" value="findthis">
 			                    <input type="submit" class="btn btn-primary" value="詳細">

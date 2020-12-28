@@ -371,12 +371,11 @@ select#ptype {
 			<form action="<%=request.getContextPath()%>/ProductServlet"
 				method="get" id="searchForm">
 				<select name="ptype" id="ptype">
-					<option value="no"></option>
-				</select> <input type="text" id="searchBar" name="name"> <i
-					class="fas fa-search" id="search"> <input type="hidden"
-					name="action" value="findByName">
+				</select>
+				<input type="text" id="searchBar" name="name">
+				<i	class="fas fa-search" id="search">
+				 	<input type="hidden" name="action" value="findByName">
 				</i>
-
 			</form>
 		</div>
 

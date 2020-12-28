@@ -50,9 +50,9 @@ public class ProductServlet extends HttpServlet {
 			String name = request.getParameter("name");
 			List<ProductVO> pVOs = null;
 			
-			System.out.println(type);
-			System.out.println(name);
-			
+			request.setAttribute("type", type);
+			request.setAttribute("name", name);
+					
 			// ³£¨S¦³
 			if("no".equals(type) && name.trim().isEmpty()) {
 				pVOs = pService.getAll();

@@ -19,6 +19,9 @@
 				height: 100%;
 				transform: translateX(-50%);
 			}
+			img.productImg{
+				width: 200px;
+			}
 			
 	
 		</style>
