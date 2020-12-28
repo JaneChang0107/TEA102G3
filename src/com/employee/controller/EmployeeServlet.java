@@ -99,7 +99,7 @@ public class EmployeeServlet extends HttpServlet {
 			
 			try {
 				/***************************1.接收請求參數****************************************/
-				String e_id = new String(req.getParameter("e_id"));
+				String e_id = req.getParameter("e_id");
 				System.out.println("e_id");
 				
 				/***************************2.開始查詢資料****************************************/

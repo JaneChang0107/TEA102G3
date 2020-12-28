@@ -2,6 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.employee.model.*"%>
+
+<%
+    Object e_id = session.getAttribute("e_id");                  // 從 session內取出 (key) account的值
+    if (e_id == null) {                                             // 如為 null, 代表此user未登入過 , 才做以下工作
+      session.setAttribute("location", request.getRequestURI());       //*工作1 : 同時記下目前位置 , 以便於login.html登入成功後 , 能夠直接導至此網頁(須配合LoginHandler.java)
+      response.sendRedirect(request.getContextPath()+"/Back_end/employee/login.jsp");   //*工作2 : 請該user去登入網頁(login.html) , 進行登入
+      return;
+    }
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,18 +22,18 @@
     <link rel="stylesheet type" href="./css/index_backstage.css">
 </head>
 <body>
-	<div class="container-fluid">
+	<div class="container-fluid index_container">
         <div class="row header">
             <div class="col-2 align-self-center img-div">
                 <img src="./images/white_LOGO.png">
             </div>
-            <div class="col">
+            <div class="col head">
                 <div class="row align-items-center">
-                    <div class="col">HELLO!阿堃</div>
+                    <div class="col"><p>HELLO!${e_id}</p></div>
                 </div>
 
                 <div class="row align-items-center">
-                    <div class="col">
+                    <div class="col head">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">   <!--員工系統 = emp_sys-->
                               <a class="nav-link active" id="emp_sys-tab" data-toggle="tab" href="#emp_sys" role="tab" aria-controls="emp_sys" aria-selected="true">
@@ -51,7 +61,9 @@
                               </a>
                             </li>
                             <li>
-                                <button type="button" class="btn btn-danger">登出</button>
+                            	<form action="<%=request.getContextPath()%>/logout">
+                                <button type="submit" class="btn btn-danger">登出</button>
+                                </form>
                             </li>
                           </ul>                         
                     </div>             
@@ -62,10 +74,10 @@
             <div class="col">
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="emp_sys" role="tabpanel" aria-labelledby="emp_sys-tab">
-                    	<%@include file="select_page.jsp"%>
+                    	<%@include file="employee.jsp"%>
                     </div>
                     <div class="tab-pane fade" id="acc_mgt" role="tabpanel" aria-labelledby="acc_mgt-tab">
-                    	<%@include file="addEmployee.jsp"%>
+<%--                     	<%@include file="addEmployee.jsp"%> --%>
                     </div>
                     <div class="tab-pane fade" id="cs_sys" role="tabpanel" aria-labelledby="cs_sys-tab">這裡放你要的頁面</div>
                     <div class="tab-pane fade" id="rent_mgt" role="tabpanel" aria-labelledby="rent_mgt-tab">這裡放你要的頁面</div>

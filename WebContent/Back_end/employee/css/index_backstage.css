@@ -8,21 +8,30 @@ body{
 img{
     max-width: 100%;
 }
+ul li{
+	list-style: none;
+}
 .container-fluid{
-    /* border: 1px solid red; */
-    margin: 5% auto;
+/*     border: 1px solid red; */
 }
 .header{
     background-color: #6CCFF3;
 }
+.update_without{
+    margin-top: 10%;
+/*     padding: 5%; */
+    font-size: 24px;
+}
+.log_header{
+}
 .row{
     height: 50%;
-    /* border: 1px solid green; */
+/*     border: 1px solid green; */
 }
 
 .col{
-    /* border: 1px solid black; */
-    font-size: 50px;
+/*     border: 1px solid black; */
+    /* font-size: 50px; */
 }
 .img-div{
     text-align: center;
@@ -43,7 +52,11 @@ img{
 }
 .login-container{
     width: 60%;
-    margin-top: 10%;
+    margin-top: 5%;
+    font-size: 50px;
+}
+.index_container{
+	font-size: 50px;
 }
 .account-row{
     /* display: inline-block; */
@@ -54,6 +67,11 @@ img{
 }
 .forget-btn{
     margin: 5% auto;
-    width: 10%;
-    height: 30%;
+    width: 20%;
+    height: 60%;
+    font-size: 24px;
+}
+.btn_col{
+    /* margin-right: 10%; */
+    margin-top: 10%;
 }

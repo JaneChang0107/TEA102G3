@@ -12,7 +12,7 @@
 	<div class="container-fluid login-container">
         <div class="row">
             <div class="col login_col">
-                <div class="row header">
+                <div class="row header log_header">
                     <div class="col-4 img-div">
                         <img src="./images/white_LOGO.png">
                     </div>

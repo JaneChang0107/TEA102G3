@@ -12,7 +12,7 @@
 	<div class="container-fluid login-container">
         <div class="row">
             <div class="col login_col">
-                <div class="row header">
+                <div class="row header log_header">
                     <div class="col-4 img-div">
                         <img src="./images/white_LOGO.png">
                     </div>
@@ -28,10 +28,10 @@
                 </div>
                 <div class="row forget-row">
                     <div class="col-10">
-                        <button type="button" class="btn btn-light forget-btn">回首頁</button>
+                        <button type="button" id="btn_index"  class="btn btn-light forget-btn">回首頁</button>
                         <button type="button" class="btn btn-warning forget-btn">送出</button>
                     </div>
-                    
+<%--                     onclick="location.href='<%=request.getContextPath()%>/Back_end/employee/login.jsp'" --%>
                 </div>
             </div>
         </div>
@@ -42,5 +42,11 @@
     <script src="../../vendors/popper/popper.min.js"></script>
     <script src="../../vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="./js/index_backstage.js"></script>
+    <script>
+	    var btn_index = document.getElementById("btn_index");
+	    btn_index.addEventListener('click',function(){
+	    	location.href='<%=request.getContextPath()%>/Back_end/employee/login.jsp'
+	    });   
+    </script>
 </body>
 </html>

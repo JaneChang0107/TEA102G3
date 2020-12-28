@@ -19,6 +19,8 @@ public class EmployeeJDBCDAO implements EmployeeDAO_interface{
 		"DELETE FROM employee where e_id = ?";
 	private static final String UPDATE = 
 		"UPDATE employee set e_password=?, e_identity=?, e_name=?, e_gender=?, e_birth=?, e_email=?, e_phone=?, e_address=?, e_title=?, e_status=?, st_id=? where e_id = ?";
+	private static final String UPDATE_WITHOUT = 
+			"UPDATE employee set e_identity=?, e_name=?, e_gender=?, e_birth=?, e_email=?, e_phone=?, e_address=?, e_title=?, st_id=? where e_id = ?";
 
 	@Override
 	public void insert(EmployeeVO employeeVO) {
@@ -74,7 +76,7 @@ public class EmployeeJDBCDAO implements EmployeeDAO_interface{
 		}
 
 	}
-
+	/*****************更新全部*****************/
 	@Override
 	public void update(EmployeeVO employeeVO) {
 
@@ -129,6 +131,61 @@ public class EmployeeJDBCDAO implements EmployeeDAO_interface{
 			}
 		}
 
+	}
+	/*****************更新除了密碼和狀態*****************/
+	@Override
+	public void update_without(EmployeeVO employeeVO) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_WITHOUT);
+			
+			
+			
+			pstmt.setString(1, employeeVO.getE_identity());
+			pstmt.setString(2, employeeVO.getE_name());
+			pstmt.setString(3, employeeVO.getE_gender());
+			pstmt.setDate(4, employeeVO.getE_birth());
+			pstmt.setString(5, employeeVO.getE_email());
+			pstmt.setString(6, employeeVO.getE_phone());
+			pstmt.setString(7, employeeVO.getE_address());
+			pstmt.setString(8, employeeVO.getE_title());
+			pstmt.setInt(9, employeeVO.getE_status());
+			pstmt.setString(10, employeeVO.getE_id());
+			
+			pstmt.executeUpdate();
+			
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
 	}
 
 	@Override
@@ -312,6 +369,66 @@ public class EmployeeJDBCDAO implements EmployeeDAO_interface{
 			}
 		}
 		return list;
+	}
+	
+	@Override
+	public EmployeeVO getEmployeePwd(String e_id) {
+
+		EmployeeVO employeeVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ONE_STMT);
+
+			pstmt.setString(1, e_id);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVo 也稱為 Domain objects
+				employeeVO = new EmployeeVO();
+				employeeVO.setE_id(rs.getString("e_id"));
+				employeeVO.setE_password(rs.getString("e_password"));
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return employeeVO;
 	}
 
 	/**
