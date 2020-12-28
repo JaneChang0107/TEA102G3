@@ -8,7 +8,7 @@
 <title>您的購物車-我要租</title>
 <style>
 * {
-	border: 1px solid gray;
+	border: 0px solid gray;
 }
 
 .mybody {
@@ -160,14 +160,14 @@ input:read-only {
 	</div>
 
 	<div>
-		<h2 class="title">結帳頁面-我要買</h2>
+		<h2 class="title">結帳頁面-我要租</h2>
 	</div>
 	<div class="content">
 
 		<hr>
 		<table class="table1">
 			<th>
-				<h4 align="center">阿堃的賣場</h4>
+				<h4 align="center">遊戲堃</h4>
 
 			</th>
 			<tr class="cart">
@@ -210,7 +210,7 @@ input:read-only {
 
 			</tr>
 			<tr>
-				<th colspan=8><a>確認運送與付款方式</a><img
+				<th colspan=8><a>請於契約書簽名</a><img
 					src="<%=request.getContextPath()%>/images/downarrow.png"
 					class="downarrow" data-toggle="collapse" href="#collapseExample"
 					type="button" aria-expanded="false" aria-controls="collapseExample"></img>
@@ -259,11 +259,11 @@ input:read-only {
 		<table class="table3">
 			<tr>
 				<td><h4>訂購人資料</h4></td>
-				<td><h4>收件人資料</h4></td>
+				<td><h4>取貨資料</h4></td>
 			</tr>
 			<tr>
 				<td>姓名:<input type="text" readonly></input></td>
-				<td>姓名:<input type="text"></input></td>
+				<td>分店:<input type="text"></input></td>
 			</tr>
 			<tr>
 				<td>住址:<input type="text" readonly></input></td>
@@ -271,12 +271,11 @@ input:read-only {
 			</tr>
 			<tr>
 				<td>電話:<input type="text" readonly></input></td>
-				<td>電話:<input type="text"></input></td>
+				<td></input></td>
 			</tr>
 			<tr>
 				<td></td>
-				<td><input type="checkbox"></input>同訂購人資料
-				<td>
+				<td></td>
 			</tr>
 
 		</table>
@@ -289,8 +288,8 @@ input:read-only {
 		<h4>總計210元</h4>
 	</div>
 	<div class="buttonarea">
-		<button type="button" class="button1">繼續逛逛</button>
-		<button type="button" class="button2">進入結帳</button>
+		<button type="button" class="button1">回上一頁</button>
+		<button type="button" class="button2">確認送出</button>
 	</div>
 	<div class="footer">
 		<jsp:include page="../footer.jsp"></jsp:include>
