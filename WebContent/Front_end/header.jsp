@@ -399,7 +399,8 @@ select#ptype {
 
 
 				<td>
-					<!-- user下拉開始 --> <i class="fas fa-user-circle" id="user"
+					<!-- user下拉開始 --> 
+					<i class="fas fa-user-circle" id="user"
 					type="button" id="dropdownMenuButton2" data-toggle="dropdown"
 					aria-haspopup="true" aria-expanded="false"></i>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
@@ -408,14 +409,14 @@ select#ptype {
 							href="<%=request.getContextPath()%>/Front_end/members/MyAccount.jsp">
 							<%=session.getAttribute("loginName") == null ? "我" : session.getAttribute("loginName")%>的帳戶
 						</a>
-
 						<hr>
 						<a class="dropdown-item"
 							href="<%=request.getContextPath()%>/Front_end/members/LoginPage.jsp">登入/註冊</a>
 						<!--如已有登入則改為另一個連結 -->
 						<a class="dropdown-item" href="#">賣家中心</a> <a
 							class="dropdown-item" href="#">登出</a>
-					</div> <!-- user下拉結束 -->
+					</div> 
+					<!-- user下拉結束 -->
 				</td>
 
 			</tr>
