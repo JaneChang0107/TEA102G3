@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.member.model.MemberService;
@@ -108,10 +109,149 @@ public class MemberServlet extends HttpServlet {
 				failureView.forward(req, res);				
 			}
 		}
+
+//準備進行個人檔案修改
+		if ("Myfileupdate".equals(action)) {
+			try {
+				// 1.接收請求參數
+				HttpSession session =req.getSession();
+				String m_id = session.getAttribute("loginId").toString();
+				// 2.開始查詢資料
+				MemberService memSvc =new MemberService();
+				MemberVO memberVO=memSvc.findOneMem(m_id);
+                // 3.查詢完成,準備轉交
+				session.setAttribute("memberVO", memberVO);
+				String url ="/Front_end/members/MyAccountRevise.jsp";
+				RequestDispatcher successView =req.getRequestDispatcher(url);
+				successView.forward(req, res);
+			} catch(Exception e) {
+				RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/members/MyAccount.jsp");
+				failureView.forward(req, res);				
+			}
+		}
+		
+//個人檔案修改
+		if ("Myfileupdateconfirm".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			// 1.接收請求參數，輸入格式錯誤處理
+			try {
+			String m_id =new String(req.getParameter("m_id").trim());
+			
+			String m_email = req.getParameter("m_email");
+//			String m_emailReg = "\\p{Alpha}\\w{2,15}[@][a-z0-9]{3,}[.]\\p{Lower}{2,}";
+			if (m_email == null || m_email.trim().length() == 0) {
+				errorMsgs.add("郵箱請勿空白");
+			} 
+//			else if (!m_email.trim().matches(m_emailReg)) {
+//				errorMsgs.add("郵箱不符合格式!請重新輸入");
+//			}
+			
+			String m_password = req.getParameter("m_password").trim();
+			if (m_password == null || m_password.trim().length() == 0) {
+				errorMsgs.add("密碼請勿空白");
+			}
+			
+			String m_name = req.getParameter("m_name");
+			String m_nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+			if (m_name == null || m_name.trim().length() == 0) {
+				errorMsgs.add("姓名請勿空白");
+			} else if (!m_name.trim().matches(m_nameReg)) {
+				errorMsgs.add("姓名只能為中英文、數字和_ , 且長度必需在2到10之間");
+			}
+			String m_gender = req.getParameter("m_gender");
+			
+			if (m_gender == null || m_gender.trim().length() == 0) {
+				errorMsgs.add("請選擇性別欄");
+			}
+		
+			
+			String m_phone = req.getParameter("m_phone");
+			if (m_phone == null || m_phone.trim().length() == 0) {
+				errorMsgs.add("電話請勿空白");
+			}else if(m_phone.length() <=8 || m_phone.length()>10 ) {
+				errorMsgs.add("電話號碼位數不符");
+			}
+
+			String m_address = req.getParameter("m_address");
+			if (m_address == null || m_address.trim().length() == 0) {
+				errorMsgs.add("地址請勿空白");
+			}
+			
+			java.sql.Date m_birth = null;
+			try {
+				m_birth = java.sql.Date.valueOf(req.getParameter("m_birth").trim());
+			} catch (IllegalArgumentException e) {
+				m_birth = new java.sql.Date(System.currentTimeMillis());
+				errorMsgs.add("請選擇生日");
+			}
+			
+			MemberService memSvc =new MemberService();  //宣告Service物件來用
+			Part m_headpicpart =req.getPart("m_headpic");   //上傳必使用Part xxx=req.getPart("某個參數") 拿到Part
+			InputStream is =m_headpicpart.getInputStream();		//用part連接InputSream高階管
+			byte[] m_headpic =null;                             //宣告byte[]陣列
+			if(is.available()!=0) {                               //如果管子接的來源不是0
+				m_headpic =new byte[is.available()];                
+			    is.read(m_headpic);
+			    is.close();
+			} else 
+				m_headpic = memSvc.findOneMem(m_id).getM_headpic();
+			
+			String m_account = req.getParameter("m_account");			
+			String m_accountName =req.getParameter("m_accountName");
+		
+			String b_code =req.getParameter("b_code");
+				
+			
+			MemberVO memberVO = new MemberVO();
+			memberVO.setM_id(m_id);
+			memberVO.setM_email(m_email);
+			memberVO.setM_password(m_password);
+			memberVO.setM_gender(m_gender);
+			memberVO.setM_name(m_name);
+			memberVO.setM_phone(m_phone);
+			memberVO.setM_address(m_address);
+			memberVO.setM_birth(m_birth);
+			memberVO.setM_headpic(m_headpic);
+			memberVO.setM_account(m_account);
+			memberVO.setM_accountName(m_accountName);
+			memberVO.setB_code(b_code);
+
+			if (!errorMsgs.isEmpty()) {
+				req.setAttribute("memberVO", memberVO);
+				RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/members/MyAccountRevise.jsp");
+				failureView.forward(req, res);
+				return;
+			}
+
+			// 2.開始修改資料
+			System.out.println("開始修改");
+			MemberService memberSvc = new MemberService();
+			memberVO = memberSvc.updateMem( m_email,  m_password,  m_name,  m_gender,  m_phone,
+					 m_address, m_birth, m_headpic,m_account,m_accountName,b_code, m_id);//得到memberVO物件以做後續處理
+            System.out.println("修改完成");
+            
+			// 3.修改完成，準備轉交
+            req.setAttribute("memberVO", memberVO);  //資料庫update完成，將memberVO物件存入req
+			String url= "/Front_end/members/MyAccount.jsp";
+			RequestDispatcher successView =req.getRequestDispatcher(url);
+			successView.forward(req, res);
+			
+			// 抓到其他例外
+			}catch(Exception e) {
+				System.out.println("例外發生");
+				errorMsgs.add("資料修改失敗"+e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/members/MyAccountRevise.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		
+		
+		
 		
 //update行為符合，修改會員資料
 		if ("update".equals(action)) {
-			System.out.println("進入修改");
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			// 1.接收請求參數，輸入格式錯誤處理

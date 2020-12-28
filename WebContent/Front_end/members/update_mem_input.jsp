@@ -55,7 +55,7 @@ a {
 		<table>
 		    <tr>
 		       <td>會員id:<font color=red><b>*</b></font></td>
-		       <td><%=memberVO.getM_id() %></td>
+		       <td><%=memberVO.getM_id()%></td>
 		    </tr>
 		
 			<tr>
@@ -192,7 +192,7 @@ a {
 		timepicker : false, //timepicker:true,
 		step : 1, //step: 60 (這是timepicker的預設間隔60分鐘)
 		format : 'Y-m-d', //format:'Y-m-d H:i:s',
-		value : new Date(),
+		value : '<%=memberVO.getM_birth()%>',
 		maxDate : '+1970-01-01' // 去除今日(不含)之後
 	});
 </script>

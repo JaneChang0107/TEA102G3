@@ -61,12 +61,12 @@
 }
 
 #pills-home-tab, #pills-profile-tab {
-    text-align:center;
-    margin:auto;
-	position: relative;
-	left: 220%;
-	font-size: 24px;
-	padding: 15px 80px;
+    text-align: center;
+    margin: auto;
+    position: relative;
+    left: 140%;
+    font-size: 24px;
+    padding: 15px 150px;
 }
 
 .content {
@@ -75,12 +75,22 @@
 }
 
 #myfiles,#changepw{
-    text-align:center;
+    text-align:left;
     margin:auto;
     background-color: #e9e9e9;
     width:800px;
     height:900px;
     font-size:24px;
+}
+#changepw{
+    height:300px;
+}
+
+#revise{
+    background-color: #FFA000;
+    width: 100px;
+    border: 1px solid #707070;
+    margin-left: 20px;
 }
 
 
@@ -135,72 +145,93 @@
 			
 			
 			<div class="tab-content" id="pills-tabContent" id="myfile">
-			
-			
+
+
 				<div class="tab-pane fade show active" id="pills-home"
 					role="tabpanel" aria-labelledby="pills-home-tab">
+
+					<table id="myfiles">
+						<tr>
+							<td><b>我的檔案</b>
+							<hr></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>Email</td>
+							<td>${memberVO.m_email}</td>
+
+						</tr>
+						<tr>
+							<td>姓名</td>
+							<td>${memberVO.m_name}</td>
+						</tr>
+						<tr>
+							<td>電話</td>
+							<td>${memberVO.m_phone}</td>
+						</tr>
+						<tr>
+							<td>性別</td>
+							<td>${memberVO.m_gender}</td>
+						</tr>
+						<tr>
+							<td>生日</td>
+							<td>${memberVO.m_birth}</td>
+						</tr>
+						<tr>
+							<td>地址</td>
+							<td>${memberVO.m_address}</td>
+						</tr>
+
+						<!-- -------------------------------------------------------------------------- -->
+						<tr>
+							<td><b>銀行帳戶</b>
+							<hr></td>
+							<td></td>
+
+						</tr>
+						<tr>
+							<td>全名</td>
+							<td>${memberVO.m_accountName}</td>
+						</tr>
+						<tr>
+							<td>銀行代碼</td>
+							<td>${memberVO.b_code}</td>
+							<td>銀行</td>
+							<td>XX銀行</td>
+						</tr>
+						<tr>
+							<td>帳戶</td>
+							<td>${memberVO.m_account}</td>
+						</tr>
+
+					</table>
 					
-											<table id="myfiles">
-							<tr>
-								<td><b>我的檔案</b><hr></td>
-								<td></td>
-							</tr>	
-							<tr>
-								<td>Email</td>
-								<td>${memberVO.m_email}</td>
+					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/controller/MemberServlet" style="margin-bottom: 0px;">
+					<input type="hidden" name="action" value="Myfileupdate">
+					<input type="hidden" name="m_id" value="<%=memberVO.getM_id()%>">
+                    <input type="submit" value="修改" id="revise" class="btn btn-primary">
+                    </FORM>
 
-							</tr>
-							<tr>
-								<td>姓名</td>
-								<td>${memberVO.m_name}</td>
-							</tr>
-							<tr>
-								<td>手機號碼</td>
-								<td>${memberVO.m_phone}</td>
-							</tr>
-							<tr>
-								<td>性別</td>
-								<td>${memberVO.m_gender}</td>
-							</tr>
-							<tr>
-								<td>生日</td>
-								<td>${memberVO.m_birth}</td>
-							</tr>
-							<tr>
-								<td>地址</td>
-								<td>${memberVO.m_address}</td>
-							</tr>
-							
-	<!-- -------------------------------------------------------------------------- -->						
-							<tr>
-								<td><b>銀行帳戶</b><hr></td>
-								<td></td>
+				</div>
 
-							</tr>
-							<tr>
-								<td>全名</td>
-								<td>${memberVO.m_accountName}</td>
-							</tr>
-							<tr>
-								<td>銀行代碼</td>
-								<td>${memberVO.b_code}</td>
-								<td>銀行</td>
-								<td>XX銀行</td>
-							</tr>
-							<tr>
-								<td>帳戶</td>
-								<td>${memberVO.m_account}</td>
-							</tr>
-
-						</table>
-						
-
-                </div>
-					
 				<div class="tab-pane fade" id="pills-profile" role="tabpanel"
 					aria-labelledby="pills-profile-tab">
-
-                        bbbbbbbbbbbbbbbbb
+					<table id="changepw">
+						<tr>
+							<td>原始密碼</td>
+							<td><input type="password" readonly value="${memberVO.m_password}" style="background-color: beige"></td>
+						</tr>
+						<tr>
+						    <td>
+						
+						</tr>
+		
+					</table>
+					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/controller/MemberServlet" style="margin-bottom: 0px;">
+					<input type="hidden" name="action" value="Myfileupdate">
+					<input type="hidden" name="m_id" value="<%=memberVO.getM_id()%>">
+                    <input type="submit" value="修改" id="revise" class="btn btn-primary">
+                    </FORM>
 
                  </div>
 

@@ -64,6 +64,30 @@ public class MemberService {
 		return memberVO;
 	}
 		
+	
+	//修改會員建構子
+	public MemberVO updateMem(String m_email, String m_password, String m_name, String m_gender, String m_phone,
+			String m_address, java.sql.Date m_birth, byte[] m_headpic, String m_account, String m_accountName, String b_code,
+			 String m_id) {
+
+		MemberVO memberVO = new MemberVO();
+		memberVO.setM_email(m_email);
+		memberVO.setM_password(m_password);
+		memberVO.setM_gender(m_gender);
+		memberVO.setM_name(m_name);
+		memberVO.setM_phone(m_phone);
+		memberVO.setM_address(m_address);
+		memberVO.setM_birth(m_birth);
+		memberVO.setM_headpic(m_headpic);
+		memberVO.setM_account(m_account);
+		memberVO.setM_accountName(m_accountName);
+		memberVO.setB_code(b_code);
+		memberVO.setM_id(m_id);
+		dao.update(memberVO);
+		return memberVO;
+
+	}
+	
 
 	//修改會員
 	public MemberVO updateMem(String m_email, String m_password, String m_name, String m_gender, String m_phone,
@@ -93,9 +117,7 @@ public class MemberService {
 		memberVO.setM_hi(m_hi);
 		memberVO.setM_offlineHi(m_offlineHi);
 		memberVO.setM_id(m_id);
-
 		dao.update(memberVO);
-
 		return memberVO;
 
 	}
