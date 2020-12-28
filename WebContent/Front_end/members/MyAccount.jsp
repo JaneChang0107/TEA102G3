@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.member.model.*"%>
+
 <%
 	String m_id = session.getAttribute("loginId").toString();
     MemberService memSvc = new MemberService();
 	MemberVO memberVO = memSvc.findOneMem(m_id);
     session.setAttribute("memberVO", memberVO);
 %>
-
+<jsp:useBean id="bankSvc" scope="page" class="com.bankcode.model.BankcodeService" />
 
 <head>
 <meta charset="UTF-8">
@@ -197,7 +198,7 @@
 							<td>銀行代碼</td>
 							<td>${memberVO.b_code}</td>
 							<td>銀行</td>
-							<td>XX銀行</td>
+							<td>${bankSvc.getOneBankcode(memberVO.b_code).b_name}</td>
 						</tr>
 						<tr>
 							<td>帳戶</td>
