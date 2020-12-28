@@ -6,6 +6,8 @@
     MemberService memSvc = new MemberService();
 	MemberVO memberVO = memSvc.findOneMem(m_id);
     session.setAttribute("memberVO", memberVO);
+    
+    
 %>
 
 
@@ -62,12 +64,12 @@
 }
 
 #pills-home-tab, #pills-profile-tab {
-    text-align:center;
-    margin:auto;
-	position: relative;
-	left: 220%;
-	font-size: 24px;
-	padding: 15px 80px;
+    text-align: center;
+    margin: auto;
+    position: relative;
+    left: 140%;
+    font-size: 24px;
+    padding: 15px 150px;
 }
 
 .content {
@@ -76,12 +78,12 @@
 }
 
 #myfiles,#changepw{
-    text-align: center;
-    margin: auto;
-    position: relative;
-    left: 140%;
-    font-size: 24px;
-    padding: 15px 150px;
+    text-align:left;
+    margin:auto;
+    background-color: #e9e9e9;
+    width:800px;
+    height:900px;
+    font-size:24px;
 }
 #changepw{
     height:300px;
@@ -239,28 +241,31 @@
 						</tr>
 
 					</table>
-						<input type="hidden" name="action" value="Myfileupdateconfirm"> <input
-							type="hidden" name="m_id" value="<%=memberVO.getM_id()%>"> <input
-							type="submit" value="送出修改" id="revise" class="btn btn-primary">
+		<input type="hidden" name="action" value="Myfileupdateconfirm">
+		<input type="hidden" name="m_id" value="<%=memberVO.getM_id()%>">
+		<input type="submit" value="送出修改" id="revise" class="btn btn-primary">
 
 
-					</div>
+				</div>
 
 					<div class="tab-pane fade" id="pills-profile" role="tabpanel"
 						aria-labelledby="pills-profile-tab">
 						<table id="changepw">
+						
+							<tr>
+								<td><input type="hidden" name="m_oldpassword" size="40" value="<%=memberVO.getM_password()%>"/></td>
+							</tr>
 							<tr>
 								<td>原始密碼</td>
-								<td><input type="password" name="m_password" size="40"
-									value="<%=memberVO.getM_password()%>" /></td>
+								<td><input type="password" name="m_password" size="40"/></td>
 							</tr>
 							<tr>
 								<td>新密碼</td>
-								<td><input type="password" name="m_password2"></td>
+								<td><input type="password" name="m_newpassword"></td>
 							</tr>
 							<tr>
 								<td>新密碼確認</td>
-								<td><input type="password" name="m_password3"></td>
+								<td><input type="password" name="m_newpasswordconfirm"></td>
 							</tr>
 
 
@@ -301,9 +306,11 @@
 	}
 %>
 
-<link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+<script
+	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <style>
 .xdsoft_datetimepicker .xdsoft_datepicker {
@@ -315,15 +322,15 @@
 }
 </style>
 <script>
-$.datetimepicker.setLocale('zh');
-$('#f_date1').datetimepicker({
-	theme : '', //theme: 'dark',
-	timepicker : false, //timepicker:true,
-	step : 1, //step: 60 (這是timepicker的預設間隔60分鐘)
-	format : 'Y-m-d', //format:'Y-m-d H:i:s',
-	value : '<%=memberVO.getM_birth()%>',
-	maxDate : '+1970-01-01' // 去除今日(不含)之後
-});
+	$.datetimepicker.setLocale('zh');
+	$('#f_date1').datetimepicker({
+		theme : '', //theme: 'dark',
+		timepicker : false, //timepicker:true,
+		step : 1, //step: 60 (這是timepicker的預設間隔60分鐘)
+		format : 'Y-m-d', //format:'Y-m-d H:i:s',
+		value : '<%=memberVO.getM_birth()%>',
+		maxDate : '+1970-01-01' // 去除今日(不含)之後
+	});
 </script>
 
 </html>

@@ -147,10 +147,34 @@ public class MemberServlet extends HttpServlet {
 //				errorMsgs.add("郵箱不符合格式!請重新輸入");
 //			}
 			
+			
 			String m_password = req.getParameter("m_password").trim();
+			String m_oldpassword =req.getParameter("m_oldpassword").trim();
+			
 			if (m_password == null || m_password.trim().length() == 0) {
 				errorMsgs.add("密碼請勿空白");
 			}
+			if(!m_password.equals(m_oldpassword)) {
+				errorMsgs.add("舊密碼不正確，請重新輸入");
+			}
+		
+			String m_newpassword =req.getParameter("m_newpassword").trim();
+			if (m_newpassword == null || m_newpassword.trim().length() == 0) {
+				errorMsgs.add("新密碼請勿空白");
+			}
+			
+			String m_newpasswordconfirm =req.getParameter("m_newpasswordconfirm").trim();
+
+			if (m_newpasswordconfirm == null || m_newpasswordconfirm.trim().length() == 0) {
+				errorMsgs.add("新密碼確認請勿空白");
+			}
+			
+			if(!m_newpassword.equals(m_newpasswordconfirm)) {
+				errorMsgs.add("新密碼不一致，請重新確認");
+			}
+			
+
+			
 			
 			String m_name = req.getParameter("m_name");
 			String m_nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
@@ -206,7 +230,7 @@ public class MemberServlet extends HttpServlet {
 			MemberVO memberVO = new MemberVO();
 			memberVO.setM_id(m_id);
 			memberVO.setM_email(m_email);
-			memberVO.setM_password(m_password);
+			memberVO.setM_password(m_newpasswordconfirm);
 			memberVO.setM_gender(m_gender);
 			memberVO.setM_name(m_name);
 			memberVO.setM_phone(m_phone);
@@ -227,7 +251,7 @@ public class MemberServlet extends HttpServlet {
 			// 2.開始修改資料
 			System.out.println("開始修改");
 			MemberService memberSvc = new MemberService();
-			memberVO = memberSvc.updateMem( m_email,  m_password,  m_name,  m_gender,  m_phone,
+			memberVO = memberSvc.updateMem( m_email,  m_newpasswordconfirm,  m_name,  m_gender,  m_phone,
 					 m_address, m_birth, m_headpic,m_account,m_accountName,b_code, m_id);//得到memberVO物件以做後續處理
             System.out.println("修改完成");
             
@@ -245,9 +269,6 @@ public class MemberServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-		
-		
-		
 		
 		
 //update行為符合，修改會員資料
