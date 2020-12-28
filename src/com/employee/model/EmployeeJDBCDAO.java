@@ -20,7 +20,7 @@ public class EmployeeJDBCDAO implements EmployeeDAO_interface{
 	private static final String UPDATE = 
 		"UPDATE employee set e_password=?, e_identity=?, e_name=?, e_gender=?, e_birth=?, e_email=?, e_phone=?, e_address=?, e_title=?, e_status=?, st_id=? where e_id = ?";
 	private static final String UPDATE_WITHOUT = 
-			"UPDATE employee set e_identity=?, e_name=?, e_gender=?, e_birth=?, e_email=?, e_phone=?, e_address=?, e_title=?, st_id=? where e_id = ?";
+		"UPDATE employee set e_identity=?, e_name=?, e_gender=?, e_birth=?, e_email=?, e_phone=?, e_address=?, e_title=?, st_id=? where e_id = ?";
 
 	@Override
 	public void insert(EmployeeVO employeeVO) {
@@ -155,7 +155,7 @@ public class EmployeeJDBCDAO implements EmployeeDAO_interface{
 			pstmt.setString(6, employeeVO.getE_phone());
 			pstmt.setString(7, employeeVO.getE_address());
 			pstmt.setString(8, employeeVO.getE_title());
-			pstmt.setInt(9, employeeVO.getE_status());
+			pstmt.setString(9, employeeVO.getSt_id());
 			pstmt.setString(10, employeeVO.getE_id());
 			
 			pstmt.executeUpdate();
@@ -468,6 +468,21 @@ public class EmployeeJDBCDAO implements EmployeeDAO_interface{
 //		employeeVO2.setE_status(456);
 //		employeeVO2.setSt_id("ST00001");
 //		dao.update(employeeVO2);
+//		System.out.println("更新成功");
+//
+//		// 更新部分
+//		EmployeeVO employeeVO2 = new EmployeeVO(); 
+//		employeeVO2.setE_id("E00001");
+//		employeeVO2.setE_identity("A123456789");
+//		employeeVO2.setE_name("1");
+//		employeeVO2.setE_gender("men");
+//		employeeVO2.setE_birth(java.sql.Date.valueOf("2020-12-12"));
+//		employeeVO2.setE_email("123");
+//		employeeVO2.setE_phone("123");
+//		employeeVO2.setE_address("123");
+//		employeeVO2.setE_title("123");
+//		employeeVO2.setSt_id("ST00001");
+//		dao.update_without(employeeVO2);
 //		System.out.println("更新成功");
 //
 //		// 刪除

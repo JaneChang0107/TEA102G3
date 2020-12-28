@@ -6,7 +6,7 @@
 	<meta charset="BIG5">
 	<title>Insert title here</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/vendors/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet type" href="./css/index_backstage.css">
+    <link rel="stylesheet type" href="<%=request.getContextPath()%>/Back_end/employee/css/index_backstage.css">
 </head>
 <body>
 	<form action="<%=request.getContextPath()%>/login" method="post">

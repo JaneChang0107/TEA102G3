@@ -69,8 +69,7 @@ public class EmployeeService {
 		employeeVO.setE_email(e_email);
 		employeeVO.setE_phone(e_phone);
 		employeeVO.setE_address(e_address);
-		employeeVO.setE_title(e_title);
-		
+		employeeVO.setE_title(e_title);		
 		employeeVO.setSt_id(st_id);
 		dao.update_without(employeeVO);
 		

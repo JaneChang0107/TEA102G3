@@ -40,7 +40,7 @@ public class Login extends HttpServlet {
 	}
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		req.setCharacterEncoding("Big5");
+		req.setCharacterEncoding("UTF-8");
 		res.setContentType("text/html; charset=Big5");
 		
 		String action = req.getParameter("action");
@@ -96,6 +96,7 @@ public class Login extends HttpServlet {
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				session.setAttribute("employeeVO", employeeVO);
 				System.out.println(employeeVO);
+//存完該死的資料 準備登入
 				res.sendRedirect(req.getContextPath() + "/Back_end/employee/index_backstage.jsp"); // *工作3: (-->如無來源網頁:則重導至login_success.jsp)
 			}
 			
@@ -109,7 +110,8 @@ public class Login extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
+			HttpSession session = req.getSession();
+			session.setAttribute("errorMsgs", errorMsgs);
 		
 			try {
 				System.out.println("update");
@@ -170,17 +172,11 @@ public class Login extends HttpServlet {
 					errorMsgs.add("住址: 只能是中文、數字 , 且長度必需在5到30之間");
 				}
 				
-				String e_title = req.getParameter("e_title");
-				String e_titleReg = "^[(0-1)]{1}$";
-				if (e_title == null || e_title.trim().length() == 0) {
-					errorMsgs.add("職稱: 請勿空白");
-				} else if(!e_title.trim().matches(e_titleReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("職稱: 0或1");
+				String e_title = req.getParameter("e_title").trim();
+				if (e_gender == null || e_gender.trim().length() == 0) {
+					errorMsgs.add("請選擇職稱");
 				}
-
-
-				Integer e_status = new Integer(req.getParameter("e_status").trim());
-				
+			
 				
 				String st_id =req.getParameter("st_id").trim();
 
@@ -196,15 +192,16 @@ public class Login extends HttpServlet {
 				employeeVO.setE_phone(e_phone);
 				employeeVO.setE_address(e_address);
 				employeeVO.setE_title(e_title);
-				employeeVO.setE_status(e_status);
 				employeeVO.setSt_id(st_id);
 
 				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("employeeVO", employeeVO); // 含有輸入格式錯誤的empVO物件,也存入req
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/Back_end/employee/update_employee_input.jsp");
-					failureView.forward(req, res);
+				if (!errorMsgs.isEmpty()) {					
+					session.setAttribute("employeeVO", employeeVO); // 含有輸入格式錯誤的empVO物件,也存入req
+					res.sendRedirect(req.getContextPath() + "/Back_end/employee/index_backstage.jsp");
+					System.out.println("有錯 印訊息");
+//					RequestDispatcher failureView = req
+//							.getRequestDispatcher("/Back_end/employee/update_employee_input.jsp");
+//					failureView.forward(req, res);
 					return; //程式中斷
 				}
 				
@@ -215,6 +212,7 @@ public class Login extends HttpServlet {
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("employeeVO", employeeVO); // 資料庫update成功後,正確的的empVO物件,存入req
 				res.sendRedirect(req.getContextPath() + "/Back_end/employee/index_backstage.jsp");
+				System.out.println("succeess");
 //				String url = "/Back_end/employee/listOneEmployee.jsp";
 //				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 //				successView.forward(req, res);
@@ -222,9 +220,11 @@ public class Login extends HttpServlet {
 				/***************************其他可能的錯誤處理*************************************/
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:"+e.getMessage());
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/Back_end/employee/update_employee_input.jsp");
-				failureView.forward(req, res);
+				res.sendRedirect(req.getContextPath() + "/Back_end/employee/index_backstage.jsp");
+				System.out.println("其他錯誤");
+//				RequestDispatcher failureView = req
+//						.getRequestDispatcher("/Back_end/employee/update_employee_input.jsp");
+//				failureView.forward(req, res);
 			}
 		}
 	}

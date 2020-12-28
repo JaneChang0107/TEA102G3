@@ -5,8 +5,8 @@
 <head>
 <meta charset="BIG5">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../../vendors/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet type" href="./css/index_backstage.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet type" href="${pageContext.request.contextPath}/Back_end/employee/css/index_backstage.css">
 </head>
 <body>
 	 <div class="container-fluid">
@@ -28,7 +28,7 @@
                       	<%@include file="update_without.jsp" %>
                     </div>
                     <div class="tab-pane fade" id="pwd_modify" role="tabpanel" aria-labelledby="pwd_modify-tab">
-                      這裡include頁面
+                     	<%@include file="update_pwd.jsp" %>
                     </div>
                     <div class="tab-pane fade" id="emp_mana" role="tabpanel" aria-labelledby="emp_mana-tab">
                       這裡include頁面
@@ -41,9 +41,9 @@
     
     
     
-    <script src="../../vendors/jquery/jquery-3.5.1.min.js"></script>
-    <script src="../../vendors/popper/popper.min.js"></script>
-    <script src="../../vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="./js/index_backstage.js"></script>
+    <script src="${pageContext.request.contextPath}/vendors/jquery/jquery-3.5.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/vendors/popper/popper.min.js"></script>
+    <script src="${pageContext.request.contextPath}/vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/Back_end/employee/js/index_backstage.js"></script>
 </body>
 </html>

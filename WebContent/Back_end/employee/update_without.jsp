@@ -11,18 +11,15 @@
 <head>
 	<meta charset="BIG5">
 	<title>Insert title here</title>
-	<link rel="stylesheet" href="../../vendors/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet type" href="./css/index_backstage.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet type" href="${pageContext.request.contextPath}/Back_end/employee/css/index_backstage.css">
 </head>
 <body>
 <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/login" name="form1">
 	 <div class="container update_without">
-        <div class="row">
-            <div class="col">
-                <p>員工ID:</p>
-            </div>
-            <div class="col">
-            	<%-- 錯誤表列 --%>
+	 	<div class="row">
+	 		<div class="col">
+	 			<%-- 錯誤表列 --%>
 				<c:if test="${not empty errorMsgs}">
 					<font style="color:red">請修正以下錯誤:</font>
 					<ul>
@@ -31,6 +28,13 @@
 						</c:forEach>
 					</ul>
 				</c:if>
+	 		</div>
+	 	</div>
+        <div class="row">
+            <div class="col">
+            	<p>員工ID:</p>
+            </div>
+            <div class="col">               
                 ${employeeVO.e_id}
             </div>
             <div class="col">
@@ -118,16 +122,16 @@
 
 
 
-	<script src="../../vendors/jquery/jquery-3.5.1.min.js"></script>
-    <script src="../../vendors/popper/popper.min.js"></script>
-    <script src="../../vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="./js/index_backstage.js"></script>
+	<script src="${pageContext.request.contextPath}/vendors/jquery/jquery-3.5.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/vendors/popper/popper.min.js"></script>
+    <script src="${pageContext.request.contextPath}/vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/Back_end/employee/js/index_backstage.js"></script>
     
     <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/datetimepicker/jquery.datetimepicker.css" />
+<script src="${pageContext.request.contextPath}/datetimepicker/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <style>
   .xdsoft_datetimepicker .xdsoft_datepicker {

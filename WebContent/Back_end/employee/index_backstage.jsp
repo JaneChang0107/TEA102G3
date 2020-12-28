@@ -18,8 +18,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
-    <link rel="stylesheet" href="../../vendors/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet type" href="./css/index_backstage.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/vendors/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet type" href="<%=request.getContextPath()%>/Back_end/employee/css/index_backstage.css">
 </head>
 <body>
 	<div class="container-fluid index_container">
@@ -88,9 +88,9 @@
     </div>
 
 
-    <script src="../../vendors/jquery/jquery-3.5.1.min.js"></script>
-    <script src="../../vendors/popper/popper.min.js"></script>
-    <script src="../../vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="./js/index_backstage.js"></script>
+    <script src="<%=request.getContextPath()%>/vendors/jquery/jquery-3.5.1.min.js"></script>
+    <script src="<%=request.getContextPath()%>/vendors/popper/popper.min.js"></script>
+    <script src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<%=request.getContextPath()%>/Back_end/employee/js/index_backstage.js"></script>
 </body>
 </html>

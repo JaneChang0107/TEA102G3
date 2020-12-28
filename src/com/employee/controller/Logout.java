@@ -25,6 +25,8 @@ public class Logout extends HttpServlet {
 		}
 		
 		session.removeAttribute("e_id");
+		session.removeAttribute("employeeVO");
+		session.removeAttribute("errorMsgs");
 		res.sendRedirect(req.getContextPath() + "/Back_end/employee/login.jsp");
 	}
 
