@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.product.model.ProductService;
 import com.product.model.ProductVO;
 import com.productPicture.model.ProductPictureService;
@@ -39,8 +40,9 @@ public class ProductServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
-		
+//		找商品
 		if("findByName".equals(action)) {
 			
 			List<String> errors = new LinkedList<String>();
@@ -325,7 +327,7 @@ public class ProductServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/Back_end/product/showProduct.jsp");
 			rd.forward(request, response);
 		}
-		
+//		單一商品
 		if("findthis".equals(action)) {
 			String pid = request.getParameter("pid");
 			
@@ -336,6 +338,26 @@ public class ProductServlet extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("/Front_end/product/ProductDetail.jsp");
 				rd.forward(request, response);
 			}
+		}
+		
+		if("sellerProduct".equals(action)) {
+			
+			HttpSession session = request.getSession();
+			String mid = (String) session.getAttribute("mid");
+			ProductService pService = new ProductService();
+			System.out.println(mid);
+			List<ProductVO> sellerProduct = pService.findBySeller(mid);
+			
+			ObjectMapper mapper = new ObjectMapper();
+			
+			String product = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(sellerProduct);
+			System.out.println(product);
+			response.getWriter().println(product);
+			
+//			request.setAttribute("sellerProduct", sellerProduct);
+//			RequestDispatcher rd = request.getRequestDispatcher("/Front_end/product/sellerProduct.jsp");
+//			rd.forward(request, response);
+			
 		}
 	}
 }

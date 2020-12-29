@@ -25,7 +25,6 @@
     <div class="header">
     	<jsp:include page="/Front_end/header.jsp"></jsp:include>
     </div>
-        
 <jsp:useBean id="ppService" scope="page" class="com.productPicture.model.ProductPictureService"></jsp:useBean>
         <div class="container">
         

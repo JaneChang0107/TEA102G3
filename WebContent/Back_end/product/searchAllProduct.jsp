@@ -30,7 +30,7 @@
 			<label>商品名稱</label>
 			<input type="text" name="name">
 		</div>
-		<input type="hidden" name="action" value="findByName">
+		<input type="hidden" name="action" value="showAll">
 		<input type="submit">
 	</form>
 

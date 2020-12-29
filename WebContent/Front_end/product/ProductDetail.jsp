@@ -12,11 +12,10 @@
 				font-size: 60px;
 			}
 			div#productDetail{
-				display: contents;
-				position: absolute;
+				position: relative;
 				width: 50%;
 				left: 50%;
-				height: 100%;
+				top: 10%;
 				transform: translateX(-50%);
 			}
 			img.productImg{
@@ -40,9 +39,16 @@
 			</c:forEach>
 			</div>
 			<div id="pInfo">
-				<span>商品名稱:</span><p id="productName">${pVO.p_name}</p>
-				<span>商品價格:</span><p id="productPrice">${pVO.p_price}</p>
-				<span>商品數量:</span><p id="productCount">${pVO.p_count}</p>
+				<div id="pInfoName">
+					<span>商品名稱:</span>
+					<span id="productName">${pVO.p_name}</span>
+				</div>
+				<div id="pInfoPrice">
+					<span>商品價格:</span><span id="productPrice">${pVO.p_price}</span>
+				</div>
+				<div id="pInfoCount">
+					<span>商品數量:</span><span id="productCount">${pVO.p_count}</span>
+				</div>
 			</div>
 			<div id="pDetail">
 				<span>商品簡介:</span>
