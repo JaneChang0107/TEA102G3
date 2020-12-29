@@ -241,9 +241,11 @@ input:read-only {
 							<div align=center>
 								<canvas id="signature" style="background: white"
 									style="border: 1px solid #000000"></canvas>
+									
 								<br>
 								<button id="clear-signature">Clear</button>
-								<button id="saveButton">Save</button>
+								<button id="saveButton" >Save</button>
+								<textarea class="article-input" id="article-input" type="input" hidden >{{article}}</textarea> 
 							</div>
 							<div align=center>
 								<div id="copy">
@@ -303,6 +305,7 @@ input:read-only {
 	</script>
 
 	<script>
+	
 		jQuery(document).ready(function($) {
 
 			var canvas = document.getElementById("signature");
@@ -321,19 +324,22 @@ input:read-only {
 			    	
 			    	var dataURL = canvas.toDataURL().replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
 			    	console.log(dataURL);
-
+					var str = dataURL;
+					
+					
 			    	window.location.href=dataURL;
+			    	document.getElementById("article-input").innerHTML=str;
 			    	
-			    	$.ajax({
-                        type: 'POST',
-                        url: 'checkRentPageDetail.jsp',
-                        data: '{ "imageData" : "' + image + '" }',
-                        contentType: 'application/json; charset=utf-8',
-                        dataType: 'json',
-                        success: function (msg) {
-                            alert('Image saved successfully !');
-                        }
-                    });
+// 			    	$.ajax({
+//                         type: 'POST',
+//                         url: 'checkRentPageDetail.jsp',
+//                         data: '{ "imageData" : "' + image + '" }',
+//                         contentType: 'application/json; charset=utf-8',
+//                         dataType: 'json',
+//                         success: function (msg) {
+//                             alert('Image saved successfully !');
+//                         }
+//                     });
 
 			    }
 			  });
