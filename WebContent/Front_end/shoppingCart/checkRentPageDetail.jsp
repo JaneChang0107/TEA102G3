@@ -19,7 +19,7 @@
 	margin: 10px auto;
 	background-color: white;
 	width: 1000px;
-	height: 1200px;
+	height: 1300px;
 	/* 	border: solid 1px */
 }
 
@@ -273,7 +273,8 @@ input:read-only {
 			</tr>
 			<tr>
 				<td>電話:<input type="text" readonly></input></td>
-				<td></input></td>
+				<td><label><input type="checkbox">使用堃幣折抵</label><br>
+										<input type="text">/現有150堃幣</td>
 			</tr>
 			<tr>
 				<td></td>
@@ -331,17 +332,7 @@ input:read-only {
 			    	document.getElementById("article-input").innerHTML=str;
 			    	document.getElementById("copy").innerHTML='<img src="'+str+'"/>';
 			    	
-			    	
-// 			    	$.ajax({
-//                         type: 'POST',
-//                         url: 'checkRentPageDetail.jsp',
-//                         data: '{ "imageData" : "' + image + '" }',
-//                         contentType: 'application/json; charset=utf-8',
-//                         dataType: 'json',
-//                         success: function (msg) {
-//                             alert('Image saved successfully !');
-//                         }
-//                     });
+			    
 
 			    }
 			  });

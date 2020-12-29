@@ -17,17 +17,17 @@
 
 .content {
 	margin: 10px auto;
-	background-color: white;
-	width: 1000px;
-	height: 850px;
+ 	background-color: white; 
+ 	 width: 1000px; 
+ 	height: 1200px; 
 	/* 	border: solid 1px */
 }
 
 .info {
 	margin: 10px auto;
-	background-color: white;
-	width: 1000px;
-	height: 300px;
+ 	background-color: white; 
+ 	width: 1000px; 
+ 	height: 300px; 
 	/* 	border: solid 1px */
 }
 
@@ -36,12 +36,12 @@
 	text-align: right;
 	width: 1000px;
 	height: 280px;
-	/* 	border: solid 1px */
+	/*border: solid 1px */
 }
 
 .buttonarea {
 	margin: 10px auto;
-	background-color:;
+	
 	width: 1000px;
 	height: 100px;
 	/* 	border: solid 1px */
@@ -49,7 +49,7 @@
 
 .table1 {
 	margin: 0px auto;
-	background-color: white;
+/* 	background-color: white; */
 	width: 800px;
 	height: 50px;
 }
@@ -130,14 +130,15 @@
 }
 
 .table3 {
-	
 	margin: 50px auto;
 	background-color: #FCF8DC;
 	width: 800px;
-	height:200px;
+	height: 200px;
 }
 
-input:read-only { background: #D7D7D7; }
+input:read-only {
+	background: #D7D7D7;
+}
 </style>
 
 </head>
@@ -226,12 +227,13 @@ input:read-only { background: #D7D7D7; }
 									<td><label><input type="radio" name="delivery"
 											value=0 />黑貓宅急便</label></td>
 									<td>60</td>
-									<td>持有者姓名:<input type="text"></input> 安全碼:<input
-										type="text"></input>
+									<td>持有者姓名:<input type="text"></input>
+									<br>安全碼:<input type="text"></input>
 
 									</td>
 								</tr>
-
+<th>
+</th>
 								<tr>
 									<td><label><input type="radio" name="delivery"
 											value=0 />黑貓宅急便</label></td>
@@ -265,169 +267,45 @@ input:read-only { background: #D7D7D7; }
 									<td><label><input type="radio" name="delivery"
 											value=0 />黑貓宅急便</label></td>
 									<td>70</td>
-									<td><label><input type="checkbox">使用堃幣折抵</label><br>
+									<td><label><input type="checkbox">使用堃幣折抵</label>
 										<input type="text">/現有150堃幣</td>
 									<td></td>
 								</tr>
-
-
-
-
+								<tr>
+									<td>
+									<br><h4>訂購人資料</h4></td>
+									<td></td>
+									<td>
+									<br><h4>收件人資料</h4></td>
+								</tr>
+								<tr>
+									<td>姓名:<input type="text" readonly></input></td>
+									<td></td>
+									<td>姓名:<input type="text"></input></td>
+								</tr>
+								<tr>
+									<td>住址:<input type="text" readonly></input></td>
+									<td></td>
+									<td>住址:<input type="text"></input></td>
+								</tr>
+								<tr>
+									<td>電話:<input type="text" readonly></input></td>
+									<td></td>
+									<td>電話:<input type="text"></input></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td><input type="checkbox"></input>同訂購人資料
+									<td>
+								</tr>
 							</table>
 						</div>
-					</div></th>
+					</div>
+					</th>
 			</tr>
-
 		</table>
-		<table class="table1">
-			<th>
-				<h4 align="center">阿堃的賣場</h4>
-
-			</th>
-			<tr class="cart">
-
-				<td>商品圖片</td>
-				<td>品名</td>
-				<td>規格</td>
-				<td>單價</td>
-				<td>數量</td>
-				<td>金額</td>
-				<td></td>
-				<td></td>
-
-			</tr>
-			<tr class="cart">
-
-				<td><img class="pic"></td>
-				<td>二手Ps4 Slim</td>
-				<td>500G<br> 附雙手把
-				</td>
-				<td>3000</td>
-				<td>1</td>
-				<td>3000</td>
-				<td></td>
-				<td></td>
-
-
-			</tr>
-			<tr>
-				<th colspan=8><a>確認運送與付款方式</a><img
-					src="<%=request.getContextPath()%>/images/downarrow.png"
-					class="downarrow" data-toggle="collapse" href="#collapse"
-					type="button" aria-expanded="false" aria-controls="collapseExample"></img>
-					<br>
-					<div class="collapse" id="collapse">
-
-						<div class="card-body">
-							<table class="table2" width="100%">
-								<tr>
-									<td><h4>取貨方式</h4></td>
-									<td></td>
-									<td><h4>付款方式</h4></td>
-								</tr>
-								<tr>
-									<td><label><input type="radio" name="delivery"
-											value=0 />黑貓宅急便</label></td>
-									<td>130</td>
-									<td><label><input type="radio" name="pay" value=0 />貨到付款</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="radio" name="delivery"
-											value=0 />黑貓宅急便</label></td>
-									<td>60</td>
-									<td><label><input type="radio" name="pay" value=0 />信用卡</label></td>
-								</tr>
-
-								<tr>
-									<td><label><input type="radio" name="delivery"
-											value=0 />黑貓宅急便</label></td>
-									<td>60</td>
-									<td>信用卡號碼:<input type="text"></input></td>
-								</tr>
-
-
-								<tr>
-									<td><label><input type="radio" name="delivery"
-											value=0 />黑貓宅急便</label></td>
-									<td>60</td>
-									<td>持有者姓名:<input type="text"></input> 安全碼:<input
-										type="text"></input>
-
-									</td>
-								</tr>
-
-								<tr>
-									<td><label><input type="radio" name="delivery"
-											value=0 />黑貓宅急便</label></td>
-									<td>60</td>
-									<td><div class="ooo" id="expiration-date">
-											<label>到期年月份</label> <select>
-												<option value="01">January</option>
-												<option value="02">February</option>
-												<option value="03">March</option>
-												<option value="04">April</option>
-												<option value="05">May</option>
-												<option value="06">June</option>
-												<option value="07">July</option>
-												<option value="08">August</option>
-												<option value="09">September</option>
-												<option value="10">October</option>
-												<option value="11">November</option>
-												<option value="12">December</option>
-											</select> <select>
-												<option value="16">2016</option>
-												<option value="17">2017</option>
-												<option value="18">2018</option>
-												<option value="19">2019</option>
-												<option value="20">2020</option>
-												<option value="21">2021</option>
-											</select>
-										</div></td>
-								</tr>
-
-								<tr>
-									<td><label><input type="radio" name="delivery"
-											value=0 />黑貓宅急便</label></td>
-									<td>70</td>
-									<td><label><input type="checkbox">使用堃幣折抵</label><br>
-										<input type="text">/現有150堃幣</td>
-									<td></td>
-								</tr>
-
-
-
-
-							</table>
-						</div>
-					</div></th>
-			</tr>
-
-		</table>
-		<hr>
-		<table class="table3">
-			<tr>
-				<td><h4>訂購人資料</h4></td>
-				<td><h4>收件人資料</h4></td>
-			</tr>
-			<tr>
-				<td>姓名:<input type="text" readonly></input></td>
-				<td>姓名:<input type="text"></input></td>
-			</tr>
-			<tr>
-				<td>住址:<input type="text" readonly></input></td>
-				<td>住址:<input type="text"></input></td>
-			</tr>
-			<tr>
-				<td>電話:<input type="text" readonly></input></td>
-				<td>電話:<input type="text"></input></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><input type="checkbox"></input>同訂購人資料
-				<td>
-			</tr>
-
-		</table>
+		
 
 	</div>
 
