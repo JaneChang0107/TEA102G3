@@ -6,10 +6,7 @@
     MemberService memSvc = new MemberService();
 	MemberVO memberVO = memSvc.findOneMem(m_id);
     session.setAttribute("memberVO", memberVO);
-    
-    
 %>
-
 
 <head>
 <meta charset="UTF-8">

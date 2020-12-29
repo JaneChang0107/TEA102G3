@@ -142,6 +142,13 @@ public class MemberService {
 		return dao.getMemberPw(m_email);
 	}
 	
+	public MemberVO activeMember(String m_email) {
+		MemberVO memberVO = new MemberVO();
+		memberVO.setM_email(m_email);
+		dao.activeMember(memberVO);
+		return memberVO;
+	}
+	
 	
 
 }

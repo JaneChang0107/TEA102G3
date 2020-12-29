@@ -19,10 +19,10 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	String userid = "TEA102G3";
 	String passwd = "102G3";
 
-	private static final String INSERT_STMT = "INSERT INTO member (m_id,m_email,m_password,m_name,m_gender,m_phone,m_address,m_birth,m_status,m_coin) VALUES('M' || LPAD(MEMBER_SEQ.NEXTVAL, 5, 0),?,?,?,?,?,?,?,1,100)";
+	private static final String INSERT_STMT = "INSERT INTO member (m_id,m_email,m_password,m_name,m_gender,m_phone,m_address,m_birth,m_status,m_coin) VALUES('M' || LPAD(MEMBER_SEQ.NEXTVAL, 5, 0),?,?,?,?,?,?,?,0,100)";
 
 	private static final String INSERTSELLER_STMT = "INSERT INTO member (m_id,m_email,m_password,m_name,m_gender,m_phone,m_address,m_birth,m_headpic,m_status,m_identity,m_id_pic"
-			+ ",m_account,m_accountname,b_code,m_bank_pic,m_storename,m_info,m_cover,m_hi,m_offlinehi,m_coin) VALUES('M' || LPAD(MEMBER_SEQ.NEXTVAL, 5, 0),?,?,?,?,?,?,?,?,2,?,?,?,?,?,?,?,?,?,?,?,100)";
+			+ ",m_account,m_accountname,b_code,m_bank_pic,m_storename,m_info,m_cover,m_hi,m_offlinehi,m_coin) VALUES('M' || LPAD(MEMBER_SEQ.NEXTVAL, 5, 0),?,?,?,?,?,?,?,?,0,?,?,?,?,?,?,?,?,?,?,?,100)";
 
 	private static final String GET_ALL_STMT = "SELECT m_id,m_email,m_password,m_name,m_gender,m_phone,m_address,to_char(m_birth,'yyyy-mm-dd') m_birth,m_headpic,m_status,m_identity,m_id_pic"
 			+ ",m_account,m_accountname,b_code,m_bank_pic,m_moneytrandate,m_storename,m_info,m_cover,m_hi,m_offlinehi,m_coin FROM member order by m_id";
@@ -38,6 +38,8 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	private static final String GET_Mems_ByStatus_STMT = "SELECT * FROM member WHERE m_status =?";
 
 	private static final String GET_Mems_Password_STMT = "SELECT m_id,m_name,m_email,m_password FROM member WHERE m_email=?";
+	
+	private static final String UPDATE_Status_STMT ="UPDATE member set m_status=1 where m_email=?";
 
 	// 新增一般會員
 	@Override
@@ -474,8 +476,43 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			}
 		}
 		return memberVO;
+	}
+	
+	
+	@Override
+	public void activeMember(MemberVO memberVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt =con.prepareStatement(UPDATE_Status_STMT);
+			pstmt.setString(1, memberVO.getM_email());
+			pstmt.executeUpdate();
+		}catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
 
 	}
+
+	
 
 	public static void main(String[] args) {
 		MemberJDBCDAO dao = new MemberJDBCDAO();
@@ -588,7 +625,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		for(MemberVO aMember : list) {
 //			System.out.println(aMember.getM_id()+",");
 			
-			System.out.println(aMember.getM_email()+",");
+//			System.out.println(aMember.getM_email()+",");
 //			System.out.println(aMember.getM_password()+",");
 //			System.out.println(aMember.getM_name()+",");
 //			System.out.println(aMember.getM_gender()+",");
@@ -610,7 +647,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 //			System.out.println(aMember.getM_hi()+",");
 //			System.out.println(aMember.getM_offlineHi()+",");
 //			System.out.println(aMember.getM_coin()+",");
-			System.out.println("----------------------");
+//			System.out.println("----------------------");
 			
 		}
 //		System.out.println("=====查詢全部完畢======");
@@ -644,11 +681,17 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 //		}
 
 		// 查密碼
-		MemberVO memberVO4= dao.getMemberPw("a111@yahoo.com.tw");	
-		System.out.println(memberVO4.getM_id());
-		System.out.println(memberVO4.getM_name());
-		System.out.println(memberVO4.getM_email());
-		System.out.println(memberVO4.getM_password());
+//		MemberVO memberVO4= dao.getMemberPw("a111@yahoo.com.tw");	
+//		System.out.println(memberVO4.getM_id());
+//		System.out.println(memberVO4.getM_name());
+//		System.out.println(memberVO4.getM_email());
+//		System.out.println(memberVO4.getM_password());
+		
+		//改狀態
+		MemberVO memberVO5 =new MemberVO();
+		memberVO5.setM_email("qqqq@yahoo.com.tw");
+		dao.activeMember(memberVO5);
+		System.out.println("狀態已改");
 
 	}
 
@@ -669,5 +712,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		}
 		return buffer;
 	}
+
+
 
 }

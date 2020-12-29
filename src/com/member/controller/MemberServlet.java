@@ -174,8 +174,6 @@ public class MemberServlet extends HttpServlet {
 			}
 			
 
-			
-			
 			String m_name = req.getParameter("m_name");
 			String m_nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 			if (m_name == null || m_name.trim().length() == 0) {
@@ -536,6 +534,8 @@ public class MemberServlet extends HttpServlet {
 			String url= "/Front_end/members/listAllMem.jsp";
 			RequestDispatcher successView =req.getRequestDispatcher(url);
 			successView.forward(req, res);
+			SendEmail.openMail(m_email);
+			
 			
 			// 抓到其他例外
 			}catch(Exception e) {
@@ -758,6 +758,35 @@ public class MemberServlet extends HttpServlet {
 				errorMsgs.add("資料刪除失敗"+e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/members/listAllMem.jsp");
 			    failureView.forward(req, res);
+			}
+		}
+		
+		
+		//開通權限
+		if ("activeMember".equals(action)) {
+			try {
+			String m_email = req.getParameter("m_email");
+			
+			MemberVO memberVO = new MemberVO();
+			memberVO.setM_email(m_email);
+
+			// 2.開始修改資料
+			System.out.println("權限變更");
+			MemberService memberSvc = new MemberService();
+			memberVO = memberSvc.activeMember(m_email);
+            System.out.println("變更完成");
+            
+			// 3.修改完成，準備轉交
+            req.setAttribute("memberVO", memberVO);  //資料庫update完成，將memberVO物件存入req
+			String url= "/Front_end/members/LoginPage.jsp";
+			RequestDispatcher successView =req.getRequestDispatcher(url);
+			successView.forward(req, res);
+			
+			// 抓到其他例外
+			}catch(Exception e) {
+				System.out.println("例外發生");
+				RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/index.jsp");
+				failureView.forward(req, res);
 			}
 		}
 

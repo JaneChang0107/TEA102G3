@@ -21,4 +21,7 @@ public interface MemberDAO_interface {
 	//查詢會員狀態
 	public Set<MemberVO> getMemberByStatus(Integer m_status);
 	
+	//寄驗證信
+	public void activeMember(MemberVO memberVO);
+	
 }

@@ -385,13 +385,15 @@ select#ptype {
 			<tr class="nav" id="nav">
 
 				<td>
-					<!-- cart下拉 開始--> <i class="fas fa-shopping-cart" type="button"
+					<!-- cart下拉 開始--> 
+					<i class="fas fa-shopping-cart" type="button"
 					id="cart" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="true"></i>
 					<div class="dropdown-menu" aria-labelledby="cart">
 						<a class="dropdown-item" href="#">租用車</a> <a class="dropdown-item"
 							href="#">購買車</a>
-					</div> <!-- cart下拉結束 -->
+					</div> 
+					<!-- cart下拉結束 -->
 				</td>
 
 				<td><i class="far fa-bell" id="bell"></i></td>
@@ -411,9 +413,10 @@ select#ptype {
 						<hr>
 						<a class="dropdown-item"
 							href="<%=request.getContextPath()%>/Front_end/members/LoginPage.jsp">登入/註冊</a>
-						<!--如已有登入則改為另一個連結 -->
-						<a class="dropdown-item" href="#">賣家中心</a> <a
-							class="dropdown-item" href="#">登出</a>
+						<a class="dropdown-item" href="#">賣家中心</a> 
+						<form action="<%=request.getContextPath()%>/member/controller/MemberLogout">
+						<button class="dropdown-item" type="submit">登出</button>
+						</form>
 					</div> 
 					<!-- user下拉結束 -->
 				</td>

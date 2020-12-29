@@ -1,23 +1,104 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>login_success.jsp</title>
-</head>
-<body>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+<style>
+.mybody {
+	background-color: #E3F8F6;
+}
 
-	<br>
-	<table border='1' cellpadding='5' cellspacing='0' width='400'>
-		<tr bgcolor='orange' align='center' valign='middle' height='20'>
-			 <td>   
-			       <h3> µn¤J¦¨¥\ªº­¶­± - login_success.jsp           </h3> 
-				     <h3> Åwªï:<font color=red> ${account} </font>±z¦n</h3>
-			 </td>
-		</tr>
-	</table>
-	<b> <br>
-	<br>                ¥H¤U¯dªÅ....
-	</b>
-	
+.myform {
+	border: 1px solid gray;
+	background-color: rgb(243, 241, 241);
+	width: 400px;
+	height: 300px;
+	text-align: center;
+	margin: 20px auto;
+}
+
+.topcol {
+	width: auto;
+	height: 80px;
+	background-color: #6CCFF3;
+	margin: 0px 0px 20px 0px;
+	font-size: 24px;
+}
+
+#inputEmail3 {
+	width: 300px;
+}
+
+#inputPassword3 {
+	width: 300px;
+	margin-bottom: 5px;
+}
+
+#signup {
+	background-color: white;
+	color: black;
+	width: 120px;
+	border: 1px solid #707070;
+	margin-left: 50px;
+}
+
+#signin {
+	background-color: #FFA000;
+	width: 100px;
+	border: 1px solid #707070;
+	margin-left: 20px;
+}
+
+#forget {
+	position: relative;
+	left: 100px;
+}
+
+.content {
+	margin-top: 100px;
+	margin-bottom: 200px;
+}
+</style>
+
+</head>
+<body class="mybody">
+
+	<div class="header">
+		<jsp:include page="../header.jsp"></jsp:include>
+	</div>
+
+	<div class="content">
+		<form class="myform"
+			ACTION="<%=request.getContextPath()%>/member/controller/MemberLogin"
+			method="post">
+			<div class="topcol">
+				<br> <u>éŠæˆ²å ƒæœƒå“¡ç™»å…¥</u>
+			</div>
+
+			<div class="form-group row"></div>
+			<h3><b>æ­¡è¿å›ä¾†! <%=session.getAttribute("loginName") %></b></h3>
+
+			<div class="form-group row"></div>
+	</div>
+
+	<div class="col-sm-10">
+
+		<br>
+	</div>
+
+
+
+	</form>
+	</div>
+
+	<div class="footer">
+		<jsp:include page="../footer.jsp"></jsp:include>
+	</div>
 </body>
+
+
+
 </html>
