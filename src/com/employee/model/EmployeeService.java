@@ -75,6 +75,16 @@ public class EmployeeService {
 		
 		return employeeVO;
 	}
+	
+	public EmployeeVO updateEmployee_pwd(String e_id, String e_password) {
+		
+		EmployeeVO employeeVO = new EmployeeVO();		
+		employeeVO.setE_id(e_id);		
+		employeeVO.setE_password(e_password);
+		dao.update_pwd(employeeVO);
+		
+		return employeeVO;
+	}
 
 	public void deleteEmployee(String employeeVO) {
 		dao.delete(employeeVO);
