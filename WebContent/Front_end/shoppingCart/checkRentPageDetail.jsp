@@ -243,11 +243,11 @@ input:read-only {
 									style="border: 1px solid #000000"></canvas>
 									
 								<br>
-								<button id="clear-signature">Clear</button>
-								<button id="saveButton" >Save</button>
-								<textarea class="article-input" id="article-input" type="input" hidden >{{article}}</textarea> 
+								<button id="clear-signature">清空重簽</button>
+								<button id="saveButton" >確認</button>
+								<textarea class="article-input" id="article-input" hidden >{{article}}</textarea> 
 							</div>
-							<div align=center>
+							<div align=center style=" width:300px height:150px background: white">
 								<div id="copy">
 								</div>
 							</div>
@@ -321,14 +321,16 @@ input:read-only {
 			        alert("Please provide signature first.");
 			    } else {
 			    	var canvas = document.getElementById("signature");
-			    	
-			    	var dataURL = canvas.toDataURL().replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
+			    	var dataURL = canvas.toDataURL("image/png");
+			    	//var download = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
 			    	console.log(dataURL);
 					var str = dataURL;
 					
 					
-			    	window.location.href=dataURL;
+			    	//window.location.href=download;
 			    	document.getElementById("article-input").innerHTML=str;
+			    	document.getElementById("copy").innerHTML='<img src="'+str+'"/>';
+			    	
 			    	
 // 			    	$.ajax({
 //                         type: 'POST',
@@ -345,23 +347,7 @@ input:read-only {
 			  });
 
 		});
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 	</script>
 
 
