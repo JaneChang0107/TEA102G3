@@ -103,7 +103,7 @@ public class Login extends HttpServlet {
 			
 		}
 		
-//---------------------------------------------更新---------------------------------------------
+//---------------------------------------------更新部分---------------------------------------------
 		
 			if ("update_without".equals(action)) { // 來自update_emp_input.jsp的請求
 			
@@ -227,5 +227,78 @@ public class Login extends HttpServlet {
 //				failureView.forward(req, res);
 			}
 		}
+//---------------------------------------------更新密碼---------------------------------------------
+			
+			if ("update_pwd".equals(action)) { // 來自update_emp_input.jsp的請求
+				
+				List<String> errorMsgs = new LinkedList<String>();
+				// Store this set in the request scope, in case we need to
+				// send the ErrorPage view.
+				HttpSession session = req.getSession();
+				session.setAttribute("errorMsgs", errorMsgs);
+				
+				try {
+					System.out.println("update_pwd");
+					/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+					String e_id =req.getParameter("e_id").trim();
+					
+					String new_password = req.getParameter("new_password");
+					String check_password = req.getParameter("check_password");
+					
+					String e_password = req.getParameter("e_password");
+					String e_passwordReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{6,30}$";
+					if (e_password == null || e_password.trim().length() == 0) {
+						errorMsgs.add("員工密碼: 請勿空白");
+					} else if(!e_password.trim().matches(e_passwordReg)) { //以下練習正則(規)表示式(regular-expression)
+						errorMsgs.add("員工密碼: 只能是英文字母、數字和_ , 且長度必需在6到30之間");
+					}
+					
+					EmployeeService employeeSvc = new EmployeeService();
+					EmployeeVO employeeVO1 = employeeSvc.getOneEmployee(e_id);
+					
+//進行舊密碼和資料庫比對,相符才進行修改
+					if(!employeeVO1.getE_password().equals(e_password)) {
+						errorMsgs.add("原始密碼不相符");
+					} else if(!new_password.equals(check_password)) {
+						errorMsgs.add("請確認第二次密碼與第一次相符");
+					}
+
+					EmployeeVO employeeVO = new EmployeeVO();
+					employeeVO.setE_id(e_id);
+					employeeVO.setE_password(new_password);
+					
+					System.out.println(new_password);
+					
+					// Send the use back to the form, if there were errors
+					if (!errorMsgs.isEmpty()) {					
+						session.setAttribute("employeeVO", employeeVO); // 含有輸入格式錯誤的empVO物件,也存入req
+						res.sendRedirect(req.getContextPath() + "/Back_end/employee/index_backstage.jsp");
+						System.out.println("有錯 印訊息");
+//					RequestDispatcher failureView = req
+//							.getRequestDispatcher("/Back_end/employee/update_employee_input.jsp");
+//					failureView.forward(req, res);
+						return; //程式中斷
+					}						
+						/***************************2.開始修改資料*****************************************/
+						employeeVO = employeeSvc.updateEmployee_pwd(e_id, new_password);
+						
+						/***************************3.修改完成,準備轉交(Send the Success view)*************/
+						req.setAttribute("employeeVO", employeeVO); // 資料庫update成功後,正確的的empVO物件,存入req
+						res.sendRedirect(req.getContextPath() + "/Back_end/employee/index_backstage.jsp");
+						System.out.println("succeess");
+//				String url = "/Back_end/employee/listOneEmployee.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+//				successView.forward(req, res);
+										
+					/***************************其他可能的錯誤處理*************************************/
+				} catch (Exception e) {
+					errorMsgs.add("修改資料失敗:"+e.getMessage());
+					res.sendRedirect(req.getContextPath() + "/Back_end/employee/index_backstage.jsp");
+					System.out.println("其他錯誤");
+//				RequestDispatcher failureView = req
+//						.getRequestDispatcher("/Back_end/employee/update_employee_input.jsp");
+//				failureView.forward(req, res);
+				}
+			}
 	}
 }
