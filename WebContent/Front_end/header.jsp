@@ -390,8 +390,9 @@ select#ptype {
 					id="cart" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="true"></i>
 					<div class="dropdown-menu" aria-labelledby="cart">
-						<a class="dropdown-item" href="#">租用車</a> <a class="dropdown-item"
-							href="#">購買車</a>
+						<a class="dropdown-item" href="#">租用車</a> 
+						<a class="dropdown-item"
+							href="<%=request.getContextPath()%>/Front_end/shoppingCart/checkBuyPage.jsp">購買車</a>
 					</div> 
 					<!-- cart下拉結束 -->
 				</td>
