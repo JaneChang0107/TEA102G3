@@ -531,7 +531,7 @@ public class MemberServlet extends HttpServlet {
             System.out.println("新增完成");
             
 			// 3.新增完成，準備轉交
-			String url= "/Front_end/members/listAllMem.jsp";
+			String url= "/Front_end/members/addSuccess.jsp";
 			RequestDispatcher successView =req.getRequestDispatcher(url);
 			successView.forward(req, res);
 			SendEmail.openMail(m_email);
@@ -722,9 +722,10 @@ public class MemberServlet extends HttpServlet {
             System.out.println("新增完成");
             
 			// 3.新增完成，準備轉交
-			String url= "/Front_end/members/listAllMem.jsp";
+			String url= "/Front_end/members/addSuccess.jsp";
 			RequestDispatcher successView =req.getRequestDispatcher(url);
 			successView.forward(req, res);
+			SendEmail.openMail(m_email);
 			
 			// 抓到其他例外
 			}catch(Exception e) {
