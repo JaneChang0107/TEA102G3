@@ -24,15 +24,23 @@ public class ProductTypeAjax extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("pppppppppppppptttttttttt");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter writer = response.getWriter();
 		ProductTypeService ptService = new ProductTypeService();
-		List<ProductTypeVO> ptVOs = ptService.getAll();
-		
 		ObjectMapper mapper = new ObjectMapper();
-		writer.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(ptVOs));
+		String action = request.getParameter("action");
 		
+		if("searchType".equals(action)) {
+			List<ProductTypeVO> ptVOs = ptService.getAll();
+			
+			writer.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(ptVOs));
+		}
+		
+		if("getOneType".equals(action)) {
+			String ptid = request.getParameter("ptid");
+			System.out.println(ptid);
+			writer.println(mapper.writeValueAsString(ptService.getOneProductType(ptid)));
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

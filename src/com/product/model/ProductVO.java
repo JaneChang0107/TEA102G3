@@ -92,6 +92,25 @@ public class ProductVO implements java.io.Serializable {
 	public Integer getP_status() {
 		return p_status;
 	}
+	public String getP_statusMeans() {
+		String means = "";
+		switch(p_status) {
+			case 0 :
+				means = "已售出";
+				break;
+			case 1 :
+				means = "上架中";
+				break;
+			case 2 :
+				means = "下架中";
+				break;
+			case 5 :
+				means = "待出貨";
+				break;
+		}
+		
+		return means;
+	}
 	public void setP_status(Integer p_status) {
 		this.p_status = p_status;
 	}

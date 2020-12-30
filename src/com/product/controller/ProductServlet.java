@@ -23,6 +23,8 @@ import com.product.model.ProductService;
 import com.product.model.ProductVO;
 import com.productPicture.model.ProductPictureService;
 import com.productPicture.model.ProductPictureVO;
+import com.productType.model.ProductTypeService;
+import com.productType.model.ProductTypeVO;
 
 @WebServlet("/ProductServlet")
 @MultipartConfig
@@ -171,10 +173,11 @@ public class ProductServlet extends HttpServlet {
 			}
 
 //	======================暫時暫時暫時暫時暫時暫時===================================================
-			List<ProductVO> pVOs = pService.getAll();
-			request.setAttribute("pVOs", pVOs);
-			RequestDispatcher ok = request.getRequestDispatcher("/Back_end/product/showProduct.jsp");
-			ok.forward(request, response);
+//			List<ProductVO> pVOs = pService.getAll();
+//			request.setAttribute("pVOs", pVOs);
+//			RequestDispatcher ok = request.getRequestDispatcher("/Back_end/product/showProduct.jsp");
+//			ok.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/Front_end/product/sellerProduct.jsp");
 //	================================================================================================
 		}
 		
@@ -312,10 +315,11 @@ public class ProductServlet extends HttpServlet {
 				}
 			}
 //			======================暫時暫時暫時暫時暫時暫時===================================================
-				List<ProductVO> pVOs = pService.getAll();
-				request.setAttribute("pVOs", pVOs);
-				RequestDispatcher ok = request.getRequestDispatcher("/Back_end/product/showProduct.jsp");
-				ok.forward(request, response);
+//			List<ProductVO> pVOs = pService.getAll();
+//			request.setAttribute("pVOs", pVOs);
+//			RequestDispatcher ok = request.getRequestDispatcher("/Back_end/product/showProduct.jsp");
+//			ok.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/Front_end/product/sellerProduct.jsp");
 //			================================================================================================
 			
 		}
@@ -332,9 +336,15 @@ public class ProductServlet extends HttpServlet {
 			String pid = request.getParameter("pid");
 			
 			ProductService pService = new ProductService();
+			ProductTypeService ptService = new ProductTypeService();
+			
+			
 			ProductVO pVO = pService.oneProduct(pid);
+			ProductTypeVO ptVO = ptService.getOneProductType(pVO.getPt_id());
+			
 			if(pVO != null) {
 				request.setAttribute("pVO", pVO);
+				request.setAttribute("ptVO", ptVO);
 				RequestDispatcher rd = request.getRequestDispatcher("/Front_end/product/ProductDetail.jsp");
 				rd.forward(request, response);
 			}
@@ -351,7 +361,6 @@ public class ProductServlet extends HttpServlet {
 			ObjectMapper mapper = new ObjectMapper();
 			
 			String product = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(sellerProduct);
-			System.out.println(product);
 			response.getWriter().println(product);
 			
 //			request.setAttribute("sellerProduct", sellerProduct);

@@ -24,9 +24,9 @@
 		width: 50%;
 	}
 	table{
-		border: 1px solid black;
+		width: 100%;
 	}
-	
+
 </style>
 </head>
 <body>

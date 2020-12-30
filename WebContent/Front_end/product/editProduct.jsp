@@ -75,7 +75,7 @@
 	            <% i = 0; %>
 	        <c:forEach var="ppVO" items="${ppVOs}">
 	        	<div class="dbImg">
-		        	<img src="<%= request.getContextPath() %>/ShowPicture?type=pp&id=${ppVO.pp_id}" class="showImg">
+		        	<img src="<%= request.getContextPath() %>/ShowPicture?type=ppid&id=${ppVO.pp_id}" class="showImg">
 		        	<input type="hidden" name="<%= "ppid" + ++i %>" value="${ppVO.pp_id}">
 		            <input type="file" name="<%= "img" + i %>" class="uploadImg" accept="image/*">
 	            </div>

@@ -2,13 +2,13 @@ $(function() {
     let contextPath = $("#contextPath").val();
     let type = $("#type").val();
     let pname = $("#name").val();
-    
-    console.log(type);
-    console.log(pname);
 
     $.ajax({
         url: contextPath + "/ProductTypeAjax",
         type : "GET",
+        data : {
+            "action" : "searchType"
+        },
         dataType : "json",
         success : function(data) {
             $("#ptype").html(`<option value="no">選擇類型</option>`);

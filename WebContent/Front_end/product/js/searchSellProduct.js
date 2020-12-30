@@ -34,12 +34,10 @@ $("#searchBtn").click(function() {
             $.each(data, function(index, value) {
 
                 findPicture(value.p_id).then((data) => {
-                    
-                    let ppid = data;
                     $(".row").append(
                         `<div class="col-md-4">
                             <div class="card" style="width: 18rem;">
-                                <img src="${contextPath}/ShowPicture?type=pp&id=${ppid}" class="card-img-top" alt="沒...沒圖片">
+                                <img src="${contextPath}/ShowPicture?type=pp&id=${data}" class="card-img-top" alt="沒...沒圖片">
                                 <div class="card-body">
                                     <h5 class="card-title">${value.p_name}</h5>
                                     <p class="card-text">平台:${value.pt_idName}</p>
