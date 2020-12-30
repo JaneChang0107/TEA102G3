@@ -45,26 +45,17 @@ pageContext.setAttribute("list", list);
     <button type="button" class="btn btn-warning btn-circle-xl" id="sellbtn">我要賣</button>
   </div>
 
-<table id= "table-2">
-	<tr>
-		<td>商品</td>
-		<td>排名</td>
-	</tr>
-
 	
-</table>	
 
 
   <div class="swiper-container">
     <H1>熱銷商品</H1>
     <div class="swiper-wrapper">
-      
-      <c:forEach var="VO" items="${list}" begin="0" end="5">
-		<jsp:useBean id="pSvc" scope="page"	class="com.orderdetail.model.OrderdetailService" />
+      <c:forEach var="VO" items="${list}" >
+		<jsp:useBean id="productSvc" scope="page"	class="com.productPicture.model.ProductPictureService" />
 		<div class="swiper-slide"><img alt="沒...沒圖" src="<%= request.getContextPath() %>/ShowPicture?type=pp&id=${id}"></div>
 		<td>${VO.p_id}</td>
 		<td>${VO.od_count}</td>
-	</tr>
 	</c:forEach>
     </div>
     <div class="swiper-pagination"></div>
