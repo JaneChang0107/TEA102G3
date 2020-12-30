@@ -315,8 +315,8 @@ public class RentOrderJDBCDAO implements RentOrderDAO_interface{
 	public static void main(String[] args) {
 
 		RentOrderJDBCDAO dao = new RentOrderJDBCDAO();
-		byte[] pic = getPictureByteArray("WebContent/back_end/employee/images/1.png");
-		byte[] pic2 = getPictureByteArray("WebContent/back_end/employee/images/2.jpg");
+		byte[] pic = getPictureByteArray("WebContent/Back_end/employee/images/1.png");
+		byte[] pic2 = getPictureByteArray("WebContent/Back_end/employee/images/2.jpg");
 
 //		// ·s¼W
 //		RentOrderVO RentOrderVO1 = new RentOrderVO(); 

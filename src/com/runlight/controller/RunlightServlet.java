@@ -38,7 +38,7 @@ public class RunlightServlet extends HttpServlet {
 			
 			
           
-			String url = "/back_end/runlight/light.jsp";
+			String url = "/Back_end/runlight/light.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 			successView.forward(req, res);
 			jedis.close();

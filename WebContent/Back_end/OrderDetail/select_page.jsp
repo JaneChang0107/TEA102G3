@@ -102,7 +102,7 @@ h4 {
 	<ul>
 	
 		<li><a
-			href='<%=request.getContextPath()%>/back_end/OrderDetail/listAllOrderdetail.jsp'>List</a>
+			href='<%=request.getContextPath()%>/Back_end/OrderDetail/listAllOrderdetail.jsp'>List</a>
 			all orderlist. <br>
 		<br></li>
 		<li>
@@ -163,7 +163,7 @@ h4 {
 
 	<ul>
 		<li><a
-			href='<%=request.getContextPath()%>/back_end/OrderDetail/addorderdetail.jsp'>Add</a>
+			href='<%=request.getContextPath()%>/Back_end/OrderDetail/addorderdetail.jsp'>Add</a>
 			a new orderdetail.</li>
 	</ul>
 

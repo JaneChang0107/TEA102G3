@@ -51,7 +51,7 @@ h4 {
 	<ul>
 
 		<li><a
-			href='<%=request.getContextPath()%>/back_end/ViewSeller/listAllviewseller.jsp'>List</a>
+			href='<%=request.getContextPath()%>/Back_end/ViewSeller/listAllviewseller.jsp'>List</a>
 			all orderlist. <br> <br></li>
 		<li>
 			<FORM METHOD="post"
@@ -82,7 +82,7 @@ h4 {
 
 	<ul>
 		<li><a
-			href='<%=request.getContextPath()%>/back_end/ViewSeller/addviewseller.jsp'>Add</a>
+			href='<%=request.getContextPath()%>/Back_end/ViewSeller/addviewseller.jsp'>Add</a>
 			a new orderdetail.</li>
 	</ul>
 

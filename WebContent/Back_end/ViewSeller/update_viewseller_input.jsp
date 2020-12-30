@@ -49,7 +49,7 @@ ViewsellerVO viewsellerVO = (ViewsellerVO) request.getAttribute("viewsellerVO");
 	<tr><td>
 	
 		 <h3>資料修改 - update_viewseller_input.jsp</h3>
-		 <h4><a href="<%= request.getContextPath() %>/back_end/ViewSeller/select_page.jsp"><img src="<%= request.getContextPath() %>/back_end/images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h4><a href="<%= request.getContextPath() %>/Back_end/ViewSeller/select_page.jsp"><img src="<%= request.getContextPath() %>/Back_end/images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 

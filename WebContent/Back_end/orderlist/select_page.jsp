@@ -43,7 +43,7 @@
 </c:if>
 
 <ul>
-  <li><a href='<%= request.getContextPath() %>/back_end/orderlist/listAllOrderlist.jsp'>List</a> all orderlist.  <br><br></li>
+  <li><a href='<%= request.getContextPath() %>/Back_end/orderlist/listAllOrderlist.jsp'>List</a> all orderlist.  <br><br></li>
   
   
   <li>
@@ -87,7 +87,7 @@
 <h3>ºŞ²z</h3>
 
 <ul>
-  <li><a href='<%= request.getContextPath() %>/back_end/orderlist/addorderlist.jsp'>Add</a> a new orderlist.</li>
+  <li><a href='<%= request.getContextPath() %>/Back_end/orderlist/addorderlist.jsp'>Add</a> a new orderlist.</li>
 </ul>
 
 </body>

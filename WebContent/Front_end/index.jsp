@@ -1,4 +1,19 @@
+<%@page import="java.util.List"%>
+<%@page import="com.orderdetail.model.OrderdetailVO"%>
+<%@page import="com.orderdetail.model.OrderdetailService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%
+OrderdetailService orderdetailSvc1 = new OrderdetailService();
+List<OrderdetailVO> list =  orderdetailSvc1.count();
+pageContext.setAttribute("list", list);
+
+
+
+%>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -30,17 +45,27 @@
     <button type="button" class="btn btn-warning btn-circle-xl" id="sellbtn">我要賣</button>
   </div>
 
+<table id= "table-2">
+	<tr>
+		<td>商品</td>
+		<td>排名</td>
+	</tr>
+
+	
+</table>	
+
+
   <div class="swiper-container">
     <H1>熱銷商品</H1>
     <div class="swiper-wrapper">
-      <div class="swiper-slide">Slide 1</div>
-      <div class="swiper-slide">Slide 2</div>
-      <div class="swiper-slide">Slide 3</div>
-      <div class="swiper-slide">Slide 4</div>
-      <div class="swiper-slide">Slide 5</div>
-      <div class="swiper-slide">Slide 6</div>
-      <div class="swiper-slide">Slide 7</div>
-      <div class="swiper-slide">Slide 8</div>
+      
+      <c:forEach var="VO" items="${list}" begin="0" end="5">
+		<jsp:useBean id="pSvc" scope="page"	class="com.orderdetail.model.OrderdetailService" />
+		<div class="swiper-slide"><img alt="沒...沒圖" src="<%= request.getContextPath() %>/ShowPicture?type=pp&id=${id}"></div>
+		<td>${VO.p_id}</td>
+		<td>${VO.od_count}</td>
+	</tr>
+	</c:forEach>
     </div>
     <div class="swiper-pagination"></div>
     <div class="swiper-button-next"></div>
