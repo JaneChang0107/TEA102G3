@@ -60,6 +60,11 @@
                                                                交易系統
                               </a>
                             </li>
+                            <li class="nav-item" role="presentation">   <!--商品管理 = porduct -->
+                              <a class="nav-link" id="porduct-tab" data-toggle="tab" href="#porduct" role="tab" aria-controls="porduct" aria-selected="false">
+                                                               商品管理
+                              </a>
+                            </li>
                             <li>
                             	<form action="<%=request.getContextPath()%>/logout">
                                 <button type="submit" class="btn btn-danger">登出</button>
@@ -82,6 +87,7 @@
                     <div class="tab-pane fade" id="cs_sys" role="tabpanel" aria-labelledby="cs_sys-tab">這裡放你要的頁面</div>
                     <div class="tab-pane fade" id="rent_mgt" role="tabpanel" aria-labelledby="rent_mgt-tab">這裡放你要的頁面</div>
                     <div class="tab-pane fade" id="tran_sys" role="tabpanel" aria-labelledby="tran_sys-tab">這裡放你要的頁面</div>
+                    <div class="tab-pane fade" id="porduct" role="tabpanel" aria-labelledby="porduct-tab">這裡放你要的頁面</div>
                 </div>
             </div>
         </div>

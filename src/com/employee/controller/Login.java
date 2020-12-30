@@ -49,18 +49,18 @@ public class Login extends HttpServlet {
 		
 		if ("login".equals(action)) {
 //宣告錯誤訊息集合
-			List<String> errorMsgs = new LinkedList<String>();
+			List<String> errorMsgs_login = new LinkedList<String>();
 //把錯誤訊息存入session scope, 待稍後用getAttribute()取用
 			HttpSession session = req.getSession();
-			session.setAttribute("errorMsgs", errorMsgs);
+			session.setAttribute("errorMsgs_login", errorMsgs_login);
 			
 			String str = req.getParameter("e_id");
 			if (str == null || (str.trim()).length() == 0) {
-				errorMsgs.add("請輸入員工編號");
+				errorMsgs_login.add("請輸入員工編號");
 			}
 		
 // 如果錯誤訊息不是空的, 則切斷程式轉交回首頁 
-			if (!errorMsgs.isEmpty()) {
+			if (!errorMsgs_login.isEmpty()) {
 				res.sendRedirect(req.getContextPath() + "/Back_end/employee/login.jsp");
 				return;//程式中斷
 			}
@@ -107,11 +107,11 @@ public class Login extends HttpServlet {
 		
 			if ("update_without".equals(action)) { // 來自update_emp_input.jsp的請求
 			
-			List<String> errorMsgs = new LinkedList<String>();
+			List<String> errorMsgs_without = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			HttpSession session = req.getSession();
-			session.setAttribute("errorMsgs", errorMsgs);
+			session.setAttribute("errorMsgs_without", errorMsgs_without);
 		
 			try {
 				System.out.println("update");
@@ -121,23 +121,23 @@ public class Login extends HttpServlet {
 				String e_identity = req.getParameter("e_identity");
 				String e_identityReg = "^[A-Z]{1}[1-2]{1}[0-9]{8}$";
 				if (e_identity == null || e_identity.trim().length() == 0) {
-					errorMsgs.add("身分證字號: 請勿空白");
+					errorMsgs_without.add("身分證字號: 請勿空白");
 				} else if(!e_identity.trim().matches(e_identityReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("請輸入正確身分證格式");
+					errorMsgs_without.add("請輸入正確身分證格式");
 				}
 				
 				
 				String e_name = req.getParameter("e_name");
 				String e_nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z)]{2,10}$";
 				if (e_name == null || e_name.trim().length() == 0) {
-					errorMsgs.add("員工姓名: 請勿空白");
+					errorMsgs_without.add("員工姓名: 請勿空白");
 				} else if(!e_name.trim().matches(e_nameReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("員工姓名: 只能是中、英文字母, 且長度必需在2到10之間");
+					errorMsgs_without.add("員工姓名: 只能是中、英文字母, 且長度必需在2到10之間");
 	            }
 				
 				String e_gender = req.getParameter("e_gender").trim();
 				if (e_gender == null || e_gender.trim().length() == 0) {
-					errorMsgs.add("請選擇性別");
+					errorMsgs_without.add("請選擇性別");
 				}
 				
 				java.sql.Date e_birth = null;
@@ -145,36 +145,36 @@ public class Login extends HttpServlet {
 					e_birth = java.sql.Date.valueOf(req.getParameter("e_birth").trim());
 				} catch (IllegalArgumentException e) {
 					e_birth=new java.sql.Date(System.currentTimeMillis());
-					errorMsgs.add("請輸入日期!");
+					errorMsgs_without.add("請輸入日期!");
 				}
 				
 				String e_email = req.getParameter("e_email");
 				String e_emailReg = "^([A-Za-z0-9_\\-\\.])+\\@([A-Za-z0-9_\\-\\.])+\\.([A-Za-z]{2,4})$";
 				if (e_email == null || e_email.trim().length() == 0) {
-					errorMsgs.add("電子信箱: 請勿空白");
+					errorMsgs_without.add("電子信箱: 請勿空白");
 				} else if(!e_email.trim().matches(e_emailReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("電子信箱: 請依照電子郵件格式輸入");
+					errorMsgs_without.add("電子信箱: 請依照電子郵件格式輸入");
 	            }
 				
 				String e_phone = req.getParameter("e_phone");
 				String e_phoneReg = "^09[0-9]{8}$";
 				if (e_phone == null || e_phone.trim().length() == 0) {
-					errorMsgs.add("電話: 請勿空白");
+					errorMsgs_without.add("電話: 請勿空白");
 				} else if(!e_phone.trim().matches(e_phoneReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("電話: 只能是數字 , 且必需09開頭 , 長度為10");
+					errorMsgs_without.add("電話: 只能是數字 , 且必需09開頭 , 長度為10");
 				}
 				
 				String e_address = req.getParameter("e_address");
 				String e_addressReg = "^[(\u4e00-\u9fa5)(0-9)]{5,30}$";
 				if (e_address == null || e_address.trim().length() == 0) {
-					errorMsgs.add("住址: 請勿空白");
+					errorMsgs_without.add("住址: 請勿空白");
 				} else if(!e_address.trim().matches(e_addressReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("住址: 只能是中文、數字 , 且長度必需在5到30之間");
+					errorMsgs_without.add("住址: 只能是中文、數字 , 且長度必需在5到30之間");
 				}
 				
 				String e_title = req.getParameter("e_title").trim();
 				if (e_gender == null || e_gender.trim().length() == 0) {
-					errorMsgs.add("請選擇職稱");
+					errorMsgs_without.add("請選擇職稱");
 				}
 			
 				
@@ -195,7 +195,7 @@ public class Login extends HttpServlet {
 				employeeVO.setSt_id(st_id);
 
 				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {					
+				if (!errorMsgs_without.isEmpty()) {					
 					session.setAttribute("employeeVO", employeeVO); // 含有輸入格式錯誤的empVO物件,也存入req
 					res.sendRedirect(req.getContextPath() + "/Back_end/employee/index_backstage.jsp");
 					System.out.println("有錯 印訊息");
@@ -219,7 +219,7 @@ public class Login extends HttpServlet {
 
 				/***************************其他可能的錯誤處理*************************************/
 			} catch (Exception e) {
-				errorMsgs.add("修改資料失敗:"+e.getMessage());
+				errorMsgs_without.add("修改資料失敗:"+e.getMessage());
 				res.sendRedirect(req.getContextPath() + "/Back_end/employee/index_backstage.jsp");
 				System.out.println("其他錯誤");
 //				RequestDispatcher failureView = req
@@ -231,11 +231,11 @@ public class Login extends HttpServlet {
 			
 			if ("update_pwd".equals(action)) { // 來自update_emp_input.jsp的請求
 				
-				List<String> errorMsgs = new LinkedList<String>();
+				List<String> errorMsgs_pwd = new LinkedList<String>();
 				// Store this set in the request scope, in case we need to
 				// send the ErrorPage view.
 				HttpSession session = req.getSession();
-				session.setAttribute("errorMsgs", errorMsgs);
+				session.setAttribute("errorMsgs_pwd", errorMsgs_pwd);
 				
 				try {
 					System.out.println("update_pwd");
@@ -248,9 +248,9 @@ public class Login extends HttpServlet {
 					String e_password = req.getParameter("e_password");
 					String e_passwordReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{6,30}$";
 					if (e_password == null || e_password.trim().length() == 0) {
-						errorMsgs.add("員工密碼: 請勿空白");
+						errorMsgs_pwd.add("員工密碼: 請勿空白");
 					} else if(!e_password.trim().matches(e_passwordReg)) { //以下練習正則(規)表示式(regular-expression)
-						errorMsgs.add("員工密碼: 只能是英文字母、數字和_ , 且長度必需在6到30之間");
+						errorMsgs_pwd.add("員工密碼: 只能是英文字母、數字和_ , 且長度必需在6到30之間");
 					}
 					
 					EmployeeService employeeSvc = new EmployeeService();
@@ -258,9 +258,9 @@ public class Login extends HttpServlet {
 					
 //進行舊密碼和資料庫比對,相符才進行修改
 					if(!employeeVO1.getE_password().equals(e_password)) {
-						errorMsgs.add("原始密碼不相符");
+						errorMsgs_pwd.add("原始密碼不相符");
 					} else if(!new_password.equals(check_password)) {
-						errorMsgs.add("請確認第二次密碼與第一次相符");
+						errorMsgs_pwd.add("請確認第二次密碼與第一次相符");
 					}
 
 					EmployeeVO employeeVO = new EmployeeVO();
@@ -270,7 +270,7 @@ public class Login extends HttpServlet {
 					System.out.println(new_password);
 					
 					// Send the use back to the form, if there were errors
-					if (!errorMsgs.isEmpty()) {					
+					if (!errorMsgs_pwd.isEmpty()) {					
 						session.setAttribute("employeeVO", employeeVO); // 含有輸入格式錯誤的empVO物件,也存入req
 						res.sendRedirect(req.getContextPath() + "/Back_end/employee/index_backstage.jsp");
 						System.out.println("有錯 印訊息");
@@ -292,7 +292,7 @@ public class Login extends HttpServlet {
 										
 					/***************************其他可能的錯誤處理*************************************/
 				} catch (Exception e) {
-					errorMsgs.add("修改資料失敗:"+e.getMessage());
+					errorMsgs_pwd.add("修改資料失敗:"+e.getMessage());
 					res.sendRedirect(req.getContextPath() + "/Back_end/employee/index_backstage.jsp");
 					System.out.println("其他錯誤");
 //				RequestDispatcher failureView = req

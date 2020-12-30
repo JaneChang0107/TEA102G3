@@ -31,7 +31,7 @@
                      	<%@include file="update_pwd.jsp" %>
                     </div>
                     <div class="tab-pane fade" id="emp_mana" role="tabpanel" aria-labelledby="emp_mana-tab">
-                      這裡include頁面
+                     	<%@include file="management.jsp" %>
                     </div>
                   </div>
             </div>

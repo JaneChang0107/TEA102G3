@@ -22,6 +22,10 @@ ul li{
 /*     padding: 5%; */
     font-size: 24px;
 }
+.management_container{
+    font-size: 24px;
+    text-align: center;
+}
 .log_header{
 }
 .row{
@@ -74,4 +78,10 @@ ul li{
 .btn_col{
     /* margin-right: 10%; */
     margin-top: 10%;
+}
+.search-col{
+	text-align: right;	
+}
+.listAll_row{
+	background-color: #6c757d;
 }

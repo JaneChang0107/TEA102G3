@@ -19,15 +19,16 @@
 	 <div class="container update_without">
 	 	<div class="row">
 	 		<div class="col">
-<%-- 	 			錯誤表列 --%>
-<%-- 				<c:if test="${not empty errorMsgs}"> --%>
-<!-- 					<font style="color:red">請修正以下錯誤:</font> -->
-<!-- 					<ul> -->
-<%-- 						<c:forEach var="message" items="${errorMsgs}"> --%>
-<%-- 							<li style="color:red">${message}</li> --%>
-<%-- 						</c:forEach> --%>
-<!-- 					</ul> -->
-<%-- 				</c:if> --%>
+<!-- 	 			錯誤表列 -->
+				<c:if test="${not empty errorMsgs_without}">
+					<font style="color:red">請修正以下錯誤:</font>
+					<ul>
+						<c:forEach var="message" items="${errorMsgs_without}">
+							<li style="color:red">${message}</li>
+						</c:forEach>
+					</ul>
+				</c:if>
+				<c:remove var="errorMsgs_without"/>
 	 		</div>
 	 	</div>
         <div class="row">
@@ -127,9 +128,9 @@
     <script src="${pageContext.request.contextPath}/vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/Back_end/employee/js/index_backstage.js"></script>
     <script>
-	    if(${errorMsgs != null}){
-			alert("${errorMsgs}");
-		}
+// 	    if(${errorMsgs_without != null}){
+// 			alert("${errorMsgs_without}");			
+// 		}
     </script>
     
     <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
