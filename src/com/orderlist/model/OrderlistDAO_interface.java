@@ -9,4 +9,5 @@ public interface OrderlistDAO_interface {
 	public void delete(String orderlistVO);
 	public OrderlistVO findByPrimaryKey(String orderlistVO);
     public List<OrderlistVO> getAll();
+    public List<OrderlistVO> status();
 }

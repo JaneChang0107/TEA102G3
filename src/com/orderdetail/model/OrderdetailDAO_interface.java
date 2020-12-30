@@ -9,4 +9,7 @@ public interface OrderdetailDAO_interface {
 	public void delete(String orderdetailVO);
 	public OrderdetailVO findByPrimaryKey(String orderdetailVO);
     public List<OrderdetailVO> getAll();
+	public List<OrderdetailVO> count();
+	
+	
 }

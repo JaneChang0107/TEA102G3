@@ -11,22 +11,22 @@ public class OrderdetailService {
 	}
 	
 	public OrderdetailVO addOrderdetail(String o_id,String p_id,Integer od_count) {
-		OrderdetailVO ODVO = new OrderdetailVO();
-		ODVO.setO_id(o_id);
-		ODVO.setP_id(p_id);
-		ODVO.setOd_count(od_count);
-		dao.insert(ODVO);
-		return ODVO;
+		OrderdetailVO orderdetailVO = new OrderdetailVO();
+		orderdetailVO.setO_id(o_id);
+		orderdetailVO.setP_id(p_id);
+		orderdetailVO.setOd_count(od_count);
+		dao.insert(orderdetailVO);
+		return orderdetailVO;
 	}
 	
 	public OrderdetailVO updateOrderdetail(String od_id,String o_id,String p_id,Integer od_count) {
-		OrderdetailVO ODVO = new OrderdetailVO();
-		ODVO.setOd_id(od_id);
-		ODVO.setO_id(o_id);
-		ODVO.setP_id(p_id);
-		ODVO.setOd_count(od_count);
-		dao.update(ODVO);
-		return ODVO;
+		OrderdetailVO orderdetailVO = new OrderdetailVO();
+		orderdetailVO.setOd_id(od_id);
+		orderdetailVO.setO_id(o_id);
+		orderdetailVO.setP_id(p_id);
+		orderdetailVO.setOd_count(od_count);
+		dao.update(orderdetailVO);
+		return orderdetailVO;
 	}
 	
 	public void deleteOrderdetail(String od_id) {
@@ -41,7 +41,9 @@ public class OrderdetailService {
 		return dao.getAll();
 	}
 	
-	
+	public List<OrderdetailVO> count(){
+		return dao.count();
+	}
 	
 	
 }

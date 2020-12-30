@@ -4,56 +4,64 @@ import java.sql.*;
 
 import java.util.*;
 
-
-import oracle.sql.*;
-
 public class OrderlistJDBCDAO implements OrderlistDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String userid = "TEA102G3";
 	String passwd = "102G3";
-	
-	private static final String INSERT_STMT = 
-			"INSERT INTO ORDERLIST   (o_id, o_date, o_status, o_shipdate, o_deceiptdate, o_finishdate, o_transport, o_address, o_total, o_pm, m_id) VALUES ('O' || lpad(ORDERLIST_SEQ.nextval,5,'0'), ?, ?, ?, ?, ?,? ,?, ?, ?,?)";
-		private static final String GET_ALL_STMT = 
-			"SELECT o_id, o_date, o_status, o_shipdate, o_deceiptdate, o_finishdate, o_transport, o_address, o_total, o_pm, m_id FROM ORDERLIST   order by  o_id";
-		private static final String GET_ONE_STMT = 
-			"SELECT  o_id, o_date, o_status, o_shipdate, o_deceiptdate, o_finishdate, o_transport, o_address, o_total, o_pm, m_id FROM ORDERLIST  where o_id = ?";
-		private static final String DELETE = 
-			"DELETE FROM ORDERLIST  where o_id = ?";
-		private static final String UPDATE = 
-			"UPDATE ORDERLIST  set  o_date = ? , o_status = ? , o_shipdate = ? , o_deceiptdate = ? , o_finishdate = ? , o_transport = ? , o_address = ? , o_total = ? , o_pm = ? , m_id = ?  where o_id =?";
-	
-		
+
+	private static final String INSERT_STMT = "INSERT INTO ORDERLIST   (o_id, o_date, o_status, o_shipdate, o_deceiptdate, o_finishdate, o_transport, o_address, o_total, o_pm, m_id) VALUES ('O' || lpad(ORDERLIST_SEQ.nextval,5,'0'), ?, ?, ?, ?, ?,? ,?, ?, ?,?)";
+	private static final String GET_ALL_STMT = "SELECT o_id, o_date, o_status, o_shipdate, o_deceiptdate, o_finishdate, o_transport, o_address, o_total, o_pm, m_id FROM ORDERLIST   order by  o_id";
+	private static final String GET_ONE_STMT = "SELECT  o_id, o_date, o_status, o_shipdate, o_deceiptdate, o_finishdate, o_transport, o_address, o_total, o_pm, m_id FROM ORDERLIST  where o_id = ?";
+	private static final String DELETE = "DELETE FROM ORDERLIST  where o_id = ?";
+	private static final String UPDATE = "UPDATE ORDERLIST  set  o_date = ? , o_status = ? , o_shipdate = ? , o_deceiptdate = ? , o_finishdate = ? , o_transport = ? , o_address = ? , o_total = ? , o_pm = ? , m_id = ?  where o_id =?";
+	private static final String status = "select o_id, o_date, o_status, o_shipdate, o_deceiptdate, o_finishdate, o_transport, o_address, o_total, o_pm, m_id from orderlist where m_id = ?";
+
 	@Override
-	public void insert(OrderlistVO orderlistVO) {
-		// TODO Auto-generated method stub
+	public List<OrderlistVO> status() {
 		
+		List<OrderlistVO> list = new ArrayList<OrderlistVO>();
+		OrderlistVO orderlistVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+		ResultSet rs = null;
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(INSERT_STMT);
+			pstmt = con.prepareStatement(status);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				orderlistVO = new OrderlistVO();
+				orderlistVO.setO_id(rs.getString("o_id"));
+				orderlistVO.setO_date(rs.getTimestamp("o_date"));
+				orderlistVO.setO_status(rs.getString("o_status"));
+				orderlistVO.setO_shipdate(rs.getTimestamp("o_shipdate"));
+				orderlistVO.setO_deceiptdate(rs.getTimestamp("o_deceiptdate"));
+				orderlistVO.setO_finishdate(rs.getTimestamp("o_finishdate"));
+				orderlistVO.setO_transport(rs.getString("o_transport"));
+				orderlistVO.setO_address(rs.getString("o_address"));
+				orderlistVO.setO_total(rs.getInt("o_total"));
+				orderlistVO.setO_pm(rs.getInt("o_pm"));
+				orderlistVO.setM_id(rs.getString("m_id"));
+				list.add(orderlistVO);
+			}
 			
-		
-			pstmt.setTimestamp(1, orderlistVO.getO_date());
-			pstmt.setString(2, orderlistVO.getO_status());
-			pstmt.setTimestamp(3, orderlistVO.getO_shipdate());
-			pstmt.setTimestamp(4, orderlistVO.getO_deceiptdate());
-			pstmt.setTimestamp(5, orderlistVO.getO_finishdate());
-			pstmt.setString(6, orderlistVO.getO_transport());
-			pstmt.setString(7, orderlistVO.getO_address());
-			pstmt.setInt(8, orderlistVO.getO_total());
-			pstmt.setInt(9, orderlistVO.getO_pm());
-			pstmt.setString(10, orderlistVO.getM_id());
 			
-			pstmt.executeUpdate();
+			
+			
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -69,21 +77,21 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface {
 				}
 			}
 		}
-		
+		return list;
 	}
 
 	@Override
-	public void update(OrderlistVO orderlistVO) {
+	public void insert(OrderlistVO orderlistVO) {
 		// TODO Auto-generated method stub
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(UPDATE);
-			
+			pstmt = con.prepareStatement(INSERT_STMT);
+
 			pstmt.setTimestamp(1, orderlistVO.getO_date());
 			pstmt.setString(2, orderlistVO.getO_status());
 			pstmt.setTimestamp(3, orderlistVO.getO_shipdate());
@@ -94,13 +102,59 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface {
 			pstmt.setInt(8, orderlistVO.getO_total());
 			pstmt.setInt(9, orderlistVO.getO_pm());
 			pstmt.setString(10, orderlistVO.getM_id());
-			pstmt.setString(11,  orderlistVO.getO_id());
-			
+
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+
+	@Override
+	public void update(OrderlistVO orderlistVO) {
+		// TODO Auto-generated method stub
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE);
+
+			pstmt.setTimestamp(1, orderlistVO.getO_date());
+			pstmt.setString(2, orderlistVO.getO_status());
+			pstmt.setTimestamp(3, orderlistVO.getO_shipdate());
+			pstmt.setTimestamp(4, orderlistVO.getO_deceiptdate());
+			pstmt.setTimestamp(5, orderlistVO.getO_finishdate());
+			pstmt.setString(6, orderlistVO.getO_transport());
+			pstmt.setString(7, orderlistVO.getO_address());
+			pstmt.setInt(8, orderlistVO.getO_total());
+			pstmt.setInt(9, orderlistVO.getO_pm());
+			pstmt.setString(10, orderlistVO.getM_id());
+			pstmt.setString(11, orderlistVO.getO_id());
+
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -125,22 +179,20 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE);
-			
+
 			pstmt.setString(1, orderlistVO);
-			
+
 			pstmt.executeUpdate();
 
-			
-			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -161,22 +213,21 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface {
 	@Override
 	public OrderlistVO findByPrimaryKey(String orderlistVO) {
 		// TODO Auto-generated method stub
-		OrderlistVO orderlistVO1= null;
-		Connection con=null;
-		PreparedStatement pstmt =null;
-		ResultSet rs =null;
-		
-		
+		OrderlistVO orderlistVO1 = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
-			
+
 			pstmt.setString(1, orderlistVO);
-			rs=pstmt.executeQuery();
-			
+			rs = pstmt.executeQuery();
+
 			while (rs.next()) {
-				orderlistVO1= new OrderlistVO();
+				orderlistVO1 = new OrderlistVO();
 				orderlistVO1.setO_id(rs.getString("o_id"));
 				orderlistVO1.setO_date(rs.getTimestamp("o_date"));
 				orderlistVO1.setO_status(rs.getString("o_status"));
@@ -189,11 +240,11 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface {
 				orderlistVO1.setO_pm(rs.getInt("o_pm"));
 				orderlistVO1.setM_id(rs.getString("m_id"));
 			}
-			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			if (rs != null) {
 				try {
 					rs.close();
@@ -216,8 +267,7 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface {
 				}
 			}
 		}
-		
-		
+
 		return orderlistVO1;
 	}
 
@@ -226,19 +276,19 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface {
 		// TODO Auto-generated method stub
 		List<OrderlistVO> list = new ArrayList<OrderlistVO>();
 		OrderlistVO orderlistVO = null;
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
-			while(rs.next()) {
-				orderlistVO= new OrderlistVO();
+			while (rs.next()) {
+				orderlistVO = new OrderlistVO();
 				orderlistVO.setO_id(rs.getString("o_id"));
 				orderlistVO.setO_date(rs.getTimestamp("o_date"));
 				orderlistVO.setO_status(rs.getString("o_status"));
@@ -252,12 +302,11 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface {
 				orderlistVO.setM_id(rs.getString("m_id"));
 				list.add(orderlistVO);
 			}
-			
-			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			if (rs != null) {
 				try {
 					rs.close();
@@ -280,15 +329,14 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface {
 				}
 			}
 		}
-		
-		
+
 		return list;
 	}
-	
+
 	public static void main(String[] args) {
-		Timestamp d = new Timestamp(System.currentTimeMillis()); 
-		OrderlistJDBCDAO dao= new OrderlistJDBCDAO();
-		
+		Timestamp d = new Timestamp(System.currentTimeMillis());
+		OrderlistJDBCDAO dao = new OrderlistJDBCDAO();
+
 //		// 穝糤
 //		OrderlistVO orderlistVO1= new OrderlistVO();
 //		orderlistVO1.setO_id("O00001");
@@ -304,58 +352,77 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface {
 //		orderlistVO1.setM_id("M00001");
 //		
 //		dao.insert(orderlistVO1);
+
+		// э
+		OrderlistVO orderlistVO2= new OrderlistVO();
+		orderlistVO2.setO_id("O00004");
+		orderlistVO2.setO_date(d);
+		orderlistVO2.setO_status("ゼ癳笷");
+		orderlistVO2.setO_shipdate(d);
+		orderlistVO2.setO_deceiptdate(d);
+		orderlistVO2.setO_finishdate(d);
+		orderlistVO2.setO_transport("獽坝┍");
+		orderlistVO2.setO_address("カ");
+		orderlistVO2.setO_total(500);
+		orderlistVO2.setO_pm(5);
+		orderlistVO2.setM_id("M00001");
 		
-//		// э
-//		OrderlistVO orderlistVO2= new OrderlistVO();
-//		orderlistVO2.setO_id("O00004");
-//		orderlistVO2.setO_date(d);
-//		orderlistVO2.setO_status("ゼ癳笷");
-//		orderlistVO2.setO_shipdate(d);
-//		orderlistVO2.setO_deceiptdate(d);
-//		orderlistVO2.setO_finishdate(d);
-//		orderlistVO2.setO_transport("獽坝┍");
-//		orderlistVO2.setO_address("カ");
-//		orderlistVO2.setO_total(500);
-//		orderlistVO2.setO_pm(5);
-//		orderlistVO2.setM_id("M00001");
-//		
-//		dao.update(orderlistVO2);
-		
+		dao.update(orderlistVO2);
+
 //		// 埃
 //		dao.delete("O00003");
-		
-		// 琩高1
-		OrderlistVO orderlistVO3= dao.findByPrimaryKey("O00004");
-		System.out.println(orderlistVO3.getO_id()+",");
-		System.out.println(orderlistVO3.getO_date()+",");
-		System.out.println(orderlistVO3.getO_status()+",");
-		System.out.println(orderlistVO3.getO_shipdate()+",");
-		System.out.println(orderlistVO3.getO_deceiptdate()+",");
-		System.out.println(orderlistVO3.getO_finishdate()+",");
-		System.out.println(orderlistVO3.getO_transport()+",");
-		System.out.println(orderlistVO3.getO_address()+",");
-		System.out.println(orderlistVO3.getO_total()+",");
-		System.out.println(orderlistVO3.getO_pm()+",");
-		System.out.println(orderlistVO3.getM_id());
-		System.out.println("---------------------one");
-		
-		// 琩高all
-		List<OrderlistVO> list =dao.getAll();
-		for(OrderlistVO ao :list) {
-			System.out.println(ao.getO_id()+",");
-			System.out.println(ao.getO_date()+",");
-			System.out.println(ao.getO_status()+",");
-			System.out.println(ao.getO_shipdate()+",");
-			System.out.println(ao.getO_deceiptdate()+",");
-			System.out.println(ao.getO_finishdate()+",");
-			System.out.println(ao.getO_transport()+",");
-			System.out.println(ao.getO_address()+",");
-			System.out.println(ao.getO_total()+",");
-			System.out.println(ao.getO_pm()+",");
-			System.out.println(ao.getM_id());
-			System.out.println("---------------------");
-		}
+
+//		// 琩高1
+//		OrderlistVO orderlistVO3 = dao.findByPrimaryKey("O00004");
+//		System.out.println(orderlistVO3.getO_id() + ",");
+//		System.out.println(orderlistVO3.getO_date() + ",");
+//		System.out.println(orderlistVO3.getO_status() + ",");
+//		System.out.println(orderlistVO3.getO_shipdate() + ",");
+//		System.out.println(orderlistVO3.getO_deceiptdate() + ",");
+//		System.out.println(orderlistVO3.getO_finishdate() + ",");
+//		System.out.println(orderlistVO3.getO_transport() + ",");
+//		System.out.println(orderlistVO3.getO_address() + ",");
+//		System.out.println(orderlistVO3.getO_total() + ",");
+//		System.out.println(orderlistVO3.getO_pm() + ",");
+//		System.out.println(orderlistVO3.getM_id());
+//		System.out.println("---------------------one");
+
+//		// 琩高all
+//		List<OrderlistVO> list = dao.getAll();
+//		for (OrderlistVO ao : list) {
+//			System.out.println(ao.getO_id() + ",");
+//			System.out.println(ao.getO_date() + ",");
+//			System.out.println(ao.getO_status() + ",");
+//			System.out.println(ao.getO_shipdate() + ",");
+//			System.out.println(ao.getO_deceiptdate() + ",");
+//			System.out.println(ao.getO_finishdate() + ",");
+//			System.out.println(ao.getO_transport() + ",");
+//			System.out.println(ao.getO_address() + ",");
+//			System.out.println(ao.getO_total() + ",");
+//			System.out.println(ao.getO_pm() + ",");
+//			System.out.println(ao.getM_id());
+//			System.out.println("---------------------");
+//		}
+
+//		List<OrderlistVO> list = dao.status();
+//		for (OrderlistVO ao : list) {
+//			System.out.println(ao.getO_id() + ",");
+//			System.out.println(ao.getO_date() + ",");
+//			System.out.println(ao.getO_status() + ",");
+//			System.out.println(ao.getO_shipdate() + ",");
+//			System.out.println(ao.getO_deceiptdate() + ",");
+//			System.out.println(ao.getO_finishdate() + ",");
+//			System.out.println(ao.getO_transport() + ",");
+//			System.out.println(ao.getO_address() + ",");
+//			System.out.println(ao.getO_total() + ",");
+//			System.out.println(ao.getO_pm() + ",");
+//			System.out.println(ao.getM_id());
+//			System.out.println("---------------------");
+//		}
+//		
 		
 	}
 
+	
+	
 }

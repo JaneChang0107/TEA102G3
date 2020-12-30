@@ -20,7 +20,65 @@ public class OrderdetailJDBCDAO implements OrderdetailDAO_interface {
 			"DELETE FROM orderdetail where od_id = ?";
 		private static final String UPDATE = 
 			"UPDATE orderdetail set o_id=?, p_id=?,od_count=? where od_id=?";
+		private static final String COUNT=
+			"select p_id ,sum(od_count) from orderdetail  group by p_id order by sum(od_count)desc";
+		
+		@Override
+		public List<OrderdetailVO> count() {
+			List<OrderdetailVO> list = new ArrayList<OrderdetailVO>();
+			OrderdetailVO orderdetailVO4 = null;
+		
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				Class.forName(driver);
+				con = DriverManager.getConnection(url, userid, passwd);
+				pstmt=con.prepareStatement(COUNT);
+				rs = pstmt.executeQuery();
 
+					while (rs.next()) {
+						orderdetailVO4=new OrderdetailVO();
+						orderdetailVO4.setP_id(rs.getString("p_id"));
+						orderdetailVO4.setOd_count(rs.getInt("sum(od_count)"));
+						list.add(orderdetailVO4);
+						
+					}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return list;
+			
+		}
+		
+		
+		
+		
+		
+	
+		
 	@Override
 	public void insert(OrderdetailVO orderdetailVO) {
 		Connection con = null;
@@ -266,23 +324,42 @@ public class OrderdetailJDBCDAO implements OrderdetailDAO_interface {
 		//// 埃
 //		dao.delete("OD00008");
 		
-		// 琩高1
-		OrderdetailVO orderdetailVO3 = dao.findByPrimaryKey("OD00007");
-		System.out.println(orderdetailVO3.getOd_id()+",");
-		System.out.println(orderdetailVO3.getO_id()+",");
-		System.out.println(orderdetailVO3.getP_id()+",");
-		System.out.println(orderdetailVO3.getOd_count());
-		System.out.println("---------------------one");
+//		// 琩高1
+//		OrderdetailVO orderdetailVO3 = dao.findByPrimaryKey("OD00007");
+//		System.out.println(orderdetailVO3.getOd_id()+",");
+//		System.out.println(orderdetailVO3.getO_id()+",");
+//		System.out.println(orderdetailVO3.getP_id()+",");
+//		System.out.println(orderdetailVO3.getOd_count());
+//		System.out.println("---------------------one");
+//		
+//		// 琩高all
+//		List<OrderdetailVO> list= dao.getAll();
+//		for(OrderdetailVO aod :list) {
+//			System.out.println(aod.getOd_id()+",");
+//			System.out.println(aod.getO_id()+",");
+//			System.out.println(aod.getP_id()+",");
+//			System.out.println(aod.getOd_count());
+//			System.out.println("---------------------");
+//		}
+//		
 		
-		// 琩高all
-		List<OrderdetailVO> list= dao.getAll();
-		for(OrderdetailVO aod :list) {
-			System.out.println(aod.getOd_id()+",");
-			System.out.println(aod.getO_id()+",");
+		List<OrderdetailVO> list2= dao.count();
+		for(OrderdetailVO aod :list2) {
+			
 			System.out.println(aod.getP_id()+",");
 			System.out.println(aod.getOd_count());
 			System.out.println("---------------------");
 		}
 		
+		
+	
 	}
+
+
+
+	
+
+
+
+	
 }

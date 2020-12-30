@@ -11,38 +11,38 @@ public class OrderlistService {
 	}
 	
 	public OrderlistVO addOrderlistVO(Timestamp o_date,String o_status,Timestamp o_shipdate,Timestamp o_deceiptdate,Timestamp o_finishdate,String o_transport,String o_address,Integer o_total,Integer o_pm,String m_id) {
-		OrderlistVO OLVO =new OrderlistVO();
-		OLVO.setO_date(o_date);
-		OLVO.setO_status(o_status);
-		OLVO.setO_shipdate(o_shipdate);
-		OLVO.setO_deceiptdate(o_deceiptdate);
-		OLVO.setO_finishdate(o_finishdate);
-		OLVO.setO_transport(o_transport); 
-		OLVO.setO_address(o_address);
-		OLVO.setO_total(o_total);
-		OLVO.setO_pm(o_pm);
-		OLVO.setM_id(m_id);
-		dao.insert(OLVO);
+		OrderlistVO orderlistVO =new OrderlistVO();
+		orderlistVO.setO_date(o_date);
+		orderlistVO.setO_status(o_status);
+		orderlistVO.setO_shipdate(o_shipdate);
+		orderlistVO.setO_deceiptdate(o_deceiptdate);
+		orderlistVO.setO_finishdate(o_finishdate);
+		orderlistVO.setO_transport(o_transport); 
+		orderlistVO.setO_address(o_address);
+		orderlistVO.setO_total(o_total);
+		orderlistVO.setO_pm(o_pm);
+		orderlistVO.setM_id(m_id);
+		dao.insert(orderlistVO);
 		
-		return OLVO;
+		return orderlistVO;
 	}
 	
 	public OrderlistVO updateOrderlistVO(String o_id,Timestamp o_date,String o_status,Timestamp o_shipdate,Timestamp o_deceiptdate,Timestamp o_finishdate,String o_transport,String o_address,Integer o_total,Integer o_pm,String m_id) {
-		OrderlistVO OLVO =new OrderlistVO();
-		OLVO.setO_id(o_id);
-		OLVO.setO_date(o_date);
-		OLVO.setO_status(o_status);
-		OLVO.setO_shipdate(o_shipdate);
-		OLVO.setO_deceiptdate(o_deceiptdate);
-		OLVO.setO_finishdate(o_finishdate);
-		OLVO.setO_transport(o_transport); 
-		OLVO.setO_address(o_address);
-		OLVO.setO_total(o_total);
-		OLVO.setO_pm(o_pm);
-		OLVO.setM_id(m_id);
-		dao.update(OLVO);
+		OrderlistVO orderlistVO =new OrderlistVO();
+		orderlistVO.setO_id(o_id);
+		orderlistVO.setO_date(o_date);
+		orderlistVO.setO_status(o_status);
+		orderlistVO.setO_shipdate(o_shipdate);
+		orderlistVO.setO_deceiptdate(o_deceiptdate);
+		orderlistVO.setO_finishdate(o_finishdate);
+		orderlistVO.setO_transport(o_transport); 
+		orderlistVO.setO_address(o_address);
+		orderlistVO.setO_total(o_total);
+		orderlistVO.setO_pm(o_pm);
+		orderlistVO.setM_id(m_id);
+		dao.update(orderlistVO);
 		
-		return OLVO;
+		return orderlistVO;
 	} 
 	
 	public void deleteOrderlist(String o_id) {
@@ -58,6 +58,10 @@ public class OrderlistService {
 		
 	}
 	
+	public List<OrderlistVO> status(){
+		return dao.status();
+		
+	}
 	
 	
 	

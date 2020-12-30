@@ -11,30 +11,30 @@ public class ViewsellerService {
 	}
 	
 	public ViewsellerVO addViewsellerVO(String o_id ,String m_buyid, String m_sellid,String v_gb ,String v_comment, Timestamp v_date) {
-		ViewsellerVO VVO = new ViewsellerVO();
-		VVO.setO_id(o_id);
-		VVO.setM_buyid(m_buyid);
-		VVO.setM_sellid(m_sellid);
-		VVO.setV_gb(v_gb);
-		VVO.setV_comment(v_comment);
-		VVO.setV_date(v_date);
-		dao.insert(VVO);
+		ViewsellerVO viewsellerVO = new ViewsellerVO();
+		viewsellerVO.setO_id(o_id);
+		viewsellerVO.setM_buyid(m_buyid);
+		viewsellerVO.setM_sellid(m_sellid);
+		viewsellerVO.setV_gb(v_gb);
+		viewsellerVO.setV_comment(v_comment);
+		viewsellerVO.setV_date(v_date);
+		dao.insert(viewsellerVO);
 		
-		return VVO;
+		return viewsellerVO;
 	}
 	
 	public ViewsellerVO updateViewsellerVO(String v_id ,String o_id ,String m_buyid, String m_sellid,String v_gb ,String v_comment, Timestamp v_date) {
-		ViewsellerVO VVO = new ViewsellerVO();
-		VVO.setV_id(v_id);
-		VVO.setO_id(o_id);
-		VVO.setM_buyid(m_buyid);
-		VVO.setM_sellid(m_sellid);
-		VVO.setV_gb(v_gb);
-		VVO.setV_comment(v_comment);
-		VVO.setV_date(v_date);
-		dao.update(VVO);
+		ViewsellerVO viewsellerVO = new ViewsellerVO();
+		viewsellerVO.setV_id(v_id);
+		viewsellerVO.setO_id(o_id);
+		viewsellerVO.setM_buyid(m_buyid);
+		viewsellerVO.setM_sellid(m_sellid);
+		viewsellerVO.setV_gb(v_gb);
+		viewsellerVO.setV_comment(v_comment);
+		viewsellerVO.setV_date(v_date);
+		dao.update(viewsellerVO);
 		
-		return VVO;
+		return viewsellerVO;
 	}
 	
 	public void deleteViewseller(String v_id) {
