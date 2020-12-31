@@ -1,3 +1,6 @@
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.Set"%>
+<%@page import="redis.clients.jedis.Jedis"%>
 <%@page import="java.util.List"%>
 <%@page import="com.orderdetail.model.OrderdetailVO"%>
 <%@page import="com.orderdetail.model.OrderdetailService"%>
@@ -9,8 +12,23 @@
 	OrderdetailService orderdetailSvc1 = new OrderdetailService();
 	List<OrderdetailVO> list = orderdetailSvc1.count();
 	pageContext.setAttribute("list", list);
-	
 	String test=(String)request.getAttribute("rl");
+	
+	Jedis jedis = new Jedis("localhost", 6379);
+	jedis.auth("123456");
+// 	String rl = jedis.get("1");
+// 	System.out.println(rl);
+	 Set<String> rl1 = jedis.keys("*"); 
+        Iterator<String> it=rl1.iterator() ;   
+        while(it.hasNext()){   
+            String key = it.next();
+            String test1=jedis.get(key);
+            request.setAttribute("aa", test1);
+//             System.out.println(key);   
+        }
+     
+	jedis.close();
+	
 %>
 
 
@@ -43,7 +61,8 @@
 
 <body>
 <h1>
-<marquee  onMouseOver="this.stop()" onMouseOut="this.start()">${rl}</marquee>
+
+<h3><marquee  onMouseOver="this.stop()" onMouseOut="this.start()">${rl==null ? aa : rl }</marquee>
 </h1>
 	<div class="content">
 
@@ -66,8 +85,9 @@
 					<jsp:useBean id="ppService" scope="page"
 						class="com.productPicture.model.ProductPictureService" />
 					<div class="swiper-slide">
-						<img  alt="沒...沒圖"
-							src="<%= request.getContextPath() %>/ShowPicture?type=pp&id=${VO.pp_id}" style="width:227.74px;height:300px;">
+						<a href="<%= request.getContextPath() %>/ProductServlet?action=findthis&pid=${VO.p_id}"><img  alt="沒...沒圖"
+							src="<%= request.getContextPath() %>/ShowPicture?type=pp&id=${VO.pp_id}" style="width:227.74px;height:300px;"></a>
+						
 					</div>
 
 				</c:forEach>

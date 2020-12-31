@@ -27,7 +27,7 @@ import com.orderdetail.model.*;
 public class OrderdetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	int count1;
+	
 	
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
