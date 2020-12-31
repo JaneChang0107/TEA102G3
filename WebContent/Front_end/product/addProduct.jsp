@@ -4,8 +4,6 @@
 
 <% 
 	ProductVO pVO = (ProductVO) request.getAttribute("pVO"); 
-	session.setAttribute("mid", "M00001");
-
 %>
 
 <!DOCTYPE html>
@@ -76,7 +74,7 @@
 	        </div>
 	        <div id="productStatus">
 	            <label>商品上下架</label>            
-	            <input type="radio" id="0" name="pstatus" value="0" checked><label for="0">下架</label>
+	            <input type="radio" id="2" name="pstatus" value="2" checked><label for="0">下架</label>
 	            <input type="radio" id="1" name="pstatus" value="1"><label for="1">上架</label>
 	        </div>
 	        <div id="productDetail">
@@ -94,9 +92,7 @@
 		<jsp:include page="/Front_end/footer.jsp"></jsp:include>
 	</div>
     
-    <script src="<%= request.getContextPath() %>/vendors/jquery/jquery-3.5.1.min.js"></script>
-	<script src="<%= request.getContextPath() %>/vendors/popper/popper.min.js"></script>
-    <script src="<%= request.getContextPath() %>/vendors/bootstrap-4.5.3-dist/js/bootstrap.min.js"></script>
+    
     <script src="<%= request.getContextPath() %>/vendors/ckeditor/ckeditor.js"></script>
 	<script src="<%= request.getContextPath() %>/Front_end/product/js/previewImg.js"></script>
 	<script>

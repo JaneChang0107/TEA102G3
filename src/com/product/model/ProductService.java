@@ -110,6 +110,10 @@ public class ProductService {
 		return dao.findByProductName(name, ptid);
 	}
 	
+	public List<ProductVO> findByStatus(Integer pstatus) {
+		return dao.findByStatus(pstatus);
+	}
+	
 	public List<ProductVO> getAllSell() {
 		return dao.getAllSell();
 	}
