@@ -103,9 +103,7 @@
 	<div class="footer">
 			<jsp:include page="/Front_end/footer.jsp"></jsp:include>
 	</div>
-    <script src="<%= request.getContextPath() %>/vendors/jquery/jquery-3.5.1.min.js"></script>
-    <script src="<%= request.getContextPath() %>/vendors/popper/popper.min.js"></script>
-    <script src="<%= request.getContextPath() %>/vendors/bootstrap-4.5.3-dist/js/bootstrap.min.js"></script>
+   
     <script src="<%= request.getContextPath() %>/vendors/ckeditor/ckeditor.js"></script>
     <script src="<%= request.getContextPath() %>/Front_end/product/js/previewImg.js"></script>
 	<script>

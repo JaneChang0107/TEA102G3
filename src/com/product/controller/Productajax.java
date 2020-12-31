@@ -77,7 +77,6 @@ public class Productajax extends HttpServlet {
 		}
 //		拿商品圖片
 		String pid = request.getParameter("pid");
-		System.out.println(pid);
 		if(pid != null) {
 			
 			ProductPictureService ppService = new ProductPictureService();

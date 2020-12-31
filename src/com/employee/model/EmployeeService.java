@@ -85,6 +85,16 @@ public class EmployeeService {
 		
 		return employeeVO;
 	}
+	
+	public EmployeeVO updateEmployee_status(String e_id, int e_status) {
+		
+		EmployeeVO employeeVO = new EmployeeVO();		
+		employeeVO.setE_id(e_id);		
+		employeeVO.setE_status(e_status);
+		dao.update_status(employeeVO);
+		
+		return employeeVO;
+	}
 
 	public void deleteEmployee(String employeeVO) {
 		dao.delete(employeeVO);

@@ -5,7 +5,7 @@ public class OrderdetailVO {
 	private String o_id;
 	private String p_id;
 	private Integer od_count;
-	
+	private String pp_id;
 	public String getOd_id() {
 		return od_id;
 	}
@@ -30,6 +30,15 @@ public class OrderdetailVO {
 	public void setOd_count(Integer od_count) {
 		this.od_count = od_count;
 	}
+	public String getPp_id() {
+		return pp_id;
+	}
+	public void setPp_id(String pp_id) {
+		this.pp_id = pp_id;
+	}
+	
+	
+	
 
 	
 	

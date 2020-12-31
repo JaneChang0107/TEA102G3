@@ -59,7 +59,7 @@ public class ProductServlet extends HttpServlet {
 					
 			// 都沒有
 			if("no".equals(type) && name.trim().isEmpty()) {
-				pVOs = pService.getAll();
+				pVOs = pService.getAllSell();
 				request.setAttribute("pVOs", pVOs);
 			}
 			
@@ -107,7 +107,7 @@ public class ProductServlet extends HttpServlet {
 			Integer pprice = null;
 			try {
 				pprice = Integer.parseInt(request.getParameter("pprice").trim());
-				if(pprice < 0) {
+				if(pprice < 0 || pprice > 9999999) {
 					errors.add("產品價格輸入有誤");
 				}
 			} catch(NumberFormatException e) {
@@ -118,8 +118,8 @@ public class ProductServlet extends HttpServlet {
 			Integer pcount = null;
 			try {
 				pcount = Integer.parseInt(request.getParameter("pcount").trim());
-				if(pcount <= 0) {
-					errors.add("產品數量需大於0");
+				if(pcount <= 0 || pcount >= 9999) {
+					errors.add("產品數量有誤");
 				}
 			} catch(NumberFormatException e) {
 				pcount = 0;
@@ -128,18 +128,23 @@ public class ProductServlet extends HttpServlet {
 			Integer pstatus = null;
 			try {
 				pstatus = Integer.parseInt(request.getParameter("pstatus"));
-				if(pstatus < 0 || pstatus > 1) {
+				if(pstatus < 1 || pstatus > 2) {
 					errors.add("請選擇商品上下架");
 				}
 			} catch(NumberFormatException e) {
-				errors.add("請選擇商品上下架");
+				errors.add("請選擇商品上下架有誤");
 				e.printStackTrace();
 			}
 			String pdetail = request.getParameter("pdetail");
+			
+			if(pdetail == null || pdetail.trim().isEmpty()) {
+				errors.add("商品介紹寫一下啦");
+			}
+			
 			Date d = new Date();
 			Timestamp addDate = new Timestamp(d.getTime());
 			HttpSession session = request.getSession();
-			String mid = (String) session.getAttribute("mid");
+			String mid = (String) session.getAttribute("loginId");
 			System.out.println(mid);
 			
 			ProductVO pVO = new ProductVO();
@@ -171,14 +176,7 @@ public class ProductServlet extends HttpServlet {
 					ppService.addProductPicture(b, pVO.getP_id());
 				}
 			}
-
-//	======================暫時暫時暫時暫時暫時暫時===================================================
-//			List<ProductVO> pVOs = pService.getAll();
-//			request.setAttribute("pVOs", pVOs);
-//			RequestDispatcher ok = request.getRequestDispatcher("/Back_end/product/showProduct.jsp");
-//			ok.forward(request, response);
 			response.sendRedirect(request.getContextPath() + "/Front_end/product/sellerProduct.jsp");
-//	================================================================================================
 		}
 		
 		if("delete".equals(action)) {
@@ -314,13 +312,7 @@ public class ProductServlet extends HttpServlet {
 					ppService.addProductPicture(b, pid);
 				}
 			}
-//			======================暫時暫時暫時暫時暫時暫時===================================================
-//			List<ProductVO> pVOs = pService.getAll();
-//			request.setAttribute("pVOs", pVOs);
-//			RequestDispatcher ok = request.getRequestDispatcher("/Back_end/product/showProduct.jsp");
-//			ok.forward(request, response);
 			response.sendRedirect(request.getContextPath() + "/Front_end/product/sellerProduct.jsp");
-//			================================================================================================
 			
 		}
 		
@@ -350,10 +342,12 @@ public class ProductServlet extends HttpServlet {
 			}
 		}
 		
+		
+		
 		if("sellerProduct".equals(action)) {
 			
 			HttpSession session = request.getSession();
-			String mid = (String) session.getAttribute("mid");
+			String mid = (String) session.getAttribute("loginId");
 			ProductService pService = new ProductService();
 			System.out.println(mid);
 			List<ProductVO> sellerProduct = pService.findBySeller(mid);
@@ -363,10 +357,35 @@ public class ProductServlet extends HttpServlet {
 			String product = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(sellerProduct);
 			response.getWriter().println(product);
 			
-//			request.setAttribute("sellerProduct", sellerProduct);
-//			RequestDispatcher rd = request.getRequestDispatcher("/Front_end/product/sellerProduct.jsp");
-//			rd.forward(request, response);
+		}
+		
+		if("allProduct".equals(action)) {
+			ProductService pService = new ProductService();
+			String status = request.getParameter("status");
 			
+			List<ProductVO> products = null;
+			
+			if("all".equals(status)) {
+				products = pService.getAll();
+			}
+			
+			if("onSell".equals(status)) {
+				products = pService.findByStatus(1);
+			}
+			
+			if("notSell".equals(status)) {
+				products = pService.findByStatus(2);
+			}
+			
+			if("selled".equals(status)) {
+				products = pService.findByStatus(0);
+			}
+			
+			
+			ObjectMapper mapper = new ObjectMapper();
+			
+			String product = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(products);
+			response.getWriter().println(product);
 		}
 	}
 }

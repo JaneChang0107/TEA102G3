@@ -13,7 +13,7 @@
 
 	<tr>
 		<td>key:</td>
-		<td><input name="key" id="key" type="text" ></td>
+		<td><input name="key" id="key" type="text" value="1"></td>
 	</tr>
 	<tr>
 		<td>value:</td>

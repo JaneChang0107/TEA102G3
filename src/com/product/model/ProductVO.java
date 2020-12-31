@@ -61,7 +61,7 @@ public class ProductVO implements java.io.Serializable {
 	public String getPt_idName() {
 		ProductTypeService ptService = new ProductTypeService();
 		ProductTypeVO ptVO = ptService.getOneProductType(pt_id);
-		return ptVO.getPt_platform();
+		return ptVO.getPt_platform() + ptVO.getPt_kind();
 	}
 	public void setPt_id(String pt_id) {
 		this.pt_id = pt_id;

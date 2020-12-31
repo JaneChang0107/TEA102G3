@@ -20,6 +20,20 @@
 <body>
 	<div class="container-fluid management_container">
 		<div class="row">
+			<div class="col">
+				<!--錯誤表列 -->
+				<c:if test="${not empty errorMsgs_status}">
+					<font style="color:red">請修正以下錯誤:</font>
+					<ul>
+						<c:forEach var="message" items="${errorMsgs_status}">
+							<li style="color:red">${message}</li>
+						</c:forEach>
+					</ul>
+				</c:if>
+				<c:remove var="errorMsgs_status"/>
+			</div>
+		</div>
+		<div class="row">
 			<div class="col search-col">
 				<p>尋找</p>
 			</div>
@@ -30,7 +44,7 @@
 				</svg>
 			</div>
 			<div class="col">
-				<button type="button" class="btn btn-outline-primary">新增</button>
+				<button type="button" id="btn_add" class="btn btn-outline-primary">新增</button>
 			</div>
 		</div>
 		<div class="row">
@@ -72,9 +86,10 @@
 			     		<input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 					</div>
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/login" style="margin-bottom: 0px;">
-					     <input type="submit" value="刪除">
+					     <input type="submit" value="更新狀態">
 					     <input type="hidden" name="e_id"  value="${employeeVO.e_id}">
-					     <input type="hidden" name="action" value="delete"></FORM>
+					     <input type="hidden" name="e_status"  value="${employeeVO.e_status}">
+					     <input type="hidden" name="action" value="update_status"></FORM>
 					<div class="col">
 					
 					</div>
@@ -90,5 +105,11 @@
     <script src="<%=request.getContextPath()%>/vendors/popper/popper.min.js"></script>
     <script src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="<%=request.getContextPath()%>/Back_end/employee/js/index_backstage.js"></script>
+    <script>
+	    var btn_add = document.getElementById("btn_add");
+	    btn_add.addEventListener('click',function(){
+	    	location.href='<%=request.getContextPath()%>/Back_end/employee/newEmployee.jsp'
+	    });
+    </script>
 </body>
 </html>

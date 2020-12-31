@@ -123,12 +123,12 @@
 <!-- 			<input type="radio" name="e_status" size="45" value="2" />¯dÂ¾°±Á~</td> -->
 <!-- 	</tr> -->
 
-	<td>¤À©±:<font color=red><b>*</b></font></td>
+	<td>Â¾ºÙ:<font color=red><b>*</b></font></td>
 		<td><select size="1" name="e_status">			
 				<option value="0">¦bÂ¾
 				<option value="1">Â÷Â¾
 				<option value="2">¯dÂ¾°±Á~
-	</select></td>
+		</select></td>
 
 	<jsp:useBean id="storeSvc" scope="page"	class="com.store.model.StoreService" />
 	<tr>
