@@ -21,8 +21,8 @@ public class OrderdetailJDBCDAO implements OrderdetailDAO_interface {
 		private static final String UPDATE = 
 			"UPDATE orderdetail set o_id=?, p_id=?,od_count=? where od_id=?";
 		private static final String COUNT=
-			"select p_id ,sum(od_count) from orderdetail  group by p_id order by sum(od_count)desc";
-		
+//			"select p_id ,sum(od_count) from orderdetail  group by p_id order by sum(od_count)desc";
+		"select orderdetail.p_id ,sum(od_count),productpicture.pp_id from orderdetail inner join productpicture on orderdetail.p_id=productpicture.p_id group by orderdetail.p_id ,productpicture.pp_id order by sum(od_count)desc";
 		@Override
 		public List<OrderdetailVO> count() {
 			List<OrderdetailVO> list = new ArrayList<OrderdetailVO>();
@@ -41,6 +41,7 @@ public class OrderdetailJDBCDAO implements OrderdetailDAO_interface {
 						orderdetailVO4=new OrderdetailVO();
 						orderdetailVO4.setP_id(rs.getString("p_id"));
 						orderdetailVO4.setOd_count(rs.getInt("sum(od_count)"));
+						orderdetailVO4.setPp_id(rs.getString("pp_id"));
 						list.add(orderdetailVO4);
 						
 					}
@@ -348,6 +349,7 @@ public class OrderdetailJDBCDAO implements OrderdetailDAO_interface {
 			
 			System.out.println(aod.getP_id()+",");
 			System.out.println(aod.getOd_count());
+			System.out.println(aod.getPp_id());
 			System.out.println("---------------------");
 		}
 		

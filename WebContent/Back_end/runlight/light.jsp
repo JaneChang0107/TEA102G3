@@ -5,12 +5,11 @@
 <%@ page language="java" contentType="text/html; charset=BIG5"
 	pageEncoding="BIG5"%>
 <%
-Jedis jedis = new Jedis("localhost", 6379);
-jedis.auth("123456");
 
 
+String test=(String)request.getAttribute("rl");
+//     System.out.println(test);
 
-    jedis.close();
 %>
 
 <!DOCTYPE html>
@@ -21,8 +20,9 @@ jedis.auth("123456");
 </head>
 <body>
 
-
-<td></td>
+<h1>
+<marquee  onMouseOver="this.stop()" onMouseOut="this.start()">${rl}</marquee>
+</h1>
 
 
 </body>
