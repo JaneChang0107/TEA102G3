@@ -29,8 +29,9 @@ public class BuyServlet extends HttpServlet {
 		// 刪除購物車中的書籍
 		if (action.equals("DELETE")) {
 			String del = req.getParameter("del");
-			int d = Integer.parseInt(del);
+			Integer d = Integer.parseInt(del);
 			buylist.removeElementAt(d);
+		
 			}		
 
 		if (action.equals("addCart")) {
@@ -91,7 +92,7 @@ public class BuyServlet extends HttpServlet {
 
 	private ProductVO getProductlist(HttpServletRequest req) {
 		
-		
+		String p_id = req.getParameter("p_id");
 		String p_name = req.getParameter("p_name");
 		String p_price = req.getParameter("p_price");
 		String p_kind = req.getParameter("p_kind");
@@ -101,13 +102,13 @@ public class BuyServlet extends HttpServlet {
 		ProductVO pvo = new ProductVO();
 		ProductTypeVO ptvo = new ProductTypeVO();
 		
-
+		pvo.setP_id(p_id);
 		pvo.setP_name(p_name);	
 		pvo.setP_price(Integer.parseInt(p_price));
 		ptvo.setPt_kind(p_kind);
 		pvo.setP_detail(p_detail);
 		pvo.setP_count(Integer.parseInt(p_count));
-		System.out.println(p_name);
+		System.out.println(p_id);
 		System.out.println(p_price);
 		System.out.println(p_kind);
 		

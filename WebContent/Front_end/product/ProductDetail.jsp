@@ -57,6 +57,7 @@ img.productImg {
 					<td><h4>
 							<div id="pInfo">
 								<div id="pInfoName">
+								<span id="productId" name="p_id" >${pVO.p_id}</span>
 									<span>商品名稱:</span> <span id="productName" name="p_name">${pVO.p_name}</span>
 								</div>
 						</h4></td>
@@ -102,7 +103,7 @@ img.productImg {
 
 			</table>
 			<input type="hidden" name="action" value="addCart">
-			
+			<input type="hidden" name="p_id" value="${pVO.p_id}">
 			<input type="hidden" name="p_name" value="${pVO.p_name}">
 			<input type="hidden" name="p_price" value="${pVO.p_price}" >
 			<input type="hidden" name="p_kind"  value="${ptVO.pt_kind}">
