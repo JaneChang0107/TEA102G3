@@ -9,6 +9,16 @@ import com.productType.model.ProductTypeVO;
 
 public class ProductVO implements java.io.Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Override
+	public String toString() {
+		return "ProductVO [p_id=" + p_id + ", p_name=" + p_name + ", p_price=" + p_price + ", p_detail=" + p_detail
+				+ ", pt_id=" + pt_id + ", p_count=" + p_count + ", p_addDate=" + p_addDate + ", p_reviseDate="
+				+ p_reviseDate + ", p_status=" + p_status + ", m_id=" + m_id + "]";
+	}
 	private String p_id;
 	private String p_name;
 	private Integer p_price;

@@ -20,24 +20,18 @@
 	 	<div class="row">
 	 		<div class="col">
 				<!--錯誤表列 -->
-				<c:if test="${not empty errorMsgs_without}">
+				<c:if test="${not empty errorMsgs_new}">
 					<font style="color:red">請修正以下錯誤:</font>
 					<ul>
-						<c:forEach var="message" items="${errorMsgs_without}">
+						<c:forEach var="message" items="${errorMsgs_new}">
 							<li style="color:red">${message}</li>
 						</c:forEach>
 					</ul>
 				</c:if>
-				<c:remove var="errorMsgs_without"/>
+				<c:remove var="errorMsgs_new"/>
 	 		</div>
 	 	</div>
         <div class="row">
-            <div class="col">
-            	<p>員工ID:</p>
-            </div>
-            <div class="col">               
-                ${employeeVO.e_id}
-            </div>
             <div class="col">
                 <p>門市:</p>
             </div>
@@ -62,7 +56,7 @@
                 <p>電話:</p>
             </div>
             <div class="col">
-                <input type="TEXT" name="e_phone" value="${employeeVO.e_phone}">
+                <input type="TEXT" name="e_phone" value="<%=(employeeVO == null) ? "0987654321" : employeeVO.getE_phone()%>">
             </div>
         </div>
         <div class="row">
@@ -70,7 +64,7 @@
                 <p>員工姓名:</p>
             </div>
             <div class="col">
-                <input type="TEXT" name="e_name" value="${employeeVO.e_name}">
+                <input type="TEXT" name="e_name" value="<%=(employeeVO == null) ? "吳永志" : employeeVO.getE_name()%>">
             </div>
             <div class="col">
                 <p>性別:</p>
@@ -85,36 +79,49 @@
                 <p>身分證字號:</p>
             </div>
             <div class="col">
-                <input type="TEXT" name="e_identity" value="${employeeVO.e_identity}">
+                <input type="TEXT" name="e_identity" value="<%= (employeeVO == null) ? "A123456789" : employeeVO.getE_identity()%>">
             </div>
             <div class="col">
                 <p>生日:</p>
             </div>
             <div class="col">
-                <input name="e_birth" id="f_date1" type="text">
+                <input name="e_birth" id="f_date1" type="text" placeholder="請選擇日期">
             </div>
         </div>
         <div class="row">
-            <div class="col-3">
+            <div class="col">
                 <p>地址:</p>
             </div>
-            <div class="col-9">
-                <input type="TEXT" name="e_address" value="${employeeVO.e_address}">
+            <div class="col">
+                <input type="TEXT" name="e_address" value="<%=(employeeVO == null) ? "新北市北投區大安路49號" : employeeVO.getE_address()%>">
+            </div>
+            <div class="col">
+                <p>狀態:</p>
+            </div>
+            <div class="col">
+                <input type="radio" name="e_status" value="0" ${employeeVO.e_status == 0 ? 'checked' : '' }>在職
+				<input type="radio" name="e_status" value="1" ${employeeVO.e_status == 1 ? 'checked' : '' }>離職	
             </div>
         </div>
         <div class="row">
-            <div class="col-3">
+            <div class="col">
                 <p>信箱:</p>
             </div>
-            <div class="col-9">
+            <div class="col">
                 <input type="TEXT" name="e_email" value="${employeeVO.e_email}">
+            </div>
+            <div class="col">
+                <p>密碼:</p>
+            </div>
+            <div class="col">
+                <input type="TEXT" name="e_password" value="<%= (employeeVO == null) ? "" : employeeVO.getE_password()%>">
             </div>
         </div>
         <div class="row forget-row">
             <div class="col btn_col">
+                <button type="button" id="btn_cancel" class="btn btn-primary forget-btn">取消</button>
                 <button type="submit" class="btn btn-primary forget-btn">確認</button>
-                <input type="hidden" name="action" value="update_without">
-				<input type="hidden" name="e_id" value="${employeeVO.e_id}">
+                <input type="hidden" name="action" value="insert">
             </div>
         </div>
     </div>
@@ -127,6 +134,10 @@
     <script src="${pageContext.request.contextPath}/vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/Back_end/employee/js/index_backstage.js"></script>
     <script>
+	    var btn_cancel = document.getElementById("btn_cancel");
+	    btn_cancel.addEventListener('click',function(){
+	    	location.href='<%=request.getContextPath()%>/Back_end/employee/index_backstage.jsp'
+	    });
 // 	    if(${errorMsgs_without != null}){
 // 			alert("${errorMsgs_without}");			
 // 		}
@@ -213,5 +224,4 @@
         
 </script>
 </body>
-
 </html>
