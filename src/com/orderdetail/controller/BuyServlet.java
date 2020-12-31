@@ -18,10 +18,6 @@ import javax.servlet.http.*;
 
 @WebServlet("/BuyServlet")
 public class BuyServlet extends HttpServlet {
-	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		 doPost(req,res);
-		
-	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
@@ -30,17 +26,6 @@ public class BuyServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		Vector<ProductVO> buylist = (Vector<ProductVO>) session.getAttribute("shoppingcart");
 		String action = req.getParameter("action");
-		
-		System.out.println("in");
-		
-		if (action.equals("xxxx")) {
-			for(int i=1;i<=buylist.size();i++) {
-			System.out.println(req.getParameter("xx"+i));
-			
-			}
-		}
-		
-		
 		// 刪除購物車中的書籍
 		if (action.equals("DELETE")) {
 			String del = req.getParameter("del");
@@ -66,12 +51,12 @@ public class BuyServlet extends HttpServlet {
 				} else {
 					for (int i = 0; i < buylist.size(); i++) {
 						ProductVO product = buylist.get(i);
-//						 假若新增的書籍和購物車的書籍一樣時
-						if (product.getP_id().equals(aproduct.getP_id())) {
-							System.out.println("放入重複的商品了");
-							buylist.setElementAt(product, i);	
-							match = true;
-						} // end of if name matches
+						// 假若新增的書籍和購物車的書籍一樣時
+//						if (product.getP_id().equals(aproduct.getP_id())) {
+//							product.setP_count(product.getP_count() + aproduct.getP_count());
+//							buylist.setElementAt(product, i);
+//							match = true;
+//						} // end of if name matches
 					} // end of for
 
 					// 假若新增的書籍和購物車的書籍不一樣時
@@ -84,9 +69,7 @@ public class BuyServlet extends HttpServlet {
 			String url = "/Front_end/shoppingCart/checkBuyPage.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
-			
 		}
-	
 
 		// 結帳，計算購物車書籍價錢總數
 //		else if (action.equals("CHECKOUT")) {
@@ -115,7 +98,6 @@ public class BuyServlet extends HttpServlet {
 		String p_kind = req.getParameter("p_kind");
 		String p_detail = req.getParameter("p_detail");
 		String p_count = req.getParameter("p_count");
-		
 
 		ProductVO pvo = new ProductVO();
 		ProductTypeVO ptvo = new ProductTypeVO();
@@ -130,11 +112,6 @@ public class BuyServlet extends HttpServlet {
 		System.out.println(p_price);
 		System.out.println(p_kind);
 		
-		
 		return pvo;
-}
-	
-		
-
-	
+	}
 }
