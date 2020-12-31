@@ -300,5 +300,236 @@ public class Login extends HttpServlet {
 //				failureView.forward(req, res);
 				}
 			}
+//---------------------------------------------更新單筆---------------------------------------------			
+			if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp的請求
+	            System.out.println("getOne");
+				List<String> errorMsgs = new LinkedList<String>();
+				// Store this set in the request scope, in case we need to
+				// send the ErrorPage view.
+				req.setAttribute("errorMsgs", errorMsgs);
+				
+				try {
+					/***************************1.接收請求參數****************************************/
+					String e_id = req.getParameter("e_id");
+					System.out.println("e_id");
+					
+					/***************************2.開始查詢資料****************************************/
+					EmployeeService employeeSvc = new EmployeeService();
+					EmployeeVO employeeVO = employeeSvc.getOneEmployee(e_id);
+									
+					/***************************3.查詢完成,準備轉交(Send the Success view)************/
+					req.setAttribute("employeeVO", employeeVO);         // 資料庫取出的empVO物件,存入req
+					String url = "/Back_end/employee/updateEmployee.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
+					successView.forward(req, res);
+					
+					/***************************其他可能的錯誤處理**********************************/
+				} catch (Exception e) {
+					errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/Back_end/employee/listAllEmployee.jsp");
+					failureView.forward(req, res);
+				}
+			}
+//---------------------------------------------更改狀態---------------------------------------------
+			if ("update_status".equals(action)) { // 來自update_emp_input.jsp的請求
+				
+				List<String> errorMsgs_status = new LinkedList<String>();
+				// Store this set in the request scope, in case we need to
+				// send the ErrorPage view.
+				HttpSession session = req.getSession();
+				session.setAttribute("errorMsgs_status", errorMsgs_status);
+				Integer new_status = new Integer(0); 
+						 
+				try {
+					System.out.println("update_status");
+					/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+					String e_id =req.getParameter("e_id").trim();
+					
+					Integer e_status =  new Integer(req.getParameter("e_status"));
+					
+
+					EmployeeVO employeeVO = new EmployeeVO();
+					employeeVO.setE_id(e_id);
+					employeeVO.setE_status(e_status);
+					
+					System.out.println(e_id + "123");
+					System.out.println(e_status);
+					
+					
+					
+					switch(e_status) {
+						case 0:
+							new_status = 1;
+							break;
+						case 1:
+							new_status = 0;
+							break;
+					}
+					
+					System.out.println("new_status = " + new_status);
+					
+					// Send the use back to the form, if there were errors
+					if (!errorMsgs_status.isEmpty()) {					
+						session.setAttribute("employeeVO", employeeVO); // 含有輸入格式錯誤的empVO物件,也存入req
+						res.sendRedirect(req.getContextPath() + "/Back_end/employee/index_backstage.jsp");
+						System.out.println("有錯 印訊息");
+//					RequestDispatcher failureView = req
+//							.getRequestDispatcher("/Back_end/employee/update_employee_input.jsp");
+//					failureView.forward(req, res);
+						return; //程式中斷
+					}						
+						/***************************2.開始修改資料*****************************************/
+						EmployeeService employeeSvc = new EmployeeService();
+						employeeVO = employeeSvc.updateEmployee_status(e_id, new_status); //e_status這裡要改
+						
+						/***************************3.修改完成,準備轉交(Send the Success view)*************/
+						req.setAttribute("employeeVO", employeeVO); // 資料庫update成功後,正確的的empVO物件,存入req
+						res.sendRedirect(req.getContextPath() + "/Back_end/employee/index_backstage.jsp");
+						System.out.println("succeess");
+//				String url = "/Back_end/employee/listOneEmployee.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+//				successView.forward(req, res);
+										
+					/***************************其他可能的錯誤處理*************************************/
+				} catch (Exception e) {
+					errorMsgs_status.add("修改資料失敗:"+e.getMessage());
+					res.sendRedirect(req.getContextPath() + "/Back_end/employee/index_backstage.jsp");
+					System.out.println("其他錯誤");
+//				RequestDispatcher failureView = req
+//						.getRequestDispatcher("/Back_end/employee/update_employee_input.jsp");
+//				failureView.forward(req, res);
+				}
+			}
+//---------------------------------------------新增---------------------------------------------
+			if ("insert".equals(action)) { // 來自addEmp.jsp的請求  
+				System.out.println("action");
+				List<String> errorMsgs_new = new LinkedList<String>();
+				// Store this set in the request scope, in case we need to
+				// send the ErrorPage view.
+				HttpSession session = req.getSession();
+				session.setAttribute("errorMsgs_new", errorMsgs_new);
+
+				try {
+					System.out.println("insert");
+					/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
+					String e_password = req.getParameter("e_password");
+					String e_passwordReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{6,30}$";
+					if (e_password == null || e_password.trim().length() == 0) {
+						errorMsgs_new.add("員工密碼: 請勿空白");
+					} else if(!e_password.trim().matches(e_passwordReg)) { //以下練習正則(規)表示式(regular-expression)
+						errorMsgs_new.add("員工密碼: 只能是英文字母、數字和_ , 且長度必需在6到30之間");
+					}
+					
+					String e_identity = req.getParameter("e_identity");
+					String e_identityReg = "^[A-Z]{1}[1-2]{1}[0-9]{8}$";
+					if (e_identity == null || e_identity.trim().length() == 0) {
+						errorMsgs_new.add("身分證字號: 請勿空白");
+					} else if(!e_identity.trim().matches(e_identityReg)) { //以下練習正則(規)表示式(regular-expression)
+						errorMsgs_new.add("請輸入正確身分證格式");
+					}
+					
+					
+					String e_name = req.getParameter("e_name");
+					String e_nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z)]{2,10}$";
+					if (e_name == null || e_name.trim().length() == 0) {
+						errorMsgs_new.add("員工姓名: 請勿空白");
+					} else if(!e_name.trim().matches(e_nameReg)) { //以下練習正則(規)表示式(regular-expression)
+						errorMsgs_new.add("員工姓名: 只能是中、英文字母, 且長度必需在2到10之間");
+		            }
+					
+					String e_gender = req.getParameter("e_gender").trim();
+					if (e_gender == null || e_gender.trim().length() == 0) {
+						errorMsgs_new.add("請選擇性別");
+					}
+					
+					java.sql.Date e_birth = null;
+					try {
+						e_birth = java.sql.Date.valueOf(req.getParameter("e_birth").trim());
+					} catch (IllegalArgumentException e) {
+						e_birth=new java.sql.Date(System.currentTimeMillis());
+						errorMsgs_new.add("請輸入日期!");
+					}
+					
+					String e_email = req.getParameter("e_email");
+					String e_emailReg = "^([A-Za-z0-9_\\-\\.])+\\@([A-Za-z0-9_\\-\\.])+\\.([A-Za-z]{2,4})$";
+					if (e_email == null || e_email.trim().length() == 0) {
+						errorMsgs_new.add("電子信箱: 請勿空白");
+					} else if(!e_email.trim().matches(e_emailReg)) { //以下練習正則(規)表示式(regular-expression)
+						errorMsgs_new.add("電子信箱: 請依照電子郵件格式輸入");
+		            }
+					
+					String e_phone = req.getParameter("e_phone");
+					String e_phoneReg = "^09[0-9]{8}$";
+					if (e_phone == null || e_phone.trim().length() == 0) {
+						errorMsgs_new.add("電話: 請勿空白");
+					} else if(!e_phone.trim().matches(e_phoneReg)) { //以下練習正則(規)表示式(regular-expression)
+						errorMsgs_new.add("電話: 只能是數字 , 且必需09開頭 , 長度為10");
+					}
+					
+					String e_address = req.getParameter("e_address");
+					String e_addressReg = "^[(\u4e00-\u9fa5)(0-9)]{5,30}$";
+					if (e_address == null || e_address.trim().length() == 0) {
+						errorMsgs_new.add("住址: 請勿空白");
+					} else if(!e_address.trim().matches(e_addressReg)) { //以下練習正則(規)表示式(regular-expression)
+						errorMsgs_new.add("住址: 只能是中文、數字 , 且長度必需在5到30之間");
+					}
+					
+					String e_title = req.getParameter("e_title").trim();
+					if (e_gender == null || e_gender.trim().length() == 0) {
+						errorMsgs_new.add("請選擇職稱");
+					}
+
+
+					Integer e_status = new Integer(req.getParameter("e_status").trim());
+									
+					
+					String st_id =req.getParameter("st_id").trim();
+
+					EmployeeVO employeeVO = new EmployeeVO();
+					employeeVO.setE_password(e_password);
+					employeeVO.setE_identity(e_identity);
+					employeeVO.setE_name(e_name);
+					employeeVO.setE_gender(e_gender);
+					employeeVO.setE_birth(e_birth);
+					employeeVO.setE_email(e_email);
+					employeeVO.setE_phone(e_phone);
+					employeeVO.setE_address(e_address);
+					employeeVO.setE_title(e_title);
+					employeeVO.setE_status(e_status);
+					employeeVO.setSt_id(st_id);
+					// Send the use back to the form, if there were errors
+					if (!errorMsgs_new.isEmpty()) {
+						session.setAttribute("employeeVO", employeeVO); // 含有輸入格式錯誤的empVO物件,也存入req
+						res.sendRedirect(req.getContextPath() + "/Back_end/employee/index_backstage.jsp");
+						System.out.println("有錯 印訊息");
+//						RequestDispatcher failureView = req
+//								.getRequestDispatcher("/Back_end/employee/addEmployee.jsp");
+//						failureView.forward(req, res);
+						return;
+					}
+					
+					/***************************2.開始新增資料***************************************/
+					EmployeeService employeeSvc = new EmployeeService();
+					employeeVO = employeeSvc.addEmployee(e_password, e_identity, e_name, e_gender,e_birth, e_email, e_phone, e_address, e_title, e_status, st_id);
+					
+					/***************************3.新增完成,準備轉交(Send the Success view)***********/
+					req.setAttribute("employeeVO", employeeVO); // 資料庫update成功後,正確的的empVO物件,存入req
+					res.sendRedirect(req.getContextPath() + "/Back_end/employee/index_backstage.jsp");
+					System.out.println("succeess");
+//					String url = "/Back_end/employee/listAllEmployee.jsp";
+//					RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+//					successView.forward(req, res);				
+					
+					/***************************其他可能的錯誤處理**********************************/
+				} catch (Exception e) {
+					errorMsgs_new.add(e.getMessage());
+					res.sendRedirect(req.getContextPath() + "/Back_end/employee/index_backstage.jsp");
+					System.out.println("其他錯誤");
+//					RequestDispatcher failureView = req
+//							.getRequestDispatcher("/Back_end/employee/addEmployee.jsp");
+//					failureView.forward(req, res);
+				}
+			}
 	}
 }

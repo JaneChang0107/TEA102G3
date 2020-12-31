@@ -95,23 +95,36 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-3">
+            <div class="col">
                 <p>地址:</p>
             </div>
-            <div class="col-9">
+            <div class="col">
                 <input type="TEXT" name="e_address" value="${employeeVO.e_address}">
+            </div>
+            <div class="col">
+                <p>狀態:</p>
+            </div>
+            <div class="col">
+                <input type="TEXT" name="e_status" value="${employeeVO.e_status}">
             </div>
         </div>
         <div class="row">
-            <div class="col-3">
+            <div class="col">
                 <p>信箱:</p>
             </div>
-            <div class="col-9">
+            <div class="col">
                 <input type="TEXT" name="e_email" value="${employeeVO.e_email}">
+            </div>
+            <div class="col">
+                <p>密碼:</p>
+            </div>
+            <div class="col">
+                <input type="TEXT" name="e_password" value="${employeeVO.e_password}">
             </div>
         </div>
         <div class="row forget-row">
             <div class="col btn_col">
+                <button type="button" id="btn_cancel" class="btn btn-primary forget-btn">取消</button>
                 <button type="submit" class="btn btn-primary forget-btn">確認</button>
                 <input type="hidden" name="action" value="update_without">
 				<input type="hidden" name="e_id" value="${employeeVO.e_id}">
@@ -127,6 +140,10 @@
     <script src="${pageContext.request.contextPath}/vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/Back_end/employee/js/index_backstage.js"></script>
     <script>
+	    var btn_cancel = document.getElementById("btn_cancel");
+	    btn_cancel.addEventListener('click',function(){
+	    	location.href='<%=request.getContextPath()%>/Back_end/employee/index_backstage.jsp'
+	    });
 // 	    if(${errorMsgs_without != null}){
 // 			alert("${errorMsgs_without}");			
 // 		}
@@ -213,5 +230,4 @@
         
 </script>
 </body>
-
 </html>
