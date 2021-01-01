@@ -89,7 +89,7 @@ public class BuyServlet extends HttpServlet {
 	
 
 		// 結帳，計算購物車書籍價錢總數
-//		else if (action.equals("CHECKOUT")) {
+//		if (action.equals("CHECKOUT")) {
 ////			float total = 0;
 ////			for (int i = 0; i < buylist.size(); i++) {
 ////				BOOK order = buylist.get(i);
@@ -98,7 +98,7 @@ public class BuyServlet extends HttpServlet {
 ////				total += (price * quantity);
 ////			}
 //			double total = buylist.stream().mapToDouble(b -> b.getP_price() * b.getP_count()).sum();
-//
+
 //			String amount = String.valueOf(total);
 //			req.setAttribute("amount", amount);
 //			String url = "/Checkout.jsp";

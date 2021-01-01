@@ -145,7 +145,7 @@ table {
 		<hr>
 		
 <%
-// 	if (buylist != null && (buylist.size() > 0)){
+ 	if (buylist != null && (buylist.size() > 0)){
 %>
 <FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/BuyServlet">
 
@@ -208,7 +208,7 @@ table {
 						庫存:${productVO.p_count}
 				</td>
 			
-				<td class="money"></td>
+				<td class="sum">xxx</td>
 				<td></td>
 
 			</tr>
@@ -229,16 +229,16 @@ table {
 		<input type="hidden" name="action" value="xxxx">	
 	</div>
 </form>	       
-	<%
-// 	}
+<%
+ 	}else{
 %>
 
-<!-- 	<div class="null"><tr><td><h3 align=center>您的購物車現在沒有商品</h3></td></tr></div> -->
-<!-- 	<div class="buttonarea">  -->
-<!-- 	<button type="button" class="button1">繼續逛逛</button> -->
-<!-- 	<button type="button" class="button2">回首頁</button> -->
-<!-- 	</div> -->
-
+	<div class="null"><tr><td><h3 align=center>您的購物車現在沒有商品</h3></td></tr></div>
+	<div class="buttonarea"> 
+	<button type="button" class="button1">繼續逛逛</button>
+	<input type ="button" class="button2" onclick="javascript:location.href='<%=request.getContextPath()%>/Front_end/index.jsp'" value="回首頁"></input>
+	</div>
+<%} %>	
 	<div class="footer">
 		<jsp:include page="../footer.jsp"></jsp:include>
 	</div>
@@ -246,13 +246,14 @@ table {
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 		crossorigin="anonymous"></script>
 	<script>
-// 	$(function(){
-//         $('.value1, .value2').keyup(function(){
-//            var value1 = parseFloat($('.value1').val()) || 0;
-//            var value2 = parseFloat($('.value2').val()) || 0;
-//            $('#sum').val(value1 + value2);
-//         });
-//      });
+	$(function(){
+        $('.value1, .value2').keyup(function(){
+           var value1 = parseFloat($('.value1').val()) || 0;
+           var value2 = parseFloat($('.value2').val()) || 0;
+          var value3 = $('#sum').val(value1 * value2);
+           console.log(value3);
+        });
+     });
 	
 	
 	var value1 =document.getElementById("value1").textContent
