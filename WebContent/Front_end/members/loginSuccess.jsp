@@ -80,6 +80,7 @@
 
 			<div class="form-group row"></div>
 			<h3><b>歡迎回來! <%=session.getAttribute("loginName") %></b></h3>
+			<h3><%=session.getAttribute("loginName") %></h3>
 
 			<div class="form-group row"></div>
 	</div>

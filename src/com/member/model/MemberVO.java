@@ -207,6 +207,18 @@ public class MemberVO implements java.io.Serializable{
 				return "../../images/LOGO找不到圖片.png";
 			}
 		}
+		public String getM_statusByString() {
+			String statusName = "";
+			if(m_status ==0) {
+				statusName ="未開通";
+			}else if(m_status ==1) {
+				statusName ="買家";
+			}else if (m_status == 2) {
+				statusName ="賣家";
+			}
+			return statusName;
+		}
+		
 		
 	}
 

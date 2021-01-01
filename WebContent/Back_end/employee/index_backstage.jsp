@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.employee.model.*"%>
+<%@ page import="com.member.model.*"%>
 
 <%
     Object e_id = session.getAttribute("e_id");                  // 從 session內取出 (key) account的值
@@ -20,6 +21,14 @@
 <title>Insert title here</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/vendors/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet type" href="<%=request.getContextPath()%>/Back_end/employee/css/index_backstage.css">
+<style>
+.nav-link
+{
+    color: #9a9a9d;
+    text-decoration: none;
+    background-color: transparent;
+}
+</style>
 </head>
 <body>
 	<div class="container-fluid index_container">
@@ -77,9 +86,10 @@
                     	<%@include file="employee.jsp"%>
                     </div>
                     <div class="tab-pane fade" id="acc_mgt" role="tabpanel" aria-labelledby="acc_mgt-tab">
-<%--                     	<%@include file="addEmployee.jsp"%> --%>
+                        <jsp:include page="listAllMem.jsp"></jsp:include>
                     </div>
                     <div class="tab-pane fade" id="cs_sys" role="tabpanel" aria-labelledby="cs_sys-tab">這裡放你要的頁面</div>
+                    
                     <div class="tab-pane fade" id="rent_mgt" role="tabpanel" aria-labelledby="rent_mgt-tab">這裡放你要的頁面</div>
                     <div class="tab-pane fade" id="tran_sys" role="tabpanel" aria-labelledby="tran_sys-tab">這裡放你要的頁面</div>       
                 </div>
