@@ -3,6 +3,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.product.model.*"%>
 <%@ page import="com.productType.model.*"%>
+<%!int i=0;%>
 <%
 	Vector<ProductVO> buylist = (Vector<ProductVO>) session.getAttribute("shoppingcart");
 %>
@@ -150,6 +151,7 @@ table {
 <FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/BuyServlet">
 
 		<c:forEach var="productVO" items="${shoppingcart}" varStatus="loop">
+		
 			<%
 			ProductVO order = null;
 			ProductTypeVO ptv = null;
@@ -197,18 +199,23 @@ table {
 					style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap"><c:out
 						value="${productVO.p_detail}" /></td>
 						
-				<td  id="value1"><c:out value="${productVO.p_price}" />
+				<td  class="value1" name="price"><c:out value="${productVO.p_price}" />
 				</td>
 
-				
+<%-- 				 --%>
 				<td align="center">
 					<div align="center">
-						<input type="number" min="1" max="${productVO.p_count}" step="1"
-							pattern="[0-9]*" class="counter" id="value2" name="xx${loop.count}" > <br>
+						<input type="number" min="1" max="${productVO.p_count}" step="1" class="numberbox" name="xx${loop.count}" value="selected"><br>
+							<a href="<%=request.getContextPath()%>/BuyServlet?action=CALCULATE
+							&calid=${loop.count}
+							&price=${productVO.p_price}
+							&xx${loop.index}="selected">計算</a>
+<!-- 						<input type="button" id="Test" onclick="numbertest()" /> -->
+						<br>
 						庫存:${productVO.p_count}
 				</td>
 			
-				<td class="sum">xxx</td>
+				<td class="sum"><p><span class="parsed"></span></p></td>
 				<td></td>
 
 			</tr>
@@ -236,7 +243,7 @@ table {
 	<div class="null"><tr><td><h3 align=center>您的購物車現在沒有商品</h3></td></tr></div>
 	<div class="buttonarea"> 
 	<button type="button" class="button1">繼續逛逛</button>
-	<input type ="button" class="button2" onclick="javascript:location.href='<%=request.getContextPath()%>/Front_end/index.jsp'" value="回首頁"></input>
+<%-- 	<input type ="button" class="button2" onclick="javascript:location.href='<%=request.getContextPath()%>/Front_end/index.jsp'" value="回首頁"></input> --%>
 	</div>
 <%} %>	
 	<div class="footer">
@@ -246,20 +253,46 @@ table {
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 		crossorigin="anonymous"></script>
 	<script>
-	$(function(){
-        $('.value1, .value2').keyup(function(){
-           var value1 = parseFloat($('.value1').val()) || 0;
-           var value2 = parseFloat($('.value2').val()) || 0;
-          var value3 = $('#sum').val(value1 * value2);
-           console.log(value3);
-        });
-     });
+// 	$(function(){
+//         $('.value1, #xx${loop.count}').keyup(function(){
+//            var value1 = parseFloat($('.value1').val()) || 0;
+//            var value2 = $('xx${loop.count}');
+//           var value3 = $('#sum').val(value1 * value2);
+//            console.log(value3);
+//         });
+//      });
 	
 	
-	var value1 =document.getElementById("value1").textContent
-	var value2 = document.getElementById("value2").val;
-	console.log(value1);
-	console.log(value2);
+// 	var value1 =document.getElementById("value1").textContent
+// 	var value2 = document.getElementById("parsed").val;
+// 	console.log(value1);
+// 	console.log(parsed);
+	
+
+// 		function numbertest() {
+// 			// 		$(".test").off('click').on('click', function (e) {
+
+// // 					  var result = document.getElementById('numberbox').value;
+// // 					  var parsed = document.getElementById('parsed');
+// // 					  var value1 =document.getElementById("value1").textContent
+// // 					  parsed.innerHTML = result*value1;
+					  
+// 			var numberbox = document.getElementsByClassName('numberbox');
+			
+// 			for (var i = 0; i < numberbox.length; i++) {
+// 				console.log(numberbox.length);
+// 				var result = document.getElementsByClassName('numberbox')[i].value;
+// 				var parsed = document.getElementsByClassName('parsed')[i];
+// 				var value1 = document.getElementsByClassName("value1")[i].textContent;
+
+// 				console.log(result);
+// 				console.log(parsed);
+// 				console.log(value1);
+
+// 				// 		});
+// 			}
+
+// 		}
 	</script>
 
 </body>

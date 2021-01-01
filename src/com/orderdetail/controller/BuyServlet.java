@@ -32,12 +32,42 @@ public class BuyServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		
 		System.out.println("in");
-		
-		if (action.equals("xxxx")) {
+		if (action.equals("CALCULATE")) {
 			for(int i=1;i<=buylist.size();i++) {
-			System.out.println(req.getParameter("xx"+i));
+			String id = req.getParameter("calid");
+			String qty = req.getParameter("xx"+i);
+			String price = req.getParameter("price");
+			System.out.println(id);
+			System.out.println(qty);
+			System.out.println(price);
+			
+//			
 			
 			}
+		}
+		
+		if (action.equals("xxxx")) {
+//			for(int i=1;i<=buylist.size();i++) {
+//			System.out.println(req.getParameter("xx"+i));
+//		
+//			}
+			
+			String p_id = req.getParameter("p_id");
+			String p_name = req.getParameter("p_name");
+			String p_price = req.getParameter("p_price");
+			String p_kind = req.getParameter("p_kind");
+			String p_detail = req.getParameter("p_detail");
+			String p_count = req.getParameter("p_count");
+			
+			
+			
+			session.setAttribute("shoppingcart", buylist);    // 資料庫取出的list物件,存入session
+			// Send the Success view
+			String url = "/Front_end/shoppingCart/checkBuyPageDetail.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交listAllEmp2_getFromSession.jsp
+			successView.forward(req, res);
+			return;
+			
 		}
 		
 		
@@ -68,7 +98,7 @@ public class BuyServlet extends HttpServlet {
 						ProductVO product = buylist.get(i);
 //						 假若新增的書籍和購物車的書籍一樣時
 						if (product.getP_id().equals(aproduct.getP_id())) {
-							System.out.println("放入重複的商品了");
+//							System.out.println("放入重複的商品了");
 							buylist.setElementAt(product, i);	
 							match = true;
 						} // end of if name matches
@@ -126,9 +156,9 @@ public class BuyServlet extends HttpServlet {
 		ptvo.setPt_kind(p_kind);
 		pvo.setP_detail(p_detail);
 		pvo.setP_count(Integer.parseInt(p_count));
-		System.out.println(p_id);
-		System.out.println(p_price);
-		System.out.println(p_kind);
+//		System.out.println(p_id);
+//		System.out.println(p_price);
+//		System.out.println(p_kind);
 		
 		
 		return pvo;

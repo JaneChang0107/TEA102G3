@@ -1,5 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.product.model.*"%>
+<%@ page import="com.productType.model.*"%>
+<%
+	Vector<ProductVO> buylist = (Vector<ProductVO>) session.getAttribute("shoppingcart");
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -161,6 +168,7 @@ input:read-only {
 				<h4 align="center">阿堃的賣場</h4>
 
 			</th>
+
 			<tr class="cart">
 
 				<td>商品圖片</td>
@@ -173,10 +181,15 @@ input:read-only {
 				<td></td>
 
 			</tr>
+						<%for (int i = 0; i < buylist.size(); i++) {
+ 			ProductVO order = buylist.get(i); 
+ 			String name = order.getP_name();
+
+ %> 
 			<tr class="cart">
 
 				<td><img class="pic"></td>
-				<td>二手Ps4 Slim</td>
+				<td><%=name%></td>
 				<td>500G<br> 附雙手把
 				</td>
 				<td>3000</td>
@@ -187,9 +200,13 @@ input:read-only {
 
 
 			</tr>
+			<%}
+%>
 			<tr>
 				<th colspan=8><a>確認運送與付款方式</a><img
-					src="<%=request.getContextPath()%>/images/downarrow.png"
+					src="
+					<%=request.getContextPath()%>
+					/images/downarrow.png"
 					class="downarrow" data-toggle="collapse" href="#collapseExample"
 					type="button" aria-expanded="false" aria-controls="collapseExample"></img>
 					<br>
