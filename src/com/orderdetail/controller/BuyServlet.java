@@ -47,6 +47,16 @@ public class BuyServlet extends HttpServlet {
 		}
 		
 		if (action.equals("xxxx")) {
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			
+			// Send the use back to the form, if there were errors
+			
+			
 			System.out.println("in2");
 			Integer amount = 0;
 			int price=0;
@@ -55,6 +65,16 @@ public class BuyServlet extends HttpServlet {
 				ProductVO order = buylist.get(i);
 				price = order.getP_price();
 				String qty = req.getParameter("xx"+(i+1));
+				
+				if (qty == null || (qty.trim()).length() == 0) {
+					errorMsgs.add("請輸入數量");
+				}
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/Front_end/shoppingCart/checkBuyPage.jsp");
+					failureView.forward(req, res);
+					return;//程式中斷
+				}
 				System.out.println(qty);
 				q = Integer.parseInt(qty);
 			
