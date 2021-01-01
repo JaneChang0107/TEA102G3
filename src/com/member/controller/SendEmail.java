@@ -2,16 +2,19 @@ package com.member.controller;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
+
+import org.apache.naming.factory.OpenEjbFactory;
+
 import javax.activation.*;
 
 public class SendEmail {
 	
 	public static void openMail(String to) throws MessagingException {
 		
-		String host = "imap.gmail.com";                //¥D¾÷ºİ
-		String username ="yuxikun102g3@gmail.com";      //±H¥óªÌ
-		String password ="kun102g3";                     //±H¥óªÌ±K½X
-		String from = "yuxikun102g3@gmail.com";           //±H¥óªÌ
+		String host = "imap.gmail.com";                //ä¸»æ©Ÿç«¯
+		String username ="yuxikun102g3@gmail.com";      //å¯„ä»¶è€…
+		String password ="kun102g3";                     //å¯„ä»¶è€…å¯†ç¢¼
+		String from = "yuxikun102g3@gmail.com";           //å¯„ä»¶è€…
 
 		Properties properties =new Properties();
 		properties.put("mail.imap.ssl.enable","true");
@@ -27,29 +30,37 @@ public class SendEmail {
 		Session session = Session.getDefaultInstance(properties);  // Get the default Session object.
 		Store store =session.getStore("imap");
 		store.connect(host, username, password);
-		System.out.println("³sµ²¦¨¥\");
+		System.out.println("é€£çµæˆåŠŸ");
 		
 		try {
-			MimeMessage message = new MimeMessage(session);                             //new¤@­ÓMimeMessageª«¥ó
-			message.setFrom(new InternetAddress(from));                                //¥ÎMimeMessageª«¥óset±H¥óªÌ
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));   //¥ÎMimeMessageª«¥óset¦¬¥óªÌ
-			message.setSubject("YuXiKun·|­û¶}³q");                                              //set¥D¦®
-			message.setContent(
-					"			<FORM METHOD=\"post\" ACTION=\"http://localhost:8081/TEA102G3/member/controller/MemberServlet\" style=\"margin-bottom: 0px;\">\r\n" + 
-					"			<input type=\"hidden\" name=\"action\" value=\"activeMember\">\r\n" + 
-					"			<input type=\"hidden\" name=\"m_email\" value=\""+to+"\">\r\n" + 
-					"            <input type=\"submit\" value=\"Click hear to active your account!\" id=\"revise\" class=\"btn btn-primary\">\r\n" + 
-					"            </FORM>","text/html");
+			MimeMessage message = new MimeMessage(session);                             //newä¸€å€‹MimeMessageç‰©ä»¶
+			message.setFrom(new InternetAddress(from));                                //ç”¨MimeMessageç‰©ä»¶setå¯„ä»¶è€…
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));   //ç”¨MimeMessageç‰©ä»¶setæ”¶ä»¶è€…
+			message.setSubject("YuXiKunæœƒå“¡é–‹é€š");                                              //setä¸»æ—¨
+			//æŒ‰éˆ•
+//			message.setContent(
+//					"			<FORM METHOD=\"post\" ACTION=\"http://localhost:8081/TEA102G3/member/controller/MemberServlet\" style=\"margin-bottom: 0px;\">\r\n" + 
+//					"			<input type=\"hidden\" name=\"action\" value=\"activeMember\">\r\n" + 
+//					"			<input type=\"hidden\" name=\"m_email\" value=\""+to+"\">\r\n" + 
+//					"            <input type=\"submit\" value=\"Click hear to active your account!\" id=\"revise\" class=\"btn btn-primary\">\r\n" + 
+//					"            </FORM>","text/html");
+			//è¶…é€£çµ
+			message.setContent("<h2>Welcome to YuXiKun</h2><br><a href=\"http://localhost:8081/TEA102G3/member/controller/MemberServlet?action=activeMember&m_email=\"+to+\">Click to join!</a>\r\n" + 
+					"","text/html");
 			System.out.println(to);
 			Transport transport= session.getTransport("smtp");						
 			transport.connect(host,username,password);
             transport.sendMessage(message, message.getAllRecipients());
 	        transport.close();		
-			System.out.println("µo°e¦¨¥\");
+			System.out.println("ç™¼é€æˆåŠŸ");
 			
 		} catch (MessagingException me) {
 			me.printStackTrace();
 		}
 		
+		
+	}
+	public static void main(String[] args) throws MessagingException {
+		SendEmail.openMail("aceg19682@gmail.com");
 	}
 }
