@@ -2,10 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.product.model.*"%>
-<%@ page import="com.productType.model.*"%>
 <%
 	Vector<ProductVO> buylist = (Vector<ProductVO>) session.getAttribute("shoppingcart");
+	
 %>
+<%!Integer amount=0;%>
+<%amount= (Integer) request.getAttribute("amount");%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -181,26 +183,34 @@ input:read-only {
 				<td></td>
 
 			</tr>
-						<%for (int i = 0; i < buylist.size(); i++) {
+		<%!int i=0;%>
+		<%
+		for (i = 0; i < buylist.size(); i++) {
  			ProductVO order = buylist.get(i); 
  			String name = order.getP_name();
-
+ 			String detail = order.getP_detail();
+ 			Integer price = order.getP_price();
+ 			Integer count = order.getP_count();
+ 			Integer k=Integer.parseInt(request.getParameter("xx"+(i+1)));
+ 			Integer total = k*count;
+ 
  %> 
 			<tr class="cart">
 
 				<td><img class="pic"></td>
 				<td><%=name%></td>
-				<td>500G<br> 附雙手把
+				<td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap"><%=detail%>
 				</td>
-				<td>3000</td>
-				<td>1</td>
-				<td>3000</td>
+				<td><%=price%></td>
+				<td><%=k%></td>
+				<td><%=k*price%></td>
 				<td></td>
 				<td></td>
 
 
 			</tr>
 			<%}
+		
 %>
 			<tr>
 				<th colspan=8><a>確認運送與付款方式</a><img
@@ -327,11 +337,14 @@ input:read-only {
 	</div>
 
 	<div class="total">
-		<h4>金額總計為 元</h4>
+		<h4>金額總計為 <%=amount%>元</h4>
 		<br>
 		<h4>運費總計為 元</h4>
 		<br>
 		<h4>總金額為元</h4>
+		
+
+
 		<br>
 		<h4>本次共可得到 堃幣</h4>
 	</div>

@@ -47,19 +47,23 @@ public class BuyServlet extends HttpServlet {
 		}
 		
 		if (action.equals("xxxx")) {
-//			for(int i=1;i<=buylist.size();i++) {
-//			System.out.println(req.getParameter("xx"+i));
-//		
-//			}
+			System.out.println("in2");
+			Integer amount = 0;
+			int price=0;
+			Integer q=0;
+			for (int i = 0; i < buylist.size(); i++) {
+				ProductVO order = buylist.get(i);
+				price = order.getP_price();
+				String qty = req.getParameter("xx"+(i+1));
+				System.out.println(qty);
+				q = Integer.parseInt(qty);
 			
-			String p_id = req.getParameter("p_id");
-			String p_name = req.getParameter("p_name");
-			String p_price = req.getParameter("p_price");
-			String p_kind = req.getParameter("p_kind");
-			String p_detail = req.getParameter("p_detail");
-			String p_count = req.getParameter("p_count");
-			
-			
+				amount += (price * q);
+				System.out.println(amount);
+
+				
+			}
+			req.setAttribute("amount", amount);
 			
 			session.setAttribute("shoppingcart", buylist);    // 資料庫取出的list物件,存入session
 			// Send the Success view
