@@ -23,6 +23,10 @@ public class OrderdetailJDBCDAO implements OrderdetailDAO_interface {
 		private static final String COUNT=
 //			"select p_id ,sum(od_count) from orderdetail  group by p_id order by sum(od_count)desc";
 		"select orderdetail.p_id ,sum(od_count),productpicture.pp_id from orderdetail inner join productpicture on orderdetail.p_id=productpicture.p_id group by orderdetail.p_id ,productpicture.pp_id order by sum(od_count)desc";
+		
+		//拿到單筆訂單詳情
+		private static final String GET_DETAIL_ByOrder ="SELECT * FROM ORDERDETAIL WHERE O_ID=?";		
+		
 		@Override
 		public List<OrderdetailVO> count() {
 			List<OrderdetailVO> list = new ArrayList<OrderdetailVO>();
@@ -75,11 +79,6 @@ public class OrderdetailJDBCDAO implements OrderdetailDAO_interface {
 		}
 		
 		
-		
-		
-		
-	
-		
 	@Override
 	public void insert(OrderdetailVO orderdetailVO) {
 		Connection con = null;
@@ -98,7 +97,6 @@ public class OrderdetailJDBCDAO implements OrderdetailDAO_interface {
 				pstmt.executeUpdate();
 				
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}finally {
 				if (pstmt != null) {
@@ -141,7 +139,6 @@ public class OrderdetailJDBCDAO implements OrderdetailDAO_interface {
 			
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			if (pstmt != null) {
@@ -177,7 +174,6 @@ public class OrderdetailJDBCDAO implements OrderdetailDAO_interface {
 			
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			if (pstmt != null) {
@@ -271,11 +267,9 @@ public class OrderdetailJDBCDAO implements OrderdetailDAO_interface {
 				orderdetailVO.setP_id(rs.getString("p_id"));
 				orderdetailVO.setOd_count(rs.getInt("od_count"));
 				list.add(orderdetailVO);
-				
 			}
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			if (rs != null) {
@@ -302,6 +296,61 @@ public class OrderdetailJDBCDAO implements OrderdetailDAO_interface {
 		}
 		return list;
 	}
+	
+	@Override
+	public List<OrderdetailVO> getDetailByOrder(String o_id) {
+		List<OrderdetailVO> list = new ArrayList<OrderdetailVO>();
+		OrderdetailVO orderdetailVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_DETAIL_ByOrder);
+			pstmt.setString(1,o_id);
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				orderdetailVO=new OrderdetailVO();
+				orderdetailVO.setOd_id(rs.getString("od_id"));
+				orderdetailVO.setO_id(rs.getString("o_id"));
+				orderdetailVO.setP_id(rs.getString("p_id"));
+				orderdetailVO.setOd_count(rs.getInt("od_count"));
+				list.add(orderdetailVO);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	
 
 	
 	
@@ -344,24 +393,25 @@ public class OrderdetailJDBCDAO implements OrderdetailDAO_interface {
 //		}
 //		
 		
-		List<OrderdetailVO> list2= dao.count();
-		for(OrderdetailVO aod :list2) {
-			
+//		List<OrderdetailVO> list2= dao.count();
+//		for(OrderdetailVO aod :list2) {
+//			
+//			System.out.println(aod.getP_id()+",");
+//			System.out.println(aod.getOd_count());
+//			System.out.println(aod.getPp_id());
+//			System.out.println("---------------------");
+//		}
+		
+		List<OrderdetailVO> list3 =dao.getDetailByOrder("O00021");
+		for(OrderdetailVO aod :list3) {
+			System.out.println(aod.getOd_id()+",");
+			System.out.println(aod.getO_id()+",");
 			System.out.println(aod.getP_id()+",");
 			System.out.println(aod.getOd_count());
-			System.out.println(aod.getPp_id());
-			System.out.println("---------------------");
-		}
-		
-		
-	
+		    System.out.println("---------------------");
 	}
 
-
-
 	
-
-
-
+	}
 	
 }

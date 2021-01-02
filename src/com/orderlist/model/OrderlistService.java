@@ -60,10 +60,10 @@ public class OrderlistService {
 	
 	public List<OrderlistVO> status(){
 		return dao.status();
-		
 	}
 	
-	
-	
+	public List<OrderlistVO> findByMember(String m_id){
+		return dao.findByMember(m_id);
+	}
 	
 }

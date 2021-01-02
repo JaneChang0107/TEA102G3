@@ -48,12 +48,24 @@
   
   <li>
     <FORM METHOD="post" ACTION="<%= request.getContextPath() %>/orderlist" >
-        <b>輸入:</b>
+        <b>輸入訂單代號:</b>
         <input type="text" name="o_id">
         <input type="hidden" name="action" value="getOne_For_Display">
         <input type="submit" value="送出">
     </FORM>
   </li>
+  
+  <!-- 查會員 -->
+    <li>
+    <FORM METHOD="post" ACTION="<%= request.getContextPath() %>/orderlist" >
+        <b>輸入會員id:</b>
+        <input type="text" name="m_id">
+        <input type="hidden" name="action" value="getMember_For_Display">
+        <input type="submit" value="送出">
+    </FORM>
+  </li>
+  
+  
 
   <jsp:useBean id="orderlistSvc" scope="page" class="com.orderlist.model.OrderlistService" />
    

@@ -45,5 +45,9 @@ public class OrderdetailService {
 		return dao.count();
 	}
 	
+	public List<OrderdetailVO> getDetailByOrder(String o_id){
+		return dao.getDetailByOrder(o_id);
+	}
+	
 	
 }

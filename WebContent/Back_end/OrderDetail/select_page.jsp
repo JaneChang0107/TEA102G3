@@ -127,6 +127,17 @@ h4 {
 				<input type="submit" value="送出">
 			</FORM>
 		</li>
+		
+		<li>
+			<FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/OrderdetailServlet">
+				<b>輸入訂單編號:</b> <input type="text" name="o_id"> 
+				<input type="hidden" name="action" value="getOrderDetailByOrder"> 
+				<input type="submit" value="送出">
+			</FORM>
+		</li>
+		
+
+		
 
 
 

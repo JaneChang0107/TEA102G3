@@ -12,4 +12,7 @@ public interface OrderdetailDAO_interface {
 	public List<OrderdetailVO> count();
 	
 	
+	public List<OrderdetailVO> getDetailByOrder(String o_id);
+	
+	
 }

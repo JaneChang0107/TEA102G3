@@ -38,6 +38,64 @@ public class OrderdetailServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		
+		
+		//查訂單詳情
+		if ("getOrderDetailByOrder".equals(action)) { // 來自select_page.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+				String str = req.getParameter("o_id");
+				if (str == null || (str.trim()).length() == 0) {
+					errorMsgs.add("請輸入編號");
+				}
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/Back_end/OrderDetail/select_page.jsp");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
+				String o_id = null;
+				try {
+					o_id = str;
+				} catch (Exception e) {
+					errorMsgs.add("編號格式不正確");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/Back_end/OrderDetail/select_page.jsp");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
+				/*************************** 2.開始查詢資料 *****************************************/
+				OrderdetailService orderdetailSvc = new OrderdetailService();
+				List<OrderdetailVO> list = orderdetailSvc.getDetailByOrder(o_id);
+				req.setAttribute("list", list);
+
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/Back_end/OrderDetail/listOneorderdetail.jsp");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+				String url = "/Back_end/OrderDetail/listOrderdetailByOrder.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 *************************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/Back_end/OrderDetail/select_page.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		
+		
 
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
