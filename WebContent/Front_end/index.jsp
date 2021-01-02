@@ -50,7 +50,9 @@
 	crossorigin="anonymous"></script>
 
 <style>
-	
+	marquee{
+	   width:1000px;
+	}
 
 </style>
 
@@ -62,13 +64,13 @@
 <body>
 <h1>
 
-<h3><marquee  onMouseOver="this.stop()" onMouseOut="this.start()">${rl==null ? aa : rl }</marquee>
+<h3><center><marquee onMouseOver="this.stop()" onMouseOut="this.start()">${rl==null ? aa : rl }</marquee></center></h3>
 </h1>
 	<div class="content">
 
 		<div class="article">
-			<button type="button" class="btn btn-success btn-circle-xl"
-				id="buybtn">我要買</button>
+			<a href="http://localhost:8081/TEA102G3/ProductServlet?ptype=no&name=&action=findByName"><button type="button" class="btn btn-success btn-circle-xl"
+				id="buybtn">我要買</button></a>
 			<button type="button" class="btn btn-danger btn-circle-xl"
 				id="rentbtn">我要租</button>
 			<button type="button" class="btn btn-warning btn-circle-xl"
@@ -76,10 +78,8 @@
 		</div>
 
 
-
-
 		<div class="swiper-container">
-			<H1>熱銷商品</H1>
+			<H2>熱銷商品</H2>
 			<div class="swiper-wrapper">
 				<c:forEach var="VO" items="${list}">
 					<jsp:useBean id="ppService" scope="page"
@@ -98,7 +98,7 @@
 		</div>
 
 		<div class="swiper-container">
-			<H1>熱銷出租品</H1>
+			<H2>熱銷出租品</H2>
 			<div class="swiper-wrapper">
 				<div class="swiper-slide">Slide 1</div>
 				<div class="swiper-slide">Slide 2</div>

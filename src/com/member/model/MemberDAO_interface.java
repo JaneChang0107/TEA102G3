@@ -10,6 +10,9 @@ public interface MemberDAO_interface {
 	public void insertSeller (MemberVO memberVO);
 	//修改
 	public void update (MemberVO memberVO);
+	//修改密碼
+	public void updatepw(MemberVO memberVO);
+	
 	//刪除
 	public void delete(String m_id);
 	//查主key

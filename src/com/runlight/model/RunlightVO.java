@@ -6,7 +6,6 @@ public class RunlightVO {
 
 	public RunlightVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public RunlightVO(String key, String value) {

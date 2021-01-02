@@ -1,9 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page import="com.runlight.model.*"%>
+<%
+RunlightVO runlightVO = new RunlightVO();
+String value=runlightVO.getValue();
+pageContext.setAttribute("value",value);
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="BIG5">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -18,12 +24,12 @@
 	
 	<tr>
 		<td>value:</td>
-		<td><input name="value" id="value" type="text" ></td>
+		<td><input name="value" id="value" type="text"></td>
 	</tr>
 </table>
 <br>
 <input type="hidden" name="action" value="insert">
-<input type="submit" value="°e¥X·s¼W"></FORM>
+<input type="submit" value="é€å‡ºæ–°å¢ž"></FORM>
 
 
 </body>

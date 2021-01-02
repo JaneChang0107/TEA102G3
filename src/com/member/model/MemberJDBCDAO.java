@@ -34,6 +34,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 
 	private static final String UPDATE = "UPDATE member set m_email=?,m_password=?,m_name=?,m_gender=?,m_phone=?,m_address=?,m_birth=?,m_headpic=?,m_identity=?,m_id_pic=?"
 			+ ",m_account=?,m_accountname=?,b_code=?,m_bank_pic=?,m_storename=?,m_info=?,m_cover=?,m_hi=?,m_offlinehi=? where m_id=?";
+	private static final String UPDATE_PW ="UPDATE member set m_password=? where m_id=?";
 
 	private static final String GET_Mems_ByStatus_STMT = "SELECT * FROM member WHERE m_status =?";
 
@@ -193,6 +194,46 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		}
 
 	}
+	
+	@Override
+	public void updatepw(MemberVO memberVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_PW);
+			pstmt.setString(1, memberVO.getM_password());
+			pstmt.setString(2, memberVO.getM_id());
+
+			pstmt.executeUpdate();
+
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+	
+	
+	
 
 	@Override
 	public void delete(String m_id) {

@@ -107,26 +107,9 @@
 	<div class="content">
 	
 	
-		<div>
-		
-
-			<img src="${memberVO.m_headpic2}" id="headimg">
-			<button type="button" class="btn btn-secondary">
-				<i class="fas fa-user-circle" id="icons"></i>我的帳戶
-			</button>
-			<button type="button" class="btn btn-secondary">
-				<i class="fas fa-clipboard-list" id="icons"></i>購買清單
-			</button>
-			<button type="button" class="btn btn-secondary">
-				<i class="fas fa-gamepad" id="icons"></i>租用清單
-			</button>
-			<button type="button" class="btn btn-secondary">
-				<i class="fas fa-bell" id="icons"></i>通知總覽
-			</button>
-			<button type="button" class="btn btn-secondary">
-				<i class="fas fa-coins" id="icons"></i>我的堃幣
-			</button>
-		</div>
+	<div>
+	     <jsp:include page="SelectBar.jsp"></jsp:include>
+	</div>
 
 <!-- --------------------------------------------------------------------------- -->
 
@@ -254,21 +237,19 @@
 							</tr>
 							<tr>
 								<td>原始密碼</td>
-								<td><input type="password" name="m_password" size="40"/></td>
+								<td><input type="password" readonly name="m_password" size="40" value="<%=memberVO.getM_password()%>" style="background-color: beige"/></td>
 							</tr>
 							<tr>
-								<td>新密碼</td>
-								<td><input type="password" name="m_newpassword"></td>
+								<td></td>
+								<td><input type="hidden" name="m_newpassword" value="<%=memberVO.getM_password()%>"></td>
 							</tr>
 							<tr>
-								<td>新密碼確認</td>
-								<td><input type="password" name="m_newpasswordconfirm"></td>
+								<td></td>
+								<td><input type="hidden" name="m_newpasswordconfirm" value="<%=memberVO.getM_password()%>"></td>
 							</tr>
-
-
 
 						</table>
-						<input type="hidden" name="action" value="Myfileupdateconfirm">
+						<input type="hidden" name="action" value="MyfilePasswordupdate">
 						<input type="hidden" name="m_id" value="<%=memberVO.getM_id()%>">
 						<input type="submit" value="送出修改" id="revise"
 							class="btn btn-primary"></FORM>

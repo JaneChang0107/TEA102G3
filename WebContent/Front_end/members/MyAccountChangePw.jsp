@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.member.model.*"%>
-
 <%
 	String m_id = session.getAttribute("loginId").toString();
     MemberService memSvc = new MemberService();
@@ -113,18 +113,24 @@
 
 <!-- --------------------------------------------------------------------------- -->
 		
+		<c:if test="${not empty errorMsgs}">
+			<font style="color: red">請修正以下錯誤:</font>
+			<ul>
+				<c:forEach var="message" items="${errorMsgs}">
+					<li style="color: red">${message}</li>
+				</c:forEach>
+			</ul>
+		</c:if>
+		
 		<div>
 
 			<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" id="myfilebar">
 			
-				<li class="nav-item" role="presentation"><a
-					class="nav-link active" id="pills-home-tab" data-toggle="pill"
-					href="#pills-home" role="tab" aria-controls="pills-home"
-					aria-selected="true">我的檔案</a></li>
+				<li class="nav-item" role="presentation">
+				<a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="false">我的檔案</a></li>
 					
-				<li class="nav-item" role="presentation"><a class="nav-link"
-					id="pills-profile-tab" data-toggle="pill" href="#pills-profile"
-					role="tab" aria-controls="pills-profile" aria-selected="false">更改密碼</a>
+				<li class="nav-item" role="presentation">
+				<a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="true">更改密碼</a>
 				</li>
 
 			</ul>
@@ -133,8 +139,7 @@
 			<div class="tab-content" id="pills-tabContent" id="myfile">
 
 
-				<div class="tab-pane fade show active" id="pills-home"
-					role="tabpanel" aria-labelledby="pills-home-tab">
+<div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 
 					<table id="myfiles">
 						<tr>
@@ -142,6 +147,9 @@
 							<hr></td>
 							<td></td>
 						</tr>
+<!-- 							<tr> -->
+<%-- 								<td style="display: none;" name="m_id" value="<%=memberVO.getM_id()%>"></td> --%>
+<!-- 							</tr> -->
 						<tr>
 							<td>Email</td>
 							<td>${memberVO.m_email}</td>
@@ -191,30 +199,32 @@
 						</tr>
 
 					</table>
-					
-					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/controller/MemberServlet" style="margin-bottom: 0px;">
-					<input type="hidden" name="action" value="Myfileupdate">
-					<input type="hidden" name="m_id" value="<%=memberVO.getM_id()%>">
-                    <input type="submit" value="修改" id="revise" class="btn btn-primary">
-                    </FORM>
 
 				</div>
 
-				<div class="tab-pane fade" id="pills-profile" role="tabpanel"
-					aria-labelledby="pills-profile-tab">
-					<table id="changepw">
-						<tr>
-							<td>原始密碼</td>
-							<td><input type="password" readonly value="${memberVO.m_password}" style="background-color: beige"></td>
-						</tr>
-						<tr>
-						    <td>
+<div class="tab-pane fade active show" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/controller/MemberServlet" style="margin-bottom: 0px;">
+						<table id="changepw">
 						
-						</tr>
-		
-					</table>
-					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/controller/MemberServlet" style="margin-bottom: 0px;">
-					<input type="hidden" name="action" value="MyfilePasswordupdate">
+							<tr>
+								<td><input type="hidden" name="m_oldpassword" size="40" value="<%=memberVO.getM_password()%>"/></td>
+							</tr>
+							<tr>
+								<td>原始密碼</td>
+								<td><input type="password" id="m_password" name="m_password"/></td>
+							</tr>
+							<tr>
+								<td>新密碼</td>
+								<td><input type="password" id="m_newpassword" name="m_newpassword"/></td>
+							</tr>
+							<tr>
+								<td>新密碼確認</td>
+								<td><input type="password" id="m_newpasswordconfirm" name="m_newpasswordconfirm"/></td>
+							</tr>
+
+						</table>
+					
+					<input type="hidden" name="action" value="MyfilePasswordconfirm">
 					<input type="hidden" name="m_id" value="<%=memberVO.getM_id()%>">
                     <input type="submit" value="修改" id="revise" class="btn btn-primary">
                     </FORM>
@@ -222,8 +232,6 @@
                  </div>
 
 			</div>
-
-
 
 		</div>
 	
@@ -238,6 +246,18 @@
 
 
 </body>
+<script>
+ $(document).ready(function(){
+    $("#revise").click(function(){
+        if($("#m_password").val()==""){
+            alert("舊密碼尚未填寫");       
+        }
+        if($("#m_newpassword").val()==""){
+        	alert("新密碼尚未填寫");
+        }
+    })
+ })
+</script>
 
 
 
