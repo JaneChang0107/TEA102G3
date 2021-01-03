@@ -25,6 +25,7 @@ import com.productPicture.model.ProductPictureService;
 import com.productPicture.model.ProductPictureVO;
 import com.productType.model.ProductTypeService;
 import com.productType.model.ProductTypeVO;
+import com.websocket.WebSocket;
 
 @WebServlet("/ProductServlet")
 @MultipartConfig
@@ -176,6 +177,15 @@ public class ProductServlet extends HttpServlet {
 					ppService.addProductPicture(b, pVO.getP_id());
 				}
 			}
+			
+			ObjectMapper mapper = new ObjectMapper();
+			
+			String pp = mapper.writeValueAsString(pVO);
+			
+			WebSocket ws = new WebSocket();
+			
+			ws.onMessage(pp);
+			
 			response.sendRedirect(request.getContextPath() + "/Front_end/product/sellerProduct.jsp");
 		}
 		
@@ -188,7 +198,7 @@ public class ProductServlet extends HttpServlet {
 			ppService.deleteProductPictureByProduct(pid);
 			pService.deleteProduct(pid);
 			
-			response.sendRedirect(request.getContextPath() + "/ProductServlet?action=showAll");
+			response.sendRedirect(request.getContextPath() + "/Front_end/product/sellerProduct.jsp");
 		}
 		
 		if("updateOne".equals(action)) {
@@ -197,10 +207,13 @@ public class ProductServlet extends HttpServlet {
 			
 			ProductPictureService ppService = new ProductPictureService(); 
 			ProductService pService = new ProductService();
+			
 			ProductVO pVO = pService.oneProduct(pid);
 			List<ProductPictureVO> ppVOs = ppService.findProductPicture(pid);
+			
 			request.setAttribute("ppVOs", ppVOs);
 			request.setAttribute("pVO", pVO);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/Front_end/product/editProduct.jsp");
 			rd.forward(request, response);
 		}
