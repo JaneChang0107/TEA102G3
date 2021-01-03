@@ -28,9 +28,7 @@
         }
      
 	jedis.close();
-
 %>
-
 
 <!DOCTYPE html>
 <html>
