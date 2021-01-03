@@ -39,6 +39,8 @@
 		<jsp:include page="/Front_end/footer.jsp"></jsp:include>
 	</div>
 	
+	
+	
     <script src="<%= request.getContextPath() %>/Front_end/product/js/sellerProduct.js"></script>
 </body>
 </html>

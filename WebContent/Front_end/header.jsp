@@ -347,6 +347,13 @@ select#ptype {
 #searchBar {
 	width: 470px;
 }
+
+#showToast{
+	position: fixed;
+	right: 10px;
+	bottom: 10px;
+	z-index: 5;
+}
 </style>
 </head>
 
@@ -427,6 +434,11 @@ select#ptype {
 		</table>
 
 	</div>
+	
+	<div id="showToast">
+		
+	</div>
+	
 	<input type="hidden" id="contextPath"
 		value="<%=request.getContextPath()%>">
 	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -466,6 +478,7 @@ select#ptype {
 		src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script>
 	<script
 		src="<%=request.getContextPath()%>/Front_end/product/js/getType.js"></script>
+	<script src="<%=request.getContextPath()%>/Front_end/js/webSocket.js"></script>
 </body>
 
 </html>
