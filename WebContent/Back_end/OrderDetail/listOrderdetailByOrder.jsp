@@ -1,19 +1,26 @@
 <%@page import="java.util.*"%>
 <%@page import="com.orderdetail.model.*"%>
 <%@page import="com.orderlist.model.*"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="BIG5"%>
+<%@page import="com.product.model.*"%>
+<%@page import="com.productPicture.model.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<jsp:useBean id="productSvc" scope="page" class="com.product.model.ProductService"></jsp:useBean>
+<jsp:useBean id="productPicSvc" scope="page" class="com.productPicture.model.ProductPictureService"></jsp:useBean>
 
 <%
 	OrderdetailService orderdetailSvc =new OrderdetailService();
 	String o_id =request.getParameter("o_id");
     List<OrderdetailVO> list = orderdetailSvc.getDetailByOrder(o_id);
+    String od_id =request.getParameter("od_id");
+    OrderdetailVO orderdetailVO =orderdetailSvc.getOneOrderdetail(od_id);
 	pageContext.setAttribute("list", list);
-	
 	OrderlistService orderlistSvc =new OrderlistService();
-	OrderlistVO orderlistVO =orderlistSvc.getOneOrderlist(o_id);
+	OrderlistVO orderlistVO =orderlistSvc.getOneOrderlist(o_id);	
+	
 
 %>
 
@@ -48,13 +55,13 @@
 <body>
 <table id="table-1">
 	<tr><td>
-		 <h3>©Ò¦³­q³æ¸ê®Æ - listAllorderdetail.jsp</h3>
-		 <h4><a href="<%= request.getContextPath() %>/Back_end/OrderDetail/select_page.jsp"><img src="<%= request.getContextPath() %>/Back_end/images/back1.gif" width="100" height="32" border="0">¦^­º­¶</a></h4>
+		 <h3>æ‰€æœ‰è¨‚å–®è³‡æ–™ - listAllorderdetail.jsp</h3>
+		 <h4><a href="<%= request.getContextPath() %>/Back_end/OrderDetail/select_page.jsp"><img src="<%= request.getContextPath() %>/Back_end/images/back1.gif" width="100" height="32" border="0">å›é¦–é </a></h4>
 	</td></tr>
 </table>
-<%-- ¿ù»~ªí¦C --%>
+<%-- éŒ¯èª¤è¡¨åˆ— --%>
 <c:if test="${not empty errorMsgs}">
-	<font style="color:red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
+	<font style="color:red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 	<ul>
 		<c:forEach var="message" items="${errorMsgs}">
 			<li style="color:red">${message}</li>
@@ -66,33 +73,36 @@
 <table>
 <h1><%=orderlistVO.getO_id()%></h1>
 <h1><%=orderlistVO.getO_status()%></h1>
+
 	<tr>
-<!-- 		<th>¬y¤ô¸¹</th> -->
-<!-- 		<th>­q³æ½s¸¹</th> -->
-		<th>°Ó«~½s¸¹</th>
-		<th>²£«~¼Æ¶q</th>
-<!-- 		<th>­×§ï</th> -->
-<!-- 		<th>§R°£</th> -->
+<!-- 		<th>æµæ°´è™Ÿ</th> -->
+<!-- 		<th>è¨‚å–®ç·¨è™Ÿ</th> -->
+		<th>å•†å“åç¨±</th>
+		<th>ç”¢å“æ•¸é‡</th>
+<!-- 		<th>ä¿®æ”¹</th> -->
+<!-- 		<th>åˆªé™¤</th> -->
 		
 	</tr>
-	
 	<c:forEach var="orderdetailVO" items="${list}">
 		<tr>
 		    
 <%-- 			<td>${orderdetailVO.od_id}</td> --%>
 <%-- 			<td>${orderdetailVO.o_id}</td> --%>
-			<td>${orderdetailVO.p_id}</td>
+<%--             <td><%=productSvc.oneProduct(orderdetailVO.getP_id())%></td> --%>
+<%--             <td><img src="data:image/jpg;base64,${productSvc.oneProduct(orderdetailVO.p_id).pp_picture64}"></td> --%>
+            <td><img src="data:image/jpg;base64,<%=((ProductPictureVO)(productPicSvc.findProductPicture("P00001").get(0))).getPp_picture64()%>" width="100px" height="100px";></td>
+			<td>${orderdetailVO.p_id} ${productSvc.oneProduct(orderdetailVO.p_id).p_name}</td>
 			<td>${orderdetailVO.od_count}</td>
 			
 <!-- 			<td> -->
 <%-- 				<FORM METHOD="post" ACTION="<%= request.getContextPath() %>/OrderdetailServlet" style="margin-bottom: 0px;"> --%>
-<!-- 			     <input type="submit" value="­×§ï"> -->
+<!-- 			     <input type="submit" value="ä¿®æ”¹"> -->
 <%-- 			     <input type="hidden" name="od_id"  value="${orderdetailVO.od_id}"> --%>
 <!-- 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM> -->
 <!-- 			</td> -->
 <!-- 			<td> -->
 <%-- 			  <FORM METHOD="post" ACTION="<%= request.getContextPath() %>/OrderdetailServlet" style="margin-bottom: 0px;"> --%>
-<!-- 			     <input type="submit" value="§R°£"> -->
+<!-- 			     <input type="submit" value="åˆªé™¤"> -->
 <%-- 			     <input type="hidden" name="od_id"  value="${orderdetailVO.od_id}"> --%>
 <!-- 			     <input type="hidden" name="action" value="delete"></FORM> -->
 <!-- 			</td> -->
