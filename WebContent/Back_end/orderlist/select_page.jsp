@@ -55,7 +55,7 @@
     </FORM>
   </li>
   
-  <!-- 查會員 -->
+  <!-- 查會員訂單-->
     <li>
     <FORM METHOD="post" ACTION="<%= request.getContextPath() %>/orderlist" >
         <b>輸入會員id:</b>
@@ -64,6 +64,8 @@
         <input type="submit" value="送出">
     </FORM>
   </li>
+  
+  <a href="<%= request.getContextPath() %>/orderlist?m_id=M00001&action=getMember_For_Display">查M00001</a>
   
   
 

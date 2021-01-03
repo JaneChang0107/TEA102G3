@@ -142,10 +142,10 @@ h5.card-header {
 						<h5 class="card-title">訂單狀態: ${orderlistVO.o_status}</h5>
 						<h5 class="card-title">總金額: ${orderlistVO.o_total}</h5>
 						
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/OrderdetailServlet"  target="_blank" class="detail">
+						<FORM METHOD="post" ACTION="<%= request.getContextPath() %>/orderlist"  target="_blank" class="detail">
 			            <input type="submit" value="詳情" class="btn btn-primary">
 			            <input type="hidden" name="o_id"  value="${orderlistVO.o_id}">
-			            <input type="hidden" name="action"	value="getOrderDetailByOrder"></FORM>
+			            <input type="hidden" name="action"	value="getOne_For_Display"></FORM>
 						
 						
 					</div>

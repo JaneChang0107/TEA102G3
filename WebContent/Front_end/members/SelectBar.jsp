@@ -13,9 +13,11 @@
 			<a href="http://localhost:8081/TEA102G3/Front_end/members/MyAccount.jsp"><button type="button" class="btn btn-secondary">
 				<i class="fas fa-user-circle" id="icons"></i>我的帳戶
 			</button></a>
+<%-- 			<a href="<%= request.getContextPath() %>/orderlist?m_id=${loginId}&action=getMember_For_Display"> --%>
+            <a href="http://localhost:8081/TEA102G3/Front_end/members/MyOrder.jsp">
 			<button type="button" class="btn btn-secondary">
 				<i class="fas fa-clipboard-list" id="icons"></i>購買清單
-			</button>
+			</button></a>
 			<button type="button" class="btn btn-secondary">
 				<i class="fas fa-gamepad" id="icons"></i>租用清單
 			</button>
