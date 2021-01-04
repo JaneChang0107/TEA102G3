@@ -2,9 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.product.model.*"%>
+<%@ page import="com.member.model.*"%>
 <%
 	Vector<ProductVO> buylist = (Vector<ProductVO>) session.getAttribute("shoppingcart");
-	
+String m_id = session.getAttribute("loginId").toString();
+MemberService memSvc = new MemberService();
+MemberVO memberVO = memSvc.findOneMem(m_id);
+session.setAttribute("memberVO", memberVO);
 %>
 <%!Integer amount=0;%>
 <%amount= (Integer) request.getAttribute("amount");%>
@@ -294,8 +298,7 @@ input:read-only {
 									<td><label><input type="radio" name="delivery"
 											value=0 />黑貓宅急便</label></td>
 									<td>70</td>
-									<td><label><input type="checkbox">使用堃幣折抵</label>
-										<input type="text">/現有150堃幣</td>
+									<td>使用堃幣折抵<input type="text">/現有150堃幣</td>
 									<td></td>
 								</tr>
 								<tr>
@@ -306,17 +309,17 @@ input:read-only {
 									<br><h4>收件人資料</h4></td>
 								</tr>
 								<tr>
-									<td>姓名:<input type="text" readonly></input></td>
+									<td>姓名:<input type="text" value="${memberVO.m_name}" readonly></input></td>
 									<td></td>
 									<td>姓名:<input type="text"></input></td>
 								</tr>
 								<tr>
-									<td>住址:<input type="text" readonly></input></td>
+									<td>住址:<input type="text" value="${memberVO.m_address}" readonly></input></td>
 									<td></td>
 									<td>住址:<input type="text"></input></td>
 								</tr>
 								<tr>
-									<td>電話:<input type="text" readonly></input></td>
+									<td>電話:<input type="text" value="${memberVO.m_phone}" readonly></input></td>
 									<td></td>
 									<td>電話:<input type="text"></input></td>
 								</tr>

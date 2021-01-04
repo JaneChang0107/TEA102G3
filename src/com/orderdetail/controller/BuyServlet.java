@@ -11,6 +11,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.orderdetail.model.OrderdetailService;
 import com.orderdetail.model.OrderdetailVO;
+import com.orderlist.model.OrderlistService;
+import com.orderlist.model.OrderlistVO;
 import com.product.model.ProductVO;
 import com.productPicture.model.ProductPictureVO;
 import com.productType.model.ProductTypeVO;
@@ -45,34 +47,13 @@ public class BuyServlet extends HttpServlet {
 //			OrderdetailVO ovo = new OrderdetailVO();
 //			OrderdetailService orderSvc = new OrderdetailService();
 //			ovo = orderSvc.addOrderdetail(o_id, p_id, od_count);
+			
+//			OrderlistVO olvo = new OrderlistVO();
+//			OrderlistService olisvc = new OrderlistService();
+//			olvo = olisvc.addOrderlistVO(o_date, o_status, o_shipdate, o_deceiptdate, o_finishdate, o_transport, o_address, o_total, o_pm, m_id)
 		}
 		
-//		if (action.equals("CALCULATE")) {
-//			System.out.println("CALCULATE");
-//			
-//			for(int i=0;i<=buylist.size();i++) {
-//				
-//			String id = req.getParameter("calid");
-//			String qty = req.getParameter("xx"+(i+1));
-//			String price = req.getParameter("price");
-//			
-//			List<String> list = new ArrayList<>();
-//		    list.add(id);
-//		    list.add(qty);
-//		    list.add(price);
-//		    String json = new Gson().toJson(list);
-//
-//		    res.setContentType("application/json");
-//		    res.setCharacterEncoding("UTF-8");
-//		    res.getWriter().write(json);
-		    
-//			System.out.println(id);
-//			System.out.println(qty);
-//			System.out.println(price);
-//	
-//			
-//			}
-//		}
+
 		
 		if (action.equals("CALCULATE")) {
 			

@@ -3,12 +3,18 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.product.model.*"%>
 <%@ page import="com.productType.model.*"%>
+<%@ page import="com.member.model.*"%>
 <%!String a="";%>
 <%
 	Vector<ProductVO> buylist = (Vector<ProductVO>) session.getAttribute("shoppingcart");
+	String m_id = session.getAttribute("loginId").toString();
+	MemberService memSvc = new MemberService();
+	MemberVO memberVO = memSvc.findOneMem(m_id);
 
 %>
 
+<jsp:useBean id="productSvc" scope="page" class="com.product.model.ProductService" />
+<jsp:useBean id="productpicSvc" scope="page" class="com.productPicture.model.ProductPictureService" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +23,7 @@
 <title>您的購物車-我要買</title>
 <style>
 * {
-	border: 1px solid gray;
+	border: 0px solid gray;
 }
 
 .mybody {
@@ -131,6 +137,10 @@ table {
     position: absoloute;
     bottom: 0px;
 }
+
+#numberbox{
+	border:1px solid gray;
+}
 </style>
 
 </head>
@@ -178,7 +188,7 @@ table {
 		<table class="table1">
 			<tr>
 				<td colspan=8>
-					<h4 align="left">阿堃的賣場</h4>
+					<h4 align="left"><%request.getParameter("p_id");%></h4>
 
 				</td>
 			</tr>
@@ -200,7 +210,7 @@ table {
 			<tr class="cart">
 
 				<td></td>
-				<td><img class="pic">
+				<td><img class="pic" src="data:image/jpg;base64,${productpicSvc.findFirstOneProductPicture(productVO.p_id).pp_picture64} ">
 					</td>
 
 				<td><c:out value="${productVO.p_name}" /></td>
@@ -215,7 +225,7 @@ table {
 
 				<td align="center">
 					
-				<input type="number" min="1" max="${productVO.p_count}" step="1" class="numberbox${loop.count}" name="xx${loop.count}"><br>
+				<input type="number" min="1" max="${productVO.p_count}" step="1" class="numberbox${loop.count}" name="xx${loop.count}" id="numberbox"><br>
 
 
 <!-- 						<button id="test" class="${loop.count}" type="button">test</button> -->
@@ -233,7 +243,9 @@ table {
 						庫存:${productVO.p_count}
 				</td>
 			
-				<td ><input type="text" name="sum" class="sum${loop.count}" class="form-control" readonly> </td>
+				<td >
+					<p class="sum${loop.count}">0</p>
+				</td>
 				<td></td>
 
 			</tr>
@@ -246,7 +258,8 @@ $(function(){
             $("input[class^='numberbox${loop.count}']").change(function(){
                var value1 = parseFloat($("input[class^='price${loop.count}']").val()) || 0;
                var value2 = parseFloat($("input[class^='numberbox${loop.count}']").val()) || 0;
-               $("input[class^='sum${loop.count}']").val(value1 * value2);
+//                $("input[class^='sum${loop.count}']").val(value1 * value2);
+               $("p[class^='sum${loop.count}']").html(value1 * value2);
                return false;
             });
          });
