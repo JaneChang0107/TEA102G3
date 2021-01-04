@@ -38,11 +38,10 @@ function showToast(data) {
             </button>
         </div>
         <div class="toast-body">
-            <small>${data.pt_idName}</small>
-            <p>${data.p_name}</p>
+            <small>${data.message}</small>
         </div>
     </div>`
-
+    announcement()
     $("#showToast").append(addthing);
     $(".toast").toast("show");
 }

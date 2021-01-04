@@ -13,6 +13,11 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+import com.Jedis.JedisSaveMessage;
+import com.bell.model.BellVO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.member.model.MemberService;
 import com.member.model.MemberVO;
 
@@ -26,6 +31,7 @@ public class WebSocket {
 	
 	@OnOpen
 	public void onOpen(Session wsSession, EndpointConfig config) {
+		
 		httpSession = (HttpSession) config.getUserProperties().get("httpSession");
 		userId = (String)httpSession.getAttribute("loginId");
 		
@@ -41,11 +47,63 @@ public class WebSocket {
 		
 		System.out.println(message);
 		
-		sessions.forEach((k, v) -> {
-			if(v != null && k != userId) {
-				v.getAsyncRemote().sendText(message);
+		ObjectMapper mapper = new ObjectMapper();
+		BellVO bellVO;
+		
+		try {
+			
+			bellVO = mapper.readValue(message, BellVO.class);
+			
+			if(!"all".equals(bellVO.getM_id())) {
+				System.out.println("!all " + bellVO.getM_id());
+				sessions.forEach((user, wsSession) -> {
+					try {
+						
+						if(bellVO.getM_id().equals(user)) {
+
+							JedisSaveMessage.saveBellMessage(user, mapper.writeValueAsString(bellVO));
+							
+							if(wsSession != null) {
+								wsSession.getAsyncRemote().sendText(mapper.writeValueAsString(bellVO));
+							}
+							
+						}
+					} catch (JsonProcessingException e) {
+						e.printStackTrace();
+					}
+				});
 			}
-		});
+			
+			if("all".equals(bellVO.getM_id().toLowerCase())) {
+				System.out.println("all" + bellVO.getM_id());
+				sessions.forEach((user, wsSession) -> {
+					bellVO.setM_id(user);
+					
+					try {
+						
+						if(wsSession != null) {
+							wsSession.getAsyncRemote().sendText(mapper.writeValueAsString(bellVO));
+						}
+						
+						JedisSaveMessage.saveBellMessage(user, mapper.writeValueAsString(bellVO));
+					
+					} catch (JsonProcessingException e) {
+						e.printStackTrace();
+					}
+
+				});
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+//		sessions.forEach((k, v) -> {
+//			if(v != null && k != userId) {
+//				v.getAsyncRemote().sendText(message);
+//			}
+//		});
 		
 	}
 	
@@ -64,12 +122,15 @@ public class WebSocket {
 		List<MemberVO> mVOs = mService.getAll();
 		
 		mVOs.forEach((mVO) -> {
-			sessions.put(mVO.getM_id(), null);
+			if(sessions.get(mVO) == null) {
+				sessions.put(mVO.getM_id(), null);
+			}
 		});
 	}
 	
 	public void updateUserList(String mid) {
 		sessions.put(mid, null);
 	}
+	
 	
 }
