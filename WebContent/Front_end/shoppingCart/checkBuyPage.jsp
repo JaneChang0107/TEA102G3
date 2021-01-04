@@ -188,7 +188,7 @@ table {
 		<table class="table1">
 			<tr>
 				<td colspan=8>
-					<h4 align="left"><%request.getParameter("p_id");%></h4>
+					<h4 align="left">阿堃的賣場</h4>
 
 				</td>
 			</tr>
@@ -271,10 +271,9 @@ $(function(){
 	<div class="total">
 		<h4>合計共<%=buylist.size()%>項商品</h4>
 		<br>
-		<h4>總計元</h4>
 	</div>
 	<div class="buttonarea">
-		<button type="button" class="button1">繼續逛逛</button>
+		<button type="button" class="button1" onclick="history.back()">回上一頁</button>
 		<button type="submit" class="button2">進入結帳</button>
 		<input type="hidden" name="action" value="CALCULATE">	
 	</div>
@@ -285,12 +284,12 @@ $(function(){
 	</div>
 	</form>
 	<%
-		} else {
+ 	} else {
 	%>
 
 	<div class="null"><tr><td><h3 align=center>您的購物車現在沒有商品</h3></td></tr></div>
 	<div class="buttonarea"> 
-	<button type="button" class="button1">繼續逛逛</button>
+	<button type="button" class="button1" onclick="history.back()">回上一頁</button>
 	<input type ="button" class="button2" onclick="javascript:location.href='<%=request.getContextPath()%>/Front_end/index.jsp'" value="回首頁"></input>
 	</div>
 <%} %>	

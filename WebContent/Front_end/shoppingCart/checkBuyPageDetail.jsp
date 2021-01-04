@@ -6,16 +6,21 @@
 <%@ page import="com.productPicture.model.*"%>
 <%@ page import="com.member.model.*"%>
 <%
-Vector<ProductVO> buylist = (Vector<ProductVO>) session.getAttribute("shoppingcart");
-String m_id = session.getAttribute("loginId").toString();
-MemberService memSvc = new MemberService();
-MemberVO memberVO = memSvc.findOneMem(m_id);
-session.setAttribute("memberVO", memberVO);
+	Vector<ProductVO> buylist = (Vector<ProductVO>) session.getAttribute("shoppingcart");
+	String m_id = session.getAttribute("loginId").toString();
+	MemberService memSvc = new MemberService();
+	MemberVO memberVO = memSvc.findOneMem(m_id);
+	session.setAttribute("memberVO", memberVO);
+
 %>
-<%!Integer amount=0;%>
-<%amount= (Integer) request.getAttribute("amount");%>
-<jsp:useBean id="productSvc" scope="page" class="com.product.model.ProductService" />
-<jsp:useBean id="productpicSvc" scope="page" class="com.productPicture.model.ProductPictureService" />
+<%!Integer amount = 0;%>
+<%
+	amount = (Integer) request.getAttribute("amount");
+%>
+<jsp:useBean id="productSvc" scope="page"
+	class="com.product.model.ProductService" />
+<jsp:useBean id="productpicSvc" scope="page"
+	class="com.productPicture.model.ProductPictureService" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,17 +38,17 @@ session.setAttribute("memberVO", memberVO);
 
 .content {
 	margin: 10px auto;
- 	background-color: white; 
- 	 width: 1000px; 
- 	height: 1200px; 
+	background-color: white;
+	width: 1000px;
+	height: 1000px;
 	/* 	border: solid 1px */
 }
 
 .info {
 	margin: 10px auto;
- 	background-color: white; 
- 	width: 1000px; 
- 	height: 300px; 
+	background-color: white;
+	width: 1000px;
+	height: 300px;
 	/* 	border: solid 1px */
 }
 
@@ -57,7 +62,6 @@ session.setAttribute("memberVO", memberVO);
 
 .buttonarea {
 	margin: 10px auto;
-	
 	width: 1000px;
 	height: 100px;
 	/* 	border: solid 1px */
@@ -65,7 +69,7 @@ session.setAttribute("memberVO", memberVO);
 
 .table1 {
 	margin: 0px auto;
-/* 	background-color: white; */
+	/* 	background-color: white; */
 	width: 800px;
 	height: 50px;
 }
@@ -169,6 +173,7 @@ input:read-only {
 	<div>
 		<h2 class="title">結帳頁面-我要買</h2>
 	</div>
+<form>	
 	<div class="content">
 
 		<hr>
@@ -190,41 +195,41 @@ input:read-only {
 				<td></td>
 
 			</tr>
-		<%!int i=0;%>
-		<%
-		for (i = 0; i < buylist.size(); i++) {
- 			ProductVO order = buylist.get(i); 
- 			String name = order.getP_name();
- 			String detail = order.getP_detail();
- 			Integer price = order.getP_price();
- 			Integer count = order.getP_count();
- 			String id = order.getP_id();
- 			ProductPictureVO ppvo = productpicSvc.findFirstOneProductPicture(id);
- 			String picture = ppvo.getPp_picture64();
- 			
- 			System.out.println(id);
- 			Integer k=Integer.parseInt(request.getParameter("xx"+(i+1)));
- 			Integer total = k*count;
- 
- %> 
-			<tr class="cart">
+			<%!int i = 0;%>
+			<%
+				for (i = 0; i < buylist.size(); i++) {
+					ProductVO order = buylist.get(i);
+					String name = order.getP_name();
+					String detail = order.getP_detail();
+					Integer price = order.getP_price();
+					Integer count = order.getP_count();
+					String id = order.getP_id();
+					ProductPictureVO ppvo = productpicSvc.findFirstOneProductPicture(id);
+					String picture = ppvo.getPp_picture64();
 
+					System.out.println(id);
+					Integer k = Integer.parseInt(request.getParameter("xx" + (i + 1)));
+					Integer total = k * count;
+			%>
+			<tr class="cart">
+<input type="text" hidden name="p_id" value="<%=id%>"></input>
+<input type="text" hidden name="od_count" value="<%=k%>"></input>
 				<td><img class="pic" src="data:image/jpg;base64,<%=picture%>">
-					</td>
+				</td>
 				<td><%=name%></td>
-				<td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap"><%=detail%>
+				<td
+					style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap"><%=detail%>
 				</td>
 				<td><%=price%></td>
 				<td><%=k%></td>
-				<td><%=k*price%></td>
+				<td class="kprice<%=i%>"><%=k * price%></td>
 				<td></td>
 				<td></td>
-
 
 			</tr>
-			<%}
-		
-%>
+			<%
+				}
+			%>
 			<tr>
 				<th colspan=8><a>確認運送與付款方式</a><img
 					src="
@@ -244,20 +249,20 @@ input:read-only {
 								</tr>
 								<tr>
 									<td><label><input type="radio" name="delivery"
-											value=0 />黑貓宅急便</label></td>
+											id="delivery" value="0" />黑貓宅急便</label></td>
 									<td>130</td>
-									<td><label><input type="radio" name="pay" value=0 />貨到付款</label></td>
+									<td><label><input type="radio" name="pay" value=6 />貨到付款</label></td>
 								</tr>
 								<tr>
 									<td><label><input type="radio" name="delivery"
-											value=0 />黑貓宅急便</label></td>
+											id="delivery" value="1" />7-11</label></td>
 									<td>60</td>
-									<td><label><input type="radio" name="pay" value=0 />信用卡</label></td>
+									<td><label><input type="radio" name="pay" value=7 />信用卡</label></td>
 								</tr>
 
 								<tr>
 									<td><label><input type="radio" name="delivery"
-											value=0 />黑貓宅急便</label></td>
+											id="delivery" value="2" />全家</label></td>
 									<td>60</td>
 									<td>信用卡號碼:<input type="text"></input></td>
 								</tr>
@@ -265,18 +270,17 @@ input:read-only {
 
 								<tr>
 									<td><label><input type="radio" name="delivery"
-											value=0 />黑貓宅急便</label></td>
+											id="delivery" value="3" />OK mart</label></td>
 									<td>60</td>
-									<td>持有者姓名:<input type="text"></input>
-									<br>安全碼:<input type="text"></input>
+									<td>持有者姓名:<input type="text"></input> <br>安全碼:<input
+										type="text"></input>
 
 									</td>
 								</tr>
-<th>
-</th>
+								<th></th>
 								<tr>
 									<td><label><input type="radio" name="delivery"
-											value=0 />黑貓宅急便</label></td>
+											id="delivery" value="4" />萊爾富</label></td>
 									<td>60</td>
 									<td><div class="ooo" id="expiration-date">
 											<label>到期年月份</label> <select>
@@ -305,76 +309,141 @@ input:read-only {
 
 								<tr>
 									<td><label><input type="radio" name="delivery"
-											value=0 />黑貓宅急便</label></td>
+											id="delivery" value="5" />郵局</label></td>
 									<td>70</td>
-									<td>使用堃幣折抵<input type="number" min="1" max="${memberVO.m_coin}">/現有${memberVO.m_coin}堃幣</td>
+									<td>使用堃幣折抵<input type="number" min="1"
+										max="${memberVO.m_coin}">/現有${memberVO.m_coin}堃幣
+									</td>
 									<td></td>
 								</tr>
 								<tr>
-									<td>
-									<br><h4>訂購人資料</h4></td>
+									<td><br>
+										<h4>訂購人資料</h4></td>
 									<td></td>
-									<td>
-									<br><h4>收件人資料</h4></td>
+									<td><br>
+										<h4>收件人資料</h4></td>
 								</tr>
 								<tr>
-									<td>姓名:<input type="text" value="${memberVO.m_name}" readonly></input></td>
+									<td>姓名:<input type="text" value="${memberVO.m_name}"
+										readonly id="txt1"></input></td>
 									<td></td>
-									<td>姓名:<input type="text"></input></td>
+									<td>姓名:<input type="text" id="txt2"></input></td>
 								</tr>
 								<tr>
-									<td>住址:<input type="text" value="${memberVO.m_address}" readonly></input></td>
+									<td>住址:<input type="text" value="${memberVO.m_address}"
+										readonly id="txt3"></input></td>
 									<td></td>
-									<td>住址:<input type="text"></input></td>
+									<td>住址:<input type="text" id="txt4"></input></td>
 								</tr>
 								<tr>
-									<td>電話:<input type="text" value="${memberVO.m_phone}" readonly></input></td>
+									<td>電話:<input type="text" value="${memberVO.m_phone}"
+										readonly id="txt5"></input></td>
 									<td></td>
-									<td>電話:<input type="text"></input></td>
+									<td>電話:<input type="text" id="txt6"></input></td>
 								</tr>
 								<tr>
 									<td></td>
 									<td></td>
-									<td><input type="checkbox"></input>同訂購人資料
+									<td><input type="checkbox" id="checkbox"></input>同訂購人資料
 									<td>
 								</tr>
 							</table>
 						</div>
-					</div>
-					</th>
+					</div></th>
 			</tr>
 		</table>
 	</div>
 
 	<div class="total">
-		<h4>金額總計為 <%=amount%>元</h4>
+		<h4 id="total">
+			金額:
+			<%=amount%>
+		</h4>
 		<br>
-		<h4>運費總計為 元</h4>
+		<h4>運費:
+			<div id="deliverymoney"></div></h4>
+			
+		</h4>
 		<br>
-		<h4>總金額為元</h4>
-		
-
-
+		<h4>總金額:<div id="subtotal"></div></h4>
 		<br>
 		<h4>本次共可得到 堃幣</h4>
-		
+
 	</div>
 	<div class="buttonarea">
-		<button type="button" class="button1">確認送出</button>
-		<button type="button" class="button2">回上一頁</button>
-		
+		<button type="button" class="button1" onclick="history.back()">回上一頁</button>
+		<button type="submit" class="button2">確認送出</button>
+		<input type="hidden" name="action" value="SUCCESS">	
+</form>
+
 	</div>
-	
-	
+
+
 	<div class="footer">
 		<jsp:include page="../footer.jsp"></jsp:include>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.5.1.js"
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 		crossorigin="anonymous"></script>
+
 	<script>
-		
-	</script>
+    $("#checkbox").change(function() {
+        if(this.checked) {
+            $('#txt2').val($('#txt1').val()).prop('disabled', false);
+            $('#txt4').val($('#txt3').val()).prop('disabled', false);
+            $('#txt6').val($('#txt5').val()).prop('disabled', false);
+        }
+        else {
+            $('#txt2').val('').prop('disabled', false);
+            $('#txt4').val('').prop('disabled', false);
+            $('#txt6').val('').prop('disabled', false);
+        }   
+      });
+    console.log(<%=amount%>);
+    
+    $('input[name=delivery]').change(function(){
+    	//alert($(this).val())   	
+    	 var radioBtn = document.getElementsByName("delivery");
+    		var c;
+    	 	 for(i=0; i<radioBtn.length; i++){
+    	   	if(radioBtn[i].checked){
+    	    	 c = radioBtn[i].value;
+    	    	 
+    	    	 switch (c) {
+    	    	    case '0':
+    	    	        c=130;
+    	    	        break;
+    	    	    case '1':
+    	    	    	c=60;
+    	    	        break;
+    	    	    case '2':
+    	    	    	c=60;
+    	    	        break;
+    	    	    case '3':
+    	    	    	c=60;
+    	    	        break;
+    	    	    case '4':
+    	    	    	c=60;
+    	    	        break;
+    	    	    case '5':
+    	    	    	c=70;
+    	    	        break;
+    	    	    case '6':
+    	    	    	
+    	    	        break;
+    	    	    case '7':
+    	    	    	
+    	    	        break;
+    	    	  
+    	    	}
+    	   	} 
+    	}
+    	   document.getElementById("deliverymoney").innerHTML = c;	
+    	   document.getElementById("subtotal").innerHTML = c+<%=amount%>;	
+    });
+    
+    
+	 </script>
 
 </body>
 

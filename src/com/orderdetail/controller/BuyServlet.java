@@ -1,6 +1,7 @@
 package com.orderdetail.controller;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,16 +43,27 @@ public class BuyServlet extends HttpServlet {
 		System.out.println("in");
 		
 		if (action.equals("SUCCESS")) {
-			System.out.println("成立訂單成功");
 			
-	
-//			OrderdetailVO ovo = new OrderdetailVO();
-//			OrderdetailService orderSvc = new OrderdetailService();
-//			ovo = orderSvc.addOrderdetail(o_id, p_id, od_count);
+			for (int i = 0; i < buylist.size(); i++) {
+			OrderlistVO olvo = new OrderlistVO();
+			Timestamp o_date = new Timestamp(System.currentTimeMillis());
+			String o_status="0";
+			String o_transport = "";
+			String o_address="";
+			Integer o_total=0;
+			Integer o_pm=0;
+			String m_id = "";
 			
-//			OrderlistVO olvo = new OrderlistVO();
-//			OrderlistService olisvc = new OrderlistService();
-//			olvo = olisvc.addOrderlistVO(o_date, o_status, o_shipdate, o_deceiptdate, o_finishdate, o_transport, o_address, o_total, o_pm, m_id)
+			OrderlistService orderSvc = new OrderlistService();
+			olvo = orderSvc.addOrderlistVO2(o_date, o_status, o_transport, o_address, o_total, o_pm, m_id);
+				}
+		
+			session.setAttribute("shoppingcart", buylist);  
+			String url = "/Front_end/shoppingCart/checkBuyPageOK.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+			return;
+		
 		}
 		
 
@@ -115,8 +127,6 @@ public class BuyServlet extends HttpServlet {
 
 		if (action.equals("addCart")) {
 			
-//			// 新增書籍至購物車中
-//			else if (action.equals("ADD")) {
 				boolean match = false;
 
 				// 取得後來新增的書籍
@@ -147,28 +157,9 @@ public class BuyServlet extends HttpServlet {
 			String url = "/Front_end/shoppingCart/checkBuyPage.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
-			
+			return;
 		}
 	
-
-		// 結帳，計算購物車書籍價錢總數
-//		if (action.equals("CHECKOUT")) {
-////			float total = 0;
-////			for (int i = 0; i < buylist.size(); i++) {
-////				BOOK order = buylist.get(i);
-////				float price = order.getPrice();
-////				int quantity = order.getQuantity();
-////				total += (price * quantity);
-////			}
-//			double total = buylist.stream().mapToDouble(b -> b.getP_price() * b.getP_count()).sum();
-
-//			String amount = String.valueOf(total);
-//			req.setAttribute("amount", amount);
-//			String url = "/Checkout.jsp";
-//			RequestDispatcher rd = req.getRequestDispatcher(url);
-//			rd.forward(req, res);
-//		}
-//	}
 
 	private ProductVO getProductlist(HttpServletRequest req) {
 		
