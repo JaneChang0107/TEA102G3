@@ -212,8 +212,9 @@ input:read-only {
 					Integer total = k * count;
 			%>
 			<tr class="cart">
-<input type="text" hidden name="p_id" value="<%=id%>"></input>
+
 <input type="text" hidden name="od_count" value="<%=k%>"></input>
+
 				<td><img class="pic" src="data:image/jpg;base64,<%=picture%>">
 				</td>
 				<td><%=name%></td>
@@ -248,20 +249,20 @@ input:read-only {
 									<td><h4>付款方式</h4></td>
 								</tr>
 								<tr>
-									<td><label><input type="radio" name="delivery"
-											id="delivery" value="0" />黑貓宅急便</label></td>
+									<td><label><input type="radio" name="o_transport"
+											id="delivery" value=0 />黑貓宅急便</label></td>
 									<td>130</td>
 									<td><label><input type="radio" name="pay" value=6 />貨到付款</label></td>
 								</tr>
 								<tr>
-									<td><label><input type="radio" name="delivery"
+									<td><label><input type="radio" name="o_transport"
 											id="delivery" value="1" />7-11</label></td>
 									<td>60</td>
 									<td><label><input type="radio" name="pay" value=7 />信用卡</label></td>
 								</tr>
 
 								<tr>
-									<td><label><input type="radio" name="delivery"
+									<td><label><input type="radio" name="o_transport"
 											id="delivery" value="2" />全家</label></td>
 									<td>60</td>
 									<td>信用卡號碼:<input type="text"></input></td>
@@ -269,7 +270,7 @@ input:read-only {
 
 
 								<tr>
-									<td><label><input type="radio" name="delivery"
+									<td><label><input type="radio" name="o_transport"
 											id="delivery" value="3" />OK mart</label></td>
 									<td>60</td>
 									<td>持有者姓名:<input type="text"></input> <br>安全碼:<input
@@ -279,7 +280,7 @@ input:read-only {
 								</tr>
 								<th></th>
 								<tr>
-									<td><label><input type="radio" name="delivery"
+									<td><label><input type="radio" name="o_transport"
 											id="delivery" value="4" />萊爾富</label></td>
 									<td>60</td>
 									<td><div class="ooo" id="expiration-date">
@@ -308,7 +309,7 @@ input:read-only {
 								</tr>
 
 								<tr>
-									<td><label><input type="radio" name="delivery"
+									<td><label><input type="radio" name="o_transport"
 											id="delivery" value="5" />郵局</label></td>
 									<td>70</td>
 									<td>使用堃幣折抵<input type="number" min="1"
@@ -333,7 +334,7 @@ input:read-only {
 									<td>住址:<input type="text" value="${memberVO.m_address}"
 										readonly id="txt3"></input></td>
 									<td></td>
-									<td>住址:<input type="text" id="txt4"></input></td>
+									<td>住址:<input type="text" id="txt4"  name="o_address"></input></td>
 								</tr>
 								<tr>
 									<td>電話:<input type="text" value="${memberVO.m_phone}"
@@ -365,7 +366,9 @@ input:read-only {
 			
 		</h4>
 		<br>
-		<h4>總金額:<div id="subtotal"></div></h4>
+		<h4>總金額:
+		<div id="o_total2"></div> </h4>
+		<textarea class="o_total" id="o_total"  name="o_total" hidden></textarea> 
 		<br>
 		<h4>本次共可得到 堃幣</h4>
 
@@ -401,9 +404,9 @@ input:read-only {
       });
     console.log(<%=amount%>);
     
-    $('input[name=delivery]').change(function(){
+    $('input[name=o_transport]').change(function(){
     	//alert($(this).val())   	
-    	 var radioBtn = document.getElementsByName("delivery");
+    	 var radioBtn = document.getElementsByName("o_transport");
     		var c;
     	 	 for(i=0; i<radioBtn.length; i++){
     	   	if(radioBtn[i].checked){
@@ -439,7 +442,9 @@ input:read-only {
     	   	} 
     	}
     	   document.getElementById("deliverymoney").innerHTML = c;	
-    	   document.getElementById("subtotal").innerHTML = c+<%=amount%>;	
+    	   document.getElementById("o_total2").innerHTML=c+<%=amount%>;
+    	   document.getElementById("o_total").innerHTML=c+<%=amount%>;
+    	   
     });
     
     

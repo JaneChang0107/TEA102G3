@@ -44,19 +44,31 @@ public class BuyServlet extends HttpServlet {
 		
 		if (action.equals("SUCCESS")) {
 			
-			for (int i = 0; i < buylist.size(); i++) {
+//			for (int i = 0; i < buylist.size(); i++) {
 			OrderlistVO olvo = new OrderlistVO();
 			Timestamp o_date = new Timestamp(System.currentTimeMillis());
-			String o_status="0";
-			String o_transport = "";
-			String o_address="";
-			Integer o_total=0;
+			String o_status="0";			
+			String o_transport = req.getParameter("o_transport");
+			System.out.println("aaaaaaa"+o_transport);
+			String o_address=req.getParameter("o_address");
+			Integer o_total=Integer.parseInt(req.getParameter("o_total"));
 			Integer o_pm=0;
-			String m_id = "";
+			String m_id = (String) session.getAttribute("loginId");
+			System.out.println("///////////////");
+			System.out.println( o_date);
+			System.out.println( o_status);
+			System.out.println("¹B°e"+ o_transport);
+			System.out.println( o_address);
+			System.out.println( o_total);
+			System.out.println( o_pm);
+			System.out.println(m_id);
+			System.out.println("///////////////");
+			
+			
 			
 			OrderlistService orderSvc = new OrderlistService();
 			olvo = orderSvc.addOrderlistVO2(o_date, o_status, o_transport, o_address, o_total, o_pm, m_id);
-				}
+				
 		
 			session.setAttribute("shoppingcart", buylist);  
 			String url = "/Front_end/shoppingCart/checkBuyPageOK.jsp";
