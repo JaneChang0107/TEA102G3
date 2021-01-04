@@ -1,10 +1,12 @@
+<%@page import="com.productPicture.model.ProductPictureVO"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.product.model.*"%>
+<%@ page import="com.productPicture.model.*"%>
 <%@ page import="com.member.model.*"%>
 <%
-	Vector<ProductVO> buylist = (Vector<ProductVO>) session.getAttribute("shoppingcart");
+Vector<ProductVO> buylist = (Vector<ProductVO>) session.getAttribute("shoppingcart");
 String m_id = session.getAttribute("loginId").toString();
 MemberService memSvc = new MemberService();
 MemberVO memberVO = memSvc.findOneMem(m_id);
@@ -12,7 +14,8 @@ session.setAttribute("memberVO", memberVO);
 %>
 <%!Integer amount=0;%>
 <%amount= (Integer) request.getAttribute("amount");%>
-
+<jsp:useBean id="productSvc" scope="page" class="com.product.model.ProductService" />
+<jsp:useBean id="productpicSvc" scope="page" class="com.productPicture.model.ProductPictureService" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -195,13 +198,19 @@ input:read-only {
  			String detail = order.getP_detail();
  			Integer price = order.getP_price();
  			Integer count = order.getP_count();
+ 			String id = order.getP_id();
+ 			ProductPictureVO ppvo = productpicSvc.findFirstOneProductPicture(id);
+ 			String picture = ppvo.getPp_picture64();
+ 			
+ 			System.out.println(id);
  			Integer k=Integer.parseInt(request.getParameter("xx"+(i+1)));
  			Integer total = k*count;
  
  %> 
 			<tr class="cart">
 
-				<td><img class="pic"></td>
+				<td><img class="pic" src="data:image/jpg;base64,<%=picture%>">
+					</td>
 				<td><%=name%></td>
 				<td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap"><%=detail%>
 				</td>
@@ -298,7 +307,7 @@ input:read-only {
 									<td><label><input type="radio" name="delivery"
 											value=0 />黑貓宅急便</label></td>
 									<td>70</td>
-									<td>使用堃幣折抵<input type="text">/現有150堃幣</td>
+									<td>使用堃幣折抵<input type="number" min="1" max="${memberVO.m_coin}">/現有${memberVO.m_coin}堃幣</td>
 									<td></td>
 								</tr>
 								<tr>

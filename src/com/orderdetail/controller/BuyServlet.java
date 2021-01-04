@@ -14,6 +14,7 @@ import com.orderdetail.model.OrderdetailVO;
 import com.orderlist.model.OrderlistService;
 import com.orderlist.model.OrderlistVO;
 import com.product.model.ProductVO;
+import com.productPicture.model.ProductPictureService;
 import com.productPicture.model.ProductPictureVO;
 import com.productType.model.ProductTypeVO;
 
@@ -181,6 +182,7 @@ public class BuyServlet extends HttpServlet {
 
 		ProductVO pvo = new ProductVO();
 		ProductTypeVO ptvo = new ProductTypeVO();
+
 		
 		pvo.setP_id(p_id);
 		pvo.setP_name(p_name);	
@@ -188,7 +190,8 @@ public class BuyServlet extends HttpServlet {
 		ptvo.setPt_kind(p_kind);
 		pvo.setP_detail(p_detail);
 		pvo.setP_count(Integer.parseInt(p_count));
-
+		
+	
 		
 		
 		return pvo;
