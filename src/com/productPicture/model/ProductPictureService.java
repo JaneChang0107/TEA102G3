@@ -41,6 +41,16 @@ public class ProductPictureService {
 		return dao.findByProduct(pid);
 	}
 	
+	//測試抓取第一張用----------------
+	public ProductPictureVO findFirstOneProductPicture(String pid) {
+		ProductPictureVO productureVO = new ProductPictureVO();
+		productureVO= (ProductPictureVO)dao.findByProduct(pid).get(0);
+		
+		return productureVO;
+	}
+	//-------------------------------
+	
+	
 	public String findProductRandomPicture(String pid) {
 		List<ProductPictureVO> ppVOs = dao.findByProduct(pid);
 		if(ppVOs.size() > 0 ) {

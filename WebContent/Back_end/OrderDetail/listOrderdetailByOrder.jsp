@@ -14,13 +14,13 @@
 <%
 	OrderdetailService orderdetailSvc =new OrderdetailService();
 	String o_id =request.getParameter("o_id");
-    List<OrderdetailVO> list = orderdetailSvc.getDetailByOrder(o_id);
     String od_id =request.getParameter("od_id");
+    
     OrderdetailVO orderdetailVO =orderdetailSvc.getOneOrderdetail(od_id);
-	pageContext.setAttribute("list", list);
 	OrderlistService orderlistSvc =new OrderlistService();
-	OrderlistVO orderlistVO =orderlistSvc.getOneOrderlist(o_id);	
+	OrderlistVO orderlistVO =orderlistSvc.getOneOrderlist(o_id);
 	
+	System.out.println(request.getParameter("o_id")); 
 
 %>
 
@@ -89,8 +89,9 @@
 <%-- 			<td>${orderdetailVO.od_id}</td> --%>
 <%-- 			<td>${orderdetailVO.o_id}</td> --%>
 <%--             <td><%=productSvc.oneProduct(orderdetailVO.getP_id())%></td> --%>
-<%--             <td><img src="data:image/jpg;base64,${productSvc.oneProduct(orderdetailVO.p_id).pp_picture64}"></td> --%>
-            <td><img src="data:image/jpg;base64,<%=((ProductPictureVO)(productPicSvc.findProductPicture("P00001").get(0))).getPp_picture64()%>" width="100px" height="100px";></td>
+           <td><img src="data:image/jpg;base64,${productPicSvc.findFirstOneProductPicture(orderdetailVO.p_id).pp_picture64}" width="100px" height="100px";></td> 
+
+<%--        <td><img src="data:image/jpg;base64,<%=((ProductPictureVO)(productPicSvc.findFirstOneProductPicture(orderdetailVO.getP_id()))).getPp_picture64()%>" width="100px" height="100px";></td> --%>
 			<td>${orderdetailVO.p_id} ${productSvc.oneProduct(orderdetailVO.p_id).p_name}</td>
 			<td>${orderdetailVO.od_count}</td>
 			
