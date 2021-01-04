@@ -44,7 +44,6 @@ public class BuyServlet extends HttpServlet {
 		
 		if (action.equals("SUCCESS")) {
 			
-//			for (int i = 0; i < buylist.size(); i++) {
 			OrderlistVO olvo = new OrderlistVO();
 			Timestamp o_date = new Timestamp(System.currentTimeMillis());
 			String o_status="0";			

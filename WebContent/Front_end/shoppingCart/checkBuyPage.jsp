@@ -4,7 +4,7 @@
 <%@ page import="com.product.model.*"%>
 <%@ page import="com.productType.model.*"%>
 <%@ page import="com.member.model.*"%>
-<%!String a="";%>
+
 <%
 	Vector<ProductVO> buylist = (Vector<ProductVO>) session.getAttribute("shoppingcart");
 	String m_id = session.getAttribute("loginId").toString();
