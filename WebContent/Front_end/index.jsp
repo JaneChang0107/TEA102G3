@@ -7,28 +7,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <%
-	OrderdetailService orderdetailSvc1 = new OrderdetailService();
-	List<OrderdetailVO> list = orderdetailSvc1.count();
-	pageContext.setAttribute("list", list);
-	String test=(String)request.getAttribute("rl");
-	
-	Jedis jedis = new Jedis("localhost", 6379);
-	jedis.auth("123456");
-// 	String rl = jedis.get("1");
-// 	System.out.println(rl);
-	 Set<String> rl1 = jedis.keys("*"); 
-        Iterator<String> it=rl1.iterator() ;   
-        while(it.hasNext()){   
-            String key = it.next();
-            String test1=jedis.get(key);
-            request.setAttribute("aa", test1);
-//             System.out.println(key);   
-        }
-     
-	jedis.close();
+OrderdetailService orderdetailSvc1 = new OrderdetailService();
+List<OrderdetailVO> list = orderdetailSvc1.count();
+pageContext.setAttribute("list", list);
 %>
+
 
 <!DOCTYPE html>
 <html>
@@ -62,7 +46,8 @@
 <body>
 <h1>
 
-<h3><center><marquee onMouseOver="this.stop()" onMouseOut="this.start()">${rl==null ? aa : rl }</marquee></center></h3>
+<h3><center><marquee onMouseOver="this.stop()" onMouseOut="this.start()" id="announcement"></marquee></center></h3>
+
 </h1>
 	<div class="content">
 
@@ -136,6 +121,31 @@
 				prevEl : '.swiper-button-prev',
 			},
 		});
+		
+		announcement()
+
+		function announcement() {
+		$.ajax({
+			url : context + "/light.do",
+			type : "get",
+			data : {
+				"action" : "announcement",
+			},
+			dataType : "json",
+			success : function(data) {
+				$("#announcement").html("");
+
+				console.log(data)
+
+				let announcement = "";
+				for(let i = 0; i < data.length; i++) {
+					announcement += (JSON.parse(data[i]).message + "\t");
+				}
+				$("#announcement").append(announcement);
+			}
+
+		});
+		}
 	</script>
 
 </body>

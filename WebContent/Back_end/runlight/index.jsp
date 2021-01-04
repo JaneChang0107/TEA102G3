@@ -13,13 +13,13 @@ pageContext.setAttribute("value",value);
 <title>Insert title here</title>
 </head>
 <body>
-	
+
 <FORM METHOD="post" ACTION="<%= request.getContextPath() %>/light.do" name="form1">
 <table>
 
 	<tr>
 		<td>key:</td>
-		<td><input name="key" id="key" type="text" value="1"></td>
+		<td><input name="key" id="key" type="text" value="all"></td>
 	</tr>
 	
 	<tr>
@@ -28,8 +28,10 @@ pageContext.setAttribute("value",value);
 	</tr>
 </table>
 <br>
-<input type="hidden" name="action" value="insert">
+<input type="hidden" name="action" value="show">
 <input type="submit" value="送出新增"></FORM>
+
+
 
 
 </body>
