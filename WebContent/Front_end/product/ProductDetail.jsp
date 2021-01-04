@@ -41,6 +41,19 @@ img.productImg {
 		<jsp:useBean id="ppService" scope="page"
 			class="com.productPicture.model.ProductPictureService"></jsp:useBean>
 
+
+		<div class="article">
+			<td>${pVO.m_id}</td>
+			<form id="myForm"
+				action="<%=request.getContextPath()%>/websocketchat/NameServlet"
+				method="POST" style="position: fixed">
+				<input type="submit" value="賣場聊聊"> <input type="hidden"
+					name="m_id" value="${pVO.m_id}"> <input type="hidden"
+					name="action" value="">
+			</form>
+		</diV>
+
+
 		<form action="<%=request.getContextPath()%>/BuyServlet" method="POST">
 			<table class="table3">
 				<tr>
@@ -57,8 +70,8 @@ img.productImg {
 					<td><h4>
 							<div id="pInfo">
 								<div id="pInfoName">
-								<span id="productId" name="p_id" >${pVO.p_id}</span>
-									<span>商品名稱:</span> <span id="productName" name="p_name">${pVO.p_name}</span>
+									<span id="productId" name="p_id">${pVO.p_id}</span> <span>商品名稱:</span>
+									<span id="productName" name="p_name">${pVO.p_name}</span>
 								</div>
 						</h4></td>
 
@@ -78,7 +91,7 @@ img.productImg {
 				</tr>
 				<tr>
 					<td><div id="pInfoCount">
-							<span>商品數量:</span><span id="productCount"  name="p_count">${pVO.p_count}</span>
+							<span>商品數量:</span><span id="productCount" name="p_count">${pVO.p_count}</span>
 						</div></td>
 
 				</tr>
@@ -93,7 +106,6 @@ img.productImg {
 				</tr>
 				<tr>
 					<td><input type="submit" name="Submit" value="放入購物車">
-					
 				</tr>
 				<tr>
 					<td colspan=2><div id="pDetail" name="p_detail">
@@ -102,13 +114,13 @@ img.productImg {
 				</tr>
 
 			</table>
-			<input type="hidden" name="action" value="addCart">
-			<input type="hidden" name="p_id" value="${pVO.p_id}">
-			<input type="hidden" name="p_name" value="${pVO.p_name}">
-			<input type="hidden" name="p_price" value="${pVO.p_price}" >
-			<input type="hidden" name="p_kind"  value="${ptVO.pt_kind}">
-			<input type="hidden" name="p_count"  value="${pVO.p_count}">
-			<input type="hidden" name="p_detail"  value="${pVO.p_detail}">
+			<input type="hidden" name="action" value="addCart"> <input
+				type="hidden" name="p_id" value="${pVO.p_id}"> <input
+				type="hidden" name="p_name" value="${pVO.p_name}"> <input
+				type="hidden" name="p_price" value="${pVO.p_price}"> <input
+				type="hidden" name="p_kind" value="${ptVO.pt_kind}"> <input
+				type="hidden" name="p_count" value="${pVO.p_count}"> <input
+				type="hidden" name="p_detail" value="${pVO.p_detail}">
 
 		</form>
 
