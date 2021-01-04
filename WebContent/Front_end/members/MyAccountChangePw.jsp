@@ -61,18 +61,14 @@
 	margin-right: 20px;
 }
 
-#pills-home-tab, #pills-profile-tab {
-    text-align: center;
-    margin: auto;
-    position: relative;
-    left: 140%;
-    font-size: 24px;
-    padding: 15px 150px;
-}
-
 .content {
 	margin-top: 100px;
 	margin-bottom: 200px;
+}
+
+#pills-home-tab, #pills-profile-tab {
+    font-size: 24px;
+    padding: 15px 150px;
 }
 
 #myfiles,#changepw{
@@ -83,6 +79,11 @@
     height:900px;
     font-size:24px;
 }
+#pills-tab{
+    margin:auto;
+    width:800px;
+}
+
 #changepw{
     height:300px;
 }
@@ -93,6 +94,7 @@
     border: 1px solid #707070;
     margin-left: 20px;
 }
+
 
 
 </style>
@@ -246,18 +248,20 @@
 
 
 </body>
-<script>
+<script type="text/javascript">
  $(document).ready(function(){
-    $("#revise").click(function(){
+    $("#revise").click(function JSalert(){
         if($("#m_password").val()==""){
-            alert("舊密碼尚未填寫");       
-        }
-        if($("#m_newpassword").val()==""){
-        	alert("新密碼尚未填寫");
+            swal("舊密碼尚未填寫");       
         }
     })
  })
 </script>
+<!-- <script type="text/javascript"> -->
+// function JSalert(){
+// 	swal("A Basic JS alert by a plug-in");
+// }
+<!-- </script> -->
 
 
 

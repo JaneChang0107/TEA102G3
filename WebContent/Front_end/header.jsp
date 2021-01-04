@@ -16,6 +16,9 @@
 <!-- Font awesome -->
 <script src="https://kit.fontawesome.com/a72ac34f47.js"
 	crossorigin="anonymous"></script>
+<script src="alert/dist/sweetalert-dev.js"></script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>	
 
 
 <style>
