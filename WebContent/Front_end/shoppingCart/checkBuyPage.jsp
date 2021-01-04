@@ -3,9 +3,10 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.product.model.*"%>
 <%@ page import="com.productType.model.*"%>
-<%!int i=0;%>
+<%!String a="";%>
 <%
 	Vector<ProductVO> buylist = (Vector<ProductVO>) session.getAttribute("shoppingcart");
+
 %>
 
 <!DOCTYPE html>
@@ -147,6 +148,7 @@ table {
 		
 <%
  	if (buylist != null && (buylist.size() > 0)){
+ 	
 %>
 <FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/BuyServlet">
 
@@ -157,7 +159,7 @@ table {
 			ProductTypeVO ptv = null;
 			int index = 0;
 			int counter = buylist.size();
-			int a;
+			
 			for (index = 0; index < buylist.size(); index++) {
 				order = buylist.get(index);
 				
@@ -199,46 +201,57 @@ table {
 
 				<td></td>
 				<td><img class="pic">
-					</div></td>
+					</td>
 
 				<td><c:out value="${productVO.p_name}" /></td>
 				<td
 					style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap"><c:out
 						value="${productVO.p_detail}" /></td>
 						
-				<td   name="price" class="price"><c:out value="${productVO.p_price}" />
-				<input type="text" hidden value=${productVO.p_price}></input
+				<td  name="price"><c:out value="${productVO.p_price}" />
+				<input type="number"  class="price${loop.count}"  name="sum" class="price${loop.count}" class="form-control" value="${productVO.p_price}" hidden></input> 
+				
 				</td>
 
-<%-- 				 --%>
 				<td align="center">
-					<div align="center">
-						
-						<input type="number" min="1" max="${productVO.p_count}" step="1" class="numberbox" name="xx${loop.count}" ><br>
-<%-- 							<a href="<%=request.getContextPath()%>/BuyServlet?action=CALCULATE --%>
-<%-- 							&calid=${loop.count} --%>
-<%-- 							&price=${productVO.p_price} --%>
-<%-- 							&xx${loop.index}="name">計算</a> --%>
-							<button id="test" class="${loop.count}" type="button">test</button>
-							<%-- 錯誤表列 --%> <c:if test="${not empty errorMsgs}">
+					
+				<input type="number" min="1" max="${productVO.p_count}" step="1" class="numberbox${loop.count}" name="xx${loop.count}"><br>
+
+
+<!-- 						<button id="test" class="${loop.count}" type="button">test</button> -->
+							<%-- 錯誤表列 --%>
+					    <c:if test="${not empty errorMsgs}">
 							
 								<c:forEach var="message" items="${errorMsgs}">
 									<font style="color: red">${message}</font>
 								</c:forEach>
 							
 						</c:if>
-<!-- 						<input type="button" id="Test" onclick="numbertest()" /> -->
+<!-- 						<button type="button" id="test" >calculate</button> -->
+<!-- 						onclick="numbertest()" -->
 						<br>
 						庫存:${productVO.p_count}
 				</td>
 			
-				<td><p><strong>Result:</strong> <span class="parsed"></span></p></td>
+				<td ><input type="text" name="sum" class="sum${loop.count}" class="form-control" readonly> </td>
 				<td></td>
 
 			</tr>
 		</table>
 	</div>
 	<hr>
+	
+		<script>
+$(function(){
+            $("input[class^='numberbox${loop.count}']").change(function(){
+               var value1 = parseFloat($("input[class^='price${loop.count}']").val()) || 0;
+               var value2 = parseFloat($("input[class^='numberbox${loop.count}']").val()) || 0;
+               $("input[class^='sum${loop.count}']").val(value1 * value2);
+               return false;
+            });
+         });
+
+	</script>
 	</c:forEach>
 
 
@@ -250,13 +263,17 @@ table {
 	<div class="buttonarea">
 		<button type="button" class="button1">繼續逛逛</button>
 		<button type="submit" class="button2">進入結帳</button>
-		<input type="hidden" name="action" value="xxxx">	
+		<input type="hidden" name="action" value="CALCULATE">	
 	</div>
 
-</form>	       
-<%
- 	}else{
-%>
+				</form>
+			</div>
+		</div>
+	</div>
+	</form>
+	<%
+		} else {
+	%>
 
 	<div class="null"><tr><td><h3 align=center>您的購物車現在沒有商品</h3></td></tr></div>
 	<div class="buttonarea"> 
@@ -270,32 +287,10 @@ table {
 	<script src="https://code.jquery.com/jquery-3.5.1.js"
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 		crossorigin="anonymous"></script>
-	<script>
-
-	$('.numberbox').change(function(e) {
-		e.preventDefault();
-		 var price = document.querySelector('.price').textContent;
-		  var result = document.querySelector('.numberbox').value;
-		  var parsed = document.querySelector('.parsed');
-		  console.log(parsed);
-		
-			  parsed.innerHTML = result*price;
-		  }
-		
-		  
-	});
-	
-// 	function numbertest() {
-		
-// 		  var price = document.querySelector('.price').textContent;
-// 		  var result = document.querySelector('.numberbox').value;
-// 		  var parsed = document.querySelector('.parsed');
-// 		  console.log(result);
-// 		  parsed.innerHTML = result*price;
-		  
-// 		}
-
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js">
 	</script>
+	
+
 
 </body>
 

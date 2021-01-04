@@ -332,8 +332,6 @@ input:read-only {
 					</th>
 			</tr>
 		</table>
-		
-
 	</div>
 
 	<div class="total">
@@ -347,11 +345,15 @@ input:read-only {
 
 		<br>
 		<h4>本次共可得到 堃幣</h4>
+		
 	</div>
 	<div class="buttonarea">
 		<button type="button" class="button1">確認送出</button>
 		<button type="button" class="button2">回上一頁</button>
+		
 	</div>
+	
+	
 	<div class="footer">
 		<jsp:include page="../footer.jsp"></jsp:include>
 	</div>

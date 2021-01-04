@@ -7,9 +7,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.orderdetail.model.OrderdetailService;
+import com.orderdetail.model.OrderdetailVO;
 import com.product.model.ProductVO;
 import com.productPicture.model.ProductPictureVO;
 import com.productType.model.ProductTypeVO;
+
 
 import java.util.*;
 import java.io.*;
@@ -32,21 +37,44 @@ public class BuyServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		
 		System.out.println("in");
-		if (action.equals("CALCULATE")) {
-			for(int i=1;i<=buylist.size();i++) {
-			String id = req.getParameter("calid");
-			String qty = req.getParameter("xx"+i);
-			String price = req.getParameter("price");
-			System.out.println(id);
-			System.out.println(qty);
-			System.out.println(price);
+		
+		if (action.equals("SUCCESS")) {
+			System.out.println("成立訂單成功");
 			
-//			
-			
-			}
+	
+//			OrderdetailVO ovo = new OrderdetailVO();
+//			OrderdetailService orderSvc = new OrderdetailService();
+//			ovo = orderSvc.addOrderdetail(o_id, p_id, od_count);
 		}
 		
-		if (action.equals("xxxx")) {
+//		if (action.equals("CALCULATE")) {
+//			System.out.println("CALCULATE");
+//			
+//			for(int i=0;i<=buylist.size();i++) {
+//				
+//			String id = req.getParameter("calid");
+//			String qty = req.getParameter("xx"+(i+1));
+//			String price = req.getParameter("price");
+//			
+//			List<String> list = new ArrayList<>();
+//		    list.add(id);
+//		    list.add(qty);
+//		    list.add(price);
+//		    String json = new Gson().toJson(list);
+//
+//		    res.setContentType("application/json");
+//		    res.setCharacterEncoding("UTF-8");
+//		    res.getWriter().write(json);
+		    
+//			System.out.println(id);
+//			System.out.println(qty);
+//			System.out.println(price);
+//	
+//			
+//			}
+//		}
+		
+		if (action.equals("CALCULATE")) {
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -75,11 +103,11 @@ public class BuyServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
-				System.out.println(qty);
+				
 				q = Integer.parseInt(qty);
 			
 				amount += (price * q);
-				System.out.println(amount);
+
 
 				
 			}
@@ -122,7 +150,6 @@ public class BuyServlet extends HttpServlet {
 						ProductVO product = buylist.get(i);
 //						 假若新增的書籍和購物車的書籍一樣時
 						if (product.getP_id().equals(aproduct.getP_id())) {
-//							System.out.println("放入重複的商品了");
 							buylist.setElementAt(product, i);	
 							match = true;
 						} // end of if name matches
@@ -180,9 +207,7 @@ public class BuyServlet extends HttpServlet {
 		ptvo.setPt_kind(p_kind);
 		pvo.setP_detail(p_detail);
 		pvo.setP_count(Integer.parseInt(p_count));
-//		System.out.println(p_id);
-//		System.out.println(p_price);
-//		System.out.println(p_kind);
+
 		
 		
 		return pvo;
