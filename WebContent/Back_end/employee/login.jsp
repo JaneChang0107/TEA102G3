@@ -40,6 +40,7 @@
 	                     <p>帳號:</p><input type="text" name="e_id">
 	                     <p>密碼:</p><input type="password" name="e_password">
 	                     <input type="hidden" name="action" value="login">
+<%-- 	                     <input type="hidden" id="employeeVO" value="${}"> --%>
                     </div>
                 </div>
                 <div class="row forget-row">

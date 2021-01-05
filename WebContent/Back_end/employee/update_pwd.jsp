@@ -8,8 +8,8 @@
 <head>
 	<meta charset="BIG5">
 	<title>Insert title here</title>
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/vendors/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet type" href="<%=request.getContextPath()%>/Back_end/employee/css/index_backstage.css">
+<%-- 	<link rel="stylesheet" href="<%=request.getContextPath()%>/vendors/bootstrap/css/bootstrap.min.css"> --%>
+<%--     <link rel="stylesheet type" href="<%=request.getContextPath()%>/Back_end/employee/css/index_backstage.css"> --%>
 </head>
 <body>
 	<form action="<%=request.getContextPath()%>/login" method="post">
@@ -63,10 +63,10 @@
     </form>
     
     
-    <script src="<%=request.getContextPath()%>/vendors/jquery/jquery-3.5.1.min.js"></script>
-    <script src="<%=request.getContextPath()%>/vendors/popper/popper.min.js"></script>
-    <script src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="<%=request.getContextPath()%>/Back_end/employee/js/index_backstage.js"></script>
+<%--     <script src="<%=request.getContextPath()%>/vendors/jquery/jquery-3.5.1.min.js"></script> --%>
+<%--     <script src="<%=request.getContextPath()%>/vendors/popper/popper.min.js"></script> --%>
+<%--     <script src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script> --%>
+<%--     <script src="<%=request.getContextPath()%>/Back_end/employee/js/index_backstage.js"></script> --%>
     <script>
 // 	    if(${errorMsgs_pwd != null}){
 // 			alert("${errorMsgs_pwd}");

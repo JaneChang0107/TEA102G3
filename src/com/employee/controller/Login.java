@@ -89,6 +89,7 @@ public class Login extends HttpServlet {
 				} catch (Exception ignored) {
 				}
 				
+				
 				/***************************2.開始查詢資料****************************************/
 				EmployeeService employeeSvc = new EmployeeService();
 				EmployeeVO employeeVO = employeeSvc.getOneEmployee(e_id);
@@ -213,7 +214,7 @@ public class Login extends HttpServlet {
 				req.setAttribute("employeeVO", employeeVO); // 資料庫update成功後,正確的的empVO物件,存入req
 				res.sendRedirect(req.getContextPath() + "/Back_end/employee/index_backstage.jsp");
 				System.out.println("succeess");
-//				String url = "/Back_end/employee/listOneEmployee.jsp";
+//				String url = "/Back_end/employee/index_backstage.jsp";
 //				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 //				successView.forward(req, res);
 
@@ -531,5 +532,27 @@ public class Login extends HttpServlet {
 //					failureView.forward(req, res);
 				}
 			}
+/**************************************以下為ajax**************************************************/
+//			String action_ajax = readJSONString(req);
+//			System.out.println(action_ajax);
+//			if ("ajax_update_without".equals(action_ajax)) {
+//				
+//			System.out.println("ajax");
+//			}
 	}
+//	
+//	//json物件轉string
+//	public String readJSONString(HttpServletRequest request){
+//		StringBuffer json = new StringBuffer();
+//		String line = null;
+//		try {
+//			BufferedReader reader = request.getReader();
+//			while((line = reader.readLine()) != null) {
+//				json.append(line);
+//			}
+//		}	catch(Exception e) {
+//			e.printStackTrace();
+//		}
+//		return json.toString();
+//	}
 }
