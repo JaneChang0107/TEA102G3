@@ -200,7 +200,7 @@ input:read-only {
 				for (i = 0; i < buylist.size(); i++) {
 					ProductVO order = buylist.get(i);
 					String name = order.getP_name();
-					String detail = order.getP_detail();
+					String detail = order.getPt_idName();
 					Integer price = order.getP_price();
 					Integer count = order.getP_count();
 					String id = order.getP_id();
@@ -250,7 +250,7 @@ input:read-only {
 								</tr>
 								<tr>
 									<td><label><input type="radio" name="o_transport"
-											id="delivery" value=0 />黑貓宅急便</label></td>
+											id="delivery" value=0 required />黑貓宅急便</label></td>
 									<td>130</td>
 									<td><label><input type="radio" name="pay" value=6 />貨到付款</label></td>
 								</tr>
@@ -328,19 +328,19 @@ input:read-only {
 									<td>姓名:<input type="text" value="${memberVO.m_name}"
 										readonly id="txt1"></input></td>
 									<td></td>
-									<td>姓名:<input type="text" id="txt2"></input></td>
+									<td>姓名:<input type="text" id="txt2" required></input></td>
 								</tr>
 								<tr>
 									<td>住址:<input type="text" value="${memberVO.m_address}"
 										readonly id="txt3"></input></td>
 									<td></td>
-									<td>住址:<input type="text" id="txt4"  name="o_address"></input></td>
+									<td>住址:<input type="text" id="txt4"  name="o_address" required></input></td>
 								</tr>
 								<tr>
 									<td>電話:<input type="text" value="${memberVO.m_phone}"
 										readonly id="txt5"></input></td>
 									<td></td>
-									<td>電話:<input type="text" id="txt6"></input></td>
+									<td>電話:<input type="text" id="txt6" required></input></td>
 								</tr>
 								<tr>
 									<td></td>
@@ -371,6 +371,8 @@ input:read-only {
 		<textarea class="o_total" id="o_total"  name="o_total" hidden></textarea> 
 		<br>
 		<h4>本次共可得到 堃幣</h4>
+		<div id="o_kun2"></div> </h4>
+		<textarea class="o_kun" id="o_kun" hidden></textarea> 
 
 	</div>
 	<div class="buttonarea">
@@ -444,6 +446,9 @@ input:read-only {
     	   document.getElementById("deliverymoney").innerHTML = c;	
     	   document.getElementById("o_total2").innerHTML=c+<%=amount%>;
     	   document.getElementById("o_total").innerHTML=c+<%=amount%>;
+    	   document.getElementById("o_kun2").innerHTML=Math.floor((c+<%=amount%>)*0.01);
+    	   document.getElementById("o_kun").innerHTML=Math.floor((c+<%=amount%>)*0.01);
+    
     	   
     });
     

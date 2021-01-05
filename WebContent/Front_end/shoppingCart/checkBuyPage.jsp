@@ -7,14 +7,15 @@
 
 <%
 	Vector<ProductVO> buylist = (Vector<ProductVO>) session.getAttribute("shoppingcart");
-	String m_id = session.getAttribute("loginId").toString();
-	MemberService memSvc = new MemberService();
-	MemberVO memberVO = memSvc.findOneMem(m_id);
+// 	String m_id = session.getAttribute("loginId").toString();
+// 	MemberService memSvc = new MemberService();
+// 	MemberVO memberVO = memSvc.findOneMem(m_id);
 
 %>
 
 <jsp:useBean id="productSvc" scope="page" class="com.product.model.ProductService" />
 <jsp:useBean id="productpicSvc" scope="page" class="com.productPicture.model.ProductPictureService" />
+<jsp:useBean id="producttypeSvc" scope="page" class="com.productType.model.ProductTypeService" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -188,7 +189,7 @@ table {
 		<table class="table1">
 			<tr>
 				<td colspan=8>
-					<h4 align="left">阿堃的賣場</h4>
+					<h4 align="left">${productVO.m_id}的賣場</h4>
 
 				</td>
 			</tr>
@@ -214,10 +215,9 @@ table {
 					</td>
 
 				<td><c:out value="${productVO.p_name}" /></td>
-				<td
-					style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap"><c:out
-						value="${productVO.p_detail}" /></td>
-						
+				<td>
+						<c:out value="${productVO.pt_idName}" />
+						</td>
 				<td  name="price"><c:out value="${productVO.p_price}" />
 				<input type="number"  class="price${loop.count}"  name="sum" class="price${loop.count}" class="form-control" value="${productVO.p_price}" hidden></input> 
 				

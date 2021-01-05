@@ -43,7 +43,7 @@ img.productImg {
 
 
 		<div class="article">
-			<td>${pVO.m_id}</td>
+<%-- 			<td>${pVO.m_id}</td> --%>
 			<form id="myForm"
 				action="<%=request.getContextPath()%>/websocketchat/NameServlet"
 				method="POST" style="position: fixed">
@@ -105,7 +105,7 @@ img.productImg {
 					<td><span>種類:</span><span id="productKindS" name="p_kind">${ptVO.pt_kind}</span></td>
 				</tr>
 				<tr>
-					<td><input type="submit" name="Submit" value="放入購物車">
+					<td><input type="submit" name="Submit" value="放入購物車" ></td>>
 				</tr>
 				<tr>
 					<td colspan=2><div id="pDetail" name="p_detail">
@@ -114,17 +114,15 @@ img.productImg {
 				</tr>
 
 			</table>
-			<input type="hidden" name="action" value="addCart"> <input
-				type="hidden" name="p_id" value="${pVO.p_id}"> <input
-				type="hidden" name="p_name" value="${pVO.p_name}"> <input
-				type="hidden" name="p_price" value="${pVO.p_price}"> <input
-				type="hidden" name="p_kind" value="${ptVO.pt_kind}"> <input
-				type="hidden" name="p_count" value="${pVO.p_count}"> <input
-				type="hidden" name="p_detail" value="${pVO.p_detail}">
+			<input type="hidden" name="action" value="addCart"> 
+			<input type="hidden" name="p_id" value="${pVO.p_id}"> 
+			<input type="hidden" name="p_name" value="${pVO.p_name}">
+			<input type="hidden" name="p_price" value="${pVO.p_price}">
+			<input type="hidden" name="p_kind" value="${ptVO.pt_id}">
+			<input type="hidden" name="p_count" value="${pVO.p_count}">
+			<input type="hidden" name="p_detail" value="${pVO.p_detail}">
 
 		</form>
-
-
 
 	</div>
 
