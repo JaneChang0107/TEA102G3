@@ -46,6 +46,9 @@
 </head>
 <body>
 
+
+
+
 <table id="table-1">
 	<tr><td>
 		 <h3>資料修改 - update_orderlist_input.jsp</h3>
@@ -64,7 +67,7 @@
 		</c:forEach>
 	</ul>
 </c:if>
-<FORM METHOD="post" ACTION="<%= request.getContextPath() %>/orderlist" name="form1">
+<FORM METHOD="post" ACTION="<%= request.getContextPath() %>/orderlist" name="form1" >
 <table>
 	<tr>
 		<td>訂單編號:<font color=red><b>*</b></font></td>
@@ -110,21 +113,15 @@
 		<td>買家:</td>
 		<td><input type="TEXT" name="m_id" size="45" value="<%=orderlistVO.getM_id()%>" /></td>
 	</tr>
-<%-- 	<jsp:useBean id="deptSvc" scope="page" class="com.dept.model.DeptService" /> --%>
-<!-- 	<tr> -->
-<!-- 		<td>部門:<font color=red><b>*</b></font></td> -->
-<!-- 		<td><select size="1" name="deptno"> -->
-<%-- 			<c:forEach var="deptVO" items="${deptSvc.all}"> --%>
-<%-- 				<option value="${deptVO.deptno}" ${(empVO.deptno==deptVO.deptno)?'selected':'' } >${deptVO.dname} --%>
-<%-- 			</c:forEach> --%>
-<!-- 		</select></td> -->
-<!-- 	</tr> -->
+
 
 </table>
 <br>
-<input type="hidden" name="action" value="update">
+
+<input type="hidden" name="action2" value="update" >
 <input type="hidden" name="o_id" value="<%=orderlistVO.getO_id()%>">
-<input type="submit" value="送出修改"></FORM>
+<input type="submit" value="送出修改" ></FORM>
+
 
 
 </body>

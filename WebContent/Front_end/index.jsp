@@ -11,6 +11,9 @@
 OrderdetailService orderdetailSvc1 = new OrderdetailService();
 List<OrderdetailVO> list = orderdetailSvc1.count();
 pageContext.setAttribute("list", list);
+
+
+
 %>
 
 
@@ -44,11 +47,13 @@ pageContext.setAttribute("list", list);
 </head>
 
 <body>
-<h1>
 
-<h3><center><marquee onMouseOver="this.stop()" onMouseOut="this.start()" id="announcement"></marquee></center></h3>
 
-</h1>
+<center>
+
+<h3><marquee onMouseOver="this.stop()" onMouseOut="this.start()" id="announcement"></marquee></h3>
+</center>
+
 	<div class="content">
 
 		<div class="article">

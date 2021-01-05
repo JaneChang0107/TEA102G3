@@ -3,6 +3,7 @@ package com.runlight.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,7 +22,7 @@ import redis.clients.jedis.Jedis;
 @WebServlet("/light.do")
 public class RunlightServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
 
@@ -70,13 +71,15 @@ public class RunlightServlet extends HttpServlet {
 		
 		if("announcement".equals(action)) {
 			
-			OrderdetailService orderdetailSvc1 = new OrderdetailService();
-			String mid = (String) req.getSession().getAttribute("loginId");
-			List<OrderdetailVO> list = orderdetailSvc1.count();
-			ObjectMapper mapper = new ObjectMapper();
-			
 			Jedis jedis = new Jedis("localhost", 6379);
 			jedis.auth("123456");
+			
+//			OrderdetailService orderdetailSvc1 = new OrderdetailService();
+			
+			String mid = (String) req.getSession().getAttribute("loginId");
+			
+//			List<OrderdetailVO> list = orderdetailSvc1.count();
+			ObjectMapper mapper = new ObjectMapper();
 			
 			List<String> rl1 = jedis.lrange("BellMessage:" + mid, 0, -1);
 			System.out.println(mid);

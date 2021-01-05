@@ -21,8 +21,70 @@ public class ViewsellerJDBCDAO implements ViewsellerDAO_interface {
 			"DELETE FROM VIEWSELLER where V_ID = ?";
 		private static final String UPDATE = 
 			"UPDATE VIEWSELLER set O_id= ? ,M_buyid=? ,M_sellid = ?, V_gb = ?,V_comment = ?, V_date = ? where V_id =?";
+		private static final String GET_SELLONE_STMT = 
+				"SELECT V_ID,O_ID,M_BUYID,M_SELLID, V_GB,V_COMMENT, V_DATE FROM VIEWSELLER where M_SELLID = ?";
 	
-	@Override
+		
+		@Override
+		public ViewsellerVO findBysellid(String viewsellerVO) {
+			// TODO Auto-generated method stub
+			
+			ViewsellerVO viewsellerVO2=null;
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				Class.forName(driver);
+				con = DriverManager.getConnection(url, userid, passwd);
+				pstmt = con.prepareStatement(GET_SELLONE_STMT);
+				
+				pstmt.setString(1,viewsellerVO);
+				rs= pstmt.executeQuery();
+				
+				while (rs.next()) {
+					viewsellerVO2 = new ViewsellerVO();
+					viewsellerVO2.setV_id(rs.getString("v_id"));
+					viewsellerVO2.setO_id(rs.getString("o_id"));
+					viewsellerVO2.setM_buyid(rs.getString("m_buyid"));
+					viewsellerVO2.setM_sellid(rs.getString("m_sellid"));
+					viewsellerVO2.setV_gb(rs.getString("v_gb"));
+					viewsellerVO2.setV_comment(rs.getString("v_comment"));
+					viewsellerVO2.setV_date(rs.getTimestamp("v_date"));
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			
+			return viewsellerVO2;
+		}
+		
+		
+		
+		@Override
 	public void insert(ViewsellerVO viewsellerVO) {
 		// TODO Auto-generated method stub
 
@@ -288,28 +350,43 @@ public class ViewsellerJDBCDAO implements ViewsellerDAO_interface {
 //		dao.delete("V00005");
 		
 		// 琩高1
-		ViewsellerVO viewsellerVO3 = dao.findByPrimaryKey("V00006");
-		System.out.println(viewsellerVO3.getV_id()+",");
-		System.out.println(viewsellerVO3.getO_id()+",");
-		System.out.println(viewsellerVO3.getM_buyid()+",");
-		System.out.println(viewsellerVO3.getM_sellid()+",");
-		System.out.println(viewsellerVO3.getV_gb()+",");
-		System.out.println(viewsellerVO3.getV_comment()+",");
-		System.out.println(viewsellerVO3.getV_date());
-		System.out.println("---------------------one");
+//		ViewsellerVO viewsellerVO3 = dao.findByPrimaryKey("V00006");
+//		System.out.println(viewsellerVO3.getV_id()+",");
+//		System.out.println(viewsellerVO3.getO_id()+",");
+//		System.out.println(viewsellerVO3.getM_buyid()+",");
+//		System.out.println(viewsellerVO3.getM_sellid()+",");
+//		System.out.println(viewsellerVO3.getV_gb()+",");
+//		System.out.println(viewsellerVO3.getV_comment()+",");
+//		System.out.println(viewsellerVO3.getV_date());
+//		System.out.println("---------------------one");
+//		
+//		// 琩高all
+//		List<ViewsellerVO> list =dao.getAll();
+//		for(ViewsellerVO av :list) {
+//			System.out.println(av.getV_id()+",");
+//			System.out.println(av.getO_id()+",");
+//			System.out.println(av.getM_buyid()+",");
+//			System.out.println(av.getM_sellid()+",");
+//			System.out.println(av.getV_gb()+",");
+//			System.out.println(av.getV_comment()+",");
+//			System.out.println(av.getV_date());
+//			System.out.println("---------------------");
 		
-		// 琩高all
-		List<ViewsellerVO> list =dao.getAll();
-		for(ViewsellerVO av :list) {
-			System.out.println(av.getV_id()+",");
-			System.out.println(av.getO_id()+",");
-			System.out.println(av.getM_buyid()+",");
-			System.out.println(av.getM_sellid()+",");
-			System.out.println(av.getV_gb()+",");
-			System.out.println(av.getV_comment()+",");
-			System.out.println(av.getV_date());
-			System.out.println("---------------------");
-		}
+			// 琩高sell 1
+			ViewsellerVO viewsellerVO2 = dao.findBysellid("M00002");
+			System.out.println(viewsellerVO2.getV_id()+",");
+			System.out.println(viewsellerVO2.getO_id()+",");
+			System.out.println(viewsellerVO2.getM_buyid()+",");
+			System.out.println(viewsellerVO2.getM_sellid()+",");
+			System.out.println(viewsellerVO2.getV_gb()+",");
+			System.out.println(viewsellerVO2.getV_comment()+",");
+			System.out.println(viewsellerVO2.getV_date());
+			System.out.println("---------------------one");
+			
+		
+		
+		
+		
 		
 	}
 	

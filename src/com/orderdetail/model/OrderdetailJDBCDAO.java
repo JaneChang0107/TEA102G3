@@ -26,6 +26,9 @@ public class OrderdetailJDBCDAO implements OrderdetailDAO_interface {
 		
 		//拿到單筆訂單詳情
 		private static final String GET_DETAIL_ByOrder ="SELECT * FROM ORDERDETAIL WHERE O_ID=?";		
+		//通知總覽
+		
+		
 		
 		@Override
 		public List<OrderdetailVO> count() {

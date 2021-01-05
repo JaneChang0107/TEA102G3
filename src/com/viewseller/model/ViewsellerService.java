@@ -45,6 +45,10 @@ public class ViewsellerService {
 		return dao.findByPrimaryKey(v_id);
 	}
 	
+	public ViewsellerVO getOnesellid(String m_id) {
+		return dao.findBysellid(m_id);
+	}
+	
 	public List<ViewsellerVO> getAll(){
 		return dao.getAll();
 		

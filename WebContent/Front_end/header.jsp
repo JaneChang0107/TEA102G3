@@ -154,11 +154,19 @@ i {
 	padding: 5px;
 }
 
-#user, #bell, #cart {
+#user,  #cart {
 	float: right;
 	position: relative;
 	left: -20px;
 	padding: 10px;
+}
+
+ #bell {
+	float: right;
+	position: relative;
+	left: -20px;
+	padding: 10px;
+	color:red;
 }
 
 #arrowdown {
@@ -405,7 +413,14 @@ select#ptype {
 					<!-- cart下拉結束 -->
 				</td>
 
-				<td><i class="far fa-bell" id="bell"></i></td>
+				<td><i class="far fa-bell" id="bell" type="button" 
+					data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="true"></i>
+					<div class="dropdown-menu" aria-labelledby="bell">
+						<a class="dropdown-item" href="">1</a> 
+						<a class="dropdown-item" href="">2</a>
+					</div> 
+				</td>
 
 
 				<td>

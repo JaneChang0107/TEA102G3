@@ -9,4 +9,5 @@ public interface ViewsellerDAO_interface {
 	public void delete(String viewsellerVO);
 	public ViewsellerVO findByPrimaryKey(String viewsellerVO);
     public List<ViewsellerVO> getAll();
+	ViewsellerVO findBysellid(String viewsellerVO);
 }
