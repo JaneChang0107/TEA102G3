@@ -4,17 +4,18 @@
 <%@ page import="com.product.model.*"%>
 <%@ page import="com.productType.model.*"%>
 <%@ page import="com.member.model.*"%>
-<%!String a="";%>
+
 <%
 	Vector<ProductVO> buylist = (Vector<ProductVO>) session.getAttribute("shoppingcart");
-	String m_id = session.getAttribute("loginId").toString();
-	MemberService memSvc = new MemberService();
-	MemberVO memberVO = memSvc.findOneMem(m_id);
+// 	String m_id = session.getAttribute("loginId").toString();
+// 	MemberService memSvc = new MemberService();
+// 	MemberVO memberVO = memSvc.findOneMem(m_id);
 
 %>
 
 <jsp:useBean id="productSvc" scope="page" class="com.product.model.ProductService" />
 <jsp:useBean id="productpicSvc" scope="page" class="com.productPicture.model.ProductPictureService" />
+<jsp:useBean id="producttypeSvc" scope="page" class="com.productType.model.ProductTypeService" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -188,7 +189,7 @@ table {
 		<table class="table1">
 			<tr>
 				<td colspan=8>
-					<h4 align="left"><%request.getParameter("p_id");%></h4>
+					<h4 align="left">${productVO.m_id}的賣場</h4>
 
 				</td>
 			</tr>
@@ -214,10 +215,9 @@ table {
 					</td>
 
 				<td><c:out value="${productVO.p_name}" /></td>
-				<td
-					style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap"><c:out
-						value="${productVO.p_detail}" /></td>
-						
+				<td>
+						<c:out value="${productVO.pt_idName}" />
+						</td>
 				<td  name="price"><c:out value="${productVO.p_price}" />
 				<input type="number"  class="price${loop.count}"  name="sum" class="price${loop.count}" class="form-control" value="${productVO.p_price}" hidden></input> 
 				
@@ -271,10 +271,9 @@ $(function(){
 	<div class="total">
 		<h4>合計共<%=buylist.size()%>項商品</h4>
 		<br>
-		<h4>總計元</h4>
 	</div>
 	<div class="buttonarea">
-		<button type="button" class="button1">繼續逛逛</button>
+		<button type="button" class="button1" onclick="history.back()">回上一頁</button>
 		<button type="submit" class="button2">進入結帳</button>
 		<input type="hidden" name="action" value="CALCULATE">	
 	</div>
@@ -285,12 +284,12 @@ $(function(){
 	</div>
 	</form>
 	<%
-		} else {
+ 	} else {
 	%>
 
 	<div class="null"><tr><td><h3 align=center>您的購物車現在沒有商品</h3></td></tr></div>
 	<div class="buttonarea"> 
-	<button type="button" class="button1">繼續逛逛</button>
+	<button type="button" class="button1" onclick="history.back()">回上一頁</button>
 	<input type ="button" class="button2" onclick="javascript:location.href='<%=request.getContextPath()%>/Front_end/index.jsp'" value="回首頁"></input>
 	</div>
 <%} %>	

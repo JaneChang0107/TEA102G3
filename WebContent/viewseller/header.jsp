@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+
 <html>
 
 <head>
@@ -16,10 +16,6 @@
 <!-- Font awesome -->
 <script src="https://kit.fontawesome.com/a72ac34f47.js"
 	crossorigin="anonymous"></script>
-<script src="alert/dist/sweetalert-dev.js"></script>
-
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>	
-
 
 <style>
 * {
@@ -157,19 +153,11 @@ i {
 	padding: 5px;
 }
 
-#user,  #cart {
+#user, #bell, #cart {
 	float: right;
 	position: relative;
 	left: -20px;
 	padding: 10px;
-}
-
- #bell {
-	float: right;
-	position: relative;
-	left: -20px;
-	padding: 10px;
-	color:red;
 }
 
 #arrowdown {
@@ -359,13 +347,6 @@ select#ptype {
 #searchBar {
 	width: 470px;
 }
-
-#showToast{
-	position: fixed;
-	right: 10px;
-	bottom: 10px;
-	z-index: 5;
-}
 </style>
 </head>
 
@@ -386,14 +367,14 @@ select#ptype {
 			src="<%=request.getContextPath()%>/images/white_LOGO字在外版(revised).png"
 			class="logo" id="headerlogo" type="button"> </a>
 
+
 		<div class="search">
 			<form action="<%=request.getContextPath()%>/ProductServlet"
 				method="get" id="searchForm">
 				<select name="ptype" id="ptype">
-				</select>
-				<input type="text" id="searchBar" name="name">
-				<i	class="fas fa-search" id="search">
-				 	<input type="hidden" name="action" value="findByName">
+				</select> <input type="text" id="searchBar" name="name"> <i
+					class="fas fa-search" id="search"> <input type="hidden"
+					name="action" value="findByName">
 				</i>
 			</form>
 		</div>
@@ -404,31 +385,20 @@ select#ptype {
 			<tr class="nav" id="nav">
 
 				<td>
-					<!-- cart下拉 開始--> 
-					<i class="fas fa-shopping-cart" type="button"
+					<!-- cart下拉 開始--> <i class="fas fa-shopping-cart" type="button"
 					id="cart" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="true"></i>
 					<div class="dropdown-menu" aria-labelledby="cart">
-						<a class="dropdown-item" href="#">租用車</a> 
-						<a class="dropdown-item"
-							href="<%=request.getContextPath()%>/Front_end/shoppingCart/checkBuyPage.jsp">購買車</a>
-					</div> 
-					<!-- cart下拉結束 -->
+						<a class="dropdown-item" href="#">租用車</a> <a class="dropdown-item"
+							href="#">購買車</a>
+					</div> <!-- cart下拉結束 -->
 				</td>
 
-				<td><i class="far fa-bell" id="bell" type="button" 
-					data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="true"></i>
-					<div class="dropdown-menu" aria-labelledby="bell">
-						<a class="dropdown-item" href="">1</a> 
-						<a class="dropdown-item" href="">2</a>
-					</div> 
-				</td>
+				<td><i class="far fa-bell" id="bell"></i></td>
 
 
 				<td>
-					<!-- user下拉開始 --> 
-					<i class="fas fa-user-circle" id="user"
+					<!-- user下拉開始 --> <i class="fas fa-user-circle" id="user"
 					type="button" id="dropdownMenuButton2" data-toggle="dropdown"
 					aria-haspopup="true" aria-expanded="false"></i>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
@@ -440,12 +410,10 @@ select#ptype {
 						<hr>
 						<a class="dropdown-item"
 							href="<%=request.getContextPath()%>/Front_end/members/LoginPage.jsp">登入/註冊</a>
-						<a class="dropdown-item" href="#">賣家中心</a> 
-						<form action="<%=request.getContextPath()%>/member/controller/MemberLogout">
-						<button class="dropdown-item" type="submit">登出</button>
-						</form>
-					</div> 
-					<!-- user下拉結束 -->
+						<!--如已有登入則改為另一個連結 -->
+						<a class="dropdown-item" href="#">賣家中心</a> <a
+							class="dropdown-item" href="#">登出</a>
+					</div> <!-- user下拉結束 -->
 				</td>
 
 			</tr>
@@ -453,11 +421,6 @@ select#ptype {
 		</table>
 
 	</div>
-	
-	<div id="showToast">
-		
-	</div>
-	
 	<input type="hidden" id="contextPath"
 		value="<%=request.getContextPath()%>">
 	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -497,7 +460,6 @@ select#ptype {
 		src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script>
 	<script
 		src="<%=request.getContextPath()%>/Front_end/product/js/getType.js"></script>
-	<script src="<%=request.getContextPath()%>/Front_end/js/webSocket.js"></script>
 </body>
 
 </html>

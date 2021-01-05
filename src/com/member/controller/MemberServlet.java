@@ -324,17 +324,17 @@ public class MemberServlet extends HttpServlet {
 					// 3.修改完成，準備轉交
 		            req.setAttribute("memberVO", memberVO);  //資料庫update完成，將memberVO物件存入req
 					String url= "/Front_end/members/MyAccount.jsp";
-//					RequestDispatcher successView =req.getRequestDispatcher(url);
-//					successView.forward(req, res);
-					res.sendRedirect("/TEA102G3"+url);
+					RequestDispatcher successView =req.getRequestDispatcher(url);
+					successView.forward(req, res);
+//					res.sendRedirect("/TEA102G3"+url);
 					// 抓到其他例外
 					}catch(Exception e) {
 						System.out.println("例外發生");
 						errorMsgs.add("資料修改失敗"+e.getMessage());
-//						RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/members/MyAccountChangePw.jsp");
-//						failureView.forward(req, res);
-						String url= "/Front_end/members/MyAccountChangePw.jsp";
-						res.sendRedirect("/TEA102G3"+url);
+						RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/members/MyAccountChangePw.jsp");
+						failureView.forward(req, res);
+//						String url= "/Front_end/members/MyAccountChangePw.jsp";
+//						res.sendRedirect("/TEA102G3"+url);
 					}
 				}
 		

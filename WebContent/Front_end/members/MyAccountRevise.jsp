@@ -60,18 +60,14 @@
 	margin-right: 20px;
 }
 
-#pills-home-tab, #pills-profile-tab {
-    text-align: center;
-    margin: auto;
-    position: relative;
-    left: 140%;
-    font-size: 24px;
-    padding: 15px 150px;
-}
-
 .content {
 	margin-top: 100px;
 	margin-bottom: 200px;
+}
+
+#pills-home-tab, #pills-profile-tab {
+    font-size: 24px;
+    padding: 15px 150px;
 }
 
 #myfiles,#changepw{
@@ -82,6 +78,11 @@
     height:900px;
     font-size:24px;
 }
+#pills-tab{
+    margin:auto;
+    width:800px;
+}
+
 #changepw{
     height:300px;
 }
@@ -92,7 +93,6 @@
     border: 1px solid #707070;
     margin-left: 20px;
 }
-
 
 </style>
 
