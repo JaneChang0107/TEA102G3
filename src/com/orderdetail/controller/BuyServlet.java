@@ -49,7 +49,7 @@ public class BuyServlet extends HttpServlet {
 			String o_transport = req.getParameter("o_transport");
 			String o_address = req.getParameter("o_address");
 			Integer o_total = Integer.parseInt(req.getParameter("o_total"));
-			Integer o_pm = 0;
+			Integer o_pm = Integer.parseInt(req.getParameter("o_kun"));
 			String m_id = (String) session.getAttribute("loginId");
 			System.out.println("///////////////");
 			System.out.println(o_date);
@@ -180,6 +180,7 @@ public class BuyServlet extends HttpServlet {
 		String p_kind = req.getParameter("p_kind");
 		String p_detail = req.getParameter("p_detail");
 		String p_count = req.getParameter("p_count");
+		String m_id = req.getParameter("m_id");
 		
 
 		ProductVO pvo = new ProductVO();
@@ -191,7 +192,8 @@ public class BuyServlet extends HttpServlet {
 		pvo.setPt_id(p_kind);
 		pvo.setP_detail(p_detail);
 		pvo.setP_count(Integer.parseInt(p_count));
-		System.out.println(pvo.getPt_id());
+		pvo.setM_id(m_id);
+		System.out.println(m_id);
 
 
 		return pvo;

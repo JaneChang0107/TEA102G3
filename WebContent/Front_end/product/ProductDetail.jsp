@@ -43,7 +43,7 @@ img.productImg {
 
 
 		<div class="article">
-<%-- 			<td>${pVO.m_id}</td> --%>
+			<td>${pVO.m_id}</td>
 			<form id="myForm"
 				action="<%=request.getContextPath()%>/websocketchat/NameServlet"
 				method="POST" style="position: fixed">
@@ -121,7 +121,8 @@ img.productImg {
 			<input type="hidden" name="p_kind" value="${ptVO.pt_id}">
 			<input type="hidden" name="p_count" value="${pVO.p_count}">
 			<input type="hidden" name="p_detail" value="${pVO.p_detail}">
-
+			<input type="hidden" name="m_id" value="${pVO.m_id}">
+ 
 		</form>
 
 	</div>

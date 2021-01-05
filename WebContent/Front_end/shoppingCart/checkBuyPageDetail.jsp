@@ -175,11 +175,28 @@ input:read-only {
 	</div>
 <form>	
 	<div class="content">
+			<%!int i = 0;%>
+			<%!String member_id;%>
+			<%
+				for (i = 0; i < buylist.size(); i++) {
+					ProductVO order = buylist.get(i);
+					String name = order.getP_name();
+					String detail = order.getPt_idName();
+					Integer price = order.getP_price();
+					Integer count = order.getP_count();
+					member_id = order.getM_id();
+					String id = order.getP_id();
+					ProductPictureVO ppvo = productpicSvc.findFirstOneProductPicture(id);
+					String picture = ppvo.getPp_picture64();
 
+					System.out.println(id);
+					Integer k = Integer.parseInt(request.getParameter("xx" + (i + 1)));
+					Integer total = k * count;
+			%>
 		<hr>
 		<table class="table1">
 			<th>
-				<h4 align="center">阿堃的賣場</h4>
+				<h4 align="center"><%=member_id%>的賣場</h4>
 
 			</th>
 
@@ -195,22 +212,7 @@ input:read-only {
 				<td></td>
 
 			</tr>
-			<%!int i = 0;%>
-			<%
-				for (i = 0; i < buylist.size(); i++) {
-					ProductVO order = buylist.get(i);
-					String name = order.getP_name();
-					String detail = order.getPt_idName();
-					Integer price = order.getP_price();
-					Integer count = order.getP_count();
-					String id = order.getP_id();
-					ProductPictureVO ppvo = productpicSvc.findFirstOneProductPicture(id);
-					String picture = ppvo.getPp_picture64();
 
-					System.out.println(id);
-					Integer k = Integer.parseInt(request.getParameter("xx" + (i + 1)));
-					Integer total = k * count;
-			%>
 			<tr class="cart">
 
 <input type="text" hidden name="od_count" value="<%=k%>"></input>
@@ -252,7 +254,7 @@ input:read-only {
 									<td><label><input type="radio" name="o_transport"
 											id="delivery" value=0 required />黑貓宅急便</label></td>
 									<td>130</td>
-									<td><label><input type="radio" name="pay" value=6 />貨到付款</label></td>
+									<td><label><input type="radio" name="pay" value=6 / required>貨到付款</label></td>
 								</tr>
 								<tr>
 									<td><label><input type="radio" name="o_transport"
@@ -312,7 +314,7 @@ input:read-only {
 									<td><label><input type="radio" name="o_transport"
 											id="delivery" value="5" />郵局</label></td>
 									<td>70</td>
-									<td>使用堃幣折抵<input type="number" min="1"
+									<td>使用堃幣折抵<input type="number" min="1" id="kun"
 										max="${memberVO.m_coin}">/現有${memberVO.m_coin}堃幣
 									</td>
 									<td></td>
@@ -356,23 +358,17 @@ input:read-only {
 	</div>
 
 	<div class="total">
-		<h4 id="total">
-			金額:
-			<%=amount%>
+		<h4 id="total">金額<%=amount%>元
 		</h4>
 		<br>
-		<h4>運費:
-			<div id="deliverymoney"></div></h4>
-			
-		</h4>
+		<h4>運費<span id="deliverymoney"></span>元</h4>
 		<br>
-		<h4>總金額:
-		<div id="o_total2"></div> </h4>
-		<textarea class="o_total" id="o_total"  name="o_total" hidden></textarea> 
+		<h4>總金額<span id="o_total2"></span>元</h4>
+		<textarea class="o_total" id="o_total" hidden></textarea>
+		折抵後金額:<input type=text class="o_total" id="o_total3" readonly name="o_total" ></input>
 		<br>
-		<h4>本次共可得到 堃幣</h4>
-		<div id="o_kun2"></div> </h4>
-		<textarea class="o_kun" id="o_kun" hidden></textarea> 
+		<h4>本次共可得到<span id="o_kun2"></span>堃幣</h4>
+		<textarea class="o_kun" id="o_kun" hidden name="o_kun" ></textarea> 
 
 	</div>
 	<div class="buttonarea">
@@ -390,6 +386,7 @@ input:read-only {
 	<script src="https://code.jquery.com/jquery-3.5.1.js"
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 		crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 
 	<script>
     $("#checkbox").change(function() {
@@ -446,12 +443,22 @@ input:read-only {
     	   document.getElementById("deliverymoney").innerHTML = c;	
     	   document.getElementById("o_total2").innerHTML=c+<%=amount%>;
     	   document.getElementById("o_total").innerHTML=c+<%=amount%>;
-    	   document.getElementById("o_kun2").innerHTML=Math.floor((c+<%=amount%>)*0.01);
-    	   document.getElementById("o_kun").innerHTML=Math.floor((c+<%=amount%>)*0.01);
-    
-    	   
+    	
+    	  
+    	   var price=c+<%=amount%>;
+    	   $(function(){
+    	        $('#kun').change(function(){
+    	           var value1 = parseFloat($('#o_total').val()) || 0;
+    	           var value2 = parseFloat($('#kun').val()) || 0;
+    	           var value3= value1-value2
+    	       		$('#o_total3').val(value3);
+    	           document.getElementById("o_kun2").innerHTML=Math.floor(value3*0.01);
+    	    	   document.getElementById("o_kun").innerHTML=Math.floor(value3*0.01);
+    	        });
+    	     });  
     });
     
+ 
     
 	 </script>
 

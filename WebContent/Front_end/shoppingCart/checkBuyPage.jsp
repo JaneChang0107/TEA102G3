@@ -189,7 +189,7 @@ table {
 		<table class="table1">
 			<tr>
 				<td colspan=8>
-					<h4 align="left">${productVO.m_id}的賣場</h4>
+					<h4 align="left"><c:out value="${productVO.m_id}" />的賣場</h4>
 
 				</td>
 			</tr>
@@ -258,7 +258,6 @@ $(function(){
             $("input[class^='numberbox${loop.count}']").change(function(){
                var value1 = parseFloat($("input[class^='price${loop.count}']").val()) || 0;
                var value2 = parseFloat($("input[class^='numberbox${loop.count}']").val()) || 0;
-//                $("input[class^='sum${loop.count}']").val(value1 * value2);
                $("p[class^='sum${loop.count}']").html(value1 * value2);
                return false;
             });
