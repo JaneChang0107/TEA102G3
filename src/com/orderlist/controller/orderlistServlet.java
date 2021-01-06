@@ -7,6 +7,8 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import com.member.model.MemberService;
+import com.member.model.MemberVO;
 import com.orderlist.model.*;
 
 @WebServlet("/orderlist")
@@ -21,6 +23,114 @@ public class orderlistServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		
+		//拿會員全部訂單
+		if("getMemberAll".equals(action)) {
+		    
+			try {
+			//拿到登入ID
+			HttpSession session =req.getSession();
+			String m_id = session.getAttribute("loginId").toString();
+
+		    //拿到memberVO
+		    MemberService memSvc = new MemberService();
+			MemberVO memberVO = memSvc.findOneMem(m_id);
+		    session.setAttribute("memberVO", memberVO);
+		    
+		    //用訂單service拿到屬於會員的訂單
+			OrderlistService orderlistSvc =new OrderlistService();
+			List<OrderlistVO> list = orderlistSvc.findByMember(m_id);
+			
+			//拿到"訂單成立"集合
+			List<OrderlistVO> neworder = new ArrayList<OrderlistVO>();
+			for(int i=0;i<list.size();i++) {
+				if(list.get(i).getO_status().equals("訂單成立")) {
+					neworder.add(list.get(i));
+				}
+			}
+			
+			//拿到"已出貨"集合
+			List<OrderlistVO> sentorder = new ArrayList<OrderlistVO>();
+			for(int i=0;i<list.size();i++) {
+				if(list.get(i).getO_status().equals("已出貨")) {
+					sentorder.add(list.get(i));
+				}
+			}
+			
+			//拿到"已到貨"集合
+			List<OrderlistVO> arrivedorder = new ArrayList<OrderlistVO>();
+			for(int i=0;i<list.size();i++) {
+				if(list.get(i).getO_status().equals("已到貨")) {
+					arrivedorder.add(list.get(i));
+				}
+			}
+			
+			//拿到"訂單完成"集合
+			List<OrderlistVO> finishorder = new ArrayList<OrderlistVO>();
+			for(int i=0;i<list.size();i++) {
+				if(list.get(i).getO_status().equals("訂單完成")) {
+					finishorder.add(list.get(i));
+				}
+			}
+			
+			
+			req.setAttribute("list", list);
+			
+			req.setAttribute("neworder", neworder);
+			req.setAttribute("sentorder", sentorder);
+			req.setAttribute("arrivedorder", arrivedorder);
+			req.setAttribute("finishorder", finishorder);
+			
+
+			String url = "/Front_end/members/MyOrder.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 轉交
+			successView.forward(req, res);
+
+			/*************************** 其他可能的錯誤處理 *************************************/
+		} catch (Exception e) {
+//			errorMsgs.add("無法取得資料:" + e.getMessage());
+			RequestDispatcher failureView = req.getRequestDispatcher("/Back_end/orderlist/select_page.jsp");
+			failureView.forward(req, res);
+		}
+			
+	}
+		
+		
+//拿會員訂單依訂單狀態
+//		if("getMemberSome".equals(action)) {
+//			try {
+//				// 拿到登入ID
+//				HttpSession session = req.getSession();
+//				String m_id = session.getAttribute("loginId").toString();
+//
+//				// 拿到memberVO
+//				MemberService memSvc = new MemberService();
+//				MemberVO memberVO = memSvc.findOneMem(m_id);
+//				session.setAttribute("memberVO", memberVO);
+//
+//				// 用訂單service拿到屬於會員的訂單
+//				OrderlistService orderlistSvc = new OrderlistService();
+//				List<OrderlistVO> list = orderlistSvc.findByMember(m_id);
+//				List<OrderlistVO> neworder = new ArrayList<OrderlistVO>();
+//				list.stream()
+//				   .filter(o -> o.getO_status().equals("訂單成立"))
+//				   .forEach(o-> neworder.add(o));                    //確認為何沒加進去
+//				req.setAttribute("neworder", neworder);
+//				
+//			} catch (Exception e) {
+////			    errorMsgs.add("無法取得資料:" + e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher("/Back_end/orderlist/select_page.jsp");
+//				failureView.forward(req, res);
+//				String url = "/Front_end/members/MyOrder.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url); // 轉交
+//				successView.forward(req, res);
+//			}
+//
+//		}
+		
+		
+		
+		
 		
 //查會員訂單action		
 		if ("getMember_For_Display".equals(action)) { // 來自select_page.jsp的請求

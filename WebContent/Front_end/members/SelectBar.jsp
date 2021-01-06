@@ -13,8 +13,8 @@
 			<a href="http://localhost:8081/TEA102G3/Front_end/members/MyAccount.jsp"><button type="button" class="btn btn-secondary">
 				<i class="fas fa-user-circle" id="icons"></i>我的帳戶
 			</button></a>
-<%-- 			<a href="<%= request.getContextPath() %>/orderlist?m_id=${loginId}&action=getMember_For_Display"> --%>
-            <a href="http://localhost:8081/TEA102G3/Front_end/members/MyOrder.jsp">
+			<a href="<%=request.getContextPath()%>/orderlist?m_id=${loginId}&action=getMemberAll">
+<!--             <a href="http://localhost:8081/TEA102G3/Front_end/members/MyOrder.jsp"> -->
 			<button type="button" class="btn btn-secondary">
 				<i class="fas fa-clipboard-list" id="icons"></i>購買清單
 			</button></a>
@@ -27,6 +27,14 @@
 			<button type="button" class="btn btn-secondary">
 				<i class="fas fa-coins" id="icons"></i>我的堃幣
 			</button>
+			
+<!-- 	<li> -->
+<%--     <FORM METHOD="post" ACTION="<%= request.getContextPath() %>/orderlist" > --%>
+<%--         <input type="hidden" name="m_id" value="${loginId}"> --%>
+<!--         <input type="hidden" name="action" value="getMemberAll"> -->
+<!--         <input type="submit" value="送出"> -->
+<!--     </FORM> -->
+<!--   </li> -->
 		</div>
 
 </body>

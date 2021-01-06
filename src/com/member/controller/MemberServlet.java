@@ -279,30 +279,32 @@ public class MemberServlet extends HttpServlet {
 					String m_oldpassword =req.getParameter("m_oldpassword").trim();
 					System.out.println("抓到舊密碼");
 					
-					if (m_password == null || m_password.trim().length() == 0) {
-						errorMsgs.add("密碼請勿空白");
-					} 
+//					if (m_password == null || m_password.trim().length() == 0) {
+//						errorMsgs.add("密碼請勿空白");
+//					} 
 					if(!m_password.equals(m_oldpassword)) {
 						errorMsgs.add("舊密碼不正確，請重新輸入");
 					}
 				
 					String m_newpassword =req.getParameter("m_newpassword").trim();
-					if (m_newpassword == null || m_newpassword.trim().length() == 0) {
-						errorMsgs.add("新密碼請勿空白");
-					}
+//					if (m_newpassword == null || m_newpassword.trim().length() == 0) {
+//						errorMsgs.add("新密碼請勿空白");
+//					}
 					
 					String m_newpasswordconfirm =req.getParameter("m_newpasswordconfirm").trim();
 
-					if (m_newpasswordconfirm == null || m_newpasswordconfirm.trim().length() == 0) {
-						errorMsgs.add("新密碼確認請勿空白");
-					}
+//					if (m_newpasswordconfirm == null || m_newpasswordconfirm.trim().length() == 0) {
+//						errorMsgs.add("新密碼確認請勿空白");
+//					}
 					
 					if(!m_newpassword.equals(m_newpasswordconfirm)) {
 						errorMsgs.add("新密碼不一致，請重新確認");
 					}
 					
+					MemberService memberSvc = new MemberService();
 					
-					MemberVO memberVO = new MemberVO();
+					MemberVO memberVO = memberSvc.findOneMem(m_id);
+					
 					memberVO.setM_id(m_id);
 					memberVO.setM_password(m_password);
 
@@ -317,16 +319,15 @@ public class MemberServlet extends HttpServlet {
 
 					// 2.開始修改資料
 					System.out.println("開始修改");
-					MemberService memberSvc = new MemberService();
 					memberVO = memberSvc.updatepw(m_newpasswordconfirm, m_id);//得到memberVO物件以做後續處理
 		            System.out.println("修改完成");
 		            
 					// 3.修改完成，準備轉交
 		            req.setAttribute("memberVO", memberVO);  //資料庫update完成，將memberVO物件存入req
 					String url= "/Front_end/members/MyAccount.jsp";
-					RequestDispatcher successView =req.getRequestDispatcher(url);
-					successView.forward(req, res);
-//					res.sendRedirect("/TEA102G3"+url);
+//					RequestDispatcher successView =req.getRequestDispatcher(url);
+//					successView.forward(req, res);
+					res.sendRedirect("/TEA102G3"+url);
 					// 抓到其他例外
 					}catch(Exception e) {
 						System.out.println("例外發生");
