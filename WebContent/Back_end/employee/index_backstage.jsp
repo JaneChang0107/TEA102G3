@@ -54,16 +54,6 @@
                               	帳號管理
                               </a>
                             </li>
-                            <li class="nav-item" role="presentation">   <!--客服系統 = cs_sys -->
-                              <a class="nav-link" id="cs_sys-tab" data-toggle="tab" href="#cs_sys" role="tab" aria-controls="cs_sys" aria-selected="false">
-                              	客服系統
-                              </a>
-                            </li>
-                            <li class="nav-item" role="presentation">   <!--出租管理 = rent_mgt -->
-                              <a class="nav-link" id="rent_mgt-tab" data-toggle="tab" href="#rent_mgt" role="tab" aria-controls="rent_mgt" aria-selected="false">
-                                                                出租管理
-                              </a>
-                            </li>
                             <li class="nav-item" role="presentation">   <!--交易管理 = tran_sys -->
                               <a class="nav-link" id="tran_sys-tab" data-toggle="tab" href="#tran_sys" role="tab" aria-controls="tran_sys" aria-selected="false">
                                                                交易系統
@@ -88,9 +78,6 @@
                     <div class="tab-pane fade" id="acc_mgt" role="tabpanel" aria-labelledby="acc_mgt-tab">
                         <jsp:include page="listAllMem.jsp"></jsp:include>
                     </div>
-                    <div class="tab-pane fade" id="cs_sys" role="tabpanel" aria-labelledby="cs_sys-tab">這裡放你要的頁面</div>
-                    
-                    <div class="tab-pane fade" id="rent_mgt" role="tabpanel" aria-labelledby="rent_mgt-tab">這裡放你要的頁面</div>
                     <div class="tab-pane fade" id="tran_sys" role="tabpanel" aria-labelledby="tran_sys-tab">這裡放你要的頁面</div>       
                 </div>
             </div>

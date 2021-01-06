@@ -11,8 +11,8 @@
 <head>
 	<meta charset="BIG5">
 	<title>Insert title here</title>
-<%-- 	<link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/bootstrap/css/bootstrap.min.css"> --%>
-<%--     <link rel="stylesheet type" href="${pageContext.request.contextPath}/Back_end/employee/css/index_backstage.css"> --%>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/vendors/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet type" href="${pageContext.request.contextPath}/Back_end/employee/css/index_backstage.css">
 </head>
 <body>
 <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/login" name="form1">
