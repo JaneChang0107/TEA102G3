@@ -65,9 +65,10 @@ public class BuyServlet extends HttpServlet {
 			olvo = orderSvc.addOrderlistVO2(o_date, o_status, o_transport, o_address, o_total, o_pm, m_id);
 
 			session.setAttribute("shoppingcart", buylist);
-			String url = "/Front_end/shoppingCart/checkBuyPageOK.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url);
-			successView.forward(req, res);
+//			String url = "/Front_end/shoppingCart/checkBuyPageOK.jsp";
+//			RequestDispatcher successView = req.getRequestDispatcher(url);
+//			successView.forward(req, res);
+			res.sendRedirect(req.getContextPath()+"/Front_end/shoppingCart/checkBuyPageOK.jsp");
 			session.removeAttribute("shoppingCart");
 			buylist.removeAll(buylist);
 			return;

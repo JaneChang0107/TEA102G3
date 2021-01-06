@@ -315,7 +315,7 @@ input:read-only {
 											id="delivery" value="5" />郵局</label></td>
 									<td>70</td>
 									<td>使用堃幣折抵<input type="number" min="0" id="kun"
-										max="${memberVO.m_coin}">/現有${memberVO.m_coin}堃幣
+										max="${memberVO.m_coin}" required>/現有${memberVO.m_coin}堃幣
 									</td>
 									<td></td>
 								</tr>
@@ -447,7 +447,7 @@ input:read-only {
     	  
     	  
     	   $(function(){
-    	        $('#kun').change(function(){
+    	        $('#kun').blur(function(){
     	           var value1 = parseFloat($('#o_total').val()) || 0;
     	           var value2 = parseFloat($('#kun').val()) || 0;
     	           var value3= value1-value2
@@ -461,7 +461,14 @@ input:read-only {
     	     });  
     });
     
- 
+    $(document).ready(function() {
+    	  $(window).keydown(function(event){
+    	    if(event.keyCode == 13) {
+    	      event.preventDefault();
+    	      return false;
+    	    }
+    	  });
+    	});
     
 	 </script>
 

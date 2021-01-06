@@ -1,5 +1,49 @@
+<%@page import="java.sql.Timestamp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.member.model.*"%>
+<%@page import="java.util.*"%>
+<%@page import="com.orderlist.model.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%!int size;%>
+<%
+	String m_id = session.getAttribute("loginId").toString();
+	OrderlistService orderlistSvc = new OrderlistService();
+	List<OrderlistVO> list = orderlistSvc.findByMember(m_id);
+	size = list.size();
+	System.out.println("size=" + list.size());
+	pageContext.setAttribute("list", list);
+	OrderlistVO showlist = list.get(size - 1);
+	String o_id = showlist.getO_id();
+	String o_transport = showlist.getO_transport();
+	switch (o_transport) {
+		case "0" :
+			o_transport = "黑貓宅急便";
+			break;
+		case "1" :
+			o_transport = "7-11";
+			break;
+		case "2" :
+			o_transport = "全家";
+			break;
+		case "3" :
+			o_transport = "OK mart";
+			break;
+		case "4" :
+			o_transport = "萊爾富";
+			break;
+		case "5" :
+			o_transport = "郵局";
+			break;
+	}
+
+	Timestamp o_date = showlist.getO_date();
+	Integer o_total = showlist.getO_total();
+%>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,8 +112,8 @@
 }
 
 .col {
-	text-align:center;
-	font-size:25px;
+	text-align: center;
+	font-size: 25px;
 }
 </style>
 
@@ -89,31 +133,27 @@
 
 		<table class="table1">
 			<tr>
-				<td class="col">以下是您的 訂單編號:00000000000</td>
-			<tr>
-			<tr>
-				<td class="col">訂單日期:2020/XX/XX</td>
+				<td class="col">訂單編號:<%=o_id%></td>
 			</tr>
 			<tr>
-				<td class="col">..........</td>
+				<td class="col">訂單時間:<%=o_date%></td>
+			</tr>
+			<tr>
+				<td class="col">訂單金額:總計<%=o_total%>元</td>
+			</tr>
+			<tr>
+				<td class="col">購買的商品為:<%=o_id%></td>
+			</tr>
+			<tr>
+				<td class="col">運送方式:<%=o_transport%></td>
+			</tr>
 
-			</tr>
-			<tr>
-				<td class="col">備用欄位</td>
-			</tr>
-			<tr>
-				<td class="col">備用欄位</td>
-			</tr>
-			<tr>
-				<td class="col">備用欄位</td>
-			</tr>
-			<tr>
-				<td class="col">備用欄位</td>
-			</tr>
+
 			<tr>
 				<td class="col">感謝您的購買</td>
 			</tr>
 		</table>
+
 	</div>
 	<div class="buttonarea">
 		<button type="button" class="button1">會員專區</button>

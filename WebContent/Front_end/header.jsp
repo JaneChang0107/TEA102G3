@@ -377,8 +377,8 @@ select#ptype {
 		<div id="myNav" class="overlay">
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 			<div class="overlay-content">
-				<a href="#">About</a> <a href="#">Services</a> <a href="#">Clients</a>
-				<a href="#">Contact</a>
+				<a href="http://localhost:8081/TEA102G3/ProductServlet?ptype=no&name=&action=findByName">我要買</a> <a href="#">我要租</a> <a href="#">我要賣</a>
+				<a href="#">關於遊戲堃</a>
 			</div>
 		</div>
 
