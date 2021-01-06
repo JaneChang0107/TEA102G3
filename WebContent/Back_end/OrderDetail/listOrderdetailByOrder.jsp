@@ -63,8 +63,9 @@ h1{
 
 
 <table id="listallorder">
-<div style="width=100px"><label>訂單編號: <%=orderlistVO.getO_id()%></label></div>
-<label>狀態: <%=orderlistVO.getO_status()%></label>
+<div style="width=100px"><p>訂單編號: <%=orderlistVO.getO_id()%></p></div>
+<p>訂單成立: <%=orderlistVO.getO_dateForm()%></p>
+<p>狀態: <%=orderlistVO.getO_status()%></p>
 <hr>
 <h2>收件資訊</h2>
 <p>收件人: <%=memSvc.findOneMem(orderlistVO.getM_id()).getM_name()%></p>
