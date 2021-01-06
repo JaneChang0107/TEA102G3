@@ -69,6 +69,7 @@ public class BuyServlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 			session.removeAttribute("shoppingCart");
+			buylist.removeAll(buylist);
 			return;
 
 		}

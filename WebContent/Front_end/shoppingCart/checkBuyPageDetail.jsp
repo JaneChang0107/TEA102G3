@@ -314,7 +314,7 @@ input:read-only {
 									<td><label><input type="radio" name="o_transport"
 											id="delivery" value="5" />郵局</label></td>
 									<td>70</td>
-									<td>使用堃幣折抵<input type="number" min="1" id="kun"
+									<td>使用堃幣折抵<input type="number" min="0" id="kun"
 										max="${memberVO.m_coin}">/現有${memberVO.m_coin}堃幣
 									</td>
 									<td></td>
@@ -445,13 +445,16 @@ input:read-only {
     	   document.getElementById("o_total").innerHTML=c+<%=amount%>;
     	
     	  
-    	   var price=c+<%=amount%>;
+    	  
     	   $(function(){
     	        $('#kun').change(function(){
     	           var value1 = parseFloat($('#o_total').val()) || 0;
     	           var value2 = parseFloat($('#kun').val()) || 0;
     	           var value3= value1-value2
     	       		$('#o_total3').val(value3);
+    	           document.getElementById("deliverymoney").innerHTML = c;	
+    	    	   document.getElementById("o_total2").innerHTML=c+<%=amount%>;
+    	    	   document.getElementById("o_total").innerHTML=c+<%=amount%>;
     	           document.getElementById("o_kun2").innerHTML=Math.floor(value3*0.01);
     	    	   document.getElementById("o_kun").innerHTML=Math.floor(value3*0.01);
     	        });
