@@ -48,7 +48,7 @@ $.ajax({
                     <form action="${contextPath}/ProductServlet" method="post">
                         <input type="hidden" name="pid" value="${value.p_id}">
                         <input type="hidden" name="action" value="updateOne">
-                        <input type="submit" class="btn btn-primary" value="修改">
+                        <input type="submit" class="btn btn-primary" ${value.p_status == 99 ? "style=display:none" : ""} value="修改">
                     </form>
                 </td>
                 <td>

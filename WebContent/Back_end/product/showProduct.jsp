@@ -6,7 +6,12 @@
 <meta charset="BIG5">
 <title>allProduct</title>
 <style>
-	
+	form.check{
+		display: inline;
+	}
+	input.checkBtn{
+		height: 40px;
+	}
 </style>
 </head>
 <body>
@@ -17,6 +22,7 @@
 	<div>
 		<select>
 			<option id="all">全部</option>
+			<option id="check">待審核</option>
 			<option id="onSell">上架中</option>
 			<option id="notSell">下架中</option>
 			<option id="selled">已出售</option>

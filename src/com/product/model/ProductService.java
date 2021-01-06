@@ -85,6 +85,10 @@ public class ProductService {
 		
 		return pVO;
 	}
+	
+	public void checked(String pid, Integer pstatus) {
+		dao.checked(pid, pstatus);
+	}
 
 	public void deleteProduct(String pid) {
 		dao.delete(pid);

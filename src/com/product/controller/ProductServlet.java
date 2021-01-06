@@ -165,6 +165,15 @@ public class ProductServlet extends HttpServlet {
 			ProductService pService = new ProductService();
 			ProductPictureService ppService = new ProductPictureService();
 			
+			switch (pstatus) { 
+				case 1 :
+					pstatus = 11;
+					break;
+				case 2 :
+					pstatus = 12;
+					break;
+			}
+			
 			pVO = pService.addProduct(pname, pprice, pdetail, ptid, pcount, addDate, pstatus, mid);
 			
 			// 新增 圖片
@@ -260,7 +269,7 @@ public class ProductServlet extends HttpServlet {
 			Integer pstatus = null;
 			try {
 				pstatus = Integer.parseInt(request.getParameter("pstatus"));
-				if(pstatus < 0 || pstatus > 1) {
+				if(pstatus < 1 || pstatus > 2) {
 					errors.add("請選擇商品狀態");
 				}
 			} catch(NumberFormatException e) {
@@ -293,6 +302,15 @@ public class ProductServlet extends HttpServlet {
 			// 沒問題開始修改
 			ProductService pService = new ProductService();
 			ProductPictureService ppService = new ProductPictureService();
+			
+			switch (pstatus) { 
+			case 1 :
+				pstatus = 11;
+				break;
+			case 2 :
+				pstatus = 12;
+				break;
+		}
 			
 			pVO = pService.updateProduct(pid, pname, pprice, pdetail, ptid, pcount, reviseDate, pstatus);
 			
@@ -355,8 +373,33 @@ public class ProductServlet extends HttpServlet {
 			}
 		}
 		
+		// 審核商品
+		if("check".equals(action)) {
+			
+			String checked = request.getParameter("checked");
+			String pid = request.getParameter("pid");
+			
+			ProductService pService = new ProductService();
+			ProductVO pVO = pService.oneProduct(pid);
+			
+			if("ok".equals(checked)) {
+				Integer pstatus = pVO.getP_status();
+				pstatus -= 10;
+
+				pService.checked(pid, pstatus);
+			}
+			
+			if("no".equals(checked)) {
+				Integer pstatus = pVO.getP_status();
+				pstatus = 99;
+
+				pService.checked(pid, pstatus);
+			}
+			
+			response.sendRedirect(request.getContextPath() + "/Back_end/product/showProduct.jsp");
+		}
 		
-		
+		// ajax 賣家的商品
 		if("sellerProduct".equals(action)) {
 			
 			HttpSession session = request.getSession();
@@ -372,6 +415,7 @@ public class ProductServlet extends HttpServlet {
 			
 		}
 		
+		// ajax 依狀態搜尋商品
 		if("allProduct".equals(action)) {
 			ProductService pService = new ProductService();
 			String status = request.getParameter("status");
@@ -390,8 +434,9 @@ public class ProductServlet extends HttpServlet {
 				products = pService.findByStatus(2);
 			}
 			
-			if("selled".equals(status)) {
-				products = pService.findByStatus(0);
+			if("check".equals(status)) {
+				products = pService.findByStatus(11);
+				products.addAll(pService.findByStatus(12));
 			}
 			
 			

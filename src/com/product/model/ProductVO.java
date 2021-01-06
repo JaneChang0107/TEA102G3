@@ -117,6 +117,15 @@ public class ProductVO implements java.io.Serializable {
 			case 5 :
 				means = "待出貨";
 				break;
+			case 11 :
+				means = "審核中(審核後上架)";
+				break;
+			case 12 :
+				means = "審核中(審核後下架)";
+				break;
+			case 99 :
+				means = "無法上架";
+				break;
 		}
 		
 		return means;

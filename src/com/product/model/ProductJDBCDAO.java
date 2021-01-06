@@ -16,6 +16,8 @@ public class ProductJDBCDAO implements ProductInterface{
 			"INSERT INTO PRODUCT (P_ID, P_NAME, P_PRICE, P_DETAIL, PT_ID, P_COUNT, P_ADDDATE, P_STATUS, M_ID) VALUES ('P' || LPAD(PRODUCT_SEQ.NEXTVAL, 5, 0), ?, ?, ?, ?, ?, ?, ?, ?)";
 	private final String UPDATE = 
 			"UPDATE PRODUCT SET P_NAME = ?, P_PRICE = ?, P_DETAIL = ?, PT_ID = ?, P_COUNT = ?, P_REVISEDATE = ?, P_STATUS = ? WHERE P_ID = ?";
+	private final String CHECKED = 
+			"UPDATE PRODUCT SET P_STATUS = ? WHERE P_ID = ?";
 	private final String DELETE =
 			"DELETE FROM PRODUCT WHERE P_ID = ?";
 	private final String FINDONE =
@@ -29,7 +31,7 @@ public class ProductJDBCDAO implements ProductInterface{
 	private final String FINDBYPNAMETPYE =
 			"SELECT * FROM PRODUCT WHERE P_NAME like ? AND PT_ID = ? AND P_STATUS = 1 ORDER BY P_ID DESC";
 	private final String FINDBYPSTATUS =
-			"SELECT * FROM PRODUCT WHERE P_STATUS= ? ORDER BY P_ID DESC";
+			"SELECT * FROM PRODUCT WHERE P_STATUS= ? ORDER BY P_ID";
 	private final String GETALLSELL =
 			"SELECT * FROM PRODUCT WHERE P_STATUS = 1 ORDER BY P_ID DESC";
 	private final String GETALL =
@@ -111,6 +113,43 @@ public class ProductJDBCDAO implements ProductInterface{
 			ps.setTimestamp(6, product.getP_reviseDate());
 			ps.setInt(7, product.getP_status());
 			ps.setString(8, product.getP_id());
+			
+			ps.executeUpdate();
+		
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+		} finally {
+			try {
+				if(ps != null) {
+					ps.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(con != null) {
+					con.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Override
+	public void checked(String p_id, Integer p_status) {
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		try {
+			Class.forName(database.DRIVER);
+			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			ps = con.prepareStatement(CHECKED);
+
+			ps.setInt(1, p_status);
+			ps.setString(2, p_id);
 			
 			ps.executeUpdate();
 		

@@ -21,6 +21,10 @@ $("#selled").click(() => {
     whichProduct("selled");
 })
 
+$("#check").click(() => {
+    whichProduct("check");
+})
+
 
 function whichProduct(which) {
     $.ajax({
@@ -44,6 +48,7 @@ function whichProduct(which) {
                         <th scope="col">數量</th>
                         <th scope="col">狀態</th>
                         <th scope="col">修改</th>
+                        <th scope="col">審核</th>
                         <th scope="col">刪除</th>
                         </tr>
                     </thead>
@@ -71,6 +76,20 @@ function whichProduct(which) {
                         </form>
                     </td>
                     <td>
+                        <form action="${contextPath}/ProductServlet" method="post" class="check">
+                            <input type="hidden" name="pid" value="${value.p_id}">
+                            <input type="hidden" name="action" value="check">
+                            <input type="hidden" name="checked" value="ok">
+                            <input type="button" class="checkBtn btn-primary"${(value.p_status != 11 && value.p_status != 12) ? "style='display : none'" : ""} value="通過">
+                        </form>
+                        <form action="${contextPath}/ProductServlet" method="post" class="check">
+                            <input type="hidden" name="pid" value="${value.p_id}">
+                            <input type="hidden" name="action" value="check">
+                            <input type="hidden" name="checked" value="no">
+                            <input type="button" class="checkBtn btn-primary" ${(value.p_status != 11 && value.p_status != 12) ? "style='display : none'" : ""} value="不通過">
+                        </form>
+                    </td>
+                    <td>
                         <form action="${contextPath}/ProductServlet" method="post">
                             <input type="hidden" name="pid" value="${value.p_id}">
                             <input type="hidden" name="action" value="delete">
@@ -83,3 +102,10 @@ function whichProduct(which) {
         }
     });
 }
+
+
+$("#allProduct").on("click", ".checkBtn", (e) => {
+    if(confirm("確定" + e.target.value)) {
+        $(e.target).closest("form").submit();
+    }
+})
