@@ -24,6 +24,40 @@ public class orderlistServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
+		if("getMemberKun".equals(action)) {
+			try {
+				//拿到登入ID
+				HttpSession session =req.getSession();
+				String m_id = session.getAttribute("loginId").toString();
+
+			    //拿到memberVO
+			    MemberService memSvc = new MemberService();
+				MemberVO memberVO = memSvc.findOneMem(m_id);
+			    session.setAttribute("memberVO", memberVO);
+			    
+			    //用訂單service拿到屬於會員的訂單
+				OrderlistService orderlistSvc =new OrderlistService();
+				List<OrderlistVO> list = orderlistSvc.findByMember(m_id);
+				req.setAttribute("list", list);				
+
+				String url = "/Front_end/members/MyKunCoin.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 轉交
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 *************************************/
+			} catch (Exception e) {
+//				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/Back_end/orderlist/select_page.jsp");
+				failureView.forward(req, res);
+			}
+				
+		}
+				
+			
+
+		
+		
+		
 		//拿會員全部訂單
 		if("getMemberAll".equals(action)) {
 		    

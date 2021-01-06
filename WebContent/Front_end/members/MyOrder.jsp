@@ -26,7 +26,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>我的帳戶</title>
+<title>我的訂單</title>
 <style>
 .mybody {
 	background-color: #E3F8F6;
@@ -172,6 +172,7 @@ h5.card-header {
 				<div class="card">
 					<h5 class="card-header">訂單編號: ${orderlistVO.o_id}</h5>
 					<div class="card-body">
+					    <h5 class="card-title">訂單成立: ${orderlistVO.o_dateForm}</h5>
 						<h5 class="card-title">訂單狀態: ${orderlistVO.o_status}</h5>
 						<h5 class="card-title">總金額: ${orderlistVO.o_total}</h5>
 						
@@ -197,6 +198,7 @@ h5.card-header {
 				<div class="card">
 					<h5 class="card-header">訂單編號: ${orderlistVO.o_id}</h5>
 					<div class="card-body">
+					<h5 class="card-title">訂單成立: ${orderlistVO.o_dateForm}</h5>
 						<h5 class="card-title">訂單狀態: ${orderlistVO.o_status}</h5>
 						<h5 class="card-title">總金額: ${orderlistVO.o_total}</h5>
 						
@@ -220,6 +222,7 @@ h5.card-header {
 				<div class="card">
 					<h5 class="card-header">訂單編號: ${orderlistVO.o_id}</h5>
 					<div class="card-body">
+					<h5 class="card-title">訂單成立: ${orderlistVO.o_dateForm}</h5>
 						<h5 class="card-title">訂單狀態: ${orderlistVO.o_status}</h5>
 						<h5 class="card-title">總金額: ${orderlistVO.o_total}</h5>
 						
@@ -243,6 +246,7 @@ h5.card-header {
 				<div class="card">
 					<h5 class="card-header">訂單編號: ${orderlistVO.o_id}</h5>
 					<div class="card-body">
+					<h5 class="card-title">訂單成立: ${orderlistVO.o_dateForm}</h5>
 						<h5 class="card-title">訂單狀態: ${orderlistVO.o_status}</h5>
 						<h5 class="card-title">總金額: ${orderlistVO.o_total}</h5>
 						
@@ -267,6 +271,7 @@ h5.card-header {
 				<div class="card">
 					<h5 class="card-header">訂單編號: ${orderlistVO.o_id}</h5>
 					<div class="card-body">
+					<h5 class="card-title">訂單成立: ${orderlistVO.o_dateForm}</h5>
 						<h5 class="card-title">訂單狀態: ${orderlistVO.o_status}</h5>
 						<h5 class="card-title">總金額: ${orderlistVO.o_total}</h5>
 						

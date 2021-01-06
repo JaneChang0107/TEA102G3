@@ -22,6 +22,7 @@
   <filter-mapping>
     <filter-name>LoginFilter</filter-name>
     <url-pattern>/Front_end/members/MyAccount.jsp</url-pattern>
+    <url-pattern>/Front_end/members/MyOrder.jsp</url-pattern>
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>
