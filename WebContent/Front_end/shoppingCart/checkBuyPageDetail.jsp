@@ -401,7 +401,7 @@ input:read-only {
       });
     console.log(<%=amount%>);
     
-    $('input[name=o_transport]').change(function(){
+    $('input[name=o_transport]').click(function(){
     	//alert($(this).val())   	
     	 var radioBtn = document.getElementsByName("o_transport");
     		var c;
@@ -452,8 +452,6 @@ input:read-only {
     	           var value3= value1-value2
     	       		$('#o_total3').val(value3);
     	           document.getElementById("deliverymoney").innerHTML = c;	
-    	    	   document.getElementById("o_total2").innerHTML=c+<%=amount%>;
-    	    	   document.getElementById("o_total").innerHTML=c+<%=amount%>;
     	           document.getElementById("o_kun2").innerHTML=Math.floor(value3*0.01);
     	    	   document.getElementById("o_kun").innerHTML=Math.floor(value3*0.01);
     	        });
