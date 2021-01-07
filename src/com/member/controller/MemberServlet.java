@@ -17,6 +17,10 @@ import javax.servlet.http.Part;
 
 import com.member.model.MemberService;
 import com.member.model.MemberVO;
+import com.orderdetail.model.OrderdetailService;
+import com.orderlist.model.OrderlistService;
+import com.orderlist.model.OrderlistVO;
+import com.product.model.ProductService;
 
 @WebServlet("/member/controller/MemberServlet")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
@@ -31,6 +35,55 @@ public class MemberServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 
+//賣家中心控制器
+		if("goSellerIndex".equals(action)) {
+			//拿到賣家id
+			   HttpSession session= req.getSession();
+			   String m_id = session.getAttribute("loginId").toString();
+			   
+			   //找待出貨訂單
+			   OrderlistService olsv =new OrderlistService();
+			   List<OrderlistVO> list = olsv.getAll();
+			   OrderdetailService odsv =new OrderdetailService();
+			   ProductService psvc =new ProductService();
+
+			   int countorder=0;
+			   int countunfinish=0;
+			   int countshipping=0;
+			   int countarrived=0;
+			   int countfinish=0;
+			   for(int i=0;i<list.size();i++){
+				   String comparem_id= psvc.oneProduct(odsv.getFirstP_id(list.get(i).getO_id())).getM_id();
+				   String compareo_status = list.get(i).getO_status();
+				   if(comparem_id.equals(m_id)){
+					   countorder++;
+				   }
+				   if(compareo_status.trim().equals("訂單成立")){
+					   countunfinish++;
+				   }
+				   if(compareo_status.trim().equals("已出貨")){
+					   countshipping++;
+				   }
+				   if(compareo_status.trim().equals("已到貨")){
+					   countarrived++;
+				   }
+				   if(compareo_status.trim().equals("訂單完成")){
+					   countfinish++;
+				   }
+			   }
+			   req.setAttribute("countorder", countorder);
+			   req.setAttribute("countunfinish", countunfinish);
+			   req.setAttribute("countshipping", countshipping);
+			   req.setAttribute("countarrived", countarrived);
+			   req.setAttribute("countfinish", countfinish);
+			   String url ="/Front_end/index_Seller.jsp";
+			   RequestDispatcher successView =req.getRequestDispatcher(url);
+	  		   successView.forward(req, res);
+
+		}
+		
+		
+		
 //查詢單個會員
 		if("getOne_For_Display".equals(action)) {
 			List<String> errorMsgs =new LinkedList<String>();
@@ -279,23 +332,23 @@ public class MemberServlet extends HttpServlet {
 					String m_oldpassword =req.getParameter("m_oldpassword").trim();
 					System.out.println("抓到舊密碼");
 					
-//					if (m_password == null || m_password.trim().length() == 0) {
-//						errorMsgs.add("密碼請勿空白");
-//					} 
+					if (m_password == null || m_password.trim().length() == 0) {
+						errorMsgs.add("密碼請勿空白");
+					} 
 					if(!m_password.equals(m_oldpassword)) {
 						errorMsgs.add("舊密碼不正確，請重新輸入");
 					}
 				
 					String m_newpassword =req.getParameter("m_newpassword").trim();
-//					if (m_newpassword == null || m_newpassword.trim().length() == 0) {
-//						errorMsgs.add("新密碼請勿空白");
-//					}
+					if (m_newpassword == null || m_newpassword.trim().length() == 0) {
+						errorMsgs.add("新密碼請勿空白");
+					}
 					
 					String m_newpasswordconfirm =req.getParameter("m_newpasswordconfirm").trim();
 
-//					if (m_newpasswordconfirm == null || m_newpasswordconfirm.trim().length() == 0) {
-//						errorMsgs.add("新密碼確認請勿空白");
-//					}
+					if (m_newpasswordconfirm == null || m_newpasswordconfirm.trim().length() == 0) {
+						errorMsgs.add("新密碼確認請勿空白");
+					}
 					
 					if(!m_newpassword.equals(m_newpasswordconfirm)) {
 						errorMsgs.add("新密碼不一致，請重新確認");
@@ -306,14 +359,24 @@ public class MemberServlet extends HttpServlet {
 					MemberVO memberVO = memberSvc.findOneMem(m_id);
 					
 					memberVO.setM_id(m_id);
+					memberVO.setM_email(memberVO.getM_email());
+					memberVO.setM_gender(memberVO.getM_gender());
 					memberVO.setM_password(m_password);
+					memberVO.setM_name(memberVO.getM_name());
+					memberVO.setM_phone(memberVO.getM_phone());
+					memberVO.setM_address(memberVO.getM_address());
+					memberVO.setM_birth(memberVO.getM_birth());
+					memberVO.setM_headpic(memberVO.getM_headpic());
+					memberVO.setM_account(memberVO.getM_account());
+					memberVO.setM_accountName(memberVO.getM_accountName());
+					memberVO.setB_code(memberVO.getB_code());
 
 					if (!errorMsgs.isEmpty()) {
 						req.setAttribute("memberVO", memberVO);
-//						RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/members/MyAccountChangePw.jsp");
-//						failureView.forward(req, res);
-						String url= "/Front_end/members/MyAccountChangePw.jsp";
-						res.sendRedirect("/TEA102G3"+url);
+						RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/members/MyAccountChangePw.jsp");
+						failureView.forward(req, res);
+//						String url= "/Front_end/members/MyAccountChangePw.jsp";
+//						res.sendRedirect("/TEA102G3"+url);
 						return;
 					}
 

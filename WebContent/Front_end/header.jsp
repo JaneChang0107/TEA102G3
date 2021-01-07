@@ -449,7 +449,7 @@ select#ptype {
 						<hr>
 						<a class="dropdown-item"
 							href="<%=request.getContextPath()%>/Front_end/members/LoginPage.jsp">登入/註冊</a>
-						<a class="dropdown-item" href="http://localhost:8081/TEA102G3/Front_end/index_Seller.jsp">賣家中心</a> 
+						<a class="dropdown-item" href="<%=request.getContextPath()%>/member/controller/MemberServlet?action=goSellerIndex">賣家中心</a> 
 						<form action="<%=request.getContextPath()%>/member/controller/MemberLogout">
 						<button class="dropdown-item" type="submit">登出</button>
 						</form>

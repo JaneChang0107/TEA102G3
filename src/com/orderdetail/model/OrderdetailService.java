@@ -49,5 +49,10 @@ public class OrderdetailService {
 		return dao.getDetailByOrder(o_id);
 	}
 	
+	public String getFirstP_id(String o_id) {
+		String firstdetail= dao.getDetailByOrder(o_id).get(0).getP_id();
+		return firstdetail;
+	}
+	
 	
 }

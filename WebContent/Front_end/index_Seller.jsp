@@ -1,14 +1,24 @@
+<%@page import="com.product.model.ProductVO"%>
+<%@page import="com.product.model.ProductService"%>
+<%@page import="com.orderlist.model.OrderlistVO"%>
+<%@page import="com.orderlist.model.OrderlistService"%>
+<%@page import="com.member.model.MemberService"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.Set"%>
 <%@page import="redis.clients.jedis.Jedis"%>
 <%@page import="java.util.List"%>
-<%@page import="com.orderdetail.model.OrderdetailVO"%>
-<%@page import="com.orderdetail.model.OrderdetailService"%>
+<%@page import="com.orderdetail.model.*"%>
+<%@page import="com.member.model.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
 
+<%
+   int countorder=(Integer)request.getAttribute("countorder");
+   int countunfinish=(Integer)request.getAttribute("countunfinish");
+   int countshipping=(Integer)request.getAttribute("countshipping");
+   int countarrived=(Integer)request.getAttribute("countarrived");
+   int countfinish=(Integer)request.getAttribute("countfinish");
 %>
 
 
@@ -27,14 +37,17 @@
    background-color:white;
    margin:auto;
    left: 15px;
+   top: 50px;
    position: relative;
    }
    .todocolumn{
-   width:250px;
-   height:300px;
-   font-size:30px;
-   text-align:center;
-   
+    width: 250px;
+    height: 130px;
+    font-size: 30px;
+    text-align: center;
+    display: inline-block;
+    margin-top: 40px;
+    border-right: 5px solid green;
    }
 
 
@@ -69,11 +82,31 @@
 	
 	
     <div id="todolist">
-    <pre style="font-size:30px;"> <u>待辦事項清單</u></pre>
+    <pre style="font-size:50px;"> <u>待辦事項清單</u></pre>
     
     <div class="todocolumn">
+    <%=countorder%><br>
+        總訂單數
+    </div>
     
-    待出貨
+    <div class="todocolumn">
+    <%=countunfinish%><br>
+        待完成訂單數
+    </div>
+    
+    <div class="todocolumn">
+    <%=countshipping%><br>
+        已出貨訂單數
+    </div>
+    
+    <div class="todocolumn">
+    <%=countarrived%><br>
+        已到貨訂單數
+    </div>
+    
+    <div class="todocolumn">
+    <%=countfinish%><br>
+        已完成訂單數
     </div>
     
 

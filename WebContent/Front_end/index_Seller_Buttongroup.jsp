@@ -59,7 +59,7 @@ body {
 <body style="background:#F5D2CD;
 	height: 100%;">
 
-<h2><b><a href="http://localhost:8081/TEA102G3/Front_end/index_Seller.jsp" style="padding-left: 20px;">遊戲堃|賣家中心</a></b></h2>
+<h2><b><a href="<%=request.getContextPath()%>/member/controller/MemberServlet?action=goSellerIndex" style="padding-left: 20px;">遊戲堃|賣家中心</a></b></h2>
 <div style="text-align:center;">
 
 <div class="btn-group dropright">
@@ -73,8 +73,8 @@ body {
 <div class="btn-group dropright">
 <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="sellerbar2">商品管理</button><br>
   <div class="dropdown-menu" id="dropdown-menu2">
-  <button type="button" class="btn btn-warning">新增商品</button>
-  <button type="button" class="btn btn-warning">我的商品</button>
+  <button type="button" class="btn btn-warning"><a href="<%=request.getContextPath()%>/Front_end/product/addProduct.jsp">新增商品</a></button>
+  <button type="button" class="btn btn-warning"><a href="<%=request.getContextPath()%>/Front_end/product/sellerProduct.jsp">我的商品</a></button>
   </div>
 </div><br>
 

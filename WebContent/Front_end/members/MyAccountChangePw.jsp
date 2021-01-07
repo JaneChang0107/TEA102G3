@@ -251,20 +251,20 @@
 
 
 </body>
-<script type="text/javascript">
- $(document).ready(function(){
-    $("#revise").click(function JSalert(){
-        if($("#m_password").val()==""){
-            swal("舊密碼尚未填寫");       
-        }
-    })
- })
-</script>
 <!-- <script type="text/javascript"> -->
-// function JSalert(){
-// 	swal("A Basic JS alert by a plug-in");
-// }
+//  $(document).ready(function(){
+//     $("#revise").click(function JSalert(){
+//         if($("#m_password").val()==""){
+//             swal("舊密碼尚未填寫");       
+//         }
+//     })
+//  })
 <!-- </script> -->
+<!-- <!-- <script type="text/javascript"> --> -->
+<!-- // function JSalert(){ -->
+<!-- // 	swal("A Basic JS alert by a plug-in"); -->
+<!-- // } -->
+<!-- <!-- </script> --> -->
 
 
 
