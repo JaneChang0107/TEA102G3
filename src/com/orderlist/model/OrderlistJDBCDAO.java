@@ -143,15 +143,18 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface {
 	
 
 	@Override
-	public void insert(OrderlistVO orderlistVO) {
+	public String insert(OrderlistVO orderlistVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
-
+		ResultSet rs = null;
+		String oid = null;
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(INSERT_STMT);
+			String[] getoid = {"O_ID"};
+			
+			pstmt = con.prepareStatement(INSERT_STMT, getoid);
 
 			pstmt.setTimestamp(1, orderlistVO.getO_date());
 			pstmt.setString(2, orderlistVO.getO_status());
@@ -165,6 +168,11 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface {
 			pstmt.setString(10, orderlistVO.getM_id());
 
 			pstmt.executeUpdate();
+			rs = pstmt.getGeneratedKeys();
+
+			while(rs.next()) {
+				oid = rs.getString(1);	
+			}	
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -183,6 +191,7 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface {
 				}
 			}
 		}
+		return oid;	
 
 	}
 

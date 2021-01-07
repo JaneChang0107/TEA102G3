@@ -118,9 +118,11 @@
 </table>
 <br>
 
-<input type="hidden" name="action2" value="update" >
+<input type="hidden" name="action" value="update" >
 <input type="hidden" name="o_id" value="<%=orderlistVO.getO_id()%>">
 <input type="submit" value="送出修改" ></FORM>
+
+   
 
 
 

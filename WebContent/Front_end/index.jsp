@@ -8,12 +8,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-OrderdetailService orderdetailSvc1 = new OrderdetailService();
-List<OrderdetailVO> list = orderdetailSvc1.count();
-pageContext.setAttribute("list", list);
-
-
-
+	OrderdetailService orderdetailSvc1 = new OrderdetailService();
+	List<OrderdetailVO> list = orderdetailSvc1.count();
+	pageContext.setAttribute("list", list);
 %>
 
 
@@ -35,30 +32,34 @@ pageContext.setAttribute("list", list);
 	crossorigin="anonymous"></script>
 
 <style>
-	marquee{
-	   width:1000px;
-	}
-
+marquee {
+	width: 1000px;
+}
 </style>
 
 
 <div class="header">
 	<jsp:include page="header.jsp"></jsp:include>
+</div>
 </head>
 
 <body>
 
 
-<center>
+	<center>
 
-<h3><marquee onMouseOver="this.stop()" onMouseOut="this.start()" id="announcement"></marquee></h3>
-</center>
+		<h3>
+			<marquee onMouseOver="this.stop()" onMouseOut="this.start()"
+				id="announcement"></marquee>
+		</h3>
+	</center>
 
 	<div class="content">
 
 		<div class="article">
-			<a href="http://localhost:8081/TEA102G3/ProductServlet?ptype=no&name=&action=findByName"><button type="button" class="btn btn-success btn-circle-xl"
-				id="buybtn">我要買</button></a>
+			<a
+				href="http://localhost:8081/TEA102G3/ProductServlet?ptype=no&name=&action=findByName"><button
+					type="button" class="btn btn-success btn-circle-xl" id="buybtn">我要買</button></a>
 			<button type="button" class="btn btn-danger btn-circle-xl"
 				id="rentbtn">我要租</button>
 			<button type="button" class="btn btn-warning btn-circle-xl"
@@ -73,9 +74,12 @@ pageContext.setAttribute("list", list);
 					<jsp:useBean id="ppService" scope="page"
 						class="com.productPicture.model.ProductPictureService" />
 					<div class="swiper-slide">
-						<a href="<%= request.getContextPath() %>/ProductServlet?action=findthis&pid=${VO.p_id}"><img  alt="沒...沒圖"
-							src="<%= request.getContextPath() %>/ShowPicture?type=pp&id=${VO.pp_id}" style="width:227.74px;height:300px;"></a>
-						
+						<a
+							href="<%= request.getContextPath() %>/ProductServlet?action=findthis&pid=${VO.p_id}"><img
+							alt="沒...沒圖"
+							src="<%= request.getContextPath() %>/ShowPicture?type=pp&id=${VO.pp_id}"
+							style="width: 227.74px; height: 300px;"></a>
+
 					</div>
 
 				</c:forEach>
@@ -111,6 +115,9 @@ pageContext.setAttribute("list", list);
 
 	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 	<script>
+	
+	
+	
 		var swiper = new Swiper('.swiper-container', {
 			slidesPerView : 4,
 			spaceBetween : 30,
@@ -126,31 +133,59 @@ pageContext.setAttribute("list", list);
 				prevEl : '.swiper-button-prev',
 			},
 		});
-		
+
 		announcement()
 
 		function announcement() {
-		$.ajax({
-			url : context + "/light.do",
-			type : "get",
-			data : {
-				"action" : "announcement",
-			},
-			dataType : "json",
-			success : function(data) {
-				$("#announcement").html("");
+			$
+					.ajax({
+						url : context + "/light.do",
+						type : "get",
+						data : {
+							"action" : "announcement",
+						},
+						dataType : "json",
+						success : function(data) {
+							$("#announcement").html("");
 
-				console.log(data)
+							console.log(data)
 
-				let announcement = "";
-				for(let i = 0; i < data.length; i++) {
-					announcement += (JSON.parse(data[i]).message + "\t");
-				}
-				$("#announcement").append(announcement);
-			}
+							let announcement = "";
+							for (let i = 0; i < data.length; i++) {
+								announcement += ((i+1) +"."+JSON.parse(data[i]).message +"   ");
+							}
+							$("#announcement").append(announcement);
+							
+						}
 
-		});
+					});
 		}
+// 		notice()
+
+// 		function notice() {
+// 			$.ajax({
+// 				url : context + "/light.do",
+// 				type : "get",
+// 				data : {
+// 					"action" : "announcement",
+// 				},
+// 				dataType : "json",
+// 				success : function(data) {
+// 					$("#notice").html("");
+
+// 					console.log(data)
+
+// 					let notice = "";
+// 					for (let i = 0; i < data.length; i++) {
+// 						notice += ("<li>"
+// 								+ JSON.parse(data[i]).message + "</li>");
+// 					}
+
+// 					$("#notice").append(notice);
+// 				}
+
+// 			});
+// 		}
 	</script>
 
 </body>

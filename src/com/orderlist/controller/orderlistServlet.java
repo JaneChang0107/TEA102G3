@@ -7,7 +7,12 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import com.bell.model.BellVO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.orderlist.model.*;
+import com.websocket.WebSocket;
+
+import redis.clients.jedis.Jedis;
 
 @WebServlet("/orderlist")
 public class orderlistServlet extends HttpServlet {
@@ -271,7 +276,27 @@ public class orderlistServlet extends HttpServlet {
 				OrderlistService orderlistSvc = new OrderlistService();
 				orderlistVO = orderlistSvc.updateOrderlistVO(o_id, o_date, o_status, o_shipdate, o_deceiptdate, o_finishdate, o_transport, o_address, o_total, o_pm, m_id);
 
+
+				
+				
+				
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+				
+				Jedis jedis = new Jedis("localhost", 6379);
+				jedis.auth("123456");
+				
+				ObjectMapper mapper = new ObjectMapper();
+				WebSocket ws = new WebSocket();
+				BellVO bellVO = new BellVO();
+				
+				bellVO.setM_id(m_id);
+				bellVO.setMessage("訂單狀態已更改");
+				
+				ws.onMessage(mapper.writeValueAsString(bellVO));
+				
+				jedis.close();
+				
+				
 				req.setAttribute("orderlistVO", orderlistVO); // 資料庫update成功後,正確的的empVO物件,存入req
 				String url = "/Back_end/orderlist/listOneorderlist.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp

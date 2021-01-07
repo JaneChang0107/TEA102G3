@@ -10,20 +10,27 @@ pageContext.setAttribute("value",value);
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>輸入公告</title>
 </head>
+
+
 <body>
 
+
+
+
+   
+     
 <FORM METHOD="post" ACTION="<%= request.getContextPath() %>/light.do" name="form1">
 <table>
 
 	<tr>
-		<td>key:</td>
-		<td><input name="key" id="key" type="text" value="all"></td>
+		<td>輸入:</td>
+		<td><input name="key" id="key" type="text" value="all">(all為系統公告或是輸入會員編號)</td>
 	</tr>
 	
 	<tr>
-		<td>value:</td>
+		<td>內容:</td>
 		<td><input name="value" id="value" type="text"></td>
 	</tr>
 </table>

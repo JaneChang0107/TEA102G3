@@ -60,7 +60,7 @@ public class WebSocket {
 					try {
 						
 						if(bellVO.getM_id().equals(user)) {
-
+							System.out.println("1111111");
 							JedisSaveMessage.saveBellMessage(user, mapper.writeValueAsString(bellVO));
 							
 							if(wsSession != null) {

@@ -1,5 +1,13 @@
+<%@page import="java.util.List"%>
+<%@page import="redis.clients.jedis.Jedis"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
+	
+	<%
+//  	String m_id= session.getAttribute("loginId").toString();
+
+	%>
 <!DOCTYPE html>
 <html>
 
@@ -418,10 +426,11 @@ select#ptype {
 
 				<td><i class="far fa-bell" id="bell" type="button" 
 					data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="true"></i>
+					aria-expanded="true" onclick="notice()"></i>
 					<div class="dropdown-menu" aria-labelledby="bell">
-						<a class="dropdown-item" href="">1</a> 
-						<a class="dropdown-item" href="">2</a>
+<ul>
+						<a class="dropdown-item" id="notice" href=""></a> 
+	</ul>					
 					</div> 
 				</td>
 
@@ -487,6 +496,32 @@ select#ptype {
 
 		function closeNav() {
 			document.getElementById("myNav").style.width = "0%";
+		}
+		
+		notice()
+		function notice() {
+			$.ajax({
+				url : context + "/light.do",
+				type : "get",
+				data : {
+					"action" : "announcement",
+				},
+				dataType : "json",
+				success : function(data) {
+					$("#notice").html("");
+
+					console.log(data)
+
+					let notice = "";
+					for (let i = 0; i < data.length; i++) {
+						notice += ("<li>"
+								+ JSON.parse(data[i]).message + "</li>");
+					}
+
+					$("#notice").append(notice);
+				}
+
+			});
 		}
 	</script>
 	<script
