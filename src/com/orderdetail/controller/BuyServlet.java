@@ -39,35 +39,26 @@ public class BuyServlet extends HttpServlet {
 		Vector<ProductVO> buylist = (Vector<ProductVO>) session.getAttribute("shoppingcart");
 		String action = req.getParameter("action");
 
-		System.out.println("in");
+	
 
 		if (action.equals("SUCCESS")) {
 
 			OrderlistVO olvo = new OrderlistVO();
-			Timestamp o_date = new Timestamp(System.currentTimeMillis());
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String nowTime = df.format(timestamp);
+			java.sql.Timestamp o_date = java.sql.Timestamp.valueOf(nowTime);
 			String o_status = "0";
 			String o_transport = req.getParameter("o_transport");
 			String o_address = req.getParameter("o_address");
 			Integer o_total = Integer.parseInt(req.getParameter("o_total"));
 			Integer o_pm = Integer.parseInt(req.getParameter("o_kun"));
 			String m_id = (String) session.getAttribute("loginId");
-			System.out.println("///////////////");
-			System.out.println(o_date);
-			System.out.println(o_status);
-			System.out.println("¹B°e" + o_transport);
-			System.out.println(o_address);
-			System.out.println(o_total);
-			System.out.println(o_pm);
-			System.out.println(m_id);
-			System.out.println("///////////////");
 
 			OrderlistService orderSvc = new OrderlistService();
 			olvo = orderSvc.addOrderlistVO2(o_date, o_status, o_transport, o_address, o_total, o_pm, m_id);
 
 			session.setAttribute("shoppingcart", buylist);
-//			String url = "/Front_end/shoppingCart/checkBuyPageOK.jsp";
-//			RequestDispatcher successView = req.getRequestDispatcher(url);
-//			successView.forward(req, res);
 			res.sendRedirect(req.getContextPath()+"/Front_end/shoppingCart/checkBuyPageOK.jsp");
 			session.removeAttribute("shoppingCart");
 			buylist.removeAll(buylist);
@@ -93,7 +84,7 @@ public class BuyServlet extends HttpServlet {
 
 			// Send the use back to the form, if there were errors
 
-			System.out.println("in2");
+		
 			Integer amount = 0;
 			int price = 0;
 			Integer q = 0;
@@ -195,7 +186,7 @@ public class BuyServlet extends HttpServlet {
 		pvo.setP_detail(p_detail);
 		pvo.setP_count(Integer.parseInt(p_count));
 		pvo.setM_id(m_id);
-		System.out.println(m_id);
+		
 
 
 		return pvo;

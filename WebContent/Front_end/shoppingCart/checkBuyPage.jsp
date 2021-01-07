@@ -7,9 +7,6 @@
 
 <%
 	Vector<ProductVO> buylist = (Vector<ProductVO>) session.getAttribute("shoppingcart");
-// 	String m_id = session.getAttribute("loginId").toString();
-// 	MemberService memSvc = new MemberService();
-// 	MemberVO memberVO = memSvc.findOneMem(m_id);
 
 %>
 

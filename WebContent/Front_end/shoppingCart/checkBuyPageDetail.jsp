@@ -188,8 +188,6 @@ input:read-only {
 					String id = order.getP_id();
 					ProductPictureVO ppvo = productpicSvc.findFirstOneProductPicture(id);
 					String picture = ppvo.getPp_picture64();
-
-					System.out.println(id);
 					Integer k = Integer.parseInt(request.getParameter("xx" + (i + 1)));
 					Integer total = k * count;
 			%>

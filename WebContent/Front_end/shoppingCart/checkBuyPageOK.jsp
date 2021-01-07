@@ -12,7 +12,6 @@
 	OrderlistService orderlistSvc = new OrderlistService();
 	List<OrderlistVO> list = orderlistSvc.findByMember(m_id);
 	size = list.size();
-	System.out.println("size=" + list.size());
 	pageContext.setAttribute("list", list);
 	OrderlistVO showlist = list.get(size - 1);
 	String o_id = showlist.getO_id();
@@ -145,7 +144,7 @@
 				<td class="col">購買的商品為:<%=o_id%></td>
 			</tr>
 			<tr>
-				<td class="col">運送方式:<%=o_transport%></td>
+				<td class="col">取貨方式:<%=o_transport%></td>
 			</tr>
 
 
@@ -157,7 +156,7 @@
 	</div>
 	<div class="buttonarea">
 		<button type="button" class="button1">會員專區</button>
-		<button type="button" class="button2">回首頁</button>
+		<button type="button" class="button2"  onclick="javascript:location.href='<%=request.getContextPath()%>/Front_end/index.jsp'">回首頁</button>
 	</div>
 	<div class="footer">
 		<jsp:include page="../footer.jsp"></jsp:include>
