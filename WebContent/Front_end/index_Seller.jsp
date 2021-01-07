@@ -21,16 +21,37 @@
 
 
 <style>
+   #todolist{
+   height:500px;
+   width:1000px;
+   background-color:white;
+   margin:auto;
+   left: 15px;
+   position: relative;
+   }
+   .todocolumn{
+   width:250px;
+   height:300px;
+   font-size:30px;
+   text-align:center;
+   
+   }
+
 
 </style>
 
 
-<div class="header">
-	<jsp:include page="header.jsp"></jsp:include>
+
 </head>
+
 
 <body style="background:#F5D2CD;
 	height: 100%;">
+	
+	
+<div class="header">
+	<jsp:include page="header.jsp"></jsp:include>
+</div>
 
 	<center>
 
@@ -46,12 +67,22 @@
 		<jsp:include page="index_Seller_Buttongroup.jsp"></jsp:include>
 	</div>
 	
+	
+    <div id="todolist">
+    <pre style="font-size:30px;"> <u>待辦事項清單</u></pre>
+    
+    <div class="todocolumn">
+    
+    待出貨
+    </div>
+    
 
 
 
 
-
-
+	
+	</div>
+	
 
 </div>
 	<div class="footer">
