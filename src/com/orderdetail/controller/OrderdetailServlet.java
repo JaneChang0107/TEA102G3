@@ -19,17 +19,11 @@ import com.orderdetail.model.*;
 //)
 
 
-
-
-
-
 @WebServlet("/OrderdetailServlet")
 public class OrderdetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
-	
-	
+
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
 	}
@@ -65,7 +59,7 @@ public class OrderdetailServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/Back_end/OrderDetail/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/members/MyOrder.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -76,7 +70,7 @@ public class OrderdetailServlet extends HttpServlet {
 
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/Back_end/OrderDetail/listOneorderdetail.jsp");
+							.getRequestDispatcher("/Front_end/members/MyOrder.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -89,7 +83,7 @@ public class OrderdetailServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/Back_end/OrderDetail/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/members/MyOrder.jsp");
 				failureView.forward(req, res);
 			}
 		}
