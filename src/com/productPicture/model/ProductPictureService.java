@@ -8,6 +8,7 @@ public class ProductPictureService {
 	
 	public ProductPictureService() {
 		dao = new ProductPictureJDBCDAO();
+//		dao = new ProductPictureJNDIDAO();
 	}
 	
 	public ProductPictureVO addProductPicture(byte[] picture, String pid) {

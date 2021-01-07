@@ -112,10 +112,10 @@
 		</div>
 	</div>
 	
-	<script src="<%=request.getContextPath()%>/vendors/jquery/jquery-3.5.1.min.js"></script>
-    <script src="<%=request.getContextPath()%>/vendors/popper/popper.min.js"></script>
-    <script src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="<%=request.getContextPath()%>/Back_end/employee/js/index_backstage.js"></script>
+<%-- 	<script src="<%=request.getContextPath()%>/vendors/jquery/jquery-3.5.1.min.js"></script> --%>
+<%--     <script src="<%=request.getContextPath()%>/vendors/popper/popper.min.js"></script> --%>
+<%--     <script src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script> --%>
+<%--     <script src="<%=request.getContextPath()%>/Back_end/employee/js/index_backstage.js"></script> --%>
     <script>
 	    var btn_add = document.getElementById("btn_add");
 	    btn_add.addEventListener('click',function(){

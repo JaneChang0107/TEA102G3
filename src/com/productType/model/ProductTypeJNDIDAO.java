@@ -1,19 +1,30 @@
 package com.productType.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.data.database;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
+public class ProductTypeJNDIDAO implements ProductTypeDAOInterface{
 
-public class ProductTypeJDBCDAO implements ProductTypeDAOInterface{
-
-
+	private static DataSource ds = null;
+	
+	static {
+		Context context;
+		try {
+			context = new InitialContext();
+			ds = (DataSource) context.lookup("java:comp/env/jdbc/TEA102G3DB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private final String INSERT = "INSERT INTO PRODUCTTYPE (PT_ID,PT_PLATFORM,PT_KIND) VALUES ('PT' || LPAD(PRODUCTTYPE_SEQ.NEXTVAL, 5, 0), ?, ?)";
 	private final String UPDATE = "UPDATE PRODUCTTYPE SET PT_PLATFORM=?, PT_KIND=? WHERE PT_ID=?";
@@ -21,57 +32,13 @@ public class ProductTypeJDBCDAO implements ProductTypeDAOInterface{
 	private final String GETONE = "SELECT * FROM PRODUCTTYPE WHERE PT_ID=?";
 	private final String GETALL = "SELECT * FROM PRODUCTTYPE ORDER BY PT_ID";
 	
-	
-	public static void main(String[] args) {
-		ProductTypeDAOInterface pt = new ProductTypeJDBCDAO();
-//		// 新增
-//		ProductTypeVO ptvoInsert = new ProductTypeVO();
-//		ptvoInsert.setPt_platform("PlaaayStationn");
-//		ptvoInsert.setPt_kind("sdddaawh");
-//		pt.insert(ptvoInsert);
-		
-		// 更新
-//		ProductTypeVO ptvoUpdate = new ProductTypeVO();
-//		ptvoUpdate.setPt_id("PT00012");
-//		ptvoUpdate.setPt_platform("PlayStationn");
-//		ptvoUpdate.setPt_kind("主機");
-//		pt.update(ptvoUpdate);
-		
-		// 刪除
-//		pt.delete("PT00021");
-		
-		
-//		// 取一
-//		ProductTypeVO ptvoGetOne = pt.findByPrimaryKey("PT00001");
-//		String id = ptvoGetOne.getPt_id();
-//		String platform = ptvoGetOne.getPt_platform();
-//		String kind = ptvoGetOne.getPt_kind();
-//		System.out.println("id:" + id);
-//		System.out.println("platform:" + platform);
-//		System.out.println("kind:" + kind);
-		
-		// 取全部
-//		List<ProductTypeVO> list = pt.getAll();
-//		for(ProductTypeVO ptVO : list) {
-//			String id = ptVO.getPt_id();
-//			String platform = ptVO.getPt_platform();
-//			String kind = ptVO.getPt_kind();
-//			System.out.println("id:" + id);
-//			System.out.println("platform:" + platform);
-//			System.out.println("kind:" + kind);
-//			System.out.println("===============================");
-//		}
-		
-	}
-	
 	@Override
 	public void insert(ProductTypeVO productType) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		
 		try {
-			Class.forName(database.DRIVER);
-			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			con = ds.getConnection();
 			ps = con.prepareStatement(INSERT);
 			
 			ps.setString(1, productType.getPt_platform());
@@ -80,9 +47,6 @@ public class ProductTypeJDBCDAO implements ProductTypeDAOInterface{
 			int line = ps.executeUpdate();
 			System.out.println(line);
 			
-		} catch(ClassNotFoundException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e.getMessage());
 		} catch(SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
@@ -111,8 +75,7 @@ public class ProductTypeJDBCDAO implements ProductTypeDAOInterface{
 		PreparedStatement ps = null;
 		
 		try {
-			Class.forName(database.DRIVER);
-			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			con = ds.getConnection();
 			ps = con.prepareStatement(UPDATE);
 			
 			ps.setString(1, productType.getPt_platform());
@@ -122,9 +85,6 @@ public class ProductTypeJDBCDAO implements ProductTypeDAOInterface{
 			int w = ps.executeUpdate();
 			System.out.println(w);
 			
-		} catch(ClassNotFoundException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e.getMessage());
 		} catch(SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
@@ -153,8 +113,7 @@ public class ProductTypeJDBCDAO implements ProductTypeDAOInterface{
 		PreparedStatement ps = null;
 		
 		try {
-			Class.forName(database.DRIVER);
-			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			con = ds.getConnection();
 			ps = con.prepareStatement(DELETE);
 			
 			ps.setString(1, p_id);
@@ -162,9 +121,6 @@ public class ProductTypeJDBCDAO implements ProductTypeDAOInterface{
 			ps.executeUpdate();
 			
 			
-		} catch(ClassNotFoundException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e.getMessage());
 		} catch(SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
@@ -194,8 +150,7 @@ public class ProductTypeJDBCDAO implements ProductTypeDAOInterface{
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(database.DRIVER);
-			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			con = ds.getConnection();
 			ps = con.prepareStatement(GETONE);
 			ps.setString(1, p_id);
 			
@@ -210,9 +165,6 @@ public class ProductTypeJDBCDAO implements ProductTypeDAOInterface{
 			
 			
 			
-		} catch(ClassNotFoundException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e.getMessage());
 		} catch(SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
@@ -251,8 +203,7 @@ public class ProductTypeJDBCDAO implements ProductTypeDAOInterface{
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(database.DRIVER);
-			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			con = ds.getConnection();
 			ps = con.prepareStatement(GETALL);
 			
 			rs = ps.executeQuery();
@@ -266,9 +217,6 @@ public class ProductTypeJDBCDAO implements ProductTypeDAOInterface{
 			}
 			
 			
-		} catch(ClassNotFoundException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e.getMessage());
 		} catch(SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());

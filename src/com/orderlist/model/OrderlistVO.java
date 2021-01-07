@@ -82,6 +82,12 @@ public String getM_id() {
 public void setM_id(String m_id) {
 	this.m_id = m_id;
 }
+
+public String getO_dateForm() {
+	java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm");
+	String O_dateFormat= df.format(o_date);
+	return O_dateFormat;
+}
  
  
 }

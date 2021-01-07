@@ -10,7 +10,7 @@
 
 <jsp:useBean id="productSvc" scope="page" class="com.product.model.ProductService"></jsp:useBean>
 <jsp:useBean id="productPicSvc" scope="page" class="com.productPicture.model.ProductPictureService"></jsp:useBean>
-
+<jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService"></jsp:useBean>
 <%
 	OrderdetailService orderdetailSvc =new OrderdetailService();
 	String o_id =request.getParameter("o_id");
@@ -38,13 +38,12 @@ td{
     padding:0px 30px 0px 30px;
 }
 
-#listallorder{
-/*     margin: auto; */
-}
 
 h1{
 /*     text-align: center; */
 }
+
+
  
 </style>
 
@@ -64,33 +63,37 @@ h1{
 
 
 <table id="listallorder">
-<div style="width=100px"><label>訂單編號: <%=orderlistVO.getO_id()%></label></div>
-<label>狀態: <%=orderlistVO.getO_status()%></label>
+<div style="width=100px"><p>訂單編號: <%=orderlistVO.getO_id()%></p></div>
+<p>訂單成立: <%=orderlistVO.getO_dateForm()%></p>
+<p>狀態: <%=orderlistVO.getO_status()%></p>
 <hr>
-<label>地址: <%=orderlistVO.getO_address()%></label>
-<label></label>
+<h2>收件資訊</h2>
+<p>收件人: <%=memSvc.findOneMem(orderlistVO.getM_id()).getM_name()%></p>
+<p>收件方式: <%=orderlistVO.getO_transport()%></p>
+<p>收件地址: <%=orderlistVO.getO_address()%></p>
+
+<hr>
 	<tr>
-<!-- 		<th>流水號</th> -->
-<!-- 		<th>訂單編號</th> -->
-<!-- 		<th>商品名稱</th> -->
-<!-- 		<th>產品數量</th> -->
-<!-- 		<th>修改</th> -->
-<!-- 		<th>刪除</th> -->
-		
+		<th><h2>示意圖</h2></th>
+		<th><h2>品名</h2></th>
+		<th><h2>數量</h2></th>
+		<th><h2>單價</h2></th>
+		<th><h2>小計</h2></th>
+     
 	</tr>
 	<c:forEach var="orderdetailVO" items="${list}">
 		<tr>
-		    
-           <td><img src="data:image/jpg;base64,${productPicSvc.findFirstOneProductPicture(orderdetailVO.p_id).pp_picture64}" width="150px" height="150px";></td> 
+           <td><img src="data:image/jpg;base64,${productPicSvc.findFirstOneProductPicture(orderdetailVO.p_id).pp_picture64}" width="100px" height="100px";></td> 
 <%--        <td><img src="data:image/jpg;base64,<%=((ProductPictureVO)(productPicSvc.findFirstOneProductPicture(orderdetailVO.getP_id()))).getPp_picture64()%>" width="100px" height="100px";></td> --%>
 			<td><h2>${productSvc.oneProduct(orderdetailVO.p_id).p_name}</h2></td>
 			<td><h2> * ${orderdetailVO.od_count}</h2></td>
 			<td><h2>${productSvc.oneProduct(orderdetailVO.p_id).p_price}</h2></td>
 			<td><h2>${orderdetailVO.od_count*productSvc.oneProduct(orderdetailVO.p_id).p_price}</h2></td>
-		</tr>	
+		</tr>
 	</c:forEach>
 </table>
 <hr>
+<h2>總金額: <%=orderlistVO.getO_total()%></h2>
 
 </body>
 </html>

@@ -8,6 +8,7 @@ public class ProductTypeService {
 	
 	public ProductTypeService() {
 		dao = new ProductTypeJDBCDAO();
+//		dao = new ProductTypeJNDIDAO();
 	}
 	
 	

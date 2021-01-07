@@ -15,118 +15,123 @@
     <link rel="stylesheet type" href="${pageContext.request.contextPath}/Back_end/employee/css/index_backstage.css">
 </head>
 <body>
-<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/login" name="form1">
-	 <div class="container update_without">
-	 	<div class="row">
-	 		<div class="col">
-				<!--錯誤表列 -->
-				<c:if test="${not empty errorMsgs_without}">
-					<font style="color:red">請修正以下錯誤:</font>
-					<ul>
-						<c:forEach var="message" items="${errorMsgs_without}">
-							<li style="color:red">${message}</li>
-						</c:forEach>
-					</ul>
-				</c:if>
-				<c:remove var="errorMsgs_without"/>
-	 		</div>
-	 	</div>
-        <div class="row">
-            <div class="col">
-            	<p>員工ID:</p>
-            </div>
-            <div class="col">               
-                ${employeeVO.e_id}
-            </div>
-            <div class="col">
-                <p>門市:</p>
-            </div>
-            <div class="col">
-            	<jsp:useBean id="storeSvc" scope="page" class="com.store.model.StoreService" />
-                <select size="1" name="st_id">
-					<c:forEach var="storeVO" items="${storeSvc.all}">
-					<option value="${storeVO.st_id}" ${(employeeVO.st_id==storeVO.st_id)? 'selected':'' }>${storeVO.st_id}
-					</c:forEach>
-				</select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <p>職稱:</p>
-            </div>
-            <div class="col">											
-                <input type="radio" name="e_title" size="45" value="EMPLOYEE" ${employeeVO.e_title eq 'EMPLOYEE' ? 'checked' : ''} >EMPLOYEE
-				<input type="radio" name="e_title" size="45" value="BOSS" ${employeeVO.e_title eq 'BOSS' ? 'checked' : ''} >BOSS
-            </div>
-            <div class="col">
-                <p>電話:</p>
-            </div>
-            <div class="col">
-                <input type="TEXT" name="e_phone" value="${employeeVO.e_phone}">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <p>員工姓名:</p>
-            </div>
-            <div class="col">
-                <input type="TEXT" name="e_name" value="${employeeVO.e_name}">
-            </div>
-            <div class="col">
-                <p>性別:</p>
-            </div>
-            <div class="col">
-                <input type="radio" name="e_gender" value="MEN" ${employeeVO.e_gender eq 'MEN' ? 'checked' : '' }>MEN
-				<input type="radio" name="e_gender" value="WOMEN" ${employeeVO.e_gender eq 'WOMEN' ? 'checked' : '' }>WOMEN
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <p>身分證字號:</p>
-            </div>
-            <div class="col">
-                <input type="TEXT" name="e_identity" value="${employeeVO.e_identity}">
-            </div>
-            <div class="col">
-                <p>生日:</p>
-            </div>
-            <div class="col">
-                <input name="e_birth" id="f_date1" type="text">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                <p>地址:</p>
-            </div>
-            <div class="col-9">
-                <input type="TEXT" name="e_address" value="${employeeVO.e_address}">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                <p>信箱:</p>
-            </div>
-            <div class="col-9">
-                <input type="TEXT" name="e_email" value="${employeeVO.e_email}">
-            </div>
-        </div>
-        <div class="row forget-row">
-            <div class="col btn_col">
-                <button type="submit" class="btn btn-primary forget-btn">確認</button>
-                <input type="hidden" name="action" value="update_without">
-				<input type="hidden" name="e_id" value="${employeeVO.e_id}">
-            </div>
-        </div>
+<%-- <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/login" name="form1"> --%>
+	 <div id="update_without" class="container update_without">
+<!-- 	 	<div class="row"> -->
+<!-- 	 		<div class="col"> -->
+<!-- 				錯誤表列 -->
+<%-- 				<c:if test="${not empty errorMsgs_without}"> --%>
+<!-- 					<font style="color:red">請修正以下錯誤:</font> -->
+<!-- 					<ul> -->
+<%-- 						<c:forEach var="message" items="${errorMsgs_without}"> --%>
+<%-- 							<li style="color:red">${message}</li> --%>
+<%-- 						</c:forEach> --%>
+<!-- 					</ul> -->
+<%-- 				</c:if> --%>
+<%-- 				<c:remove var="errorMsgs_without"/> --%>
+<!-- 	 		</div> -->
+<!-- 	 	</div> -->
+<!--         <div class="row"> -->
+<!--             <div class="col"> -->
+<!--             	<p>員工ID:</p> -->
+<!--             </div> -->
+<!--             <div class="col">                -->
+<%--                 ${employeeVO.e_id} --%>
+<!--             </div> -->
+<!--             <div class="col"> -->
+<!--                 <p>門市:</p> -->
+<!--             </div> -->
+<!--             <div class="col"> -->
+<%--             	<jsp:useBean id="storeSvc" scope="page" class="com.store.model.StoreService" /> --%>
+<!--                 <select size="1" id="st_id" name="st_id"> -->
+<%-- 					<c:forEach var="storeVO" items="${storeSvc.all}"> --%>
+<%-- 					<option id="select_store" value="${storeVO.st_id}" ${(employeeVO.st_id==storeVO.st_id)? 'selected':'' }>${storeVO.st_id} --%>
+<%-- 					</c:forEach> --%>
+<!-- 				</select> -->
+<!--             </div> -->
+<!--         </div> -->
+<!--         <div class="row"> -->
+<!--             <div class="col"> -->
+<!--                 <p>職稱:</p> -->
+<!--             </div> -->
+<!--             <div class="col"> -->
+<%--              <c:if test="${employeeVO.e_title.equals('BOSS')}">											 --%>
+<%--                 <input id="status_emp" type="radio" name="e_title" size="45" value="EMPLOYEE" ${employeeVO.e_title eq 'EMPLOYEE' ? 'checked' : ''} >EMPLOYEE --%>
+<%-- 				<input id="status_boss" type="radio" name="e_title" size="45" value="BOSS" ${employeeVO.e_title eq 'BOSS' ? 'checked' : ''} >BOSS --%>
+<%-- 			 </c:if> --%>
+<%--              <c:if test="${employeeVO.e_title.equals('EMPLOYEE')}">											 --%>
+<!--                 <p>EMPLOYEE -->
+<%-- 			 </c:if> --%>
+<!--             </div> -->
+<!--             <div class="col"> -->
+<!--                 <p>電話:</p> -->
+<!--             </div> -->
+<!--             <div class="col"> -->
+<%--                 <input id="e_phone" type="TEXT" name="e_phone" value="${employeeVO.e_phone}"> --%>
+<!--             </div> -->
+<!--         </div> -->
+<!--         <div class="row"> -->
+<!--             <div class="col"> -->
+<!--                 <p>員工姓名:</p> -->
+<!--             </div> -->
+<!--             <div class="col"> -->
+<%--                 <input id="e_name" type="TEXT" name="e_name" value="${employeeVO.e_name}"> --%>
+<!--             </div> -->
+<!--             <div class="col"> -->
+<!--                 <p>性別:</p> -->
+<!--             </div> -->
+<!--             <div class="col"> -->
+<%--                 <input id="gender_men" type="radio" name="e_gender" value="MEN" ${employeeVO.e_gender eq 'MEN' ? 'checked' : '' }>MEN --%>
+<%-- 				<input id="gender_women" type="radio" name="e_gender" value="WOMEN" ${employeeVO.e_gender eq 'WOMEN' ? 'checked' : '' }>WOMEN --%>
+<!--             </div> -->
+<!--         </div> -->
+<!--         <div class="row"> -->
+<!--             <div class="col"> -->
+<!--                 <p>身分證字號:</p> -->
+<!--             </div> -->
+<!--             <div class="col"> -->
+<%--                 <input id="e_identity" type="TEXT" name="e_identity" value="${employeeVO.e_identity}"> --%>
+<!--             </div> -->
+<!--             <div class="col"> -->
+<!--                 <p>生日:</p> -->
+<!--             </div> -->
+<!--             <div class="col"> -->
+<!--                 <input name="e_birth" id="f_date1" type="text"> -->
+<!--             </div> -->
+<!--         </div> -->
+<!--         <div class="row"> -->
+<!--             <div class="col-3"> -->
+<!--                 <p>地址:</p> -->
+<!--             </div> -->
+<!--             <div class="col-9"> -->
+<%--                 <input type="TEXT" id="e_address"  name="e_address" value="${employeeVO.e_address}"> --%>
+<!--             </div> -->
+<!--         </div> -->
+<!--         <div class="row"> -->
+<!--             <div class="col-3"> -->
+<!--                 <p>信箱:</p> -->
+<!--             </div> -->
+<!--             <div class="col-9"> -->
+<%--                 <input type="TEXT" id="e_email" name="e_email" value="${employeeVO.e_email}"> --%>
+<!--             </div> -->
+<!--         </div> -->
+<!--         <div class="row forget-row"> -->
+<!--             <div class="col btn_col"> -->
+<!--                 <button type="button" id="btn_enter" class="btn btn-primary forget-btn">確認</button> -->
+<!--                 <input type="hidden" name="action" value="update_without"> -->
+<%-- 				<input type="hidden" name="e_id" id="e_id" value="${employeeVO.e_id}"> --%>
+<!--             </div> -->
+<!--         </div> -->
     </div>
-	</FORM>
+<!-- 	</FORM> -->
 
 
 
-	<script src="${pageContext.request.contextPath}/vendors/jquery/jquery-3.5.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/vendors/popper/popper.min.js"></script>
-    <script src="${pageContext.request.contextPath}/vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/Back_end/employee/js/index_backstage.js"></script>
-    <script>
+<%-- 	<script src="${pageContext.request.contextPath}/vendors/jquery/jquery-3.5.1.min.js"></script> --%>
+<%--     <script src="${pageContext.request.contextPath}/vendors/popper/popper.min.js"></script> --%>
+<%--     <script src="${pageContext.request.contextPath}/vendors/bootstrap/js/bootstrap.min.js"></script> --%>
+<%--     <script src="${pageContext.request.contextPath}/Back_end/employee/js/index_backstage.js"></script> --%>
+    <script>    	    
 // 	    if(${errorMsgs_without != null}){
 // 			alert("${errorMsgs_without}");			
 // 		}

@@ -21,15 +21,6 @@
 <meta charset="utf-8">
 <title>YuXiKun</title>
 
-<!-- Bootstrap 的 CSS -->
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/vendors/bootstrap/css/bootstrap.min.css">
-<!-- Link Swiper's CSS -->
-<link rel="stylesheet"
-	href="https://unpkg.com/swiper/swiper-bundle.min.css">
-<!-- Font awesome -->
-<script src="https://kit.fontawesome.com/a72ac34f47.js"
-	crossorigin="anonymous"></script>
 
 <style>
 marquee {
@@ -137,6 +128,7 @@ marquee {
 		announcement()
 
 		function announcement() {
+
 			$
 					.ajax({
 						url : context + "/light.do",
@@ -159,6 +151,8 @@ marquee {
 						}
 
 					});
+
+			
 		}
 // 		notice()
 

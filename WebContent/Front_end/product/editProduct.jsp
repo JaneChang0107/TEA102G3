@@ -85,8 +85,8 @@
 	            </div>
 	        </div>
 	        <div>
-	            <label>商品上下架 (請重新選擇上下架)</label>            
-	            <input type="radio" id="0" name="pstatus" value="0" checked><label for="0">下架</label>
+	            <label>商品上下架 (需先經過審核)</label>            
+	            <input type="radio" id="0" name="pstatus" value="2" checked><label for="2">下架</label>
 	            <input type="radio" id="1" name="pstatus" value="1"><label for="1">上架</label>
 	        </div>
 	        <div>

@@ -16,6 +16,7 @@ public class ProductService {
 	
 	public ProductService() {
 		dao = new ProductJDBCDAO();
+//		dao = new ProductJNDIDAO();
 	}
 	
 	public static void main(String[] args) {
@@ -84,6 +85,10 @@ public class ProductService {
 		dao.update(pVO);
 		
 		return pVO;
+	}
+	
+	public void checked(String pid, Integer pstatus) {
+		dao.checked(pid, pstatus);
 	}
 
 	public void deleteProduct(String pid) {

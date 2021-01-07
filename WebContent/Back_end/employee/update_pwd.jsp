@@ -8,11 +8,11 @@
 <head>
 	<meta charset="BIG5">
 	<title>Insert title here</title>
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/vendors/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet type" href="<%=request.getContextPath()%>/Back_end/employee/css/index_backstage.css">
+<%-- 	<link rel="stylesheet" href="<%=request.getContextPath()%>/vendors/bootstrap/css/bootstrap.min.css"> --%>
+<%--     <link rel="stylesheet type" href="<%=request.getContextPath()%>/Back_end/employee/css/index_backstage.css"> --%>
 </head>
 <body>
-	<form action="<%=request.getContextPath()%>/login" method="post">
+<%-- 	<form action="<%=request.getContextPath()%>/login" method="post"> --%>
 	<div class="container update_without">
 		<div class="row">
 	 		<div class="col">
@@ -54,19 +54,19 @@
         </div>
         <div class="row forget-row">
             <div class="col btn_col">
-                <button type="submit" class="btn btn-primary forget-btn">確認</button>
+                <button type="button" id="enter_forget" class="btn btn-primary forget-btn">確認</button>
                 <input type="hidden" name="action" value="update_pwd">
 				<input type="hidden" name="e_id" value="${employeeVO.e_id}">
             </div>
         </div>
     </div>
-    </form>
+<!--     </form> -->
     
     
-    <script src="<%=request.getContextPath()%>/vendors/jquery/jquery-3.5.1.min.js"></script>
-    <script src="<%=request.getContextPath()%>/vendors/popper/popper.min.js"></script>
-    <script src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="<%=request.getContextPath()%>/Back_end/employee/js/index_backstage.js"></script>
+<%--     <script src="<%=request.getContextPath()%>/vendors/jquery/jquery-3.5.1.min.js"></script> --%>
+<%--     <script src="<%=request.getContextPath()%>/vendors/popper/popper.min.js"></script> --%>
+<%--     <script src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script> --%>
+<%--     <script src="<%=request.getContextPath()%>/Back_end/employee/js/index_backstage.js"></script> --%>
     <script>
 // 	    if(${errorMsgs_pwd != null}){
 // 			alert("${errorMsgs_pwd}");

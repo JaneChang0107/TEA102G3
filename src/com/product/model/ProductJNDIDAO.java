@@ -1,17 +1,29 @@
 package com.product.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.data.*;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
-
-public class ProductJDBCDAO implements ProductInterface{
+public class ProductJNDIDAO implements ProductInterface{
+	
+	private static DataSource ds = null;
+	
+	static {
+		try {
+			Context context = new InitialContext();
+			ds = (DataSource) context.lookup("java:comp/env/jdbc/TEA102G3DB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private final String INSERT = 
 			"INSERT INTO PRODUCT (P_ID, P_NAME, P_PRICE, P_DETAIL, PT_ID, P_COUNT, P_ADDDATE, P_STATUS, M_ID) VALUES ('P' || LPAD(PRODUCT_SEQ.NEXTVAL, 5, 0), ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -46,8 +58,7 @@ public class ProductJDBCDAO implements ProductInterface{
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(database.DRIVER);
-			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			con = ds.getConnection();
 			String[] getpid = {"P_ID"};
 			ps = con.prepareStatement(INSERT, getpid);
 			
@@ -102,8 +113,7 @@ public class ProductJDBCDAO implements ProductInterface{
 		PreparedStatement ps = null;
 		
 		try {
-			Class.forName(database.DRIVER);
-			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			con = ds.getConnection();
 			ps = con.prepareStatement(UPDATE);
 			
 			ps.setString(1, product.getP_name());
@@ -145,8 +155,7 @@ public class ProductJDBCDAO implements ProductInterface{
 		PreparedStatement ps = null;
 		
 		try {
-			Class.forName(database.DRIVER);
-			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			con = ds.getConnection();
 			ps = con.prepareStatement(CHECKED);
 
 			ps.setInt(1, p_status);
@@ -181,8 +190,7 @@ public class ProductJDBCDAO implements ProductInterface{
 		PreparedStatement ps = null;
 		
 		try {
-			Class.forName(database.DRIVER);
-			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			con = ds.getConnection();
 			ps = con.prepareStatement(DELETE);
 			
 			ps.setString(1, p_id);
@@ -218,8 +226,7 @@ public class ProductJDBCDAO implements ProductInterface{
 		ResultSet rs = null;
 		ProductVO pVO = null;
 		try {
-			Class.forName(database.DRIVER);
-			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			con = ds.getConnection();
 			ps = con.prepareStatement(FINDONE);
 			ps.setString(1, p_id);
 			rs = ps.executeQuery();
@@ -276,8 +283,7 @@ public class ProductJDBCDAO implements ProductInterface{
 		List<ProductVO> list = new LinkedList<ProductVO>();
 		
 		try {
-			Class.forName(database.DRIVER);
-			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			con = ds.getConnection();
 			ps = con.prepareStatement(FINDBYSELLER);
 			ps.setString(1, m_id);
 			
@@ -336,8 +342,7 @@ public class ProductJDBCDAO implements ProductInterface{
 		List<ProductVO> list = new LinkedList<ProductVO>();
 		
 		try {
-			Class.forName(database.DRIVER);
-			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			con = ds.getConnection();
 			ps = con.prepareStatement(FINDBYPNAME);
 			ps.setString(1, "%" + p_name + "%");
 			
@@ -396,8 +401,7 @@ public class ProductJDBCDAO implements ProductInterface{
 		List<ProductVO> list = new LinkedList<ProductVO>();
 		
 		try {
-			Class.forName(database.DRIVER);
-			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			con = ds.getConnection();
 			ps = con.prepareStatement(FINDBYPTYPE);
 			ps.setString(1, pt_id);
 			
@@ -456,8 +460,7 @@ public class ProductJDBCDAO implements ProductInterface{
 		List<ProductVO> list = new LinkedList<ProductVO>();
 		
 		try {
-			Class.forName(database.DRIVER);
-			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			con = ds.getConnection();
 			ps = con.prepareStatement(FINDBYPNAMETPYE);
 			
 			ps.setString(1, "%" + p_name + "%");
@@ -518,8 +521,7 @@ public class ProductJDBCDAO implements ProductInterface{
 		List<ProductVO> list = new LinkedList<ProductVO>();
 		
 		try {
-			Class.forName(database.DRIVER);
-			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			con = ds.getConnection();
 			ps = con.prepareStatement(FINDBYPSTATUS);
 			
 			ps.setInt(1, p_status);
@@ -578,8 +580,7 @@ public class ProductJDBCDAO implements ProductInterface{
 		List<ProductVO> list = new LinkedList<ProductVO>();
 		
 		try {
-			Class.forName(database.DRIVER);
-			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			con = ds.getConnection();
 			ps = con.prepareStatement(GETALLSELL);
 			
 			rs = ps.executeQuery();
@@ -637,8 +638,7 @@ public class ProductJDBCDAO implements ProductInterface{
 		List<ProductVO> list = new LinkedList<ProductVO>();
 		
 		try {
-			Class.forName(database.DRIVER);
-			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			con = ds.getConnection();
 			ps = con.prepareStatement(GETALL);
 			
 			rs = ps.executeQuery();
