@@ -117,10 +117,10 @@
 <%--     <script src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script> --%>
 <%--     <script src="<%=request.getContextPath()%>/Back_end/employee/js/index_backstage.js"></script> --%>
     <script>
-	    var btn_add = document.getElementById("btn_add");
-	    btn_add.addEventListener('click',function(){
-	    	location.href='<%=request.getContextPath()%>/Back_end/employee/newEmployee.jsp'
-	    });
+// 	    var btn_add = document.getElementById("btn_add");
+// 	    btn_add.addEventListener('click',function(){
+<%-- 	    	location.href='<%=request.getContextPath()%>/Back_end/employee/newEmployee.jsp' --%>
+// 	    });
     </script>
 
 
