@@ -79,29 +79,9 @@
                         <jsp:include page="listAllMem.jsp"></jsp:include>
                     </div>
 
-                    <div class="tab-pane fade" id="cs_sys" role="tabpanel" aria-labelledby="cs_sys-tab">
+                  
                     
                     
-                    <FORM METHOD="post" ACTION="<%= request.getContextPath() %>/light.do" name="form1">
-					<table>
-					<tr>
-					<td>輸入:</td>
-					<td><input name="key" id="key" type="text" value="all">(all為系統公告或是輸入會員編號)</td>
-					</tr>
-					<tr>
-					<td>內容:</td>
-					<td><input name="value" id="value" type="text"></td>
-					</tr>
-					</table>
-					<br>
-					<input type="hidden" name="action" value="show">
-					<input type="submit" value="送出新增"></FORM>
-                    
-                    
-                    
-                    </div>
-                    <div class="tab-pane fade" id="rent_mgt" role="tabpanel" aria-labelledby="rent_mgt-tab">這裡放你要的頁面</div>
-
                     <div class="tab-pane fade" id="tran_sys" role="tabpanel" aria-labelledby="tran_sys-tab">這裡放你要的頁面</div>       
                 </div>
             </div>
