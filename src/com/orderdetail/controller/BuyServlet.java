@@ -14,9 +14,11 @@ import com.orderdetail.model.OrderdetailService;
 import com.orderdetail.model.OrderdetailVO;
 import com.orderlist.model.OrderlistService;
 import com.orderlist.model.OrderlistVO;
+import com.product.model.ProductService;
 import com.product.model.ProductVO;
 import com.productPicture.model.ProductPictureService;
 import com.productPicture.model.ProductPictureVO;
+import com.productType.model.ProductTypeService;
 import com.productType.model.ProductTypeVO;
 
 import java.util.*;
@@ -42,7 +44,7 @@ public class BuyServlet extends HttpServlet {
 	
 
 		if (action.equals("SUCCESS")) {
-
+//成立Orderlist的訂單資料
 			OrderlistVO olvo = new OrderlistVO();
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -54,15 +56,26 @@ public class BuyServlet extends HttpServlet {
 			Integer o_total = Integer.parseInt(req.getParameter("o_total"));
 			Integer o_pm = Integer.parseInt(req.getParameter("o_kun"));
 			String m_id = (String) session.getAttribute("loginId");
-
 			OrderlistService orderSvc = new OrderlistService();
-			olvo = orderSvc.addOrderlistVO2(o_date, o_status, o_transport, o_address, o_total, o_pm, m_id);
+			String o_id = orderSvc.addOrderlistVO2(o_date, o_status, o_transport, o_address, o_total, o_pm, m_id);
+//成立Orderdetail的訂單資料	
+			ProductTypeService pSvc = new ProductTypeService();
+			OrderdetailVO odvo = new OrderdetailVO();
+			int size = buylist.size();
+			for(int i=0;i<buylist.size();i++) {
+				String p_id = buylist.get(i).getP_id();
+				Integer od_count = Integer.parseInt(req.getParameter("k"+i));
+				OrderdetailService odSvc = new OrderdetailService();
+				odvo=odSvc.addOrderdetail(o_id, p_id, od_count);
+			}
 
 			session.setAttribute("shoppingcart", buylist);
 			res.sendRedirect(req.getContextPath()+"/Front_end/shoppingCart/checkBuyPageOK.jsp");
 			session.removeAttribute("shoppingCart");
 			buylist.removeAll(buylist);
 			return;
+			
+			
 
 		}
 

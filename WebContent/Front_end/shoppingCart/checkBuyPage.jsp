@@ -263,11 +263,6 @@ $(function(){
 	</script>
 	</c:forEach>
 
-
-	<div class="total">
-		<h4>合計共<%=buylist.size()%>項商品</h4>
-		<br>
-	</div>
 	<div class="buttonarea">
 		<button type="button" class="button1" onclick="history.back()">回上一頁</button>
 		<button type="submit" class="button2">進入結帳</button>

@@ -222,7 +222,7 @@ input:read-only {
 					style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap"><%=detail%>
 				</td>
 				<td><%=price%></td>
-				<td><%=k%></td>
+				<td ><%=k%><input type="hidden" value="<%=k%>" name="k<%=i%>"></input></td>
 				<td class="kprice<%=i%>"><%=k * price%></td>
 				<td></td>
 				<td></td>
@@ -443,9 +443,10 @@ input:read-only {
     	   document.getElementById("o_total").innerHTML=c+<%=amount%>;
     	
     	  
-    	  
+    	
+    	   
     	   $(function(){
-    	        $('#kun').blur(function(){
+    	        $('#kun,input[name=o_transport]').change(function(){
     	           var value1 = parseFloat($('#o_total').val()) || 0;
     	           var value2 = parseFloat($('#kun').val()) || 0;
     	           var value3= value1-value2
@@ -458,7 +459,7 @@ input:read-only {
     	        });
     	     });  
     });
-    
+    //防止按下enter送出表單
     $(document).ready(function() {
     	  $(window).keydown(function(event){
     	    if(event.keyCode == 13) {
