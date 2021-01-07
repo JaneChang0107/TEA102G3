@@ -16,6 +16,7 @@ public class ProductService {
 	
 	public ProductService() {
 		dao = new ProductJDBCDAO();
+//		dao = new ProductJNDIDAO();
 	}
 	
 	public static void main(String[] args) {

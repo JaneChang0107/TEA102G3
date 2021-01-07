@@ -6,7 +6,7 @@
 <head>
 <meta charset="utf-8">
 <title>YuXiKun</title>
-
+<link rel="shortcut icon" href="<%= request.getContextPath() %>/images/logo.png">
 <!-- Bootstrap 的 CSS -->
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/vendors/bootstrap/css/bootstrap.min.css">

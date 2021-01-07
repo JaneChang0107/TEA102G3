@@ -187,14 +187,6 @@ public class ProductServlet extends HttpServlet {
 				}
 			}
 			
-			ObjectMapper mapper = new ObjectMapper();
-			
-			String pp = mapper.writeValueAsString(pVO);
-			
-			WebSocket ws = new WebSocket();
-			
-			ws.onMessage(pp);
-			
 			response.sendRedirect(request.getContextPath() + "/Front_end/product/sellerProduct.jsp");
 		}
 		
