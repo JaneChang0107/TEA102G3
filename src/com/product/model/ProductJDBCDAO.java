@@ -8,7 +8,8 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.data.database;
+import com.data.*;
+
 
 public class ProductJDBCDAO implements ProductInterface{
 	
