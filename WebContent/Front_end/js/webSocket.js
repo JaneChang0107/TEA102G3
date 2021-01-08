@@ -29,7 +29,7 @@ function showToast(data) {
     $("#showToast").html("");
     
     let addthing =
-    `<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000"  style="position: absolute; top: 100; right: 100;">
+    `<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000"  style="position: absolute; top: 100px; right: 100px;">
         <div class="toast-header">
             
             <strong class="mr-auto">公告</strong>
