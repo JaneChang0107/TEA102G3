@@ -6,7 +6,6 @@ $.ajax({
         beforeSend: function(){       // 在 request 發送之前執行
         },
         success: function(data){      // request 成功取得回應後執行
-        	console.log(data);
         	
         	 $("#update_without").html("");
 
@@ -100,7 +99,7 @@ $.ajax({
        	  list_html +='    </div>';
        	
        	  $("#update_without").html(list_html);
-       	  console.log("ajax_action")
+
        	  
  
        	 $('#f_date1').datetimepicker({
@@ -127,7 +126,7 @@ $.ajax({
 // 按下基本資料按鈕
   $("#emp_modify-tab").on("click", function(){
 	 let e_id = $("#e_id").val();
-	 console.log(e_id)
+
       //let form_data = new FormData();
       //form_data.append("user_id", user_id);
       //form_data.append("name", task_text);
@@ -235,7 +234,7 @@ $.ajax({
        	  list_html +='    </div>';
        	
        	$("#update_without").html(list_html);
-        console.log("ajax_action")
+
        	  
        	 $.datetimepicker.setLocale('zh'); 
        	 $('#f_date1').datetimepicker({
@@ -276,7 +275,7 @@ $.ajax({
 		 e_title="EMPLOYEE";
 	 }
 	 
-	 console.log(e_id)
+
       //let form_data = new FormData();
       //form_data.append("user_id", user_id);
       //form_data.append("name", task_text);
@@ -393,7 +392,7 @@ $.ajax({
        	  list_html +='    </div>';
        	
        	$("#update_without").html(list_html);
-        console.log("ajax_action")
+
        	  
        	 $.datetimepicker.setLocale('zh'); 
        	 $('#f_date1').datetimepicker({
@@ -442,7 +441,7 @@ $.ajax({
 		  success: function(data){      // request 成功取得回應後執行
 		  			  		  	  
 			  $("[type='password']").val("");
-			  console.log(data);
+
 //			  for(let i=0; data){}
 			  alert(data);
 			  
@@ -461,7 +460,7 @@ $.ajax({
 		  dataType:"json",
 		  beforeSend:function(){},
 		  success:function(data){
-			  console.log(data)
+
 			  let list_html = ""
 			  
 			  list_html+='<div class="row">';
@@ -518,7 +517,7 @@ $.ajax({
 				  list_html+='		</div>';
 			  })
 			  
-			  console.log(list_html);
+
 			  
 			  $("div.management_container").html(list_html);
 			  
@@ -528,3 +527,238 @@ $.ajax({
 			  }
 		  })
   });
+  
+//點選管理員工的"新增"按鈕
+  $(document).on("click","#btn_add" ,function(){
+	  $.ajax({
+		  url:"http://localhost:8081/TEA102G3/Add_before", 
+		  type: "POST",
+		  dataType: "json",
+		  beforeSend: function(){},
+		  success: function(data){
+			  
+
+
+			  
+			  list_html = "";
+			  
+			  list_html+='<div class="row">';
+			  list_html+='    <div class="col">';
+			  list_html+='        <p>門市:</p>';
+			  list_html+='    </div>';
+			  list_html+='    <div class="col">';
+			  list_html+='        <select size="1" id="st_id_add" name="st_id">';
+			  for(let i = 0; i < data.length; i++){			  
+				  list_html+='            <option value="'+ data[i].st_id +'">'+ data[i].st_id +'';
+			  };
+			  list_html+='        </select>';
+			  list_html+='    </div>';
+			  list_html+='</div>';
+			  list_html+='<div class="row">';
+			  list_html+='    <div class="col">';
+			  list_html+='        <p>職稱:</p>';
+			  list_html+='    </div>';
+			  list_html+='    <div class="col">';
+			  list_html+='        <input type="radio" name="e_title" size="45" value="EMPLOYEE">EMPLOYEE';
+			  list_html+='        <input type="radio" name="e_title" size="45" value="BOSS">BOSS';
+			  list_html+='    </div>';
+			  list_html+='    <div class="col">';
+			  list_html+='        <p>電話:</p>';
+			  list_html+='    </div>';
+			  list_html+='    <div class="col">';
+			  list_html+='        <input type="TEXT" id="e_phone_add" name="e_phone">';
+			  list_html+='    </div>';
+			  list_html+='</div>';
+			  list_html+='<div class="row">';
+			  list_html+='    <div class="col">';
+			  list_html+='        <p>員工姓名:</p>';
+			  list_html+='    </div>';
+			  list_html+='    <div class="col">';
+			  list_html+='        <input type="TEXT" id="e_name_add" name="e_name">';
+			  list_html+='    </div>';
+			  list_html+='    <div class="col">';
+			  list_html+='        <p>性別:</p>';
+			  list_html+='    </div>';
+			  list_html+='    <div class="col">';
+			  list_html+='        <input type="radio" name="e_gender" value="MEN"}>MEN';
+			  list_html+='        <input type="radio" name="e_gender" value="WOMEN"}>WOMEN';
+			  list_html+='    </div>';
+			  list_html+='</div>';
+			  list_html+='<div class="row">';
+			  list_html+='    <div class="col">';
+			  list_html+='        <p>身分證字號:</p>';
+			  list_html+='    </div>';
+			  list_html+='    <div class="col">';
+			  list_html+='        <input type="TEXT" id="e_identity_add" name="e_identity">';
+			  list_html+='    </div>';
+			  list_html+='    <div class="col">';
+			  list_html+='        <p>生日:</p>';
+			  list_html+='    </div>';
+			  list_html+='    <div class="col">';
+			  list_html+='        <input name="e_birth" id="f_date1" type="text" placeholder="請選擇日期">';
+			  list_html+='    </div>';
+			  list_html+='</div>';
+			  list_html+='<div class="row">';
+			  list_html+='    <div class="col">';
+			  list_html+='        <p>地址:</p>';
+			  list_html+='    </div>';
+			  list_html+='    <div class="col">';
+			  list_html+='        <input type="TEXT" id="e_address_add" name="e_address">';
+			  list_html+='    </div>';
+			  list_html+='    <div class="col">';
+			  list_html+='        <p>狀態:</p>';
+			  list_html+='    </div>';
+			  list_html+='    <div class="col">';
+			  list_html+='        <input type="radio" name="e_status" value="0">在職';
+			  list_html+='        <input type="radio" name="e_status" value="1">離職	';
+			  list_html+='    </div>';
+			  list_html+='</div>';
+			  list_html+='<div class="row">';
+			  list_html+='    <div class="col">';
+			  list_html+='        <p>信箱:</p>';
+			  list_html+='    </div>';
+			  list_html+='    <div class="col">';
+			  list_html+='        <input type="TEXT" id="e_email_add" name="e_email">';
+			  list_html+='    </div>';
+			  list_html+='    <div class="col">';
+			  list_html+='        <p>密碼:</p>';
+			  list_html+='    </div>';
+			  list_html+='    <div class="col">';
+			  list_html+='        <input type="password" id="e_password" name="e_password">';
+			  list_html+='    </div>';
+			  list_html+='</div>';
+			  list_html+='<div class="row forget-row">';
+			  list_html+='    <div class="col btn_col">';
+			  list_html+='        <button type="button" id="btn_cancel" class="btn btn-primary forget-btn">取消</button>';
+			  list_html+='        <button type="button" id="add_enter" class="btn btn-primary forget-btn">確認</button>';
+			  list_html+='    </div>';
+			  list_html+='</div>';
+			  
+			  $("div.management_container").html(list_html);
+			  
+			  $.datetimepicker.setLocale('zh'); 
+		       	 $('#f_date1').datetimepicker({
+		           theme: '',              //theme: 'dark',
+		   	       timepicker:false,       //timepicker:true,
+		   	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
+		   	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
+//		   		   value: new Date(), // value:   new Date(),
+		             //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+		             //startDate:	            '2017/07/10',  // 起始日
+		             //minDate:               '-1970-01-01', // 去除今日(不含)之前
+		             //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+		          });
+		  },
+		  error:function(){
+			  console.log("error");
+		  }
+	  })
+  })
+  
+//點選新增員工的"確認"按鈕
+  $(document).on("click", "#add_enter",function(){
+	     let e_password = $("#e_password").val();
+		 let select_store = $("#st_id_add").val();
+		 let e_title = $("[name='e_title']:checked").val();
+		 let e_phone = $("#e_phone_add").val();
+		 let e_name = $("#e_name_add").val();
+		 let e_gender = $("[name='e_gender']:checked").val();
+		 let e_identity = $("#e_identity_add").val();
+		 let f_date1 = $("#f_date1").val();
+		 let e_address = $("#e_address_add").val();
+		 let e_email = $("#e_email_add").val();
+		 let e_status = $("[name='e_status']:checked").val();
+		 
+		 
+		 let form_data = { 
+				 	"e_password" : e_password,
+			        "st_id": select_store,
+			        "e_title" : e_title,
+			        "e_phone" : e_phone,
+			        "e_name" : e_name,
+			        "e_gender" : e_gender,
+			        "e_identity" : e_identity,
+			        "f_date1" : f_date1,
+			        "e_address" : e_address,
+			        "e_email" : e_email,
+			        "e_status" : e_status
+			      };
+		 let data_string = JSON.stringify(form_data);
+		 
+
+		 
+	  $.ajax({
+		  url: "http://localhost:8081/TEA102G3/Add_after",
+		  type: "POST",
+		  data: data_string,
+		  dataType: "json",
+		  beforeSend: function(){		  
+		  },
+		  success: function(data){
+			  
+			  
+			  let list_html = ""
+				  
+				  list_html+='<div class="row">';
+				  list_html+='    <div class="col search-col">';
+				  list_html+='        <p>查詢</p>';
+				  list_html+='    </div>';
+				  list_html+='    <div class="col">';
+				  list_html+='        <input type="text" name=""> ';
+				  list_html+='        <button type="button" class="btn btn-primary">查詢</button>';
+				  list_html+='    </div>';
+				  list_html+='    <div class="col">';
+				  list_html+='        <button type="button" id="btn_add" class="btn btn-outline-primary">新增</button>';
+				  list_html+='    </div>';
+				  list_html+='</div>';
+				  list_html+='<div class="row">';
+				  list_html+='    <div class="col">';
+				  list_html+='        <div class="row listAll_row">';
+				  list_html+='            <div class="col">員工id</div>';
+				  list_html+='            <div class="col">員工密碼</div>';
+				  list_html+='            <div class="col">身分證字號</div>';
+				  list_html+='            <div class="col">員工姓名</div>';
+				  list_html+='            <div class="col">性別</div>';
+				  list_html+='            <div class="col">生日</div>';
+				  list_html+='            <div class="col">員工信箱</div>';
+				  list_html+='            <div class="col">員工電話</div>';
+				  list_html+='            <div class="col">員工地址</div>';
+				  list_html+='            <div class="col">職稱</div>';
+				  list_html+='            <div class="col">員工狀態</div>';
+				  list_html+='            <div class="col">門市id</div>';
+				  list_html+='            <div class="col">修改</div>';
+				  list_html+='            <div class="col">刪除</div>';
+				  list_html+='        </div>';	  
+					  
+				  $.each(data.emp_list, function(index, item){
+					  list_html+='		<div class="row" id="div_append">';
+					  list_html+='            <div class="col">'+ item.e_id +'</div>';
+					  list_html+='            <div class="col">'+ item.e_password +'</div>';
+					  list_html+='            <div class="col">'+ item.e_identity +'</div>';
+					  list_html+='            <div class="col">'+ item.e_name +'</div>';
+					  list_html+='            <div class="col">'+ item.e_gender +'</div>';
+					  list_html+='            <div class="col">'+ item.e_birth +'</div>';
+					  list_html+='            <div class="col">'+ item.e_email +'</div>';
+					  list_html+='            <div class="col">'+ item.e_phone +'</div>';
+					  list_html+='            <div class="col">'+ item.e_address +'</div>';
+					  list_html+='            <div class="col">'+ item.e_title +'</div>';
+					  list_html+='            <div class="col">'+ item.e_status +'</div>';
+					  list_html+='            <div class="col">'+ item.st_id +'</div>';
+					  list_html+='            <div class="col">';
+					  list_html+='                 <input type="submit" value="修改">';
+					  list_html+='            </div>';
+					  list_html+='            <div class="col">';
+					  list_html+='                 <input type="submit" value="更新狀態">';
+					  list_html+='            </div>';
+					  list_html+='		</div>';
+				  })
+				  
+				  
+				  $("div.management_container").html(list_html);
+			  
+		  },
+		  error: function(){
+			  console.log("error");
+		  }
+	  })
+  })

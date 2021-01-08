@@ -15,7 +15,7 @@
     <link rel="stylesheet type" href="${pageContext.request.contextPath}/Back_end/employee/css/index_backstage.css">
 </head>
 <body>
-<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/login" name="form1">
+<%-- <FORM METHOD="post" ACTION="${pageContext.request.contextPath}/login" name="form1"> --%>
 	 <div class="container update_without">
 	 	<div class="row">
 	 		<div class="col">
@@ -125,7 +125,7 @@
             </div>
         </div>
     </div>
-	</FORM>
+<!-- 	</FORM> -->
 
 
 
@@ -134,10 +134,10 @@
     <script src="${pageContext.request.contextPath}/vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/Back_end/employee/js/index_backstage.js"></script>
     <script>
-	    var btn_cancel = document.getElementById("btn_cancel");
-	    btn_cancel.addEventListener('click',function(){
-	    	location.href='<%=request.getContextPath()%>/Back_end/employee/index_backstage.jsp'
-	    });
+// 	    var btn_cancel = document.getElementById("btn_cancel");
+// 	    btn_cancel.addEventListener('click',function(){
+<%-- 	    	location.href='<%=request.getContextPath()%>/Back_end/employee/index_backstage.jsp' --%>
+// 	    });
 // 	    if(${errorMsgs_without != null}){
 // 			alert("${errorMsgs_without}");			
 // 		}

@@ -23,10 +23,18 @@
 <!-- Font awesome -->
 <script src="https://kit.fontawesome.com/a72ac34f47.js"
 	crossorigin="anonymous"></script>
-<script src="alert/dist/sweetalert-dev.js"></script>
+<!-- <script src="alert/dist/sweetalert-dev.js"></script> -->
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>	
-
+	<script
+		src="<%=request.getContextPath()%>/vendors/jquery/jquery-3.5.1.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/vendors/popper/popper.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/Front_end/product/js/getType.js"></script>
+	<script src="<%=request.getContextPath()%>/Front_end/js/webSocket.js"></script>
 
 <style>
 * {
@@ -455,7 +463,7 @@ select#ptype {
 						<hr>
 						<a class="dropdown-item"
 							href="<%=request.getContextPath()%>/Front_end/members/LoginPage.jsp">登入/註冊</a>
-						<a class="dropdown-item" href="http://localhost:8081/TEA102G3/Front_end/index_Seller.jsp">賣家中心</a> 
+						<a class="dropdown-item" href="<%=request.getContextPath()%>/member/controller/MemberServlet?action=goSellerIndex">賣家中心</a> 
 						<form action="<%=request.getContextPath()%>/member/controller/MemberLogout">
 						<button class="dropdown-item" type="submit">登出</button>
 						</form>
@@ -545,15 +553,7 @@ select#ptype {
 			});
 		}
 	</script>
-	<script
-		src="<%=request.getContextPath()%>/vendors/jquery/jquery-3.5.1.min.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/vendors/popper/popper.min.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/Front_end/product/js/getType.js"></script>
-	<script src="<%=request.getContextPath()%>/Front_end/js/webSocket.js"></script>
+
 </body>
 
 </html>

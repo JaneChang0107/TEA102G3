@@ -10,7 +10,7 @@ public class OrderlistService {
 		dao= new OrderlistJDBCDAO();
 	}
 	
-	public OrderlistVO addOrderlistVO2(Timestamp o_date,String o_status,String o_transport,String o_address,Integer o_total,Integer o_pm,String m_id) {
+	public String addOrderlistVO2(Timestamp o_date,String o_status,String o_transport,String o_address,Integer o_total,Integer o_pm,String m_id) {
 		OrderlistVO orderlistVO =new OrderlistVO();
 		orderlistVO.setO_date(o_date);
 		orderlistVO.setO_status(o_status);
@@ -19,9 +19,9 @@ public class OrderlistService {
 		orderlistVO.setO_total(o_total);
 		orderlistVO.setO_pm(o_pm);
 		orderlistVO.setM_id(m_id);
-		dao.insert(orderlistVO);
 		
-		return orderlistVO;
+		
+		return dao.insert(orderlistVO);
 	}
 	
 	

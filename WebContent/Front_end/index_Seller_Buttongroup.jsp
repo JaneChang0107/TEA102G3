@@ -34,8 +34,22 @@ body {
     font-size: 50px;
     margin: 30px;
     margin-left: 60px;
-    border-radius: 5%;
+    border-radius: 30px;
+    box-shadow: 3px 3px 5px 6px darkgrey;
+}
+.btn-warning{
+    width: 140px;
+    margin: 5px;
+    margin-left: 8px;
     
+}
+
+#dropdown-menu1,#dropdown-menu2,#dropdown-menu3,#dropdown-menu4{
+    width:80px;
+    height:120px;
+    background-color:darkgrey;
+    border-radius: 8%;
+    opacity: 0.88;
 }
 
 </style>
@@ -45,14 +59,47 @@ body {
 <body style="background:#F5D2CD;
 	height: 100%;">
 
-<h2><b><a href="http://localhost:8081/TEA102G3/Front_end/index_Seller.jsp" style="padding-left: 20px;">遊戲堃|賣家中心</a></b></h2>
+<h2><b><a href="<%=request.getContextPath()%>/member/controller/MemberServlet?action=goSellerIndex" style="padding-left: 20px;">遊戲堃|賣家中心</a></b></h2>
+<div style="text-align:center;">
 
-<button type="button" class="btn btn-primary" id="sellerbar1">訂單管理</button>
-<button type="button" class="btn btn-success" id="sellerbar2">商品管理</button><br>
-<button type="button" class="btn btn-danger" id="sellerbar3">財務管理</button>
-<button type="button" class="btn btn-info" id="sellerbar4">賣場管理</button>
+<div class="btn-group dropright">
+<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="sellerbar1">訂單管理</button>
+  <div class="dropdown-menu" id="dropdown-menu1">
+  <button type="button" class="btn btn-warning">我的銷售</button>
+  <button type="button" class="btn btn-warning">物流設定</button>
+  </div>
+</div>
+
+<div class="btn-group dropright">
+<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="sellerbar2">商品管理</button><br>
+  <div class="dropdown-menu" id="dropdown-menu2">
+  <button type="button" class="btn btn-warning"><a href="<%=request.getContextPath()%>/Front_end/product/addProduct.jsp">新增商品</a></button>
+  <button type="button" class="btn btn-warning"><a href="<%=request.getContextPath()%>/Front_end/product/sellerProduct.jsp">我的商品</a></button>
+  </div>
+</div><br>
+
+<div class="btn-group dropright">
+<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="sellerbar3">財務管理</button>
+  <div class="dropdown-menu" id="dropdown-menu3">
+  <button type="button" class="btn btn-warning">銀行帳號</button>
+  <button type="button" class="btn btn-warning">我的進帳</button>
+  </div>
+</div>
+
+<div class="btn-group dropright">
+<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="sellerbar4">賣場管理</button>
+  <div class="dropdown-menu" id="dropdown-menu4">
+  <button type="button" class="btn btn-warning">賣場介紹</button>
+  <button type="button" class="btn btn-warning">賣場評價</button>
+  </div>
+</div>
 
 
+
+
+
+
+</div>
 </body>
 
 </html>

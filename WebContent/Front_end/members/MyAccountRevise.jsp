@@ -71,12 +71,15 @@
 }
 
 #myfiles,#changepw{
-    text-align:left;
-    margin:auto;
-    background-color: #e9e9e9;
-    width:800px;
-    height:900px;
-    font-size:24px;
+    text-align: left;
+    margin: auto;
+    width: 800px;
+    height: 900px;
+    font-size: 24px;
+    background-color: #FFF68F;
+    color: #8d8a8a;
+    border-radius: 30px;
+    font-weight: bold;
 }
 #pills-tab{
     margin:auto;

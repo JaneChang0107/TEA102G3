@@ -83,9 +83,10 @@ h1{
 	</tr>
 	<c:forEach var="orderdetailVO" items="${list}">
 		<tr>
-           <td><img src="data:image/jpg;base64,${productPicSvc.findFirstOneProductPicture(orderdetailVO.p_id).pp_picture64}" width="100px" height="100px";></td> 
+           <td><img src="<%=request.getContextPath()%>/ShowPicture?type=ppid&id=${productPicSvc.findProductRandomPicture(orderdetailVO.p_id)}" width="100px" height="100px";></td> 
 <%--        <td><img src="data:image/jpg;base64,<%=((ProductPictureVO)(productPicSvc.findFirstOneProductPicture(orderdetailVO.getP_id()))).getPp_picture64()%>" width="100px" height="100px";></td> --%>
 			<td><h2>${productSvc.oneProduct(orderdetailVO.p_id).p_name}</h2></td>
+			<td><h2> * ${orderdetailVO.od_count}</h2></td>
 			<td><h2> * ${orderdetailVO.od_count}</h2></td>
 			<td><h2>${productSvc.oneProduct(orderdetailVO.p_id).p_price}</h2></td>
 			<td><h2>${orderdetailVO.od_count*productSvc.oneProduct(orderdetailVO.p_id).p_price}</h2></td>
