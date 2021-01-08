@@ -252,20 +252,48 @@ input:read-only {
 									<td><label><input type="radio" name="o_transport"
 											id="delivery" value=0 required />黑貓宅急便</label></td>
 									<td>130</td>
-									<td><label><input type="radio" name="pay" value=6 / required>貨到付款</label></td>
+									<td><label><input type="radio" name="pay" value=6 id="paynow" required>貨到付款</label></td>
 								</tr>
 								<tr>
 									<td><label><input type="radio" name="o_transport"
 											id="delivery" value="1" />7-11</label></td>
 									<td>60</td>
-									<td><label><input type="radio" name="pay" value=7 />信用卡</label></td>
+									<td><label><input type="radio" name="pay" value=7  id="credit"/>信用卡</label></td>
 								</tr>
 
 								<tr>
 									<td><label><input type="radio" name="o_transport"
 											id="delivery" value="2" />全家</label></td>
 									<td>60</td>
-									<td>信用卡號碼:<input type="text"></input></td>
+										<td id="creditform" rowspan=2>
+											<div>
+										信用卡號碼:<input type="text" required></input><br>
+										持有者姓名:<input type="text" required></input><br>安全碼:<input type="text" required></input>
+										<div class="ooo" id="expiration-date" >
+												 <label>到期年月份</label> <select required>
+													<option value="01">January</option>
+													<option value="02">February</option>
+													<option value="03">March</option>
+													<option value="04">April</option>
+													<option value="05">May</option>
+													<option value="06">June</option>
+													<option value="07">July</option>
+													<option value="08">August</option>
+													<option value="09">September</option>
+													<option value="10">October</option>
+													<option value="11">November</option>
+													<option value="12">December</option>
+												</select> <select required>
+													<option value="16">2016</option>
+													<option value="17">2017</option>
+													<option value="18">2018</option>
+													<option value="19">2019</option>
+													<option value="20">2020</option>
+													<option value="21">2021</option>
+												</select>
+												</div>
+											</td>
+										
 								</tr>
 
 
@@ -273,39 +301,14 @@ input:read-only {
 									<td><label><input type="radio" name="o_transport"
 											id="delivery" value="3" />OK mart</label></td>
 									<td>60</td>
-									<td>持有者姓名:<input type="text"></input> <br>安全碼:<input
-										type="text"></input>
-
-									</td>
+									<td></td>
 								</tr>
 								<th></th>
 								<tr>
 									<td><label><input type="radio" name="o_transport"
 											id="delivery" value="4" />萊爾富</label></td>
 									<td>60</td>
-									<td><div class="ooo" id="expiration-date">
-											<label>到期年月份</label> <select>
-												<option value="01">January</option>
-												<option value="02">February</option>
-												<option value="03">March</option>
-												<option value="04">April</option>
-												<option value="05">May</option>
-												<option value="06">June</option>
-												<option value="07">July</option>
-												<option value="08">August</option>
-												<option value="09">September</option>
-												<option value="10">October</option>
-												<option value="11">November</option>
-												<option value="12">December</option>
-											</select> <select>
-												<option value="16">2016</option>
-												<option value="17">2017</option>
-												<option value="18">2018</option>
-												<option value="19">2019</option>
-												<option value="20">2020</option>
-												<option value="21">2021</option>
-											</select>
-										</div></td>
+									<td></td>
 								</tr>
 
 								<tr>
@@ -465,6 +468,20 @@ input:read-only {
     	      return false;
     	    }
     	  });
+    	});
+    
+    
+    window.onload=function (){
+    	 $("#creditform").hide();
+    	}
+    $(document).ready(function(){
+    	 $("#creditform").show();
+    	  $('#paynow').click(function(){
+    	    $("#creditform").hide();
+    	  });
+    	  $('#credit').click(function(){
+    		  $("#creditform").show();
+      	  });
     	});
     
 	 </script>
