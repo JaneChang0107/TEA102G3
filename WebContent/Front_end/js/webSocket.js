@@ -27,11 +27,15 @@ function connect() {
 
 function showToast(data) {
     $("#showToast").html("");
-    
+
     let addthing =
+<<<<<<< HEAD
     `<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000"  style="position: absolute; top: 100px; right: 100px;">
+=======
+    `<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+>>>>>>> parent of 47ae2a6 (i)
         <div class="toast-header">
-            
+            <img src="..." class="rounded mr-2" alt="...">
             <strong class="mr-auto">公告</strong>
             <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                 <span aria-hidden="true">&times;</span>

@@ -41,7 +41,7 @@ marquee {
 
 		<h3>
 			<marquee onMouseOver="this.stop()" onMouseOut="this.start()"
-				id="announcement"> </marquee>
+				id="announcement"></marquee>
 		</h3>
 	</center>
 
@@ -129,8 +129,8 @@ marquee {
 
 		function announcement() {
 
-			
-					$.ajax({
+			$
+					.ajax({
 						url : context + "/light.do",
 						type : "get",
 						data : {

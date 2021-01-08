@@ -5,6 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 	
 	<%
+//  	String m_id= session.getAttribute("loginId").toString();
 
 	%>
 <!DOCTYPE html>
@@ -375,16 +376,9 @@ select#ptype {
 	width: 470px;
 }
 
-
-	
-
-
-}
-
 #showToast{
 	position: fixed;
-	top:100px;
-	right: 100px;
+	right: 10px;
 	bottom: 10px;
 	z-index: 5;
 }
@@ -443,7 +437,7 @@ select#ptype {
 					aria-expanded="true" onclick="notice()"></i>
 					<div class="dropdown-menu" aria-labelledby="bell">
 <ul>
-						<a class="dropdown-item" id="notice" onclick="belldel()" href=""></a> 
+						<a class="dropdown-item" id="notice" href=""></a> 
 	</ul>					
 					</div> 
 				</td>
@@ -486,23 +480,8 @@ select#ptype {
 	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 
+
 	<script>
-//  	var context="/TEA102G3"
-	function belldel() {
-		$.ajax({
-			url : context + "/light.do",
-			type : "get",
-			data : {
-				"action" : "delete",
-			},
-			dataType:"json",
-			success : function(data) {
-				console.log(data);
-			}
-		});	
-	}
-		
-	
 		var swiper = new Swiper('.swiper-container', {
 			slidesPerView : 4,
 			spaceBetween : 30,
