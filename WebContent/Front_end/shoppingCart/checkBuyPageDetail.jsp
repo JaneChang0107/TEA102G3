@@ -29,7 +29,7 @@
 <title>結帳頁面-我要買</title>
 <style>
 * {
-	border: 0px solid gray;
+	border: 1px solid gray;
 }
 
 .mybody {
@@ -205,9 +205,8 @@ input:read-only {
 				<td>規格</td>
 				<td>單價</td>
 				<td>數量</td>
-				<td>金額</td>
-				<td></td>
-				<td></td>
+				<td colspan=3>金額</td>
+				
 
 			</tr>
 
@@ -223,24 +222,24 @@ input:read-only {
 				</td>
 				<td><%=price%></td>
 				<td ><%=k%><input type="hidden" value="<%=k%>" name="k<%=i%>"></input></td>
-				<td class="kprice<%=i%>"><%=k * price%></td>
-				<td></td>
-				<td></td>
+				<td class="kprice<%=i%>" colspan=3><%=k * price%></td>
+			
 
 			</tr>
 			<%
 				}
 			%>
 			<tr>
-				<th colspan=8><a>確認運送與付款方式</a><img
-					src="
-					<%=request.getContextPath()%>
-					/images/downarrow.png"
+			<tr><td colspan=8></td><tr>
+				<th colspan=8><a>確認運送與付款方式</a>
+					<img src="<%=request.getContextPath()%>/images/downarrow.png"
 					class="downarrow" data-toggle="collapse" href="#collapseExample"
 					type="button" aria-expanded="false" aria-controls="collapseExample"></img>
 					<br>
 					<div class="collapse" id="collapseExample">
+					
 
+						<div class="collapse" id="collapseExample">
 						<div class="card-body">
 							<table class="table2" width="100%">
 								<tr>
@@ -265,12 +264,13 @@ input:read-only {
 									<td><label><input type="radio" name="o_transport"
 											id="delivery" value="2" />全家</label></td>
 									<td>60</td>
+<!-- 									<td>信用卡號碼:<input type="text"></input></td> -->
 										<td id="creditform" rowspan=2>
 											<div>
-										信用卡號碼:<input type="text" required></input><br>
-										持有者姓名:<input type="text" required></input><br>安全碼:<input type="text" required></input>
-										<div class="ooo" id="expiration-date" >
-												 <label>到期年月份</label> <select required>
+										信用卡號碼:<input type="text"></input><br>
+										持有者姓名:<input type="text"></input><br>安全碼:<input type="text"></input>
+										<div class="ooo" id="expiration-date">
+												 <label>到期年月份</label> <select>
 													<option value="01">January</option>
 													<option value="02">February</option>
 													<option value="03">March</option>
@@ -283,7 +283,7 @@ input:read-only {
 													<option value="10">October</option>
 													<option value="11">November</option>
 													<option value="12">December</option>
-												</select> <select required>
+												</select> <select>
 													<option value="16">2016</option>
 													<option value="17">2017</option>
 													<option value="18">2018</option>
@@ -301,14 +301,41 @@ input:read-only {
 									<td><label><input type="radio" name="o_transport"
 											id="delivery" value="3" />OK mart</label></td>
 									<td>60</td>
-									<td></td>
+<!-- 									<td>持有者姓名:<input type="text"></input> <br>安全碼:<input -->
+<!-- 										type="text"></input> -->
+
+<!-- 									</td> -->
+<td></td>
 								</tr>
 								<th></th>
 								<tr>
 									<td><label><input type="radio" name="o_transport"
 											id="delivery" value="4" />萊爾富</label></td>
 									<td>60</td>
-									<td></td>
+<!-- 									<td><div class="ooo" id="expiration-date"> -->
+<!-- 											<label>到期年月份</label> <select> -->
+<!-- 												<option value="01">January</option> -->
+<!-- 												<option value="02">February</option> -->
+<!-- 												<option value="03">March</option> -->
+<!-- 												<option value="04">April</option> -->
+<!-- 												<option value="05">May</option> -->
+<!-- 												<option value="06">June</option> -->
+<!-- 												<option value="07">July</option> -->
+<!-- 												<option value="08">August</option> -->
+<!-- 												<option value="09">September</option> -->
+<!-- 												<option value="10">October</option> -->
+<!-- 												<option value="11">November</option> -->
+<!-- 												<option value="12">December</option> -->
+<!-- 											</select> <select> -->
+<!-- 												<option value="16">2016</option> -->
+<!-- 												<option value="17">2017</option> -->
+<!-- 												<option value="18">2018</option> -->
+<!-- 												<option value="19">2019</option> -->
+<!-- 												<option value="20">2020</option> -->
+<!-- 												<option value="21">2021</option> -->
+<!-- 											</select> -->
+<!-- 										</div></td> -->
+<td></td>
 								</tr>
 
 								<tr>
@@ -376,6 +403,13 @@ input:read-only {
 		<button type="button" class="button1" onclick="history.back()">回上一頁</button>
 		<button type="submit" class="button2">確認送出</button>
 		<input type="hidden" name="action" value="SUCCESS">	
+		
+		
+
+  
+  
+  
+</div>
 </form>
 
 	</div>
@@ -470,7 +504,7 @@ input:read-only {
     	  });
     	});
     
-    
+//控制radiobutton    
     window.onload=function (){
     	 $("#creditform").hide();
     	}
