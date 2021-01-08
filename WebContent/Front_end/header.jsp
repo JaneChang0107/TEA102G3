@@ -376,12 +376,12 @@ select#ptype {
 	width: 470px;
 }
 
-#showToast{
-	position: fixed;
-	right: 10px;
-	bottom: 10px;
-	z-index: 5;
-}
+/* #showToast{ */
+/* 	position: fixed; */
+/* 	right: 10px; */
+/* 	bottom: 10px; */
+/* 	z-index: 5; */
+/* } */
 </style>
 </head>
 
@@ -437,7 +437,7 @@ select#ptype {
 					aria-expanded="true" onclick="notice()"></i>
 					<div class="dropdown-menu" aria-labelledby="bell">
 <ul>
-						<a class="dropdown-item" id="notice" href=""></a> 
+						<a class="dropdown-item" id="notice" onclick="belldel()" href=""></a> 
 	</ul>					
 					</div> 
 				</td>
@@ -482,6 +482,9 @@ select#ptype {
 
 
 	<script>
+	
+	
+	
 		var swiper = new Swiper('.swiper-container', {
 			slidesPerView : 4,
 			spaceBetween : 30,
@@ -504,6 +507,22 @@ select#ptype {
 
 		function closeNav() {
 			document.getElementById("myNav").style.width = "0%";
+		}
+// var context="/TEA102G3"		
+		
+		function belldel(){
+			$.ajax({
+				url:context + "/light.do",
+				type:"get",
+				data:{
+					"action":"delete",
+					},
+				dataType:"json",
+				success:function(data){
+					console.log(data)
+				}
+			});
+			
 		}
 		
 		notice()
