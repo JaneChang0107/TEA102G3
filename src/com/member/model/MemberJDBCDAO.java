@@ -41,6 +41,8 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	private static final String GET_Mems_Password_STMT = "SELECT m_id,m_name,m_email,m_password FROM member WHERE m_email=?";
 	
 	private static final String UPDATE_Status_STMT ="UPDATE member set m_status=? where m_email=?";
+	
+	private static final String UPDATE_Kun_STMT ="UPDATE member set m_coin=? where m_id=?";
 
 	// 新增一般會員
 	@Override
@@ -519,7 +521,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		return memberVO;
 	}
 	
-	
+	//會員開通
 	@Override
 	public void activeMember(MemberVO memberVO) {
 		Connection con = null;
@@ -553,6 +555,43 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		}
 
 	}
+	
+	//修改Kun幣
+	@Override
+	public void changeKun(MemberVO memberVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_Kun_STMT);
+			pstmt.setInt(1, memberVO.getM_coin());
+			pstmt.setString(2, memberVO.getM_id());
+			pstmt.executeUpdate();
+
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}	
+	}
+	
 
 	
 
@@ -754,6 +793,8 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		}
 		return buffer;
 	}
+
+
 
 
 

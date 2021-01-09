@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.member.model.MemberService;
+import com.member.model.MemberVO;
 import com.orderdetail.model.OrderdetailService;
 import com.orderdetail.model.OrderdetailVO;
 import com.orderlist.model.OrderlistService;
@@ -54,10 +56,28 @@ public class BuyServlet extends HttpServlet {
 			String o_transport = req.getParameter("o_transport");
 			String o_address = req.getParameter("o_address");
 			Integer o_total = Integer.parseInt(req.getParameter("o_total"));
-			Integer o_pm = Integer.parseInt(req.getParameter("o_kun"));
+			
+//取得本次折抵Kun幣
+			Integer kunUse= Integer.parseInt(req.getParameter("kunUse"));
+//將本次賺取Kun幣與折抵額運算
+			Integer o_pm = Integer.parseInt(req.getParameter("o_kun"))-kunUse;						
+			
 			String m_id = (String) session.getAttribute("loginId");
 			OrderlistService orderSvc = new OrderlistService();
 			String o_id = orderSvc.addOrderlistVO2(o_date, o_status, o_transport, o_address, o_total, o_pm, m_id);
+//修改會員Kun幣
+			MemberService mSv = new MemberService();
+			MemberVO memberVO = mSv.findOneMem(m_id);
+			
+			int before=memberVO.getM_coin();
+			System.out.println("原本持有Kun幣:"+before);
+            memberVO.setM_coin(before+o_pm);
+            
+            int after=memberVO.getM_coin();
+            System.out.println("購買後持有Kun幣:"+after);
+            
+            mSv.changeKun(after,m_id);
+			
 //成立Orderdetail的訂單資料	
 			ProductTypeService pSvc = new ProductTypeService();
 			OrderdetailVO odvo = new OrderdetailVO();

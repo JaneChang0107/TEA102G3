@@ -29,7 +29,7 @@
 <title>結帳頁面-我要買</title>
 <style>
 * {
-	border: 1px solid gray;
+	border: 0px solid gray;
 }
 
 .mybody {
@@ -194,7 +194,7 @@ input:read-only {
 		<hr>
 		<table class="table1">
 			<th>
-				<h4 align="center"><%=member_id%>的賣場</h4>
+				<h4 align="center"><%=memSvc.findOneMem(member_id).getM_name()%>的賣場</h4>
 
 			</th>
 
@@ -342,7 +342,7 @@ input:read-only {
 									<td><label><input type="radio" name="o_transport"
 											id="delivery" value="5" />郵局</label></td>
 									<td>70</td>
-									<td>使用堃幣折抵<input type="number" min="0" id="kun"
+									<td>使用堃幣折抵<input type="number" min="0" id="kun" name="kunUse"
 										max="${memberVO.m_coin}" required>/現有${memberVO.m_coin}堃幣
 									</td>
 									<td></td>

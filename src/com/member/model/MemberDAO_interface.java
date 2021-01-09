@@ -26,5 +26,7 @@ public interface MemberDAO_interface {
 	
 	//寄驗證信
 	public void activeMember(MemberVO memberVO);
+	//修改會員Kun幣
+	public void changeKun(MemberVO memberVO);
 	
 }

@@ -9,7 +9,7 @@
 	Vector<ProductVO> buylist = (Vector<ProductVO>) session.getAttribute("shoppingcart");
 
 %>
-
+<jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService" />
 <jsp:useBean id="productSvc" scope="page" class="com.product.model.ProductService" />
 <jsp:useBean id="productpicSvc" scope="page" class="com.productPicture.model.ProductPictureService" />
 <jsp:useBean id="producttypeSvc" scope="page" class="com.productType.model.ProductTypeService" />
@@ -186,7 +186,7 @@ table {
 		<table class="table1">
 			<tr>
 				<td colspan=8>
-					<h4 align="left"><c:out value="${productVO.m_id}" />的賣場</h4>
+					<h4 align="left"><c:out value="${memSvc.findOneMem(productVO.m_id).m_name}" />的賣場</h4>
 
 				</td>
 			</tr>
@@ -208,7 +208,7 @@ table {
 			<tr class="cart">
 
 				<td></td>
-				<td><img class="pic" src="data:image/jpg;base64,${productpicSvc.findFirstOneProductPicture(productVO.p_id).pp_picture64} ">
+				<td><img class="pic" src="<%=request.getContextPath()%>/ShowPicture?type=ppid&id=${productpicSvc.findProductRandomPicture(productVO.p_id)}">
 					</td>
 
 				<td><c:out value="${productVO.p_name}" /></td>

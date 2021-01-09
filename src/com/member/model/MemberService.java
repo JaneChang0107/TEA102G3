@@ -156,6 +156,12 @@ public class MemberService {
 		return memberVO;
 	}
 	
-	
+	public MemberVO changeKun(Integer m_coin,String m_id) {
+		MemberVO memberVO = new MemberVO();
+		memberVO.setM_coin(m_coin);
+		memberVO.setM_id(m_id);
+		dao.changeKun(memberVO);
+		return memberVO;
+	}
 
 }
