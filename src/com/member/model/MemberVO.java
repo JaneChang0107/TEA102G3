@@ -214,7 +214,9 @@ public class MemberVO implements java.io.Serializable{
 			}else if(m_status ==1) {
 				statusName ="買家";
 			}else if (m_status == 2) {
-				statusName ="賣家";
+				statusName ="賣家未驗證";
+			}else if(m_status ==3) {
+				statusName="賣家";
 			}
 			return statusName;
 		}

@@ -14,11 +14,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
-   int countorder=(Integer)request.getAttribute("countorder");
-   int countunfinish=(Integer)request.getAttribute("countunfinish");
-   int countshipping=(Integer)request.getAttribute("countshipping");
-   int countarrived=(Integer)request.getAttribute("countarrived");
-   int countfinish=(Integer)request.getAttribute("countfinish");
+//    int countorder,countunfinish,countshipping,countarrived,countfinish;
+//    countorder=(Integer)request.getAttribute("countorder");
+//    countunfinish=(Integer)request.getAttribute("countunfinish");
+//    countshipping=(Integer)request.getAttribute("countshipping");
+//    countarrived=(Integer)request.getAttribute("countarrived");
+//    countfinish=(Integer)request.getAttribute("countfinish");
+
 %>
 
 
@@ -85,27 +87,27 @@
     <pre style="font-size:50px;"> <u>待辦事項清單</u></pre>
     
     <div class="todocolumn">
-    <%=countorder%><br>
+    ${countorder}<br>
         總訂單數
     </div>
     
     <div class="todocolumn">
-    <%=countunfinish%><br>
+    ${countunfinish}<br>
         待完成訂單數
     </div>
     
     <div class="todocolumn">
-    <%=countshipping%><br>
+    ${countshipping}<br>
         已出貨訂單數
     </div>
     
     <div class="todocolumn">
-    <%=countarrived%><br>
+    ${countarrived}<br>
         已到貨訂單數
     </div>
     
     <div class="todocolumn">
-    <%=countfinish%><br>
+    ${countfinish}<br>
         已完成訂單數
     </div>
     

@@ -9,7 +9,7 @@ import javax.activation.*;
 
 public class SendEmail {
 	
-	public static void openMail(String to) throws MessagingException {
+	public static void openMail(String status,String to) throws MessagingException {
 		
 		String host = "imap.gmail.com";                //主機端
 		String username ="yuxikun102g3@gmail.com";      //寄件者
@@ -45,8 +45,8 @@ public class SendEmail {
 //					"            <input type=\"submit\" value=\"Click hear to active your account!\" id=\"revise\" class=\"btn btn-primary\">\r\n" + 
 //					"            </FORM>","text/html");
 			//超連結
-			message.setContent("<h2>Welcome to YuXiKun</h2><br><a href=\"http://localhost:8081/TEA102G3/member/controller/MemberServlet?action=activeMember&m_email=\"+to+\">Click to join!</a>\r\n" + 
-					"","text/html");
+			message.setContent("<h2>Welcome to YuXiKun</h2><br><a href=\"http://localhost:8081/TEA102G3/member/controller/MemberServlet?action=activeMember&m_status="+status+"&m_email="+to+"\">click to join</a>","text/html");
+			System.out.println(status);
 			System.out.println(to);
 			Transport transport= session.getTransport("smtp");						
 			transport.connect(host,username,password);
@@ -58,9 +58,11 @@ public class SendEmail {
 			me.printStackTrace();
 		}
 		
-		
 	}
-	public static void main(String[] args) throws MessagingException {
-		SendEmail.openMail("aceg19682@gmail.com");
-	}
+//	public static void main(String[] args) throws MessagingException {
+//		SendEmail.openMail("2","aceg19682@gmail.com");
+//	}
+//	System.out.println(<h2>Welcome to YuXiKun</h2><br><a href="http://localhost:8081/TEA102G3/member/controller/MemberServlet?action=activeMember&m_status="+status+"&m_email="+to+"">click to join</a>
+//);
+	
 }

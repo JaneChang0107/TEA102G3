@@ -37,7 +37,13 @@ public class MemberServlet extends HttpServlet {
 
 //賣家中心控制器
 		if("goSellerIndex".equals(action)) {
-			//拿到賣家id
+			   int countorder=0;
+			   int countunfinish=0;
+			   int countshipping=0;
+			   int countarrived=0;
+			   int countfinish=0;
+			try {   
+
 			   HttpSession session= req.getSession();
 			   String m_id = session.getAttribute("loginId").toString();
 			   
@@ -46,31 +52,34 @@ public class MemberServlet extends HttpServlet {
 			   List<OrderlistVO> list = olsv.getAll();
 			   OrderdetailService odsv =new OrderdetailService();
 			   ProductService psvc =new ProductService();
+				if (list.size() != 0) {
+					for (int i = 0; i < list.size(); i++) {
+//						System.out.println("訂單號"+(list.get(i).getO_id())+"，賣家:"+psvc.oneProduct(odsv.getFirstP_id(list.get(i).getO_id())).getM_id());
+						//從全訂單比對有該帳戶的訂單
+						String comparem_id = psvc.oneProduct(odsv.getFirstP_id(list.get(i).getO_id())).getM_id();
+						String compareo_status = list.get(i).getO_status();
 
-			   int countorder=0;
-			   int countunfinish=0;
-			   int countshipping=0;
-			   int countarrived=0;
-			   int countfinish=0;
-			   for(int i=0;i<list.size();i++){
-				   String comparem_id= psvc.oneProduct(odsv.getFirstP_id(list.get(i).getO_id())).getM_id();
-				   String compareo_status = list.get(i).getO_status();
-				   if(comparem_id.equals(m_id)){
-					   countorder++;
-				   }
-				   if(compareo_status.trim().equals("訂單成立")){
-					   countunfinish++;
-				   }
-				   if(compareo_status.trim().equals("已出貨")){
-					   countshipping++;
-				   }
-				   if(compareo_status.trim().equals("已到貨")){
-					   countarrived++;
-				   }
-				   if(compareo_status.trim().equals("訂單完成")){
-					   countfinish++;
-				   }
-			   }
+						if (comparem_id.equals(m_id)) {
+							countorder++;
+						}
+						if (comparem_id.equals(m_id) && compareo_status.trim().equals("訂單成立")) {
+							countunfinish++;
+						}
+						if (comparem_id.equals(m_id) && compareo_status.trim().equals("已出貨")) {
+							countshipping++;
+						}
+						if (comparem_id.equals(m_id) && compareo_status.trim().equals("已到貨")) {
+							countarrived++;
+						}
+						if (comparem_id.equals(m_id) && compareo_status.trim().equals("訂單完成")) {
+							countfinish++;
+						}
+					}
+				}
+
+		}catch(Exception e) {
+			countorder=0;countunfinish=0;countshipping=0;countarrived=0;countfinish=0;
+		}finally {
 			   req.setAttribute("countorder", countorder);
 			   req.setAttribute("countunfinish", countunfinish);
 			   req.setAttribute("countshipping", countshipping);
@@ -79,9 +88,8 @@ public class MemberServlet extends HttpServlet {
 			   String url ="/Front_end/index_Seller.jsp";
 			   RequestDispatcher successView =req.getRequestDispatcher(url);
 	  		   successView.forward(req, res);
-
 		}
-		
+}
 		
 		
 //查詢單個會員
@@ -669,7 +677,7 @@ public class MemberServlet extends HttpServlet {
 			String url= "/Front_end/members/addSuccess.jsp";
 			RequestDispatcher successView =req.getRequestDispatcher(url);
 			successView.forward(req, res);
-			SendEmail.openMail(m_email);
+			SendEmail.openMail("1",m_email);
 			
 			
 			// 抓到其他例外
@@ -860,7 +868,7 @@ public class MemberServlet extends HttpServlet {
 			String url= "/Front_end/members/addSuccess.jsp";
 			RequestDispatcher successView =req.getRequestDispatcher(url);
 			successView.forward(req, res);
-			SendEmail.openMail(m_email);
+			SendEmail.openMail("2",m_email);
 			
 			// 抓到其他例外
 			}catch(Exception e) {
@@ -901,15 +909,20 @@ public class MemberServlet extends HttpServlet {
 		//開通權限
 		if ("activeMember".equals(action)) {
 			try {
+			Integer m_status =Integer.parseInt(req.getParameter("m_status"));
+			System.out.println("權限="+m_status);
 			String m_email = req.getParameter("m_email");
 			
+			
 			MemberVO memberVO = new MemberVO();
+			memberVO.setM_status(m_status);
 			memberVO.setM_email(m_email);
+			
 
 			// 2.開始修改資料
-			System.out.println("權限變更");
+			System.out.println(m_email+"權限變更為"+m_status);
 			MemberService memberSvc = new MemberService();
-			memberVO = memberSvc.activeMember(m_email);
+			memberVO = memberSvc.activeMember(m_status,m_email);
             System.out.println("變更完成");
             
 			// 3.修改完成，準備轉交

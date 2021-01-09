@@ -40,7 +40,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 
 	private static final String GET_Mems_Password_STMT = "SELECT m_id,m_name,m_email,m_password FROM member WHERE m_email=?";
 	
-	private static final String UPDATE_Status_STMT ="UPDATE member set m_status=1 where m_email=?";
+	private static final String UPDATE_Status_STMT ="UPDATE member set m_status=? where m_email=?";
 
 	// 新增一般會員
 	@Override
@@ -528,7 +528,8 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt =con.prepareStatement(UPDATE_Status_STMT);
-			pstmt.setString(1, memberVO.getM_email());
+			pstmt.setInt(1, memberVO.getM_status());
+			pstmt.setString(2, memberVO.getM_email());
 			pstmt.executeUpdate();
 		}catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
