@@ -52,7 +52,7 @@ body {
 }
 
 h1 {
-	color: rgba(236, 76, 76, 0.548);
+/* 	color: rgba(236, 76, 76, 0.548); */
 	shape-rendering: auto;
 }
 

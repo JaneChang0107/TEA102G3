@@ -32,6 +32,9 @@
 	<div class="header">
 		<jsp:include page="/Front_end/header.jsp"></jsp:include>
 	</div>
+	<div>
+		<jsp:include page="../index_Seller_Buttongroup.jsp"></jsp:include>
+	</div>
 
 	<div id="addProductPlace">
 	<jsp:useBean id="ptService" scope="page" class="com.productType.model.ProductTypeService"></jsp:useBean>

@@ -42,6 +42,18 @@ public class OrderlistService {
 		return orderlistVO;
 	}
 	
+	//­×§ï­q³æª¬ºA
+	public OrderlistVO updateStatus(String o_status,String o_id) {
+        OrderlistVO orderlistVO = new OrderlistVO();
+        orderlistVO.setO_status(o_status);
+        orderlistVO.setO_id(o_id);
+        dao.updateStatus(orderlistVO);
+        
+		return orderlistVO;
+	}
+	
+
+	
 	public OrderlistVO updateOrderlistVO(String o_id,Timestamp o_date,String o_status,Timestamp o_shipdate,Timestamp o_deceiptdate,Timestamp o_finishdate,String o_transport,String o_address,Integer o_total,Integer o_pm,String m_id) {
 		OrderlistVO orderlistVO =new OrderlistVO();
 		orderlistVO.setO_id(o_id);

@@ -19,6 +19,8 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface {
 	//查詢訂單用
 	private static final String GET_ORDER_ByMember ="SELECT * FROM ORDERLIST WHERE M_ID=?";
 	private static final String GET_ORDER_ByMember_Status ="SELECT * FROM ORDERLIST WHERE M_ID=? AND O_STATUS=?";
+	//改變訂單狀態
+	private static final String UPDATE_Status_STMT ="UPDATE ORDERLIST SET o_status=? WHERE o_id=?";
 
 	
 	@Override
@@ -194,6 +196,43 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface {
 		return oid;	
 
 	}
+	
+//修改訂單狀態
+	@Override
+	public void updateStatus(OrderlistVO orderlistVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_Status_STMT);
+
+			pstmt.setString(1, orderlistVO.getO_status());
+			pstmt.setString(2, orderlistVO.getO_id());
+			
+			pstmt.executeUpdate();
+			}catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+
+			}
+		}
+	
 
 	@Override
 	public void update(OrderlistVO orderlistVO) {
@@ -429,6 +468,13 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface {
 //		orderlistVO2.setM_id("M00001");
 //		
 //		dao.update(orderlistVO2);
+		
+		OrderlistVO orderlistVO22 = new OrderlistVO();
+		orderlistVO22.setO_id("O00001");
+		orderlistVO22.setO_status("已出貨");
+		
+		dao.updateStatus(orderlistVO22);
+		
 
 //		// 刪除
 //		dao.delete("O00003");
@@ -500,6 +546,8 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface {
 //		
 		
 	}
+
+
 
 	
 	

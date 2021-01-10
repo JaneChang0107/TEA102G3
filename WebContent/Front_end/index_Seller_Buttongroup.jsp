@@ -65,8 +65,8 @@ body {
 <div class="btn-group dropright">
 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="sellerbar1">訂單管理</button>
   <div class="dropdown-menu" id="dropdown-menu1">
-  <button type="button" class="btn btn-warning">我的銷售</button>
-  <button type="button" class="btn btn-warning">物流設定</button>
+  <button type="button" class="btn btn-warning"><a href="<%=request.getContextPath()%>/orderlist?action=getSellerAll">我的銷售</a></button>
+<!--   <button type="button" class="btn btn-warning">物流設定</button> -->
   </div>
 </div>
 

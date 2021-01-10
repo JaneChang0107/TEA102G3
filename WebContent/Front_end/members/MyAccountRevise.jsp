@@ -76,7 +76,7 @@
     width: 800px;
     height: 900px;
     font-size: 24px;
-    background-color: #FFF68F;
+    background-color: #cce5ff;
     color: #8d8a8a;
     border-radius: 30px;
     font-weight: bold;

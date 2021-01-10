@@ -52,7 +52,7 @@ public class BuyServlet extends HttpServlet {
 			java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String nowTime = df.format(timestamp);
 			java.sql.Timestamp o_date = java.sql.Timestamp.valueOf(nowTime);
-			String o_status = "0";
+			String o_status = "­q³æ¦¨¥ß";
 			String o_transport = req.getParameter("o_transport");
 			String o_address = req.getParameter("o_address");
 			Integer o_total = Integer.parseInt(req.getParameter("o_total"));

@@ -16,19 +16,28 @@
 	String o_id =request.getParameter("o_id");
     String od_id =request.getParameter("od_id");
     
-    //OrderdetailVO orderdetailVO =orderdetailSvc.getOneOrderdetail(od_id);
 	OrderlistService orderlistSvc =new OrderlistService();
 	OrderlistVO orderlistVO =orderlistSvc.getOneOrderlist(o_id);
 	
-	System.out.println(request.getParameter("o_id")); 
+	OrderdetailService odsv =new OrderdetailService();
+	
+	String comparem_id = productSvc.oneProduct(odsv.getFirstP_id(o_id)).getM_id();
+	String m_id = session.getAttribute("loginId").toString();
+	Boolean orderbelong;
+	if(comparem_id.equals(m_id) && orderlistVO.getO_status().equals("訂單成立")){
+		orderbelong=true;
+	}else{
+		orderbelong=false;
+	}
+// 	System.out.println("是否為該賣家未出貨訂單"+orderbelong);
+	request.setAttribute("orderbelong", orderbelong);
 
 %>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="BIG5">
-<title>orderdetail</title>
+<meta charset="UTF-8">
 
 <style>
 body{
@@ -37,19 +46,23 @@ body{
 td{
     padding:0px 30px 0px 30px;
 }
-
-
-h1{
-/*     text-align: center; */
+#signin {
+    background-color: #FFA000;
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+    color: floralwhite;
+    border: 1px solid #707070;
+    margin-left: 20px;
 }
 
-
- 
 </style>
 
 
 </head>
 <body>
+
+
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -94,6 +107,17 @@ h1{
 </table>
 <hr>
 <h2>總金額: <%=orderlistVO.getO_total()%></h2>
+
+
+<c:if test="${orderbelong}">
+<form METHOD="post" ACTION="<%=request.getContextPath()%>/orderlist">
+     <input type="hidden" name="action" value="change_O_status">
+     <input type="hidden" name="o_status" value="已出貨">
+     <input type="hidden" name="o_id" value=<%=o_id%>>
+     <input type="submit" id="signin" value="出貨">
+</form>
+</c:if>
+
 
 </body>
 </html>

@@ -28,6 +28,10 @@
 	<div class="header">
 		<jsp:include page="/Front_end/header.jsp"></jsp:include>
 	</div>
+	<div>
+		<jsp:include page="../index_Seller_Buttongroup.jsp"></jsp:include>
+	</div>
+	
 	
 	<div id="sellerProduct">
 		
