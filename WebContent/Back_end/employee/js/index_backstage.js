@@ -496,7 +496,7 @@ $.ajax({
 				  
 			  $.each(data.emp_list, function(index, item){
 				  list_html+='		<div class="row" id="div_append">';
-				  list_html+='            <div class="col">'+ item.e_id +'</div>';
+				  list_html+='            <div class="col" id="e_id">'+ item.e_id +'</div>';
 				  list_html+='            <div class="col">'+ item.e_password +'</div>';
 				  list_html+='            <div class="col">'+ item.e_identity +'</div>';
 				  list_html+='            <div class="col">'+ item.e_name +'</div>';
@@ -506,13 +506,13 @@ $.ajax({
 				  list_html+='            <div class="col">'+ item.e_phone +'</div>';
 				  list_html+='            <div class="col">'+ item.e_address +'</div>';
 				  list_html+='            <div class="col">'+ item.e_title +'</div>';
-				  list_html+='            <div class="col">'+ item.e_status +'</div>';
+				  list_html+='            <div class="col" id="e_status">'+ item.e_status +'</div>';
 				  list_html+='            <div class="col">'+ item.st_id +'</div>';
 				  list_html+='            <div class="col">';
 				  list_html+='                 <input type="submit" value="修改">';
 				  list_html+='            </div>';
 				  list_html+='            <div class="col">';
-				  list_html+='                 <input type="submit" value="更新狀態">';
+				  list_html+='                 <button type="button" id="toggle_status">更新狀態';
 				  list_html+='            </div>';
 				  list_html+='		</div>';
 			  })
@@ -732,7 +732,7 @@ $.ajax({
 					  
 				  $.each(data.emp_list, function(index, item){
 					  list_html+='		<div class="row" id="div_append">';
-					  list_html+='            <div class="col">'+ item.e_id +'</div>';
+					  list_html+='            <div class="col" id="e_id">'+ item.e_id +'</div>';
 					  list_html+='            <div class="col">'+ item.e_password +'</div>';
 					  list_html+='            <div class="col">'+ item.e_identity +'</div>';
 					  list_html+='            <div class="col">'+ item.e_name +'</div>';
@@ -742,13 +742,13 @@ $.ajax({
 					  list_html+='            <div class="col">'+ item.e_phone +'</div>';
 					  list_html+='            <div class="col">'+ item.e_address +'</div>';
 					  list_html+='            <div class="col">'+ item.e_title +'</div>';
-					  list_html+='            <div class="col">'+ item.e_status +'</div>';
+					  list_html+='            <div class="col" id="e_status">'+ item.e_status +'</div>';
 					  list_html+='            <div class="col">'+ item.st_id +'</div>';
 					  list_html+='            <div class="col">';
 					  list_html+='                 <input type="submit" value="修改">';
 					  list_html+='            </div>';
 					  list_html+='            <div class="col">';
-					  list_html+='                 <input type="submit" value="更新狀態">';
+					  list_html+='                 <button type="button" id="toggle_status">更新狀態';
 					  list_html+='            </div>';
 					  list_html+='		</div>';
 				  })
@@ -815,7 +815,7 @@ $.ajax({
 				  
 			  $.each(data, function(index, item){
 				  list_html+='		<div class="row" id="div_append">';
-				  list_html+='            <div class="col">'+ item.e_id +'</div>';
+				  list_html+='            <div class="col" id="e_id">'+ item.e_id +'</div>';
 				  list_html+='            <div class="col">'+ item.e_password +'</div>';
 				  list_html+='            <div class="col">'+ item.e_identity +'</div>';
 				  list_html+='            <div class="col">'+ item.e_name +'</div>';
@@ -825,13 +825,13 @@ $.ajax({
 				  list_html+='            <div class="col">'+ item.e_phone +'</div>';
 				  list_html+='            <div class="col">'+ item.e_address +'</div>';
 				  list_html+='            <div class="col">'+ item.e_title +'</div>';
-				  list_html+='            <div class="col">'+ item.e_status +'</div>';
+				  list_html+='            <div class="col" id="e_status">'+ item.e_status +'</div>';
 				  list_html+='            <div class="col">'+ item.st_id +'</div>';
 				  list_html+='            <div class="col">';
 				  list_html+='                 <input type="submit" value="修改">';
 				  list_html+='            </div>';
 				  list_html+='            <div class="col">';
-				  list_html+='                 <input type="submit" value="更新狀態">';
+				  list_html+='                 <button type="button" id="toggle_status">更新狀態';
 				  list_html+='            </div>';
 				  list_html+='		</div>';
 			  })
@@ -840,6 +840,46 @@ $.ajax({
 		  },
 		  error: function(){
 			  console.log("error");
+		  }
+	  })
+  })
+  
+  //更改單一員工狀態
+  $(document).on("click", "#toggle_status", function(){
+//	  console.log($(this));
+	  //更改狀態                 按鈕     父層最近的div屬性       同層id="e_status"   div內的文字
+	  let e_status = $(this).closest("div").siblings("#e_status").text()
+	  let e_id = $(this).closest("div").siblings("#e_id").text();
+	  
+	  let div_e_status = $(this).closest("div").siblings("#e_status")
+	  
+//	  if(e_status == 1){
+//		  div_e_status.html("0")
+//	  } else {
+//		  div_e_status.html("1")
+//	  }	
+	  
+	  
+	  let form_data = {
+			  "e_id" : e_id,
+			  "e_status" : e_status 
+	  }
+	  
+	 let form_string = JSON.stringify(form_data);
+	  $.ajax({
+		  url : "http://localhost:8081/TEA102G3/change_status", 
+		  type : "POST",
+		  data : form_string,
+		  beforeSend : function(){},
+		  success: function(){
+			  if(e_status == 1){
+				  div_e_status.html("0")
+			  } else {
+				  div_e_status.html("1")
+			  }			  
+		  },
+		  error : function(){
+			  console.log("error")
 		  }
 	  })
   })

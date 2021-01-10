@@ -36,7 +36,7 @@ public class Add_before extends HttpServlet {
 		String jsonString = jsonArray.toString();
 
 		
-		out.println(jsonArray);
+		out.println(jsonString);
 		out.flush();
 		out.close();
 	}
