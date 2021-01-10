@@ -11,6 +11,7 @@ public interface EmployeeDAO_interface {
      public void update_status(EmployeeVO employeeVO);
      public void delete(String e_id);
      public EmployeeVO findByPrimaryKey(String e_id);
+     public List<EmployeeVO> findByPrimaryKey_e_name(String e_name);
      public EmployeeVO getEmployeePwd(String e_id);
      public List<EmployeeVO> getAll();
      //萬用複合查詢(傳入參數型態Map)(回傳 List)

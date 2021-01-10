@@ -37,21 +37,20 @@ public class ajax extends HttpServlet {
 		
 		StoreService sevice = new StoreService();
 		String action_ajax = readJSONString(req);
-		System.out.println("action_ajax = " + action_ajax);
+
 		PrintWriter out= res.getWriter();
 		
 		List<StoreVO> store_list = sevice.getAll();
-		System.out.println(store_list);
+
 		
 		try {			
 			JSONObject jsonObj = new JSONObject(action_ajax);
-//			System.out.println("jsonObj =" + jsonObj);
+
 			String e_id =  jsonObj.getString("e_id");	
-			System.out.println("e_id = " + e_id);
+
 			EmployeeService employeeSvc = new EmployeeService();
 			EmployeeVO employeeVO = employeeSvc.getOneEmployee(e_id);
-//			System.out.println("e_id = " + e_id);
-			System.out.println("employeeVO = " + employeeVO);
+
 		
 			Map<String, Object> data_map = new HashMap<>();
 			data_map.put("store", store_list);
@@ -60,7 +59,7 @@ public class ajax extends HttpServlet {
 			JSONObject Obj =  new JSONObject(data_map);
 		
 			String jsonstr = Obj.toString();
-			System.out.println(jsonstr);			
+			
 			out.write(jsonstr);
 			out.flush();
 			out.close();

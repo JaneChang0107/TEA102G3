@@ -35,7 +35,7 @@ public class ListAll extends HttpServlet {
 		
 		EmployeeService service = new EmployeeService();	
 		List<EmployeeVO> emp_list = service.getAll();
-		System.out.println("list" + emp_list);
+
 	
 		JSONObject jsonObj = new JSONObject();
 		try {

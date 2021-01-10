@@ -38,7 +38,7 @@ public class Add_after extends HttpServlet {
 		
 		String enter = readJSONString(req);
 		
-		System.out.println(enter);
+
 		
 
 		try {
@@ -58,7 +58,7 @@ public class Add_after extends HttpServlet {
 			
 			int int_status = Integer.parseInt(e_status);
 			
-			System.out.println(e_password);
+
 			
 			//時間字串轉SQL date
 			SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
@@ -77,7 +77,7 @@ public class Add_after extends HttpServlet {
 //送值去前端顯示部分
 			JSONObject sendObj = new JSONObject();
 			sendObj.put("emp_list", emp_list);
-			System.out.println("sendObj"+sendObj);
+
 			out.println(sendObj);
 			out.flush();
 			out.close();

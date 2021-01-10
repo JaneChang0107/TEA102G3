@@ -103,6 +103,9 @@ public class EmployeeService {
 	public EmployeeVO getOneEmployee(String employeeVO) {
 		return dao.findByPrimaryKey(employeeVO);
 	}
+	public List<EmployeeVO> getOneEmployee_e_name(String employeeVO) {
+		return dao.findByPrimaryKey_e_name(employeeVO);
+	}
 	public EmployeeVO getOneEmployeePwd(String employeeVO) {
 		return dao.getEmployeePwd(employeeVO);
 	}

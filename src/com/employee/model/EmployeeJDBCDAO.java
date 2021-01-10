@@ -15,6 +15,8 @@ public class EmployeeJDBCDAO implements EmployeeDAO_interface{
 		"SELECT e_id,e_password,e_identity,e_name,e_gender,to_char(e_birth,'yyyy-mm-dd') e_birth,e_email,e_phone,e_address,e_title,e_status,st_id FROM employee order by e_id";
 	private static final String GET_ONE_STMT = 
 		"SELECT e_id,e_password,e_identity,e_name,e_gender,to_char(e_birth,'yyyy-mm-dd') e_birth,e_email,e_phone,e_address,e_title,e_status,st_id FROM employee where e_id = ?";
+	private static final String GET_ONE_STMT_ENAME = 
+		"SELECT e_id,e_password,e_identity,e_name,e_gender,to_char(e_birth,'yyyy-mm-dd') e_birth,e_email,e_phone,e_address,e_title,e_status,st_id FROM employee where e_name like ?";
 	private static final String DELETE = 
 		"DELETE FROM employee where e_id = ?";
 	private static final String UPDATE = 
@@ -399,6 +401,79 @@ public class EmployeeJDBCDAO implements EmployeeDAO_interface{
 		}
 		return employeeVO;
 	}
+	
+//查單個with員工姓名
+	@Override
+	public List<EmployeeVO> findByPrimaryKey_e_name(String e_name) {
+		
+		EmployeeVO employeeVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<EmployeeVO> list = new LinkedList<EmployeeVO>();
+		
+		try {
+			
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ONE_STMT_ENAME);			
+			pstmt.setString(1, "%" + e_name + "%");
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				// empVo 也稱為 Domain objects
+				employeeVO = new EmployeeVO();
+				employeeVO.setE_id(rs.getString("e_id"));
+				employeeVO.setE_password(rs.getString("e_password"));
+				employeeVO.setE_identity(rs.getString("e_identity"));
+				employeeVO.setE_name(rs.getString("e_name"));
+				employeeVO.setE_gender(rs.getString("e_gender"));
+				employeeVO.setE_birth(rs.getDate("e_birth"));
+				employeeVO.setE_email(rs.getString("e_email"));
+				employeeVO.setE_phone(rs.getString("e_phone"));
+				employeeVO.setE_address(rs.getString("e_address"));
+				employeeVO.setE_title(rs.getString("e_title"));
+				employeeVO.setE_status(rs.getInt("e_status"));
+				employeeVO.setSt_id(rs.getString("st_id"));
+				
+				list.add(employeeVO);
+			}
+			
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
 
 	@Override
 	public List<EmployeeVO> getAll() {
@@ -583,12 +658,12 @@ public class EmployeeJDBCDAO implements EmployeeDAO_interface{
 //		dao.update_without(employeeVO2);
 //		System.out.println("更新成功");
 //
-		// 更新密碼
-		EmployeeVO employeeVO2 = new EmployeeVO(); 
-		employeeVO2.setE_id("E00001");
-		employeeVO2.setE_password("123456");
-		dao.update_pwd(employeeVO2);
-		System.out.println("更新成功");
+//		// 更新密碼
+//		EmployeeVO employeeVO2 = new EmployeeVO(); 
+//		employeeVO2.setE_id("E00001");
+//		employeeVO2.setE_password("123456");
+//		dao.update_pwd(employeeVO2);
+//		System.out.println("更新成功");
 //
 //		// 刪除
 //		dao.delete("E00002");
@@ -611,6 +686,24 @@ public class EmployeeJDBCDAO implements EmployeeDAO_interface{
 //
 //		// 查詢
 //		List<EmployeeVO> list = dao.getAll();
+//		for (EmployeeVO aEmp : list) {
+//			System.out.print(aEmp.getE_id() + ",");
+//			System.out.print(aEmp.getE_password() + ",");
+//			System.out.print(aEmp.getE_identity() + ",");
+//			System.out.print(aEmp.getE_name() + ",");
+//			System.out.print(aEmp.getE_gender() + ",");
+//			System.out.print(aEmp.getE_birth() + ",");
+//			System.out.print(aEmp.getE_email() + ",");
+//			System.out.print(aEmp.getE_phone() + ",");
+//			System.out.print(aEmp.getE_address() + ",");
+//			System.out.print(aEmp.getE_title() + ",");
+//			System.out.print(aEmp.getE_status() + ",");
+//			System.out.println(aEmp.getSt_id());
+//			System.out.println();
+//		}
+//		
+//		// 查詢名字
+//		List<EmployeeVO> list = dao.findByPrimaryKey_e_name("LI");
 //		for (EmployeeVO aEmp : list) {
 //			System.out.print(aEmp.getE_id() + ",");
 //			System.out.print(aEmp.getE_password() + ",");

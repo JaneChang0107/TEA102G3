@@ -40,17 +40,16 @@ public class Refresh extends HttpServlet {
 		PrintWriter out= res.getWriter();
 		
 		List<StoreVO> store_list = sevice.getAll();
-		System.out.println(store_list);
+
 		
 		HttpSession session = req.getSession();
 		String session_e_id = (session.getAttribute("e_id")).toString();
-		System.out.println("session_e_id = " + session_e_id);
+
 		
 							
 			EmployeeService employeeSvc = new EmployeeService();
 			EmployeeVO employeeVO = employeeSvc.getOneEmployee(session_e_id);
-//			System.out.println("e_id = " + e_id);
-			System.out.println("employeeVO = " + employeeVO);
+
 		
 			Map<String, Object> data_map = new HashMap<>();
 			data_map.put("store", store_list);
@@ -59,7 +58,7 @@ public class Refresh extends HttpServlet {
 			JSONObject Obj =  new JSONObject(data_map);
 		
 			String jsonstr = Obj.toString();
-			System.out.println(jsonstr);			
+		
 			out.write(jsonstr);
 			out.flush();
 			out.close();

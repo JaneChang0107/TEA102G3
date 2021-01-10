@@ -18,7 +18,7 @@
 <%--     <link rel="stylesheet type" href="<%=request.getContextPath()%>/Back_end/employee/css/index_backstage.css"> --%>
 </head>
 <body>
-	<div class="container-fluid management_container">
+	<div class="container-fluid management_container" id="con_mam">
 <!-- 		<div class="row"> -->
 <!-- 			<div class="col"> -->
 <!-- 				錯誤表列 -->

@@ -43,7 +43,7 @@ public class update_pwd extends HttpServlet {
 				
 		PrintWriter out = res.getWriter();		
 		String enter = readJSONString(req);
-		System.out.println(enter);
+
 		HttpSession session = req.getSession();
 		String session_e_id = (session.getAttribute("e_id")).toString();
 		EmployeeService service = new EmployeeService();
@@ -76,7 +76,7 @@ public class update_pwd extends HttpServlet {
 				
 			
 			String jsonStr = buffer.toString();
-			System.out.println("aaaaa" + jsonStr);
+
 			out.write(jsonStr);
 			out.flush();
 			out.close();
