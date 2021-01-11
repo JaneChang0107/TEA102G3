@@ -5,8 +5,8 @@
 <head>
 	<meta charset="BIG5">
 	<title>Insert title here</title>
-<%-- 	<link rel="stylesheet" href="<%=request.getContextPath()%>/vendors/bootstrap/css/bootstrap.min.css"> --%>
-<%--     <link rel="stylesheet type" href="<%=request.getContextPath()%>/Back_end/employee/css/index_backstage.css"> --%>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/vendors/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet type" href="<%=request.getContextPath()%>/Back_end/employee/css/index_backstage.css">
 </head>
 <body>
 	<div class="container-fluid login-container">

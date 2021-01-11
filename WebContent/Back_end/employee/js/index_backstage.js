@@ -497,7 +497,7 @@ $.ajax({
 			  $.each(data.emp_list, function(index, item){
 				  list_html+='		<div class="row" id="div_append">';
 				  list_html+='            <div class="col" id="e_id">'+ item.e_id +'</div>';
-				  list_html+='            <div class="col">'+ item.e_password +'</div>';
+				  list_html+='            <div class="col" id="e_password"><p class="para">'+ item.e_password +'</p><input name="input_e_password" class="-none" value="'+ item.e_password +'"></div>';
 				  list_html+='            <div class="col">'+ item.e_identity +'</div>';
 				  list_html+='            <div class="col">'+ item.e_name +'</div>';
 				  list_html+='            <div class="col">'+ item.e_gender +'</div>';
@@ -509,7 +509,7 @@ $.ajax({
 				  list_html+='            <div class="col" id="e_status">'+ item.e_status +'</div>';
 				  list_html+='            <div class="col">'+ item.st_id +'</div>';
 				  list_html+='            <div class="col">';
-				  list_html+='                 <input type="submit" value="修改">';
+				  list_html+='                 <button type="button" id="modify">修改';
 				  list_html+='            </div>';
 				  list_html+='            <div class="col">';
 				  list_html+='                 <button type="button" id="toggle_status">更新狀態';
@@ -733,7 +733,7 @@ $.ajax({
 				  $.each(data.emp_list, function(index, item){
 					  list_html+='		<div class="row" id="div_append">';
 					  list_html+='            <div class="col" id="e_id">'+ item.e_id +'</div>';
-					  list_html+='            <div class="col">'+ item.e_password +'</div>';
+					  list_html+='            <div class="col"><p class="para">'+ item.e_password +'</p><input name="input_e_password" class="-none" value="'+ item.e_password +'"></div>';
 					  list_html+='            <div class="col">'+ item.e_identity +'</div>';
 					  list_html+='            <div class="col">'+ item.e_name +'</div>';
 					  list_html+='            <div class="col">'+ item.e_gender +'</div>';
@@ -745,7 +745,7 @@ $.ajax({
 					  list_html+='            <div class="col" id="e_status">'+ item.e_status +'</div>';
 					  list_html+='            <div class="col">'+ item.st_id +'</div>';
 					  list_html+='            <div class="col">';
-					  list_html+='                 <input type="submit" value="修改">';
+					  list_html+='                 <button type="button" id="modify">修改';
 					  list_html+='            </div>';
 					  list_html+='            <div class="col">';
 					  list_html+='                 <button type="button" id="toggle_status">更新狀態';
@@ -816,7 +816,7 @@ $.ajax({
 			  $.each(data, function(index, item){
 				  list_html+='		<div class="row" id="div_append">';
 				  list_html+='            <div class="col" id="e_id">'+ item.e_id +'</div>';
-				  list_html+='            <div class="col">'+ item.e_password +'</div>';
+				  list_html+='            <div class="col" id="e_password"><p class="para">'+ item.e_password +'</p><input name="input_e_password" class="-none" value="'+ item.e_password +'"></div>';
 				  list_html+='            <div class="col">'+ item.e_identity +'</div>';
 				  list_html+='            <div class="col">'+ item.e_name +'</div>';
 				  list_html+='            <div class="col">'+ item.e_gender +'</div>';
@@ -828,7 +828,7 @@ $.ajax({
 				  list_html+='            <div class="col" id="e_status">'+ item.e_status +'</div>';
 				  list_html+='            <div class="col">'+ item.st_id +'</div>';
 				  list_html+='            <div class="col">';
-				  list_html+='                 <input type="submit" value="修改">';
+				  list_html+='                 <button type="button" id="modify">修改';
 				  list_html+='            </div>';
 				  list_html+='            <div class="col">';
 				  list_html+='                 <button type="button" id="toggle_status">更新狀態';
@@ -844,7 +844,8 @@ $.ajax({
 	  })
   })
   
-  //更改單一員工狀態
+  
+//更改單一員工狀態
   $(document).on("click", "#toggle_status", function(){
 //	  console.log($(this));
 	  //更改狀態                 按鈕     父層最近的div屬性       同層id="e_status"   div內的文字
@@ -882,4 +883,42 @@ $.ajax({
 			  console.log("error")
 		  }
 	  })
+  })
+  
+//修改員工密碼
+  $(document).on("click", "#modify", function(){
+	  let update_val = ($(this).closest("div").siblings("#e_password").find("[name='input_e_password']").val()).trim();
+//	  console.log(update_val)
+	  
+	  let e_id = $(this).closest("div").siblings("#e_id").text();
+	  
+	  let form_data = {
+			  "e_id" : e_id,
+			  "e_password" : update_val
+	  }
+	  
+	  let form_string = JSON.stringify(form_data);
+	  
+	  if(update_val == ""){
+		  alert('請輸入')
+	  } else{
+		  $(this).closest("div").siblings("#e_password").find("p.para").html(update_val).toggleClass("-none");
+		  $(this).closest("div").siblings("#e_password").find("[name='input_e_password']").toggleClass("-none");
+		  
+		  if($(this).closest("div").siblings("#e_password").find("[name='input_e_password']").hasClass("-none")){
+			  
+			  $.ajax({
+				  url:"http://localhost:8081/TEA102G3/change_password",
+				  type:"POST",
+				  data: form_string,
+				  beforeSend:function(){},
+				  success:function(){
+					  alert('更新成功')
+				  },
+				  error:function(){
+					  console.log("error")
+				  }
+			  })
+		  }
+	  }
   })

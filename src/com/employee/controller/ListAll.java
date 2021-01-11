@@ -40,7 +40,7 @@ public class ListAll extends HttpServlet {
 		JSONObject jsonObj = new JSONObject();
 		try {
 			jsonObj.put("emp_list", emp_list);
-			System.out.println("jsonObj"+jsonObj);
+//			System.out.println("jsonObj"+jsonObj);
 			out.println(jsonObj);
 			out.flush();
 			out.close();

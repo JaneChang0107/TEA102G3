@@ -85,3 +85,7 @@ ul li{
 .listAll_row{
 	background-color: #6c757d;
 }
+
+.-none{
+  display: none;
+}
