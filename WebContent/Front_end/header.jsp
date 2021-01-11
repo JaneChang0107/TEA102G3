@@ -173,20 +173,14 @@ i {
 	padding: 5px;
 }
 
-#user,  #cart {
+#user,  #cart,#bell {
 	float: right;
 	position: relative;
 	left: -20px;
 	padding: 10px;
 }
 
- #bell {
-	float: right;
-	position: relative;
-	left: -20px;
-	padding: 10px;
-	color:red;
-}
+ 
 
 #arrowdown {
 	position: relative;
@@ -437,7 +431,7 @@ select#ptype {
 					aria-expanded="true" onclick="notice()"></i>
 					<div class="dropdown-menu" aria-labelledby="bell">
 <ul>
-						<a class="dropdown-item" id="notice" onclick="belldel()" href=""></a> 
+						<a class="dropdown-item" id="notice" onclick="belldel()" href="notice/notice.jsp"></a> 
 	</ul>					
 					</div> 
 				</td>

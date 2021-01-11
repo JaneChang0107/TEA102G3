@@ -61,7 +61,7 @@ public class RunlightServlet extends HttpServlet {
 				}	
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/Back_end/runlight/input.jsp");
+							.getRequestDispatcher("/Back_end/employee/index_backstage.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -75,11 +75,11 @@ public class RunlightServlet extends HttpServlet {
 			
 			ws.onMessage(mapper.writeValueAsString(bellVO));
 			
-			res.sendRedirect(req.getContextPath() + "/Back_end/runlight/input.jsp");
+			res.sendRedirect(req.getContextPath() + "/Back_end/employee/index_backstage.jsp");
 			}catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/Back_end/runlight/input.jsp");
+						.getRequestDispatcher("/Back_end/employee/index_backstage.jsp");
 				failureView.forward(req, res);
 			}
 			
