@@ -69,21 +69,10 @@ margin-right:auto;
 	<div id="showMoneyContent">
 	<table>
 	<tr>
-	<td><h3 style="color:red">即將撥款</h3></td>
+	<td colspan=2><h3 >即將撥款</h3></td>
 	</tr>
 	<tr>
-	<td><h3 >$XXXXX</h3></td>
-	</tr>
-	</table>
-	</div>
-	
-	<div id="showMoneyContent">
-	<table>
-	<tr>
-	<td><h3 style="color:red">已撥款</h3></td>
-	</tr>
-	<tr>
-	<td><h3 >$XXXXX</h3></td>
+	<td><h3>$</td><td><h3 style="color:red">XXXXX</h3></td>
 	</tr>
 	</table>
 	</div>
@@ -91,10 +80,21 @@ margin-right:auto;
 	<div id="showMoneyContent">
 	<table>
 	<tr>
-	<td><h3 style="color:red">已撥款</h3></td>
+	<td colspan=2><h3>已撥款</h3></td>
 	</tr>
 	<tr>
-	<td><h3 >$XXXXX</h3></td>
+	<td><h3>$</td><td><h3 style="color:red">XXXXX</h3></td>
+	</tr>
+	</table>
+	</div>
+	
+	<div id="showMoneyContent">
+	<table>
+	<tr>
+	<td colspan=2><h3 >全部</h3></td>
+	</tr>
+	<tr>
+	<td><h3>$</td><td><h3 style="color:red">XXXXX</h3></td>
 	</tr>
 	</table>
 	</div>
