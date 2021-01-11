@@ -1,15 +1,20 @@
 package com.viewseller.controller;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.*;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.orderdetail.model.OrderdetailService;
+import com.orderdetail.model.OrderdetailVO;
 import com.viewseller.model.*;
 
 
@@ -194,13 +199,12 @@ public class ViewSellerServlet extends HttpServlet {
 		if ("insert".equals(action)) { // 來自addEmp.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
+			
 			try {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-				String v_id = new String(req.getParameter("v_id").trim());
+//				String v_id = new String(req.getParameter("v_id").trim());
 
 				String o_id = req.getParameter("o_id").trim();
 				if (o_id == null || o_id.trim().length() == 0) {
@@ -224,17 +228,22 @@ public class ViewSellerServlet extends HttpServlet {
 				}
 				
 				java.sql.Timestamp v_date = null;
+				
 				try {
 					v_date = java.sql.Timestamp.valueOf(req.getParameter("v_date").trim());
 				} catch (Exception e) {
 					v_date = new java.sql.Timestamp(System.currentTimeMillis());
 					errorMsgs.add("請輸入日期!");
 				}
-				
+//				Date d = new Date();
+//				Timestamp addDate = new Timestamp(d.getTime());
+//				HttpSession session = req.getSession();
+//				String mid = (String) session.getAttribute("loginId");
+//				System.out.println(mid);
 				
 
 				ViewsellerVO viewsellerVO = new ViewsellerVO();
-				viewsellerVO.setV_id(v_id);
+//				viewsellerVO.setV_id(v_id);
 				viewsellerVO.setO_id(o_id);
 				viewsellerVO.setM_buyid(m_buyid);
 				viewsellerVO.setM_sellid(m_sellid);
@@ -245,24 +254,36 @@ public class ViewSellerServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("viewsellerVO", viewsellerVO); // 含有輸入格式錯誤的empVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/Back_end/ViewSeller/addviewseller.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/Back_end/OrderDetail/listOrderdetailByOrder.jsp");
 					failureView.forward(req, res);
 					return;
 				}
+				System.out.println("261行");
 
 				/*************************** 2.開始新增資料 ***************************************/
 				ViewsellerService viewsellerSvc = new ViewsellerService();
 				viewsellerVO = viewsellerSvc.addViewsellerVO(o_id, m_buyid, m_sellid, v_gb, v_comment, v_date);
+				OrderdetailService orderdetailSvc = new OrderdetailService();//
+                
+				
 
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/Back_end/ViewSeller/listAllviewseller.jsp";
+				List<OrderdetailVO> list = orderdetailSvc.getDetailByOrder(o_id);//
+				req.setAttribute("list", list);//
+				
+			    
+			    req.setAttribute("viewsellerVO",viewsellerVO);
+			    
+				System.out.println("有抓到VO"+viewsellerVO);
+				
+				String url = "/Back_end/OrderDetail/odcommentview.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/Back_end/ViewSeller/addviewseller.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/Back_end/OrderDetail/listOrderdetailByOrder.jsp");
 				failureView.forward(req, res);
 			}
 		}

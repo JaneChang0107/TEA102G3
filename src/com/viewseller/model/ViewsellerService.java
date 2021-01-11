@@ -44,15 +44,18 @@ public class ViewsellerService {
 	public ViewsellerVO getOneViewseller(String v_id) {
 		return dao.findByPrimaryKey(v_id);
 	}
-	
-	public ViewsellerVO getOnesellid(String m_id) {
-		return dao.findBysellid(m_id);
+	public ViewsellerVO getOneViewbyoid(String o_id) {
+		return dao.getOneViewbyoid(o_id);
 	}
+	
+	
+	public List<ViewsellerVO> findBysellid(String m_sellid) {
+		return dao.findBysellid(m_sellid);
+	}
+
 	
 	public List<ViewsellerVO> getAll(){
 		return dao.getAll();
 		
 	}
-	
-	
 }

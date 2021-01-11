@@ -1,176 +1,220 @@
-<%@page import="com.sun.xml.internal.bind.ValidationEventLocatorEx"%>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
-<%@ page import="com.viewseller.model.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="com.member.model.*"%>
+<%@page import="java.util.*"%>
+<%@page import="com.orderlist.model.*"%>
+<%@page import="com.viewseller.model.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%
-	ViewsellerVO viewsellerVO = (ViewsellerVO) request.getAttribute("viewsellerVO");
+	//拿到登入ID
+    HttpSession Session = request.getSession();
+	String m_id = Session.getAttribute("loginId").toString();
+
+	//拿到memberVO
+// 	MemberService memSvc = new MemberService();
+// 	MemberVO memberVO = memSvc.findOneMem(m_id);
+// 	session.setAttribute("memberVO", memberVO);
+
+	//用訂單service拿到屬於會員的訂單
+	OrderlistService orderlistSvc = new OrderlistService();
+	List<OrderlistVO> list = orderlistSvc.findByMember(m_id);
+	pageContext.setAttribute("list", list);
+
+// 	ProductVO pVO =(ProductVO)request.getAttribute("pVO");
+
+// 	String m_sellid= pVO.getM_id();
+// 	ViewsellerService vsc = new ViewsellerService();
+// 	List<ViewsellerVO> list = vsc.findBysellid(m_sellid);
+// 	request.setAttribute("list", list);
 %>
 
-<html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>賣家評價頁面</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的訂單</title>
 
 <link rel="stylesheet"
-	href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-<script
-	src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	href="<%=request.getContextPath()%>/vendors/bootstrap-4.5.3-dist/css/bootstrap.min.css">
 
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/viewseller.css">
 <style>
+img#productImg {
+	height: 200px;
+	overflow: hidden;
+	text-align: center;
+	line-height: 200px;
+}
 
+div.col-md-3 {
+	margin: 70px 30px auto 30px;
+}
 </style>
-
 </head>
 
+<body class="mybody">
 
-<body>
+
+	<!-- header----------->
 	<div class="header">
 		<jsp:include page="/Front_end/header.jsp"></jsp:include>
 	</div>
-	
-	
-	<div class="class-card" style="height: 50px; margin-top: 50px;">
-			<h2>評價</h2>
+	<!-- header----------->
+
+	<!-- --------------------------------------------------------------------------- -->
+
+	<!--Nav bar區域-->
+
+	<jsp:useBean id="ppService" scope="page"
+		class="com.productPicture.model.ProductPictureService"></jsp:useBean>
+
+
+	<!-- 	<div class="row align-items-center"> -->
+	<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+		<li class="nav-item" role="presentation"><a
+			class="nav-link active" id="pills-home-tab" data-toggle="pill"
+			href="#pills-home" role="tab" aria-controls="pills-home"
+			aria-selected="true">全部</a></li>
+
+		<li class="nav-item" role="presentation"><a class="nav-link"
+			id="pills-profile-tab" data-toggle="pill" href="#pills-profile"
+			role="tab" aria-controls="pills-profile" aria-selected="false">好評</a>
+		</li>
+
+		<li class="nav-item" role="presentation"><a class="nav-link"
+			id="pills-contact-tab" data-toggle="pill" href="#pills-contact"
+			role="tab" aria-controls="pills-contact" aria-selected="false">負評</a>
+		</li>
+
+	</ul>
+    <jsp:useBean id="memSvc" scope="page"
+	    class="com.member.model.MemberService"></jsp:useBean>
+
+
+	<!-- 全部 -->
+	<div class="tab-content" id="pills-tabContent">
+		<div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+			aria-labelledby="pills-home-tab">
+
+			<table id="order">
+
+				<c:forEach var="orderlistVO" items="${list}">
+					<div class="card">
+						<h5 class="card-header">買家名稱: ${orderlistVO.m_name}</h5>
+						<div class="card-body">
+							<h5 class="card-title">訂單編號: ${orderlistVO.o_id}</h5>
+							<%-- 						<h5 class="card-title">產品名稱: ${orderlistVO.o_status}</h5> --%>
+							<%-- 						<h5 class="card-title">購買數量: ${orderlistVO.o_total}</h5> --%>
+							<h5 class="card-title">購買金額: ${orderlistVO.o_total}</h5>
+
+<%-- 							<jsp:useBean id="memSvc" scope="page" --%>
+<%-- 								class="com.member.model.MemberService"></jsp:useBean> --%>
+<!-- 							<div> -->
+<!-- 								<table id="viewseller"> -->
+<%-- 									<c:forEach var="viewsellerVO" items="${list}"> --%>
+
+<!-- 										<div class="card"> -->
+<!-- 											<h5 class="card-header">會員名稱: -->
+<%-- 												${memSvc.findOneMem(viewsellerVO.m_buyid).m_name}</h5> --%>
+<!-- 											<div class="card-body"> -->
+<%-- 												<h5 class="card-title">評價: ${viewsellerVO.v_gb}</h5> --%>
+<%-- 												<h5 class="card-title">評論內容: ${viewsellerVO.v_comment}</h5> --%>
+
+<!-- 											</div> -->
+<!-- 										</div> -->
+
+<%-- 									</c:forEach> --%>
+<!-- 								</table> -->
+
+<!-- 							</div> -->
+
+
+							<%-- 								<c:forEach var="viewsellerVO" items="${list}"> --%>
+							<%-- 									<h5 class="card-title">是否滿意: ${vslist.v_gb}</h5> --%>
+							<%-- 									<h5 class="card-title">評價內容: ${vslist.v_comment}</h5> --%>
+							<%-- 								</c:forEach> --%>
+
+							<%-- 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ViewsellerServlet"  target="_blank" class="detail"> --%>
+							<!-- 			            <input type="submit" value="詳情" class="btn btn-primary"> -->
+							<%-- 			            <input type="hidden" name="o_id"  value="${orderlistVO.o_id}"> --%>
+							<!-- 			            <input type="hidden" name="action"	value="getOrderDetailByOrder"></FORM> -->
+						</div>
+					</div>
+
+				</c:forEach>
+
+			</table>
 		</div>
-		<div class="row">
-			<div>
-				<div class="col-sm-12" style="margin-top: 20px;">
-					<div class="card-deck">
-						<c:forEach var="class_infoVO" items="${list}" varStatus="status" begin="0" end="3">
-							<div class="card">
-								<a
-									href="<%=request.getContextPath()%>/Class_info/Class_learnServlet?action=class_Introduction&class_id=${class_infoVO.class_id}">
 
-									<img class="card-img-top"
-									src="<%=request.getContextPath()%>/Class_info/Class_Introduction?action=class_pic_sm&class_id=${class_infoVO.class_id}"
-									alt="Card image cap">
-									<div class="card-body">
-										<h6 class="card-title" style="height: 30px">${class_infoVO.class_name}</h6>
-								</a>
-								<p class="card-text" style="line-height: 1">
-									<small class="text-muted"> 授課老師：<a
-										href="<%=request.getContextPath()%>/Class_info/Class_Introduction?action=class_Introduction&class_id=${class_infoVO.class_id}">
-											${class_infoVO.member_id}</a><br>
-										課程評價：${class_infoVO.member_id}<br>
-										課程時數：${class_infoVO.member_id}<br>
-										購買人數：${class_infoVO.member_id}<br>
-									</small>
-								</p>
-							</div>
-					</div>
-					</c:forEach>
-				</div>
-			</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-			<div class="progress">
-				<div class="progress-bar progress-bar-success" role="progressbar"
-					aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-					style="width: 60%;">
-					<span class="sr-only">好評</span>
-				</div>
-				<div class="progress-bar progress-bar-info" role="progressbar"
-					aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-					style="width: 40%;">
-					<span class="sr-only">負評</span>
-				</div>
-			</div>
-			
-			
-			<div class="tabs-container">
-				<div class="tabs-pages">
-					<div class="tab active">全部</div>
-					<div class="tab">好評</div>
-					<div class="tab">壞評</div>
-				</div>
-				<div class="tabs-contents">
-					<div class="tab-c active">
-						<div class="inner-content">
-							全部 <br /> hello
-						</div>
+		<!--新訂單區域  -->
+		<div class="tab-pane fade" id="pills-profile" role="tabpanel"
+			aria-labelledby="pills-profile-tab">
+
+			<c:forEach var="orderlistVO" items="${neworder}">
+
+				<div class="card">
+					<h5 class="card-header">訂單編號: ${orderlistVO.o_id}</h5>
+					<div class="card-body">
+						<h5 class="card-title">訂單成立: ${orderlistVO.o_dateForm}</h5>
+						<h5 class="card-title">訂單狀態: ${orderlistVO.o_status}</h5>
+						<h5 class="card-title">總金額: ${orderlistVO.o_total}</h5>
+
+						<FORM METHOD="post"
+							ACTION="<%=request.getContextPath()%>/OrderdetailServlet"
+							target="_blank" class="detail">
+							<input type="submit" value="詳情" class="btn btn-primary">
+							<input type="hidden" name="o_id" value="${orderlistVO.o_id}">
+							<input type="hidden" name="action" value="getOrderDetailByOrder">
+						</FORM>
+
 
 					</div>
-					<div class="tab-c">
-						<div class="inner-content">
-							好評 <br /> hello
-						</div>
-					</div>
-					<div class="tab-c">
-						<div class="inner-content">
-							壞評 <br /> hello
-						</div>
-					</div>
 				</div>
-			</div>
 
-
-
+			</c:forEach>
 
 		</div>
-		<div class="footer">
-			<jsp:include page="/Front_end/footer_chat.jsp"></jsp:include>
 
-			<script
-				src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<!-- 寄出訂單區域 -->
+		<div class="tab-pane fade" id="pills-contact" role="tabpanel"
+			aria-labelledby="pills-contact-tab">
+			<c:forEach var="orderlistVO" items="${sentorder}">
 
-			<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-			<script>
-				var swiper = new Swiper('.swiper-container', {
-					slidesPerView : 4,
-					spaceBetween : 30,
-					slidesPerGroup : 4,
-					loop : true,
-					loopFillGroupWithBlank : true,
-					pagination : {
-						el : '.swiper-pagination',
-						clickable : true,
-					},
-					navigation : {
-						nextEl : '.swiper-button-next',
-						prevEl : '.swiper-button-prev',
-					},
-				});
+				<div class="card">
+					<h5 class="card-header">訂單編號: ${orderlistVO.o_id}</h5>
+					<div class="card-body">
+						<h5 class="card-title">訂單成立: ${orderlistVO.o_dateForm}</h5>
+						<h5 class="card-title">訂單狀態: ${orderlistVO.o_status}</h5>
+						<h5 class="card-title">總金額: ${orderlistVO.o_total}</h5>
 
-				<script>
-				$(".tab").each(function(index) {
-					$(this).click(function(e) {
-						triggletab();
-						triigletabcontent();
-						$(this).toggleClass("active");
-						$(".tab-c").eq(index).toggleClass("active");
-					});
-				});
-				//to remove all tab headers
-				function triggletab() {
-					$(".tab").each(function() {
-						$(this).removeClass("active");
-					});
-				}
+						<FORM METHOD="post"
+							ACTION="<%=request.getContextPath()%>/OrderdetailServlet"
+							target="_blank" class="detail">
+							<input type="submit" value="詳情" class="btn btn-primary">
+							<input type="hidden" name="o_id" value="${orderlistVO.o_id}">
+							<input type="hidden" name="action" value="getOrderDetailByOrder">
+						</FORM>
 
-				//triggle the tab content
-				function triigletabcontent() {
-					$(".tab-c").each(function() {
-						$(this).removeClass("active");
-					});
-				}
-			</script>
+					</div>
+				</div>
+
+			</c:forEach>
+
+		</div>
+
+
+		<!-- --------------------------------------------------------------------------- -->
+	</div>
+
+	<!-- ----footers---- -->
+	<div class="footer">
+		<jsp:include page="/Front_end/footer.jsp"></jsp:include>
+	</div>
+	<!-- ----footer---- -->
 </body>
+
+
+
 </html>

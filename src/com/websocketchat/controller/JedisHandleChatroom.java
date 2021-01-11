@@ -1,6 +1,7 @@
 package com.websocketchat.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -17,12 +18,21 @@ public class JedisHandleChatroom {
 
 	private static JedisPool pool = JedisPoolUtil.getJedisPool();
 
-	public static List<ChatroomVO> getAllChatrooms(String sender) {
-		String key = new StringBuilder(sender).toString();
+	public static Set<String> getAllChatrooms(String sender) {
+//		String key = new StringBuilder(sender).toString();
 		Jedis jedis = null;
 		jedis = pool.getResource();
 		jedis.auth("123456");
-		Set<String> chatrooms = jedis.keys("*");
+		
+		Set<String> chatrooms = jedis.keys(sender+"*");
+		Set<String> names = new HashSet<>();
+		for (String str : chatrooms) {
+			String name = str.substring(str.lastIndexOf(":") + 1);
+			names.add(name);
+		}
+		
+		
+//		List<ChatroomVO> output = new ArrayList<>();
 		
 //		System.out.println(chatrooms.size());
 		
@@ -38,28 +48,28 @@ public class JedisHandleChatroom {
 		//getmembers from oracle by email
 		
 		
-		List<ChatroomVO> output = new ArrayList<>();
-		
-		MemberVO member1 = new MemberVO();
-		member1.setM_id("M00001");
-		member1.setM_name("李宵搖");
-		
-		MemberVO member2 = new MemberVO();
-		member2.setM_id("M00002");
-		member2.setM_name("李XX");
-		
-		MemberVO member3 = new MemberVO();
-		member3.setM_id("M00003");
-		member3.setM_name("林XX");
-		
-		output.add(new ChatroomVO(member1));
-		output.add(new ChatroomVO(member2));
-		output.add(new ChatroomVO(member3));
+//		List<ChatroomVO> output = new ArrayList<>();
+//		
+//		MemberVO member1 = new MemberVO();
+//		member1.setM_id("M00001");
+//		member1.setM_name("李宵搖");
+//		
+//		MemberVO member2 = new MemberVO();
+//		member2.setM_id("M00002");
+//		member2.setM_name("李XX");
+//		
+//		MemberVO member3 = new MemberVO();
+//		member3.setM_id("M00003");
+//		member3.setM_name("林XX");
+//		
+//		output.add(new ChatroomVO(member1));
+//		output.add(new ChatroomVO(member2));
+//		output.add(new ChatroomVO(member3));
 		
 		
 		
 		jedis.close();
-		return output;
+		return names;
 	}
 
 }

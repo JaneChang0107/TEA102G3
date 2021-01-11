@@ -25,12 +25,15 @@
     <div class="header">
     	<jsp:include page="/Front_end/header.jsp"></jsp:include>
     </div>
+    
 <jsp:useBean id="ppService" scope="page" class="com.productPicture.model.ProductPictureService"></jsp:useBean>
         <div class="container">
         
         <input type="hidden" id="type" value="${type}">
         <input type="hidden" id="name" value="${name}">
+     	
      	<div class="row align-items-center">  	
+     	
 		<c:forEach var="value" items="${pVOs}">
 			<div class="col-md-3">
 			        <div class="card" style="width: 18rem;">

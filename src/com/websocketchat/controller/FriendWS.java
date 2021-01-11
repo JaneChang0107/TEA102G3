@@ -35,8 +35,8 @@ public class FriendWS {
 		/* Sends all the connected users to the new user */
 		
 		Set<String> userNames = sessionsMap.keySet();
-//	    Map<String ,Session> userNames = sessionsMap;
-		State stateMessage = new State("open", userName, userNames);
+
+		State stateMessage = new State("open", userName, JedisHandleMessage.getAllChatrooms(userName));
 		String stateMessageJson = gson.toJson(stateMessage);
 		Collection<Session> sessions = sessionsMap.values();
 		for (Session session : sessions) {
@@ -53,20 +53,20 @@ public class FriendWS {
 
 	@OnMessage
 	public void onMessage(Session userSession, String message) {
-		String[] messages = message.split(","); //new
-		String type = messages[0].substring(messages[0].lastIndexOf(":") + 2, messages[0].length()-1);
+//		String[] messasges = message.split(","); //new
+//		String type = messages[0].substring(messages[0].lastIndexOf(":") + 2, messages[0].length()-1);
 		
 		ChatMessage chatMessage = gson.fromJson(message, ChatMessage.class);
 		String sender = chatMessage.getSender();
 		String receiver = chatMessage.getReceiver();
-		String time = chatMessage.getTime();
+		
 		
 		if ("history".equals(chatMessage.getType())) {
 			List<String> historyData = JedisHandleMessage.getHistoryMsg(sender, receiver);
 			
 			
             String historyMsg = gson.toJson(historyData);
-			ChatMessage cmHistory = new ChatMessage("history", sender, receiver, historyMsg,time);
+			ChatMessage cmHistory = new ChatMessage("history", sender, receiver, historyMsg);
 			if (userSession != null && userSession.isOpen()) {
 				userSession.getAsyncRemote().sendText(gson.toJson(cmHistory));
 				System.out.println("history = " + gson.toJson(cmHistory));

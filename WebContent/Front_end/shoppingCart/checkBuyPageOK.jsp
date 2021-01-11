@@ -4,21 +4,17 @@
 <%@ page import="com.member.model.*"%>
 <%@page import="java.util.*"%>
 <%@page import="com.orderlist.model.*"%>
-<%@page import="com.orderdetail.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%!int size;%>
 <%
 	String m_id = session.getAttribute("loginId").toString();
 	OrderlistService orderlistSvc = new OrderlistService();
-	OrderdetailService orderdetainSvc = new OrderdetailService();
-	
 	List<OrderlistVO> list = orderlistSvc.findByMember(m_id);
 	size = list.size();
 	pageContext.setAttribute("list", list);
 	OrderlistVO showlist = list.get(size - 1);
 	String o_id = showlist.getO_id();
-	List<OrderdetailVO> orderDetailList = orderdetainSvc.getDetailByOrder(o_id);
 	String o_transport = showlist.getO_transport();
 	switch (o_transport) {
 		case "0" :
@@ -66,7 +62,7 @@
 	margin: 10px auto;
 	background-color: white;
 	width: 1000px;
-	height: 300px;
+	height: 800px;
 	/* 	border: solid 1px */
 }
 
@@ -136,14 +132,22 @@
 
 		<table class="table1">
 			<tr>
-				<td class="col">您的訂單已成立</td>
-			</tr>
-			<tr>
 				<td class="col">訂單編號:<%=o_id%></td>
 			</tr>
 			<tr>
 				<td class="col">訂單時間:<%=o_date%></td>
 			</tr>
+			<tr>
+				<td class="col">訂單金額:總計<%=o_total%>元</td>
+			</tr>
+			<tr>
+				<td class="col">購買的商品為:<%=o_id%></td>
+			</tr>
+			<tr>
+				<td class="col">取貨方式:<%=o_transport%></td>
+			</tr>
+
+
 			<tr>
 				<td class="col">感謝您的購買</td>
 			</tr>

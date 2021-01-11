@@ -23,4 +23,8 @@
 			<item value="C:\Users\202008-CJ01015\Desktop\TEA102G3\TEA102G3\TEA102G3"/>
 		</list>
 	</section>
+	<section name="ChooseWorkspaceDialogSettings">
+		<item key="DIALOG_X_ORIGIN" value="533"/>
+		<item key="DIALOG_Y_ORIGIN" value="234"/>
+	</section>
 </section>

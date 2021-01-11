@@ -41,16 +41,18 @@
 
 	<div>
 		<c:if test="${loginId != null}">
-			<form id="myForm"
-				action="<%=request.getContextPath()%>/websocketchat/NameServlet"
-				method="POST" style="position:fixed" >
-				<input type="image" id="icon" value="賣場聊聊"
-					src="<%=request.getContextPath()%>/images/chaticon.png"
-					alt="Submit"> <input type="hidden" name="m_id"
-					value="${memberID}"> <input type="hidden" name="action"
-					value="">
-			</form>
+<!-- 			<form id="myForm" -->
+<%-- 				action="<%=request.getContextPath()%>/websocketchat/NameServlet" --%>
+<!-- 				method="POST" style="position:fixed" > -->
+<!-- 				<input type="image" id="icon" value="賣場聊聊" -->
+<%-- 					src="<%=request.getContextPath()%>/images/chaticon.png" --%>
+<!-- 					alt="Submit">  -->
+<%-- 				<input type="hidden" name="m_id" value="${loginId}">  --%>
+<!-- 				<input type="hidden" name="action" value=""> -->
+<!-- 			</form> -->
+<%-- 			<jsp:include page="/chat/chat.jsp"></jsp:include> --%>
 		</c:if>
+		
 
 	</div>
 	<div class="copyright">Copyright © 2020 YuXiKun Co. ,Ltd. All

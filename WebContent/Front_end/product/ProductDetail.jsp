@@ -1,6 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.product.model.*"%>
+<%@ page import="com.viewseller.model.*"%>
+<%@ page import="com.member.model.*"%>
+
+<%
+	// ProductVO pVO = new ProductVO();
+	ProductVO pVO = (ProductVO) request.getAttribute("pVO");
+
+	String m_sellid = pVO.getM_id();
+	ViewsellerService vsc = new ViewsellerService();
+	List<ViewsellerVO> list = vsc.findBysellid(m_sellid);
+	request.setAttribute("list", list);
+
+// 	MemberService memSvc = new MemberService();
+// 	MemberVO memberVO = memSvc.findOneMem(m_sellid);
+// 	session.setAttribute("memberVO", memberVO);
+%>
 
 <!DOCTYPE html>
 <html>
@@ -105,7 +123,7 @@ img.productImg {
 					<td><span>種類:</span><span id="productKindS" name="p_kind">${ptVO.pt_kind}</span></td>
 				</tr>
 				<tr>
-					<td><input type="submit" name="Submit" value="放入購物車" ></td>>
+					<td><input type="submit" name="Submit" value="放入購物車"></td>>
 				</tr>
 				<tr>
 					<td colspan=2><div id="pDetail" name="p_detail">
@@ -114,17 +132,37 @@ img.productImg {
 				</tr>
 
 			</table>
-			<input type="hidden" name="action" value="addCart"> 
-			<input type="hidden" name="p_id" value="${pVO.p_id}"> 
-			<input type="hidden" name="p_name" value="${pVO.p_name}">
-			<input type="hidden" name="p_price" value="${pVO.p_price}">
-			<input type="hidden" name="p_kind" value="${ptVO.pt_id}">
-			<input type="hidden" name="p_count" value="${pVO.p_count}">
-			<input type="hidden" name="p_detail" value="${pVO.p_detail}">
-			<input type="hidden" name="m_id" value="${pVO.m_id}">
- 
-		</form>
+			<input type="hidden" name="action" value="addCart"> <input
+				type="hidden" name="p_id" value="${pVO.p_id}"> <input
+				type="hidden" name="p_name" value="${pVO.p_name}"> <input
+				type="hidden" name="p_price" value="${pVO.p_price}"> <input
+				type="hidden" name="p_kind" value="${ptVO.pt_id}"> <input
+				type="hidden" name="p_count" value="${pVO.p_count}"> <input
+				type="hidden" name="p_detail" value="${pVO.p_detail}"> <input
+				type="hidden" name="m_id" value="${pVO.m_id}">
 
+		</form>
+		
+		<jsp:useBean id="memSvc" scope="page"
+			class="com.member.model.MemberService"></jsp:useBean>
+		<div>
+			<table id="viewseller">
+				<c:forEach var="viewsellerVO" items="${list}">
+
+					<div class="card">
+						<h5 class="card-header">會員名稱:
+							${memSvc.findOneMem(viewsellerVO.m_buyid).m_name}</h5>
+						<div class="card-body">
+							<h5 class="card-title">評價: ${viewsellerVO.v_gb}</h5>
+							<h5 class="card-title">評論內容: ${viewsellerVO.v_comment}</h5>
+
+						</div>
+					</div>
+
+				</c:forEach>
+			</table>
+
+		</div>
 	</div>
 
 	<div class="footer">

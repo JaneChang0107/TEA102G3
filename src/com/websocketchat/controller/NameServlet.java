@@ -2,6 +2,7 @@ package com.websocketchat.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,13 +28,16 @@ public class NameServlet extends HttpServlet {
 
 		MemberService memSvc = new MemberService();
 		MemberVO memberVO = memSvc.findOneMem(m_id);
-
 		HttpSession session = req.getSession();
-		String userName = (String) session.getAttribute("account");
-		List<ChatroomVO> chatrooms = JedisHandleChatroom.getAllChatrooms(userName);
-		System.out.println(chatrooms.size()+"3221234");
+//		String userId=(String) session.getAttribute("loginId");
+//		System.out.println(userId);
 		
-		req.setAttribute("chatrooms", chatrooms);
+		String userName = (String) session.getAttribute("loginId");
+		
+//		Set<String> chatrooms = JedisHandleChatroom.getAllChatrooms(userName);
+//		System.out.println(chatrooms.size()+"3221234");
+		
+//		req.setAttribute("chatrooms", chatrooms);
 		req.setAttribute("userName", userName);
 		req.setAttribute("memberVO", memberVO);
 

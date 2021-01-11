@@ -1,181 +1,113 @@
-<%@page import="com.sun.xml.internal.bind.ValidationEventLocatorEx"%>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
-<%@ page import="com.viewseller.model.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.viewseller.model.ViewsellerVO"%>
 
 <%
-	ViewsellerVO viewsellerVO = (ViewsellerVO) request.getAttribute("viewsellerVO");
-ViewsellerService Srv = new ViewsellerService();
-List<ViewsellerVO> list = Srv.get();
-pageContext.setAttribute("list", list);
+	ViewsellerVO viewVO = (ViewsellerVO) request.getAttribute("viewVO");
+    pageContext.setAttribute("viewVO", viewVO);
 %>
 
-
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>新增評價</title>
-
+<meta charset="UTF-8">
+<title>addProduct</title>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/setcomment.css">
+	href="<%=request.getContextPath()%>/vendors/bootstrap-4.5.3-dist/css/bootstrap.min.css">
 
+<style>
+div#showImg>img.viewImg {
+	width: 200px;
+}
+
+div#addComment {
+	position: relative;
+	width: 50%;
+	left: 50%;
+	top: 10%;
+	transform: translateX(-50%);
+}
+
+btn btn-primary {
+	text-align: right;
+}
+</style>
 
 </head>
-<body>
 
+<body>
+<!-- header----------->
 	<div class="header">
 		<jsp:include page="/Front_end/header.jsp"></jsp:include>
 	</div>
+<!-- header----------->
 
 
-  <FORM METHOD="post"
-		ACTION="<%=request.getContextPath()%>/ViewSellerServlet" name="form1">
-		<table>
+	<div id="addComment">
+		<jsp:useBean id="viewsellerService" scope="page"
+			class="com.viewseller.model.ViewsellerService"></jsp:useBean>
+		<%-- 	<jsp:useBean id="ptService" scope="page" class="com.productType.model.ProductTypeService"></jsp:useBean> --%>
 
-			<tr>
-				<!-- 	綁訂單編號 動態顯示 -->
-				<td>訂單編號:</td>
-				<td>
-					<div id="member_o_id">
-						<span id="o_id" name="o_id">${viewsellerVO.o_id}</span>
-					</div>
-				</td>
-<!-- 				<td><input type="TEXT" name="o_id" size="45" -->
-<%-- 					value="<%=(viewsellerVO == null) ? "O00001" : viewsellerVO.getO_id()%>" /></td> --%>
-			</tr>
+		<h1>留下評論：</h1>
 
-			<tr>
-				<!-- 	綁訂單編號 動態顯示 -->
-				<td>買家名稱:</td>
-				<td>
-					<div id="member_buyid">
-						<span id="m_buyid" name="m_buyid">${viewsellerVO.m_buyid}</span>
-					</div>
-				</td>
+		<c:if test="${!errors.isEmpty()}">
+			<c:forEach var="error" items="${errors}">
+				<p style="color: red">${error}</p>
+			</c:forEach>
+		</c:if>
 
-<!-- 				<td><input type="TEXT" name="m_buyid" size="45" -->
-<%-- 					value="<%=(viewsellerVO == null) ? "M00001" : viewsellerVO.getM_buyid()%>" /></td> --%>
-			</tr>
+		<FORM METHOD="post"
+			ACTION="<%=request.getContextPath()%>/ViewSellerServlet" name="form1">
 
+			<div id="o_id" style="display: none">
+				<label>訂單編號</label> <input type="text"
+					value="<%=viewVO == null ? "" : viewVO.getO_id()%>">
+			</div>
 
-			<tr>
-				<!-- 	綁訂單編號 動態顯示 -->
-				<td>賣家名稱:</td>
-				<td>
-					<div id="member_sellid">
-						<span id="m_sellid" name="m_sellid">${viewsellerVO.m_sellid}</span>
-					</div>
-				</td>
-<!-- 				<td><input type="TEXT" name="m_sellid" size="45" -->
-<%-- 					value="<%=(viewsellerVO == null) ? "M00002" : viewsellerVO.getM_sellid()%>" /></td> --%>
-			</tr>
+			<div id="m_buyid" style="display: none">
+				<label>買家名稱</label> <input type="text"
+					value="<%=viewVO == null ? "" : viewVO.getM_buyid()%>">
+			</div>
 
-			<tr>
-				<td>好壞評價:</td>
-				<td><input type="radio" name="v_gb" value="好評">好評 <input
-					type="radio" name="v_gb" value="負評">負評</td>
-			</tr>
+			<div id="m_sellid" style="display: none">
+				<label>賣家名稱</label> <input type="text"
+					value="<%=viewVO == null ? "" : viewVO.getM_sellid()%>">
+			</div>
 
-			<tr>
-				<td>評論內容:</td>
-				<td><input type="TEXT" name="v_comment" size="45"
-					value="<%=(viewsellerVO == null) ? "" : viewsellerVO.getV_comment()%>" />
-				</td>
-			</tr>
+			<div id="choose_gb">
+				<label>選擇好壞：</label> <input type="radio" id="2" name="v_gb"
+					value="2" checked><label for="2">值得鼓勵</label> <input
+					type="radio" id="1" name="v_gb" value="1"><label for="1">不甚滿意</label>
+			</div>
 
-			<tr>
-				<!-- 	綁訂單編號 動態顯示 -->
-				<td>評價日期:</td>
-				<td><input type="text" name="v_date" id="v_date" size="40"
-					placeholder="請選擇日期" /></td>
-			</tr>
-
-
-		</table>
-		<br> <input type="hidden" name="action" value="insert"> <input
-			type="submit" value="確認送出">
-
-	</FORM>
-
-
-
-	
-
-	<article class="task_container">
-		<button type="button" class="btn_empty">清空</button>
-		<h1 class="title1">評價</h1>
-
-		<div class="task_add_block">
-			<input type="text" class="task_name" placeholder="留下您的評價">
-			<button type="button" class="task_add">送出</button>
-		</div>
-
-		<div class="task_list_parent">
-			<ul class="task_list">
-			</ul>
-		</div>
-	</article>
-
-
-
-
-
-	<div class="footer">
-		<jsp:include page="/Front_end/footer.jsp"></jsp:include>
+			<div id="v_comment">
+				<label>評論內容：</label>
+				<textarea name="comment" cols="40" rows="1"><%=viewVO == null ? "" : viewVO.getV_comment()%></textarea>
+			</div>
+			<div>
+				<input type="hidden" name="action" value="insert"> <input
+					type="submit" class="btn btn-primary" value="送出">
+			</div>
+		</form>
 	</div>
+
+
+
+<!-- ----footers---- -->
+		<div class="footer">
+			<jsp:include page="/Front_end/footer.jsp"></jsp:include>
+		</div>
+<!-- ----footer---- -->
+
+
 	<script
-		src="<%=request.getContextPath()%>/vendors/popper/popper.min.js"></script>
+		src="<%=request.getContextPath()%>/vendors/ckeditor/ckeditor.js"></script>
 	<script
-		src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/vendors/jquery/jquery-3.5.1.min.js"></script>
-	<script src="<%=request.getContextPath()%>/js/setcomment.js"></script>
+		src="<%=request.getContextPath()%>/Front_end/product/js/previewImg.js"></script>
+	<script>
+		CKEDITOR.replace('editor');
+	</script>
 
 </body>
-
-<%
-	java.sql.Timestamp v_date = null;
-
-	try {
-		v_date = viewsellerVO.getV_date();
-	} catch (Exception e) {
-		v_date = new java.sql.Timestamp(System.currentTimeMillis());
-	}
-%>
-
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script
-	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-
-<style>
-.xdsoft_datetimepicker .xdsoft_datepicker {
-	width: 300px; /* width:  300px; */
-}
-
-.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-	height: 151px; /* height:  151px; */
-}
-</style>
-<script>
-	$.datetimepicker.setLocale('zh'); // kr ko ja en
-	$(function() {
-		$('#v_date').datetimepicker({
-			theme : '', //theme: 'dark',
-			timepicker : true, //timepicker: false,
-			step : 1, //step: 60 (這是timepicker的預設間隔60分鐘)
-			format : 'Y-m-d H:i:s',
-			value : new Date(),
-			//disabledDates:    ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-			//startDate:	        '2017/07/10',  // 起始日
-			minDate : '-1970-01-01', // 去除今日(不含)之前
-		//maxDate:           '+1970-01-01'  // 去除今日(不含)之後
-		});
-	});
-</script>
-
-
 </html>
