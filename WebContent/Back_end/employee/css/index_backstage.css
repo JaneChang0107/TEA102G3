@@ -89,3 +89,11 @@ ul li{
 .-none{
   display: none;
 }
+
+.button_mem{
+	font-size: 20px;
+}
+.AutoNewline
+{
+	word-break: break-all;
+}

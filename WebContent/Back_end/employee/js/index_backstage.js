@@ -126,7 +126,6 @@ $.ajax({
       });     
 
 
-
 // 按下基本資料按鈕
   $("#emp_modify-tab").on("click", function(){
 	 let e_id = $("#e_id").val();
@@ -744,18 +743,18 @@ $.ajax({
 					  
 				  $.each(data.emp_list, function(index, item){
 					  list_html+='		<div class="row" id="div_append">';
-					  list_html+='            <div class="col" id="e_id">'+ item.e_id +'</div>';
-					  list_html+='            <div class="col"><p class="para">'+ item.e_password +'</p><input name="input_e_password" class="-none" value="'+ item.e_password +'"></div>';
-					  list_html+='            <div class="col">'+ item.e_identity +'</div>';
-					  list_html+='            <div class="col">'+ item.e_name +'</div>';
-					  list_html+='            <div class="col">'+ item.e_gender +'</div>';
-					  list_html+='            <div class="col">'+ item.e_birth +'</div>';
-					  list_html+='            <div class="col">'+ item.e_email +'</div>';
-					  list_html+='            <div class="col">'+ item.e_phone +'</div>';
-					  list_html+='            <div class="col">'+ item.e_address +'</div>';
-					  list_html+='            <div class="col">'+ item.e_title +'</div>';
-					  list_html+='            <div class="col" id="e_status" data-e_id = "' + item.e_status + '">'+ item.e_status_view +'</div>';
-					  list_html+='            <div class="col">'+ item.st_name +'</div>';
+					  list_html+='            <div class="col AutoNewline" id="e_id">'+ item.e_id +'</div>';
+					  list_html+='            <div class="col AutoNewline"><p class="para">'+ item.e_password +'</p><input name="input_e_password" class="-none" value="'+ item.e_password +'"></div>';
+					  list_html+='            <div class="col AutoNewline">'+ item.e_identity +'</div>';
+					  list_html+='            <div class="col AutoNewline">'+ item.e_name +'</div>';
+					  list_html+='            <div class="col AutoNewline">'+ item.e_gender +'</div>';
+					  list_html+='            <div class="col AutoNewline">'+ item.e_birth +'</div>';
+					  list_html+='            <div class="col AutoNewline">'+ item.e_email +'</div>';
+					  list_html+='            <div class="col AutoNewline">'+ item.e_phone +'</div>';
+					  list_html+='            <div class="col AutoNewline">'+ item.e_address +'</div>';
+					  list_html+='            <div class="col AutoNewline">'+ item.e_title +'</div>';
+					  list_html+='            <div class="col AutoNewline" id="e_status" data-e_id = "' + item.e_status + '">'+ item.e_status_view +'</div>';
+					  list_html+='            <div class="col AutoNewline">'+ item.st_name +'</div>';
 					  list_html+='            <div class="col">';
 					  list_html+='                 <button type="button" id="modify">修改';
 					  list_html+='            </div>';
@@ -774,7 +773,8 @@ $.ajax({
 		  }
 	  })
   })
-  
+ 
+ //按查詢按鈕
   $(document).on("click", "#button_search", function(){
 	  let inpute = $("#input_search").val();
 	  
@@ -827,19 +827,19 @@ $.ajax({
 				  
 			  $.each(data, function(index, item){
 				  list_html+='		<div class="row" id="div_append">';
-				  list_html+='            <div class="col" id="e_id">'+ item.e_id +'</div>';
-				  list_html+='            <div class="col" id="e_password"><p class="para">'+ item.e_password +'</p><input name="input_e_password" class="-none" value="'+ item.e_password +'"></div>';
-				  list_html+='            <div class="col">'+ item.e_identity +'</div>';
-				  list_html+='            <div class="col">'+ item.e_name +'</div>';
-				  list_html+='            <div class="col">'+ item.e_gender +'</div>';
-				  list_html+='            <div class="col">'+ item.e_birth +'</div>';
-				  list_html+='            <div class="col">'+ item.e_email +'</div>';
-				  list_html+='            <div class="col">'+ item.e_phone +'</div>';
-				  list_html+='            <div class="col">'+ item.e_address +'</div>';
-				  list_html+='            <div class="col">'+ item.e_title +'</div>';
-				  list_html+='            <div class="col" id="e_status" data-e_id = "' + item.e_status + '">'+ item.e_status_view +'</div>';
-				  list_html+='            <div class="col">'+ item.st_name +'</div>';
-				  list_html+='            <div class="col">';
+				  list_html+='            <div class="col AutoNewline" id="e_id">'+ item.e_id +'</div>';
+				  list_html+='            <div class="col AutoNewline" id="e_password"><p class="para">'+ item.e_password +'</p><input name="input_e_password" class="-none" value="'+ item.e_password +'"></div>';
+				  list_html+='            <div class="col AutoNewline">'+ item.e_identity +'</div>';
+				  list_html+='            <div class="col AutoNewline">'+ item.e_name +'</div>';
+				  list_html+='            <div class="col AutoNewline">'+ item.e_gender +'</div>';
+				  list_html+='            <div class="col AutoNewline">'+ item.e_birth +'</div>';
+				  list_html+='            <div class="col AutoNewline">'+ item.e_email +'</div>';
+				  list_html+='            <div class="col AutoNewline">'+ item.e_phone +'</div>';
+				  list_html+='            <div class="col AutoNewline">'+ item.e_address +'</div>';
+				  list_html+='            <div class="col AutoNewline">'+ item.e_title +'</div>';
+				  list_html+='            <div class="col AutoNewline" id="e_status" data-e_id = "' + item.e_status + '">'+ item.e_status_view +'</div>';
+				  list_html+='            <div class="col AutoNewline">'+ item.st_name +'</div>';
+				  list_html+='            <div class="col AutoNewline">';
 				  list_html+='                 <button type="button" id="modify">修改';
 				  list_html+='            </div>';
 				  list_html+='            <div class="col">';
@@ -932,3 +932,76 @@ $.ajax({
 		  }
 	  }
   })
+  
+//顯示所有員工
+  $("#acc_mgt-tab").on("click", function(){
+	  $.ajax({
+		  url: "http://localhost:8081/TEA102G3/List_member",
+		  type: "POST",
+		  dataType: "json",
+		  beforeSend: function(){},
+		  success: function(data){
+			  list_html = "";
+				  
+			  list_html +='<div class="row">';
+			  list_html +='    <div class="col" >';
+			  list_html +='    尋找';
+			  list_html +='        <input type="text">';
+			  list_html +='        <button type="button" id="button_search" class="btn btn-primary">查詢</button>';
+			  list_html +='    </div>';
+			  list_html +='</div>';
+			  list_html +='<div class="row">';					  
+			  list_html +='    <div class="col">';
+			  list_html +='        <div class="row listAll_row" id="membercol">';
+			  list_html +='            <div class="col">會員id</div>';
+			  list_html +='            <div class="col">電子郵件</div>';
+			  list_html +='            <div class="col">姓名</div>';
+			  list_html +='            <div class="col">性別</div>';
+			  list_html +='            <div class="col">電話</div>';
+			  list_html +='            <div class="col">地址</div>';
+			  list_html +='            <div class="col">生日</div>';
+			  list_html +='            <div class="col">會員狀態</div>';
+			  list_html +='            <div class="col">修改</div>';
+			  list_html +='        </div>';
+			  $.each(data, function(index, item){
+			  list_html +='            <div class="row"  id="memberrow">';
+			  list_html +='                <div class="col">'+ item.m_id +'</div>';
+			  list_html +='                <div class="col">'+ item.m_email +'</div>';
+			  list_html +='                <div class="col">'+ item.m_name +'</div>';
+			  list_html +='                <div class="col">'+ item.m_gender +'</div>';
+			  list_html +='                <div class="col">'+ item.m_phone +'</div>';
+			  list_html +='                <div class="col">'+ item.m_address +'</div>';
+			  list_html +='                <div class="col">'+ item.m_birth +'</div>';
+			  list_html +='                <div class="col" data_status="'+ item.m_status +'">'+ item.m_statusByString +'</div>';
+			  list_html +='                <div class="col">';
+//			  list_html +='                    <div class="row">';
+//			  list_html +='                        <div class="col button_mem"><button type="button">未開通</div>';
+//			  list_html +='                        <div class="col button_mem"><button type="button">買家</div>';
+//			  list_html +='                    </div>';
+//			  list_html +='                    <div class="row">';
+//			  list_html +='                        <div class="col button_mem"><button type="button">未驗證</div>';
+//			  list_html +='                        <div class="col button_mem"><button type="button">賣家</div>';
+//			  list_html +='                    </div>';
+			  list_html +='					   <select id="select_m_id">';
+			  list_html +='					   		<option value="0">未開通</opion>';
+			  list_html +='					 	 	<option value="1">買家</opion>';
+			  list_html +='					   		<option value="2">賣家未驗證</opion>';
+			  list_html +='					 	 	<option value="3">賣家</opion>';
+			  list_html +='					   </select>';
+			  list_html +='                    <input type="hidden" name="m_id" value="'+ item.m_id +'">';
+			  list_html +='                </div>';
+			  list_html +='            </div>';
+			  });
+			  list_html +='    </div>';
+			  list_html +='</div>';
+			  
+			  $("#mem_page").html(list_html);
+		  },
+		  error: function(){
+			  console.log("error")
+		  }
+	  })
+  })
+  
+//修改會員狀態
+  
