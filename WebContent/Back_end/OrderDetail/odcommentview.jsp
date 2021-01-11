@@ -24,7 +24,7 @@
 	OrderlistService orderlistSvc =new OrderlistService();
 	OrderlistVO orderlistVO =orderlistSvc.getOneOrderlist(o_id);
 	
-// 	System.out.println(request.getParameter("o_id")); 
+	System.out.println(request.getParameter("o_id")); 
 	
     HttpSession Session = request.getSession();
     String m_id = (String) Session.getAttribute("loginId");
@@ -33,11 +33,10 @@
     pageContext.setAttribute("list", list);
  
 
-
-       ViewsellerVO viewsellerVO=(ViewsellerVO)request.getAttribute("viewsellerVO");
-       List<ViewsellerVO> viewlist = new ArrayList<ViewsellerVO>(); 
-	   viewlist.add(viewsellerVO);
-	   pageContext.setAttribute("viewlist", viewlist);
+    ViewsellerVO viewsellerVO=(ViewsellerVO)request.getAttribute("viewsellerVO");
+    List<ViewsellerVO> viewlist = new ArrayList<ViewsellerVO>(); 
+    viewlist.add(viewsellerVO);
+	pageContext.setAttribute("viewlist", viewlist);
       
 
 
@@ -149,11 +148,11 @@ btn btn-primary {
 		<th><h2>評價時間</h2></th>
      
 	</tr>
-	<c:forEach var="viewlist" items="${viewlist}">
+	<c:forEach var="viewsellerVO" items="${viewlist}">
 		<tr>
-			<td><h2>${viewlist.v_gb}</h2></td>
-			<td><h2>${viewlist.v_comment}</h2></td>
-			<td><h2>${viewlist.v_date}</h2></td>
+			<td><h2>${viewsellerVO.v_gb}</h2></td>
+			<td><h2>${viewsellerVO.v_comment}</h2></td>
+			<td><h2>${viewsellerVO.v_date}</h2></td>
 		</tr>
 		</c:forEach>
 </table>

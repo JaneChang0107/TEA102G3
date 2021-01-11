@@ -15,6 +15,8 @@ import javax.servlet.http.HttpSession;
 
 import com.orderdetail.model.OrderdetailService;
 import com.orderdetail.model.OrderdetailVO;
+import com.orderlist.model.OrderlistService;
+import com.orderlist.model.OrderlistVO;
 import com.viewseller.model.*;
 
 
@@ -135,6 +137,8 @@ public class ViewSellerServlet extends HttpServlet {
 				if (o_id == null || o_id.trim().length() == 0) {
 					errorMsgs.add("請勿空白");
 				}
+				
+				
 				String m_buyid = req.getParameter("m_buyid").trim();
 				if (m_buyid == null || m_buyid.trim().length() == 0) {
 					errorMsgs.add("請勿空白");
@@ -200,7 +204,7 @@ public class ViewSellerServlet extends HttpServlet {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-
+            System.out.println("開始新增評論");
 			
 			try {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
@@ -210,14 +214,18 @@ public class ViewSellerServlet extends HttpServlet {
 				if (o_id == null || o_id.trim().length() == 0) {
 					errorMsgs.add("o_id請勿空白");
 				}
+			
 				String m_buyid = req.getParameter("m_buyid").trim();
 				if (m_buyid == null || m_buyid.trim().length() == 0) {
 					errorMsgs.add("m_buyid請勿空白");
 				}
+				
 				String m_sellid = req.getParameter("m_sellid").trim();
 				if (m_sellid == null || m_sellid.trim().length() == 0) {
 					errorMsgs.add("m_sellid請勿空白");
 				}
+				
+				System.out.println("m_sellid"+m_sellid);
 				String v_gb = req.getParameter("v_gb").trim();
 				if (v_gb == null || v_gb.trim().length() == 0) {
 					errorMsgs.add("v_gb請勿空白");
@@ -241,7 +249,6 @@ public class ViewSellerServlet extends HttpServlet {
 //				String mid = (String) session.getAttribute("loginId");
 //				System.out.println(mid);
 				
-
 				ViewsellerVO viewsellerVO = new ViewsellerVO();
 //				viewsellerVO.setV_id(v_id);
 				viewsellerVO.setO_id(o_id);
@@ -250,34 +257,35 @@ public class ViewSellerServlet extends HttpServlet {
 				viewsellerVO.setV_gb(v_gb);
 				viewsellerVO.setV_comment(v_comment);
 				viewsellerVO.setV_date(v_date);
-
-				// Send the use back to the form, if there were errors
+				
 				if (!errorMsgs.isEmpty()) {
+					System.out.println("有錯誤處理");
 					req.setAttribute("viewsellerVO", viewsellerVO); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req.getRequestDispatcher("/Back_end/OrderDetail/listOrderdetailByOrder.jsp");
 					failureView.forward(req, res);
 					return;
 				}
-				System.out.println("261行");
-
+				
 				/*************************** 2.開始新增資料 ***************************************/
 				ViewsellerService viewsellerSvc = new ViewsellerService();
 				viewsellerVO = viewsellerSvc.addViewsellerVO(o_id, m_buyid, m_sellid, v_gb, v_comment, v_date);
-				OrderdetailService orderdetailSvc = new OrderdetailService();//
-                
 				
-
-				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+				OrderdetailService orderdetailSvc = new OrderdetailService();//
 				List<OrderdetailVO> list = orderdetailSvc.getDetailByOrder(o_id);//
 				req.setAttribute("list", list);//
 				
-			    
+				OrderlistService orderlistSvc =new OrderlistService();
+				OrderlistVO orderlistVO = new OrderlistVO();
+				String o_status ="訂單完成";
+				orderlistVO.setO_status(o_status);
+				orderlistVO.setO_id(o_id);
+				orderlistVO = orderlistSvc.updateStatus(o_status, o_id);
+				req.setAttribute("orderlistVO", orderlistVO);
+				
 			    req.setAttribute("viewsellerVO",viewsellerVO);
 			    
-				System.out.println("有抓到VO"+viewsellerVO);
-				
 				String url = "/Back_end/OrderDetail/odcommentview.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
@@ -311,7 +319,6 @@ public class ViewSellerServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-		
 		
 	}
 

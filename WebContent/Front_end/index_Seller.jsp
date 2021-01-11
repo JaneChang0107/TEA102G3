@@ -14,12 +14,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
-//    int countorder,countunfinish,countshipping,countarrived,countfinish;
-//    countorder=(Integer)request.getAttribute("countorder");
-//    countunfinish=(Integer)request.getAttribute("countunfinish");
-//    countshipping=(Integer)request.getAttribute("countshipping");
-//    countarrived=(Integer)request.getAttribute("countarrived");
-//    countfinish=(Integer)request.getAttribute("countfinish");
+
 
 %>
 
@@ -54,7 +49,6 @@
 
 
 </style>
-
 
 
 </head>

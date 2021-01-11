@@ -309,6 +309,7 @@ h5.card-header {
 				</c:forEach>
 			</div>
 		</div>
+		</div>
 
 <!-- --------footer-------- -->
 	<div class="footer">
