@@ -2,20 +2,23 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.orderlist.model.*"%>	
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%!int sum=0;%>	
-<%!int paidAlready=0;%>	
-<%!int paidNotYet=0;%>	
-<%
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
+	<%
     OrderlistService OrderlistSvc = new OrderlistService();
     List<OrderlistVO> list = OrderlistSvc.getAll();
     pageContext.setAttribute("list",list);
     List<OrderlistVO> notFinishList = new ArrayList<OrderlistVO>();
     List<OrderlistVO> finishList = new ArrayList<OrderlistVO>();
-    
+    int sum=0;
+	int paidNotYet=0;
+	int paidAlready=0;
+	
     for(int i=0;i<list.size();i++){
+    	
     	sum+=list.get(i).getO_total();
+    	
     	if(!(list.get(i).getO_status().equals("訂單完成"))){
+    		
     		paidNotYet+=list.get(i).getO_total();
     	
     		notFinishList.add(list.get(i));
@@ -24,6 +27,7 @@
     		
     	}
     	if(list.get(i).getO_status().equals("訂單完成")){
+    		
     		paidAlready+=list.get(i).getO_total();
     		
     		
@@ -31,10 +35,14 @@
     		//System.out.println(finishList);
     	}
     
+    	
     }
     pageContext.setAttribute("notFinishList",notFinishList);
     pageContext.setAttribute("finishList",finishList);
-%>
+    
+ %> 
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -123,7 +131,9 @@ div#addProductPlace{
 	<td colspan=2><h3 >即將撥款</h3></td>
 	</tr>
 	<tr>
-	<td><h3>$</h3></td><td><h3 style="color:red"><%=paidNotYet %></h3></td>
+  
+
+	<td><h3>$</h3></td><td><h3 style="color:red"><%=paidNotYet%></h3></td>
 	</tr>
 	</table>
 	</div>
@@ -153,9 +163,7 @@ div#addProductPlace{
 	</tr>
 	</table>
 	
-	
-	
-	
+	%>
 	
 	<table>
 	<tr>
@@ -230,13 +238,13 @@ div#addProductPlace{
 		 </tr>
 	</c:forEach>
 		  </table>
-
-		  </div>
+	  </div>
 		</div>
 		
 		</div></td>
 	</tr>
 	</table>
+	
 	
 	<div class="footer">
 		<jsp:include page="/Front_end/footer.jsp"></jsp:include>
