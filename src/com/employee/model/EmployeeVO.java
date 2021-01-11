@@ -18,7 +18,7 @@ public class EmployeeVO implements Serializable{
 	private String e_title;
 	private Integer e_status;
 	private String st_id;
-	private String e_status_view;
+
 	
 	
 	public String getE_id() {

@@ -38,11 +38,11 @@ public class List_one extends HttpServlet {
 		try {
 			JSONObject jsonObj = new JSONObject(enter);
 			String e_name =  jsonObj.getString("input");
-			System.out.println("e_name = " + e_name);
+//			System.out.println("e_name = " + e_name);
 			
 		List<EmployeeVO> employeeVO =  service.getOneEmployee_e_name(e_name);
 		
-//		System.out.println("aaaaa" + employeeVO);
+
 		
 		JSONArray jsonArray = new JSONArray(employeeVO);
 		String jsonStr = jsonArray.toString();

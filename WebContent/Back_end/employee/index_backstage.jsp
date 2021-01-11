@@ -38,7 +38,7 @@
             </div>
             <div class="col head">
                 <div class="row align-items-center">
-                    <div class="col"><p>HELLO!${e_id}</p></div>
+                    <div class="col"><p>HELLO!${employeeVO.e_name}</p></div>
                 </div>
 
                 <div class="row align-items-center">

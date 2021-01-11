@@ -41,6 +41,7 @@ public class ajax extends HttpServlet {
 		PrintWriter out= res.getWriter();
 		
 		List<StoreVO> store_list = sevice.getAll();
+		
 
 		
 		try {			

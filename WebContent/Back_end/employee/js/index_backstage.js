@@ -23,11 +23,12 @@ $.ajax({
        	  list_html +='                <p>門市:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
-       	  list_html +='                <select size="1" id="st_id" name="st_id">';
-       	  for(let i = 0; i < data.store.length; i++){
-       	  list_html +='					<option value="'+ data.store[i].st_id +'" '+((data.emp.st_id==data.store[i].st_id)? 'selected':'' )+'>'+ data.store[i].st_id ;         		  
-       	  }       	 
-       	  list_html +='				</select>';
+//       	  list_html +='                <select size="1" id="st_id" name="st_id">';
+//       	  for(let i = 0; i < data.store.length; i++){
+//       	  list_html +='					<option value="'+ data.store[i].st_id +'" '+((data.emp.st_id==data.store[i].st_id)? 'selected':'' )+'>'+ data.store[i].st_name ;         		  
+//       	  }       	 
+//       	  list_html +='				</select>';
+       	  list_html +=            		data.emp.st_name;
        	  list_html +='            </div>';
        	  list_html +='        </div>';
        	  list_html +='        <div class="row">';
@@ -35,8 +36,9 @@ $.ajax({
        	  list_html +='                <p>職稱:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';											
-       	  list_html +='             <input type="radio" name="e_title" size="45" value="EMPLOYEE" '+ ((data.emp.e_title == 'EMPLOYEE') ? 'checked' : '') +'>EMPLOYEE';
-       	  list_html +='				<input type="radio" name="e_title" size="45" value="BOSS" '+ ((data.emp.e_title == 'BOSS') ? 'checked' : '')+'>BOSS';
+//       	  list_html +='             <input type="radio" name="e_title" size="45" value="EMPLOYEE" '+ ((data.emp.e_title == 'EMPLOYEE') ? 'checked' : '') +'>EMPLOYEE';
+//       	  list_html +='				<input type="radio" name="e_title" size="45" value="BOSS" '+ ((data.emp.e_title == 'BOSS') ? 'checked' : '')+'>BOSS';
+       	  list_html +=				data.emp.e_title;
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
        	  list_html +='                <p>電話:</p>';
@@ -94,6 +96,8 @@ $.ajax({
        	  list_html +='            <div class="col btn_col">';
        	  list_html +='                <button type="button" id="btn_enter" class="btn btn-primary forget-btn">確認</button>';
        	  list_html +='                <input type="hidden" name="e_id" id="e_id" value="'+ data.emp.e_id +'">';
+       	  list_html +='                <input type="hidden" name="st_id" id="st_id" value="'+ data.emp.st_id +'">';
+       	  list_html +='                <input type="hidden" name="e_title" id="e_title" value="'+ data.emp.e_title +'">';
        	  list_html +='            </div>';
        	  list_html +='        </div>';
        	  list_html +='    </div>';
@@ -158,11 +162,12 @@ $.ajax({
        	  list_html +='                <p>門市:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
-       	  list_html +='                <select size="1" id="st_id" name="st_id">';
-       	  for(let i = 0; i < data.store.length; i++){
-       	  list_html +='					<option value="'+ data.store[i].st_id +'" '+((data.emp.st_id==data.store[i].st_id)? 'selected':'' )+'>'+ data.store[i].st_id ;         		  
-       	  }       	 
-       	  list_html +='				</select>';
+//   	  list_html +='                <select size="1" id="st_id" name="st_id">';
+//   	  for(let i = 0; i < data.store.length; i++){
+//   	  list_html +='					<option value="'+ data.store[i].st_id +'" '+((data.emp.st_id==data.store[i].st_id)? 'selected':'' )+'>'+ data.store[i].st_name ;         		  
+//   	  }       	 
+//   	  list_html +='				</select>';
+       	  list_html +=            		data.emp.st_name;
        	  list_html +='            </div>';
        	  list_html +='        </div>';
        	  list_html +='        <div class="row">';
@@ -170,8 +175,9 @@ $.ajax({
        	  list_html +='                <p>職稱:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';											
-       	  list_html +='             <input type="radio" name="e_title" size="45" value="EMPLOYEE" '+ ((data.emp.e_title == 'EMPLOYEE') ? 'checked' : '') +'>EMPLOYEE';
-       	  list_html +='				<input type="radio" name="e_title" size="45" value="BOSS" '+ ((data.emp.e_title == 'BOSS') ? 'checked' : '')+'>BOSS';
+//   	  list_html +='             <input type="radio" name="e_title" size="45" value="EMPLOYEE" '+ ((data.emp.e_title == 'EMPLOYEE') ? 'checked' : '') +'>EMPLOYEE';
+//   	  list_html +='				<input type="radio" name="e_title" size="45" value="BOSS" '+ ((data.emp.e_title == 'BOSS') ? 'checked' : '')+'>BOSS';
+       	  list_html +=				data.emp.e_title;
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
        	  list_html +='                <p>電話:</p>';
@@ -229,6 +235,8 @@ $.ajax({
        	  list_html +='            <div class="col btn_col">';
        	  list_html +='                <button type="button" id="btn_enter" class="btn btn-primary forget-btn">確認</button>';
        	  list_html +='                <input type="hidden" name="e_id" id="e_id" value="'+ data.emp.e_id +'">';
+       	  list_html +='                <input type="hidden" name="st_id" id="st_id" value="'+ data.emp.st_id +'">';
+       	  list_html +='                <input type="hidden" name="e_title" id="e_title" value="'+ data.emp.e_title +'">';
        	  list_html +='            </div>';
        	  list_html +='        </div>';
        	  list_html +='    </div>';
@@ -262,7 +270,7 @@ $.ajax({
   $(document).on("click", "#btn_enter", function(){
 	 let e_id = $("[name='e_id']").val();
 	 let select_store = $("[name='st_id']").val();
-	 let e_title = $("[name='e_title']:checked").val();
+	 let e_title = $("[name='e_title']").val();
 	 let e_phone = $("[name='e_phone']").val();
 	 let e_name = $("[name='e_name']").val();
 	 let e_gender = $("[name='e_gender']:checked").val();
@@ -316,11 +324,12 @@ $.ajax({
        	  list_html +='                <p>門市:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
-       	  list_html +='                <select size="1" id="st_id" name="st_id">';
-       	  for(let i = 0; i < data.store.length; i++){
-       	  list_html +='					<option value="'+ data.store[i].st_id +'" '+((data.emp.st_id==data.store[i].st_id)? 'selected':'' )+'>'+ data.store[i].st_id ;         		  
-       	  }       	 
-       	  list_html +='				</select>';
+//   	  list_html +='                <select size="1" id="st_id" name="st_id">';
+//   	  for(let i = 0; i < data.store.length; i++){
+//   	  list_html +='					<option value="'+ data.store[i].st_id +'" '+((data.emp.st_id==data.store[i].st_id)? 'selected':'' )+'>'+ data.store[i].st_name ;         		  
+//   	  }       	 
+//   	  list_html +='				</select>';
+       	  list_html +=            		data.emp.st_name;
        	  list_html +='            </div>';
        	  list_html +='        </div>';
        	  list_html +='        <div class="row">';
@@ -328,8 +337,9 @@ $.ajax({
        	  list_html +='                <p>職稱:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';											
-       	  list_html +='             <input type="radio" name="e_title" size="45" value="EMPLOYEE" '+ ((data.emp.e_title == 'EMPLOYEE') ? 'checked' : '') +'>EMPLOYEE';
-       	  list_html +='				<input type="radio" name="e_title" size="45" value="BOSS" '+ ((data.emp.e_title == 'BOSS') ? 'checked' : '')+'>BOSS';
+//   	  list_html +='             <input type="radio" name="e_title" size="45" value="EMPLOYEE" '+ ((data.emp.e_title == 'EMPLOYEE') ? 'checked' : '') +'>EMPLOYEE';
+//   	  list_html +='				<input type="radio" name="e_title" size="45" value="BOSS" '+ ((data.emp.e_title == 'BOSS') ? 'checked' : '')+'>BOSS';
+       	  list_html +=				data.emp.e_title;
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
        	  list_html +='                <p>電話:</p>';
@@ -387,6 +397,8 @@ $.ajax({
        	  list_html +='            <div class="col btn_col">';
        	  list_html +='                <button type="button" id="btn_enter" class="btn btn-primary forget-btn">確認</button>';
        	  list_html +='                <input type="hidden" name="e_id" id="e_id" value="'+ data.emp.e_id +'">';
+       	  list_html +='                <input type="hidden" name="st_id" id="st_id" value="'+ data.emp.st_id +'">';
+       	  list_html +='                <input type="hidden" name="e_title" id="e_title" value="'+ data.emp.e_title +'">';
        	  list_html +='            </div>';
        	  list_html +='        </div>';
        	  list_html +='    </div>';
