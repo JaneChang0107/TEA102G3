@@ -4,29 +4,34 @@ import java.util.List;
 import java.util.Set;
 
 public interface MemberDAO_interface {
-	//¤@¯ë·|­û·s¼W
+	//ï¿½@ï¿½ï¿½ï¿½|ï¿½ï¿½ï¿½sï¿½W
 	public void insert (MemberVO memberVO);
-	//½æ®a·|­û·s¼W
+	//ï¿½ï¿½ï¿½aï¿½|ï¿½ï¿½ï¿½sï¿½W
 	public void insertSeller (MemberVO memberVO);
-	//­×§ï
+	//ï¿½×§ï¿½
 	public void update (MemberVO memberVO);
-	//­×§ï±K½X
+	//ï¿½×§ï¿½ï¿½Kï¿½X
 	public void updatepw(MemberVO memberVO);
-	
-	//§R°£
+
+	//ï¿½Rï¿½ï¿½
 	public void delete(String m_id);
-	//¬d¥Dkey
+	//ï¿½dï¿½Dkey
 	public MemberVO findByPK(String m_id);
-	//¬d¥þ³¡
+	//ï¿½dï¿½ï¿½ï¿½ï¿½
 	public List<MemberVO> getAll();
-	//¬d±K½X
+	//ï¿½dï¿½Kï¿½X
 	public MemberVO getMemberPw(String m_email);
-	//¬d¸ß·|­ûª¬ºA
+	//ï¿½dï¿½ß·|ï¿½ï¿½ï¿½ï¿½ï¿½A
 	public Set<MemberVO> getMemberByStatus(Integer m_status);
-	
-	//±HÅçÃÒ«H
+
+	//ï¿½Hï¿½ï¿½ï¿½Ò«H
 	public void activeMember(MemberVO memberVO);
-	//­×§ï·|­ûKun¹ô
+
+	//ï¿½×§ï¿½ï¿½|ï¿½ï¿½Kunï¿½ï¿½
 	public void changeKun(MemberVO memberVO);
-	
+
+
+	//ï¿½qï¿½ï¿½ï¿½`ï¿½ï¿½
+	public List<MemberVO> getNotice(String m_id);
+
 }

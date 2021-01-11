@@ -19,8 +19,9 @@ pageContext.setAttribute("list", list);
 <head>
 <meta charset="BIG5">
 <title>order</title>
-
+<div class="header">
 <jsp:include page="../header.jsp"></jsp:include>
+</div>
 <style>
   table#table-1 {
 	background-color: #CCCCFF;
@@ -86,7 +87,7 @@ pageContext.setAttribute("list", list);
 	<c:forEach var="orderlistVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		<tr>
 			<td>${orderlistVO.o_id}</td>
-			<td><fmt:formatDate value="${orderlistVO.o_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+			<td><fmt:formatDate value="${orderlistVO.o_date}" pattern="yyyy-MM-dd "/></td>
 			<td>${orderlistVO.o_status}</td>
 			<td><fmt:formatDate value="${orderlistVO.o_shipdate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 			<td><fmt:formatDate value="${orderlistVO.o_deceiptdate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>

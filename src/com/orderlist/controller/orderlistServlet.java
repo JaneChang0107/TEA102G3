@@ -391,12 +391,10 @@ public class orderlistServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-
+				
 				String o_id = new String(req.getParameter("o_id").trim());
-
 				java.sql.Timestamp o_date = null;
 				try {
 					o_date = java.sql.Timestamp.valueOf(req.getParameter("o_date").trim());
@@ -473,7 +471,6 @@ public class orderlistServlet extends HttpServlet {
 				orderlistVO.setO_total(o_total);
 				orderlistVO.setO_pm(o_pm);
 				orderlistVO.setM_id(m_id);
-
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("orderlistVO", orderlistVO); // 含有輸入格式錯誤的empVO物件,也存入req
@@ -482,7 +479,6 @@ public class orderlistServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
-
 				/*************************** 2.開始修改資料 *****************************************/
 				OrderlistService orderlistSvc = new OrderlistService();
 				orderlistVO = orderlistSvc.updateOrderlistVO(o_id, o_date, o_status, o_shipdate, o_deceiptdate, o_finishdate, o_transport, o_address, o_total, o_pm, m_id);

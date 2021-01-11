@@ -71,7 +71,7 @@
 <table>
 	<tr>
 		<td>訂單編號:<font color=red><b>*</b></font></td>
-		<td><%=orderlistVO.getO_id()%></td>
+		<td><input name="o_id" id="o_id" type="text" readonly="readonly" value="<%=orderlistVO.getO_id()%>"/></td>
 	</tr>
 	<tr>
 		<td>訂單日期:</td>

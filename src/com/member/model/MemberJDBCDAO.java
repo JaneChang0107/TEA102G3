@@ -44,6 +44,61 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	
 	private static final String UPDATE_Kun_STMT ="UPDATE member set m_coin=? where m_id=?";
 
+	private static final String NOTICE ="select orderlist.o_date,ORDERDETAIL.o_id,ORDERDETAIL.p_id,ORDERDETAIL.od_count,ORDERLIST.o_status,product.p_name,member.m_name,member.m_id "
+			+ "		from member inner join orderlist on member.M_id=Orderlist.M_id "
+			+ "		inner join orderdetail on orderlist.o_id=orderdetail.o_id "
+			+ "		inner join product on orderdetail.p_id=product.p_id where M_id=? order by orderlist.o_date desc";
+	
+	public List<MemberVO> getNotice(String m_id) {
+		List<MemberVO> list = new ArrayList<MemberVO>();
+		MemberVO memberVO = null;
+		Connection con = null;
+		PreparedStatement pstmt =null;
+		ResultSet rs=null;
+		try {
+			Class.forName(driver);
+			con=DriverManager.getConnection(url, userid, passwd);
+			pstmt=con.prepareStatement(NOTICE);
+			
+			pstmt.setString(1, m_id);
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				memberVO=new MemberVO();
+				memberVO.setM_id(rs.getString("m_id"));
+				memberVO.setM_name(rs.getString("m_name"));
+				memberVO.setO_id(rs.getString("o_id"));
+				memberVO.setP_id(rs.getString("p_id"));
+				memberVO.setP_name(rs.getString("p_name"));
+				memberVO.setOd_count(rs.getString("od_count"));
+				memberVO.setO_status(rs.getString("o_status"));
+				memberVO.setO_date(rs.getTimestamp("o_date"));
+				list.add(memberVO);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	
+	}
+	
+	
 	// 新增一般會員
 	@Override
 	public void insert(MemberVO memberVO) {
@@ -598,6 +653,20 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	public static void main(String[] args) {
 		MemberJDBCDAO dao = new MemberJDBCDAO();
 
+		List<MemberVO> notice =dao.getNotice("M00001");
+		for(MemberVO gn : notice) {
+			System.out.println(gn.getO_date()+",");
+			System.out.println(gn.getO_id()+",");
+			System.out.println(gn.getO_status()+",");
+			System.out.println(gn.getOd_count()+",");
+			System.out.println(gn.getM_id()+",");
+			System.out.println(gn.getM_name()+",");
+			System.out.println(gn.getP_id()+",");
+			System.out.println(gn.getP_name());
+			System.out.println("---------------------");
+		}
+		
+		
 //		//新增
 //		MemberVO memberVO1=new MemberVO();		
 //		memberVO1.setM_email("a111@yahoo.com.tw");
@@ -701,9 +770,9 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 //		System.out.println("======查詢完畢=======");
 
 		// 查全部
-		List<MemberVO> list =dao.getAll();
-		
-		for(MemberVO aMember : list) {
+//		List<MemberVO> list =dao.getAll();
+//		
+//		for(MemberVO aMember : list) {
 //			System.out.println(aMember.getM_id()+",");
 			
 //			System.out.println(aMember.getM_email()+",");
@@ -769,30 +838,30 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 //		System.out.println(memberVO4.getM_password());
 		
 		//改狀態
-		MemberVO memberVO5 =new MemberVO();
-		memberVO5.setM_email("qqqq@yahoo.com.tw");
-		dao.activeMember(memberVO5);
-		System.out.println("狀態已改");
+//		MemberVO memberVO5 =new MemberVO();
+//		memberVO5.setM_email("qqqq@yahoo.com.tw");
+//		dao.activeMember(memberVO5);
+//		System.out.println("狀態已改");
 
-	}
+//	}
 
 	// 插入圖片
-	public static byte[] getPic(String path) {
-		byte[] buffer = null;
-		try {
-			FileInputStream fis = new FileInputStream(path);
-			buffer = new byte[fis.available()];
-			fis.read(buffer);
-			fis.close();
-		} catch (FileNotFoundException e) {
-			System.out.println("找不到檔案");
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("傳輸過程發生問題");
-			e.printStackTrace();
-		}
-		return buffer;
-	}
+//	public static byte[] getPic(String path) {
+//		byte[] buffer = null;
+//		try {
+//			FileInputStream fis = new FileInputStream(path);
+//			buffer = new byte[fis.available()];
+//			fis.read(buffer);
+//			fis.close();
+//		} catch (FileNotFoundException e) {
+//			System.out.println("找不到檔案");
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			System.out.println("傳輸過程發生問題");
+//			e.printStackTrace();
+//		}
+//		return buffer;
+//	}
 
 
 

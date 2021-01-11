@@ -128,6 +128,10 @@ public class MemberService {
 //
 //	}
 
+	public List<MemberVO> getNotice(String m_id){
+		return dao.getNotice(m_id);
+	}
+	
 	public void deleteMem(String m_id) {
 		dao.delete(m_id);
 	}

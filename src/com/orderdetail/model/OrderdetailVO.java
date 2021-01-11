@@ -6,6 +6,7 @@ public class OrderdetailVO {
 	private String p_id;
 	private Integer od_count;
 	private String pp_id;
+	
 	public String getOd_id() {
 		return od_id;
 	}

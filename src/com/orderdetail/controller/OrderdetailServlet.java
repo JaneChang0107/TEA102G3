@@ -334,19 +334,7 @@ public class OrderdetailServlet extends HttpServlet {
 	}
 
 
-//
-//public void init() throws ServletException {
-//	
-//	OrderdetailService orderdetailSvc = new OrderdetailService();
-//	List<OrderdetailVO> orderdetailVO =  orderdetailSvc.count();
-//	
-//	orderdetailVO.forEach((VO) -> {
-//		System.out.println( VO.getP_id());
-//		System.out.println( VO.getOd_count());
-//		System.out.println("---------------------");
-//			
-//	});
-//}
+
 
 
 }

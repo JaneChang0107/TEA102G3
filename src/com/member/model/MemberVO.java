@@ -1,4 +1,5 @@
 package com.member.model;
+import java.sql.Timestamp;
 import java.util.Base64;
 
 public class MemberVO implements java.io.Serializable{
@@ -26,7 +27,49 @@ public class MemberVO implements java.io.Serializable{
 		private String m_hi;
 		private String m_offlineHi;
 		private Integer m_coin;
+		private String o_id;
+		private String p_id;
+		private String od_count;
+		private String o_status;
+		private String p_name;
+		private Timestamp o_date;
 		
+		public Timestamp getO_date() {
+			return o_date;
+		}
+		public void setO_date(Timestamp o_date) {
+			this.o_date = o_date;
+		}
+		public String getO_id() {
+			return o_id;
+		}
+		public void setO_id(String o_id) {
+			this.o_id = o_id;
+		}
+		public String getP_id() {
+			return p_id;
+		}
+		public void setP_id(String p_id) {
+			this.p_id = p_id;
+		}
+		public String getOd_count() {
+			return od_count;
+		}
+		public void setOd_count(String od_count) {
+			this.od_count = od_count;
+		}
+		public String getO_status() {
+			return o_status;
+		}
+		public void setO_status(String o_status) {
+			this.o_status = o_status;
+		}
+		public String getP_name() {
+			return p_name;
+		}
+		public void setP_name(String p_name) {
+			this.p_name = p_name;
+		}
 		public String getM_id() {
 			return m_id;
 		}
@@ -220,6 +263,9 @@ public class MemberVO implements java.io.Serializable{
 			}
 			return statusName;
 		}
+		
+		
+		
 		
 		
 	}
