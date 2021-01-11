@@ -75,11 +75,12 @@ public class WebSocket {
 			}
 			
 			if("all".equals(bellVO.getM_id().toLowerCase())) {
-				System.out.println("all" + bellVO.getM_id());
+				System.out.println("alllllll" + bellVO.getM_id());
+				System.out.println(sessions.size());
 				sessions.forEach((user, wsSession) -> {
 					bellVO.setM_id(user);
-					
 					try {
+						System.out.println("alllll" + mapper.writeValueAsString(bellVO));
 						
 						if(wsSession != null) {
 							wsSession.getAsyncRemote().sendText(mapper.writeValueAsString(bellVO));

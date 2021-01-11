@@ -29,7 +29,7 @@ pageContext.setAttribute("value",value);
 
 
    
-     
+<div id="div_input">
 <FORM METHOD="post" ACTION="<%= request.getContextPath() %>/light.do" name="form1">
 <table>
 
@@ -45,8 +45,10 @@ pageContext.setAttribute("value",value);
 </table>
 <br>
 <input type="hidden" name="action" value="show">
-<input type="submit" value="送出新增"></FORM>
-
+<!-- <input type="submit" value="送出新增"> -->
+<button type="button" id="btn_send">送出新增</button>
+</FORM>
+</div>
 
 
 

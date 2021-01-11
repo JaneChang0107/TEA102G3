@@ -99,6 +99,7 @@
     <script src="<%=request.getContextPath()%>/vendors/popper/popper.min.js"></script>
     <script src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="<%=request.getContextPath()%>/Back_end/employee/js/index_backstage.js"></script>
+    <script src="<%=request.getContextPath()%>/Back_end/employee/js/notic.js"></script>
         <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/datetimepicker/jquery.datetimepicker.css" />
