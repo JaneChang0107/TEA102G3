@@ -82,7 +82,7 @@ body {
 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="sellerbar3">財務管理</button>
   <div class="dropdown-menu" id="dropdown-menu3">
   <button type="button" class="btn btn-warning">銀行帳號</button>
-  <button type="button" class="btn btn-warning">我的進帳</button>
+  <button type="button" class="btn btn-warning"><a href="<%=request.getContextPath()%>/Front_end/seller/MyPayIn.jsp">我的進帳</a></button>
   </div>
 </div>
 
