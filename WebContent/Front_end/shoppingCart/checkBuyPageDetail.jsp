@@ -186,8 +186,11 @@ input:read-only {
 					Integer count = order.getP_count();
 					member_id = order.getM_id();
 					String id = order.getP_id();
-					ProductPictureVO ppvo = productpicSvc.findFirstOneProductPicture(id);
-					String picture = ppvo.getPp_picture64();
+					String picture = "";
+					
+					if(productpicSvc.findFirstOneProductPicture(id) != null){
+						picture=productpicSvc.findFirstOneProductPicture(id).getPp_picture64();
+					}
 					Integer k = Integer.parseInt(request.getParameter("xx" + (i + 1)));
 					Integer total = k * count;
 			%>

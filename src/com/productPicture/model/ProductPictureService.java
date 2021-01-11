@@ -44,10 +44,11 @@ public class ProductPictureService {
 	
 	//測試抓取第一張用----------------
 	public ProductPictureVO findFirstOneProductPicture(String pid) {
-		ProductPictureVO productureVO = new ProductPictureVO();
-		productureVO= (ProductPictureVO)dao.findByProduct(pid).get(0);
-		
-		return productureVO;
+		List<ProductPictureVO> productureVO = dao.findByProduct(pid);
+		if(!productureVO.isEmpty()) {
+			return productureVO.get(0);
+		}
+		return null;
 	}
 	//-------------------------------
 	
