@@ -506,8 +506,8 @@ $.ajax({
 				  list_html+='            <div class="col">'+ item.e_phone +'</div>';
 				  list_html+='            <div class="col">'+ item.e_address +'</div>';
 				  list_html+='            <div class="col">'+ item.e_title +'</div>';
-				  list_html+='            <div class="col" id="e_status">'+ item.e_status +'</div>';
-				  list_html+='            <div class="col">'+ item.st_id +'</div>';
+				  list_html+='            <div class="col" id="e_status" data-e_id = "' + item.e_status + '">'+ item.e_status_view +'</div>';
+				  list_html+='            <div class="col">'+ item.st_name +'</div>';
 				  list_html+='            <div class="col">';
 				  list_html+='                 <button type="button" id="modify">修改';
 				  list_html+='            </div>';
@@ -742,8 +742,8 @@ $.ajax({
 					  list_html+='            <div class="col">'+ item.e_phone +'</div>';
 					  list_html+='            <div class="col">'+ item.e_address +'</div>';
 					  list_html+='            <div class="col">'+ item.e_title +'</div>';
-					  list_html+='            <div class="col" id="e_status">'+ item.e_status +'</div>';
-					  list_html+='            <div class="col">'+ item.st_id +'</div>';
+					  list_html+='            <div class="col" id="e_status" data-e_id = "' + item.e_status + '">'+ item.e_status_view +'</div>';
+					  list_html+='            <div class="col">'+ item.st_name +'</div>';
 					  list_html+='            <div class="col">';
 					  list_html+='                 <button type="button" id="modify">修改';
 					  list_html+='            </div>';
@@ -825,8 +825,8 @@ $.ajax({
 				  list_html+='            <div class="col">'+ item.e_phone +'</div>';
 				  list_html+='            <div class="col">'+ item.e_address +'</div>';
 				  list_html+='            <div class="col">'+ item.e_title +'</div>';
-				  list_html+='            <div class="col" id="e_status">'+ item.e_status +'</div>';
-				  list_html+='            <div class="col">'+ item.st_id +'</div>';
+				  list_html+='            <div class="col" id="e_status" data-e_id = "' + item.e_status + '">'+ item.e_status_view +'</div>';
+				  list_html+='            <div class="col">'+ item.st_name +'</div>';
 				  list_html+='            <div class="col">';
 				  list_html+='                 <button type="button" id="modify">修改';
 				  list_html+='            </div>';
@@ -849,7 +849,7 @@ $.ajax({
   $(document).on("click", "#toggle_status", function(){
 //	  console.log($(this));
 	  //更改狀態                 按鈕     父層最近的div屬性       同層id="e_status"   div內的文字
-	  let e_status = $(this).closest("div").siblings("#e_status").text()
+	  let e_status = $(this).closest("div").siblings("#e_status").attr("data-e_id");
 	  let e_id = $(this).closest("div").siblings("#e_id").text();
 	  
 	  let div_e_status = $(this).closest("div").siblings("#e_status")
@@ -871,13 +871,11 @@ $.ajax({
 		  url : "http://localhost:8081/TEA102G3/change_status", 
 		  type : "POST",
 		  data : form_string,
+		  dataType:"json",
 		  beforeSend : function(){},
-		  success: function(){
-			  if(e_status == 1){
-				  div_e_status.html("0")
-			  } else {
-				  div_e_status.html("1")
-			  }			  
+		  success: function(v){
+				  div_e_status.html(v.e_statusView);
+				  div_e_status.attr("data-e_id",v.e_st);
 		  },
 		  error : function(){
 			  console.log("error")

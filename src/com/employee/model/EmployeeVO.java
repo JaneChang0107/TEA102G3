@@ -3,6 +3,8 @@ package com.employee.model;
 import java.io.Serializable;
 import java.sql.Date;
 
+import com.store.model.StoreService;
+
 public class EmployeeVO implements Serializable{
 	private String e_id;
 	private String e_password;
@@ -16,6 +18,8 @@ public class EmployeeVO implements Serializable{
 	private String e_title;
 	private Integer e_status;
 	private String st_id;
+	private String e_status_view;
+	
 	
 	public String getE_id() {
 		return e_id;
@@ -86,10 +90,22 @@ public class EmployeeVO implements Serializable{
 	public String getSt_id() {
 		return st_id;
 	}
+	public String getSt_name() {
+		StoreService sService = new StoreService();
+		return sService.getOneStore(st_id).getSt_name();
+	}
 	public void setSt_id(String st_id) {
 		this.st_id = st_id;
 	}
 	
-
+	public String getE_status_view() {
+		String e_status_view = ""; 
+		if(e_status == 0) {
+			e_status_view = "°±Â¾";
+		} else if(e_status == 1) {
+			e_status_view = "¦bÂ¾";
+		}	
+		return e_status_view;				
+	}
 	
 }

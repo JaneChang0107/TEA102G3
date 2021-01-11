@@ -11,6 +11,7 @@ public interface EmployeeDAO_interface {
      public void update_status(EmployeeVO employeeVO);
      public void delete(String e_id);
      public EmployeeVO findByPrimaryKey(String e_id);
+     public EmployeeVO findByEmail(String e_email);
      public List<EmployeeVO> findByPrimaryKey_e_name(String e_name);
      public EmployeeVO getEmployeePwd(String e_id);
      public List<EmployeeVO> getAll();

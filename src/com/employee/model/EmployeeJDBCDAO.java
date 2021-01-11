@@ -15,6 +15,8 @@ public class EmployeeJDBCDAO implements EmployeeDAO_interface{
 		"SELECT e_id,e_password,e_identity,e_name,e_gender,to_char(e_birth,'yyyy-mm-dd') e_birth,e_email,e_phone,e_address,e_title,e_status,st_id FROM employee order by e_id";
 	private static final String GET_ONE_STMT = 
 		"SELECT e_id,e_password,e_identity,e_name,e_gender,to_char(e_birth,'yyyy-mm-dd') e_birth,e_email,e_phone,e_address,e_title,e_status,st_id FROM employee where e_id = ?";
+	private static final String GET_ONE_STMT_EMAIL = 
+			"SELECT e_id,e_password,e_identity,e_name,e_gender,to_char(e_birth,'yyyy-mm-dd') e_birth,e_email,e_phone,e_address,e_title,e_status,st_id FROM employee where e_email = ?";
 	private static final String GET_ONE_STMT_ENAME = 
 		"SELECT e_id,e_password,e_identity,e_name,e_gender,to_char(e_birth,'yyyy-mm-dd') e_birth,e_email,e_phone,e_address,e_title,e_status,st_id FROM employee where e_name like ?";
 	private static final String DELETE = 
@@ -367,6 +369,75 @@ public class EmployeeJDBCDAO implements EmployeeDAO_interface{
 				employeeVO.setSt_id(rs.getString("st_id"));
 			}
 
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return employeeVO;
+	}
+	@Override
+	public EmployeeVO findByEmail(String e_email) {
+		
+		EmployeeVO employeeVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ONE_STMT_EMAIL);
+			
+			pstmt.setString(1, e_email);
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				// empVo ¤]ºÙ¬° Domain objects
+				employeeVO = new EmployeeVO();
+				employeeVO.setE_id(rs.getString("e_id"));
+				employeeVO.setE_password(rs.getString("e_password"));
+				employeeVO.setE_identity(rs.getString("e_identity"));
+				employeeVO.setE_name(rs.getString("e_name"));
+				employeeVO.setE_gender(rs.getString("e_gender"));
+				employeeVO.setE_birth(rs.getDate("e_birth"));
+				employeeVO.setE_email(rs.getString("e_email"));
+				employeeVO.setE_phone(rs.getString("e_phone"));
+				employeeVO.setE_address(rs.getString("e_address"));
+				employeeVO.setE_title(rs.getString("e_title"));
+				employeeVO.setE_status(rs.getInt("e_status"));
+				employeeVO.setSt_id(rs.getString("st_id"));
+			}
+			
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. "

@@ -103,6 +103,9 @@ public class EmployeeService {
 	public EmployeeVO getOneEmployee(String employeeVO) {
 		return dao.findByPrimaryKey(employeeVO);
 	}
+	public EmployeeVO getOneEmployee_email(String employeeVO) {
+		return dao.findByEmail(employeeVO);
+	}
 	public List<EmployeeVO> getOneEmployee_e_name(String employeeVO) {
 		return dao.findByPrimaryKey_e_name(employeeVO);
 	}
@@ -114,4 +117,13 @@ public class EmployeeService {
 		return dao.getAll();
 	}
 
+
+	public String random() {			
+			String code = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+			StringBuffer random_code = null;
+			for(int i = 0; i < 8; i++) {
+				random_code.append(code.charAt((int)(Math.random()*62)));			
+			}			
+			return random_code.toString();
+	}
 }

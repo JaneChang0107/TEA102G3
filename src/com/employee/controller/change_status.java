@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.employee.model.EmployeeService;
+import com.employee.model.EmployeeVO;
 
 
 @WebServlet("/change_status")
@@ -47,6 +48,18 @@ public class change_status extends HttpServlet {
 			
 			EmployeeService service = new EmployeeService();
 			service.updateEmployee_status(e_id, num_e_status);
+			
+			EmployeeVO eVO = service.getOneEmployee(e_id);
+			
+			String e_statusView = eVO.getE_status_view();
+			int e_st = eVO.getE_status();
+			
+			JSONObject obj = new JSONObject();
+			obj.put("e_statusView", e_statusView);
+			obj.put("e_st", e_st);
+			
+			out.println(obj.toString());			
+			out.close();
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
