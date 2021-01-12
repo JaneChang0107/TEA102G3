@@ -22,8 +22,8 @@ public class JedisHandleMessage {
 		Set<String> chatrooms = jedis.keys(sender+"*");
 		Set<String> names = new HashSet<>();
 		for (String str : chatrooms) {
-			String m_id = str.substring(str.lastIndexOf(":") + 1);
-			names.add(m_id);
+			String m_name = str.substring(str.lastIndexOf(":") + 1);
+			names.add(m_name);
 		}
 		jedis.close();
 		return names;

@@ -41,6 +41,7 @@ div.statusoutput {
 }
 
 div.membername {
+	margin-left: 20px;
 	display: inline-block;
 	font-size: 25px;
 	font-weight: bold;
@@ -91,6 +92,7 @@ input.submit_btn {
 
 .livebox {
 	display: none;
+	z-index:100;
 }
 
 ul#area {
@@ -166,4 +168,5 @@ div.column{
 	
 	
 }
+
 

@@ -162,8 +162,7 @@ div#addProductPlace{
 	</div></td>
 	</tr>
 	</table>
-	
-	%>
+
 	
 	<table>
 	<tr>
@@ -179,6 +178,7 @@ div#addProductPlace{
 	    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">已撥款</a>
 	  </div>
 	</nav>
+	
 	<div class="tab-content" id="nav-tabContent">
 	  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 	  	<table id="tablecontent"  class="table table-hover">

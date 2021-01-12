@@ -63,13 +63,15 @@ img.productImg {
 		<div class="article">
 			<td>${pVO.m_id}</td>
 			<form id="myForm"
-				action="<%=request.getContextPath()%>/websocketchat/NameServlet"
-				method="POST" style="position: fixed">
+				action="<%=request.getContextPath()%>/chat/chatsell.jsp"
+				method="POST" style="position: fixed;" target="_blank">
 				<input type="submit" value="賣場聊聊"> <input type="hidden"
 					name="m_id" value="${pVO.m_id}"> <input type="hidden"
 					name="action" value="">
 			</form>
 		</diV>
+		
+		
 
 
 		<form action="<%=request.getContextPath()%>/BuyServlet" method="POST">

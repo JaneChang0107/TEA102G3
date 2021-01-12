@@ -11,6 +11,9 @@ public class ViewsellerJDBCDAO implements ViewsellerDAO_interface {
 	String userid = "TEA102G3";
 	String passwd = "102G3";
 	
+	
+//	public static final String isRepeat_COMMENT =
+//			"SELECT COUNT(DISTINCT V_ID) FROM VIEWSELLER WHERE O_ID= ? AND M_BUYID = ?";
 	private static final String INSERT_STMT = 
 			"INSERT INTO VIEWSELLER  (V_ID,O_ID,M_BUYID,M_SELLID, V_GB,V_COMMENT, V_DATE) VALUES ('V' || lpad(VIEWSELLER_SEQ.nextval,5,'0'), ?, ?, ?, ?, ?,?)";
 	private static final String GETSELL_ALL_STMT = 

@@ -29,10 +29,9 @@ public class NameServlet extends HttpServlet {
 		MemberService memSvc = new MemberService();
 		MemberVO memberVO = memSvc.findOneMem(m_id);
 		HttpSession session = req.getSession();
-//		String userId=(String) session.getAttribute("loginId");
-//		System.out.println(userId);
 		
-		String userName = (String) session.getAttribute("loginId");
+		String userName = (String) session.getAttribute("loginName");
+
 		
 //		Set<String> chatrooms = JedisHandleChatroom.getAllChatrooms(userName);
 //		System.out.println(chatrooms.size()+"3221234");
