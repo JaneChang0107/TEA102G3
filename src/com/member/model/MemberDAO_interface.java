@@ -23,7 +23,7 @@ public interface MemberDAO_interface {
 	//�d�K�X
 	public MemberVO getMemberPw(String m_email);
 	//�d�߷|�����A
-	public Set<MemberVO> getMemberByStatus(Integer m_status);
+	public List<MemberVO> getMemberByStatus(Integer m_status);
 
 	//�H���ҫH
 	public void activeMember(MemberVO memberVO);

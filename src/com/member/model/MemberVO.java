@@ -1,9 +1,22 @@
 package com.member.model;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Base64;
 
 public class MemberVO implements java.io.Serializable{
 		
+		@Override
+	public String toString() {
+		return "MemberVO [m_id=" + m_id + ", m_email=" + m_email + ", m_password=" + m_password + ", m_name=" + m_name
+				+ ", m_gender=" + m_gender + ", m_phone=" + m_phone + ", m_address=" + m_address + ", m_birth="
+				+ m_birth + ", m_headpic=" + Arrays.toString(m_headpic) + ", m_status=" + m_status + ", m_identity="
+				+ m_identity + ", m_id_pic=" + Arrays.toString(m_id_pic) + ", m_account=" + m_account
+				+ ", m_accountName=" + m_accountName + ", b_code=" + b_code + ", m_bank_pic="
+				+ Arrays.toString(m_bank_pic) + ", m_moneyTranDate=" + m_moneyTranDate + ", m_storename=" + m_storename
+				+ ", m_info=" + m_info + ", m_cover=" + Arrays.toString(m_cover) + ", m_hi=" + m_hi + ", m_offlineHi="
+				+ m_offlineHi + ", m_coin=" + m_coin + ", o_id=" + o_id + ", p_id=" + p_id + ", od_count=" + od_count
+				+ ", o_status=" + o_status + ", p_name=" + p_name + ", o_date=" + o_date + "]";
+	}
 		private String m_id;
 		private String m_email;
 		private String m_password;

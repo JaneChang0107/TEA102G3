@@ -774,7 +774,7 @@ $.ajax({
 	  })
   })
  
- //按查詢按鈕
+ //按查詢按鈕(員工)
   $(document).on("click", "#button_search", function(){
 	  let inpute = $("#input_search").val();
 	  
@@ -946,8 +946,13 @@ $.ajax({
 			  list_html +='<div class="row">';
 			  list_html +='    <div class="col" >';
 			  list_html +='    尋找';
-			  list_html +='        <input type="text">';
-			  list_html +='        <button type="button" id="button_search" class="btn btn-primary">查詢</button>';
+			  list_html +='			   <select id="search_m_status">';
+			  list_html +='			   		<option value="0">未開通</opion>';
+			  list_html +='			 	 	<option value="1">買家</opion>';
+			  list_html +='			   		<option value="2">賣家未驗證</opion>';
+			  list_html +='			 	 	<option value="3">賣家</opion>';
+			  list_html +='			   </select>';
+			  list_html +='        <button type="button" id="button_search_mem" class="btn btn-primary">查詢</button>';
 			  list_html +='    </div>';
 			  list_html +='</div>';
 			  list_html +='<div class="row">';					  
@@ -1033,4 +1038,82 @@ $.ajax({
 			  console.log("error")
 		  }
 	  })
+  })
+  
+//按查詢按鈕(會員)
+  $(document).on("click", "#button_search_mem", function(){
+	 let input_val = $("#search_m_status").val();
+	 
+	 let form_data = {
+			 "m_status" : input_val
+	 }
+	 
+	 let form_str = JSON.stringify(form_data);
+	 $.ajax({
+		 url: "http://localhost:8081/TEA102G3/Search_m_status",
+		 type: "POST",
+		 data: form_str,
+		 dataType: "json",
+		 beforeSend: function(){},
+		 success: function(data){
+			 list_html = "";
+			 
+			 list_html +='<div class="row">';
+			  list_html +='    <div class="col" >';
+			  list_html +='    尋找';
+			  list_html +='			   <select id="search_m_status">';
+			  list_html +='			   		<option value="0">未開通</opion>';
+			  list_html +='			 	 	<option value="1">買家</opion>';
+			  list_html +='			   		<option value="2">賣家未驗證</opion>';
+			  list_html +='			 	 	<option value="3">賣家</opion>';
+			  list_html +='			   </select>';
+			  list_html +='        <button type="button" id="button_search_mem" class="btn btn-primary">查詢</button>';
+			  list_html +='    </div>';
+			  list_html +='</div>';
+			  list_html +='<div class="row">';					  
+			  list_html +='    <div class="col">';
+			  list_html +='        <div class="row listAll_row" id="membercol">';
+			  list_html +='            <div class="col">會員id</div>';
+			  list_html +='            <div class="col">電子郵件</div>';
+			  list_html +='            <div class="col">姓名</div>';
+			  list_html +='            <div class="col">性別</div>';
+			  list_html +='            <div class="col">電話</div>';
+			  list_html +='            <div class="col">地址</div>';
+			  list_html +='            <div class="col">生日</div>';
+			  list_html +='            <div class="col">會員狀態</div>';
+			  list_html +='            <div class="col">修改</div>';
+			  list_html +='        </div>';
+			  $.each(data, function(index, item){
+			  list_html +='            <div class="row"  id="memberrow">';
+			  list_html +='                <div class="col" id="div_m_id">'+ item.m_id +'</div>';
+			  list_html +='                <div class="col" id="div_m_email">'+ item.m_email +'</div>';
+			  list_html +='                <div class="col">'+ item.m_name +'</div>';
+			  list_html +='                <div class="col">'+ item.m_gender +'</div>';
+			  list_html +='                <div class="col">'+ item.m_phone +'</div>';
+			  list_html +='                <div class="col">'+ item.m_address +'</div>';
+			  list_html +='                <div class="col">'+ item.m_birth +'</div>';
+			  list_html +='                <div class="col" data_status="'+ item.m_status +'">'+ item.m_statusByString +'</div>';
+			  list_html +='                <div class="col" id="div_m_status">';
+			  list_html +='					   <select id="select_m_id">';
+			  list_html +='					   		<option value="0" '+ ((item.m_status == 0) ? 'selected' :'') +'>未開通</opion>';
+			  list_html +='					 	 	<option value="1" '+ ((item.m_status == 1) ? 'selected' :'') +'>買家</opion>';
+			  list_html +='					   		<option value="2" '+ ((item.m_status == 2) ? 'selected' :'') +'>賣家未驗證</opion>';
+			  list_html +='					 	 	<option value="3" '+ ((item.m_status == 3) ? 'selected' :'') +'>賣家</opion>';
+			  list_html +='					   </select>';
+			  list_html +='                    <input type="hidden" name="m_id" value="'+ item.m_id +'">';
+			  list_html +='                </div>';
+			  list_html +='                <div class="col">';
+			  list_html +='					   <button id="btn_update_mstatus">修改'
+			  list_html +='                </div>';
+			  list_html +='            </div>';
+			  });
+			  list_html +='    </div>';
+			  list_html +='</div>';
+			  
+			  $("#mem_page").html(list_html);
+		 },
+		 error: function(){
+			 console.log("error")
+		 }
+	 })
   })

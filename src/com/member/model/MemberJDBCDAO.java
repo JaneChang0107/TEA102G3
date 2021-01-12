@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -29,9 +30,6 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 
 	private static final String GET_ONE_STMT = "SELECT m_id,m_email,m_password,m_name,m_gender,m_phone,m_address,to_char(m_birth,'yyyy-mm-dd') m_birth,m_headpic,m_status,m_identity,m_id_pic"
 			+ ",m_account,m_accountname,b_code,m_bank_pic,m_moneytrandate,m_storename,m_info,m_cover,m_hi,m_offlinehi,m_coin FROM member where m_id = ?";
-	
-	private static final String GET_ONE_STMT_EMAIL = "SELECT m_id,m_email,m_password,m_name,m_gender,m_phone,m_address,to_char(m_birth,'yyyy-mm-dd') m_birth,m_headpic,m_status,m_identity,m_id_pic"
-			+ ",m_account,m_accountname,b_code,m_bank_pic,m_moneytrandate,m_storename,m_info,m_cover,m_hi,m_offlinehi,m_coin FROM member where m_email = ?";
 
 	private static final String DELETE = "DELETE FROM member where m_id = ? ";
 
@@ -39,7 +37,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			+ ",m_account=?,m_accountname=?,b_code=?,m_bank_pic=?,m_storename=?,m_info=?,m_cover=?,m_hi=?,m_offlinehi=? where m_id=?";
 	private static final String UPDATE_PW ="UPDATE member set m_password=? where m_id=?";
 
-	private static final String GET_Mems_ByStatus_STMT = "SELECT * FROM member WHERE m_status =?";
+	private static final String GET_Mems_ByStatus_STMT = "SELECT * FROM member WHERE m_status like ?";
 
 	private static final String GET_Mems_Password_STMT = "SELECT m_id,m_name,m_email,m_password FROM member WHERE m_email=?";
 	
@@ -512,8 +510,8 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	}
 
 	@Override
-	public Set<MemberVO> getMemberByStatus(Integer m_status) {
-		Set<MemberVO> set = new LinkedHashSet<MemberVO>();
+	public List<MemberVO> getMemberByStatus(Integer m_status) {
+		List<MemberVO> list = new LinkedList<MemberVO>();
 		MemberVO memberVO = null;
 
 		Connection con = null;
@@ -525,6 +523,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			pstmt = con.prepareStatement(GET_Mems_ByStatus_STMT);
 			pstmt.setInt(1, m_status);
 			rs = pstmt.executeQuery();
+			
 
 			while (rs.next()) {
 				memberVO = new MemberVO();
@@ -551,7 +550,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 				memberVO.setM_hi(rs.getString("m_hi"));
 				memberVO.setM_offlineHi(rs.getString("m_offlineHi"));
 				memberVO.setM_coin(rs.getInt("m_coin"));
-				set.add(memberVO);
+				list.add(memberVO);
 			}
 
 		} catch (ClassNotFoundException e) {
@@ -560,7 +559,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			e.printStackTrace();
 		}
 
-		return set;
+		return list;
 	}
 
 	@Override

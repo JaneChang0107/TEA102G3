@@ -151,7 +151,7 @@ public class MemberService {
 		return dao.getAll();
 	}
 
-	public Set<MemberVO> getMemberByStatus(Integer m_status) {
+	public List<MemberVO> getMemberByStatus(Integer m_status) {
 		return dao.getMemberByStatus(m_status);
 	}
 
