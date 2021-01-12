@@ -2,7 +2,6 @@ $(document).on("click", "#btn_send",function(){
 	let key = $("#key").val().trim();
 	let value = $("#value").val().trim();
 	
-//	console.log("aaaaaaaaaaaaaaaaaaaaaaaa")
 	let form_data = {
 		"key" : key,
 		"value" : value

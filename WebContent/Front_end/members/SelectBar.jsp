@@ -8,7 +8,6 @@
 </head>
 <body>
 		<div>
-
 			<img src="${memberVO.m_headpic2}" id="headimg">
 			<a href="http://localhost:8081/TEA102G3/Front_end/members/MyAccount.jsp"><button type="button" class="btn btn-secondary">
 				<i class="fas fa-user-circle" id="icons"></i>我的帳戶
@@ -22,9 +21,14 @@
 				<i class="fas fa-gamepad" id="icons"></i>租用清單
 			</button>
 			
-			<button type="button" class="btn btn-secondary">
-				<i class="fas fa-bell" id="icons"></i>通知總覽
+			
+			<button type="button" class="btn btn-secondary" >
+<a href="<%=request.getContextPath()%>/Front_end/notice/notice.jsp">				
+			<i class="fas fa-bell" id="icons"></i>通知總覽
+			
 			</button>
+			
+			
 			<a href="<%=request.getContextPath()%>/orderlist?m_id=${loginId}&action=getMemberKun">
 			<button type="button" class="btn btn-secondary">
 				<i class="fas fa-coins" id="icons"></i>我的堃幣

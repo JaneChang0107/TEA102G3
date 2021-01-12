@@ -370,6 +370,16 @@ select#ptype {
 	width: 470px;
 }
 
+#showToast{
+position: absolute;
+right: 18px;
+}
+
+/* #showToast .toast { */
+/* position: relative; */
+/* left: 1500px; */
+/* } */
+
 /* #showToast{ */
 /* 	position: fixed; */
 /* 	right: 10px; */
