@@ -1,6 +1,9 @@
 package com.employee.controller;
 
 import java.io.IOException;
+
+import javax.mail.MessagingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,6 +37,15 @@ public class Forget_password extends HttpServlet {
 		String e_password = service.random();
 		
 		service.updateEmployee_pwd(e_id, e_password);
+		try {
+			EmployeeService.sendEmail(e_password, e_email);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+		
+		String url = "Back_end/employee/login.jsp";
+		RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+		successView.forward(req, res);
 	}
 	
 	

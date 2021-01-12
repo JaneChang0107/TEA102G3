@@ -507,18 +507,18 @@ $.ajax({
 				  
 			  $.each(data.emp_list, function(index, item){
 				  list_html+='		<div class="row" id="div_append">';
-				  list_html+='            <div class="col" id="e_id">'+ item.e_id +'</div>';
-				  list_html+='            <div class="col" id="e_password"><p class="para">'+ item.e_password +'</p><input name="input_e_password" class="-none" value="'+ item.e_password +'"></div>';
-				  list_html+='            <div class="col">'+ item.e_identity +'</div>';
-				  list_html+='            <div class="col">'+ item.e_name +'</div>';
-				  list_html+='            <div class="col">'+ item.e_gender +'</div>';
-				  list_html+='            <div class="col">'+ item.e_birth +'</div>';
-				  list_html+='            <div class="col">'+ item.e_email +'</div>';
-				  list_html+='            <div class="col">'+ item.e_phone +'</div>';
-				  list_html+='            <div class="col">'+ item.e_address +'</div>';
-				  list_html+='            <div class="col">'+ item.e_title +'</div>';
-				  list_html+='            <div class="col" id="e_status" data-e_id = "' + item.e_status + '">'+ item.e_status_view +'</div>';
-				  list_html+='            <div class="col">'+ item.st_name +'</div>';
+				  list_html+='            <div class="col AutoNewline" id="e_id">'+ item.e_id +'</div>';
+				  list_html+='            <div class="col AutoNewline" id="e_password"><p class="para">'+ item.e_password +'</p><input name="input_e_password" class="-none" value="'+ item.e_password +'"></div>';
+				  list_html+='            <div class="col AutoNewline">'+ item.e_identity +'</div>';
+				  list_html+='            <div class="col AutoNewline">'+ item.e_name +'</div>';
+				  list_html+='            <div class="col AutoNewline">'+ item.e_gender +'</div>';
+				  list_html+='            <div class="col AutoNewline">'+ item.e_birth +'</div>';
+				  list_html+='            <div class="col AutoNewline">'+ item.e_email +'</div>';
+				  list_html+='            <div class="col AutoNewline">'+ item.e_phone +'</div>';
+				  list_html+='            <div class="col AutoNewline">'+ item.e_address +'</div>';
+				  list_html+='            <div class="col AutoNewline">'+ item.e_title +'</div>';
+				  list_html+='            <div class="col AutoNewline" id="e_status" data-e_id = "' + item.e_status + '">'+ item.e_status_view +'</div>';
+				  list_html+='            <div class="col AutoNewline">'+ item.st_name +'</div>';
 				  list_html+='            <div class="col">';
 				  list_html+='                 <button type="button" id="modify">修改';
 				  list_html+='            </div>';

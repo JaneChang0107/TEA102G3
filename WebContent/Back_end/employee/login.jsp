@@ -17,7 +17,7 @@
             <div class="col login_col">
                 <div class="row header log_header">
                     <div class="col-4 img-div">
-                        <img src="./images/white_LOGO.png">
+                        <img src="<%=request.getContextPath()%>/Back_end/employee/images/white_LOGO.png">
                     </div>
                     <div class="col-8 img-div">
                         <p>後臺管理系統</p>
