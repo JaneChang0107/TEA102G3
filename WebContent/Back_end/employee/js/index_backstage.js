@@ -1092,7 +1092,7 @@ $.ajax({
 			  list_html +='                <div class="col">'+ item.m_phone +'</div>';
 			  list_html +='                <div class="col">'+ item.m_address +'</div>';
 			  list_html +='                <div class="col">'+ item.m_birth +'</div>';
-			  list_html +='                <div class="col" data_status="'+ item.m_status +'">'+ item.m_statusByString +'</div>';
+//			  list_html +='                <div class="col" data_status="'+ item.m_status +'">'+ item.m_statusByString +'</div>';
 			  list_html +='                <div class="col" id="div_m_status">';
 			  list_html +='					   <select id="select_m_id">';
 			  list_html +='					   		<option value="0" '+ ((item.m_status == 0) ? 'selected' :'') +'>未開通</opion>';
