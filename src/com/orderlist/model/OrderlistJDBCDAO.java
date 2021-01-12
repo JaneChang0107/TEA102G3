@@ -19,8 +19,8 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface {
 	//查詢訂單用
 	private static final String GET_ORDER_ByMember ="SELECT * FROM ORDERLIST WHERE M_ID=?";
 	private static final String GET_ORDER_ByMember_Status ="SELECT * FROM ORDERLIST WHERE M_ID=? AND O_STATUS=?";
-	//改變訂單狀態
-	private static final String UPDATE_Status_STMT ="UPDATE ORDERLIST SET o_status=? WHERE o_id=?";
+	//改變訂單狀態(出貨用)
+	private static final String UPDATE_Status_STMT ="UPDATE ORDERLIST SET o_shipdate=CURRENT_TIMESTAMP, o_status=? WHERE o_id=?";
 
 	
 	@Override
