@@ -488,7 +488,7 @@ public class orderlistServlet extends HttpServlet {
 				
 				
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-				
+				//推播開始--------------------------
 				Jedis jedis = new Jedis("localhost", 6379);
 				jedis.auth("123456");
 				
@@ -502,7 +502,7 @@ public class orderlistServlet extends HttpServlet {
 				ws.onMessage(mapper.writeValueAsString(bellVO));
 				
 				jedis.close();
-				
+				//推播結束--------------------------
 				
 				req.setAttribute("orderlistVO", orderlistVO); // 資料庫update成功後,正確的的empVO物件,存入req
 				String url = "/Back_end/orderlist/listOneorderlist.jsp";
