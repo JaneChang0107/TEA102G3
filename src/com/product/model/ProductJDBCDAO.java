@@ -18,12 +18,16 @@ public class ProductJDBCDAO implements ProductInterface{
 			"UPDATE PRODUCT SET P_NAME = ?, P_PRICE = ?, P_DETAIL = ?, PT_ID = ?, P_COUNT = ?, P_REVISEDATE = ?, P_STATUS = ? WHERE P_ID = ?";
 	private final String CHECKED = 
 			"UPDATE PRODUCT SET P_STATUS = ? WHERE P_ID = ?";
+	private final String SELLOUT = 
+			"UPDATE PRODUCT SET P_STATUS = 0, P_COUNT = 0 WHERE P_ID = ?";
 	private final String DELETE =
 			"DELETE FROM PRODUCT WHERE P_ID = ?";
+	private final String SELLERDELETE =
+			"UPDATE PRODUCT SET P_STATUS = 50 WHERE P_ID = ?";
 	private final String FINDONE =
 			"SELECT * FROM PRODUCT WHERE P_ID = ?";
 	private final String FINDBYSELLER =
-			"SELECT * FROM PRODUCT WHERE M_ID = ? ORDER BY P_ID DESC";
+			"SELECT * FROM PRODUCT WHERE M_ID = ? AND P_STATUS <> 50 ORDER BY P_ID DESC";
 	private final String FINDBYPNAME =
 			"SELECT * FROM PRODUCT WHERE P_NAME like ? AND P_STATUS = 1 ORDER BY P_ID DESC";
 	private final String FINDBYPTYPE =
@@ -173,6 +177,42 @@ public class ProductJDBCDAO implements ProductInterface{
 			}
 		}
 	}
+	
+	@Override
+	public void sellout(String p_id) {
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		try {
+			Class.forName(database.DRIVER);
+			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			ps = con.prepareStatement(SELLOUT);
+
+			ps.setString(1, p_id);
+			
+			ps.executeUpdate();
+		
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+		} finally {
+			try {
+				if(ps != null) {
+					ps.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(con != null) {
+					con.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 	@Override
 	public void delete(String p_id) {
@@ -188,6 +228,42 @@ public class ProductJDBCDAO implements ProductInterface{
 			
 			ps.executeUpdate();
 		
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+		} finally {
+			try {
+				if(ps != null) {
+					ps.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(con != null) {
+					con.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	@Override
+	public void sellerDelete(String p_id) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		try {
+			Class.forName(database.DRIVER);
+			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			ps = con.prepareStatement(SELLERDELETE);
+			
+			ps.setString(1, p_id);
+			
+			ps.executeUpdate();
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());

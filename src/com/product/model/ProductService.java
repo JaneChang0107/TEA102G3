@@ -90,9 +90,16 @@ public class ProductService {
 	public void checked(String pid, Integer pstatus) {
 		dao.checked(pid, pstatus);
 	}
+	
+	public void sellout(String pid) {
+		dao.sellout(pid);
+	}
 
 	public void deleteProduct(String pid) {
 		dao.delete(pid);
+	}
+	public void sellerDeleteProduct(String pid) {
+		dao.sellerDelete(pid);
 	}
 	
 	public ProductVO oneProduct(String pid) {

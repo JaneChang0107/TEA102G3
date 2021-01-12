@@ -21,6 +21,10 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface {
 	private static final String GET_ORDER_ByMember_Status ="SELECT * FROM ORDERLIST WHERE M_ID=? AND O_STATUS=?";
 	//改變訂單狀態(出貨用)
 	private static final String UPDATE_Status_STMT ="UPDATE ORDERLIST SET o_shipdate=CURRENT_TIMESTAMP, o_status=? WHERE o_id=?";
+	//改變訂單狀態(到貨用)
+	private static final String UPDATE_Arrive_STMT ="UPDATE ORDERLIST SET o_deceiptdate=CURRENT_TIMESTAMP, o_status='已到貨' WHERE o_id=?";
+	//改變訂單狀態(訂單完成用)
+	private static final String UPDATE_Finish_STMT ="UPDATE ORDERLIST SET o_finishdate=CURRENT_TIMESTAMP, o_status='訂單完成' WHERE o_id=?";
 
 	
 	@Override
@@ -210,6 +214,74 @@ public class OrderlistJDBCDAO implements OrderlistDAO_interface {
 
 			pstmt.setString(1, orderlistVO.getO_status());
 			pstmt.setString(2, orderlistVO.getO_id());
+			
+			pstmt.executeUpdate();
+			}catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+
+			}
+		}
+	
+	@Override
+	public void updateStatusArrive(String o_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_Arrive_STMT);
+
+			pstmt.setString(1, o_id);
+			
+			pstmt.executeUpdate();
+			}catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+
+			}
+		}
+	
+	@Override
+	public void updateStatusFinish(String o_id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_Finish_STMT);
+
+			pstmt.setString(1, o_id);
 			
 			pstmt.executeUpdate();
 			}catch (Exception e) {

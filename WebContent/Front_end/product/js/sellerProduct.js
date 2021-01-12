@@ -48,18 +48,24 @@ $.ajax({
                     <form action="${contextPath}/ProductServlet" method="post">
                         <input type="hidden" name="pid" value="${value.p_id}">
                         <input type="hidden" name="action" value="updateOne">
-                        <input type="submit" class="btn btn-primary" ${value.p_status == 99 ? "style=display:none" : ""} value="修改">
+                        <input type="submit" class="btn btn-primary" ${value.p_status == 99 || value.p_status == 0 ? "style=display:none" : ""} value="修改">
                     </form>
                 </td>
                 <td>
                     <form action="${contextPath}/ProductServlet" method="post">
                         <input type="hidden" name="pid" value="${value.p_id}">
-                        <input type="hidden" name="action" value="delete">
-                        <input type="submit" class="btn btn-primary" value="刪除">
+                        <input type="hidden" name="action" value="sellerDelete">
+                        <input type="button" class="btn btn-primary" value="刪除">
                     </form>
                 </td>
-            </tr>`
+                </tr>`
             )
         })
+    }
+});
+
+$(document).on("click", ".btn", (e) => {
+    if(confirm("確定要刪除?")) {
+    	$(e.target).closest("form").submit();
     }
 });

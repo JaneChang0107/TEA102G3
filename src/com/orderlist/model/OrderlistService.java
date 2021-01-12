@@ -52,7 +52,13 @@ public class OrderlistService {
 		return orderlistVO;
 	}
 	
-
+	public void updateStatusArrive(String o_id) {
+        dao.updateStatusArrive(o_id);
+	}
+	
+	public void updateStatusFinish(String o_id) {
+        dao.updateStatusFinish(o_id);
+	}
 	
 	public OrderlistVO updateOrderlistVO(String o_id,Timestamp o_date,String o_status,Timestamp o_shipdate,Timestamp o_deceiptdate,Timestamp o_finishdate,String o_transport,String o_address,Integer o_total,Integer o_pm,String m_id) {
 		OrderlistVO orderlistVO =new OrderlistVO();

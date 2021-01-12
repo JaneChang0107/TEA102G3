@@ -14,7 +14,7 @@ public interface OrderlistDAO_interface {
     //出貨用
     public void updateStatus(OrderlistVO orderlistVO);
     //到貨用
-//    public void updateStatusArrive(OrderlistVO orderlistVO);
-//    //訂單完成用
-//    public void updateStatusFinish(OrderlistVO orderlistVO);
+    public void updateStatusArrive(String o_id);
+    //訂單完成用
+    public void updateStatusFinish(String o_id);
 }

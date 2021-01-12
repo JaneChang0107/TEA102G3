@@ -6,8 +6,10 @@ public interface ProductInterface {
 
 	public String insert(ProductVO product);
 	public void update(ProductVO product);
-	public void checked(String p_id, Integer p_status);
+	public void checked(String p_id, Integer p_status);							// 審核完成
+	public void sellout(String p_id);											// 售出
 	public void delete(String p_id);
+	public void sellerDelete(String p_id);
 	public ProductVO findOneProduct (String p_id);
 	public List<ProductVO> findBySeller(String m_id);							// 賣家商品列表用
 	public List<ProductVO> findByProductName(String p_name);					// 搜尋用

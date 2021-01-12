@@ -25,7 +25,6 @@ import com.productPicture.model.ProductPictureService;
 import com.productPicture.model.ProductPictureVO;
 import com.productType.model.ProductTypeService;
 import com.productType.model.ProductTypeVO;
-import com.websocket.WebSocket;
 
 @WebServlet("/ProductServlet")
 @MultipartConfig
@@ -198,6 +197,16 @@ public class ProductServlet extends HttpServlet {
 			ProductPictureService ppService = new ProductPictureService();
 			ppService.deleteProductPictureByProduct(pid);
 			pService.deleteProduct(pid);
+			
+			response.sendRedirect(request.getContextPath() + "/Front_end/product/sellerProduct.jsp");
+		}
+		
+		if("sellerDelete".equals(action)) {
+			
+			String pid = request.getParameter("pid");
+			
+			ProductService pService = new ProductService();
+			pService.sellerDeleteProduct(pid);
 			
 			response.sendRedirect(request.getContextPath() + "/Front_end/product/sellerProduct.jsp");
 		}
