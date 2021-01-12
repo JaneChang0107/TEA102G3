@@ -13,6 +13,7 @@ public interface MemberDAO_interface {
 	//�ק��K�X
 	public void updatepw(MemberVO memberVO);
 
+	public void updateStatus(MemberVO memberVO);
 	//�R��
 	public void delete(String m_id);
 	//�d�Dkey

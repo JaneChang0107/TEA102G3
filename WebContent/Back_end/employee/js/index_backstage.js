@@ -965,15 +965,15 @@ $.ajax({
 			  list_html +='        </div>';
 			  $.each(data, function(index, item){
 			  list_html +='            <div class="row"  id="memberrow">';
-			  list_html +='                <div class="col">'+ item.m_id +'</div>';
-			  list_html +='                <div class="col">'+ item.m_email +'</div>';
+			  list_html +='                <div class="col" id="div_m_id">'+ item.m_id +'</div>';
+			  list_html +='                <div class="col" id="div_m_email">'+ item.m_email +'</div>';
 			  list_html +='                <div class="col">'+ item.m_name +'</div>';
 			  list_html +='                <div class="col">'+ item.m_gender +'</div>';
 			  list_html +='                <div class="col">'+ item.m_phone +'</div>';
 			  list_html +='                <div class="col">'+ item.m_address +'</div>';
 			  list_html +='                <div class="col">'+ item.m_birth +'</div>';
-			  list_html +='                <div class="col" data_status="'+ item.m_status +'">'+ item.m_statusByString +'</div>';
-			  list_html +='                <div class="col">';
+//			  list_html +='                <div class="col" data_status="'+ item.m_status +'">'+ item.m_statusByString +'</div>';
+			  list_html +='                <div class="col" id="div_m_status">';
 //			  list_html +='                    <div class="row">';
 //			  list_html +='                        <div class="col button_mem"><button type="button">未開通</div>';
 //			  list_html +='                        <div class="col button_mem"><button type="button">買家</div>';
@@ -983,12 +983,15 @@ $.ajax({
 //			  list_html +='                        <div class="col button_mem"><button type="button">賣家</div>';
 //			  list_html +='                    </div>';
 			  list_html +='					   <select id="select_m_id">';
-			  list_html +='					   		<option value="0">未開通</opion>';
-			  list_html +='					 	 	<option value="1">買家</opion>';
-			  list_html +='					   		<option value="2">賣家未驗證</opion>';
-			  list_html +='					 	 	<option value="3">賣家</opion>';
+			  list_html +='					   		<option value="0" '+ ((item.m_status == 0) ? 'selected' :'') +'>未開通</opion>';
+			  list_html +='					 	 	<option value="1" '+ ((item.m_status == 1) ? 'selected' :'') +'>買家</opion>';
+			  list_html +='					   		<option value="2" '+ ((item.m_status == 2) ? 'selected' :'') +'>賣家未驗證</opion>';
+			  list_html +='					 	 	<option value="3" '+ ((item.m_status == 3) ? 'selected' :'') +'>賣家</opion>';
 			  list_html +='					   </select>';
 			  list_html +='                    <input type="hidden" name="m_id" value="'+ item.m_id +'">';
+			  list_html +='                </div>';
+			  list_html +='                <div class="col">';
+			  list_html +='					   <button id="btn_update_mstatus">修改'
 			  list_html +='                </div>';
 			  list_html +='            </div>';
 			  });
@@ -1004,4 +1007,30 @@ $.ajax({
   })
   
 //修改會員狀態
-  
+  $(document).on("click", "#btn_update_mstatus",function(){
+	  let update_val = $(this).closest("div").siblings("#div_m_status").find("#select_m_id").val();
+	  let update_m_id = $(this).closest("div").siblings("#div_m_id").text();
+	  let update_m_email = $(this).closest("div").siblings("#div_m_email").text();
+	  console.log(update_m_id)
+	  
+	  let form_data = {
+		"m_status" : update_val,
+		"m_id" : update_m_id,
+		"m_email" : update_m_email
+	  }
+	  
+	  let form_str = JSON.stringify(form_data);
+	  $.ajax({
+		  url:"http://localhost:8081/TEA102G3/Update_m_status",
+		  type: "POST",
+		  data: form_str,
+		  dataType: "json",
+		  beforeSend: function(){},
+		  success: function(data){
+			  update_val = data.m_status;
+		  },
+		  error: function(){
+			  console.log("error")
+		  }
+	  })
+  })

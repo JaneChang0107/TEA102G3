@@ -96,6 +96,13 @@ public class MemberService {
 		return memberVO;
 	}
 	
+	public MemberVO updateStatus(int m_status, String m_email) {
+		MemberVO memberVO = new MemberVO();
+		memberVO.setM_status(m_status);
+		memberVO.setM_email(m_email);
+		dao.updateStatus(memberVO);
+		return memberVO;
+	}
 	//­×§ï·|­û
 //	public MemberVO updateMem(String m_email, String m_name, String m_gender, String m_phone,
 //			String m_address, java.sql.Date m_birth, byte[] m_headpic, String m_identity,

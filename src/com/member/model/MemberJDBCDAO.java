@@ -29,6 +29,9 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 
 	private static final String GET_ONE_STMT = "SELECT m_id,m_email,m_password,m_name,m_gender,m_phone,m_address,to_char(m_birth,'yyyy-mm-dd') m_birth,m_headpic,m_status,m_identity,m_id_pic"
 			+ ",m_account,m_accountname,b_code,m_bank_pic,m_moneytrandate,m_storename,m_info,m_cover,m_hi,m_offlinehi,m_coin FROM member where m_id = ?";
+	
+	private static final String GET_ONE_STMT_EMAIL = "SELECT m_id,m_email,m_password,m_name,m_gender,m_phone,m_address,to_char(m_birth,'yyyy-mm-dd') m_birth,m_headpic,m_status,m_identity,m_id_pic"
+			+ ",m_account,m_accountname,b_code,m_bank_pic,m_moneytrandate,m_storename,m_info,m_cover,m_hi,m_offlinehi,m_coin FROM member where m_email = ?";
 
 	private static final String DELETE = "DELETE FROM member where m_id = ? ";
 
@@ -287,6 +290,43 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			}
 		}
 
+	}
+	
+	@Override
+	public void updateStatus(MemberVO memberVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_Status_STMT);
+			pstmt.setInt(1, memberVO.getM_status());
+			pstmt.setString(2, memberVO.getM_email());
+			
+			pstmt.executeUpdate();
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
 	}
 	
 	
