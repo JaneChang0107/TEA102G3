@@ -5,26 +5,11 @@ const contextPath = pathname.substr(0, position);
 console.log(contextPath)
 
 whichProduct("all");
-$("#all").click(() => {
-    whichProduct("all");
-})
 
-$("#onSell").click(() => {
-    whichProduct("onSell");
+$("#selectStatus").on("change", () => {
+	let selected = $("#selectStatus").val();
+	whichProduct(selected);
 })
-
-$("#notSell").click(() => {
-    whichProduct("notSell");
-})
-
-$("#selled").click(() => {
-    whichProduct("selled");
-})
-
-$("#check").click(() => {
-    whichProduct("check");
-})
-
 
 function whichProduct(which) {
     $.ajax({

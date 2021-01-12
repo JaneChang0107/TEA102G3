@@ -21,12 +21,12 @@
 	
 	<div>
 		<div>
-			<select>
-				<option id="all">全部</option>
-				<option id="check">待審核</option>
-				<option id="onSell">上架中</option>
-				<option id="notSell">下架中</option>
-				<option id="selled">已出售</option>
+			<select id="selectStatus">
+				<option id="all" value="all">全部</option>
+				<option id="check" value="check">待審核</option>
+				<option id="onSell" value="onSell">上架中</option>
+				<option id="notSell" value="notSell">下架中</option>
+				<option id="selled" value="selled">已出售</option>
 			</select>
 		</div>
 		

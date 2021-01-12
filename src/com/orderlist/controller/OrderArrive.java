@@ -2,6 +2,7 @@ package com.orderlist.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,9 +26,13 @@ public class OrderArrive extends HttpServlet {
 		
 		OrderlistService oService = new OrderlistService();
 		
-		oService.updateStatusArrive(oid);
+		if(!oid.isEmpty()) {
+			oService.updateStatusArrive(oid);
+		}
 		
-		
+		request.setAttribute("oid", oid);
+		RequestDispatcher rd = request.getRequestDispatcher("/Back_end/orderlist/OrderArrive.jsp");
+		rd.forward(request, response);
 		
 	}
 

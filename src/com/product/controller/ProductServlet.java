@@ -423,22 +423,49 @@ public class ProductServlet extends HttpServlet {
 			
 			List<ProductVO> products = null;
 			
-			if("all".equals(status)) {
-				products = pService.getAll();
+			switch (status) {
+				case "all" :
+					products = pService.getAll();
+					break;
+					
+				case "onSell" :
+					products = pService.findByStatus(1);
+					break;
+					
+				case "notSell" :
+					products = pService.findByStatus(2);
+					break;
+					
+				case "check" :
+					products = pService.findByStatus(11);
+					products.addAll(pService.findByStatus(12));
+					break;
+					
+				case "selled" :
+					products = pService.findByStatus(0);
+					break;
 			}
 			
-			if("onSell".equals(status)) {
-				products = pService.findByStatus(1);
-			}
-			
-			if("notSell".equals(status)) {
-				products = pService.findByStatus(2);
-			}
-			
-			if("check".equals(status)) {
-				products = pService.findByStatus(11);
-				products.addAll(pService.findByStatus(12));
-			}
+//			if("all".equals(status)) {
+//				products = pService.getAll();
+//			}
+//			
+//			if("onSell".equals(status)) {
+//				products = pService.findByStatus(1);
+//			}
+//			
+//			if("notSell".equals(status)) {
+//				products = pService.findByStatus(2);
+//			}
+//			
+//			if("check".equals(status)) {
+//				products = pService.findByStatus(11);
+//				products.addAll(pService.findByStatus(12));
+//			}
+//			
+//			if("selled".equals(status)) {
+//				products = pService.findByStatus(0);
+//			}
 			
 			
 			ObjectMapper mapper = new ObjectMapper();

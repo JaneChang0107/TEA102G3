@@ -47,7 +47,7 @@
                 let oid = $("#oid").val();
     
                 $.ajax({
-                    url: "http://localhost:8081/TEA102G3/OrderListQRCode?oid=" + oid,
+                    url: "http://10.2.0.44:8081/TEA102G3/QRCode?oid=" + oid,
                     type : "GET",
                     dataType : "text",
                     success : function(data) {

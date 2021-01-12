@@ -20,10 +20,12 @@ public class OrderListQRCode extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String oid = request.getParameter("oid");
+		String hostString = request.getServerName() + ":" + request.getServerPort();
+		System.out.println(hostString);
 		
 		OrderListQRCodeCreate qr = new OrderListQRCodeCreate();
 		
-		response.getWriter().println(qr.creater(oid));
+		response.getWriter().println(qr.creater(hostString, oid));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -15,8 +15,8 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 public class OrderListQRCodeCreate {
 	
-	public String creater(String oid) {
-		String action = "/TEA102G3/OrderArrive?oid=" + oid;
+	public String creater(String host,String oid) {
+		String action = host + "/TEA102G3/OrderArrive?oid=" + oid;
 		int width = 300;
 		int height = 300;
 		String format = "jpg";
