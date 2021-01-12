@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.Base64;
 
 public class MemberVO implements java.io.Serializable{
-		
+
 		@Override
 	public String toString() {
-		return "MemberVO [m_id=" + m_id + ", m_email=" + m_email + ", m_password=" + m_password + ", m_name=" + m_name
+		return "[m_id=" + m_id + ", m_email=" + m_email + ", m_password=" + m_password + ", m_name=" + m_name
 				+ ", m_gender=" + m_gender + ", m_phone=" + m_phone + ", m_address=" + m_address + ", m_birth="
 				+ m_birth + ", m_headpic=" + Arrays.toString(m_headpic) + ", m_status=" + m_status + ", m_identity="
 				+ m_identity + ", m_id_pic=" + Arrays.toString(m_id_pic) + ", m_account=" + m_account

@@ -3,6 +3,7 @@ package com.employee.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -40,24 +42,17 @@ public class Search_m_status extends HttpServlet {
 			
 			int num_m_status = Integer.parseInt(m_status);
 			System.out.println("num_m_status = " + num_m_status);
-			
+	
 			MemberService service = new MemberService();
 			List<MemberVO> list = service.getMemberByStatus(num_m_status);
-			for (MemberVO memberVO : list) {
-				System.out.println("memberVO="+memberVO);
-			}
-			System.out.println("list = " + list);
-			System.out.println("listªø«×" + list.size());
+
+
+			String listarray  = new JSONArray(list).toString();
 			
-			JSONObject obj = new JSONObject(list);
-			
-			System.out.println("obj = " + obj);
-			
-			String jsonStr = obj.toString();
-			
-			System.out.println("jsonStr = " + jsonStr);
-			
-			out.write(jsonStr);
+			System.out.println("listarray = " + listarray);
+
+
+			out.write(listarray);
 			out.flush();
 			out.close();
 		} catch (JSONException e) {

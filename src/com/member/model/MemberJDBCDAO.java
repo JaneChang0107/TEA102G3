@@ -691,20 +691,20 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 
 	public static void main(String[] args) {
 		MemberJDBCDAO dao = new MemberJDBCDAO();
-
-		List<MemberVO> notice =dao.getNotice("M00001");
-		for(MemberVO gn : notice) {
-			System.out.println(gn.getO_date()+",");
-			System.out.println(gn.getO_id()+",");
-			System.out.println(gn.getO_status()+",");
-			System.out.println(gn.getOd_count()+",");
-			System.out.println(gn.getM_id()+",");
-			System.out.println(gn.getM_name()+",");
-			System.out.println(gn.getP_id()+",");
-			System.out.println(gn.getP_name());
-			System.out.println("---------------------");
-		}
-		
+//
+//		List<MemberVO> notice =dao.getNotice("M00001");
+//		for(MemberVO gn : notice) {
+//			System.out.println(gn.getO_date()+",");
+//			System.out.println(gn.getO_id()+",");
+//			System.out.println(gn.getO_status()+",");
+//			System.out.println(gn.getOd_count()+",");
+//			System.out.println(gn.getM_id()+",");
+//			System.out.println(gn.getM_name()+",");
+//			System.out.println(gn.getP_id()+",");
+//			System.out.println(gn.getP_name());
+//			System.out.println("---------------------");
+//		}
+//		
 		
 //		//穝糤
 //		MemberVO memberVO1=new MemberVO();		
@@ -838,36 +838,36 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 //			System.out.println(aMember.getM_coin()+",");
 //			System.out.println("----------------------");
 			
-		}
-//		System.out.println("=====琩高场Ч拨======");
-//		
-//		Set<MemberVO> set = dao.getMemberByStatus(2);
-//		for(MemberVO aStatus : set) {
-//			System.out.println(aStatus.getM_id()+",");
-//			System.out.println(aStatus.getM_email()+",");
-//			System.out.println(aStatus.getM_password()+",");
-//			System.out.println(aStatus.getM_name()+",");
-//			System.out.println(aStatus.getM_gender()+",");
-//			System.out.println(aStatus.getM_phone()+",");
-//			System.out.println(aStatus.getM_address()+",");
-//			System.out.println(aStatus.getM_birth()+",");
-//			System.out.println(aStatus.getM_headpic()+",");
-//			System.out.println(aStatus.getM_status()+",");
-//			System.out.println(aStatus.getM_identity()+",");
-//			System.out.println(aStatus.getM_id_pic()+",");
-//			System.out.println(aStatus.getM_account()+",");
-//			System.out.println(aStatus.getM_accountName()+",");
-//			System.out.println(aStatus.getB_code()+",");
-//			System.out.println(aStatus.getM_bank_pic()+",");
-//			System.out.println(aStatus.getM_moneyTranDate()+",");
-//			System.out.println(aStatus.getM_storename()+",");
-//			System.out.println(aStatus.getM_info()+",");
-//			System.out.println(aStatus.getM_cover()+",");
-//			System.out.println(aStatus.getM_hi()+",");
-//			System.out.println(aStatus.getM_offlineHi()+",");
-//			System.out.println(aStatus.getM_coin()+",");
-//			System.out.println("----------------------");
 //		}
+//		System.out.println("=====琩高场Ч拨======");
+		
+		List<MemberVO> list = dao.getMemberByStatus(2);
+		for(MemberVO aStatus : list) {
+			System.out.println(aStatus.getM_id()+",");
+			System.out.println(aStatus.getM_email()+",");
+			System.out.println(aStatus.getM_password()+",");
+			System.out.println(aStatus.getM_name()+",");
+			System.out.println(aStatus.getM_gender()+",");
+			System.out.println(aStatus.getM_phone()+",");
+			System.out.println(aStatus.getM_address()+",");
+			System.out.println(aStatus.getM_birth()+",");
+			System.out.println(aStatus.getM_headpic()+",");
+			System.out.println(aStatus.getM_status()+",");
+			System.out.println(aStatus.getM_identity()+",");
+			System.out.println(aStatus.getM_id_pic()+",");
+			System.out.println(aStatus.getM_account()+",");
+			System.out.println(aStatus.getM_accountName()+",");
+			System.out.println(aStatus.getB_code()+",");
+			System.out.println(aStatus.getM_bank_pic()+",");
+			System.out.println(aStatus.getM_moneyTranDate()+",");
+			System.out.println(aStatus.getM_storename()+",");
+			System.out.println(aStatus.getM_info()+",");
+			System.out.println(aStatus.getM_cover()+",");
+			System.out.println(aStatus.getM_hi()+",");
+			System.out.println(aStatus.getM_offlineHi()+",");
+			System.out.println(aStatus.getM_coin()+",");
+			System.out.println("----------------------");
+		}
 
 		// 琩盞絏
 //		MemberVO memberVO4= dao.getMemberPw("a111@yahoo.com.tw");	
@@ -903,7 +903,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 //	}
 
 
-
+	}
 
 
 }

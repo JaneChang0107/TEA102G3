@@ -82,12 +82,12 @@
                     </div>
                     <div class="tab-pane fade" id="acc_mgt" role="tabpanel" aria-labelledby="acc_mgt-tab">
                         <jsp:include page="listAllMem.jsp"></jsp:include>
-                    </div>
-       
-                    <div class="tab-pane fade" id="tran_sys" role="tabpanel" aria-labelledby="tran_sys-tab">這裡放你要的頁面</div>       
+                    </div>  
+                    <div class="tab-pane fade" id="tran_sys" role="tabpanel" aria-labelledby="tran_sys-tab">
+<%-- 						<%@include file="/Back_end/product/showProduct.jsp"%> --%>
+					</div>       
                     <div class="tab-pane fade" id="notice_sys" role="tabpanel" aria-labelledby="notice_sys-tab">
-                    	<jsp:include page="/Back_end/runlight/input.jsp"></jsp:include>
-					
+                    	<jsp:include page="/Back_end/runlight/input.jsp"></jsp:include>					
 					</div>       
                 </div>
             </div>
@@ -100,6 +100,7 @@
     <script src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="<%=request.getContextPath()%>/Back_end/employee/js/index_backstage.js"></script>
     <script src="<%=request.getContextPath()%>/Back_end/employee/js/notic.js"></script>
+    
         <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/datetimepicker/jquery.datetimepicker.css" />

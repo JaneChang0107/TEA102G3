@@ -93,7 +93,7 @@ function whichProduct(which) {
                         <form action="${contextPath}/ProductServlet" method="post">
                             <input type="hidden" name="pid" value="${value.p_id}">
                             <input type="hidden" name="action" value="delete">
-                            <input type="button" class="btn btn-primary" value="刪除">
+                            <input type="submit" class="btn btn-primary" value="刪除">
                         </form>
                     </td>
                 </tr>`
@@ -109,9 +109,3 @@ $("#allProduct").on("click", ".checkBtn", (e) => {
         $(e.target).closest("form").submit();
     }
 })
-
-$(document).on("click", ".btn", (e) => {
-    if(confirm("確定要刪除?")) {
-    	$(e.target).closest("form").submit();
-    }
-});
