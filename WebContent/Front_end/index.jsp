@@ -46,7 +46,33 @@ marquee {
 	</center>
 
 	<div class="content">
+	  <div class="container my-4">
 
+    <div id="carouselExample1" class="carousel slide z-depth-1-half" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="<%=request.getContextPath()%>/images/ps4.png" alt="First slide" width=1300px height=600px >
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="<%=request.getContextPath()%>/images/switch.png" alt="Second slide"  width=1300px height=600px>
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="<%=request.getContextPath()%>/images/xbox.png" alt="Third slide" width=1300px height=600px>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExample1" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExample1" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
+    
+  </div>
+	
 		<div class="article">
 			<a
 				href="<%=request.getContextPath()%>/ProductServlet?ptype=no&name=&action=findByName"><button
@@ -178,6 +204,10 @@ marquee {
 
 // 			});
 // 		}
+
+// $('.carousel').carousel({
+// 	interval:100;
+// })
 	</script>
 
 </body>
