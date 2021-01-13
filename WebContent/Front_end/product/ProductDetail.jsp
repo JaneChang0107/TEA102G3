@@ -65,14 +65,14 @@ img.productImg {
   display: inline-block;/*讓div並排*/ 
   vertical-align: top;/*就算個個div行數不同，也一律向上對齊*/ 
   width: 300px;
-  height: 500px;
+  height: 600px;
   border-radius:3px;
 
   }
   #info{
   margin: 0px auto;
    width: 1200px;
-  height: 500px;
+  height: 600px;
   }
   #productinfo{
   margin: 0px auto;
@@ -95,7 +95,11 @@ img.productImg {
   
   }
   .all{
-  height:1500px;
+  height:1800px;
+  }
+  #viewseller{
+  height:auto;
+  
   }
   
 </style>
@@ -129,7 +133,7 @@ img.productImg {
 					name="action" value="">
 			</form>
 		
-  </div><div id="right"><div id="productDetail">
+  </div><div id="right"><div>
 		<jsp:useBean id="ppService" scope="page"
 			class="com.productPicture.model.ProductPictureService"></jsp:useBean>
   
@@ -141,12 +145,6 @@ img.productImg {
   		</div>
 			<table class="table3">
 				<tr>
-					<td align=center width=400px><h4>
-							
-								
-							
-						</h4></td>
-					
 						<div id="productinfo">
 						<Table id="content">
 							  <tr>
@@ -176,8 +174,7 @@ img.productImg {
 							     <td ><span> ${pVO.p_detail}</span></td>
 							    </tr>
 							    <tr>
-							    <td colspan=2> <input type="submit" value="放入購物車" class="btn btn-info"></td>
-							     
+							    <td colspan=2> <input type="submit" value="放入購物車" class="btn btn-info"></td> 
 							    </tr>
 							</Table>
 						</div>
@@ -197,9 +194,8 @@ img.productImg {
 		</form>
   
   </div>
-  
-  <div width=1200px height=200px>
-  <table id="viewseller">
+ 
+  <div id="viewseller">
 				<c:forEach var="viewsellerVO" items="${list}">
 
 					<div class="card">
@@ -213,8 +209,8 @@ img.productImg {
 					</div>
 
 				</c:forEach>
-	</table>
   </div>
+  
   </div>
 </div>
  </div> 
