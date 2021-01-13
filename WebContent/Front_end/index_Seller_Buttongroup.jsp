@@ -65,7 +65,7 @@ body {
 <div class="btn-group dropright">
 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="sellerbar1">訂單管理</button>
   <div class="dropdown-menu" id="dropdown-menu1">
-  <button type="button" class="btn btn-warning"><a href="<%=request.getContextPath()%>/orderlist?action=getSellerAll">我的銷售</a></button>
+  <a href="<%=request.getContextPath()%>/orderlist?action=getSellerAll"><button type="button" class="btn btn-warning">我的銷售</button></a>
 <!--   <button type="button" class="btn btn-warning">物流設定</button> -->
   </div>
 </div>
@@ -73,29 +73,25 @@ body {
 <div class="btn-group dropright">
 <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="sellerbar2">商品管理</button><br>
   <div class="dropdown-menu" id="dropdown-menu2">
-  <button type="button" class="btn btn-warning"><a href="<%=request.getContextPath()%>/Front_end/product/addProduct.jsp">新增商品</a></button>
-  <button type="button" class="btn btn-warning"><a href="<%=request.getContextPath()%>/Front_end/product/sellerProduct.jsp">我的商品</a></button>
+  <a href="<%=request.getContextPath()%>/Front_end/product/addProduct.jsp"><button type="button" class="btn btn-warning">新增商品</button></a>
+  <a href="<%=request.getContextPath()%>/Front_end/product/sellerProduct.jsp"><button type="button" class="btn btn-warning">我的商品</button></a>
   </div>
 </div><br>
 
 <div class="btn-group dropright">
 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="sellerbar3">財務管理</button>
   <div class="dropdown-menu" id="dropdown-menu3">
-  <button type="button" class="btn btn-warning">銀行帳號</button>
-  <button type="button" class="btn btn-warning"><a href="<%=request.getContextPath()%>/Front_end/seller/MyPayIn.jsp">我的進帳</a></button>
+  <a href="<%=request.getContextPath()%>/Front_end/seller/MyPayIn.jsp"><button type="button" class="btn btn-warning">我的進帳</button></a>
   </div>
 </div>
 
 <div class="btn-group dropright">
 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="sellerbar4">賣場管理</button>
   <div class="dropdown-menu" id="dropdown-menu4">
-  <button type="button" class="btn btn-warning"><a href="<%=request.getContextPath()%>/Front_end/seller/udsellstore.jsp">賣場介紹</a></button>
-  <button type="button" class="btn btn-warning"><a href="<%=request.getContextPath()%>/Front_end/seller/viewseller.jsp">賣場評價</a></button>
+  <a href="<%=request.getContextPath()%>/Front_end/seller/udsellstore.jsp"><button type="button" class="btn btn-warning">賣場介紹</button></a>
+  <a href="<%=request.getContextPath()%>/Front_end/seller/viewseller.jsp"><button type="button" class="btn btn-warning">賣場評價</button></a>
   </div>
 </div>
-
-
-
 
 
 

@@ -55,7 +55,7 @@ $.ajax({
                     <form action="${contextPath}/ProductServlet" method="post">
                         <input type="hidden" name="pid" value="${value.p_id}">
                         <input type="hidden" name="action" value="sellerDelete">
-                        <input type="button" class="btn btn-primary" value="刪除">
+                        <input type="button" class="btn checkBtn btn-primary" value="刪除">
                     </form>
                 </td>
                 </tr>`
@@ -64,7 +64,7 @@ $.ajax({
     }
 });
 
-$(document).on("click", ".btn", (e) => {
+$(document).on("click", ".checkBtn", (e) => {
     if(confirm("確定要刪除?")) {
     	$(e.target).closest("form").submit();
     }
