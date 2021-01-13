@@ -49,12 +49,11 @@ marquee {
 
 		<div class="article">
 			<a
-				href="http://localhost:8081/TEA102G3/ProductServlet?ptype=no&name=&action=findByName"><button
+				href="<%=request.getContextPath()%>/ProductServlet?ptype=no&name=&action=findByName"><button
 					type="button" class="btn btn-success btn-circle-xl" id="buybtn">我要買</button></a>
-			<button type="button" class="btn btn-danger btn-circle-xl"
-				id="rentbtn">我要租</button>
+            <a href="">
 			<button type="button" class="btn btn-warning btn-circle-xl"
-				id="sellbtn">我要賣</button>
+				id="sellbtn">我要賣</button></a>
 		</div>
 
 
