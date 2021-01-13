@@ -45,10 +45,10 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	
 	private static final String UPDATE_Kun_STMT ="UPDATE member set m_coin=? where m_id=?";
 
-	private static final String NOTICE ="select orderlist.o_date,ORDERDETAIL.o_id,ORDERDETAIL.p_id,ORDERDETAIL.od_count,ORDERLIST.o_status,product.p_name,member.m_name,member.m_id "
-			+ "		from member inner join orderlist on member.M_id=Orderlist.M_id "
-			+ "		inner join orderdetail on orderlist.o_id=orderdetail.o_id "
-			+ "		inner join product on orderdetail.p_id=product.p_id where M_id=? order by orderlist.o_date desc";
+	private static final String NOTICE ="select orderlist.o_date, orderlist.o_status, ORDERDETAIL.p_id, ORDERDETAIL.o_id, ORDERDETAIL.od_count, product.p_name,orderlist.M_id ,member.m_name from orderlist inner join orderdetail on orderlist.o_id=orderdetail.o_id inner join product on orderdetail.p_id=product.p_id inner join member on orderlist.M_id=member.m_id where orderlist.m_id= ? order by orderlist.o_date desc";
+	
+	
+	
 	
 	public List<MemberVO> getNotice(String m_id) {
 		List<MemberVO> list = new ArrayList<MemberVO>();
@@ -692,18 +692,18 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	public static void main(String[] args) {
 		MemberJDBCDAO dao = new MemberJDBCDAO();
 //
-//		List<MemberVO> notice =dao.getNotice("M00001");
-//		for(MemberVO gn : notice) {
-//			System.out.println(gn.getO_date()+",");
-//			System.out.println(gn.getO_id()+",");
-//			System.out.println(gn.getO_status()+",");
-//			System.out.println(gn.getOd_count()+",");
-//			System.out.println(gn.getM_id()+",");
-//			System.out.println(gn.getM_name()+",");
-//			System.out.println(gn.getP_id()+",");
-//			System.out.println(gn.getP_name());
-//			System.out.println("---------------------");
-//		}
+		List<MemberVO> notice =dao.getNotice("M00002");
+		for(MemberVO gn : notice) {
+			System.out.println(gn.getO_date()+",");
+			System.out.println(gn.getO_id()+",");
+			System.out.println(gn.getO_status()+",");
+			System.out.println(gn.getOd_count()+",");
+			System.out.println(gn.getM_id()+",");
+			System.out.println(gn.getM_name()+",");
+			System.out.println(gn.getP_id()+",");
+			System.out.println(gn.getP_name());
+			System.out.println("---------------------");
+		}
 //		
 		
 //		//新增
@@ -841,33 +841,33 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 //		}
 //		System.out.println("=====查詢全部完畢======");
 		
-		List<MemberVO> list = dao.getMemberByStatus(2);
-		for(MemberVO aStatus : list) {
-			System.out.println(aStatus.getM_id()+",");
-			System.out.println(aStatus.getM_email()+",");
-			System.out.println(aStatus.getM_password()+",");
-			System.out.println(aStatus.getM_name()+",");
-			System.out.println(aStatus.getM_gender()+",");
-			System.out.println(aStatus.getM_phone()+",");
-			System.out.println(aStatus.getM_address()+",");
-			System.out.println(aStatus.getM_birth()+",");
-			System.out.println(aStatus.getM_headpic()+",");
-			System.out.println(aStatus.getM_status()+",");
-			System.out.println(aStatus.getM_identity()+",");
-			System.out.println(aStatus.getM_id_pic()+",");
-			System.out.println(aStatus.getM_account()+",");
-			System.out.println(aStatus.getM_accountName()+",");
-			System.out.println(aStatus.getB_code()+",");
-			System.out.println(aStatus.getM_bank_pic()+",");
-			System.out.println(aStatus.getM_moneyTranDate()+",");
-			System.out.println(aStatus.getM_storename()+",");
-			System.out.println(aStatus.getM_info()+",");
-			System.out.println(aStatus.getM_cover()+",");
-			System.out.println(aStatus.getM_hi()+",");
-			System.out.println(aStatus.getM_offlineHi()+",");
-			System.out.println(aStatus.getM_coin()+",");
-			System.out.println("----------------------");
-		}
+//		List<MemberVO> list = dao.getMemberByStatus(2);
+//		for(MemberVO aStatus : list) {
+//			System.out.println(aStatus.getM_id()+",");
+//			System.out.println(aStatus.getM_email()+",");
+//			System.out.println(aStatus.getM_password()+",");
+//			System.out.println(aStatus.getM_name()+",");
+//			System.out.println(aStatus.getM_gender()+",");
+//			System.out.println(aStatus.getM_phone()+",");
+//			System.out.println(aStatus.getM_address()+",");
+//			System.out.println(aStatus.getM_birth()+",");
+//			System.out.println(aStatus.getM_headpic()+",");
+//			System.out.println(aStatus.getM_status()+",");
+//			System.out.println(aStatus.getM_identity()+",");
+//			System.out.println(aStatus.getM_id_pic()+",");
+//			System.out.println(aStatus.getM_account()+",");
+//			System.out.println(aStatus.getM_accountName()+",");
+//			System.out.println(aStatus.getB_code()+",");
+//			System.out.println(aStatus.getM_bank_pic()+",");
+//			System.out.println(aStatus.getM_moneyTranDate()+",");
+//			System.out.println(aStatus.getM_storename()+",");
+//			System.out.println(aStatus.getM_info()+",");
+//			System.out.println(aStatus.getM_cover()+",");
+//			System.out.println(aStatus.getM_hi()+",");
+//			System.out.println(aStatus.getM_offlineHi()+",");
+//			System.out.println(aStatus.getM_coin()+",");
+//			System.out.println("----------------------");
+//		}
 
 		// 查密碼
 //		MemberVO memberVO4= dao.getMemberPw("a111@yahoo.com.tw");	
