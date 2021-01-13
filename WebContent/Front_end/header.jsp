@@ -69,6 +69,21 @@ h1 {
 	height: 200px;
 	background: #6CCFF3;
 }
+#notice{
+    position: relative;
+    right: 40px;
+}
+	#buybtn, #rentbtn, #sellbtn {
+    padding: 50px 150px;
+    font-size: 60px;
+    margin: 30px;
+    margin-left: 60px;
+    border-radius: 30px;
+    box-shadow: 3px 3px 5px 6px darkgrey;
+	}
+	
+	
+	
 
 /*RWD開始--------------------------------------------*/
 @media screen and (max-width: 576px) {
@@ -234,15 +249,16 @@ div.article {
 }
 
 div.swiper-container {
-	position: relative;
-	height: 300px;
-	width: 1000px;
-	background: #eee;
-	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-	font-size: 10px;
-	color: #000;
-	margin: 40px auto;
-	padding: 0;
+    position: relative;
+    height: 300px;
+    width: 1000px;
+    background: ivory;
+    border: 2px solid powderblue;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    color: #000;
+    margin: 40px auto;
+    padding: 0;
 }
 
 .swiper-container {
@@ -398,7 +414,8 @@ right: 18px;
 		<div id="myNav" class="overlay">
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 			<div class="overlay-content">
-				<a href="http://localhost:8081/TEA102G3/ProductServlet?ptype=no&name=&action=findByName">我要買</a> <a href="#">我要租</a> <a href="#">我要賣</a>
+				<a href="http://localhost:8081/TEA102G3/ProductServlet?ptype=no&name=&action=findByName">我要買</a> 
+				<a class="dropdown-item" href="<%=request.getContextPath()%>/member/controller/MemberServlet?action=goSellerIndex">我要賣</a>
 				<a href="#">關於遊戲堃</a>
 			</div>
 		</div>
@@ -433,9 +450,9 @@ right: 18px;
 					data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="true" onclick="notice()"></i>
 					<div class="dropdown-menu" aria-labelledby="bell">
-<ul>
-						<a class="dropdown-item" id="notice" onclick="belldel()" href="<%=request.getContextPath()%>/Front_end/notice/notice.jsp"></a> 
-	</ul>					
+				<ul>
+				<a class="dropdown-item" id="notice" onclick="belldel()" href="<%=request.getContextPath()%>/Front_end/notice/notice.jsp"></a> 
+                </ul>					
 					</div> 
 				</td>
 
