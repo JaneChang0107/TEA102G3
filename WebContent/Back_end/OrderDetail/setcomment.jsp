@@ -59,92 +59,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- --------modal -->
 
-<style>
-body{
-    background-color: #E3F8F6;
-}
-td{
-    padding:0px 30px 0px 30px;
-}
-#signin {
-    background-color: #FFA000;
-    width: 100px;
-    height: 50px;
-    font-size: 20px;
-    color: floralwhite;
-    border: 1px solid #707070;
-    margin-left: 20px;
-}
-.modal-content {
-    position: relative;
-    background-color: #e1fbae;
-    }
-
-</style>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- --------modal -->
 
 </head>
 <body>
 
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
 
-<div style="border-width: 19px;border-style: dashed;border-color: #FFAC55;padding: 48px";">
-
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
-
-
-<table id="listallorder">
-<div style="width=100px"><p>訂單編號: <%=orderlistVO.getO_id()%></p></div>
-<p>訂單成立: <%=orderlistVO.getO_dateForm()%></p>
-<p>狀態: <%=orderlistVO.getO_status()%></p>
-<hr>
-<h2>收件資訊</h2>
-<p>收件人: <%=memSvc.findOneMem(orderlistVO.getM_id()).getM_name()%></p>
-<p>收件方式: <%=orderlistVO.getO_transport()%></p>
-<p>收件地址: <%=orderlistVO.getO_address()%></p>
-
-<hr>
-	<tr>
-		<th><h2>示意圖</h2></th>
-		<th><h2>品名</h2></th>
-		<th><h2>數量</h2></th>
-		<th><h2>單價</h2></th>
-		<th><h2>小計</h2></th>
-     
-	</tr>
-	<c:forEach var="orderdetailVO" items="${list}">
-		<tr>
-           <td><img src="<%=request.getContextPath()%>/ShowPicture?type=ppid&id=${productPicSvc.findProductRandomPicture(orderdetailVO.p_id)}" width="100px" height="100px";></td> 
-			<td><h2>${productSvc.oneProduct(orderdetailVO.p_id).p_name}</h2></td>
-			<td><h2> * ${orderdetailVO.od_count}</h2></td>
-			<td><h2>${productSvc.oneProduct(orderdetailVO.p_id).p_price}</h2></td>
-			<td><h2>${orderdetailVO.od_count*productSvc.oneProduct(orderdetailVO.p_id).p_price}</h2></td>
-		</tr>
-	</c:forEach>
-</table>
-<hr>
-<h2>總金額: <%=orderlistVO.getO_total()%></h2>
-
-
-<c:if test="${commentunfinish}">
-
-<button type="button" id="${orderlistVO.o_id}" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">我要評價</button>
-<div id="myModal" class="modal fade" role="dialog">
-		<div class="modal-dialog" style="width:420px"; >
+			Modal content
 			<div class="modal-content">
-				<div class="modal-header" style="background-color:lightsteelblue";>
+				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h1 class="modal-title">留下評論</h1>
+					<h4 class="modal-title">留下評論</h4>
 				</div>
 				<div class="modal-body">
 					<!--       <h1>留下評論：</h1> -->
@@ -176,20 +108,17 @@ td{
 
 						<div id="choose_gb">
 							<div>
-								<tr><h2>給予評價：</h2></tr>
-								<tr>
+								<h2>給予評價：</h2>
 								<input type="radio" name="v_gb" value="good"
 									<%=viewsellerVO != null && viewsellerVO.getV_gb().equals("good") ? "checked" : ""%>><i
-									class="fas fa-thumbs-up"></i> 
-								<input type="radio" name="v_gb"
+									class="fas fa-thumbs-up"></i> <input type="radio" name="v_gb"
 									value="bad"
 									<%=viewsellerVO != null && viewsellerVO.getV_gb().equals("bad") ? "checked" : ""%>><i
 									class="fas fa-thumbs-down"></i>
-								</tr>
 							</div>
 							<div id="v_comment">
 								<h2>評論內容：</h2>
-								<textarea name="v_comment" placeholder="請填寫評論內容" cols="50" rows="4"><%=viewsellerVO == null ? "" : viewsellerVO.getV_comment()%></textarea>
+								<textarea name="v_comment" placeholder="請填寫評論內容"><%=viewsellerVO == null ? "" : viewsellerVO.getV_comment()%></textarea>
 								<%-- 					<textarea name="v_comment" /*cols="40" rows="1"*/><%=viewsellerVO == null ? "" : viewsellerVO.getV_comment()%></textarea> --%>
 							</div>
 
@@ -207,34 +136,17 @@ td{
 					</form>
 
 				</div>
-				<div class="modal-footer" style="padding:0";>
-					<button type="button" class="btn btn-default" data-dismiss="modal" style="display:none";></button>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
-	</c:if>
-			</div>
-			</div>
-			</div>
 			</div>
 
-<c:if test="${orderbelong}">
-<form METHOD="post" ACTION="<%=request.getContextPath()%>/orderlist">
-     <input type="hidden" name="action" value="change_O_status">
-     <input type="hidden" name="o_status" value="已出貨">
-     <input type="hidden" name="o_id" value=<%=o_id%>>
-     <input type="submit" id="signin" value="出貨">
-</form>
-</c:if>
+		</div>
+	</div>
 
 	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-<script src="https://code.jquery.com/jquery-3.5.1.js"
+
+	<script src="https://code.jquery.com/jquery-3.5.1.js"
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 		crossorigin="anonymous"></script>
 
@@ -268,6 +180,7 @@ td{
 <script src="https://kit.fontawesome.com/a72ac34f47.js"
 	crossorigin="anonymous"></script>
 <script>
+
 $.datetimepicker.setLocale('zh'); // kr ko ja en
 $(function() {
 	$('#v_date').datetimepicker({
@@ -280,7 +193,7 @@ $(function() {
 		//startDate:	        '2017/07/10',  // 起始日
 		minDate : '-1970-01-01', // 去除今日(不含)之前
 	//maxDate:           '+1970-01-01'  // 去除今日(不含)之後
-	});s
+	});
 });
 </script>
 </html>

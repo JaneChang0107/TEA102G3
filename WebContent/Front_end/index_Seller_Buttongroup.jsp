@@ -89,8 +89,8 @@ body {
 <div class="btn-group dropright">
 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="sellerbar4">賣場管理</button>
   <div class="dropdown-menu" id="dropdown-menu4">
-  <button type="button" class="btn btn-warning">賣場介紹</button>
-  <button type="button" class="btn btn-warning"><a href="<%=request.getContextPath()%>/viewseller/viewseller.jsp">賣場評價</a></button>
+  <button type="button" class="btn btn-warning"><a href="<%=request.getContextPath()%>/Front_end/seller/udsellstore.jsp">賣場介紹</a></button>
+  <button type="button" class="btn btn-warning"><a href="<%=request.getContextPath()%>/Front_end/seller/viewseller.jsp">賣場評價</a></button>
   </div>
 </div>
 

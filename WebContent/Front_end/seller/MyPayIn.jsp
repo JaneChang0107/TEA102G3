@@ -223,13 +223,14 @@ div#addProductPlace{
 	  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
 	  	<table id="tablecontent" class="table table-hover">
 	  
-	<c:forEach var="orderlistVO" items="${finishList}">
 	  	<tr>
 		  <td>訂單</td>
 		  <td>買家</td>
 		  <td>撥款日</td>
 		  <td>金額</td>
-		 <tr>
+		 </tr>
+		 
+	<c:forEach var="orderlistVO" items="${finishList}">
 		 <tr>
 		  <td>${orderlistVO.o_id}</td>
 		  <td>${orderlistVO.m_id}</td>

@@ -28,18 +28,14 @@
 	
     HttpSession Session = request.getSession();
     String m_id = (String) Session.getAttribute("loginId");
-
 	List<OrderdetailVO> list = (List<OrderdetailVO>)request.getAttribute("list");
     pageContext.setAttribute("list", list);
  
-
     ViewsellerVO viewsellerVO=(ViewsellerVO)request.getAttribute("viewsellerVO");
     List<ViewsellerVO> viewlist = new ArrayList<ViewsellerVO>(); 
     viewlist.add(viewsellerVO);
 	pageContext.setAttribute("viewlist", viewlist);
       
-
-
 %>
 
 <!DOCTYPE html>
@@ -55,16 +51,12 @@ body{
 td{
     padding:0px 30px 0px 30px;
 }
-
-
 h1{
 /*     text-align: center; */
 }
-
 div#showImg>img.viewImg {
 	width: 200px;
 }
-
 div#addComment {
 	position: relative;
 	width: 50%;
@@ -72,18 +64,18 @@ div#addComment {
 	top: 10%;
 	transform: translateX(-50%);
 }
-
 btn btn-primary {
 	text-align: right;
 }
-
  
 </style>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </head>
 <body>
-
+<div style="border-width: 19px;border-style: dashed;border-color: #FFAC55;padding: 48px";">
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
@@ -130,70 +122,33 @@ btn btn-primary {
 
 	 
 	 <!-- --------------------顯示評價內容------------------- -->
-	 <h1>評價資料：</h1>
-
-		<c:if test="${!errors.isEmpty()}">
-			<c:forEach var="error" items="${errors}">
-				<p style="color: red">${error}</p>
-			</c:forEach>
-		</c:if>
-		
-<!--      ======================        顯示評價           ====================             -->		
 	
-		<hr>
-<table>
+<button type="button" id="${orderlistVO.o_id}" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">查看評價</button>
+<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog" style="width:420px"; >
+			<div class="modal-content">
+				<div class="modal-header" style="background-color:#b0deb3";>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h1 class="modal-title">我的留言</h1>
+				</div>
+				<div class="modal-body">
+					<!--       <h1>留下評論：</h1> -->
+<table style="inline-block:auto";>
 	<tr>
-		<th><h2>選擇評價</h2></th>
-		<th><h2>評論內容</h2></th>
-		<th><h2>評價時間</h2></th>
-     
+		<div><h2>選擇評價：${viewsellerVO.v_gb}</h2></div>
+		<div><h2>評論內容：${viewsellerVO.v_comment}</h2></div>
+		<div>${viewsellerVO.v_date}</div>
 	</tr>
-	<c:forEach var="viewsellerVO" items="${viewlist}">
-		<tr>
-			<td><h2>${viewsellerVO.v_gb}</h2></td>
-			<td><h2>${viewsellerVO.v_comment}</h2></td>
-			<td><h2>${viewsellerVO.v_date}</h2></td>
-		</tr>
-		</c:forEach>
 </table>
-<hr>
-		
-
-<!-- 		<FORM METHOD="post" -->
-<%-- 			ACTION="<%=request.getContextPath()%>/ViewSellerServlet" name="form1"> --%>
-
-<!-- 			<div id="o_id" style="display: none"> -->
-<!-- 				<label>訂單編號</label> <input type="text" -->
-<%-- 					value="<%=viewVO == null ? "" : viewVO.getO_id()%>"> --%>
-<!-- 			</div> -->
-
-<!-- 			<div id="m_buyid" style="display: none"> -->
-<!-- 				<label>買家名稱</label> <input type="text" -->
-<%-- 					value="<%=viewVO == null ? "" : viewVO.getM_buyid()%>"> --%>
-<!-- 			</div> -->
-
-<!-- 			<div id="m_sellid" style="display: none"> -->
-<!-- 				<label>賣家名稱</label> <input type="text" -->
-<%-- 					value="<%=viewVO == null ? "" : viewVO.getM_sellid()%>"> --%>
-<!-- 			</div> -->
-
-<!-- 			<div id="choose_gb"> -->
-<!-- 				<h2>選擇評價： -->
-<!-- 				<input type="radio" id="2" name="v_gb" value="2" checked><label for="2">值得鼓勵</label> -->
-<!-- 				<input type="radio" id="1" name="v_gb" value="1"><label for="1">不甚滿意</label></h2>  -->
-<!-- 			</div> -->
-
-<!-- 			<div id="v_comment"> -->
-<!-- 				<h2>評論內容： -->
-<%-- 				<textarea name="comment" cols="40" rows="1"><%=viewVO == null ? "" : viewVO.getV_comment()%></textarea></h2> --%>
-<!-- 			</div> -->
-<!-- 			<div> -->
-<!-- 				<input type="hidden" name="action" value="insert"> <input -->
-<!-- 					type="submit" class="btn btn-primary" value="送出"> -->
-<!-- 			</div> -->
-<!-- 		</form> -->
-	</div>
+				</div>
+				<div class="modal-footer" style="padding:0;">
+					<button type="button" class="btn btn-default" data-dismiss="modal" style="display:none";></button>
 	
+<hr>
+
+<hr>
+	</div>
+	</div>
 </body>
 <script src="https://kit.fontawesome.com/a72ac34f47.js"
 	crossorigin="anonymous"></script>

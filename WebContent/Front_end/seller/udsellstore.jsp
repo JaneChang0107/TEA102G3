@@ -27,7 +27,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>我的訂單</title>
+<title>賣場介紹修改</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/vendors/bootstrap-4.5.3-dist/css/bootstrap.min.css">
 
@@ -125,20 +125,7 @@ img#productImg {
 	<tr>
   <!-- ---------計算評價數量 start------------- -->
  
-		<c:forEach var="viewsellerVO"  items="${list}">
-		     <% ViewsellerVO viewsellerVO =(ViewsellerVO)pageContext.getAttribute("viewsellerVO");%>
-			<c:choose >
-				<c:when test="<%=viewsellerVO.getV_gb().equals(\"good\")%>">
-				  <%  pageContext.setAttribute("goodNum",++goodNum);
-				  %>	
-				</c:when>
-		          	<c:otherwise >
-					  <% pageContext.setAttribute("badNum",++badNum);
-					 
-					  %>
-		            </c:otherwise>
-			</c:choose>
-		</c:forEach>	  
+	
 	
   <!-- ---------計算評價數量 end----------------- -->
  <% sum=badNum+goodNum;
@@ -155,7 +142,7 @@ img#productImg {
 	</tr>
 	<tr>
 	<td>
-<span class="likebtn-wrapper" data-theme="large" data-white_label="true" data-identifier="GOOD" data-show_like_label="false" data-dislike_enabled="false" data-icon_dislike_show="false" data-voting_enabled="false" data-voting_cancelable="false" data-counter_show="false" data-popup_disabled="true" data-tooltip_enabled="false"></span>
+
 	</td><td><h1 style="color:red">  ${goodNum}</h1></td>
 	</tr>
 	</table>
@@ -168,8 +155,7 @@ img#productImg {
 	</tr>
 	<tr>
 	<td>
-<img id="img" src="<%=request.getContextPath()%>/images/dislike.PNG"
-						width="67px" height="67px" border="0">
+
 	</td><td><h1 style="color:red"> ${badNum}</h1></td>
 	</tr>
 	</table>
@@ -219,10 +205,10 @@ img#productImg {
 		      <c:if test="${status.count%3==2}">
 		   		<tr bgcolor="lightgreen">
 			  </c:if>
-					 <td><h6>${viewsellerVO.o_id} </h6></td>
-		             <td><h6>${memSvc.findOneMem(viewsellerVO.m_buyid).m_name}</h6></td>
-					 <td><h6>${viewsellerVO.v_gb}</h6></td>
-					 <td><h6>${viewsellerVO.v_comment}</h6></td>
+					 <td><h4>${viewsellerVO.o_id} </h4></td>
+		             <td><h4>${memSvc.findOneMem(viewsellerVO.m_buyid).m_name}</h4></td>
+					 <td><h4>${viewsellerVO.v_gb}</h4></td>
+					 <td><h4>${viewsellerVO.v_comment}</h4></td>
 		        </tr>
 		 </c:forEach>
 		</table>  
@@ -253,10 +239,10 @@ img#productImg {
 		      <c:if test="${status.count%3==2}">
 		   		<tr bgcolor="lightpink">
 			  </c:if>
-					 <td><h6>${viewsellerVO.o_id} </h6></td>
-		             <td><h6>${memSvc.findOneMem(viewsellerVO.m_buyid).m_name}</h6></td>
-					 <td><h6>${viewsellerVO.v_gb}</h6></td>
-					 <td><h6>${viewsellerVO.v_comment}</h6></td>
+					 <td><h4>${viewsellerVO.o_id} </h4></td>
+		             <td><h4>${memSvc.findOneMem(viewsellerVO.m_buyid).m_name}</h4></td>
+					 <td><h4>${viewsellerVO.v_gb}</h4></td>
+					 <td><h4>${viewsellerVO.v_comment}</h4></td>
 		        </tr>
 		           </c:when>
 				</c:choose> 
@@ -289,10 +275,10 @@ img#productImg {
 		      <c:if test="${status.count%3==2}">
 		   		<tr bgcolor="lightpink">
 			  </c:if>
-					  <td><h6>${viewsellerVO.o_id} </h6></td>
-		             <td><h6>${memSvc.findOneMem(viewsellerVO.m_buyid).m_name}</h6></td>
-					 <td><h6>${viewsellerVO.v_gb}</h6></td>
-					 <td><h6>${viewsellerVO.v_comment}</h6></td>
+					 <td><h4>${viewsellerVO.o_id} </h4></td>
+		             <td><h4>${memSvc.findOneMem(viewsellerVO.m_buyid).m_name}</h4></td>
+					 <td><h4>${viewsellerVO.v_gb}</h4></td>
+					 <td><h4>${viewsellerVO.v_comment}</h4></td>
 		        </tr>
 		           </c:when>
 				</c:choose> 
@@ -305,15 +291,13 @@ img#productImg {
 	</tr>
 	</table>
 	
+
 	
+	<!-- ----footer---- -->
 	<div class="footer">
 		<jsp:include page="/Front_end/footer.jsp"></jsp:include>
 	</div>
 </div>
-	<!-- ----footer---- -->
-	
-	<script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
-<!-- LikeBtn.com END -->
 	
 </body>
 </html>
