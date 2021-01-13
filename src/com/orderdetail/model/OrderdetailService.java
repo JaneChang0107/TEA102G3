@@ -41,6 +41,10 @@ public class OrderdetailService {
 		return dao.getAll();
 	}
 	
+	public List<OrderdetailVO> ran(){
+		return dao.ran();
+	}
+	
 	public List<OrderdetailVO> count(){
 		return dao.count();
 	}

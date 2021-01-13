@@ -11,6 +11,9 @@
 	OrderdetailService orderdetailSvc1 = new OrderdetailService();
 	List<OrderdetailVO> list = orderdetailSvc1.count();
 	pageContext.setAttribute("list", list);
+	
+	List<OrderdetailVO> ranlist = orderdetailSvc1.ran();
+	pageContext.setAttribute("ranlist",ranlist);
 %>
 
 
@@ -107,14 +110,18 @@ marquee {
 		<div class="swiper-container">
 			<H2>今日推薦</H2>
 			<div class="swiper-wrapper">
-				<div class="swiper-slide">Slide 1</div>
-				<div class="swiper-slide">Slide 2</div>
-				<div class="swiper-slide">Slide 3</div>
-				<div class="swiper-slide">Slide 4</div>
-				<div class="swiper-slide">Slide 5</div>
-				<div class="swiper-slide">Slide 6</div>
-				<div class="swiper-slide">Slide 7</div>
-				<div class="swiper-slide">Slide 8</div>
+			<c:forEach var="rv" items="${ranlist}">
+				<jsp:useBean id="ppService1" scope="page" class="com.productPicture.model.ProductPictureService" />
+				<div class="swiper-slide">
+						<a href="<%= request.getContextPath() %>/ProductServlet?action=findthis&pid=${rv.p_id}">
+							<img alt="沒...沒圖"
+							src="<%= request.getContextPath() %>/ShowPicture?type=pp&id=${rv.pp_id}"
+							style="width: 227.74px; height: 300px;"></a>
+				
+				</div>
+				
+			</c:forEach>
+				
 			</div>
 			<div class="swiper-pagination"></div>
 			<div class="swiper-button-next"></div>

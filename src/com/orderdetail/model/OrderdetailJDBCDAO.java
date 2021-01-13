@@ -24,9 +24,71 @@ public class OrderdetailJDBCDAO implements OrderdetailDAO_interface {
 //			"select p_id ,sum(od_count) from orderdetail  group by p_id order by sum(od_count)desc";
 		"select orderdetail.p_id ,sum(od_count),productpicture.pp_id from orderdetail inner join productpicture on orderdetail.p_id=productpicture.p_id group by orderdetail.p_id ,productpicture.pp_id order by sum(od_count)desc";
 		
+		
+		private static final String ran="SELECT pp_id,p_id FROM productpicture order by dbms_random.random ";
+		
 		//拿到單筆訂單詳情
 		private static final String GET_DETAIL_ByOrder ="SELECT * FROM ORDERDETAIL WHERE O_ID=?";		
 		//通知總覽
+		
+		public List<OrderdetailVO> ran(){
+			List<OrderdetailVO> ranlist=new ArrayList<OrderdetailVO>();
+			OrderdetailVO orderdetailVO5 =null;
+			
+			
+			Connection con=null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				Class.forName(driver);
+			
+					con=DriverManager.getConnection(url,userid,passwd);
+					pstmt=con.prepareStatement(ran);
+					rs = pstmt.executeQuery();
+					while (rs.next()) {
+						orderdetailVO5 = new OrderdetailVO();
+						orderdetailVO5.setPp_id(rs.getString("pp_id"));
+						orderdetailVO5.setP_id(rs.getString("p_id"));
+						ranlist.add(orderdetailVO5);
+					}
+					
+					
+					
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return ranlist;
+			
+		}
+		
+		
 		
 		
 		
@@ -395,6 +457,15 @@ public class OrderdetailJDBCDAO implements OrderdetailDAO_interface {
 //			System.out.println("---------------------");
 //		}
 //		
+		List<OrderdetailVO> list =dao.ran();
+			for(OrderdetailVO r :list) {
+				System.out.print(r.getPp_id());
+				System.out.println(r.getP_id());
+			}
+		
+		
+		
+		
 		
 //		List<OrderdetailVO> list2= dao.count();
 //		for(OrderdetailVO aod :list2) {
@@ -405,14 +476,14 @@ public class OrderdetailJDBCDAO implements OrderdetailDAO_interface {
 //			System.out.println("---------------------");
 //		}
 		
-		List<OrderdetailVO> list3 =dao.getDetailByOrder("O00021");
-		for(OrderdetailVO aod :list3) {
-			System.out.println(aod.getOd_id()+",");
-			System.out.println(aod.getO_id()+",");
-			System.out.println(aod.getP_id()+",");
-			System.out.println(aod.getOd_count());
-		    System.out.println("---------------------");
-	}
+//		List<OrderdetailVO> list3 =dao.getDetailByOrder("O00021");
+//		for(OrderdetailVO aod :list3) {
+//			System.out.println(aod.getOd_id()+",");
+//			System.out.println(aod.getO_id()+",");
+//			System.out.println(aod.getP_id()+",");
+//			System.out.println(aod.getOd_count());
+//		    System.out.println("---------------------");
+//	}
 
 	
 	}
