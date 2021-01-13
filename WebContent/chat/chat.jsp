@@ -113,6 +113,7 @@ request.setAttribute("memberVO", memberVO);
 		})
 	})
 	$(".X_btn").click(function() {
+		$("iframe").css('width', '1px');
 		$(".all_div_chat").fadeOut(1000, function() {
 			$(".all_div_chat").addClass("livebox");
 			$(".chat_icon").removeClass("livebox");

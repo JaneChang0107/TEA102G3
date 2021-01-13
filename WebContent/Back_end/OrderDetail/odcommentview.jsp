@@ -45,27 +45,48 @@
 <title>orderdetail</title>
 
 <style>
-body{
-    background-color: #E3F8F6;
+body {
+	background-color: #E3F8F6;
+	font-size: 25px;
 }
-td{
-    padding:0px 30px 0px 30px;
+* {
+  box-sizing: border-box;
 }
-h1{
-/*     text-align: center; */
+.column1 {
+    float: left;
+    width: 30%;
+    padding: 76px;
+    height: 800px;
+    background-color:lightblue
 }
-div#showImg>img.viewImg {
-	width: 200px;
+.column2{
+    float: left;
+    width: 70%;
+    padding: 76px;
+    height: 800px; 
+  	background-color: #e4e1a2;
 }
-div#addComment {
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.row {
+	font-size: 25px; 
+}
+
+/*  #signin {  */
+/* 	background-color: #FFA000; */
+/* 	width: 100px; */
+/* 	height: 50px; */
+/*  	font-size: 20px;  */
+/* 	color: floralwhite; */
+/* 	border: 1px solid #707070; */
+/* 	margin-left: 20px; */
+/*  }  */
+.modal-content {
 	position: relative;
-	width: 50%;
-	left: 50%;
-	top: 10%;
-	transform: translateX(-50%);
-}
-btn btn-primary {
-	text-align: right;
+	background-color: #e1fbae;
 }
  
 </style>
@@ -75,52 +96,54 @@ btn btn-primary {
 
 </head>
 <body>
-<div style="border-width: 19px;border-style: dashed;border-color: #FFAC55;padding: 48px";">
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
+
+	
+
+		<div class="row">
+			<div class="column1">
+				<!-- 錯誤表列 -->
+				<c:if test="${not empty errorMsgs}">
+					<li style="color: red; font-color:red">請完成評價後再送出！</li>
+				</c:if>
+				<font style="color:blue"><h1>訂單資訊</h1></font>
+				<td><p>訂單編號:<%=orderlistVO.getO_id()%></p></td>
+			   <td><p> 訂單成立:<%=orderlistVO.getO_dateForm()%></p></td>
+			   <td><p> 狀態:<%=orderlistVO.getO_status()%></p></td>
 
 
-<table id="listallorder">
-<div style="width=100px"><p>訂單編號: <%=orderlistVO.getO_id()%></p></div>
-<p>訂單成立: <%=orderlistVO.getO_dateForm()%></p>
-<p>狀態: <%=orderlistVO.getO_status()%></p>
-<hr>
-<h2>收件資訊</h2>
-<p>收件人: <%=memSvc.findOneMem(orderlistVO.getM_id()).getM_name()%></p>
-<p>收件方式: <%=orderlistVO.getO_transport()%></p>
-<p>收件地址: <%=orderlistVO.getO_address()%></p>
+			
+					<br>	
+			<font style="color:blue"><h1>收件資訊</h1></font>
+			<td><p>收件人:<%=memSvc.findOneMem(orderlistVO.getM_id()).getM_name()%></p></td>
+			<td><p>收件方式:<%=orderlistVO.getO_transport()%></p></td>
+			<td><p>收件地址:<%=orderlistVO.getO_address()%></p></td>
+		  </div>
 
-<hr>
-	<tr>
-		<th><h2>示意圖</h2></th>
-		<th><h2>品名</h2></th>
-		<th><h2>數量</h2></th>
-		<th><h2>單價</h2></th>
-		<th><h2>小計</h2></th>
+			<div class="column2">
+				<font style="color:blue"><h1>商品明細</h1></font>
+			<table class=detail style="width:800px; margin-left:-54px";>
+			<tr style="text-align:center";>
+			<td>示意圖</td>
+			<td>品名</td>
+			<td>數量</td>
+			<td>單價</td>
+			<td>小計</td>
+			</tr>
+			
+			<c:forEach var="orderdetailVO" items="${list}">
+			<tr style="text-align:center";>
+			<td><img src="<%=request.getContextPath()%>/ShowPicture?type=ppid&id=${productPicSvc.findProductRandomPicture(orderdetailVO.p_id)}"
+			width="100px" height="100px";></td>
+			<td><p>${productSvc.oneProduct(orderdetailVO.p_id).p_name}</p></td>
+			<td><p>* ${orderdetailVO.od_count}</p></td>
+			<td><p>${productSvc.oneProduct(orderdetailVO.p_id).p_price}</p></td>
+			<td><p>${orderdetailVO.od_count*productSvc.oneProduct(orderdetailVO.p_id).p_price}</p></td>
+			</tr>
+			</c:forEach>
+			 </table>
+			<hr>
+			<h2>總金額:<%=orderlistVO.getO_total()%></h2>
 
-	</tr>
-	<c:forEach var="orderdetailVO" items="${list}">
-		<tr>222</tr>
-           <td><img src="<%=request.getContextPath()%>/ShowPicture?type=ppid&id=${productPicSvc.findProductRandomPicture(orderdetailVO.p_id)}" width="100px" height="100px";></td> 
-<%--        <td><img src="data:image/jpg;base64,<%=((ProductPictureVO)(productPicSvc.findFirstOneProductPicture(orderdetailVO.getP_id()))).getPp_picture64()%>" width="100px" height="100px";></td> --%>
-			<td><h2>${productSvc.oneProduct(orderdetailVO.p_id).p_name}</h2></td>
-			<td><h2> * ${orderdetailVO.od_count}</h2></td>
-			<td><h2>${productSvc.oneProduct(orderdetailVO.p_id).p_price}</h2></td>
-			<td><h2>${orderdetailVO.od_count*productSvc.oneProduct(orderdetailVO.p_id).p_price}</h2></td>
-		</tr>
-	</c:forEach>
-</table>
-<hr>
-<h2>總金額: <%=orderlistVO.getO_total()%></h2>
-
-	 
 	 <!-- --------------------顯示評價內容------------------- -->
 	
 <button type="button" id="${orderlistVO.o_id}" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">查看評價</button>

@@ -92,7 +92,7 @@ input.submit_btn {
 
 .livebox {
 	display: none;
-	z-index:100;
+	z-index:-2;
 }
 
 ul#area {

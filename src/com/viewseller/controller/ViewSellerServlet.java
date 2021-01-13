@@ -199,6 +199,7 @@ public class ViewSellerServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:" + e.getMessage());
+				System.out.println(errorMsgs);
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/Back_end/ViewSeller/update_viewseller_input.jsp");
 				failureView.forward(req, res);

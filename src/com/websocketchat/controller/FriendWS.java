@@ -93,7 +93,6 @@ public class FriendWS {
 
 	@OnClose
 	public void onClose(Session userSession, CloseReason reason) {
-System.out.println("ooooooooooooooooooooooooooooooooooo");
 		String userNameClose = null;
 		Set<String> userNames = sessionsMap.keySet();
 		for (String userName : userNames) {

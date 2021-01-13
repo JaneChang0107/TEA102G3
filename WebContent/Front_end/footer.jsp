@@ -50,7 +50,7 @@
 <%-- 				<input type="hidden" name="m_id" value="${loginId}">  --%>
 <!-- 				<input type="hidden" name="action" value=""> -->
 <!-- 			</form> -->
-			<iframe src="<%=request.getContextPath()%>/chat/chat.jsp" style="position: fixed;right: 0;bottom: 0;height: 434px;width: 487px;border:0;"></iframe>
+			<iframe src="<%=request.getContextPath()%>/chat/chat.jsp" style="position: fixed;right: 0;bottom: 0;height: 434px;width: 487px;border:0;z-index:10"></iframe>
 		</c:if>
 		
 

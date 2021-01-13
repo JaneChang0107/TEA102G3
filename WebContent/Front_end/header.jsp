@@ -398,7 +398,7 @@ right: 18px;
 		<div id="myNav" class="overlay">
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 			<div class="overlay-content">
-				<a href="http://localhost:8081/TEA102G3/ProductServlet?ptype=no&name=&action=findByName">我要買</a> <a href="#">我要租</a> <a href="#">我要賣</a>
+				<a href="http://localhost:8081/TEA102G3/ProductServlet?ptype=no&name=&action=findByName">我要買</a>  <a href="#">我要賣</a>
 				<a href="#">關於遊戲堃</a>
 			</div>
 		</div>
@@ -432,9 +432,9 @@ right: 18px;
 				<td><i class="far fa-bell" id="bell" type="button" 
 					data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="true" onclick="notice()"></i>
-					<div class="dropdown-menu" aria-labelledby="bell">
+					<div class="dropdown-menu" aria-labelledby="bell" style="margin-left:-84px";>
 <ul>
-						<a class="dropdown-item" id="notice" onclick="belldel()" href="<%=request.getContextPath()%>/Front_end/notice/notice.jsp"></a> 
+						<a class="dropdown-item" id="notice"  onclick="belldel()" href="<%=request.getContextPath()%>/Front_end/notice/notice.jsp"></a> 
 	</ul>					
 					</div> 
 				</td>

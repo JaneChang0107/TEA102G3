@@ -38,7 +38,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	private static final String UPDATE_PW ="UPDATE member set m_password=? where m_id=?";
 
 	private static final String UPDATE_SELLSTORE =
-			"UPDATE member set m_storename=? m_info=? m_cover=? where m_id=?";
+			"UPDATE member set m_storename=?, m_info=?, m_cover=? where m_id=?";
 	private static final String GET_Mems_ByStatus_STMT = "SELECT * FROM member WHERE m_status like ?";
 
 	private static final String GET_Mems_Password_STMT = "SELECT m_id,m_name,m_email,m_password FROM member WHERE m_email=?";
@@ -731,18 +731,18 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	public static void main(String[] args) {
 		MemberJDBCDAO dao = new MemberJDBCDAO();
 //
-		List<MemberVO> notice =dao.getNotice("M00002");
-		for(MemberVO gn : notice) {
-			System.out.println(gn.getO_date()+",");
-			System.out.println(gn.getO_id()+",");
-			System.out.println(gn.getO_status()+",");
-			System.out.println(gn.getOd_count()+",");
-			System.out.println(gn.getM_id()+",");
-			System.out.println(gn.getM_name()+",");
-			System.out.println(gn.getP_id()+",");
-			System.out.println(gn.getP_name());
-			System.out.println("---------------------");
-		}
+//		List<MemberVO> notice =dao.getNotice("M00002");
+//		for(MemberVO gn : notice) {
+//			System.out.println(gn.getO_date()+",");
+//			System.out.println(gn.getO_id()+",");
+//			System.out.println(gn.getO_status()+",");
+//			System.out.println(gn.getOd_count()+",");
+//			System.out.println(gn.getM_id()+",");
+//			System.out.println(gn.getM_name()+",");
+//			System.out.println(gn.getP_id()+",");
+//			System.out.println(gn.getP_name());
+//			System.out.println("---------------------");
+//		}
 //		
 		
 //		//新增
@@ -786,6 +786,16 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 //		dao.insertSeller(memberVO11);
 //		System.out.println("插入成功2");
 
+		MemberVO memberVO2=new MemberVO();
+		memberVO2.setM_storename("阿坤市集");
+		memberVO2.setM_info("eeee");
+		memberVO2.setM_cover(null);
+		memberVO2.setM_id("M00001");
+		
+		dao.updateSellstore(memberVO2);
+		System.out.println("修改成功");
+		
+		
 //		
 //		//修改
 //		MemberVO memberVO2=new MemberVO();

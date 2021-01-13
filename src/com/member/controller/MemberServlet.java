@@ -41,44 +41,51 @@ public class MemberServlet extends HttpServlet {
 			List<String> errorMsgs =new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			
+			String m_id =new String(req.getParameter("m_id"));
             String m_storename =req.getParameter("m_storename");
-			
+            System.out.println(m_storename+"m_storename");
 			String m_info =req.getParameter("m_info");
-			
-            Part m_cover=req.getPart("m_cover");
-            
-            InputStream is4 = m_cover.getInputStream();
-            byte[] m_coverbuffer =null;
+			System.out.println(m_info+"m_info");
+      
+         	MemberService memSvc =new MemberService();  //宣告Service物件來用
+			Part m_cover =req.getPart("m_cover");   //上傳必使用Part xxx=req.getPart("某個參數") 拿到Part
+			InputStream is =m_cover.getInputStream();		//用part連接InputSream高階管
+			byte[] m_coverbuffer =null;                             //宣告byte[]陣列
+			if(is.available()!=0) {                               //如果管子接的來源不是0
+				m_coverbuffer =new byte[is.available()];                
+			    is.read(m_coverbuffer);
+			    is.close();
+			} else 
+				m_coverbuffer = memSvc.findOneMem(m_id).getM_cover();
+         
             try {
-            	m_coverbuffer =new byte[is4.available()];
-            	is4.read(m_coverbuffer);
-            	is4.close();
-            }catch(Exception e) {
-            	errorMsgs.add("賣場封面上傳失敗，請再試一次");
-            	e.printStackTrace();
-            }
-	
-			try {
-				// 1.接收請求參數
-				String m_id =new String(req.getParameter("m_id"));
-				// 2.開始查詢資料
-				MemberService memSvc =new MemberService();
-				MemberVO memberVO=memSvc.updateSellstore(m_storename,m_info,m_coverbuffer,m_id);
-                // 3.查詢完成,準備轉交
+				// 1.接收請求參數			
+			System.out.println("開始修改67");
+				MemberVO memberVO = new MemberVO();
+				memberVO.setM_id(m_id);
+				memberVO.setM_storename(m_storename);
+				memberVO.setM_info(m_info);
+				memberVO.setM_cover(m_coverbuffer);
+           System.out.println("放進vo了");
+				// 2.開始修改資料
+				MemberService memSvc2 =new MemberService();
+				memberVO=memSvc2.updateSellstore(m_storename,m_info,m_coverbuffer,m_id);
+           System.out.println("修改好了77");     
+				// 3.查詢完成,準備轉交
 				req.setAttribute("memberVO", memberVO);
 				String url ="/Front_end/seller/udsellstore.jsp";
 				RequestDispatcher successView =req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch(Exception e) {
+				System.out.println("s80");
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+				System.out.println(e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/seller/udsellstore.jsp");
-				failureView.forward(req, res);				
+				failureView.forward(req, res);	
+				
 			}
 		}
-		
-		
-		
-		
+
 //賣家中心控制器
 		if("goSellerIndex".equals(action)) {
 			   int countorder=0;

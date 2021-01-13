@@ -52,7 +52,7 @@
 
 #showViewseller{
 	margin:20px auto; 
- 	background:white;
+ 	background:#6fadd594;
  	width:1000px;
   	height:150px;
   	
