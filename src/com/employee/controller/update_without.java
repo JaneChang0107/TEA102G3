@@ -98,11 +98,11 @@ public class update_without extends HttpServlet {
             }
 			
 			String e_gender = jsonObj.getString("e_gender");
-			String e_genderReg = "^[(0-1)]{1}$";
+			String e_genderReg = "[MEN]|[WOMEN]";
 			if (e_gender == null || e_gender.trim().length() == 0) {
-				errorMsgs.add("職稱: 請勿空白");
+				errorMsgs.add("性別: 請勿空白");
 			} else if(!e_gender.trim().matches(e_genderReg)) { //以下練習正則(規)表示式(regular-expression)
-				errorMsgs.add("職稱: 0或1");
+				errorMsgs.add("性別: MEN or WOMEN");
 			}
 			
 			String e_identity = jsonObj.getString("e_identity");
@@ -150,7 +150,7 @@ public class update_without extends HttpServlet {
 			employeeVO.setE_email(e_email);
 			
 			
-			if(errorMsgs != null) {
+			if(errorMsgs.isEmpty()) {
 				employeeVO = employeeService.updateEmployee_without(e_id, e_identity, e_name, e_gender, SQLDate, e_email, e_phone, e_address, e_title, select_store);
 			}
 			
