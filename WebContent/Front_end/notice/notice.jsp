@@ -43,7 +43,7 @@ pageContext.setAttribute("list",list);
 <%@ include file="page1.file" %>
 <c:forEach var="memberVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 	<h3>
-	<div class="div1"><p>${memberVO.m_name}的${memberVO.p_name}數量${memberVO.od_count}${memberVO.o_status}</p></div>
+	<div class="div1"><p><b>${memberVO.m_name}</b>的${memberVO.p_name}數量<b>${memberVO.od_count}</b>${memberVO.o_status}</p></div>
 	</h3>
 </c:forEach>	
 	

@@ -13,11 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.bell.model.BellVO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.orderdetail.model.OrderdetailService;
 import com.orderdetail.model.OrderdetailVO;
 import com.orderlist.model.OrderlistService;
 import com.orderlist.model.OrderlistVO;
 import com.viewseller.model.*;
+import com.websocket.WebSocket;
+
+import redis.clients.jedis.Jedis;
 
 
 @WebServlet("/ViewSellerServlet")
@@ -277,6 +282,23 @@ public class ViewSellerServlet extends HttpServlet {
 
 				orderlistVO.setO_id(o_id);
 				orderlistSvc.updateStatusFinish(o_id);
+				
+				//推播開始--------------------------
+				Jedis jedis = new Jedis("localhost", 6379);
+				jedis.auth("123456");
+				
+				ObjectMapper mapper = new ObjectMapper();
+				WebSocket ws = new WebSocket();
+				BellVO bellVO = new BellVO();
+				
+				bellVO.setM_id(m_sellid);
+				bellVO.setMessage("您的訂單"+o_id+"有一則新評價");
+				
+				ws.onMessage(mapper.writeValueAsString(bellVO));
+				
+				jedis.close();
+				//推播結束--------------------------
+				
 				
 			    req.setAttribute("viewsellerVO",viewsellerVO);
 			    
