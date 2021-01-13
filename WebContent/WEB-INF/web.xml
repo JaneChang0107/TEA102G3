@@ -34,6 +34,8 @@
     <url-pattern>/Front_end/members/MyAccount.jsp</url-pattern>
     <url-pattern>/Front_end/members/MyOrder.jsp</url-pattern>
     <url-pattern>/Front_end/index_Seller.jsp</url-pattern>
+    <url-pattern>/Front_end/shoppingCart/checkBuyPageDetail.jsp</url-pattern>
+    <url-pattern>/Front_end/shoppingCart/checkBuyPageOK.jsp</url-pattern>
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>
