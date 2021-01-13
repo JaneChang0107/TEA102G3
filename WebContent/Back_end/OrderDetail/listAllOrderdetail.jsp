@@ -54,12 +54,12 @@
 
 </head>
 <body>
-<table id="table-1">
+
 	<tr><td>
-		 <h3>所有訂單資料 - listAllorderdetail.jsp</h3>
-		 <h4><a href="<%= request.getContextPath() %>/Back_end/OrderDetail/select_page.jsp"><img src="<%= request.getContextPath() %>/Back_end/images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h3>所有訂單資料 </h3>
+<%-- 		 <h4><a href="<%= request.getContextPath() %>/Back_end/OrderDetail/select_page.jsp"><img src="<%= request.getContextPath() %>/Back_end/images/back1.gif" width="100" height="32" border="0">回首頁</a></h4> --%>
 	</td></tr>
-</table>
+
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
@@ -69,7 +69,7 @@
 		</c:forEach>
 	</ul>
 </c:if>
-
+<div id="odlist">
 <table>
 	<tr>
 		<th>流水號</th>
@@ -78,11 +78,8 @@
 		<th>產品數量</th>
 		<th>修改</th>
 		<th>刪除</th>
-		
 	</tr>
-	
-	<%@ include file="page1.file" %> 
-	<c:forEach var="orderdetailVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+	<c:forEach var="orderdetailVO" items="${list}" >
 		<tr>
 			<td>${orderdetailVO.od_id}</td>
 			<td>${orderdetailVO.o_id}</td>
@@ -104,7 +101,7 @@
 		</tr>	
 	</c:forEach>
 </table>
-<%@ include file="page2.file" %>
+</div>
 
 </body>
 </html>

@@ -65,15 +65,15 @@ h4 {
 </style>
 </head>
 <body>
-<marquee >
+
 	<table id="table-1">
 		<tr>
 	
-			<td><h3><marquee  onMouseOver="this.stop()" onMouseOut="this.start()">orderdetail</marquee></h3>
+			<td><h3>orderdetail</h3>
 				<h4>home</h4></td>
 		</tr>
 	</table>
-</marquee>
+
 
 <table id= "table-2">
 	<tr>
