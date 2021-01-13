@@ -61,13 +61,13 @@ function whichProduct(which) {
                         </form>
                     </td>
                     <td>
-                        <form action="${contextPath}/ProductServlet" method="post" class="check">
+                        <form class="check">
                             <input type="hidden" name="pid" value="${value.p_id}">
                             <input type="hidden" name="action" value="check">
                             <input type="hidden" name="checked" value="ok">
                             <input type="button" class="checkBtn btn-primary"${(value.p_status != 11 && value.p_status != 12) ? "style='display : none'" : ""} value="通過">
                         </form>
-                        <form action="${contextPath}/ProductServlet" method="post" class="check">
+                        <form class="check">
                             <input type="hidden" name="pid" value="${value.p_id}">
                             <input type="hidden" name="action" value="check">
                             <input type="hidden" name="checked" value="no">
@@ -75,10 +75,10 @@ function whichProduct(which) {
                         </form>
                     </td>
                     <td>
-                        <form action="${contextPath}/ProductServlet" method="post">
+                        <form>
                             <input type="hidden" name="pid" value="${value.p_id}">
                             <input type="hidden" name="action" value="delete">
-                            <input type="submit" class="btn btn-primary" value="刪除">
+                            <input type="button" class="checkBtn btn-primary" value="刪除">
                         </form>
                     </td>
                 </tr>`
@@ -90,7 +90,18 @@ function whichProduct(which) {
 
 
 $("#allProduct").on("click", ".checkBtn", (e) => {
+
+    let formData = $(e.target).closest("form").serializeArray();
+
     if(confirm("確定" + e.target.value)) {
-        $(e.target).closest("form").submit();
+
+        $.ajax({
+            url : contextPath + "/ProductServlet",
+            type : "POST",
+            data : formData,
+            success : () => {
+                whichProduct("all");
+            }
+        });
     }
 })

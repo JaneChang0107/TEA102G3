@@ -396,8 +396,6 @@ public class ProductServlet extends HttpServlet {
 
 				pService.checked(pid, pstatus);
 			}
-			
-			response.sendRedirect(request.getContextPath() + "/Back_end/product/showProduct.jsp");
 		}
 		
 		// ajax 賣家的商品
@@ -445,29 +443,7 @@ public class ProductServlet extends HttpServlet {
 					products = pService.findByStatus(0);
 					break;
 			}
-			
-//			if("all".equals(status)) {
-//				products = pService.getAll();
-//			}
-//			
-//			if("onSell".equals(status)) {
-//				products = pService.findByStatus(1);
-//			}
-//			
-//			if("notSell".equals(status)) {
-//				products = pService.findByStatus(2);
-//			}
-//			
-//			if("check".equals(status)) {
-//				products = pService.findByStatus(11);
-//				products.addAll(pService.findByStatus(12));
-//			}
-//			
-//			if("selled".equals(status)) {
-//				products = pService.findByStatus(0);
-//			}
-			
-			
+
 			ObjectMapper mapper = new ObjectMapper();
 			
 			String product = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(products);
