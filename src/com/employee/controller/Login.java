@@ -57,6 +57,14 @@ public class Login extends HttpServlet {
 			String str = req.getParameter("e_id");
 			if (str == null || (str.trim()).length() == 0) {
 				errorMsgs_login.add("請輸入員工編號");
+			} 
+			
+			EmployeeService employeeSvc = new EmployeeService();
+			EmployeeVO employeeVO = employeeSvc.getOneEmployee(str);
+			
+			String password = req.getParameter("e_password");
+			if(!password.equals(employeeVO.getE_password())) {
+				errorMsgs_login.add("錯了!滾!");
 			}
 		
 // 如果錯誤訊息不是空的, 則切斷程式轉交回首頁 
@@ -91,8 +99,8 @@ public class Login extends HttpServlet {
 				
 				
 				/***************************2.開始查詢資料****************************************/
-				EmployeeService employeeSvc = new EmployeeService();
-				EmployeeVO employeeVO = employeeSvc.getOneEmployee(e_id);
+//				EmployeeService employeeSvc = new EmployeeService();
+//				EmployeeVO employeeVO = employeeSvc.getOneEmployee(e_id);
 								
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				session.setAttribute("employeeVO", employeeVO);

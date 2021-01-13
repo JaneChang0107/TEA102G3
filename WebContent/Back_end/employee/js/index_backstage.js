@@ -307,7 +307,8 @@ $.ajax({
         beforeSend: function(){       // 在 request 發送之前執行
         },
         success: function(data){      // request 成功取得回應後執行
-
+        	
+          console.log(data)
 
           let list_html = "";
 
@@ -401,7 +402,25 @@ $.ajax({
        	  list_html +='            </div>';
        	  list_html +='        </div>';
        	  list_html +='    </div>';
-       	
+       	  
+       	  let error_list = "";
+       	  
+       	  error_list +='<div class="row">';
+       	  error_list +='    <div class="col">';
+       	  error_list +='        錯誤表列';
+       	  error_list +='            <ul>';
+       	  
+       	  $.each(data.errorMsg, function(item, index){
+       	  error_list +='                    <li style="color:red">'+ index +'</li>';
+          })
+       	  
+          error_list +='            </ul>';
+       	  error_list +='    </div>';
+       	  error_list +='</div>';       	         	  
+       	  
+       	if(data.errorMsg != null){
+       		$("#update_without").prepend(error_list);
+       	} else {
        	$("#update_without").html(list_html);
 
        	  
@@ -419,6 +438,7 @@ $.ajax({
           });
 
           alert('success');
+       	}
 
         },
         error: function(xhr){         // request 發生錯誤的話執行

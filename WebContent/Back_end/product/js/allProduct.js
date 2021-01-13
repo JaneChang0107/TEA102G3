@@ -2,7 +2,7 @@ let pathname = location.pathname;
 let position = pathname.indexOf("/", 2);
 const contextPath = pathname.substr(0, position);
 
-console.log(contextPath)
+//console.log(contextPath)
 
 whichProduct("all");
 
@@ -44,7 +44,7 @@ function whichProduct(which) {
             );
 
             $.each(JSON.parse(data), (index, value) => {
-                console.log(value.p_name);
+//                console.log(value.p_name);
                 $("#products").append(
                     `<tr>
                     <td id="${value.p_id}" scope="row">${value.p_id}</td>

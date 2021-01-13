@@ -28,7 +28,7 @@
                     
 <!--                     	錯誤表列 -->
 						<c:if test="${not empty errorMsgs_login}">
-							<font style="color:red">請修正以下錯誤:</font>
+<!-- 							<font style="color:red">請修正以下錯誤:</font> -->
 							<ul>
 							    <c:forEach var="message" items="${errorMsgs_login}">
 									<li style="color:red">${message}</li>

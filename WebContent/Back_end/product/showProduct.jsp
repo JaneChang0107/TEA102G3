@@ -15,10 +15,6 @@
 </style>
 </head>
 <body>
-	<div class="header">
-		<jsp:include page="/Front_end/header.jsp"></jsp:include>
-	</div>
-	
 	<div>
 		<div>
 			<select id="selectStatus">
@@ -33,13 +29,7 @@
 		<div id="allProduct">
 			
 		</div>
-	</div>
-
-
-	<div class="footer">
-		<jsp:include page="/Front_end/footer.jsp"></jsp:include>
-	</div>
-	
+	</div>	
     <script src="<%= request.getContextPath() %>/Back_end/product/js/allProduct.js"></script>
 </body>
 </body>
