@@ -17,16 +17,14 @@
 			<button type="button" class="btn btn-secondary">
 				<i class="fas fa-clipboard-list" id="icons"></i>購買清單
 			</button></a>
-			<button type="button" class="btn btn-secondary">
-				<i class="fas fa-gamepad" id="icons"></i>租用清單
-			</button>
 			
 			
+			<a href="<%=request.getContextPath()%>/Front_end/notice/notice.jsp">
 			<button type="button" class="btn btn-secondary" >
-<a href="<%=request.getContextPath()%>/Front_end/notice/notice.jsp">				
+            				
 			<i class="fas fa-bell" id="icons"></i>通知總覽
 			
-			</button>
+			</button></a>
 			
 			
 			<a href="<%=request.getContextPath()%>/orderlist?m_id=${loginId}&action=getMemberKun">

@@ -27,9 +27,14 @@ pageContext.setAttribute("list",list);
 <style>
   
   .div1 {
-    border: 10px solid #CCCCFF;
+    border: 3px solid #CCCCFF;
     padding: 5px;
     text-align: center;
+    width: 1000px;
+    height: 70px;
+    margin: auto;
+    margin-top: 10px;
+    background-color: white;
   }
 </style>
 </head>

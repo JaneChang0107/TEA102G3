@@ -45,7 +45,7 @@ public class SendEmail {
 //					"            <input type=\"submit\" value=\"Click hear to active your account!\" id=\"revise\" class=\"btn btn-primary\">\r\n" + 
 //					"            </FORM>","text/html");
 			//超連結
-			message.setContent("<h2>Welcome to YuXiKun</h2><br><a href=\"http://localhost:8081/TEA102G3/member/controller/MemberServlet?action=activeMember&m_status="+status+"&m_email="+to+"\">click to join</a>","text/html");
+			message.setContent("<h2>Welcome to YuXiKun</h2><br><a href=\"http://localhost:8081/TEA102G3/member/controller/MemberServlet?action=activeMember&m_status="+status+"&m_email="+to+"\">點選此處以開通</a>","text/html; charset=UTF-8");
 			System.out.println(status);
 			System.out.println(to);
 			Transport transport= session.getTransport("smtp");						

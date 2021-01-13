@@ -65,9 +65,8 @@ marquee {
 					<jsp:useBean id="ppService" scope="page"
 						class="com.productPicture.model.ProductPictureService" />
 					<div class="swiper-slide">
-						<a
-							href="<%= request.getContextPath() %>/ProductServlet?action=findthis&pid=${VO.p_id}"><img
-							alt="沒...沒圖"
+						<a href="<%= request.getContextPath() %>/ProductServlet?action=findthis&pid=${VO.p_id}">
+							<img alt="沒...沒圖"
 							src="<%= request.getContextPath() %>/ShowPicture?type=pp&id=${VO.pp_id}"
 							style="width: 227.74px; height: 300px;"></a>
 

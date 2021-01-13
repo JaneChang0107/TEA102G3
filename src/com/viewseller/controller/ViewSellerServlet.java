@@ -204,7 +204,6 @@ public class ViewSellerServlet extends HttpServlet {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-            System.out.println("開始新增評論");
 			
 			try {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
@@ -225,7 +224,6 @@ public class ViewSellerServlet extends HttpServlet {
 					errorMsgs.add("m_sellid請勿空白");
 				}
 				
-				System.out.println("m_sellid"+m_sellid);
 				String v_gb = req.getParameter("v_gb").trim();
 				if (v_gb == null || v_gb.trim().length() == 0) {
 					errorMsgs.add("v_gb請勿空白");
@@ -276,11 +274,9 @@ public class ViewSellerServlet extends HttpServlet {
 				
 				OrderlistService orderlistSvc =new OrderlistService();
 				OrderlistVO orderlistVO = new OrderlistVO();
-				String o_status ="訂單完成";
-				orderlistVO.setO_status(o_status);
+
 				orderlistVO.setO_id(o_id);
-				orderlistVO = orderlistSvc.updateStatus(o_status, o_id);
-				req.setAttribute("orderlistVO", orderlistVO);
+				orderlistSvc.updateStatusFinish(o_id);
 				
 			    req.setAttribute("viewsellerVO",viewsellerVO);
 			    

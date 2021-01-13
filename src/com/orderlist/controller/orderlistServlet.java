@@ -209,7 +209,7 @@ public class orderlistServlet extends HttpServlet {
 			
 	}		
 		
-//修改訂單狀態
+//修改訂單狀態為已出貨
 		if("change_O_status".equals(action)) {
 			try {
 				String o_status= req.getParameter("o_status");
@@ -224,6 +224,23 @@ public class orderlistServlet extends HttpServlet {
 				OrderdetailService orderdetailSvc = new OrderdetailService();
 				List<OrderdetailVO> list = orderdetailSvc.getDetailByOrder(o_id);
 				
+				//推播開始--------------------------
+				Jedis jedis = new Jedis("localhost", 6379);
+				jedis.auth("123456");
+				
+				ObjectMapper mapper = new ObjectMapper();
+				WebSocket ws = new WebSocket();
+				BellVO bellVO = new BellVO();
+				String m_id = orderlistSvc.getOneOrderlist(o_id).getM_id();
+				
+				bellVO.setM_id(m_id);
+				bellVO.setMessage("您的訂單"+o_id+o_status);
+				
+				ws.onMessage(mapper.writeValueAsString(bellVO));
+				
+				jedis.close();
+				//推播結束--------------------------
+					
 				req.setAttribute("orderlistVO", orderlistVO);
 				req.setAttribute("list", list);
 			    String url = "/Back_end/OrderDetail/listOrderdetailByOrder.jsp";
@@ -236,6 +253,7 @@ public class orderlistServlet extends HttpServlet {
 		}
 					
 }
+		
 
 		
 //查會員訂單action		
