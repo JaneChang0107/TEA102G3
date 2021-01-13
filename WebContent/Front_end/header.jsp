@@ -178,6 +178,7 @@ i {
 	position: relative;
 	left: -20px;
 	padding: 10px;
+	color:black;
 }
 
  
@@ -424,16 +425,8 @@ right: 18px;
 			<tr class="nav" id="nav">
 
 				<td>
-					<!-- cart下拉 開始--> 
-					<i class="fas fa-shopping-cart" type="button"
-					id="cart" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="true"></i>
-					<div class="dropdown-menu" aria-labelledby="cart">
-						<a class="dropdown-item" href="#">租用車</a> 
-						<a class="dropdown-item"
-							href="<%=request.getContextPath()%>/Front_end/shoppingCart/checkBuyPage.jsp">購買車</a>
-					</div> 
-					<!-- cart下拉結束 -->
+					<a href="<%=request.getContextPath()%>/Front_end/shoppingCart/checkBuyPage.jsp"><i class="fas fa-shopping-cart" 
+					id="cart"> </i></a>
 				</td>
 
 				<td><i class="far fa-bell" id="bell" type="button" 

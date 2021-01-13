@@ -115,7 +115,7 @@ img.productImg {
 
 <div style="height:50px">
   </div>
-  <div id="seller"><img src="" width=1200px height=200px>
+  <div id="seller"><img src="${memSvc.findOneMem(m_sellid).m_cover2}" width=1200px height=200px>
   </div>
   <br>
   <div id="info">
