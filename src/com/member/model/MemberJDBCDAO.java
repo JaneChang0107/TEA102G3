@@ -37,6 +37,8 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			+ ",m_account=?,m_accountname=?,b_code=?,m_bank_pic=?,m_storename=?,m_info=?,m_cover=?,m_hi=?,m_offlinehi=? where m_id=?";
 	private static final String UPDATE_PW ="UPDATE member set m_password=? where m_id=?";
 
+	private static final String UPDATE_SELLSTORE =
+			"UPDATE member set m_storename=? m_info=? m_cover=? where m_id=?";
 	private static final String GET_Mems_ByStatus_STMT = "SELECT * FROM member WHERE m_status like ?";
 
 	private static final String GET_Mems_Password_STMT = "SELECT m_id,m_name,m_email,m_password FROM member WHERE m_email=?";
@@ -48,7 +50,44 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	private static final String NOTICE ="select orderlist.o_date, orderlist.o_status, ORDERDETAIL.p_id, ORDERDETAIL.o_id, ORDERDETAIL.od_count, product.p_name,orderlist.M_id ,member.m_name from orderlist inner join orderdetail on orderlist.o_id=orderdetail.o_id inner join product on orderdetail.p_id=product.p_id inner join member on orderlist.M_id=member.m_id where orderlist.m_id= ? order by orderlist.o_date desc";
 	
 	
-	
+	@Override
+	public void updateSellstore(MemberVO memberVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_SELLSTORE);
+			pstmt.setString(1, memberVO.getM_storename());
+			pstmt.setString(2, memberVO.getM_info());
+			pstmt.setBytes(3, memberVO.getM_cover());
+			pstmt.setString(4, memberVO.getM_id());
+			
+			pstmt.executeUpdate();
+
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
 	
 	public List<MemberVO> getNotice(String m_id) {
 		List<MemberVO> list = new ArrayList<MemberVO>();

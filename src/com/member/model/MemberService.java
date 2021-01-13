@@ -96,6 +96,16 @@ public class MemberService {
 		return memberVO;
 	}
 	
+	//­×§ï½æ³õ­¶­±
+		public MemberVO updateSellstore(String m_storename,String m_info, byte[] m_cover,String m_id) {
+			MemberVO memberVO = new MemberVO();
+			memberVO.setM_storename(m_storename);
+			memberVO.setM_info(m_info);
+			memberVO.setM_cover(m_cover);
+			memberVO.setM_id(m_id);
+			dao.updateSellstore(memberVO);
+			return memberVO;
+		}
 	public MemberVO updateStatus(int m_status, String m_email) {
 		MemberVO memberVO = new MemberVO();
 		memberVO.setM_status(m_status);

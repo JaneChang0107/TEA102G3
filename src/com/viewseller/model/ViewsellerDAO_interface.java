@@ -12,4 +12,5 @@ public interface ViewsellerDAO_interface {
 	public List<ViewsellerVO> findBysellid(String m_id);
 	public ViewsellerVO getOneViewbyoid(String o_id);
 	
+	
 }

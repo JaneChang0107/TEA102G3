@@ -23,7 +23,6 @@
 	OrderlistService orderlistSvc =new OrderlistService();
 	OrderlistVO orderlistVO =orderlistSvc.getOneOrderlist(o_id);
 	pageContext.setAttribute("orderlistVO", orderlistVO);
-
 	OrderdetailService odsv =new OrderdetailService();
 	String comparem_id = productSvc.oneProduct(odsv.getFirstP_id(o_id)).getM_id();
 	String m_id = session.getAttribute("loginId").toString();
@@ -35,7 +34,6 @@
 	}
 	pageContext.setAttribute("comparem_id", comparem_id);
 	request.setAttribute("orderbelong", orderbelong);
-
 	//=================================
 		ViewsellerService vser = new ViewsellerService();
 		ViewsellerVO viewsellerVO = vser.getOneViewbyoid(o_id);
@@ -80,7 +78,6 @@ td{
     position: relative;
     background-color: #e1fbae;
     }
-
 </style>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -91,7 +88,6 @@ td{
 
 
 <div style="border-width: 19px;border-style: dashed;border-color: #FFAC55;padding: 48px";">
-
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
@@ -101,8 +97,6 @@ td{
 		</c:forEach>
 	</ul>
 </c:if>
-
-
 <table id="listallorder">
 <div style="width=100px"><p>訂單編號: <%=orderlistVO.getO_id()%></p></div>
 <p>訂單成立: <%=orderlistVO.getO_dateForm()%></p>
@@ -112,7 +106,6 @@ td{
 <p>收件人: <%=memSvc.findOneMem(orderlistVO.getM_id()).getM_name()%></p>
 <p>收件方式: <%=orderlistVO.getO_transport()%></p>
 <p>收件地址: <%=orderlistVO.getO_address()%></p>
-
 <hr>
 	<tr>
 		<th><h2>示意圖</h2></th>
@@ -242,7 +235,6 @@ td{
 
 <%
 	java.sql.Timestamp v_date = null;
-
 	try {
 		v_date = viewsellerVO.getV_date();
 	} catch (Exception e) {
@@ -260,7 +252,6 @@ td{
 .xdsoft_datetimepicker .xdsoft_datepicker {
 	width: 300px; /* width:  300px; */
 }
-
 .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
 	height: 151px; /* height:  151px; */
 }
@@ -280,7 +271,7 @@ $(function() {
 		//startDate:	        '2017/07/10',  // 起始日
 		minDate : '-1970-01-01', // 去除今日(不含)之前
 	//maxDate:           '+1970-01-01'  // 去除今日(不含)之後
-	});s
+	});
 });
 </script>
 </html>

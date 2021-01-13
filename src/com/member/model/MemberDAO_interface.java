@@ -34,5 +34,8 @@ public interface MemberDAO_interface {
 
 	//ï¿½qï¿½ï¿½ï¿½`ï¿½ï¿½
 	public List<MemberVO> getNotice(String m_id);
+	
+	//­×§ï½æ³õ­¶­±
+	public void updateSellstore(MemberVO memberVO);
 
 }

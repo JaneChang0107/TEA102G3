@@ -35,6 +35,50 @@ public class MemberServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 
+		
+//修改賣場頁面
+		if ("updateSellstore".equals(action)) {
+			List<String> errorMsgs =new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+            String m_storename =req.getParameter("m_storename");
+			
+			String m_info =req.getParameter("m_info");
+			
+            Part m_cover=req.getPart("m_cover");
+            
+            InputStream is4 = m_cover.getInputStream();
+            byte[] m_coverbuffer =null;
+            try {
+            	m_coverbuffer =new byte[is4.available()];
+            	is4.read(m_coverbuffer);
+            	is4.close();
+            }catch(Exception e) {
+            	errorMsgs.add("賣場封面上傳失敗，請再試一次");
+            	e.printStackTrace();
+            }
+	
+			try {
+				// 1.接收請求參數
+				String m_id =new String(req.getParameter("m_id"));
+				// 2.開始查詢資料
+				MemberService memSvc =new MemberService();
+				MemberVO memberVO=memSvc.updateSellstore(m_storename,m_info,m_coverbuffer,m_id);
+                // 3.查詢完成,準備轉交
+				req.setAttribute("memberVO", memberVO);
+				String url ="/Front_end/seller/udsellstore.jsp";
+				RequestDispatcher successView =req.getRequestDispatcher(url);
+				successView.forward(req, res);
+			} catch(Exception e) {
+				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/seller/udsellstore.jsp");
+				failureView.forward(req, res);				
+			}
+		}
+		
+		
+		
+		
 //賣家中心控制器
 		if("goSellerIndex".equals(action)) {
 			   int countorder=0;

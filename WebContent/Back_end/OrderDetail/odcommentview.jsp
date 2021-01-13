@@ -143,10 +143,6 @@ btn btn-primary {
 				</div>
 				<div class="modal-footer" style="padding:0;">
 					<button type="button" class="btn btn-default" data-dismiss="modal" style="display:none";></button>
-	
-<hr>
-
-<hr>
 	</div>
 	</div>
 </body>
