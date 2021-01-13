@@ -1,3 +1,5 @@
+<%@page import="com.qrcode.OrderListQRCodeCreate"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.product.model.ProductVO"%>
 <%@page import="com.product.model.ProductService"%>
 <%@page import="com.orderlist.model.OrderlistVO"%>
@@ -14,7 +16,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
-
 %>
 
 
@@ -159,6 +160,7 @@ h5.card-header {
 
 <!--內容區域 -->
 
+
 <!-- 全部 -->
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -173,6 +175,29 @@ h5.card-header {
 					    <h5 class="card-title">訂單成立: ${orderlistVO.o_dateForm}</h5>
 						<h5 class="card-title">訂單狀態: ${orderlistVO.o_status}</h5>
 						<h5 class="card-title">總金額: ${orderlistVO.o_total}</h5>
+						
+						<%
+						OrderlistVO orderlistVO = (OrderlistVO)pageContext.getAttribute("orderlistVO");
+						String o_id = orderlistVO.getO_id();
+						String o_status = orderlistVO.getO_status();
+						Boolean shipOrNot;
+						if(o_status.equals("已出貨")){
+							shipOrNot=true;
+						}else{
+							shipOrNot=false;
+						}
+						System.out.println(shipOrNot);
+                        String hostString = request.getServerName() + ":" + request.getServerPort();
+                        OrderListQRCodeCreate qr = new OrderListQRCodeCreate();
+                        String qrcode=qr.creater(hostString,o_id);
+						
+						%>
+						
+						<c:if test="<%=shipOrNot%>">
+						<p>以下是您的出貨QRcode:</p>
+                        <img src="data:image/jpg;base64,<%=qrcode%>" style="width:100px; height: 100px;"/>
+						
+						</c:if>
 						
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/OrderdetailServlet"  target="_blank" class="detail">
 			            <input type="submit" value="詳情" class="btn btn-primary">
@@ -224,6 +249,17 @@ h5.card-header {
 						<h5 class="card-title">訂單狀態: ${orderlistVO.o_status}</h5>
 						<h5 class="card-title">總金額: ${orderlistVO.o_total}</h5>
 						
+						<% 
+						OrderlistVO orderlistVO = (OrderlistVO)pageContext.getAttribute("orderlistVO");
+						String o_id=orderlistVO.getO_id();
+                        String hostString = request.getServerName() + ":" + request.getServerPort();
+                        OrderListQRCodeCreate qr = new OrderListQRCodeCreate(); 
+                        String qrcode=qr.creater(hostString,o_id );
+                        %>
+                        <p>以下是您的出貨QRcode:</p>
+                        <img src="data:image/jpg;base64,<%=qrcode%>" style="width:100px; height: 100px;"/>
+						
+						
 						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/OrderdetailServlet"  target="_blank" class="detail">
 			            <input type="submit" value="詳情" class="btn btn-primary">
 			            <input type="hidden" name="o_id"  value="${orderlistVO.o_id}">
@@ -252,7 +288,7 @@ h5.card-header {
 			            <input type="submit" value="詳情" class="btn btn-primary">
 			            <input type="hidden" name="o_id"  value="${orderlistVO.o_id}">
 			            <input type="hidden" name="action"	value="getOrderDetailByOrder"></FORM>						
-						
+
 					</div>
 				</div>
 

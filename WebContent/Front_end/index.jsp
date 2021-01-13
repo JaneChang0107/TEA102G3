@@ -80,7 +80,7 @@ marquee {
 		</div>
 
 		<div class="swiper-container">
-			<H2>熱銷出租品</H2>
+			<H2>今日推薦</H2>
 			<div class="swiper-wrapper">
 				<div class="swiper-slide">Slide 1</div>
 				<div class="swiper-slide">Slide 2</div>

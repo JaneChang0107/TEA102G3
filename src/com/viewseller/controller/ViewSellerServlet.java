@@ -38,7 +38,7 @@ public class ViewSellerServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
-		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
+		if ("getOne_For_Display".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -292,7 +292,7 @@ public class ViewSellerServlet extends HttpServlet {
 				BellVO bellVO = new BellVO();
 				
 				bellVO.setM_id(m_sellid);
-				bellVO.setMessage("您的訂單"+o_id+"有一則新評價");
+				bellVO.setMessage("您的訂單"+o_id+"有新評價");
 				
 				ws.onMessage(mapper.writeValueAsString(bellVO));
 				

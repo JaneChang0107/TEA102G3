@@ -17,6 +17,7 @@ import com.orderdetail.model.OrderdetailService;
 import com.orderdetail.model.OrderdetailVO;
 import com.orderlist.model.*;
 import com.product.model.ProductService;
+import com.qrcode.OrderListQRCodeCreate;
 import com.websocket.WebSocket;
 
 import redis.clients.jedis.Jedis;
@@ -163,6 +164,9 @@ public class orderlistServlet extends HttpServlet {
 				List<OrderlistVO> arrivedorder = new ArrayList<OrderlistVO>();
 				//"訂單完成"集合
 				List<OrderlistVO> finishorder = new ArrayList<OrderlistVO>();
+				
+//				//"QRcode"集合
+//				List qrcodelist = new ArrayList();
 			   
 			   if (list.size() != 0) {
 					for (int i = 0; i < list.size(); i++) {
@@ -170,6 +174,14 @@ public class orderlistServlet extends HttpServlet {
 						//從全訂單比對有該帳戶的訂單
 						String comparem_id = psvc.oneProduct(odsv.getFirstP_id(list.get(i).getO_id())).getM_id();
 						String compareo_status = list.get(i).getO_status();
+						
+						
+//						//生成QRcode
+//						String hostString = req.getServerName() + ":" + req.getServerPort();
+//						System.out.println(hostString);
+//						
+//						OrderListQRCodeCreate qr = new OrderListQRCodeCreate();
+//						qrcodelist.add((qr.creater(hostString, list.get(i).getO_id())));
 
 						if (comparem_id.equals(m_id)) {
 							sellerorder.add(list.get(i));
@@ -178,7 +190,7 @@ public class orderlistServlet extends HttpServlet {
 							neworder.add(list.get(i));
 						}
 						if (comparem_id.equals(m_id) && compareo_status.trim().equals("已出貨")) {
-							sentorder.add(list.get(i));
+							sentorder.add(list.get(i));							
 						}
 						if (comparem_id.equals(m_id) && compareo_status.trim().equals("已到貨")) {
 							arrivedorder.add(list.get(i));
@@ -194,6 +206,11 @@ public class orderlistServlet extends HttpServlet {
 			req.setAttribute("sentorder", sentorder);
 			req.setAttribute("arrivedorder", arrivedorder);
 			req.setAttribute("finishorder", finishorder);
+			
+//			System.out.println("qrcode集合在c"+qrcodelist);
+//			req.setAttribute("qrcodelist", qrcodelist);
+		    
+
 			
 
 			String url = "/Front_end/order/SellerOrder.jsp";

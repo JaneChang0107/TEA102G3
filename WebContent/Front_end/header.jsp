@@ -326,7 +326,7 @@ div.copyright {
 .overlay .closebtn {
 	position: absolute;
 	top: 20px;
-	right: 45px;
+	left: 45px;
 	font-size: 60px;
 }
 
@@ -441,7 +441,7 @@ right: 18px;
 					aria-expanded="true" onclick="notice()"></i>
 					<div class="dropdown-menu" aria-labelledby="bell">
 <ul>
-						<a class="dropdown-item" id="notice" onclick="belldel()" href="notice/notice.jsp"></a> 
+						<a class="dropdown-item" id="notice" onclick="belldel()" href="<%=request.getContextPath()%>/Front_end/notice/notice.jsp"></a> 
 	</ul>					
 					</div> 
 				</td>
@@ -506,7 +506,7 @@ right: 18px;
 		});
 
 		function openNav() {
-			document.getElementById("myNav").style.width = "35%";
+			document.getElementById("myNav").style.width = "30%";
 		}
 
 		function closeNav() {
