@@ -10,7 +10,7 @@ public interface OrderdetailDAO_interface {
 	public OrderdetailVO findByPrimaryKey(String orderdetailVO);
     public List<OrderdetailVO> getAll();
 	public List<OrderdetailVO> count();
-	
+	public List<OrderdetailVO> ran();
 	
 	public List<OrderdetailVO> getDetailByOrder(String o_id);
 	

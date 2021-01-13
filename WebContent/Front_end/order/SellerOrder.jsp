@@ -80,10 +80,6 @@
      padding: 15px 50px; 
  } 
 
-.content {
-	margin-top: 100px;
-	margin-bottom: 200px;
-}
 #pills-tab{
     margin:auto;
     width:950px;
