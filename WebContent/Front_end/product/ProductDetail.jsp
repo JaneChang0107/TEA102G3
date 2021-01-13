@@ -14,6 +14,7 @@
 	ViewsellerService vsc = new ViewsellerService();
 	List<ViewsellerVO> list = vsc.findBysellid(m_sellid);
 	request.setAttribute("list", list);
+	request.setAttribute("m_sellid", m_sellid);
 
 // 	MemberService memSvc = new MemberService();
 // 	MemberVO memberVO = memSvc.findOneMem(m_sellid);
@@ -31,22 +32,72 @@
 	border: solid 0px gray;
 }
 
-p#productName {
-	font-size: 60px;
-}
-
-div#productDetail {
-	position: relative;
-	width: 50%;
-	left: 50%;
-	top: 10%;
-	transform: translateX(-50%);
-	background-color: white;
-}
 
 img.productImg {
-	width: 200px;
+	width: 250px;
+	background-color:white;
 }
+
+#seller{
+  margin: 0px auto;/*div對齊效果*/
+  text-align: center;/*display: inline對齊效果*/
+  width: 1200px;
+  height: 200px;
+  paddin:20px auto;
+ 
+}
+
+#right {
+  margin: 0px auto;
+  text-align: center;/*display: inline對齊效果*/
+  display: inline-block;/*讓div並排*/ 
+  vertical-align: top;/*就算個個div行數不同，也一律向上對齊*/ 
+  width: 900px;
+  height:500px;
+  border-radius:3px;
+  
+  
+ 
+  }
+#left {
+   margin: 0px auto;
+  text-align: center;/*display: inline對齊效果*/
+  display: inline-block;/*讓div並排*/ 
+  vertical-align: top;/*就算個個div行數不同，也一律向上對齊*/ 
+  width: 300px;
+  height: 500px;
+  border-radius:3px;
+
+  }
+  #info{
+  margin: 0px auto;
+   width: 1200px;
+  height: 500px;
+  }
+  #productinfo{
+  margin: 0px auto;
+   background-color:white;
+    text-align:center;
+  }
+  span{
+  font-size:24px;
+  }
+   #content{
+   width:100%;
+  margin: 0px auto;
+   background-color:white;
+    text-align:center;
+  }
+  #headpic{
+  border-radius:50%;
+  width:200px;
+  height:200px;
+  
+  }
+  .all{
+  height:1500px;
+  }
+  
 </style>
 </head>
 <body>
@@ -54,101 +105,101 @@ img.productImg {
 
 		<jsp:include page="/Front_end/header.jsp"></jsp:include>
 	</div>
+<div class="all">
+	<jsp:useBean id="memSvc" scope="page"
+			class="com.member.model.MemberService"></jsp:useBean>
 
-	<div id="productDetail">
-		<jsp:useBean id="ppService" scope="page"
-			class="com.productPicture.model.ProductPictureService"></jsp:useBean>
-
-
-		<div class="article">
-			<td>${pVO.m_id}</td>
-			<form id="myForm"
+<div style="height:50px">
+  </div>
+  <div id="seller"><img src="" width=1200px height=200px>
+  </div>
+  <br>
+  <div id="info">
+  <div id="left">
+  <div >
+ <img src="${memSvc.findOneMem(m_sellid).m_headpic2}" id="headpic">
+  <br>
+ <h4>${memSvc.findOneMem(m_sellid).m_name}</h4>
+  </div>
+  		<form id="myForm"
 				action="<%=request.getContextPath()%>/chat/chatsell.jsp"
-				method="POST" style="position: fixed;" target="_blank">
-				<input type="submit" value="賣場聊聊"> <input type="hidden"
+				method="POST"  target="_blank">
+				<input type="submit" value="賣場聊聊" class="btn btn-success"> <input type="hidden"
 					name="m_id" value="${pVO.m_id}"> <input type="hidden"
 					name="action" value="">
 			</form>
-		</diV>
 		
-		
-
-
-		<form action="<%=request.getContextPath()%>/BuyServlet" method="POST">
+  </div><div id="right"><div id="productDetail">
+		<jsp:useBean id="ppService" scope="page"
+			class="com.productPicture.model.ProductPictureService"></jsp:useBean>
+  
+  		<form action="<%=request.getContextPath()%>/BuyServlet" method="POST">
+  		<div id="productinfo">
+		<c:forEach var="ppVO" items="${ppService.findProductPicture(pVO.p_id)}">
+		<img src="<%= request.getContextPath() %>/ShowPicture?type=ppid&id=${ppVO.pp_id}" class="productImg" name="p_img">
+		</c:forEach> 		
+  		</div>
 			<table class="table3">
 				<tr>
-					<td rowspan=8 align=center><h4>
-							<div id="pImg">
-								<c:forEach var="ppVO"
-									items="${ppService.findProductPicture(pVO.p_id)}">
-									<img
-										src="<%= request.getContextPath() %>/ShowPicture?type=ppid&id=${ppVO.pp_id}"
-										class="productImg" name="p_img">
-								</c:forEach>
-							</div>
+					<td align=center width=400px><h4>
+							
+								
+							
 						</h4></td>
-					<td><h4>
-							<div id="pInfo">
-								<div id="pInfoName">
-									<span id="productId" name="p_id">${pVO.p_id}</span> <span>商品名稱:</span>
-									<span id="productName" name="p_name">${pVO.p_name}</span>
-								</div>
-						</h4></td>
-
-				</tr>
-				<tr>
-					<td><button>聯絡賣家</button></td>
-				</tr>
-				<tr>
-					<td>讚/倒讚</td>
-
-				</tr>
-				<tr>
-					<td><div id="xxx">
-							<span>平台:</span><span id="productCount">${ptVO.pt_platform}</span>
-						</div></td>
-
-				</tr>
-				<tr>
-					<td><div id="pInfoCount">
-							<span>商品數量:</span><span id="productCount" name="p_count">${pVO.p_count}</span>
-						</div></td>
-
-				</tr>
-				<tr>
-					<td><div id="pInfoPrice">
-							<span>商品價格:</span><span id="productPrice" name="p_price">${pVO.p_price}</span>
-						</div></td>
-
-				</tr>
-				<tr>
-					<td><span>種類:</span><span id="productKindS" name="p_kind">${ptVO.pt_kind}</span></td>
-				</tr>
-				<tr>
-					<td><input type="submit" name="Submit" value="放入購物車"></td>>
-				</tr>
-				<tr>
-					<td colspan=2><div id="pDetail" name="p_detail">
-							<span>商品簡介:</span> ${pVO.p_detail}
-						</div></td>
-				</tr>
+					
+						<div id="productinfo">
+						<Table id="content">
+							  <tr>
+							    <td><span>商品ID:</span></td>
+							     <td><span id="productId" name="p_id">${pVO.p_id}</span> </td>
+							  </tr>
+							   <td><span>商品名稱:</span></td>
+							     <td><span id="productName" name="p_name">${pVO.p_name}</span></td>
+							  <tr>
+							    <td><span>平台:</span></td>
+							     <td><span id="productCount">${ptVO.pt_platform}</span></td>
+							    </tr>
+							  <tr>
+							    <td><span>商品數量:</span></td>
+							     <td><span id="productCount" name="p_count">${pVO.p_count}</span></td>
+							    </tr>
+							  <tr>
+							    <td><span>商品價格:</span></td>
+							     <td><span id="productPrice" name="p_price">${pVO.p_price}</span></td>
+							    </tr>
+							     <tr>
+							    <td><span>種類:</span></td>
+							     <td><span id="productKindS" name="p_kind">${ptVO.pt_kind}</span></td>
+							    </tr>
+							     <tr>
+							    <td name="p_detail"><span>商品簡介:</span></td>
+							     <td ><span> ${pVO.p_detail}</span></td>
+							    </tr>
+							    <tr>
+							    <td colspan=2> <input type="submit" value="放入購物車" class="btn btn-info"></td>
+							     
+							    </tr>
+							</Table>
+						</div>
+						</tr>
+						
 
 			</table>
-			<input type="hidden" name="action" value="addCart"> <input
-				type="hidden" name="p_id" value="${pVO.p_id}"> <input
-				type="hidden" name="p_name" value="${pVO.p_name}"> <input
-				type="hidden" name="p_price" value="${pVO.p_price}"> <input
-				type="hidden" name="p_kind" value="${ptVO.pt_id}"> <input
-				type="hidden" name="p_count" value="${pVO.p_count}"> <input
-				type="hidden" name="p_detail" value="${pVO.p_detail}"> <input
-				type="hidden" name="m_id" value="${pVO.m_id}">
-
+				 <input type="hidden" name="action" value="addCart">
+				 <input type="hidden" name="p_id" value="${pVO.p_id}">
+				 <input type="hidden" name="p_name" value="${pVO.p_name}">
+				 <input type="hidden" name="p_price" value="${pVO.p_price}">
+				 <input type="hidden" name="p_kind" value="${ptVO.pt_id}">
+				 <input type="hidden" name="p_count" value="${pVO.p_count}">
+				 <input type="hidden" name="p_detail" value="${pVO.p_detail}">
+				 <input type="hidden" name="m_id" value="${pVO.m_id}">
+				
 		</form>
-		
-		<jsp:useBean id="memSvc" scope="page"
-			class="com.member.model.MemberService"></jsp:useBean>
-		<div>
-			<table id="viewseller">
+  
+  </div>
+  
+  <div width=1200px height=200px>
+  <table id="viewseller">
 				<c:forEach var="viewsellerVO" items="${list}">
 
 					<div class="card">
@@ -162,13 +213,16 @@ img.productImg {
 					</div>
 
 				</c:forEach>
-			</table>
+	</table>
+  </div>
+  </div>
+</div>
+ </div> 
 
-		</div>
-	</div>
 
 	<div class="footer">
 		<jsp:include page="/Front_end/footer.jsp"></jsp:include>
 	</div>
+
 </body>
 </html>
