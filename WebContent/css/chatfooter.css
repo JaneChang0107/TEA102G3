@@ -165,8 +165,17 @@ div.reminder_div{
 div.column{
 	background-color: #ebe7a2;
 	text-align:center;
-	
-	
 }
-
+.time_me {
+	float:right;
+	transform: translateY(-54%);
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+.time_friend {
+	float:left;
+	transform: translateY(-54%);
+    font-size: 14px;
+    margin-bottom: 15px;
+}
 

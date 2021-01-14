@@ -75,7 +75,7 @@ request.setAttribute("memberVO", memberVO);
 					${memberVO.m_name}
 						<!--點擊好友後顯示名稱位子-->
 					</div>
-					<button class="X_btn"></button>
+					<button class="X_btn" style="display:none";></button>
 				</div>
 				<div class="chat_message" id="chat_message">
 					<!-- 訊息顯示 -->
