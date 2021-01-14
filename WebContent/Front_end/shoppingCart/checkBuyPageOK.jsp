@@ -141,9 +141,6 @@
 				<td class="col">訂單金額:總計<%=o_total%>元</td>
 			</tr>
 			<tr>
-				<td class="col">購買的商品為:<%=o_id%></td>
-			</tr>
-			<tr>
 				<td class="col">取貨方式:<%=o_transport%></td>
 			</tr>
 
