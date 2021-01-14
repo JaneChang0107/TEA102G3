@@ -54,6 +54,26 @@ public class BuyServlet extends HttpServlet {
 			java.sql.Timestamp o_date = java.sql.Timestamp.valueOf(nowTime);
 			String o_status = "訂單成立";
 			String o_transport = req.getParameter("o_transport");
+			switch (o_transport) {
+			case "0" :
+				o_transport = "黑貓宅急便";
+				break;
+			case "1" :
+				o_transport = "7-11";
+				break;
+			case "2" :
+				o_transport = "全家";
+				break;
+			case "3" :
+				o_transport = "OK mart";
+				break;
+			case "4" :
+				o_transport = "萊爾富";
+				break;
+			case "5" :
+				o_transport = "郵局";
+				break;
+		}
 			String o_address = req.getParameter("o_address");
 			Integer o_total = Integer.parseInt(req.getParameter("o_total"));
 			
