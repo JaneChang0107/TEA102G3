@@ -97,3 +97,8 @@ ul li{
 {
 	word-break: break-all;
 }
+
+.btn_pwd_update
+{
+	width: 100px;
+}

@@ -528,7 +528,7 @@ $.ajax({
 			  $.each(data.emp_list, function(index, item){
 				  list_html+='		<div class="row" id="div_append">';
 				  list_html+='            <div class="col AutoNewline" id="e_id">'+ item.e_id +'</div>';
-				  list_html+='            <div class="col AutoNewline" id="e_password"><p class="para">'+ item.e_password +'</p><input name="input_e_password" class="-none" value="'+ item.e_password +'"></div>';
+				  list_html+='            <div class="col AutoNewline" id="e_password"><p class="para">'+ item.e_password +'</p><input name="input_e_password" class="-none btn_pwd_update" value="'+ item.e_password +'"></div>';
 				  list_html+='            <div class="col AutoNewline">'+ item.e_identity +'</div>';
 				  list_html+='            <div class="col AutoNewline">'+ item.e_name +'</div>';
 				  list_html+='            <div class="col AutoNewline">'+ item.e_gender +'</div>';
@@ -780,7 +780,7 @@ $.ajax({
 				  $.each(data.emp_list, function(index, item){
 					  list_html+='		<div class="row" id="div_append">';
 					  list_html+='            <div class="col AutoNewline" id="e_id">'+ item.e_id +'</div>';
-					  list_html+='            <div class="col AutoNewline"><p class="para">'+ item.e_password +'</p><input name="input_e_password" class="-none" value="'+ item.e_password +'"></div>';
+					  list_html+='            <div class="col AutoNewline"><p class="para">'+ item.e_password +'</p><input name="input_e_password" class="-none btn_pwd_update" value="'+ item.e_password +'"></div>';
 					  list_html+='            <div class="col AutoNewline">'+ item.e_identity +'</div>';
 					  list_html+='            <div class="col AutoNewline">'+ item.e_name +'</div>';
 					  list_html+='            <div class="col AutoNewline">'+ item.e_gender +'</div>';
