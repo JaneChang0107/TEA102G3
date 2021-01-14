@@ -98,10 +98,10 @@ public class update_without extends HttpServlet {
             }
 			
 			String e_gender = jsonObj.getString("e_gender");
-			String e_genderReg = "[MEN]|[WOMEN]";
+			String e_genderReg = "(WOMEN)|(MEN)";
 			if (e_gender == null || e_gender.trim().length() == 0) {
 				errorMsgs.add("性別: 請勿空白");
-			} else if(!e_gender.trim().matches(e_genderReg)) { //以下練習正則(規)表示式(regular-expression)
+			} else if(!e_gender.trim().matches(e_genderReg)) { 
 				errorMsgs.add("性別: MEN or WOMEN");
 			}
 			
@@ -109,7 +109,7 @@ public class update_without extends HttpServlet {
 			String e_identityReg = "^[A-Z]{1}[1-2]{1}[0-9]{8}$";
 			if (e_identity == null || e_identity.trim().length() == 0) {
 				errorMsgs.add("身分證字號: 請勿空白");
-			} else if(!e_identity.trim().matches(e_identityReg)) { //以下練習正則(規)表示式(regular-expression)
+			} else if(!e_identity.trim().matches(e_identityReg)) { 
 				errorMsgs.add("請輸入正確身分證格式");
 			}
 			
@@ -119,7 +119,7 @@ public class update_without extends HttpServlet {
 			String e_emailReg = "^([A-Za-z0-9_\\-\\.])+\\@([A-Za-z0-9_\\-\\.])+\\.([A-Za-z]{2,4})$";
 			if (e_email == null || e_email.trim().length() == 0) {
 				errorMsgs.add("電子信箱: 請勿空白");
-			} else if(!e_email.trim().matches(e_emailReg)) { //以下練習正則(規)表示式(regular-expression)
+			} else if(!e_email.trim().matches(e_emailReg)) { 
 				errorMsgs.add("電子信箱: 請依照電子郵件格式輸入");
             }
 			

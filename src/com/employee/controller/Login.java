@@ -21,14 +21,17 @@ public class Login extends HttpServlet {
 	// 【實際上應至資料庫搜尋比對】
 	protected boolean allowUser(String e_id, String e_password) {
 		EmployeeService employeeSvc = new EmployeeService();
+//		System.out.println("幹");
 		EmployeeVO employeeVO = employeeSvc.getOneEmployee(e_id);
-		
+//		System.out.println("抓到了");
 		try{
-			if (employeeVO.getE_id().equals(e_id) && employeeVO.getE_password().equals(e_password))
+//			System.out.println("before");
+			if (e_id.equals(employeeVO.getE_id()) && employeeVO.getE_password().equals(e_password))
 			return true;
 		else
 			return false;
 			} catch (NullPointerException e) {
+//				System.out.println("after");
 				e.printStackTrace();
 			}
 		return false;
@@ -53,18 +56,23 @@ public class Login extends HttpServlet {
 //把錯誤訊息存入session scope, 待稍後用getAttribute()取用
 			HttpSession session = req.getSession();
 			session.setAttribute("errorMsgs_login", errorMsgs_login);
+			EmployeeService employeeSvc = new EmployeeService();
 			
 			String str = req.getParameter("e_id");
 			if (str == null || (str.trim()).length() == 0) {
 				errorMsgs_login.add("請輸入員工編號");
-			} 
-			
-			EmployeeService employeeSvc = new EmployeeService();
+			} else if(employeeSvc.getOneEmployee(str) == null) {
+//				System.out.println("0");
+				errorMsgs_login.add("連自己的帳號記錯?");
+//				System.out.println("1");
+			}
+			System.out.println("這有嗎?");
+			try {
 			EmployeeVO employeeVO = employeeSvc.getOneEmployee(str);
 			
 			String password = req.getParameter("e_password");
 			if(!password.equals(employeeVO.getE_password())) {
-				errorMsgs_login.add("錯了!滾!");
+				errorMsgs_login.add("密碼錯了!滾!");
 			}
 		
 // 如果錯誤訊息不是空的, 則切斷程式轉交回首頁 
@@ -74,7 +82,7 @@ public class Login extends HttpServlet {
 			}
 		
 		
-
+//			System.out.println("有跑到這嗎?");
 // 【取得使用者 帳號(e_id) 密碼(e_password)】
 			String e_id = req.getParameter("e_id");
 			String e_password = req.getParameter("e_password");
@@ -87,15 +95,14 @@ public class Login extends HttpServlet {
 //				HttpSession session = req.getSession();
 				session.setAttribute("e_id", e_id); // *工作1: 才在session內做已經登入過的標識
 	
-				try {
+				
 					String location = (String) session.getAttribute("location");
 					if (location != null) {
 						session.removeAttribute("location"); // *工作2: 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)
 						res.sendRedirect(location);
 						return;
 					}
-				} catch (Exception ignored) {
-				}
+				
 				
 				
 				/***************************2.開始查詢資料****************************************/
@@ -108,7 +115,12 @@ public class Login extends HttpServlet {
 //存完該死的資料 準備登入
 				res.sendRedirect(req.getContextPath() + "/Back_end/employee/index_backstage.jsp"); // *工作3: (-->如無來源網頁:則重導至login_success.jsp)
 			}
-			
+			} catch(NullPointerException e) {
+				res.sendRedirect(req.getContextPath() + "/Back_end/employee/login.jsp");
+				System.out.println("想吃500?" + e);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
 		}
 		

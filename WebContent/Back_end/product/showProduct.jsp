@@ -10,7 +10,11 @@
 		display: inline;
 	}
 	input.checkBtn{
-		height: 40px;
+		height: 10%;
+	}
+	
+	table.table{
+		font-size: 25px;
 	}
 </style>
 </head>

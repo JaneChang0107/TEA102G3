@@ -418,7 +418,7 @@ $.ajax({
        	  error_list +='    </div>';
        	  error_list +='</div>';       	         	  
        	  
-       	if(data.errorMsg != null){
+       	if(data.errorMsg.length != 0){
        		$("#update_without").prepend(error_list);
        	} else {
        	$("#update_without").html(list_html);
@@ -572,7 +572,7 @@ $.ajax({
 
 			  
 			  list_html = "";
-			  
+			  list_html+='<form>';
 			  list_html+='<div class="row">';
 			  list_html+='    <div class="col">';
 			  list_html+='        <p>門市:</p>';
@@ -580,7 +580,7 @@ $.ajax({
 			  list_html+='    <div class="col">';
 			  list_html+='        <select size="1" id="st_id_add" name="st_id">';
 			  for(let i = 0; i < data.length; i++){			  
-				  list_html+='            <option value="'+ data[i].st_id +'">'+ data[i].st_id +'';
+				  list_html+='            <option value="'+ data[i].st_id +'">'+ data[i].st_name +'';
 			  };
 			  list_html+='        </select>';
 			  list_html+='    </div>';
@@ -590,7 +590,7 @@ $.ajax({
 			  list_html+='        <p>職稱:</p>';
 			  list_html+='    </div>';
 			  list_html+='    <div class="col">';
-			  list_html+='        <input type="radio" name="e_title" size="45" value="EMPLOYEE">EMPLOYEE';
+			  list_html+='        <input type="radio" id="radio_emp" name="e_title" size="45" value="EMPLOYEE">EMPLOYEE';
 			  list_html+='        <input type="radio" name="e_title" size="45" value="BOSS">BOSS';
 			  list_html+='    </div>';
 			  list_html+='    <div class="col">';
@@ -611,7 +611,7 @@ $.ajax({
 			  list_html+='        <p>性別:</p>';
 			  list_html+='    </div>';
 			  list_html+='    <div class="col">';
-			  list_html+='        <input type="radio" name="e_gender" value="MEN"}>MEN';
+			  list_html+='        <input type="radio" id="radio_men" name="e_gender" value="MEN"}>MEN';
 			  list_html+='        <input type="radio" name="e_gender" value="WOMEN"}>WOMEN';
 			  list_html+='    </div>';
 			  list_html+='</div>';
@@ -640,7 +640,7 @@ $.ajax({
 			  list_html+='        <p>狀態:</p>';
 			  list_html+='    </div>';
 			  list_html+='    <div class="col">';
-			  list_html+='        <input type="radio" name="e_status" value="0">在職';
+			  list_html+='        <input type="radio" id="radio_status" name="e_status" value="0">在職';
 			  list_html+='        <input type="radio" name="e_status" value="1">離職	';
 			  list_html+='    </div>';
 			  list_html+='</div>';
@@ -660,10 +660,12 @@ $.ajax({
 			  list_html+='</div>';
 			  list_html+='<div class="row forget-row">';
 			  list_html+='    <div class="col btn_col">';
-			  list_html+='        <button type="button" id="btn_cancel" class="btn btn-primary forget-btn">取消</button>';
-			  list_html+='        <button type="button" id="add_enter" class="btn btn-primary forget-btn">確認</button>';
+			  list_html+='        <button type="button" id="btn_auto" class="btn btn-primary">自動帶入</button>';
+			  list_html+='        <button type="button" id="add_enter" class="btn btn-primary">確認</button>';
 			  list_html+='    </div>';
 			  list_html+='</div>';
+			  list_html+='</form>';
+			  
 			  
 			  $("#con_mam").html(list_html);
 			  
@@ -679,6 +681,20 @@ $.ajax({
 		             //minDate:               '-1970-01-01', // 去除今日(不含)之前
 		             //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
 		          });
+		       	 
+		      $(document).on("click", "#btn_auto", function(){
+		    	 $("#e_password").val("1");
+		 		 $("#st_id_add").val("ST00001");
+		 		 $("#radio_emp").attr("checked",'');
+		 		 $("#e_phone_add").val("0987654321");
+		 		 $("#e_name_add").val("高子軒");
+		 		 $("#radio_men").attr("checked",'');
+		 		 $("#e_identity_add").val("A123456789");
+		 		 $("#f_date2").val("2021-01-01");
+		 		 $("#e_address_add").val("台北市長安東路1號");
+		 		 $("#e_email_add").val("s@bbb.com");
+		 		 $("#radio_status").attr("checked",'');
+		      })
 		  },
 		  error:function(){
 			  console.log("error");
@@ -687,41 +703,41 @@ $.ajax({
   })
   
 //點選新增員工的"確認"按鈕
-  $(document).on("click", "#add_enter",function(){
-	     let e_password = $("#e_password").val();
-		 let select_store = $("#st_id_add").val();
-		 let e_title = $("[name='e_title']:checked").val();
-		 let e_phone = $("#e_phone_add").val();
-		 let e_name = $("#e_name_add").val();
-		 let e_gender = $("[name='e_gender']:checked").val();
-		 let e_identity = $("#e_identity_add").val();
-		 let f_date1 = $("#f_date1").val();
-		 let e_address = $("#e_address_add").val();
-		 let e_email = $("#e_email_add").val();
-		 let e_status = $("[name='e_status']:checked").val();
-		 
-		 
-		 let form_data = { 
-				 	"e_password" : e_password,
-			        "st_id": select_store,
-			        "e_title" : e_title,
-			        "e_phone" : e_phone,
-			        "e_name" : e_name,
-			        "e_gender" : e_gender,
-			        "e_identity" : e_identity,
-			        "f_date1" : f_date1,
-			        "e_address" : e_address,
-			        "e_email" : e_email,
-			        "e_status" : e_status
-			      };
-		 let data_string = JSON.stringify(form_data);
-		 
-
-		 
+  $(document).on("click", "#add_enter",function(e){
+//	     let e_password = $("#e_password").val();
+//		 let select_store = $("#st_id_add").val();
+//		 let e_title = $("[name='e_title']:checked").val();
+//		 let e_phone = $("#e_phone_add").val();
+//		 let e_name = $("#e_name_add").val();
+//		 let e_gender = $("[name='e_gender']:checked").val();
+//		 let e_identity = $("#e_identity_add").val();
+//		 let f_date1 = $("#f_date1").val();
+//		 let e_address = $("#e_address_add").val();
+//		 let e_email = $("#e_email_add").val();
+//		 let e_status = $("[name='e_status']:checked").val();
+//		 
+//		 
+//		 let form_data = { 
+//				 	"e_password" : e_password,
+//			        "st_id": select_store,
+//			        "e_title" : e_title,
+//			        "e_phone" : e_phone,
+//			        "e_name" : e_name,
+//			        "e_gender" : e_gender,
+//			        "e_identity" : e_identity,
+//			        "f_date1" : f_date1,
+//			        "e_address" : e_address,
+//			        "e_email" : e_email,
+//			        "e_status" : e_status
+//			      };
+//		 let data_string = JSON.stringify(form_data);
+		 			  //$(this) 相當於
+		 let formData = $(e.target).closest("form").serializeArray();
+		
 	  $.ajax({
 		  url: "http://localhost:8081/TEA102G3/Add_after",
 		  type: "POST",
-		  data: data_string,
+		  data: formData,
 		  dataType: "json",
 		  beforeSend: function(){		  
 		  },
@@ -784,9 +800,28 @@ $.ajax({
 					  list_html+='		</div>';
 				  })
 				  
+				  let error_list = "";
+		       	  
+		       	  error_list +='<div class="row">';
+		       	  error_list +='    <div class="col">';
+		       	  error_list +='        錯誤表列';
+		       	  error_list +='            <ul>';
+		       	  
+		       	  $.each(data.errorMsg, function(item, index){
+		       	  error_list +='                    <li style="color:red">'+ index +'</li>';
+		          })
+		       	  
+		          error_list +='            </ul>';
+		       	  error_list +='    </div>';
+		       	  error_list +='</div>';       	         	  
+		       	  
+		       	if(data.errorMsg.length != 0){
+		       		$("#con_mam").prepend(error_list);
+		       	} else {
 				  
 				  $("#con_mam").html(list_html);
-			  
+				  alert('success');
+		       	}
 		  },
 		  error: function(){
 			  console.log("error");

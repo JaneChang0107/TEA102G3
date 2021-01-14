@@ -57,7 +57,7 @@ function whichProduct(which) {
                         <form action="${contextPath}/ProductServlet" method="post">
                             <input type="hidden" name="pid" value="${value.p_id}">
                             <input type="hidden" name="action" value="updateOne">
-                            <input type="submit" class="btn btn-primary" value="修改">
+                            <input type="submit" class="checkBtn btn-primary" value="修改">
                         </form>
                     </td>
                     <td>
@@ -92,6 +92,7 @@ function whichProduct(which) {
 $("#allProduct").on("click", ".checkBtn", (e) => {
 
     let formData = $(e.target).closest("form").serializeArray();
+    console.log(formData);
 
     if(confirm("確定" + e.target.value)) {
 

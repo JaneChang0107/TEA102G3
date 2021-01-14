@@ -84,7 +84,7 @@
                         <jsp:include page="listAllMem.jsp"></jsp:include>
                     </div>  
                     <div class="tab-pane fade" id="tran_sys" role="tabpanel" aria-labelledby="tran_sys-tab">
-						<jsp:include page="Transession.jsp"></jsp:include>
+						<%@include file="/Back_end/product/showProduct.jsp"%>
 					</div>       
                     <div class="tab-pane fade" id="notice_sys" role="tabpanel" aria-labelledby="notice_sys-tab">
                     	<jsp:include page="/Back_end/runlight/input.jsp"></jsp:include>					
