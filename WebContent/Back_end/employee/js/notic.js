@@ -1,6 +1,7 @@
 $(document).on("click", "#btn_send",function(){
-	let key = $("#key").val().trim();
+	let key = $(".form-select").val().trim();
 	let value = $("#value").val().trim();
+	console.log(key);
 	
 	let Reg = /^[(alM0-9_)]{3,6}$/;
 	if(value.length == 0){
@@ -25,37 +26,20 @@ $(document).on("click", "#btn_send",function(){
 		success: function(data){
 			list_html= "";
 			
-//			list_html +='<table>';
-//			list_html +='';
-//			list_html +='	<tr>';
-//			list_html +='		<td>輸入:</td>';
-//			list_html +='		<td><input name="key" id="key" type="text" value="all">(all為系統公告或是輸入會員編號)</td>';
-//			list_html +='	</tr>';
-//			list_html +='	';
-//			list_html +='	<tr>';
-//			list_html +='		<td>內容:</td>';
-//			list_html +='		<td><input name="value" id="value" type="text"></td>';
-//			list_html +='	</tr>';
-//			list_html +='</table>';
-//			list_html +='<button type="button" id="btn_send">送出新增</button>';
 			
-			
-			list_html += '<table class="table table-dark table-hover">';
+			list_html += '<div id="div_input" class="dic_css">';
+			list_html += '<table class="bordered">';
 			list_html += '	<tr>';
 			list_html += '		<td>輸入:</td>';
 			list_html += '		<td>';
 			list_html += '		<jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService" />   ';
 			list_html += '<select class="form-select" aria-label="Default select example">';
-			list_html += '  <option selected >all為系統公告或是輸入會員編號</option>';
-			list_html += '  <option id="key" value="all">all</option>';
+			list_html += '  <option selected >請輸入系統公告或是會員編號</option>';
+			list_html += '  <option id="key" value="all">all系統公告</option>';
 			
 			$.each(data.mid_list, function(index, item){
-			console.log(data);
-			console.log(data.mlist);
-			console.log(index);
-			console.log(item);
 //			list_html += '  <c:forEach var="mVO" items="${memSvc.all}">';
-			list_html += '  <option id="key" value="'+item.m_id+'">'+item.m_id+'</option>';
+			list_html += '  <option id="key" value="'+item.m_id+'">'+item.m_id+item.m_name+'</option>';
 
 			//			list_html += '  </c:forEach>';
 			})
@@ -64,11 +48,12 @@ $(document).on("click", "#btn_send",function(){
 			list_html += '	</tr>';
 			list_html += '	<tr>';
 			list_html += '		<td>內容:</td>';
-			list_html += '		<td><input name="value" id="value" type="text"></td>';
+			list_html += '		<td><textarea id="value" name="value" class="form-control" rows="10"></textarea></td>';
 			list_html += '	</tr>';
 			list_html += '</table>';
-			list_html += '<button type="button" id="btn_send">送出新增</button>';
+			list_html += '<button type="button" id="btn_send" class="btn btn-primary btn-sm">送出新增</button>';
 			list_html += '<input type="hidden" name="action" value="show">';
+			list_html += '</div>';
 			
 			
 			
