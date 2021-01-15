@@ -119,6 +119,7 @@ public class Login extends HttpServlet {
 				res.sendRedirect(req.getContextPath() + "/Back_end/employee/login.jsp");
 				System.out.println("想吃500?" + e);
 			} catch (Exception e) {
+				System.out.println("員工登入出4了");
 				e.printStackTrace();
 			}
 			

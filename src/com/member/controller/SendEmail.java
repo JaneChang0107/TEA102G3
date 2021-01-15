@@ -59,6 +59,7 @@ public class SendEmail {
 		}
 		
 	}
+					
 //	public static void main(String[] args) throws MessagingException {
 //		SendEmail.openMail("2","aceg19682@gmail.com");
 //	}

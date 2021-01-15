@@ -29,6 +29,27 @@
 marquee {
 	width: 1000px;
 }
+
+.w-100{
+    opacity: 0.4;
+}
+#carousel-inner {
+    position: relative;
+    width: 1800px;
+    overflow: hidden;
+    right: 350px;
+    height:500px;
+}
+H1
+{
+color: rgb(145, 195, 255);
+font-size: 50px;
+background-color: rgb(120, 120, 120);
+text-shadow: rgb(3, 3, 3) 4px 4px 4px;
+
+}
+
+
 </style>
 
 
@@ -49,45 +70,46 @@ marquee {
 	</center>
 
 	<div class="content">
-	  <div class="container my-4">
+
+
+<div class="container my-4">
 
     <div id="carouselExample1" class="carousel slide z-depth-1-half" data-ride="carousel">
-      <div class="carousel-inner">
+      <div class="carousel-inner" id="carousel-inner">
         <div class="carousel-item active">
-          <img class="d-block w-100" src="<%=request.getContextPath()%>/images/ps4.png" alt="First slide" width=1300px height=600px >
+          <img class="d-block w-100" src="<%=request.getContextPath()%>/images/ps4.png" alt="First slide" width=1300px height=500px >
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="<%=request.getContextPath()%>/images/switch.png" alt="Second slide"  width=1300px height=600px>
+          <img class="d-block w-100" src="<%=request.getContextPath()%>/images/switch.png" alt="Second slide"  width=1300px height=500px>
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="<%=request.getContextPath()%>/images/xbox.png" alt="Third slide" width=1300px height=600px>
+          <img class="d-block w-100" src="<%=request.getContextPath()%>/images/xbox.png" alt="Third slide" width=1300px height=500px>
         </div>
       </div>
       <a class="carousel-control-prev" href="#carouselExample1" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+<!--         <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
         <span class="sr-only">Previous</span>
       </a>
       <a class="carousel-control-next" href="#carouselExample1" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+<!--         <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
         <span class="sr-only">Next</span>
       </a>
-    </div>
+</div> 
+</div>
 
-    
-  </div>
-	
 		<div class="article">
 			<a
 				href="<%=request.getContextPath()%>/ProductServlet?ptype=no&name=&action=findByName"><button
-					type="button" class="btn btn-success btn-circle-xl" id="buybtn">我要買</button></a>
-            <a href="">
-			<button type="button" class="btn btn-warning btn-circle-xl"
+					type="button" class="btn btn-success" id="buybtn">我要買</button></a>
+            <a href="<%=request.getContextPath()%>/member/controller/MemberServlet?action=goSellerIndex">
+			<button type="button" class="btn btn-warning"
 				id="sellbtn">我要賣</button></a>
+				
 		</div>
 
 
 		<div class="swiper-container">
-			<H2>熱銷商品</H2>
+			<H2><b>熱銷商品</b></H2>
 			<div class="swiper-wrapper">
 				<c:forEach var="VO" items="${list}">
 					<jsp:useBean id="ppService" scope="page"
@@ -108,9 +130,9 @@ marquee {
 		</div>
 
 		<div class="swiper-container">
-			<H2>今日推薦</H2>
+			<H2><b>今日推薦</b></H2>
 			<div class="swiper-wrapper">
-				<c:forEach var="rv" items="${ranlist}">
+			<c:forEach var="rv" items="${ranlist}">
 				<jsp:useBean id="ppService1" scope="page" class="com.productPicture.model.ProductPictureService" />
 				<div class="swiper-slide">
 						<a href="<%= request.getContextPath() %>/ProductServlet?action=findthis&pid=${rv.p_id}">
@@ -121,6 +143,7 @@ marquee {
 				</div>
 				
 			</c:forEach>
+				
 			</div>
 			<div class="swiper-pagination"></div>
 			<div class="swiper-button-next"></div>
@@ -211,10 +234,12 @@ marquee {
 // 			});
 // 		}
 
-// $('.carousel').carousel({
-// 	interval:100;
-// })
+
+$('.carousel').carousel({
+  interval: 1500
+});
 	</script>
+
 
 </body>
 

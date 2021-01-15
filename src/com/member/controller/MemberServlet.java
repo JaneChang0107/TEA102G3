@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -729,6 +730,7 @@ public class MemberServlet extends HttpServlet {
 			RequestDispatcher successView =req.getRequestDispatcher(url);
 			successView.forward(req, res);
 			SendEmail.openMail("1",m_email);
+				
 			
 			
 			// 抓到其他例外

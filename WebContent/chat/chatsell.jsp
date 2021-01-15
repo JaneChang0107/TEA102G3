@@ -217,7 +217,9 @@ request.setAttribute("memberVO", memberVO);
 		
 // 		row.innerHTML = '';
 		for (var i = 0; i < friends.length; i++) {
-			
+			if(friends[i] === self ) {
+			    continue;
+			   }
 			if (friends[i] != seller) {
 				row.innerHTML += '<div id=' + i + ' class="column" name="friendName" value=' + friends[i] + ' ><h2>'
 						+ friends[i] + '</h2></div>';

@@ -25,8 +25,6 @@ public class MemberLogin extends HttpServlet {
 		MemberJDBCDAO dao =new MemberJDBCDAO();
 		MemberVO memberLogin=dao.getMemberPw(account);
 		
-
-		
 		try {
 			loginId =memberLogin.getM_id();
 			loginName =memberLogin.getM_name();
