@@ -159,7 +159,9 @@ h5.card-header {
 					<div class="card-body">
 					    <h5 class="card-title">時間: ${orderlistVO.o_dateForm}</h5>
 						<h5 class="card-title">總金額: ${orderlistVO.o_total}</h5>
-						<h5 class="card-title">獲得堃幣: <span style="color:#FFA000;">${orderlistVO.o_pm}</span></h5>
+						<h5 class="card-title">使用堃幣: <b style="color:red;">${orderlistVO.o_pm-Math.round(orderlistVO.o_total*0.01)}</b></h5>
+						<h5 class="card-title">堃幣回饋: <b style="color:#FFA000;">${Math.round(orderlistVO.o_total*0.01)}</b></h5>					
+						
 
 					</div>
 				</div>

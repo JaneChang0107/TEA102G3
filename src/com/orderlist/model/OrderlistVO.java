@@ -88,6 +88,18 @@ public String getO_dateForm() {
 	String O_dateFormat= df.format(o_date);
 	return O_dateFormat;
 }
+
+public Integer getO_shippingfee() {
+	int shippingfee;
+	if(o_transport.equals("¶Â¿ß¦v«æ«K")) {
+		shippingfee=130;
+	}else if(o_transport.equals("¶l§½")) {
+		shippingfee=70;
+	}else {
+		shippingfee=60;
+	}
+	return shippingfee;
+}
  
  
 }

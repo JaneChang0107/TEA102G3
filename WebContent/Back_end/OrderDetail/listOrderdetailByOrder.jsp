@@ -174,10 +174,14 @@ body {
 						<td><p>${orderdetailVO.od_count*productSvc.oneProduct(orderdetailVO.p_id).p_price}</p></td>
 					</tr>
 				</c:forEach>
+
 			</table>
 			<hr>
-			<h2>
-				總金額:<%=orderlistVO.getO_total()%></h2>
+			<h2 style="text-align:right;">運費:<%=orderlistVO.getO_shippingfee()%></h2>
+<%-- 			<h2>堃幣回饋:<%=Math.round(orderlistVO.getO_total()*0.01) %></h2> --%>
+			<h2 style="text-align:right;">堃幣折抵:<%=orderlistVO.getO_pm()-Math.round(orderlistVO.getO_total()*0.01)%></h2>
+			<hr>
+			<h2 style="size:50px;text-align:right;">總金額:<%=orderlistVO.getO_total()%></h2>
 
 
 			<c:if test="${commentunfinish}">
