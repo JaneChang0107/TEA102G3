@@ -30,15 +30,15 @@
 }
 </style>
 </head>
-<body>
+<body >
 	<div class="container-fluid index_container">
-        <div class="row header">
+        <div class="row header shadow">
             <div class="col-2 align-self-center img-div">
                 <img src="./images/white_LOGO.png">
             </div>
             <div class="col head">
                  <div class="row align-items-end">
-                    <div class="col-8 head">
+                    <div class="col-7 head">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">   <!--員工系統 = emp_sys-->
                               <a class="nav-link active" id="emp_sys-tab" data-toggle="tab" href="#emp_sys" role="tab" aria-controls="emp_sys" aria-selected="true">
@@ -62,12 +62,16 @@
                             </li>
                           </ul>                         
                     </div>
+                    <div class="col div_img">
+                    	<img class="img-profile rounded-circle" src="./images/undraw_profile.svg">
+                    </div>
                     <div class="col">
-                    	<p>${employeeVO.e_name}</p>
+<!--                     	<img class="img-profile rounded-circle" src="./images/undraw_profile.svg">                   	 -->
+                    	<p class="p_ename">${employeeVO.e_name}</p>
                     </div>
                     <div class="col">
                     	<form action="<%=request.getContextPath()%>/logout">
-                            <button type="submit" class="btn btn-danger">登出</button>
+                            <button type="submit" class="btn btn-danger">Log Out</button>
                         </form>
                     </div>             
                 </div>
