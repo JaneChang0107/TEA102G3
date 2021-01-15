@@ -19,7 +19,7 @@
 
 <!DOCTYPE html>
 <html>
-
+<jsp:useBean id="pSvc" scope="page"	class="com.product.model.ProductService" />
 <head>
 <meta charset="utf-8">
 <title>YuXiKun</title>
@@ -40,14 +40,7 @@ marquee {
     right: 350px;
     height:500px;
 }
-H1
-{
-color: rgb(145, 195, 255);
-font-size: 50px;
-background-color: rgb(120, 120, 120);
-text-shadow: rgb(3, 3, 3) 4px 4px 4px;
 
-}
 
 
 </style>
@@ -59,7 +52,6 @@ text-shadow: rgb(3, 3, 3) 4px 4px 4px;
 </head>
 
 <body>
-
 
 	<center>
 
@@ -135,6 +127,7 @@ text-shadow: rgb(3, 3, 3) 4px 4px 4px;
 			<c:forEach var="rv" items="${ranlist}">
 				<jsp:useBean id="ppService1" scope="page" class="com.productPicture.model.ProductPictureService" />
 				<div class="swiper-slide">
+<%-- 				<h2>${pSvc.oneProduct(rv.p_id).p_name}</h2> --%>
 						<a href="<%= request.getContextPath() %>/ProductServlet?action=findthis&pid=${rv.p_id}">
 							<img alt="沒...沒圖"
 							src="<%= request.getContextPath() %>/ShowPicture?type=pp&id=${rv.pp_id}"

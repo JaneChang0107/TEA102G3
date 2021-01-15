@@ -63,7 +63,7 @@
 
 <style>
 body {
-	background-color: #E3F8F6;
+	
 	font-size: 25px;
 }
 * {
@@ -90,6 +90,8 @@ body {
 }
 .row {
 	font-size: 25px; 
+	width: 1500px;
+
 }
 
 /*  #signin {  */
@@ -114,142 +116,150 @@ body {
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </head>
-<body>
+<body style="background-color: #E3F8F6;">
 
-	
 
-		<div class="row">
-			<div class="column1">
-				<!-- 錯誤表列 -->
-				<c:if test="${not empty errorMsgs}">
-					<li style="color: red; font-color:red">請完成評價後再送出！</li>
-				</c:if>
-				<font style="color:blue"><h1>訂單資訊</h1></font>
-				<td><p>訂單編號:<%=orderlistVO.getO_id()%></p></td>
-			   <td><p> 訂單成立:<%=orderlistVO.getO_dateForm()%></p></td>
-			   <td><p> 狀態:<%=orderlistVO.getO_status()%></p></td>
 
-	<c:if test="${orderbelong}">
-		<form METHOD="post" ACTION="<%=request.getContextPath()%>/orderlist">
-			<input type="hidden" name="action" value="change_O_status"> <input
-				type="hidden" name="o_status" value="已出貨"> <input
-				type="hidden" name="o_id" value=<%=o_id%>> <input
-				type="submit" id="signin" value="出貨">
-		</form>
-	</c:if>
-			
-					<br>	
-			<font style="color:blue"><h1>收件資訊</h1></font>
-			<td><p>收件人:<%=memSvc.findOneMem(orderlistVO.getM_id()).getM_name()%></p></td>
-			<td><p>收件方式:<%=orderlistVO.getO_transport()%></p></td>
-			<td><p>收件地址:<%=orderlistVO.getO_address()%></p></td>
-		  </div>
+	<div class="row" style="margin: auto; margin-top: 100px;">
+		<div class="column1">
+			<!-- 錯誤表列 -->
+			<c:if test="${not empty errorMsgs}">
+				<li style="color: red; font-color: red">請完成評價後再送出！</li>
+			</c:if>
+			<font style="color: blue"><h1>訂單資訊</h1></font>
+			<td><p>
+					訂單編號:<%=orderlistVO.getO_id()%></p></td>
+			<td><p>
+					訂單成立:<%=orderlistVO.getO_dateForm()%></p></td>
+			<td><p>
+					狀態:<%=orderlistVO.getO_status()%></p></td>
 
-			<div class="column2">
-				<font style="color:blue"><h1>商品明細</h1></font>
-			<table class=detail style="width:800px; margin-left:-54px";>
-			<tr style="text-align:center";>
-			<td>示意圖</td>
-			<td>品名</td>
-			<td>數量</td>
-			<td>單價</td>
-			<td>小計</td>
-			</tr>
-			
-			<c:forEach var="orderdetailVO" items="${list}">
-			<tr style="text-align:center";>
-			<td><img src="<%=request.getContextPath()%>/ShowPicture?type=ppid&id=${productPicSvc.findProductRandomPicture(orderdetailVO.p_id)}"
-			width="100px" height="100px";></td>
-			<td><p>${productSvc.oneProduct(orderdetailVO.p_id).p_name}</p></td>
-			<td><p>* ${orderdetailVO.od_count}</p></td>
-			<td><p>${productSvc.oneProduct(orderdetailVO.p_id).p_price}</p></td>
-			<td><p>${orderdetailVO.od_count*productSvc.oneProduct(orderdetailVO.p_id).p_price}</p></td>
-			</tr>
-			</c:forEach>
-			 </table>
+			<c:if test="${orderbelong}">
+				<form METHOD="post" ACTION="<%=request.getContextPath()%>/orderlist">
+					<input type="hidden" name="action" value="change_O_status">
+					<input type="hidden" name="o_status" value="已出貨"> <input
+						type="hidden" name="o_id" value=<%=o_id%>> <input
+						type="submit" id="signin" value="出貨">
+				</form>
+			</c:if>
+
+			<br> <font style="color: blue"><h1>收件資訊</h1></font>
+			<td><p>
+					收件人:<%=memSvc.findOneMem(orderlistVO.getM_id()).getM_name()%></p></td>
+			<td><p>
+					收件方式:<%=orderlistVO.getO_transport()%></p></td>
+			<td><p>
+					收件地址:<%=orderlistVO.getO_address()%></p></td>
+		</div>
+
+		<div class="column2">
+			<font style="color: blue"><h1>商品明細</h1></font>
+			<table class=detail style="width: 800px; margin-left: -54px";>
+				<tr style="text-align: center";>
+					<td>示意圖</td>
+					<td>品名</td>
+					<td>數量</td>
+					<td>單價</td>
+					<td>小計</td>
+				</tr>
+
+				<c:forEach var="orderdetailVO" items="${list}">
+					<tr style="text-align: center";>
+						<td><img
+							src="<%=request.getContextPath()%>/ShowPicture?type=ppid&id=${productPicSvc.findProductRandomPicture(orderdetailVO.p_id)}"
+							width="100px" height="100px";></td>
+						<td><p>${productSvc.oneProduct(orderdetailVO.p_id).p_name}</p></td>
+						<td><p>* ${orderdetailVO.od_count}</p></td>
+						<td><p>${productSvc.oneProduct(orderdetailVO.p_id).p_price}</p></td>
+						<td><p>${orderdetailVO.od_count*productSvc.oneProduct(orderdetailVO.p_id).p_price}</p></td>
+					</tr>
+				</c:forEach>
+			</table>
 			<hr>
-			<h2>總金額:<%=orderlistVO.getO_total()%></h2>
-             
-           
-	<c:if test="${commentunfinish}">
+			<h2>
+				總金額:<%=orderlistVO.getO_total()%></h2>
 
-		<button type="button" id="${orderlistVO.o_id}"
-			class="btn btn-info btn-lg" data-toggle="modal"
-			data-target="#myModal">我要評價</button>
-		<div id="myModal" class="modal fade" role="dialog">
-			<div class="modal-dialog" style="width: 420px"; >
-				<div class="modal-content">
-					<div class="modal-header" style="background-color: lightsteelblue";>
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h1 class="modal-title">留下評論</h1>
-					</div>
-					<div class="modal-body">
-						<!--       <h1>留下評論：</h1> -->
 
-						<FORM METHOD="post"
-							ACTION="<%=request.getContextPath()%>/ViewSellerServlet"
-							name="form1">
+			<c:if test="${commentunfinish}">
 
-							<div id="o_id" style="display: none">
-								<label>訂單編號</label> <input type="text" name="o_id"
-									value="${orderlistVO.o_id}">
+				<button type="button" id="${orderlistVO.o_id}"
+					class="btn btn-info btn-lg" data-toggle="modal"
+					data-target="#myModal">我要評價</button>
+				<div id="myModal" class="modal fade" role="dialog">
+					<div class="modal-dialog" style="width: 420px"; >
+						<div class="modal-content">
+							<div class="modal-header"
+								style="background-color: lightsteelblue";>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h1 class="modal-title">留下評論</h1>
 							</div>
+							<div class="modal-body">
+								<!--       <h1>留下評論：</h1> -->
 
-							<div id="m_buyid" style="display: none">
-								<label>買家名稱</label> <input type="text" name="m_buyid"
-									value="${orderlistVO.m_id}">
+								<FORM METHOD="post"
+									ACTION="<%=request.getContextPath()%>/ViewSellerServlet"
+									name="form1">
+
+									<div id="o_id" style="display: none">
+										<label>訂單編號</label> <input type="text" name="o_id"
+											value="${orderlistVO.o_id}">
+									</div>
+
+									<div id="m_buyid" style="display: none">
+										<label>買家名稱</label> <input type="text" name="m_buyid"
+											value="${orderlistVO.m_id}">
+									</div>
+
+									<div id="m_sellid" style="display: none">
+										<label>賣家名稱</label> <input type="text" name="m_sellid"
+											value="${comparem_id}">
+									</div>
+
+									<div id="choose_gb">
+										<div>
+											<tr>
+												<h2>給予評價：</h2>
+											</tr>
+											<tr>
+												<input type="radio" name="v_gb" value="good"
+													<%=viewsellerVO != null && viewsellerVO.getV_gb().equals("good") ? "checked" : ""%>>
+												<i class="fas fa-thumbs-up"></i>
+												<input type="radio" name="v_gb" value="bad"
+													<%=viewsellerVO != null && viewsellerVO.getV_gb().equals("bad") ? "checked" : ""%>>
+												<i class="fas fa-thumbs-down"></i>
+											</tr>
+										</div>
+										<div id="v_comment">
+											<h2>評論內容：</h2>
+											<textarea name="v_comment" placeholder="請填寫評論內容"
+												style="width: 385px" cols="50" rows="4"><%=viewsellerVO == null ? "" : viewsellerVO.getV_comment()%></textarea>
+											<%-- 					<textarea name="v_comment" /*cols="40" rows="1"*/><%=viewsellerVO == null ? "" : viewsellerVO.getV_comment()%></textarea> --%>
+										</div>
+
+										<div style="display: none">
+											<h2>
+												評價日期： <input type="text" name="v_date" id="v_date" size="40"
+													placeholder="請選擇日期" />
+											</h2>
+										</div>
+
+										<div>
+											<input type="hidden" name="action" value="insert"> <input
+												type="submit" class="btn btn-primary" value="送出">
+										</div>
+								</form>
+
 							</div>
-
-							<div id="m_sellid" style="display: none">
-								<label>賣家名稱</label> <input type="text" name="m_sellid"
-									value="${comparem_id}">
+							<div class="modal-footer" style="padding: 0";>
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal" style="display: none";></button>
 							</div>
-
-							<div id="choose_gb">
-								<div>
-									<tr>
-										<h2>給予評價：</h2>
-									</tr>
-									<tr>
-										<input type="radio" name="v_gb" value="good"
-											<%=viewsellerVO != null && viewsellerVO.getV_gb().equals("good") ? "checked" : ""%>>
-										<i class="fas fa-thumbs-up"></i>
-										<input type="radio" name="v_gb" value="bad"
-											<%=viewsellerVO != null && viewsellerVO.getV_gb().equals("bad") ? "checked" : ""%>>
-										<i class="fas fa-thumbs-down"></i>
-									</tr>
-								</div>
-								<div id="v_comment">
-									<h2>評論內容：</h2>
-									<textarea name="v_comment" placeholder="請填寫評論內容" style="width: 385px" cols="50"
-										rows="4"><%=viewsellerVO == null ? "" : viewsellerVO.getV_comment()%></textarea>
-									<%-- 					<textarea name="v_comment" /*cols="40" rows="1"*/><%=viewsellerVO == null ? "" : viewsellerVO.getV_comment()%></textarea> --%>
-								</div>
-
-								<div style="display: none">
-									<h2>
-										評價日期： <input type="text" name="v_date" id="v_date" size="40"
-											placeholder="請選擇日期" />
-									</h2>
-								</div>
-
-								<div>
-									<input type="hidden" name="action" value="insert"> <input
-										type="submit" class="btn btn-primary" value="送出">
-								</div>
-						</form>
-
-					</div>
-					<div class="modal-footer" style="padding: 0";>
-						<button type="button" class="btn btn-default" data-dismiss="modal"
-							style="display: none";></button>
-					</div>
-	</c:if>
-	 </div>
-       </div>
+			</c:if>
+		</div>
+	</div>
 
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"
+	<script src="https://code.jquery.com/jquery-3.5.1.js"
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 		crossorigin="anonymous"></script>
 

@@ -30,7 +30,7 @@ pageContext.setAttribute("list",list);
     border: 3px solid #CCCCFF;
     padding: 5px;
     text-align: center;
-    width: 1000px;
+    width: 800px;
     height: 70px;
     margin: auto;
     margin-top: 10px;
@@ -147,7 +147,7 @@ h5.card-header {
 <c:forEach var="memberVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 	<h3>
 	<div class="div1">
-	<p>您購買的${memberVO.p_name}數量<b>${memberVO.od_count}</b>${memberVO.o_status}</p>
+	<p>您購買的<u>${memberVO.p_name}</u>數量<b>${memberVO.od_count}</b>${memberVO.o_status}</p>
 	</div>
 	</h3>
 </c:forEach>	

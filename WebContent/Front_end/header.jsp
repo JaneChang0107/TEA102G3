@@ -81,6 +81,17 @@ h1 {
     border-radius: 30px;
     box-shadow: 3px 3px 5px 6px darkgrey;
 	}
+	#buybtn{
+	color: #fff;
+    background-color: cornflowerblue;
+    border-color:cornflowerblue;
+	}
+	#sellbtn{
+	color: #212529;
+    background-color: #FFC1D6;
+    border-color:#FFC1D6;
+	}
+
 	
 	
 	

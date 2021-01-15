@@ -18,6 +18,10 @@
         	div.col-md-3{
         		margin: 70px 30px auto 30px;
         	}
+        	.price{
+        	    font-size:40px;
+        	    color:rgb(255, 0, 124);
+        	}
         </style>
     </head>
     <body>
@@ -39,9 +43,9 @@
 			        <div class="card" style="width: 18rem;">
 			        <img src="<%= request.getContextPath() %>/ShowPicture?type=pp&id=${ppService.findProductRandomPicture(value.p_id)}" class="card-img-top" id="productImg" alt="沒...沒圖片">
 			        <div class="card-body">
-			            <h5 class="card-title">${value.p_name}</h5>
-			            <p class="card-text">平台:${value.pt_idName}</p>
-			            <p class="card-text">價格:${value.p_price}</p>
+			            <h5 class="card-title"><b>${value.p_name}</b></h5>
+			            <p class="card-text">分類:${value.pt_idName}</p>
+			            <b><p class="price">$${value.p_price}</p></b>
 			            <small>上架時間:${value.p_addDateSec}</small>
 			            <div>
 			                <form action="<%= request.getContextPath() %>/ProductServlet" method="GET">
