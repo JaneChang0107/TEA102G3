@@ -83,7 +83,7 @@
 	position: relative;
 	left: 50%;
 	font-size: 20px;
-	padding: 15px 50px;
+	padding: 15px 47px;
 }
 
 .content {

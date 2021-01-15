@@ -76,7 +76,7 @@
     width: 800px;
     height: 900px;
     font-size: 24px;
-    background-color: #cce5ff;
+    background-color: lightblue;
     color: #8d8a8a;
     border-radius: 30px;
     font-weight: bold;
@@ -95,6 +95,13 @@
     width: 100px;
     border: 1px solid #707070;
     margin-left: 20px;
+}
+#signup {
+	background-color: white;
+	color: black;
+	width: 120px;
+	border: 1px solid #707070;
+	margin-left: 50px;
 }
 
 </style>
@@ -224,6 +231,9 @@
 						</tr>
 
 					</table>
+		<input type="button" value="放棄修改" onclick="location.href='<%=request.getContextPath()%>/Front_end/members/MyAccount.jsp'" class="btn btn-primary" id="signup">
+		
+					
 		<input type="hidden" name="action" value="Myfileupdateconfirm">
 		<input type="hidden" name="m_id" value="<%=memberVO.getM_id()%>">
 		<input type="submit" value="送出修改" id="revise" class="btn btn-primary">
@@ -252,10 +262,10 @@
 							</tr>
 
 						</table>
-						<input type="hidden" name="action" value="MyfilePasswordupdate">
-						<input type="hidden" name="m_id" value="<%=memberVO.getM_id()%>">
-						<input type="submit" value="送出修改" id="revise"
-							class="btn btn-primary"></FORM>
+<!-- 						<input type="hidden" name="action" value="MyfilePasswordupdate"> -->
+<%-- 						<input type="hidden" name="m_id" value="<%=memberVO.getM_id()%>"> --%>
+<!-- 						<input type="submit" value="送出修改" id="revise" -->
+<!-- 							class="btn btn-primary"></FORM> -->
 
                  </div>
 

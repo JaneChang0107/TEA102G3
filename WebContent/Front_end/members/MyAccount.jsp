@@ -77,7 +77,7 @@
     width: 800px;
     height: 900px;
     font-size: 24px;
-    background-color: #cce5ff;
+    background-color: lightblue;
     color: #8d8a8a;
     border-radius: 30px;
     font-weight: bold;

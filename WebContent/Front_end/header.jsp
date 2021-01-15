@@ -425,9 +425,9 @@ right: 18px;
 		<div id="myNav" class="overlay">
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 			<div class="overlay-content">
-				<a href="http://localhost:8081/TEA102G3/ProductServlet?ptype=no&name=&action=findByName">我要買</a> 
+				<a class="dropdown-item" href="http://localhost:8081/TEA102G3/ProductServlet?ptype=no&name=&action=findByName">我要買</a> 
 				<a class="dropdown-item" href="<%=request.getContextPath()%>/member/controller/MemberServlet?action=goSellerIndex">我要賣</a>
-				<a href="#">關於遊戲堃</a>
+				<a class="dropdown-item" href="#">關於遊戲堃</a>
 			</div>
 		</div>
 

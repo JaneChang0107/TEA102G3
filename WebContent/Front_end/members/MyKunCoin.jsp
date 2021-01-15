@@ -113,12 +113,14 @@ h5.card-header {
 }
 
 #coinBar {
-    margin:auto;
-	height: 80px;
-	width: 800px;
-	text-align: left;
-	background-color: white;
-	margin-bottom:50px;
+    margin: auto;
+    height: 80px;
+    width: 800px;
+    text-align: left;
+    background-color: aliceblue;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    box-shadow: 3px 3px 3px 2px darkgrey;
 }
 #coinpic{
     color:#FFA000;

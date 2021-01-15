@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService"></jsp:useBean>
 		<div>
-			<img src="${memberVO.m_headpic2}" id="headimg">
+			<img src="${memSvc.findOneMem(loginId).m_headpic2}" id="headimg">
 			<a href="http://localhost:8081/TEA102G3/Front_end/members/MyAccount.jsp"><button type="button" class="btn btn-secondary">
 				<i class="fas fa-user-circle" id="icons"></i>我的帳戶
 			</button></a>
