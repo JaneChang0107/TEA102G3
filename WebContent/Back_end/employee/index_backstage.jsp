@@ -37,12 +37,8 @@
                 <img src="./images/white_LOGO.png">
             </div>
             <div class="col head">
-                <div class="row align-items-center">
-                    <div class="col"><p>HELLO!${employeeVO.e_name}</p></div>
-                </div>
-
-                <div class="row align-items-center">
-                    <div class="col head">
+                 <div class="row align-items-end">
+                    <div class="col-8 head">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">   <!--員工系統 = emp_sys-->
                               <a class="nav-link active" id="emp_sys-tab" data-toggle="tab" href="#emp_sys" role="tab" aria-controls="emp_sys" aria-selected="true">
@@ -64,12 +60,15 @@
                                                                公告系統
                               </a>
                             </li>
-                            <li>
-                            	<form action="<%=request.getContextPath()%>/logout">
-                                <button type="submit" class="btn btn-danger">登出</button>
-                                </form>
-                            </li>
                           </ul>                         
+                    </div>
+                    <div class="col">
+                    	<p>${employeeVO.e_name}</p>
+                    </div>
+                    <div class="col">
+                    	<form action="<%=request.getContextPath()%>/logout">
+                            <button type="submit" class="btn btn-danger">登出</button>
+                        </form>
                     </div>             
                 </div>
             </div>
