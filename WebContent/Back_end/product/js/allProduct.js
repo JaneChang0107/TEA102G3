@@ -47,7 +47,7 @@ function whichProduct(which) {
 //                console.log(value.p_name);
                 $("#products").append(
                     `<tr>
-                    <td id="${value.p_id}" scope="row">${value.p_id}</td>
+                    <td id="${value.p_id}" scope="row"><a href='${contextPath}/ProductServlet?pid=${value.p_id}&action=findthis' target="_blank">${value.p_id}</a></td>
                     <td id="name${count}">${value.p_name}</td>
                     <td id="type${count}" data-type="${value.pt_id}">${value.pt_idName}</td>
                     <td id="price${count}">${value.p_price}元</td>

@@ -2,8 +2,6 @@ let pathname = location.pathname;
 let position = pathname.indexOf("/", 2);
 const contextPath = pathname.substr(0, position);
 
-console.log(contextPath)
-
 $.ajax({
     url: contextPath + "/ProductServlet",
     type: "GET",
@@ -43,7 +41,7 @@ $.ajax({
                 <td id="type${count}" data-type="${value.pt_id}">${value.pt_idName}</td>
                 <td id="price${count}">${value.p_price}元</td>
                 <td id="count${count}">${value.p_count}個</td>
-                <td data-status="${value.p_status}">${value.p_statusMeans}</td>
+                <td data-status="${value.p_status}">${switchStatus(value.p_statusMeans)}</td>
                 <td>
                     <form action="${contextPath}/ProductServlet" method="post">
                         <input type="hidden" name="pid" value="${value.p_id}">
@@ -69,3 +67,46 @@ $(document).on("click", ".checkBtn", (e) => {
     	$(e.target).closest("form").submit();
     }
 });
+
+$(document).on("click", ".statusBtn", (event) => {
+        let pstatus = $(event.target).closest("td").attr("data-status");
+        let pid = $(event.target).closest("tr").find("td").eq(0).attr("data-pid");
+
+        $.ajax({
+            url : contextPath + "/ProductAjaxChangeStatus",
+            type : "POST",
+            data : {
+                "pstatus" : pstatus,
+                "pid" : pid,
+            },
+            datatype : "json",
+            success : (e) => {
+                let value = JSON.parse(e);
+                $(event.target).closest("td").attr("data-status", value.p_status);
+                $(event.target).closest("td").html(switchStatus(value.p_statusMeans));
+            }
+        });
+
+});
+
+
+function switchStatus(status) {
+    switch (status) {
+        case "上架中" :
+            return `<input type="button" class="btn statusBtn btn-primary" value="上架中">`;
+        case "下架中" :
+            return `<input type="button" class="btn statusBtn btn-primary" value="下架中">`;
+        case "審核中(審核後上架)" :
+            return `<input type="button" class="btn statusBtn btn-primary" value="審核後上架">`;;
+        case "審核中(審核後下架)" :
+            return `<input type="button" class="btn statusBtn btn-primary" value="審核後下架">`;
+        case "已售出" :
+            return "已售出";
+        case "待出貨" :
+            return "待出貨";
+        case "無法上架" :
+            return "無法上架";
+        default :
+            return "ssss";
+    }
+}
