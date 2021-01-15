@@ -1,11 +1,7 @@
-@charset "BIG5";
-*{
-  margin: 0;
-  padding: 0;
-}
-body {
-  padding: 40px 100px;
-}
+/* @charset "BIG5"; */
+/* .input_body_class { */
+/*   padding: 40px 100px; */
+/* } */
 .dic_css{
   width: 800px;
   margin: 40px auto;
@@ -14,7 +10,7 @@ body {
   color: #444;
 }
 /*表格的默认设置*/
-table {
+.bordered {
   *border-collapse: collapse;
   border-spacing: 0;
   width: 100%;

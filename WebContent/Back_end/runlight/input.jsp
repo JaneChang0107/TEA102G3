@@ -14,13 +14,10 @@ pageContext.setAttribute("value",value);
 <title>輸入公告</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 <style>
-*{
-  margin: 0;
-  padding: 0;
-}
-body {
-  padding: 40px 100px;
-}
+
+/* .input_body_class { */
+/*   padding: 40px 100px; */
+/* } */
 .dic_css{
   width: 800px;
   margin: 40px auto;
@@ -29,7 +26,7 @@ body {
   color: #444;
 }
 /*表格的默认设置*/
-table {
+.bordered {
   *border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
@@ -86,7 +83,7 @@ table {
 </head>
 
 
-<body>
+<body class="input_body_class">
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -104,7 +101,7 @@ table {
 
 <!-- zebra        table table-dark table-hover         bordered -->
 <FORM METHOD="post" ACTION="<%= request.getContextPath() %>/light.do" name="form1">
-<table class="bordered" >
+<table class="bordered"  >
 
 	<tr>
 		<td>輸入:</td>
