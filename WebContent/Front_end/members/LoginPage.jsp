@@ -82,7 +82,7 @@
 				<label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
 				<div class="col-sm-10">
 					<input type="email" class="form-control" id="inputEmail3"
-						name="account">
+						name="account" placeholder="請輸入註冊時的Email">
 				</div>
 			</div>
 
@@ -90,7 +90,7 @@
 				<label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
 				<div class="col-sm-10">
 					<input type="password" class="form-control" id="inputPassword3"
-						name="password">
+						name="password" placeholder="請輸入密碼">
 				</div>
 			</div>
 
