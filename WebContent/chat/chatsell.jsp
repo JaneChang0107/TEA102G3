@@ -37,10 +37,39 @@ request.setAttribute("memberVO", memberVO);
 	href="<%=request.getContextPath()%>/css/chatsell.css" type="text/css" />
 <script
 	src="<%=request.getContextPath()%>/vendors/jquery/jquery-3.5.1.min.js"></script>
-<style type="text/css">
-</style>
-<title>KUN聊天室</title>
 
+<title>KUN聊天室</title>
+<style>
+.chip {
+  display: inline-block;
+  padding: 0 25px;
+  height: 50px;
+  font-size: 16px;
+  line-height: 50px;
+  border-radius: 25px;
+
+}
+
+.chip img {
+  float: left;
+  margin: 0 10px 0 -25px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+div.row {
+	width: 281px;
+	height: 639px;
+	display: inline-block;
+	overflow: auto;
+	background-color: #2c3e50;
+	border: 2px solid black;
+	position:relative;
+}
+
+
+
+</style>
 </head>
 
 
@@ -56,7 +85,13 @@ request.setAttribute("memberVO", memberVO);
 		<div class="all_div_chat livebox">
 			<div class="row" id="row">
 			<input id="seller" style= "display:none"; value="${memberVO.m_name}">
-			<div class="column" name="friendName" value="${memberVO.m_name}"><h2>${memberVO.m_name}</h2></div>
+			<div class="column" name="friendName" value="${memberVO.m_name}">
+			
+			<div class="chip">
+            <img src="<%=request.getContextPath()%>/images/apple.jpg" alt="Person" width="96" height="96">
+               ${memberVO.m_name}
+            </div>
+	   </div>
 <%-- 				<h2>${memberVO.m_name}的賣場</h2> --%>
 <!-- 				<ul class="memberlist"> -->
 				
@@ -72,6 +107,7 @@ request.setAttribute("memberVO", memberVO);
 			<div class="chat_box">
 				<div class="statusoutput">
 					<div class="membername" id="membername">
+					
 					${memberVO.m_name}
 						<!--點擊好友後顯示名稱位子-->
 					</div>

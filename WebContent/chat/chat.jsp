@@ -47,8 +47,8 @@ request.setAttribute("memberVO", memberVO);
 <body onload="connect();" onunload="disconnect();">
 	<div class="chat_area">
 		<div class="chat_icon">
-			<img id="only_img"
-				src="<%=request.getContextPath()%>/images/chaticon.png" alt=""
+			<img id="only_img" style="width: 80% ; height: 80%; margin-top:-100px";
+				src="<%=request.getContextPath()%>/images/Message.png" alt=""
 				title="聊聊">
 		</div>
 
@@ -60,10 +60,7 @@ request.setAttribute("memberVO", memberVO);
 						${memberVO.m_name}
 			</c:if>">
 
-			<h2>
-			<c:if test="${!memberVO.m_name.equals(loginName)}">		
-						${memberVO.m_name}
-			</c:if></h2></div>
+			</div>
 			
 <%-- 				<h2>${memberVO.m_name}的賣場</h2> --%>
 <!-- 				<ul class="memberlist"> -->
@@ -230,7 +227,10 @@ request.setAttribute("memberVO", memberVO);
 				continue;
 			console.log('朋友'+[i]+'是'+friends[i] + self +'是我');
 			}
-			
+// 			if (friends[i] != seller) {
+// 				row.innerHTML += '<div id=' + i + ' class="column" name="friendName" value=' + friends[i] + ' ><h2>'
+// 						+ friends[i] + '</h2></div>';
+// 			}
 		
 			row.innerHTML += '<div id=' + i + ' class="column" name="friendName" value=' + friends[i] + ' ><h2>'
 					+ friends[i] + '</h2></div>';

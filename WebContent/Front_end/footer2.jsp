@@ -34,9 +34,8 @@
 		src="<%=request.getContextPath()%>/images/white_LOGO字在外版(revised).png"
 		class="logo" id="footerlogo">
 	<div class="footerwords" id="footerwords">
-		<span class="footerwords">關於我們</span><span class="footerwords">隱私權政策</span>
-		<span class="footerwords">網站地圖</span><br>
-		<span class="footerwords">常用問答</span>
+		<span class="footerwords">關於我們</span><span class="footerwords">隱私權政策</span><br>
+		<span class="footerwords">網站地圖</span><span class="footerwords">常用問答</span><br>
 		<span class="footerwords">服務條款</span>
 	</div>
 

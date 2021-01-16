@@ -26,58 +26,76 @@
 
 
 <style>
+
+.container my-4{
+    margin-bottom: -2.5rem!important;
+}
+.container {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+}
 marquee {
 	width: 1000px;
 }
 
 .w-100{
-    opacity: 0.4;
+    opacity: 1;
 }
 #carousel-inner {
     position: relative;
-    width: 1800px;
+    width: 152%; 
     overflow: hidden;
-    right: 350px;
-    height:500px;
+    right: 290px;
+    height: 767px; 
+    top: -72px;
 }
-
 
 
 </style>
 
-
 <div class="header">
 	<jsp:include page="header.jsp"></jsp:include>
 </div>
-</head>
 
+
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/slick.css"/>
+<!-- Add the new slick-theme.css if you want the default styling -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/slick-theme.css"/>
+
+
+</head>
+<jsp:useBean id="ppService" scope="page" class="com.productPicture.model.ProductPictureService" />
 <body>
 
 	<center>
-
-		<h3>
-			<marquee onMouseOver="this.stop()" onMouseOut="this.start()"
-				id="announcement"></marquee>
-		</h3>
+		<h1>
+			<marquee onMouseOver="this.stop()" onMouseOut="this.start()" id="announcement"></marquee>
+		<h1/>
 	</center>
 
-	<div class="content">
+<div class="content">
 
 
-<div class="container my-4">
+<div class="container my-4" style="margin-bottom: -2.5rem!important";>
 
     <div id="carouselExample1" class="carousel slide z-depth-1-half" data-ride="carousel">
       <div class="carousel-inner" id="carousel-inner">
         <div class="carousel-item active">
-          <img class="d-block w-100" src="<%=request.getContextPath()%>/images/ps4.png" alt="First slide" width=1300px height=500px >
+          <img class="d-block w-100" src="<%=request.getContextPath()%>/images/index1.jpg" alt="First slide">
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="<%=request.getContextPath()%>/images/switch.png" alt="Second slide"  width=1300px height=500px>
+          <img class="d-block w-100" src="<%=request.getContextPath()%>/images/index6.jfif" alt="Second slide" >
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="<%=request.getContextPath()%>/images/xbox.png" alt="Third slide" width=1300px height=500px>
+          <img class="d-block w-100" src="<%=request.getContextPath()%>/images/index4.jfif" alt="Second slide" >
         </div>
-      </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="<%=request.getContextPath()%>/images/index3.png" alt="Third slide">
+        </div>
+            </div>
       <a class="carousel-control-prev" href="#carouselExample1" role="button" data-slide="prev">
 <!--         <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
         <span class="sr-only">Previous</span>
@@ -89,28 +107,18 @@ marquee {
 </div> 
 </div>
 
-		<div class="article">
-			<a
-				href="<%=request.getContextPath()%>/ProductServlet?ptype=no&name=&action=findByName"><button
-					type="button" class="btn btn-success" id="buybtn">我要買</button></a>
-            <a href="<%=request.getContextPath()%>/member/controller/MemberServlet?action=goSellerIndex">
-			<button type="button" class="btn btn-warning"
-				id="sellbtn">我要賣</button></a>
-				
-		</div>
 
-
+<H2><b style="margin-left:208px ;color: #bd2130";>熱銷商品</b></H2>
 		<div class="swiper-container">
-			<H2><b>熱銷商品</b></H2>
-			<div class="swiper-wrapper">
+			
+		<div class="swiper-wrapper">
 				<c:forEach var="VO" items="${list}">
-					<jsp:useBean id="ppService" scope="page"
-						class="com.productPicture.model.ProductPictureService" />
-					<div class="swiper-slide">
+					
+			<div class="swiper-slide">
 						<a href="<%= request.getContextPath() %>/ProductServlet?action=findthis&pid=${VO.p_id}">
 							<img alt="沒...沒圖"
 							src="<%= request.getContextPath() %>/ShowPicture?type=pp&id=${VO.pp_id}"
-							style="width: 227.74px; height: 300px;"></a>
+							style="width: 294.74px; height: 300px;"></a>
 
 					</div>
 
@@ -121,8 +129,11 @@ marquee {
 			<div class="swiper-button-prev"></div>
 		</div>
 
+
+
+<H2><b style="margin-left:208px;color: #bd2130";>今日推薦</b></H2>
 		<div class="swiper-container">
-			<H2><b>今日推薦</b></H2>
+			
 			<div class="swiper-wrapper">
 			<c:forEach var="rv" items="${ranlist}">
 				<jsp:useBean id="ppService1" scope="page" class="com.productPicture.model.ProductPictureService" />
@@ -131,10 +142,8 @@ marquee {
 						<a href="<%= request.getContextPath() %>/ProductServlet?action=findthis&pid=${rv.p_id}">
 							<img alt="沒...沒圖"
 							src="<%= request.getContextPath() %>/ShowPicture?type=pp&id=${rv.pp_id}"
-							style="width: 227.74px; height: 300px;"></a>
-				
+							style="width: 290px; height: 300px;"></a>
 				</div>
-				
 			</c:forEach>
 				
 			</div>
@@ -151,15 +160,17 @@ marquee {
 
 
 	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/vendors/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/vendors//jquery-migrate-1.2.1.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/slick.min.js"></script>
+	
+	
 	<script>
-	
-	
-	
 		var swiper = new Swiper('.swiper-container', {
 			slidesPerView : 4,
 			spaceBetween : 30,
 			slidesPerGroup : 4,
-			loop : true,
+			loop : false,
 			loopFillGroupWithBlank : true,
 			pagination : {
 				el : '.swiper-pagination',
@@ -184,7 +195,7 @@ marquee {
 						},
 						dataType : "json",
 						success : function(data) {
-							$("#announcement").html("");
+							$("#announcement").html("");http://localhost:8081/TEA102G3/images/index2.png
 
 							console.log(data)
 
@@ -229,9 +240,12 @@ marquee {
 
 
 $('.carousel').carousel({
-  interval: 1500
+  interval: 6000
 });
-	</script>
+	
+
+
+</script>
 
 
 </body>

@@ -38,6 +38,7 @@
 	<script src="<%=request.getContextPath()%>/Front_end/js/webSocket.js"></script>
 
 <style>
+
 * {
 	box-sizing: border-box;
 }
@@ -47,7 +48,7 @@ html {
 }
 
 body {
-	background: #E3F8F6;
+	background-color: moccasin;
 	height: 100%;
 }
 
@@ -67,7 +68,7 @@ h1 {
 	bottom: 0px;
 	width: 100%;
 	height: 200px;
-	background: #6CCFF3;
+	background:#179ab8;
 }
 #notice{
     position: relative;
@@ -204,7 +205,7 @@ i {
 	position: relative;
 	left: -20px;
 	padding: 10px;
-	color:black;
+	color:white;
 }
 
  
@@ -222,24 +223,27 @@ i {
 .logo {
 	position: relative;
 	left: 50px;
-	top: 10px;
+	top: 5px ;
+	
 }
 
 #footerlogo {
 	width: 300px;
+	left: 205px;
+	top: 31px ;
 }
 
 div.header {
 	widows: 1280px;
 	height: 80px;
-	background: #6CCFF3;
+	background: #179ab8;
 }
 
 #searchBar {
 	position: relative;
 	height: 40px;
 	width: 600px;
-	left: 70px;
+	left: 91px;
 	top: 10px;
 }
 
@@ -262,20 +266,20 @@ div.article {
 div.swiper-container {
     position: relative;
     height: 300px;
-    width: 1000px;
-    background: ivory;
-    border: 2px solid powderblue;
+    width: 1272px;
+/*     background: ivory; */
+/*     border: 2px solid powderblue; */
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 10px;
     color: #000;
-    margin: 40px auto;
+    margin: 30px auto;
     padding: 0;
 }
 
-.swiper-container {
-	width: 50%;
-	height: 50%;
-}
+/* .swiper-container { */
+/* 	width: 50%; */
+/* 	height: 50%; */
+/* } */
 
 .swiper-slide {
 	text-align: center;
@@ -299,8 +303,8 @@ div.swiper-container {
 div.footerwords {
 	position: absolute;
 	display: inline;
-	top: 20px;
-	left: 50%;
+	top: 46px;
+	left: 40%;
 }
 
 span.footerwords {
@@ -314,7 +318,7 @@ div.copyright {
 	left: 50%;
 	padding: 10px;
 	transform: translateX(-50%);
-	color: gray;
+	color: white;
 }
 
 .overlay {
@@ -325,7 +329,7 @@ div.copyright {
 	top: 0;
 	left: 0;
 	background-color: rgb(0, 0, 0);
-	background-color: rgba(28, 65, 145, 0.9);
+	background-color: rgb(23 154 184);
 	overflow-x: hidden;
 	transition: 0.5s;
 }
@@ -388,14 +392,18 @@ div.header {
 select#ptype {
 	position: relative;
 	font-size: 20px;
-	top: 12px;
+	top: 11px;
 	height: 40px;
-	left: 75px;
-	z-index: 1;
+	left: 96px;
+	z-index: 0;
 }
 
 #searchBar {
 	width: 470px;
+	position:relative;
+	height:40px;
+	left:91px;
+	top:10;
 }
 
 #showToast{
@@ -414,6 +422,8 @@ right: 18px;
 /* 	bottom: 10px; */
 /* 	z-index: 5; */
 /* } */
+
+
 </style>
 </head>
 
@@ -422,12 +432,12 @@ right: 18px;
 	<div class="header">
 
 		<i class="fas fa-bars" id="ham" onclick="openNav()"></i>
-		<div id="myNav" class="overlay">
+		<div id="myNav" class="overlay"";>
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 			<div class="overlay-content">
-				<a class="dropdown-item" href="http://localhost:8081/TEA102G3/ProductServlet?ptype=no&name=&action=findByName">我要買</a> 
+				<a href="http://localhost:8081/TEA102G3/ProductServlet?ptype=no&name=&action=findByName">我要買</a> 
 				<a class="dropdown-item" href="<%=request.getContextPath()%>/member/controller/MemberServlet?action=goSellerIndex">我要賣</a>
-				<a class="dropdown-item" href="#">關於遊戲堃</a>
+				<a href="#">關於遊戲堃</a>
 			</div>
 		</div>
 
@@ -446,7 +456,6 @@ right: 18px;
 				</i>
 			</form>
 		</div>
-
 
 
 		<table>
@@ -527,7 +536,7 @@ right: 18px;
 		});
 
 		function openNav() {
-			document.getElementById("myNav").style.width = "30%";
+			document.getElementById("myNav").style.width = "13%";
 		}
 
 		function closeNav() {
