@@ -49,6 +49,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 
 	private static final String NOTICE ="select orderlist.o_date, orderlist.o_status, ORDERDETAIL.p_id, ORDERDETAIL.o_id, ORDERDETAIL.od_count, product.p_name,orderlist.M_id ,member.m_name from orderlist inner join orderdetail on orderlist.o_id=orderdetail.o_id inner join product on orderdetail.p_id=product.p_id inner join member on orderlist.M_id=member.m_id where orderlist.m_id= ? order by orderlist.o_date desc";
 	
+	private static final String UPDATE_EMAIL_STMT ="UPDATE member set m_email=? where m_id=?";
 	
 	@Override
 	public void updateSellstore(MemberVO memberVO) {
@@ -725,6 +726,42 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		}	
 	}
 	
+	@Override
+	public void updateEmail(MemberVO memberVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_EMAIL_STMT);
+			pstmt.setString(1, memberVO.getM_email());
+			pstmt.setString(2, memberVO.getM_id());
+			
+			pstmt.executeUpdate();
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
 
 	
 
@@ -953,6 +990,9 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 
 
 	}
+
+
+
 
 
 }

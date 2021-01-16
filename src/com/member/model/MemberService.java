@@ -113,6 +113,16 @@ public class MemberService {
 		dao.updateStatus(memberVO);
 		return memberVO;
 	}
+	
+	//修改email
+	    public MemberVO updateEmail(String m_email,String m_id) {
+	    	MemberVO memberVO =new MemberVO();
+	    	memberVO.setM_email(m_email);
+	    	memberVO.setM_id(m_id);
+	    	dao.updateEmail(memberVO);
+	    	return memberVO;
+	}
+	
 	//修改會員
 //	public MemberVO updateMem(String m_email, String m_name, String m_gender, String m_phone,
 //			String m_address, java.sql.Date m_birth, byte[] m_headpic, String m_identity,

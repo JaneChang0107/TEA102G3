@@ -35,7 +35,9 @@ public class MemberServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-
+	
+		
+		
 		
 //­×§ï½æ³õ­¶­±
 		if ("updateSellstore".equals(action)) {

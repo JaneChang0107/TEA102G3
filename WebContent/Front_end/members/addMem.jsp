@@ -86,7 +86,7 @@
         <div class="form-group row">
           <label for="inputEmail3" class="col-sm-2 col-form-label" >Email<b>*</b></label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="mail" name="m_email" value="<%=(memberVO == null) ? "a123@yahoo.com" : memberVO.getM_email()%>" />
+            <input type="text" class="form-control" id="mail" name="m_email" value="<%=(memberVO == null) ? "" : memberVO.getM_email()%>" />
           </div>
 		</div>
 		
@@ -100,7 +100,7 @@
 		  <div class="form-group row">
 			<label for="inputEmail3" class="col-sm-2 col-form-label" >姓名<b>*</b></label>
 			<div class="col-sm-10">
-			  <input type="text" class="form-control" id="name" name="m_name" value="<%=(memberVO == null) ? "MrJava" : memberVO.getM_name()%>" />
+			  <input type="text" class="form-control" id="name" name="m_name" value="<%=(memberVO == null) ? "" : memberVO.getM_name()%>" />
 			</div>
 		  </div>
 
@@ -135,7 +135,7 @@
 			</div>
 		  </div>
           <div id="seller">
-		  <input type="checkbox" class="btn btn-primary"value="成為賣家" onclick="location.href='addMemSeller.jsp'"><label>我要成為賣家</label>
+		  <input type="checkbox" class="btn btn-primary"value="成為賣家" onclick="location.href='<%=request.getContextPath()%>/Front_end/members/addMemSeller.jsp'"><label>我要成為賣家</label>
           </div>
 		  <input type="hidden" name="action" value="insert"> 
 		  <button type="submit" class="btn btn-primary" value="註冊" id="signup">註冊</button>

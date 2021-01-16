@@ -37,5 +37,8 @@ public interface MemberDAO_interface {
 	
 	//修改賣場頁面
 	public void updateSellstore(MemberVO memberVO);
+	
+	//Ajax修改email
+	public void updateEmail(MemberVO memberVO);
 
 }

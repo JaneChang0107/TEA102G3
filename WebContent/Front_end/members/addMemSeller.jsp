@@ -85,7 +85,7 @@
 	ACTION="<%=request.getContextPath()%>/member/controller/MemberServlet"	name="form1">        
 	<div class="topcol">
             <br>
-            <u>會員註冊</u>
+            <u>賣家會員註冊</u>
             
         </div>
           	<c:if test="${not empty errorMsgs}">
@@ -148,7 +148,7 @@
 			</div>
 		  </div>
           <div id="seller">
-		  <input type="checkbox" class="btn btn-primary"value="成為賣家" onclick="location.href='addMem.jsp'" checked><label>我要成為賣家</label>
+		  <input type="checkbox" class="btn btn-primary" value="成為賣家" onclick="location.href='<%=request.getContextPath()%>/Front_end/members/addMem.jsp'" checked><label>我要成為賣家</label>
           </div>		  
 		  
 		 <div class="form-group row">
