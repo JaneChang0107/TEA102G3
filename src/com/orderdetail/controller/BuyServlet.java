@@ -212,7 +212,7 @@ public class BuyServlet extends HttpServlet {
 			} else {
 				for (int i = 0; i < buylist.size(); i++) {
 					ProductVO product = buylist.get(i);
-//						 假若新增的書籍和購物車的書籍一樣時
+//						 假若新增的商品和購物車的商品一樣時不能加入
 					if (product.getP_id().equals(aproduct.getP_id())) {
 						buylist.setElementAt(product, i);
 						match = true;
@@ -225,7 +225,7 @@ public class BuyServlet extends HttpServlet {
 					}
 				} // end of for
 
-				// 假若新增的書籍和購物車的書籍不一樣時
+				// 假若新增的商品和購物車的商品不一樣時
 				if (!match&&!sellermatch)
 					buylist.add(aproduct);
 			}
