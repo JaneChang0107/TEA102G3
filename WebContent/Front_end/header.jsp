@@ -328,7 +328,7 @@ div.copyright {
 	z-index: 3;
 	top: 0;
 	left: 0;
-	background-color: rgb(0, 0, 0);
+	opacity:0.9;
 	background-color: rgb(23 154 184);
 	overflow-x: hidden;
 	transition: 0.5s;
@@ -411,6 +411,17 @@ position: absolute;
 right: 18px;
 }
 
+#buttongroup{
+width:460.25px;
+height:100px;
+font-size:35px;
+background-color:rgb(23 154 184);
+border-color:rgb(23 154 184);
+
+
+
+}
+
 /* #showToast .toast { */
 /* position: relative; */
 /* left: 1500px; */
@@ -432,14 +443,28 @@ right: 18px;
 	<div class="header">
 
 		<i class="fas fa-bars" id="ham" onclick="openNav()"></i>
+<!-- 		<div id="myNav" class="overlay"> -->
+<!-- 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+<!-- 			<div class="overlay-content"> -->
+<%-- 				<a href="<%=request.getContextPath()%>/ProductServlet?ptype=no&name=&action=findByName">我要買</a>  --%>
+<%-- 				<a href="<%=request.getContextPath()%>/member/controller/MemberServlet?action=goSellerIndex">我要賣</a> --%>
+<!-- 				<a href="#">關於遊戲堃</a> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+		
 		<div id="myNav" class="overlay">
-			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-			<div class="overlay-content">
-				<a href="<%=request.getContextPath()%>/ProductServlet?ptype=no&name=&action=findByName">我要買</a> 
-				<a href="<%=request.getContextPath()%>/member/controller/MemberServlet?action=goSellerIndex">我要賣</a>
-				<a href="#">關於遊戲堃</a>
-			</div>
-		</div>
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="overlay-content">
+ <input type="submit" value="我要買" class="btn btn-primary btn-lg"  id="buttongroup"
+    onclick="window.location='<%=request.getContextPath()%>/ProductServlet?ptype=no&name=&action=findByName';" /> 
+    <br>
+     <input type="submit" value="我要賣" class="btn btn-primary btn-lg" id="buttongroup"
+    onclick="window.location='<%=request.getContextPath()%>/member/controller/MemberServlet?action=goSellerIndex"  class="btn btn-primary btn-lg"/>   
+	<br> 
+	<input type="submit" value="關於遊戲堃" class="btn btn-primary btn-lg" id="buttongroup"
+    onclick="" />
+  </div>
+</div>
 
 		<a href="<%=request.getContextPath()%>/Front_end/index.jsp"><img
 			src="<%=request.getContextPath()%>/images/white_LOGO字在外版(revised).png"
@@ -536,7 +561,7 @@ right: 18px;
 		});
 
 		function openNav() {
-			document.getElementById("myNav").style.width = "30%";
+			document.getElementById("myNav").style.width = "25%";
 		}
 
 		function closeNav() {
