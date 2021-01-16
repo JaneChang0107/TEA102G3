@@ -152,7 +152,7 @@
 
 	</div>
 	<div class="buttonarea">
-		<button type="button" class="button1">會員專區</button>
+		<button type="button" class="button1" onclick="javascript:location.href='<%=request.getContextPath()%>/Front_end/members/MyAccount.jsp'">會員專區</button>
 		<button type="button" class="button2"  onclick="javascript:location.href='<%=request.getContextPath()%>/Front_end/index.jsp'">回首頁</button>
 	</div>
 	<div class="footer">

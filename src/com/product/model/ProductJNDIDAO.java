@@ -759,6 +759,12 @@ public class ProductJNDIDAO implements ProductInterface{
 		}
 		return list;
 	}
+
+	@Override
+	public void updateQty(ProductVO product) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 

@@ -39,7 +39,9 @@ public class ProductJDBCDAO implements ProductInterface{
 	private final String GETALLSELL =
 			"SELECT * FROM PRODUCT WHERE P_STATUS = 1 ORDER BY P_ID DESC";
 	private final String GETALL =
-			"SELECT * FROM PRODUCT ORDER BY P_ID DESC";
+			"SELECT * FROM PRODUCT ORDER BY P_ID DESC";	
+	private final String UPDATEQTY = 
+			"UPDATE PRODUCT SET P_COUNT = ? WHERE P_ID = ?";
 	
 	@Override
 	public String insert(ProductVO product) {
@@ -760,6 +762,43 @@ public class ProductJDBCDAO implements ProductInterface{
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public void updateQty(ProductVO product) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		try {
+			Class.forName(database.DRIVER);
+			con = DriverManager.getConnection(database.URL, database.USER, database.PASSWORD);
+			ps = con.prepareStatement(UPDATEQTY);
+			
+			ps.setInt(1, product.getP_count());
+			ps.setString(2, product.getP_id());
+			
+			ps.executeUpdate();
+		
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+		} finally {
+			try {
+				if(ps != null) {
+					ps.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(con != null) {
+					con.close();
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
 	}
 	
 

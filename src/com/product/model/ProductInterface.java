@@ -18,4 +18,5 @@ public interface ProductInterface {
 	public List<ProductVO> findByStatus(Integer p_status);						// 審查用 確認狀態用
 	public List<ProductVO> getAllSell();
 	public List<ProductVO> getAll();
+	public void updateQty(ProductVO product);
 }

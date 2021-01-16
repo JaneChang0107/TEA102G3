@@ -134,4 +134,16 @@ public class ProductService {
 		return dao.getAll();
 	}
 	
+	public ProductVO updateProductQty(String pId,Integer count) {
+		
+		ProductVO pVO = new ProductVO();
+		
+		pVO.setP_id(pId);
+		pVO.setP_count(count);
+		
+		dao.updateQty(pVO);
+		
+		return pVO;
+	}
+
 }

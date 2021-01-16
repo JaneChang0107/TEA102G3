@@ -100,6 +100,7 @@ public class BuyServlet extends HttpServlet {
 			
 //成立Orderdetail的訂單資料	
 			ProductTypeService pSvc = new ProductTypeService();
+			ProductService prSvc = new ProductService();
 			OrderdetailVO odvo = new OrderdetailVO();
 			int size = buylist.size();
 			for(int i=0;i<buylist.size();i++) {
@@ -107,6 +108,18 @@ public class BuyServlet extends HttpServlet {
 				Integer od_count = Integer.parseInt(req.getParameter("k"+i));
 				OrderdetailService odSvc = new OrderdetailService();
 				odvo=odSvc.addOrderdetail(o_id, p_id, od_count);
+//修改商品庫存	
+				//拉出商品庫存
+				Integer qty = prSvc.oneProduct(p_id).getP_count();
+				//扣掉
+				Integer aftercount=qty-od_count;
+				//塞回去
+				prSvc.updateProductQty(p_id, aftercount);
+				
+				if(aftercount==0) {
+					prSvc.sellout(p_id);
+				}
+				
 			}
 
 			session.setAttribute("shoppingcart", buylist);
@@ -186,6 +199,7 @@ public class BuyServlet extends HttpServlet {
 
 		if (action.equals("addCart")) {
 			boolean match = false;
+			boolean sellermatch=false;
 
 			// 取得後來新增的書籍
 			ProductVO aproduct = getProductlist(req);
@@ -203,10 +217,16 @@ public class BuyServlet extends HttpServlet {
 						buylist.setElementAt(product, i);
 						match = true;
 					} // end of if name matches
+					
+					//假如同一個賣家就能放進購物車 不同賣家就不行放進去
+					if(!product.getM_id().equals(aproduct.getM_id())){
+						buylist.setElementAt(product, i);
+						sellermatch = true;
+					}
 				} // end of for
 
 				// 假若新增的書籍和購物車的書籍不一樣時
-				if (!match)
+				if (!match&&!sellermatch)
 					buylist.add(aproduct);
 			}
 		}

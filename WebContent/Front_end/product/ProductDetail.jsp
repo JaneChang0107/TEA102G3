@@ -194,7 +194,14 @@ img.productImg {
 		</form>
   
   </div>
- 
+  <br>
+    <br>
+   <br>
+     <br>
+       <br>
+         <br>
+           <br>
+             <br>
   <div id="viewseller">
 				<c:forEach var="viewsellerVO" items="${list}">
 
