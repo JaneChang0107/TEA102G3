@@ -48,7 +48,7 @@ html {
 }
 
 body {
-	background-color: moccasin;
+	background-color: #E3F8F6;
 	height: 100%;
 }
 
@@ -68,7 +68,7 @@ h1 {
 	bottom: 0px;
 	width: 100%;
 	height: 200px;
-	background:#179ab8;
+	background:#6CCFF3;
 }
 #notice{
     position: relative;
@@ -236,7 +236,7 @@ i {
 div.header {
 	widows: 1280px;
 	height: 80px;
-	background: #179ab8;
+	background: #6CCFF3;
 }
 
 #searchBar {
@@ -432,11 +432,11 @@ right: 18px;
 	<div class="header">
 
 		<i class="fas fa-bars" id="ham" onclick="openNav()"></i>
-		<div id="myNav" class="overlay"";>
+		<div id="myNav" class="overlay">
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 			<div class="overlay-content">
-				<a href="http://localhost:8081/TEA102G3/ProductServlet?ptype=no&name=&action=findByName">我要買</a> 
-				<a class="dropdown-item" href="<%=request.getContextPath()%>/member/controller/MemberServlet?action=goSellerIndex">我要賣</a>
+				<a href="<%=request.getContextPath()%>/ProductServlet?ptype=no&name=&action=findByName">我要買</a> 
+				<a href="<%=request.getContextPath()%>/member/controller/MemberServlet?action=goSellerIndex">我要賣</a>
 				<a href="#">關於遊戲堃</a>
 			</div>
 		</div>
@@ -536,7 +536,7 @@ right: 18px;
 		});
 
 		function openNav() {
-			document.getElementById("myNav").style.width = "13%";
+			document.getElementById("myNav").style.width = "30%";
 		}
 
 		function closeNav() {

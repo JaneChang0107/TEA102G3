@@ -89,9 +89,9 @@ marquee {
         <div class="carousel-item">
           <img class="d-block w-100" src="<%=request.getContextPath()%>/images/index6.jfif" alt="Second slide" >
         </div>
-        <div class="carousel-item">
-          <img class="d-block w-100" src="<%=request.getContextPath()%>/images/index4.jfif" alt="Second slide" >
-        </div>
+<!--         <div class="carousel-item"> -->
+<%--           <img class="d-block w-100" src="<%=request.getContextPath()%>/images/index4.jfif" alt="Second slide" > --%>
+<!--         </div> -->
         <div class="carousel-item">
           <img class="d-block w-100" src="<%=request.getContextPath()%>/images/index3.png" alt="Third slide">
         </div>
@@ -240,10 +240,9 @@ marquee {
 
 
 $('.carousel').carousel({
-  interval: 6000
+  interval: 1500
 });
 	
-
 
 </script>
 
