@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>新增會員</title>
+<title>新增賣家會員</title>
 
 <style>
         b{
@@ -96,24 +96,24 @@
 			</c:forEach>
 		</ul>
 	</c:if>
-        <div class="form-group row">
+                <div class="form-group row">
           <label for="inputEmail3" class="col-sm-2 col-form-label" >Email<b>*</b></label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="mail" name="m_email" value="<%=(memberVO == null) ? "a123@yahoo.com" : memberVO.getM_email()%>" />
+            <input type="text" class="form-control" id="mail" name="m_email" value="<%=(memberVO == null) ? "" : memberVO.getM_email()%>"  placeholder="請輸入Email"/>
           </div>
 		</div>
 		
 		<div class="form-group row">
 			<label for="inputEmail3" class="col-sm-2 col-form-label" >密碼<b>*</b></label>
 			<div class="col-sm-10">
-			  <input type="password" class="form-control" id="password" name="m_password" value="<%=(memberVO == null) ? "" : memberVO.getM_password()%>" />
+			  <input type="password" class="form-control" id="password" name="m_password" value="<%=(memberVO == null) ? "" : memberVO.getM_password()%>"  placeholder="請輸入6~12位密碼"/>
 			</div>
 		  </div>
 
 		  <div class="form-group row">
 			<label for="inputEmail3" class="col-sm-2 col-form-label" >姓名<b>*</b></label>
 			<div class="col-sm-10">
-			  <input type="text" class="form-control" id="name" name="m_name" value="<%=(memberVO == null) ? "MrJava" : memberVO.getM_name()%>" />
+			  <input type="text" class="form-control" id="name" name="m_name" value="<%=(memberVO == null) ? "" : memberVO.getM_name()%>" placeholder="請輸入您的姓名"/>
 			</div>
 		  </div>
 
@@ -130,14 +130,14 @@
 		  <div class="form-group row">
 			<label for="inputEmail3" class="col-sm-2 col-form-label" >電話<b>*</b></label>
 			<div class="col-sm-10">
-			  <input type="text" class="form-control"  name="m_phone" id="phone" value="<%=(memberVO == null) ? "0999999999" : memberVO.getM_phone()%>" />
+			  <input type="text" class="form-control"  name="m_phone" id="phone" value="<%=(memberVO == null) ? "" : memberVO.getM_phone()%>" placeholder="請輸入您的手機電話"/>
 			</div>
 		  </div>
 
 		  <div class="form-group row">
 			<label for="inputEmail3" class="col-sm-2 col-form-label">地址<b>*</b></label>
 			<div class="col-sm-10">
-			  <input type="text" class="form-control" id="address" name="m_address" value="<%=(memberVO == null) ? "請填入地址" : memberVO.getM_address()%>" />
+			  <input class="twaddress" id="address"  name="m_address" value=""/>
 			</div>
 		  </div>
 
@@ -148,7 +148,7 @@
 			</div>
 		  </div>
           <div id="seller">
-		  <input type="checkbox" class="btn btn-primary" value="成為賣家" onclick="location.href='<%=request.getContextPath()%>/Front_end/members/addMem.jsp'" checked><label>我要成為賣家</label>
+		  <label><input type="checkbox" class="btn btn-primary" value="成為賣家" onclick="location.href='<%=request.getContextPath()%>/Front_end/members/addMem.jsp'" checked>我要成為賣家</label>
           </div>		  
 		  
 		 <div class="form-group row">
@@ -163,7 +163,7 @@
 			<label for="inputEmail3" class="myclass">身分證字號<c>*</c></label>
 			<div class="col-sm-10">
 			  <input type="text" name="m_identity"
-					value="<%=(memberVO == null) ? "F123456789" : memberVO.getM_identity()%>" class="form-control" />
+					value="<%=(memberVO == null) ? "" : memberVO.getM_identity()%>" class="form-control" placeholder="請輸入國民身分證字號10碼"/>
 			</div>
 		  </div>
 		  <div class="form-group row">
@@ -178,7 +178,7 @@
 			<label for="inputEmail3" class="myclass">銀行戶名<c>*</c></label>
 			<div class="col-sm-10">
 			  <input type="text" name="m_accountName"
-					value="<%=(memberVO == null) ? "阿坤" : memberVO.getM_accountName()%>" class="form-control" />
+					value="<%=(memberVO == null) ? "" : memberVO.getM_accountName()%>" class="form-control" placeholder="請輸入您的銀行戶名"/>
 			</div>
 		  </div>
 		  
@@ -186,7 +186,7 @@
 			<label for="inputEmail3" class="myclass">銀行帳戶<c>*</c></label>
 			<div class="col-sm-10">
 			  <input type="text" name="m_account"
-					value="<%=(memberVO == null) ? "12341234123412" : memberVO.getM_account()%>" class="form-control" />
+					value="<%=(memberVO == null) ? "" : memberVO.getM_account()%>" class="form-control" placeholder="請輸入您的銀行帳戶"/>
 			</div>
 		  </div>
 		  
@@ -194,7 +194,7 @@
 			<label for="inputEmail3" class="myclass">銀行代號<c>*</c></label>
 			<div class="col-sm-10">
 			  <input type="text" name="b_code"
-					value="<%=(memberVO == null) ? "700" : memberVO.getB_code()%>" class="form-control" />
+					value="<%=(memberVO == null) ? "" : memberVO.getB_code()%>" class="form-control" placeholder="請輸入銀行代號3碼"/>
 			</div>
 		  </div>
 		  
@@ -258,6 +258,8 @@
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script
 	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+	
+<script	src="<%=request.getContextPath()%>/Front_end/members/js/address.js"></script>
 
 <style>
 .xdsoft_datetimepicker .xdsoft_datepicker {
