@@ -35,11 +35,12 @@ ul li{
     text-align: center;
 }
 .log_header{
+	height: 170px;
 }
-.row{
-/*     height: 50%; */
-/*     border: 1px solid green; */
-}
+/* .row{ */
+/*     height: 170px; */
+/* /*     border: 1px solid green; */ */
+/* } */
 
 .col{
 /*     border: 1px solid black; */
@@ -65,17 +66,18 @@ ul li{
 .login-container{
     width: 60%;
     margin-top: 5%;
-    font-size: 50px;
+    font-size: 36px;
 }
 .index_container{
 	font-size: 36px;
 }
 .account-row{
-    /* display: inline-block; */
-    margin: 10% 10%;
+    text-align: center;
+    margin: 10% 10% 6% 10%;
 }
 .forget-row{
-    text-align: right;
+    text-align: center;
+    margin: 6% 8% 8% 8%;
 }
 /* .forget-btn{ */
 /*     margin: 5% auto; */
@@ -141,4 +143,8 @@ ul li{
 
 .div_img{
 	text-align: right;
+}
+
+.p_backend{
+	font-size: 42px;
 }

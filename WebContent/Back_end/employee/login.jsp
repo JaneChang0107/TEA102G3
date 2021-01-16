@@ -20,7 +20,7 @@
                         <img src="<%=request.getContextPath()%>/Back_end/employee/images/white_LOGO.png">
                     </div>
                     <div class="col-8 img-div">
-                        <p>後臺管理系統</p>
+                        <p class="p_backend">後臺管理系統</p>
                     </div>
                 </div>
                 <div class="row account-row">
@@ -35,8 +35,7 @@
 								</c:forEach>
 							</ul>
 						</c:if> 
-						<c:remove var="errorMsgs_login"/>
-						                 	
+						<c:remove var="errorMsgs_login"/>						                 	
 	                     <p>帳號:</p><input type="text" name="e_id">
 	                     <p>密碼:</p><input type="password" name="e_password">
 	                     <input type="hidden" name="action" value="login">
@@ -44,9 +43,9 @@
                     </div>
                 </div>
                 <div class="row forget-row">
-                    <div class="col-10">
-                        <button type="submit" id="btn_login" class="btn btn-warning forget-btn">登入</button>
-                        <button type="button"  id="btn_forget" class="btn btn-warning forget-btn">忘記密碼</button>
+                    <div class="col">
+                        <button type="submit" id="btn_login" class="btn btn-warning forget-btn btn-lg">登入</button>
+                        <button type="button"  id="btn_forget" class="btn btn-warning forget-btn btn-lg">忘記密碼</button>
                     </div>                  
 <%--                       onclick="location.href='<%=request.getContextPath()%>/Back_end/employee/password.jsp'" --%>
                 </div>
