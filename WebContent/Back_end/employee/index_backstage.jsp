@@ -103,13 +103,14 @@
     <script src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="<%=request.getContextPath()%>/Back_end/employee/js/index_backstage.js"></script>
     <script src="<%=request.getContextPath()%>/Back_end/employee/js/notic.js"></script>
+    <script src="<%=request.getContextPath()%>/Back_end/employee/js/address.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     
     
         <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/datetimepicker/jquery.datetimepicker.css" />
-<script src="${pageContext.request.contextPath}/datetimepicker/jquery.js"></script>
+<%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/datetimepicker/jquery.datetimepicker.css" /> --%>
+<%-- <script src="${pageContext.request.contextPath}/datetimepicker/jquery.js"></script> --%>
 <script src="${pageContext.request.contextPath}/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <style>

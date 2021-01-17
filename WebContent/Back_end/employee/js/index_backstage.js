@@ -81,7 +81,7 @@ $.ajax({
        	  list_html +='                <p>地址:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col-9">';
-       	  list_html +='                <input class="form-control form-control-user" type="TEXT" id="e_address" name="e_address" value="'+ data.emp.e_address +'">';
+       	  list_html +='                <input class="form-control form-control-user twaddress" type="TEXT" id="e_address" name="e_address" value="'+ data.emp.e_address +'">';
        	  list_html +='            </div>';
        	  list_html +='        </div>';
        	  list_html +='        <div class="row">';
@@ -219,7 +219,7 @@ $.ajax({
        	  list_html +='                <p>地址:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col-9">';
-       	  list_html +='                <input class="form-control form-control-user" type="TEXT" id="e_address" name="e_address" value="'+ data.emp.e_address +'">';
+       	  list_html +='                <input class="form-control form-control-user twaddress" type="TEXT" id="e_address" name="e_address" value="'+ data.emp.e_address +'">';
        	  list_html +='            </div>';
        	  list_html +='        </div>';
        	  list_html +='        <div class="row">';
@@ -382,7 +382,7 @@ $.ajax({
        	  list_html +='                <p>地址:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col-9">';
-       	  list_html +='                <input class="form-control form-control-user" type="TEXT" id="e_address" name="e_address" value="'+ data.emp.e_address +'">';
+       	  list_html +='                <input class="form-control form-control-user twaddress" type="TEXT" id="e_address" name="e_address" value="'+ data.emp.e_address +'">';
        	  list_html +='            </div>';
        	  list_html +='        </div>';
        	  list_html +='        <div class="row">';
@@ -634,7 +634,7 @@ $.ajax({
 			  list_html+='        <p>地址:</p>';
 			  list_html+='    </div>';
 			  list_html+='    <div class="col">';
-			  list_html+='        <input class="form-control form-control-user" type="TEXT" id="e_address_add" name="e_address">';
+			  list_html+='        <input class="form-control form-control-user twaddress" type="TEXT" id="e_address_add" name="e_address">';
 			  list_html+='    </div>';
 			  list_html+='    <div class="col">';
 			  list_html+='        <p>狀態:</p>';
