@@ -9,7 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bell.model.BellVO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.orderlist.model.OrderlistService;
+import com.websocket.WebSocket;
+
+import redis.clients.jedis.Jedis;
 
 @WebServlet("/OrderArrive")
 public class OrderArrive extends HttpServlet {
@@ -29,7 +34,21 @@ public class OrderArrive extends HttpServlet {
 		if(!oid.isEmpty()) {
 			oService.updateStatusArrive(oid);
 		}
+		//推播開始--------------------------
+		Jedis jedis = new Jedis("localhost", 6379);
+		jedis.auth("123456");
 		
+		ObjectMapper mapper = new ObjectMapper();
+		WebSocket ws = new WebSocket();
+		BellVO bellVO = new BellVO();
+		
+		bellVO.setM_id(oService.getOneOrderlist(oid).getM_id());
+		bellVO.setMessage(" 訂單已到貨");
+		
+		ws.onMessage(mapper.writeValueAsString(bellVO));
+		
+		jedis.close();
+		//推播結束--------------------------
 		request.setAttribute("oid", oid);
 		RequestDispatcher rd = request.getRequestDispatcher("/Back_end/orderlist/OrderArrive.jsp");
 		rd.forward(request, response);

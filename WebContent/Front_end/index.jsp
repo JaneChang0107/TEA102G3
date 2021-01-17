@@ -8,23 +8,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-// 	String m_id= session.getAttribute("loginId").toString();
 	boolean loginornot=true;
 	if(session.getAttribute("loginId")==null){
 		loginornot=true;
 	}else{
 		loginornot=false;
 	}
-// 	try{
-		
-// 		String m_id= session.getAttribute("loginId").toString();
-		
-// 	 	loginornot=false;
-// 		System.out.println("try:"+loginornot);
-// 	}catch(Exception e) {
-// 		loginornot=true;
-// 		e.printStackTrace();
-// 	}
+
 		System.out.println("try1:"+loginornot);
     OrderdetailService orderdetailSvc1 = new OrderdetailService();
 	List<OrderdetailVO> list = orderdetailSvc1.count();

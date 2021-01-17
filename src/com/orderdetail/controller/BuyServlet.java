@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bell.model.BellVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.member.model.MemberService;
@@ -22,6 +23,9 @@ import com.productPicture.model.ProductPictureService;
 import com.productPicture.model.ProductPictureVO;
 import com.productType.model.ProductTypeService;
 import com.productType.model.ProductTypeVO;
+import com.websocket.WebSocket;
+
+import redis.clients.jedis.Jedis;
 
 import java.util.*;
 import java.io.*;
@@ -101,6 +105,7 @@ public class BuyServlet extends HttpServlet {
 //成立Orderdetail的訂單資料	
 			ProductTypeService pSvc = new ProductTypeService();
 			ProductService prSvc = new ProductService();
+			
 			OrderdetailVO odvo = new OrderdetailVO();
 			int size = buylist.size();
 			for(int i=0;i<buylist.size();i++) {
@@ -120,8 +125,28 @@ public class BuyServlet extends HttpServlet {
 					prSvc.sellout(p_id);
 				}
 				
+				
+				//推播開始--------------------------
+				Jedis jedis = new Jedis("localhost", 6379);
+				jedis.auth("123456");
+				
+				ObjectMapper mapper = new ObjectMapper();
+				WebSocket ws = new WebSocket();
+				BellVO bellVO = new BellVO();
+				
+				bellVO.setM_id(prSvc.oneProduct(p_id).getM_id());
+				bellVO.setMessage(" 你有新訂單");
+				
+				ws.onMessage(mapper.writeValueAsString(bellVO));
+				
+				jedis.close();
+				//推播結束--------------------------
+				
+				
 			}
 
+			
+			
 			session.setAttribute("shoppingcart", buylist);
 			res.sendRedirect(req.getContextPath()+"/Front_end/shoppingCart/checkBuyPageOK.jsp");
 			session.removeAttribute("shoppingCart");
