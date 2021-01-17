@@ -19,18 +19,9 @@
 <title>會員列表</title>
 
 <style>
-
-  h4 {
-    color: blue;
-    display: inline;
-  }
-  #membercol{
-     height:70px;
-  }
-  #memberrow{
-     height:110px;  
-  }
-
+	#memberrow{
+		margin-bottom: 10px;
+	}
 </style>
 
 

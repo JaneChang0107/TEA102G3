@@ -24,7 +24,9 @@
                     </div>
                 </div>
                 <div class="row account-row">
-                    <div class="col">
+                	<div class="col-6  d-none d-lg-block bg-login-image" id="serser">
+                	</div>
+                    <div class="col-6 col_enter">
                     
 <!--                     	錯誤表列 -->
 						<c:if test="${not empty errorMsgs_login}">
@@ -36,17 +38,18 @@
 							</ul>
 						</c:if> 
 						<c:remove var="errorMsgs_login"/>						                 	
-	                     <p>帳號:</p><input type="text" name="e_id">
-	                     <p>密碼:</p><input type="password" name="e_password">
+	                     <div class="row form-group">
+	                     	<input class="form-control form-control-user" type="text" name="e_id" placeholder="請輸入員工ID">
+	                     </div>
+	                     <div class="row form-group">
+	                     	<input class="form-control form-control-user" type="password" name="e_password" placeholder="請輸入密碼">
+	                     </div>
 	                     <input type="hidden" name="action" value="login">
-<%-- 	                     <input type="hidden" id="employeeVO" value="${}"> --%>
+						<button type="submit" id="btn_login" class="btn btn-warning forget-btn btn-lg">登入</button>
+						<hr>
+                        <a id="btn_forget" class="small" href='<%=request.getContextPath()%>/Back_end/employee/password.jsp'>忘記密碼?</a>
                     </div>
-                </div>
-                <div class="row forget-row">
-                    <div class="col">
-                        <button type="submit" id="btn_login" class="btn btn-warning forget-btn btn-lg">登入</button>
-                        <button type="button"  id="btn_forget" class="btn btn-warning forget-btn btn-lg">忘記密碼</button>
-                    </div>                  
+                </div>              
 <%--                       onclick="location.href='<%=request.getContextPath()%>/Back_end/employee/password.jsp'" --%>
                 </div>
             </div>
@@ -61,17 +64,15 @@
     <script src="<%=request.getContextPath()%>/vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="<%=request.getContextPath()%>/Back_end/employee/js/index_backstage.js"></script>
     <script>
-	    var btn_forget = document.getElementById("btn_forget");
-	    btn_forget.addEventListener('click',function(){
-	    	location.href='<%=request.getContextPath()%>/Back_end/employee/password.jsp'
-	    });
-	    
-	   /* var btn_login = document.getElementById("btn_login");
-	    btn_login.addEventListener('click',function(){*/
-// 	    	if(${errorMsgs_login != null}){
-// 	    		alert("${errorMsgs_login}");
-// 	    	};
-	 /*   })*/
+// 		let pic = [
+// 			"url(https://source.unsplash.com/K4mSJ7kc0As/600x800) center center / cover",
+// 			"url(http://i.imgur.com/OZ60HUB.gif) center center / cover",
+// 			"url(https://i.imgur.com/DJkTI8L.gif) center center / cover",
+// 			"url(https://i.imgur.com/oK6VoFb.gif) center center / cover",
+// 			"url(https://i.imgur.com/RYGJ7gN.gif) center center / cover"
+// 		]
+// 		let i = Math.floor(Math.random()*5)
+// 		$("#serser").css("background",pic[i])
     </script>
 </body>
 </html>

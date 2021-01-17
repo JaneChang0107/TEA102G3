@@ -4,11 +4,16 @@
 }
 body{
     background-color: #E3F8F6;
-/*     font-family: cursive; */
+    font-family: inherit;
     
 }
 img{
     max-width: 100%;
+}
+a {
+    color: #4e73df;
+    text-decoration: none;
+    background-color: transparent;
 }
 ul li{
 	list-style: none;
@@ -73,7 +78,8 @@ ul li{
 }
 .account-row{
     text-align: center;
-    margin: 10% 10% 6% 10%;
+/*     margin: 10% 10% 6% 10%; */
+    height: 600px;
 }
 .forget-row{
     text-align: center;
@@ -93,7 +99,7 @@ ul li{
 	text-align: right;	
 }
 .listAll_row{
-	background-color: #6c757d;
+	background-color: #17a2b861;
 }
 
 .-none{
@@ -147,4 +153,67 @@ ul li{
 
 .p_backend{
 	font-size: 42px;
+}
+
+.btn-warning {
+    color: #212529;
+    background-color: rgba(0,123,255,.5);
+    border-color: rgba(0,123,255,.5);
+}
+.nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    border-bottom-left-radius: 100px;	
+}
+
+.form-control-user {
+    border-radius: 10rem;
+    padding: 1.5rem 1rem;
+}
+
+.bg-login-image {
+    background: url(https://source.unsplash.com/K4mSJ7kc0As/600x800);
+    background-position: center;
+    background-size: cover;
+}
+
+.small, small {
+    font-size: 50%;
+    font-weight: 400;
+    display: block;
+}
+
+.col_enter{
+	padding: 10rem;
+}
+
+.row_sendEmail{
+	text-align: center;
+	margin-top: 10%;
+}
+
+.input_mam{
+	display: inline-block;
+	widows: 50%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+#con_mam{
+	font-size: 20px;
+}
+
+#mem_page{
+	font-size: 20px
 }

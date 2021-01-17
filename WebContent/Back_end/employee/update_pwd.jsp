@@ -33,7 +33,7 @@
                 <p>原有密碼:</p>
             </div>
             <div class="col">
-                <input type="password" name="e_password">
+                <input class="form-control form-control-user" type="password" name="e_password">
             </div>
         </div>
         <div class="row">
@@ -41,7 +41,7 @@
                 <p>新密碼:</p>
             </div>
             <div class="col">
-                <input type="password" name="new_password">
+                <input class="form-control form-control-user" type="password" name="new_password">
             </div>
         </div>
         <div class="row">
@@ -49,7 +49,7 @@
                 <p>密碼確認:</p>
             </div>
             <div class="col">
-                <input type="password" name="check_password">
+                <input class="form-control form-control-user" type="password" name="check_password">
             </div>
         </div>
         <div class="row forget-row">

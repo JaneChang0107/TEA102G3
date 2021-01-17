@@ -44,7 +44,7 @@ $.ajax({
        	  list_html +='                <p>電話:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
-       	  list_html +='                <input type="TEXT" id="e_phone" name="e_phone" value="'+ data.emp.e_phone +'">';
+       	  list_html +='                <input class="form-control form-control-user" type="TEXT" id="e_phone" name="e_phone" value="'+ data.emp.e_phone +'">';
        	  list_html +='            </div>';
        	  list_html +='        </div>';
        	  list_html +='        <div class="row">';
@@ -52,7 +52,7 @@ $.ajax({
        	  list_html +='                <p>員工姓名:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
-       	  list_html +='                <input type="TEXT" name="e_name" value="'+ data.emp.e_name +'">';
+       	  list_html +='                <input class="form-control form-control-user" type="TEXT" name="e_name" value="'+ data.emp.e_name +'">';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
        	  list_html +='                <p>性別:</p>';
@@ -67,13 +67,13 @@ $.ajax({
        	  list_html +='                <p>身分證字號:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
-       	  list_html +='                <input type="TEXT" name="e_identity" value="'+ data.emp.e_identity +'">';
+       	  list_html +='                <input class="form-control form-control-user" type="TEXT" name="e_identity" value="'+ data.emp.e_identity +'">';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
        	  list_html +='                <p>生日:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
-       	  list_html +='                <input name="e_birth" id="f_date1" type="text">';
+       	  list_html +='                <input class="form-control form-control-user" name="e_birth" id="f_date1" type="text">';
        	  list_html +='            </div>';
        	  list_html +='        </div>';
        	  list_html +='        <div class="row">';
@@ -81,7 +81,7 @@ $.ajax({
        	  list_html +='                <p>地址:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col-9">';
-       	  list_html +='                <input type="TEXT" id="e_address" name="e_address" value="'+ data.emp.e_address +'">';
+       	  list_html +='                <input class="form-control form-control-user" type="TEXT" id="e_address" name="e_address" value="'+ data.emp.e_address +'">';
        	  list_html +='            </div>';
        	  list_html +='        </div>';
        	  list_html +='        <div class="row">';
@@ -89,7 +89,7 @@ $.ajax({
        	  list_html +='                <p>信箱:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col-9">';
-       	  list_html +='                <input type="TEXT" name="e_email" value="'+ data.emp.e_email +'">';
+       	  list_html +='                <input class="form-control form-control-user" type="TEXT" name="e_email" value="'+ data.emp.e_email +'">';
        	  list_html +='            </div>';
        	  list_html +='        </div>';
        	  list_html +='        <div class="row forget-row">';
@@ -182,7 +182,7 @@ $.ajax({
        	  list_html +='                <p>電話:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
-       	  list_html +='                <input type="TEXT" id="e_phone" name="e_phone" value="'+ data.emp.e_phone +'">';
+       	  list_html +='                <input class="form-control form-control-user" type="TEXT" id="e_phone" name="e_phone" value="'+ data.emp.e_phone +'">';
        	  list_html +='            </div>';
        	  list_html +='        </div>';
        	  list_html +='        <div class="row">';
@@ -190,7 +190,7 @@ $.ajax({
        	  list_html +='                <p>員工姓名:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
-       	  list_html +='                <input type="TEXT" name="e_name" value="'+ data.emp.e_name +'">';
+       	  list_html +='                <input class="form-control form-control-user" type="TEXT" name="e_name" value="'+ data.emp.e_name +'">';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
        	  list_html +='                <p>性別:</p>';
@@ -205,13 +205,13 @@ $.ajax({
        	  list_html +='                <p>身分證字號:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
-       	  list_html +='                <input type="TEXT" name="e_identity" value="'+ data.emp.e_identity +'">';
+       	  list_html +='                <input class="form-control form-control-user" type="TEXT" name="e_identity" value="'+ data.emp.e_identity +'">';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
        	  list_html +='                <p>生日:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
-       	  list_html +='                <input name="e_birth" id="f_date1" type="text">';
+       	  list_html +='                <input class="form-control form-control-user" name="e_birth" id="f_date1" type="text">';
        	  list_html +='            </div>';
        	  list_html +='        </div>';
        	  list_html +='        <div class="row">';
@@ -219,7 +219,7 @@ $.ajax({
        	  list_html +='                <p>地址:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col-9">';
-       	  list_html +='                <input type="TEXT" id="e_address" name="e_address" value="'+ data.emp.e_address +'">';
+       	  list_html +='                <input class="form-control form-control-user" type="TEXT" id="e_address" name="e_address" value="'+ data.emp.e_address +'">';
        	  list_html +='            </div>';
        	  list_html +='        </div>';
        	  list_html +='        <div class="row">';
@@ -227,7 +227,7 @@ $.ajax({
        	  list_html +='                <p>信箱:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col-9">';
-       	  list_html +='                <input type="TEXT" name="e_email" value="'+ data.emp.e_email +'">';
+       	  list_html +='                <input class="form-control form-control-user" type="TEXT" name="e_email" value="'+ data.emp.e_email +'">';
        	  list_html +='            </div>';
        	  list_html +='        </div>';
        	  list_html +='        <div class="row forget-row">';
@@ -345,7 +345,7 @@ $.ajax({
        	  list_html +='                <p>電話:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
-       	  list_html +='                <input type="TEXT" id="e_phone" name="e_phone" value="'+ data.emp.e_phone +'">';
+       	  list_html +='                <input class="form-control form-control-user" type="TEXT" id="e_phone" name="e_phone" value="'+ data.emp.e_phone +'">';
        	  list_html +='            </div>';
        	  list_html +='        </div>';
        	  list_html +='        <div class="row">';
@@ -353,7 +353,7 @@ $.ajax({
        	  list_html +='                <p>員工姓名:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
-       	  list_html +='                <input type="TEXT" id="e_name" name="e_name" value="'+ data.emp.e_name +'">';
+       	  list_html +='                <input class="form-control form-control-user" type="TEXT" id="e_name" name="e_name" value="'+ data.emp.e_name +'">';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
        	  list_html +='                <p>性別:</p>';
@@ -368,13 +368,13 @@ $.ajax({
        	  list_html +='                <p>身分證字號:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
-       	  list_html +='                <input type="TEXT" name="e_identity" value="'+ data.emp.e_identity +'">';
+       	  list_html +='                <input class="form-control form-control-user" type="TEXT" name="e_identity" value="'+ data.emp.e_identity +'">';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
        	  list_html +='                <p>生日:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col">';
-       	  list_html +='                <input name="e_birth" id="f_date1" type="text">';
+       	  list_html +='                <input class="form-control form-control-user" name="e_birth" id="f_date1" type="text">';
        	  list_html +='            </div>';
        	  list_html +='        </div>';
        	  list_html +='        <div class="row">';
@@ -382,7 +382,7 @@ $.ajax({
        	  list_html +='                <p>地址:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col-9">';
-       	  list_html +='                <input type="TEXT" id="e_address" name="e_address" value="'+ data.emp.e_address +'">';
+       	  list_html +='                <input class="form-control form-control-user" type="TEXT" id="e_address" name="e_address" value="'+ data.emp.e_address +'">';
        	  list_html +='            </div>';
        	  list_html +='        </div>';
        	  list_html +='        <div class="row">';
@@ -390,7 +390,7 @@ $.ajax({
        	  list_html +='                <p>信箱:</p>';
        	  list_html +='            </div>';
        	  list_html +='            <div class="col-9">';
-       	  list_html +='                <input type="TEXT" name="e_email" value="'+ data.emp.e_email +'">';
+       	  list_html +='                <input class="form-control form-control-user" type="TEXT" name="e_email" value="'+ data.emp.e_email +'">';
        	  list_html +='            </div>';
        	  list_html +='        </div>';
        	  list_html +='        <div class="row forget-row">';
@@ -499,7 +499,7 @@ $.ajax({
 			  list_html+='        <p>查詢</p>';
 			  list_html+='    </div>';
 			  list_html+='    <div class="col">';
-			  list_html+='        <input type="text" id="input_search" name=""> ';
+			  list_html+='        <input class="input_mam" type="text" id="input_search" name=""> ';
 			  list_html+='        <button type="button" id="button_search" class="btn btn-primary">查詢</button>';
 			  list_html+='    </div>';
 			  list_html+='    <div class="col">';
@@ -528,7 +528,7 @@ $.ajax({
 			  $.each(data.emp_list, function(index, item){
 				  list_html+='		<div class="row" id="div_append">';
 				  list_html+='            <div class="col AutoNewline" id="e_id">'+ item.e_id +'</div>';
-				  list_html+='            <div class="col AutoNewline" id="e_password"><p class="para">'+ item.e_password +'</p><input name="input_e_password" class="-none btn_pwd_update" value="'+ item.e_password +'"></div>';
+				  list_html+='            <div class="col AutoNewline" id="e_password"><p class="para">'+ item.e_password +'</p><input class="form-control form-control-user -none btn_pwd_update" name="input_e_password" value="'+ item.e_password +'"></div>';
 				  list_html+='            <div class="col AutoNewline">'+ item.e_identity +'</div>';
 				  list_html+='            <div class="col AutoNewline">'+ item.e_name +'</div>';
 				  list_html+='            <div class="col AutoNewline">'+ item.e_gender +'</div>';
@@ -597,7 +597,7 @@ $.ajax({
 			  list_html+='        <p>電話:</p>';
 			  list_html+='    </div>';
 			  list_html+='    <div class="col">';
-			  list_html+='        <input type="TEXT" id="e_phone_add" name="e_phone">';
+			  list_html+='        <input class="form-control form-control-user" type="TEXT" id="e_phone_add" name="e_phone">';
 			  list_html+='    </div>';
 			  list_html+='</div>';
 			  list_html+='<div class="row">';
@@ -605,7 +605,7 @@ $.ajax({
 			  list_html+='        <p>員工姓名:</p>';
 			  list_html+='    </div>';
 			  list_html+='    <div class="col">';
-			  list_html+='        <input type="TEXT" id="e_name_add" name="e_name">';
+			  list_html+='        <input class="form-control form-control-user" type="TEXT" id="e_name_add" name="e_name">';
 			  list_html+='    </div>';
 			  list_html+='    <div class="col">';
 			  list_html+='        <p>性別:</p>';
@@ -620,13 +620,13 @@ $.ajax({
 			  list_html+='        <p>身分證字號:</p>';
 			  list_html+='    </div>';
 			  list_html+='    <div class="col">';
-			  list_html+='        <input type="TEXT" id="e_identity_add" name="e_identity">';
+			  list_html+='        <input class="form-control form-control-user" type="TEXT" id="e_identity_add" name="e_identity">';
 			  list_html+='    </div>';
 			  list_html+='    <div class="col">';
 			  list_html+='        <p>生日:</p>';
 			  list_html+='    </div>';
 			  list_html+='    <div class="col">';
-			  list_html+='        <input name="e_birth" id="f_date2" type="text" placeholder="請選擇日期">';
+			  list_html+='        <input class="form-control form-control-user" name="e_birth" id="f_date2" type="text" placeholder="請選擇日期">';
 			  list_html+='    </div>';
 			  list_html+='</div>';
 			  list_html+='<div class="row">';
@@ -634,7 +634,7 @@ $.ajax({
 			  list_html+='        <p>地址:</p>';
 			  list_html+='    </div>';
 			  list_html+='    <div class="col">';
-			  list_html+='        <input type="TEXT" id="e_address_add" name="e_address">';
+			  list_html+='        <input class="form-control form-control-user" type="TEXT" id="e_address_add" name="e_address">';
 			  list_html+='    </div>';
 			  list_html+='    <div class="col">';
 			  list_html+='        <p>狀態:</p>';
@@ -649,13 +649,13 @@ $.ajax({
 			  list_html+='        <p>信箱:</p>';
 			  list_html+='    </div>';
 			  list_html+='    <div class="col">';
-			  list_html+='        <input type="TEXT" id="e_email_add" name="e_email">';
+			  list_html+='        <input class="form-control form-control-user" type="TEXT" id="e_email_add" name="e_email">';
 			  list_html+='    </div>';
 			  list_html+='    <div class="col">';
 			  list_html+='        <p>密碼:</p>';
 			  list_html+='    </div>';
 			  list_html+='    <div class="col">';
-			  list_html+='        <input type="password" id="e_password" name="e_password">';
+			  list_html+='        <input class="form-control form-control-user" type="password" id="e_password" name="e_password">';
 			  list_html+='    </div>';
 			  list_html+='</div>';
 			  list_html+='<div class="row forget-row">';
@@ -751,7 +751,7 @@ $.ajax({
 				  list_html+='        <p>查詢</p>';
 				  list_html+='    </div>';
 				  list_html+='    <div class="col">';
-				  list_html+='        <input type="text" id="input_search" name=""> ';
+				  list_html+='        <input class="input_mam" type="text" id="input_search" name=""> ';
 				  list_html+='        <button type="button" id="button_search" class="btn btn-primary">查詢</button>';
 				  list_html+='    </div>';
 				  list_html+='    <div class="col">';
@@ -780,7 +780,7 @@ $.ajax({
 				  $.each(data.emp_list, function(index, item){
 					  list_html+='		<div class="row" id="div_append">';
 					  list_html+='            <div class="col AutoNewline" id="e_id">'+ item.e_id +'</div>';
-					  list_html+='            <div class="col AutoNewline"><p class="para">'+ item.e_password +'</p><input name="input_e_password" class="-none btn_pwd_update" value="'+ item.e_password +'"></div>';
+					  list_html+='            <div class="col AutoNewline"><p class="para">'+ item.e_password +'</p><input class="form-control form-control-user -none btn_pwd_update" name="input_e_password" value="'+ item.e_password +'"></div>';
 					  list_html+='            <div class="col AutoNewline">'+ item.e_identity +'</div>';
 					  list_html+='            <div class="col AutoNewline">'+ item.e_name +'</div>';
 					  list_html+='            <div class="col AutoNewline">'+ item.e_gender +'</div>';
@@ -854,7 +854,7 @@ $.ajax({
 			  list_html+='        <p>查詢</p>';
 			  list_html+='    </div>';
 			  list_html+='    <div class="col">';
-			  list_html+='        <input type="text" id="input_search" name=""> ';
+			  list_html+='        <input class="input_mam" type="text" id="input_search" name=""> ';
 			  list_html+='        <button type="button" id="button_search" class="btn btn-primary">查詢</button>';
 			  list_html+='    </div>';
 			  list_html+='    <div class="col">';
@@ -883,7 +883,7 @@ $.ajax({
 			  $.each(data, function(index, item){
 				  list_html+='		<div class="row" id="div_append">';
 				  list_html+='            <div class="col AutoNewline" id="e_id">'+ item.e_id +'</div>';
-				  list_html+='            <div class="col AutoNewline" id="e_password"><p class="para">'+ item.e_password +'</p><input name="input_e_password" class="-none" value="'+ item.e_password +'"></div>';
+				  list_html+='            <div class="col AutoNewline" id="e_password"><p class="para">'+ item.e_password +'</p><input class="form-control form-control-user -none btn_pwd_update" name="input_e_password" value="'+ item.e_password +'"></div>';
 				  list_html+='            <div class="col AutoNewline">'+ item.e_identity +'</div>';
 				  list_html+='            <div class="col AutoNewline">'+ item.e_name +'</div>';
 				  list_html+='            <div class="col AutoNewline">'+ item.e_gender +'</div>';
@@ -978,7 +978,11 @@ $.ajax({
 				  data: form_string,
 				  beforeSend:function(){},
 				  success:function(){
-					  alert('更新成功')
+					  Swal.fire(
+							  '更新成功!',
+							  'You clicked the button!',
+							  'success'
+							)
 				  },
 				  error:function(){
 					  console.log("error")

@@ -21,14 +21,14 @@
                         <p>後臺管理系統</p>
                     </div>
                 </div>
-                <div class="row account-row">
+                <div class="row row_sendEmail">
                     <div class="col">
                         <p>請輸入註冊時電子郵件:</p>
-                        <input type="text" name="e_email"></input>
+                        <input class="form-control form-control-user" type="text" name="e_email"></input>
                     </div>
                 </div>
                 <div class="row forget-row">
-                    <div class="col-10">
+                    <div class="col">
                         <button type="button" id="btn_index"  class="btn btn-light forget-btn">回首頁</button>
                         <button type="submit" class="btn btn-warning forget-btn">送出</button>
                     </div>
