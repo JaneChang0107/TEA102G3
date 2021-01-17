@@ -24,7 +24,7 @@
                 <div class="row row_sendEmail">
                     <div class="col">
                         <p>請輸入註冊時電子郵件:</p>
-                        <input class="form-control form-control-user" type="text" name="e_email"></input>
+                        <input class="form-control form-control-user input_forget" type="text" name="e_email"></input>
                     </div>
                 </div>
                 <div class="row forget-row">

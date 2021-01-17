@@ -162,7 +162,7 @@ public static void sendEmail(String random_password,String e_mail) throws Messag
 			MimeMessage message = new MimeMessage(session);                             //new一個MimeMessage物件
 			message.setFrom(new InternetAddress(from));                                //用MimeMessage物件set寄件者
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(e_mail));   //用MimeMessage物件set收件者
-			message.setSubject("不是叫你滾嗎?");                                              //set主旨
+			message.setSubject("YuXiKun忘記密碼?");                                              //set主旨
 			//按鈕
 //			message.setContent(
 //					"			<FORM METHOD=\"post\" ACTION=\"http://localhost:8081/TEA102G3/member/controller/MemberServlet\" style=\"margin-bottom: 0px;\">\r\n" + 

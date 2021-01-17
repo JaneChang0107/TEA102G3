@@ -437,7 +437,11 @@ $.ajax({
              //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
           });
 
-          alert('success');
+       	Swal.fire(
+       		  'success!',
+       		  '',
+       		  'success'
+       		)
        	}
 
         },
@@ -474,7 +478,11 @@ $.ajax({
 			  $("[type='password']").val("");
 
 //			  for(let i=0; data){}
-			  alert(data);
+			  Swal.fire(
+					  data,
+					  '',
+					  'success'
+					)
 			  
 		  },
 		  error: function(xhr){         // request 發生錯誤的話執行
@@ -540,10 +548,10 @@ $.ajax({
 				  list_html+='            <div class="col AutoNewline" id="e_status" data-e_id = "' + item.e_status + '">'+ item.e_status_view +'</div>';
 				  list_html+='            <div class="col AutoNewline">'+ item.st_name +'</div>';
 				  list_html+='            <div class="col">';
-				  list_html+='                 <button type="button" id="modify">修改';
+				  list_html+='                 <button type="button" class="btn btn-warning forget-btn btn-lg btn_mem" id="modify">修改';
 				  list_html+='            </div>';
 				  list_html+='            <div class="col">';
-				  list_html+='                 <button type="button" id="toggle_status">更新狀態';
+				  list_html+='                 <button type="button" class="btn btn-warning forget-btn btn-lg btn_mem" id="toggle_status">更新狀態';
 				  list_html+='            </div>';
 				  list_html+='		</div>';
 			  })
@@ -574,10 +582,10 @@ $.ajax({
 			  list_html = "";
 			  list_html+='<form>';
 			  list_html+='<div class="row">';
-			  list_html+='    <div class="col">';
+			  list_html+='    <div class="col-3">';
 			  list_html+='        <p>門市:</p>';
 			  list_html+='    </div>';
-			  list_html+='    <div class="col">';
+			  list_html+='    <div class="col-3">';
 			  list_html+='        <select size="1" id="st_id_add" name="st_id">';
 			  for(let i = 0; i < data.length; i++){			  
 				  list_html+='            <option value="'+ data[i].st_id +'">'+ data[i].st_name +'';
@@ -792,10 +800,10 @@ $.ajax({
 					  list_html+='            <div class="col AutoNewline" id="e_status" data-e_id = "' + item.e_status + '">'+ item.e_status_view +'</div>';
 					  list_html+='            <div class="col AutoNewline">'+ item.st_name +'</div>';
 					  list_html+='            <div class="col">';
-					  list_html+='                 <button type="button" id="modify">修改';
+					  list_html+='                 <button type="button" class="btn btn-warning forget-btn btn-lg btn_mem" id="modify">修改';
 					  list_html+='            </div>';
 					  list_html+='            <div class="col">';
-					  list_html+='                 <button type="button" id="toggle_status">更新狀態';
+					  list_html+='                 <button type="button" class="btn btn-warning forget-btn btn-lg btn_mem" id="toggle_status">更新狀態';
 					  list_html+='            </div>';
 					  list_html+='		</div>';
 				  })
@@ -820,7 +828,11 @@ $.ajax({
 		       	} else {
 				  
 				  $("#con_mam").html(list_html);
-				  alert('success');
+				  Swal.fire(
+						  'success!',
+						  '',
+						  'success'
+						)
 		       	}
 		  },
 		  error: function(){
@@ -895,10 +907,10 @@ $.ajax({
 				  list_html+='            <div class="col AutoNewline" id="e_status" data-e_id = "' + item.e_status + '">'+ item.e_status_view +'</div>';
 				  list_html+='            <div class="col AutoNewline">'+ item.st_name +'</div>';
 				  list_html+='            <div class="col AutoNewline">';
-				  list_html+='                 <button type="button" id="modify">修改';
+				  list_html+='                 <button type="button" class="btn btn-warning forget-btn btn-lg btn_mem" id="modify">修改';
 				  list_html+='            </div>';
 				  list_html+='            <div class="col">';
-				  list_html+='                 <button type="button" id="toggle_status">更新狀態';
+				  list_html+='                 <button type="button" class="btn btn-warning forget-btn btn-lg btn_mem" id="toggle_status">更新狀態';
 				  list_html+='            </div>';
 				  list_html+='		</div>';
 			  })
@@ -980,7 +992,7 @@ $.ajax({
 				  success:function(){
 					  Swal.fire(
 							  '更新成功!',
-							  'You clicked the button!',
+							  '',
 							  'success'
 							)
 				  },
@@ -1055,7 +1067,7 @@ $.ajax({
 			  list_html +='                    <input type="hidden" name="m_id" value="'+ item.m_id +'">';
 			  list_html +='                </div>';
 			  list_html +='                <div class="col">';
-			  list_html +='					   <button id="btn_update_mstatus">修改'
+			  list_html +='					   <button class="btn btn-warning forget-btn btn-lg btn_mem" id="btn_update_mstatus">修改'
 			  list_html +='                </div>';
 			  list_html +='            </div>';
 			  });
@@ -1092,6 +1104,11 @@ $.ajax({
 		  beforeSend: function(){},
 		  success: function(data){
 			  update_val = data.m_status;
+			  Swal.fire(
+					  'success!',
+					  '',
+					  'success'
+					)
 		  },
 		  error: function(){
 			  console.log("error")
@@ -1162,7 +1179,7 @@ $.ajax({
 			  list_html +='                    <input type="hidden" name="m_id" value="'+ item.m_id +'">';
 			  list_html +='                </div>';
 			  list_html +='                <div class="col">';
-			  list_html +='					   <button id="btn_update_mstatus">修改'
+			  list_html +='					   <button class="btn btn-warning forget-btn btn-lg btn_mem" id="btn_update_mstatus">修改'
 			  list_html +='                </div>';
 			  list_html +='            </div>';
 			  });

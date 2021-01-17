@@ -217,3 +217,12 @@ ul li{
 #mem_page{
 	font-size: 20px
 }
+
+.btn_mem{
+	font-size: 1rem;
+}
+
+.input_forget{
+	display: initial;
+    width: 50%;
+}
