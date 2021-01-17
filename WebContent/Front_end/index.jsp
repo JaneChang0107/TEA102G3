@@ -61,8 +61,8 @@ marquee {
 	width: 152%;
 	overflow: hidden;
 	right: 290px;
-	height: 767px;
-	/*     top: -72px; */
+	height: 747px;
+	top: -32px; 
 }
 </style>
 
@@ -86,7 +86,7 @@ marquee {
 
 <c:if test="<%=loginornot%>"> 
 <center>
-			<h1><marquee onMouseOver="this.stop()" onMouseOut="this.start()">歡迎光臨</marquee></h1>
+			<h1><marquee onMouseOver="this.stop()" onMouseOut="this.start()">歡迎光臨遊戲堃</marquee></h1>
 </center>
 </c:if>
 	
@@ -138,7 +138,7 @@ marquee {
 		</div>
 
 
-		<H2>
+		<H2 style="margin-top: 20px;">
 			<b style="margin-left: 208px; color: #bd2130";>熱銷商品</b>
 		</H2>
 		<div class="swiper-container">
@@ -165,7 +165,7 @@ marquee {
 
 
 
-		<H2>
+		<H2 style="margin-top: 20px;">
 			<b style="margin-left: 208px; color: #bd2130";>今日推薦</b>
 		</H2>
 		<div class="swiper-container">
