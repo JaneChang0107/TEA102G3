@@ -648,8 +648,8 @@ $.ajax({
 			  list_html+='        <p>狀態:</p>';
 			  list_html+='    </div>';
 			  list_html+='    <div class="col">';
-			  list_html+='        <input type="radio" id="radio_status" name="e_status" value="0">在職';
-			  list_html+='        <input type="radio" name="e_status" value="1">離職	';
+			  list_html+='        <input type="radio" id="radio_status" name="e_status" value="0">停職';
+			  list_html+='        <input type="radio" name="e_status" value="1">在職	';
 			  list_html+='    </div>';
 			  list_html+='</div>';
 			  list_html+='<div class="row">';

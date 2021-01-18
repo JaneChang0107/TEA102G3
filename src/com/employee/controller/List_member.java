@@ -35,10 +35,10 @@ public class List_member extends HttpServlet {
 		
 		MemberService service = new MemberService();
 		List<MemberVO> list =  service.getAll();
-		System.out.println(list);
+//		System.out.println(list);
 		
 		JSONArray jsonAry = new JSONArray(list);
-		System.out.println(jsonAry);
+//		System.out.println(jsonAry);
 		String jsonStr = jsonAry.toString();
 		out.write(jsonStr);
 		out.flush();

@@ -49,7 +49,7 @@ public class Search_m_status extends HttpServlet {
 
 			String listarray  = new JSONArray(list).toString();
 			
-			System.out.println("listarray = " + listarray);
+//			System.out.println("listarray = " + listarray);
 
 
 			out.write(listarray);
