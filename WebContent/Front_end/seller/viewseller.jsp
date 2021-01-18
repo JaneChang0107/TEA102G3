@@ -174,11 +174,11 @@ font-size:25px;
  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ViewSellerServlet" name="form1">
     <div class="date">
        			<li>起始日期：
-				<td><input type="text" name="time1" id="start_date"
+				<td><input type="text" name="time1" id="time1"
 					size="20" placeholder="請選擇日期" /></td></li>
             <br>
 				<li>結束日期：
-				<td><input type="text" name="time2" id="end_date" size="20"
+				<td><input type="text" name="time2" id="time2" size="20"
 					placeholder="請選擇日期" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="hidden" name="action" value="search"> 
 					<input type="submit" class="btn btn-primary" value="送出"></td></li>
@@ -356,7 +356,19 @@ font-size:25px;
 <script>
 	$.datetimepicker.setLocale('zh'); // kr ko ja en
 	$(function() {
-		$('#start_date').datetimepicker({
+		$('#time1').datetimepicker({
+			theme : '', //theme: 'dark',
+			timepicker : true, //timepicker: false,
+			step : 1, //step: 60 (這是timepicker的預設間隔60分鐘)
+			format : 'Y-m-d H:i:s',
+			value : new Date(),
+			//disabledDates:    ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+			//startDate:	        '2017/07/10',  // 起始日
+// 			minDate : '-1970-01-01', // 去除今日(不含)之前
+		     maxDate: '+1970-01-01'  // 去除今日(不含)之後
+		});
+
+		$('#time2').datetimepicker({
 			theme : '', //theme: 'dark',
 			timepicker : true, //timepicker: false,
 			step : 1, //step: 60 (這是timepicker的預設間隔60分鐘)
@@ -365,19 +377,7 @@ font-size:25px;
 			//disabledDates:    ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
 			//startDate:	        '2017/07/10',  // 起始日
 			minDate : '-1970-01-01', // 去除今日(不含)之前
-		//maxDate:           '+1970-01-01'  // 去除今日(不含)之後
-		});
-
-		$('#end_date').datetimepicker({
-			theme : '', //theme: 'dark',
-			timepicker : true, //timepicker: false,
-			step : 1, //step: 60 (這是timepicker的預設間隔60分鐘)
-			format : 'Y-m-d H:i:s',
-			value : new Date(),
-			//disabledDates:    ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-			//startDate:	        '2017/07/10',  // 起始日
-			minDate : '+1970-01-02', // 去除今日(不含)之前
-		//maxDate:           '+1970-01-01'  // 去除今日(不含)之後
+// 		    maxDate:'+1970-01-01'  // 去除今日(不含)之後
 		});
 	});
 </script>

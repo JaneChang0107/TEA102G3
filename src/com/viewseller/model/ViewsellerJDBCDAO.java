@@ -16,12 +16,10 @@ public class ViewsellerJDBCDAO implements ViewsellerDAO_interface {
 	
 
 //	private static final String GET_BY_SEARCH =
-//			"SELECT * FROM VIEWSELLER WHERE M_ID=? AND V_DATE <= TO_TIMESTAMP(?,'yyyy/MM/dd hh24:mi:ss') ";
+//			"SELECT * FROM VIEWSELLER WHERE M_SELLID=? AND V_DATE <= TO_TIMESTAMP(?,'yyyy/MM/dd hh24:mi:ss')";
 	//查詢時間區段的評價
 	public static final String GET_BY_SEARCH = 
-	" SELECT * FROM VIEWSELLER WHERE M_SELLID=? " +  
-	" WHERE V_DATE BETWEEN " + 
-	" TO_TIMESTAMP(?,'yyyy/MM/dd hh24:mi:ss') AND TO_TIMESTAMP(?,'yyyy/MM/dd hh24:mi:ss') ";
+	" SELECT * FROM VIEWSELLER WHERE M_SELLID=? AND V_DATE BETWEEN TO_TIMESTAMP(?,'yyyy/MM/dd hh24:mi:ss') AND TO_TIMESTAMP(?,'yyyy/MM/dd hh24:mi:ss')";
 	private static final String INSERT_STMT = 
 			"INSERT INTO VIEWSELLER  (V_ID,O_ID,M_BUYID,M_SELLID, V_GB,V_COMMENT, V_DATE) VALUES ('V' || lpad(VIEWSELLER_SEQ.nextval,5,'0'), ?, ?, ?, ?, ?,?)";
 	private static final String GETSELL_ALL_STMT = 

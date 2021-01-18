@@ -131,14 +131,14 @@ body {
 			<td><p>
 					狀態:<%=orderlistVO.getO_status()%></p></td>
 
-<%-- 			<c:if test="${orderbelong}"> --%>
+			<c:if test="${orderbelong}">
 				<form METHOD="post" ACTION="<%=request.getContextPath()%>/orderlist">
 					<input type="hidden" name="action" value="change_O_status">
 					<input type="hidden" name="o_status" value="已出貨"> <input
 						type="hidden" name="o_id" value=<%=o_id%>> <input
 						type="submit" id="signin" value="出貨">
 				</form>
-<%-- 			</c:if> --%>
+			</c:if>
 
 			<br> <font style="color: blue"><h1>收件資訊</h1></font>
 			<td><p>
@@ -148,7 +148,7 @@ body {
 			<td><p>
 					收件地址:<%=orderlistVO.getO_address()%></p></td>
 					
-<%-- 			<c:if test="${commentunfinish}"> --%>
+			<c:if test="${commentunfinish}">
 
 				<button type="button" id="${orderlistVO.o_id}"
 					class="btn btn-info btn-lg" data-toggle="modal"
@@ -223,7 +223,7 @@ body {
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal" style="display: none";></button>
 							</div>
-<%-- 			</c:if> --%>	
+			</c:if>	
 					</div>
 			</div>		
 				</div>	

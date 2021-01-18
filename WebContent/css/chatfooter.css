@@ -106,8 +106,8 @@ ul#area li {
     display: inline-block;
     clear: both;
     padding: 10px;
-    border-radius: 51px;
-    margin-bottom: 7px;
+    border-radius: 6px;
+    margin-bottom: -3px;
     font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -169,16 +169,16 @@ div.column{
 }
 .time_me {
 	float: right;
-    transform: translateY(-55%);
+    transform: translateY(-18%);
     font-size: 14px;
-    margin: -1px 2px;
-    height: 9px;
+    margin: -4px 2px;
+    height: 10px;
 }
 .time_friend {
 	float: left;
-    transform: translateY(-55%);
+    transform: translateY(-18%);
     font-size: 14px;
-    margin: -1px 2px;
-    height: 9px;
+     margin: -4px 2px;
+    height: 10px;
 }
 

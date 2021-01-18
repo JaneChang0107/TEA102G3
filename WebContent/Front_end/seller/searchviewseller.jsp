@@ -134,20 +134,17 @@ font-size:25px;
 	<!-- header----------->
   <!-- ---------計算評價數量 start------------- -->
  
-<%-- 		<c:forEach var="viewsellerVO"  items="${list}"> --%>
-<%-- 		     <% ViewsellerVO viewsellerVO =(ViewsellerVO)pageContext.getAttribute("viewsellerVO");%> --%>
-<%-- 			<c:choose > --%>
-<%-- 				<c:when test="<%=viewsellerVO.getV_gb().equals(\"good\")%>"> --%>
-<%-- 				  <%  pageContext.setAttribute("goodNum",++goodNum); --%>
-<%-- 				  %>	 --%>
-<%-- 				</c:when> --%>
-<%-- 		          	<c:otherwise > --%>
-<%-- 					  <% pageContext.setAttribute("badNum",++badNum); --%>
-					 
-<%-- 					  %> --%>
-<%-- 		            </c:otherwise> --%>
-<%-- 			</c:choose> --%>
-<%-- 		</c:forEach>	   --%>
+		<c:forEach var="viewsellerVO"  items="${list}">
+		     <% ViewsellerVO viewsellerVO =(ViewsellerVO)pageContext.getAttribute("viewsellerVO");%>
+			<c:choose >
+				<c:when test="<%=viewsellerVO.getV_gb().equals(\"good\")%>">
+				  <%  pageContext.setAttribute("goodNum",++goodNum); %>	
+				</c:when>
+		          	<c:otherwise >
+					  <% pageContext.setAttribute("badNum",++badNum);%> 
+		            </c:otherwise>
+			</c:choose>
+		</c:forEach>	  
   <!-- ---------計算評價數量 end----------------- -->
   <% sum=badNum+goodNum;
  pageContext.setAttribute("sum",sum);%>
@@ -165,23 +162,9 @@ font-size:25px;
 	<!-- --------------------------------------------------------------------------- -->
    
    <br>
-    <div><h2>查詢評價 &nbsp;&nbsp;<br>
-   <br>
+    <div><h2>查詢評價 &nbsp;&nbsp;
+  
  
-    <div class="date">
-<!--         <tr> -->
-<!-- 				<li><td>起始日期：</td> -->
-<!-- 				<td><input type="text" name="co_start" id="start_date" -->
-<!-- 					size="20" placeholder="請選擇日期" /></td></li> -->
-<!-- 			</tr> -->
-<!-- <br> -->
-<!-- 			<tr> -->
-<!-- 				<li><td>結束日期：</td> -->
-<!-- 				<td><input type="text" name="co_expire" id="end_date" size="20" -->
-<!-- 					placeholder="請選擇日期" /></td></li> -->
-<!-- 			</tr> -->
-
-    </div>
   </div> 
 
 	<table>
@@ -192,19 +175,11 @@ font-size:25px;
 	<td>
 	<div class="showAll">
 	
-<!--Nav bar區域 start-->
-<!-- 	<nav> -->
-<!-- 	  <div class="nav nav-tabs" id="nav-tab" role="tablist" > -->
-<!-- 	    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">全部</a> -->
-<!-- 	    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">好評</a> -->
-<!-- 	    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">負評</a> -->
-<!-- 	  </div> -->
-<!-- 	</nav> -->
-<!--Nav bar區域 end-->
+
 	<!-- 全部start -->
 	<div class="tab-content" id="nav-tabContent">
 	  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
- <%@ include file="page1.file" %> 
+ <%@ include file="page1search.file" %>
 	  	<table id="tablecontent"  class="table table-hover">
 	  	<tr>
 		  <td><h4>訂單</h4></td>
@@ -240,13 +215,12 @@ font-size:25px;
 					 </h4></td>
 		        </tr>
 		 </c:forEach>
-		</table>  
-	<%@ include file="page2.file" %> 
+		</table>
+			<%@ include file="page2search.file" %> 
+		  
 	</div>
 	<!-- 全部  end-->
 
-	
-   
 		</div>
 		
 		</div></td>
@@ -258,23 +232,6 @@ font-size:25px;
 		<jsp:include page="/Front_end/footer.jsp"></jsp:include>
 	</div>
 	<!-- ----footer---- -->
-	
-	<!-- =====Date time picker設定======== -->
-<%-- <% --%>
-// 	java.sql.Timestamp co_start = null;
-// 	java.sql.Timestamp co_expire = null;
-
-// 	try {
-// 		co_start = couponVO.getCo_start();
-// 	} catch (Exception e) {
-// 		co_start = new java.sql.Timestamp(System.currentTimeMillis());
-// 	}
-// 	try {
-// 		co_expire = couponVO.getCo_expire();
-// 	} catch (Exception e) {
-// 		co_expire = new java.sql.Timestamp(System.currentTimeMillis());
-// 	}
-<%-- %> --%>
 
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
@@ -282,42 +239,5 @@ font-size:25px;
 <script
 	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
-<style>
-.xdsoft_datetimepicker .xdsoft_datepicker {
-	width: 300px; /* width:  300px; */
-}
-
-.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-	height: 151px; /* height:  151px; */
-}
-</style>
-<script>
-	$.datetimepicker.setLocale('zh'); // kr ko ja en
-	$(function() {
-		$('#start_date').datetimepicker({
-			theme : '', //theme: 'dark',
-			timepicker : true, //timepicker: false,
-			step : 1, //step: 60 (這是timepicker的預設間隔60分鐘)
-			format : 'Y-m-d H:i:s',
-			value : new Date(),
-			//disabledDates:    ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-			//startDate:	        '2017/07/10',  // 起始日
-			minDate : '-1970-01-01', // 去除今日(不含)之前
-		//maxDate:           '+1970-01-01'  // 去除今日(不含)之後
-		});
-
-		$('#end_date').datetimepicker({
-			theme : '', //theme: 'dark',
-			timepicker : true, //timepicker: false,
-			step : 1, //step: 60 (這是timepicker的預設間隔60分鐘)
-			format : 'Y-m-d H:i:s',
-			value : new Date(),
-			//disabledDates:    ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-			//startDate:	        '2017/07/10',  // 起始日
-			minDate : '+1970-01-02', // 去除今日(不含)之前
-		//maxDate:           '+1970-01-01'  // 去除今日(不含)之後
-		});
-	});
-</script>
 </body>
 </html>
