@@ -11,6 +11,7 @@ public interface ViewsellerDAO_interface {
     public List<ViewsellerVO> getAll();
 	public List<ViewsellerVO> findBysellid(String m_id);
 	public ViewsellerVO getOneViewbyoid(String o_id);
+	public List<ViewsellerVO> searchDate(String m_sellid,String time1,String time2);
 	
 	
 }

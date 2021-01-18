@@ -10,9 +10,12 @@
 <%
     String m_sellid =(String)session.getAttribute("loginId");
     ViewsellerService vSvc = new ViewsellerService();
-    List<ViewsellerVO> list = vSvc.findBysellid(m_sellid);
-    pageContext.setAttribute("list", list);
+    //List<ViewsellerVO> list = vSvc.findBysellid(m_sellid);
+    //pageContext.setAttribute("list", list);
 
+    List<ViewsellerVO> viewList = (List<ViewsellerVO>)request.getAttribute("viewList");
+    pageContext.setAttribute("list", viewList);
+    
     int goodNum = 0 ,badNum = 0;
     int sum = 0;
     
@@ -114,6 +117,8 @@ font-size:20px;
 font-size:25px;
 }
 
+
+ 
 </style>
 </head>
 <body style="background: #F5D2CD; height: 100%;">
@@ -128,33 +133,24 @@ font-size:25px;
 <!-- 	</div> -->
 	<!-- header----------->
   <!-- ---------計算評價數量 start------------- -->
-<%-- <c:if test="${not empty errorMsgs}"> --%>
-<!-- 		<font style="color: red">請修正以下錯誤:</font> -->
-<!-- 		<ul> -->
-<%-- 			<c:forEach var="message" items="${errorMsgs}"> --%>
-<%-- 				<li style="color: red">${message}</li> --%>
-<%-- 			</c:forEach> --%>
-<!-- 		</ul> -->
-<%-- 	</c:if> --%>
-			
-		<c:forEach var="viewsellerVO"  items="${list}">
-		     <% ViewsellerVO viewsellerVO =(ViewsellerVO)pageContext.getAttribute("viewsellerVO");%>
-			<c:choose >
-				<c:when test="<%=viewsellerVO.getV_gb().equals(\"good\")%>">
-				  <%  pageContext.setAttribute("goodNum",++goodNum);
-				  %>	
-				</c:when>
-		          	<c:otherwise >
-					  <% pageContext.setAttribute("badNum",++badNum);
-					 
-					  %>
-		            </c:otherwise>
-			</c:choose>
-		</c:forEach>	  
-  <!-- ---------計算評價數量 end----------------- -->
- <% sum=badNum+goodNum;
- pageContext.setAttribute("sum",sum);%>
  
+<%-- 		<c:forEach var="viewsellerVO"  items="${list}"> --%>
+<%-- 		     <% ViewsellerVO viewsellerVO =(ViewsellerVO)pageContext.getAttribute("viewsellerVO");%> --%>
+<%-- 			<c:choose > --%>
+<%-- 				<c:when test="<%=viewsellerVO.getV_gb().equals(\"good\")%>"> --%>
+<%-- 				  <%  pageContext.setAttribute("goodNum",++goodNum); --%>
+<%-- 				  %>	 --%>
+<%-- 				</c:when> --%>
+<%-- 		          	<c:otherwise > --%>
+<%-- 					  <% pageContext.setAttribute("badNum",++badNum); --%>
+					 
+<%-- 					  %> --%>
+<%-- 		            </c:otherwise> --%>
+<%-- 			</c:choose> --%>
+<%-- 		</c:forEach>	   --%>
+  <!-- ---------計算評價數量 end----------------- -->
+  <% sum=badNum+goodNum;
+ pageContext.setAttribute("sum",sum);%>
  <div class="showAll">
  
  <div><h2>賣場評價 &nbsp;&nbsp;
@@ -169,37 +165,41 @@ font-size:25px;
 	<!-- --------------------------------------------------------------------------- -->
    
    <br>
-<div><h2>查詢評價</h2> &nbsp;&nbsp;
+    <div><h2>查詢評價 &nbsp;&nbsp;<br>
    <br>
- <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ViewSellerServlet" name="form1">
+ 
     <div class="date">
-       			<li>起始日期：
-				<td><input type="text" name="time1" id="start_date"
-					size="20" placeholder="請選擇日期" /></td></li>
-            <br>
-				<li>結束日期：
-				<td><input type="text" name="time2" id="end_date" size="20"
-					placeholder="請選擇日期" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="hidden" name="action" value="search"> 
-					<input type="submit" class="btn btn-primary" value="送出"></td></li>
-    </div>
-</form>
-</div> 
-<br>
-	<table>
+<!--         <tr> -->
+<!-- 				<li><td>起始日期：</td> -->
+<!-- 				<td><input type="text" name="co_start" id="start_date" -->
+<!-- 					size="20" placeholder="請選擇日期" /></td></li> -->
+<!-- 			</tr> -->
+<!-- <br> -->
+<!-- 			<tr> -->
+<!-- 				<li><td>結束日期：</td> -->
+<!-- 				<td><input type="text" name="co_expire" id="end_date" size="20" -->
+<!-- 					placeholder="請選擇日期" /></td></li> -->
+<!-- 			</tr> -->
 
+    </div>
+  </div> 
+
+	<table>
+	<tr>
+
+	</tr>
 	<tr>
 	<td>
-<!-- 	<div class="showAll"> -->
+	<div class="showAll">
 	
 <!--Nav bar區域 start-->
-	<nav>
-	  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-	    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">全部</a>
-	    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">好評</a>
-	    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">負評</a>
-	  </div>
-	</nav>
+<!-- 	<nav> -->
+<!-- 	  <div class="nav nav-tabs" id="nav-tab" role="tablist" > -->
+<!-- 	    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">全部</a> -->
+<!-- 	    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">好評</a> -->
+<!-- 	    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">負評</a> -->
+<!-- 	  </div> -->
+<!-- 	</nav> -->
 <!--Nav bar區域 end-->
 	<!-- 全部start -->
 	<div class="tab-content" id="nav-tabContent">
@@ -213,7 +213,7 @@ font-size:25px;
 		  <td><h4>評論內容</h4></td>
 		  <td><h4>時間</h4></td>
 		 </tr>
-		 <c:forEach varStatus="status" var="viewsellerVO" items="${list}" begin="<%=pageIndex%>"
+		<c:forEach varStatus="status" var="viewsellerVO" items="${list}" begin="<%=pageIndex%>"
 				end="<%=pageIndex+rowsPerPage-1%>">
 		  <% ViewsellerVO viewsellerVO =(ViewsellerVO)pageContext.getAttribute("viewsellerVO");%>
 		      <c:if test="${status.count%2==0}">
@@ -243,92 +243,16 @@ font-size:25px;
 		</table>  
 	<%@ include file="page2.file" %> 
 	</div>
-<!-- 	</div> -->
 	<!-- 全部  end-->
 
-    <!-- 好評  start-->
-    
-	<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-	 	<table id="tablecontent"  class="table table-hover">
-	 	<tr>
-		  <td><h4>訂單</h4></td>
-		  <td><h4>買家</h4></td>
-		  <td><h4>評價</h4></td>
-		  <td><h4>評論內容</h4></td>
-		   <td><h4>時間</h4></td>
-		 </tr>
-		
-		  <c:forEach varStatus="status" var="viewsellerVO" items="${list}"> 
-		  <% ViewsellerVO viewsellerVO =(ViewsellerVO)pageContext.getAttribute("viewsellerVO");%>
-		        <c:choose>
-				  <c:when test="<%=viewsellerVO.getV_gb().equals(\"good\")%>">
-		      <c:if test="${status.count%2==0}">
-		   	    <tr bgcolor="white">
-			  </c:if>
-		
-		      <c:if test="${status.count%2==1}">
-		   		<tr bgcolor="#dee2e6">
-			  </c:if>
-			
-					 <td><h4>${viewsellerVO.o_id} </h4></td>
-		             <td><h4>${memSvc.findOneMem(viewsellerVO.m_buyid).m_name}</h4></td>
-					 <td>
-					 	<c:if test="<%=viewsellerVO.getV_gb().equals(\"good\")%>">
-				  	<i class="far fa-thumbs-up" style="font-size: 3ex;position: relative;left: 10px; top: 1px;padding: 2px"></i>
-				</c:if>
-					 </td>
-					 <td><h4>${viewsellerVO.v_comment}</h4></td>
-					  <td><h4> <fmt:formatDate value="${viewsellerVO.v_date}" pattern="yyyy-MM-dd HH:mm:ss"/></h4></td>
-		        </tr>
-		           </c:when>
-				</c:choose> 
-		 </c:forEach>
-		</table>   
-	</div>
-    <!-- 好評  end-->
 	
-    <!-- 負評  start-->
-		<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-	 	<table id="tablecontent"  class="table table-hover">
-	 	<tr>
-		  <td><h4>訂單</h4></td>
-		  <td><h4>買家</h4></td>
-		  <td><h4>評價</h4></td>
-		  <td><h4>評論內容</h4></td>
-		   <td><h4>時間</h4></td>
-		 </tr>
-		  <c:forEach varStatus="status" var="viewsellerVO" items="${list}"> 
-		  <% ViewsellerVO viewsellerVO =(ViewsellerVO)pageContext.getAttribute("viewsellerVO");%>
-		        <c:choose>
-				  <c:when test="<%=viewsellerVO.getV_gb().equals(\"bad\")%>">
-		      <c:if test="${status.count%3==0}">
-		   	    <tr bgcolor="white">
-			  </c:if>
-		
-		      <c:if test="${status.count%3==1}">
-		   		<tr bgcolor="#dee2e6">
-			  </c:if>
-		
-					 <td><h4>${viewsellerVO.o_id} </h4></td>
-		             <td><h4>${memSvc.findOneMem(viewsellerVO.m_buyid).m_name}</h4></td>
-					 <td>
-					 	<c:if test="<%=viewsellerVO.getV_gb().equals(\"bad\")%>">
-				  	<i class="far fa-thumbs-down" style="font-size: 3ex;position: relative;left: 10px; top: 1px;padding: 2px";></i>
-				</c:if>
-					 </td>
-					 <td><h4>${viewsellerVO.v_comment}</h4></td>
-					  <td><h4> <fmt:formatDate value="${viewsellerVO.v_date}" pattern="yyyy-MM-dd HH:mm:ss"/></h4></td>
-		        </tr>
-		           </c:when>
-				</c:choose> 
-		 </c:forEach>
-		</table>  
-	</div>
+   
 		</div>
 		
 		</div></td>
 	</tr>
 	</table>
+
 	</div>
 	<div class="footer">
 		<jsp:include page="/Front_end/footer.jsp"></jsp:include>
@@ -336,7 +260,21 @@ font-size:25px;
 	<!-- ----footer---- -->
 	
 	<!-- =====Date time picker設定======== -->
+<%-- <% --%>
+// 	java.sql.Timestamp co_start = null;
+// 	java.sql.Timestamp co_expire = null;
 
+// 	try {
+// 		co_start = couponVO.getCo_start();
+// 	} catch (Exception e) {
+// 		co_start = new java.sql.Timestamp(System.currentTimeMillis());
+// 	}
+// 	try {
+// 		co_expire = couponVO.getCo_expire();
+// 	} catch (Exception e) {
+// 		co_expire = new java.sql.Timestamp(System.currentTimeMillis());
+// 	}
+<%-- %> --%>
 
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />

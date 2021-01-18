@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.product.model.*"%>
 <%@ page import="com.viewseller.model.*"%>
@@ -13,14 +12,14 @@
 
 	String m_sellid = pVO.getM_id();
 	ViewsellerService vsc = new ViewsellerService();
-	List<ViewsellerVO> list1 = (List<ViewsellerVO>)vsc.findBysellid(m_sellid);
+	List<ViewsellerVO> list = vsc.findBysellid(m_sellid);
+	request.setAttribute("list", list);
 	request.setAttribute("m_sellid", m_sellid);
 
     int goodNum = 0 ,badNum = 0;
 
     pageContext.setAttribute("goodNum", goodNum);
     pageContext.setAttribute("badNum", badNum);
-    pageContext.setAttribute("list1", list1);
 	
 	
 	
@@ -98,7 +97,7 @@ img.productImg {
   height:200px;
   }
   .all{
-  height:1800px;
+  height:1500px;
   }
   #viewseller{
   height:auto;
@@ -162,11 +161,7 @@ font-color:white;
   clear: both;
 }
 
-
-
 </style>
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 </head>
 <body>
 
@@ -186,7 +181,7 @@ font-color:white;
   
    <div id="left">
    <!-- ---------計算評價數量 start------------- -->
-		<c:forEach var="viewsellerVO"  items="${list1}">
+		<c:forEach var="viewsellerVO"  items="${list}">
 		     <% ViewsellerVO viewsellerVO =(ViewsellerVO)pageContext.getAttribute("viewsellerVO");%>
 			<c:choose >
 				<c:when test="<%=viewsellerVO.getV_gb().equals(\"good\")%>">
@@ -278,13 +273,9 @@ font-color:white;
 		</table>
 		 <br>
 		 <br>
-		 
-<!-- ----old -->
- <%@ include file="page1.file" %> 
 
-<c:forEach var="viewsellerVO" items="${list1}"  begin="<%=pageIndex%>"
-				end="<%=pageIndex+rowsPerPage-1%>">
 
+<c:forEach var="viewsellerVO" items="${list}">
 <div id="viewseller">
 
   <% ViewsellerVO viewsellerVO =(ViewsellerVO)pageContext.getAttribute("viewsellerVO");%>
@@ -308,17 +299,14 @@ font-color:white;
 		</div>
 					
 		<div class="card-title" style="font-size:22px">評論內容: ${viewsellerVO.v_comment}</div>
-		<div class="card-title" style="font-size:10px">  <fmt:formatDate value="${viewsellerVO.v_date}" pattern="yyyy-MM-dd HH:mm:ss"/></div>
+		<div class="card-title" style="font-size:10px"> ${viewsellerVO.v_date}</div>
   
    </div>
  </div>
  </div>
 </c:forEach>
-<%@ include file="page2.file" %> 
 
 
-
-<!--------old--------------->
 	</div>
 
 
@@ -339,9 +327,7 @@ font-color:white;
 
 
 		<jsp:include page="/Front_end/footer.jsp"></jsp:include>
-		
 
 
 </body>
-
 </html>

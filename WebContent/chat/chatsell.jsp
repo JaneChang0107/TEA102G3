@@ -52,22 +52,20 @@ request.setAttribute("memberVO", memberVO);
 
 .chip img {
   float: left;
-  margin: 0 10px 0 -25px;
+  margin:-4px 17px -23px -27px;
+/*   margin: 23px -32px 0px -65px; */
   height: 50px;
   width: 50px;
   border-radius: 50%;
 }
-div.row {
-	width: 281px;
-	height: 639px;
-	display: inline-block;
-	overflow: auto;
-	background-color: #2c3e50;
-	border: 2px solid black;
-	position:relative;
+
+.statusmem{   
+    text-align: center;
+    font-size: 40px;
+    height: 80px;
+    margin: 0px 21px 7px 12px;
+    width: 160px;
 }
-
-
 
 </style>
 </head>
@@ -82,15 +80,11 @@ div.row {
 <!-- 		</div> -->
 
 
-		<div class="all_div_chat livebox">
+<!-- 		<div class="all_div_chat livebox"> -->
 			<div class="row" id="row">
-			<input id="seller" style= "display:none"; value="${memberVO.m_name}">
+			<input id="seller" style= "display:none" value="${memberVO.m_name}">
 			<div class="column" name="friendName" value="${memberVO.m_name}">
-			
-			<div class="chip">
-            <img src="<%=request.getContextPath()%>/images/apple.jpg" alt="Person" width="96" height="96">
-               ${memberVO.m_name}
-            </div>
+               <h2>${memberVO.m_name}</h2>
 	   </div>
 <%-- 				<h2>${memberVO.m_name}的賣場</h2> --%>
 <!-- 				<ul class="memberlist"> -->
@@ -107,8 +101,10 @@ div.row {
 			<div class="chat_box">
 				<div class="statusoutput">
 					<div class="membername" id="membername">
-					
-					${memberVO.m_name}
+					<div class="chip">
+            <img src="${memberVO.m_headpic2}" alt="Person">
+               <div class="statusmem">${memberVO.m_name}</div>
+            </div>
 						<!--點擊好友後顯示名稱位子-->
 					</div>
 					<button class="X_btn" style="display:none";></button>
@@ -126,7 +122,7 @@ div.row {
 
 				</div>
 			</div>
-		</div>
+<!-- 		</div> -->
 	</div>
 
 </body>
@@ -251,15 +247,19 @@ div.row {
 		var seller = document.getElementById("seller").value;
 		console.log(seller);
 		
-// 		row.innerHTML = '';
+ 		row.innerHTML = '';
+ 		if (friends.indexOf(seller) == -1) {
+ 			row.innerHTML += '<div id=' + i + ' class="column" name="friendName" value=' + seller + ' ><h2>'
+			+ seller + '</h2></div>';
+ 		}
+ 				
 		for (var i = 0; i < friends.length; i++) {
 			if(friends[i] === self ) {
-			    continue;
-			   }
-			if (friends[i] != seller) {
+				continue;
+			}
+			
 				row.innerHTML += '<div id=' + i + ' class="column" name="friendName" value=' + friends[i] + ' ><h2>'
 						+ friends[i] + '</h2></div>';
-			}
 		}
 		addListener();
 	}

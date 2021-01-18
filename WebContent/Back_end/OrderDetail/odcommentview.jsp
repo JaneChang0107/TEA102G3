@@ -46,7 +46,7 @@
 
 <style>
 body {
-	background-color: #E3F8F6;
+	
 	font-size: 25px;
 }
 * {
@@ -73,6 +73,8 @@ body {
 }
 .row {
 	font-size: 25px; 
+	width: 1500px;
+
 }
 
 /*  #signin {  */
@@ -96,10 +98,8 @@ body {
 
 </head>
 <body>
-
-	
-
-		<div class="row">
+<body style="background-color: #E3F8F6;">
+		<div class="row" style="margin: auto; margin-top: 100px;">
 			<div class="column1">
 				<!-- 錯誤表列 -->
 				<c:if test="${not empty errorMsgs}">
@@ -117,7 +117,46 @@ body {
 			<td><p>收件人:<%=memSvc.findOneMem(orderlistVO.getM_id()).getM_name()%></p></td>
 			<td><p>收件方式:<%=orderlistVO.getO_transport()%></p></td>
 			<td><p>收件地址:<%=orderlistVO.getO_address()%></p></td>
-		  </div>
+		  
+	 <!-- --------------------顯示評價內容------------------- -->
+	
+<button type="button" id="${orderlistVO.o_id}" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">查看評價</button>
+<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog" style="width:420px"; >
+			<div class="modal-content">
+				<div class="modal-header" style="background-color:#b0deb3";>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h1 class="modal-title">我的留言</h1>
+				</div>
+				<div class="modal-body">
+					<!--       <h1>留下評論：</h1> -->
+<table style="inline-block:auto";>
+	<tr>
+		<div><h2>是否推薦：
+		<c:choose >
+				<c:when test="<%=viewsellerVO.getV_gb().equals(\"good\")%>">
+				  	<i class="far fa-thumbs-up" style="font-size: 2.5ex;position: relative;left: 10px; top: 1px;padding: 2px";></i>
+				</c:when>
+		          	<c:otherwise >
+					  <i class="far fa-thumbs-down" style="font-size: 2.5ex;position: relative;left: 10px; top: 1px;padding: 2px";></i>
+		            </c:otherwise>
+			</c:choose>
+		</h2></div>
+		<div><h2>評論內容：${viewsellerVO.v_comment}</h2></div>
+		<div> <fmt:formatDate value="${viewsellerVO.v_date}" pattern="yyyy-MM-dd HH:mm:ss"/></div>
+	</tr>
+</table>
+				</div>
+				<div class="modal-footer" style="padding:0;">
+					<button type="button" class="btn btn-default" data-dismiss="modal" style="display:none";></button>
+	</div>
+	</div>
+	</div>
+	</div>
+</div>
+
+
+
 
 			<div class="column2">
 				<font style="color:blue"><h1>商品明細</h1></font>
@@ -148,30 +187,7 @@ body {
 			<h2 style="size:50px;text-align:right;">總金額:<%=orderlistVO.getO_total()%></h2>
 
 
-	 <!-- --------------------顯示評價內容------------------- -->
-	
-<button type="button" id="${orderlistVO.o_id}" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">查看評價</button>
-<div id="myModal" class="modal fade" role="dialog">
-		<div class="modal-dialog" style="width:420px"; >
-			<div class="modal-content">
-				<div class="modal-header" style="background-color:#b0deb3";>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h1 class="modal-title">我的留言</h1>
-				</div>
-				<div class="modal-body">
-					<!--       <h1>留下評論：</h1> -->
-<table style="inline-block:auto";>
-	<tr>
-		<div><h2>選擇評價：${viewsellerVO.v_gb}</h2></div>
-		<div><h2>評論內容：${viewsellerVO.v_comment}</h2></div>
-		<div>${viewsellerVO.v_date}</div>
-	</tr>
-</table>
-				</div>
-				<div class="modal-footer" style="padding:0;">
-					<button type="button" class="btn btn-default" data-dismiss="modal" style="display:none";></button>
-	</div>
-	</div>
+
 </body>
 <script src="https://kit.fontawesome.com/a72ac34f47.js"
 	crossorigin="anonymous"></script>

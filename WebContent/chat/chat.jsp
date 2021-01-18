@@ -220,7 +220,9 @@ request.setAttribute("memberVO", memberVO);
 	function refreshFriendList(jsonObj) {
 		var friends = jsonObj.users;
 		var row = document.getElementById("row");
-// 		row.innerHTML = '';
+		row.innerHTML = '';
+        if (friends.indexOf(friends[i]) == -1) {
+
 		for (var i = 0; i < friends.length; i++) {
 			
 			if (friends[i] === self ) {
@@ -234,6 +236,7 @@ request.setAttribute("memberVO", memberVO);
 		
 			row.innerHTML += '<div id=' + i + ' class="column" name="friendName" value=' + friends[i] + ' ><h2>'
 					+ friends[i] + '</h2></div>';
+ 		}
 		}
 		addListener();
 	}

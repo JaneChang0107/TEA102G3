@@ -38,6 +38,43 @@ public class ViewSellerServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
+		
+		if("search".equals(action)) {
+			//這種錯誤儲存方式取出數量不受限制
+			List<String> errorMsgs = new ArrayList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			HttpSession session = req.getSession();
+			//存取前端參數
+			String m_sellid =(String)session.getAttribute("loginId");
+			String time1 = req.getParameter("time1");
+			String time2 = req.getParameter("time2");
+			
+			List<ViewsellerVO> resultList = null ;
+			
+			try {
+				/*************************** 1.接收請求參數 ****************************************/
+			
+				/*************************** 2.開始查詢資料 ****************************************/
+				ViewsellerService viewsellerSvc = new ViewsellerService();
+				resultList = viewsellerSvc.searchDate(m_sellid, time1, time2);
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+				System.out.println("123456");
+				req.setAttribute("viewList", resultList); // 資料庫取出的empVO物件,存入req
+				String url = "/Front_end/seller/searchviewseller.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
+				successView.forward(req, res);
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/Front_end/seller/viewseller.jsp");
+				failureView.forward(req, res);
+			}
+         }
+		
+		
+		
+		
+		
 		if ("getOne_For_Display".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -98,6 +135,7 @@ public class ViewSellerServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		
 		if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();

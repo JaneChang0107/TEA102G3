@@ -3,6 +3,8 @@ package com.viewseller.model;
 import java.sql.*;
 import java.util.*;
 
+import com.sun.xml.internal.bind.annotation.OverrideAnnotationOf;
+
 
 
 public class ViewsellerJDBCDAO implements ViewsellerDAO_interface {
@@ -13,6 +15,13 @@ public class ViewsellerJDBCDAO implements ViewsellerDAO_interface {
 	
 	
 
+//	private static final String GET_BY_SEARCH =
+//			"SELECT * FROM VIEWSELLER WHERE M_ID=? AND V_DATE <= TO_TIMESTAMP(?,'yyyy/MM/dd hh24:mi:ss') ";
+	//查詢時間區段的評價
+	public static final String GET_BY_SEARCH = 
+	" SELECT * FROM VIEWSELLER WHERE M_SELLID=? " +  
+	" WHERE V_DATE BETWEEN " + 
+	" TO_TIMESTAMP(?,'yyyy/MM/dd hh24:mi:ss') AND TO_TIMESTAMP(?,'yyyy/MM/dd hh24:mi:ss') ";
 	private static final String INSERT_STMT = 
 			"INSERT INTO VIEWSELLER  (V_ID,O_ID,M_BUYID,M_SELLID, V_GB,V_COMMENT, V_DATE) VALUES ('V' || lpad(VIEWSELLER_SEQ.nextval,5,'0'), ?, ?, ?, ?, ?,?)";
 	private static final String GETSELL_ALL_STMT = 
@@ -29,6 +38,63 @@ public class ViewsellerJDBCDAO implements ViewsellerDAO_interface {
 			"UPDATE VIEWSELLER set O_id= ? ,M_buyid=? ,M_sellid = ?, V_gb = ?,V_comment = ?, V_date = ? where V_id =?";
 	
 	
+	//拿賣家所有評價
+			@Override
+			public List<ViewsellerVO> searchDate(String m_sellid,String time1,String time2) {
+				List<ViewsellerVO> list = new ArrayList<ViewsellerVO>();
+				ViewsellerVO viewsellerVO = null;
+				Connection con = null;
+				PreparedStatement pstmt = null;
+				
+				ResultSet rs = null;
+				
+				try {
+					Class.forName(driver);
+					con = DriverManager.getConnection(url, userid, passwd);
+					pstmt = con.prepareStatement(GET_BY_SEARCH);
+					
+					pstmt.setString(1,m_sellid);
+					pstmt.setString(2,time1);
+					pstmt.setString(3,time2);
+					rs = pstmt.executeQuery();
+					
+					while (rs.next()) {
+						viewsellerVO = new ViewsellerVO();
+						viewsellerVO.setO_id(rs.getString("o_id"));
+						viewsellerVO.setM_buyid(rs.getString("m_buyid"));
+						viewsellerVO.setV_gb(rs.getString("v_gb"));
+						viewsellerVO.setV_comment(rs.getString("v_comment"));
+						viewsellerVO.setV_date(rs.getTimestamp("v_date"));
+						list.add(viewsellerVO);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					if (rs != null) {
+						try {
+							rs.close();
+						} catch (SQLException se) {
+							se.printStackTrace(System.err);
+						}
+					}
+					if (pstmt != null) {
+						try {
+							pstmt.close();
+						} catch (SQLException se) {
+							se.printStackTrace(System.err);
+						}
+					}
+					if (con != null) {
+						try {
+							con.close();
+						} catch (Exception e) {
+							e.printStackTrace(System.err);
+						}
+					}
+				}
+				
+				return list;
+			}
 		
 		//拿賣家所有評價
 		@Override
