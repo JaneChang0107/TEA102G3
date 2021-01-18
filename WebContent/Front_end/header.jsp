@@ -409,6 +409,7 @@ select#ptype {
 #showToast{
 position: absolute;
 right: 18px;
+z-index: 100;
 }
 
 #buttongroup{

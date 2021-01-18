@@ -63,6 +63,8 @@ marquee {
 	right: 290px;
 	height: 747px;
 	top: -32px; 
+	z-index: 1;
+	
 }
 </style>
 
