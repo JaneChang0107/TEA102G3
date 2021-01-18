@@ -201,7 +201,7 @@ font-color:white;
   
   <div class="sellerinfo" style="width:250px;color:blue; font-size:30px; margin:auto";>
         ${memSvc.findOneMem(m_sellid).m_storename}
-        <div style="font-style: italic; margin:auto;font-size:20px";>
+        <div style="font-style: italic; margin:auto;font-size:20px";><br/>
 		 ${memSvc.findOneMem(m_sellid).m_info}
 	    </div>
   </div>

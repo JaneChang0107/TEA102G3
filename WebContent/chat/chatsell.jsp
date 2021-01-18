@@ -66,6 +66,13 @@ request.setAttribute("memberVO", memberVO);
     margin: 0px 21px 7px 12px;
     width: 160px;
 }
+.friend {
+	background: #eee;
+	float: left;
+	height: 8px;
+	font-size:23px;
+	line-height: 5px;
+}
 
 </style>
 </head>

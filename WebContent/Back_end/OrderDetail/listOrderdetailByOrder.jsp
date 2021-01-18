@@ -234,7 +234,7 @@ body {
 		<div class="column2">
 			<font style="color: blue"><h1>商品明細</h1></font>
 			<table class=detail style="width: 800px; margin-left: -54px";>
-				<tr style="text-align: center";>
+				<tr style="text-align: center">
 					<td>示意圖</td>
 					<td>品名</td>
 					<td>數量</td>

@@ -71,7 +71,13 @@
     .disnone{
     display:none;
     }
-    
+    .col btn_col{
+    font-size: x-large;
+    }
+    btn_cancel{
+    font-size: x-large;
+   
+    }
     
 </style>
 </head>
@@ -114,9 +120,17 @@
 				</div>
 			</div>
 		
-	       <input type="hidden" name="action" value="updateSellstore">
-		   <input type="hidden" name="m_id" value="<%=memberVO.getM_id()%>">
-		   <input class="submit" type="submit" value="上傳修改">
+		 <div class="row forget-row">
+            <div class="col btn_col">
+                <br><button type="button" id="btn_cancel" class="btn btn-primary forget-btn" style="font-size: x-large">取消</button>
+                 &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="submit" class="btn btn-primary forget-btn" style="font-size: x-large">確認</button>
+                 <input type="hidden" name="action" value="updateSellstore">
+				  <input type="hidden" name="m_id" value="<%=memberVO.getM_id()%>">
+            </div>
+        </div>
+		 
+<!-- 		   <input class="submit" type="submit" value="上傳修改"> -->
 		</form>
 
 	<!-- ----footer---- -->
@@ -143,6 +157,17 @@
 $("#imgInp").on("click",function(){
 	$("#preshow").removeClass("disnone");
 })
+
+
+	    var btn_cancel = document.getElementById("btn_cancel");
+	    btn_cancel.addEventListener('click',function(){
+	    	location.href='<%=request.getContextPath()%>/Front_end/seller/udsellstore.jsp'
+	    });
+// 	    if(${errorMsgs_without != null}){
+// 			alert("${errorMsgs_without}");			
+// 		}
+
+
 
 </script>
 </body>

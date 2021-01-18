@@ -139,6 +139,7 @@ ul#area li {
 	float: left;
 	height: 8px;
 	font-size:23px;
+	line-height: 5px;
 }
 
 .me {
@@ -152,6 +153,7 @@ ul#area li {
 
 .friend+.me {
 	border-bottom-right-radius: 6px;
+		border-bottom-right-radius: 6px;
 }
 
 .me+.me {
