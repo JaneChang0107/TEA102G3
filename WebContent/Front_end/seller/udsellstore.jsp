@@ -35,8 +35,14 @@
         width:1000px;
         text-align:center;
 	}
-	.row {
-		margin: 20px 0px;
+	.row-margin {
+	    display: -ms-flexbox;
+      display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+ 		margin: 20px 0px; 
 	}
 	.row-title {
     	width: 220px;
@@ -56,11 +62,14 @@
 	}
 	.submit{
 	    position: center;	
-    	}
+    }
     #stname-input{
     width: 676px;
     line-height: 86px;
     font-size: x-large;
+    }
+    .disnone{
+    display:none;
     }
     
     
@@ -79,26 +88,26 @@
 
 		<h1 class="sells-intro">編輯賣場介紹</h1>
 	    <form class="intro-form" action="<%= request.getContextPath() %>/member/controller/MemberServlet" name="form1" method="POST" enctype="multipart/form-data">
-	       	<div class="row">
+	       	<div class="row-margin">
 				<div  class="row-title">上傳圖片:</div>
 				<div><input type="File" name="m_cover" id="imgInp" style="width:676px" multiple/></div>
 				
 			</div> 
-			 <div class="row">
+			 <div class="row-margin">
 			 	<div  class="row-title">賣場封面:</div>
 				<img class="img" src="${memberVO.m_cover2}">
 			</div>	
-	        <div class="row">
+	        <div class="row-margin disnone" id="preshow">
 				<div class="row-title">圖片預覽:</div>
 				<div><img id="blah" height="200px" width="676px" /></div>
 			</div>	
 		
-			<div class="row">
+			<div class="row-margin">
 				<div class="row-title">賣場名稱:</div>
 				<div><input type="text" name="m_storename" id="stname-input" value='${memberVO == null ? "" : memberVO.getM_storename()}'></div>
 			</div> 
 			 
-			 <div class="row">
+			 <div class="row-margin">
 				<div class="row-title">賣場簡介:</div>
 				<div>		
 					<input type="text" name="m_info" style="width:676px;height:90px;font-size:x-large;font-style: italic" value='${memberVO == null ? "" : memberVO.getM_info()}'> 
@@ -130,6 +139,11 @@
 			}
 		});
 	});
+
+$("#imgInp").on("click",function(){
+	$("#preshow").removeClass("disnone");
+})
+
 </script>
 </body>
 </html>

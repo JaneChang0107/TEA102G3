@@ -108,8 +108,7 @@ body {
 	background-color: #e1fbae;
 }
 </style>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
@@ -117,8 +116,6 @@ body {
 
 </head>
 <body style="background-color: #E3F8F6;">
-
-
 
 	<div class="row" style="margin: auto; margin-top: 100px;">
 		<div class="column1">
@@ -134,14 +131,14 @@ body {
 			<td><p>
 					狀態:<%=orderlistVO.getO_status()%></p></td>
 
-			<c:if test="${orderbelong}">
+<%-- 			<c:if test="${orderbelong}"> --%>
 				<form METHOD="post" ACTION="<%=request.getContextPath()%>/orderlist">
 					<input type="hidden" name="action" value="change_O_status">
 					<input type="hidden" name="o_status" value="已出貨"> <input
 						type="hidden" name="o_id" value=<%=o_id%>> <input
 						type="submit" id="signin" value="出貨">
 				</form>
-			</c:if>
+<%-- 			</c:if> --%>
 
 			<br> <font style="color: blue"><h1>收件資訊</h1></font>
 			<td><p>
@@ -150,41 +147,8 @@ body {
 					收件方式:<%=orderlistVO.getO_transport()%></p></td>
 			<td><p>
 					收件地址:<%=orderlistVO.getO_address()%></p></td>
-		</div>
-
-		<div class="column2">
-			<font style="color: blue"><h1>商品明細</h1></font>
-			<table class=detail style="width: 800px; margin-left: -54px";>
-				<tr style="text-align: center";>
-					<td>示意圖</td>
-					<td>品名</td>
-					<td>數量</td>
-					<td>單價</td>
-					<td>小計</td>
-				</tr>
-
-				<c:forEach var="orderdetailVO" items="${list}">
-					<tr style="text-align: center";>
-						<td><img
-							src="<%=request.getContextPath()%>/ShowPicture?type=ppid&id=${productPicSvc.findProductRandomPicture(orderdetailVO.p_id)}"
-							width="100px" height="100px";></td>
-						<td><p>${productSvc.oneProduct(orderdetailVO.p_id).p_name}</p></td>
-						<td><p>* ${orderdetailVO.od_count}</p></td>
-						<td><p>${productSvc.oneProduct(orderdetailVO.p_id).p_price}</p></td>
-						<td><p>${orderdetailVO.od_count*productSvc.oneProduct(orderdetailVO.p_id).p_price}</p></td>
-					</tr>
-				</c:forEach>
-
-			</table>
-			<hr>
-			<h2 style="text-align:right;">運費:<%=orderlistVO.getO_shippingfee()%></h2>
-<%-- 			<h2>堃幣回饋:<%=Math.round(orderlistVO.getO_total()*0.01) %></h2> --%>
-			<h2 style="text-align:right;">堃幣折抵:<%=orderlistVO.getO_pm()-Math.round(orderlistVO.getO_total()*0.01)%></h2>
-			<hr>
-			<h2 style="size:50px;text-align:right;">總金額:<%=orderlistVO.getO_total()%></h2>
-
-
-			<c:if test="${commentunfinish}">
+					
+<%-- 			<c:if test="${commentunfinish}"> --%>
 
 				<button type="button" id="${orderlistVO.o_id}"
 					class="btn btn-info btn-lg" data-toggle="modal"
@@ -222,12 +186,13 @@ body {
 									<div id="choose_gb">
 										<div>
 											<tr>
-												<h2>給予評價：</h2>
+												<h2>是否推薦：</h2>
 											</tr>
 											<tr>
 												<input type="radio" name="v_gb" value="good"
 													<%=viewsellerVO != null && viewsellerVO.getV_gb().equals("good") ? "checked" : ""%>>
 												<i class="fas fa-thumbs-up"></i>
+											
 												<input type="radio" name="v_gb" value="bad"
 													<%=viewsellerVO != null && viewsellerVO.getV_gb().equals("bad") ? "checked" : ""%>>
 												<i class="fas fa-thumbs-down"></i>
@@ -258,7 +223,47 @@ body {
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal" style="display: none";></button>
 							</div>
-			</c:if>
+<%-- 			</c:if> --%>	
+					</div>
+			</div>		
+				</div>	
+				</div>
+				</div>
+
+
+		<div class="column2">
+			<font style="color: blue"><h1>商品明細</h1></font>
+			<table class=detail style="width: 800px; margin-left: -54px";>
+				<tr style="text-align: center";>
+					<td>示意圖</td>
+					<td>品名</td>
+					<td>數量</td>
+					<td>單價</td>
+					<td>小計</td>
+				</tr>
+
+				<c:forEach var="orderdetailVO" items="${list}">
+					<tr style="text-align: center";>
+						<td><img
+							src="<%=request.getContextPath()%>/ShowPicture?type=ppid&id=${productPicSvc.findProductRandomPicture(orderdetailVO.p_id)}"
+							width="100px" height="100px";></td>
+						<td><p>${productSvc.oneProduct(orderdetailVO.p_id).p_name}</p></td>
+						<td><p>* ${orderdetailVO.od_count}</p></td>
+						<td><p>${productSvc.oneProduct(orderdetailVO.p_id).p_price}</p></td>
+						<td><p>${orderdetailVO.od_count*productSvc.oneProduct(orderdetailVO.p_id).p_price}</p></td>
+					</tr>
+				</c:forEach>
+
+			</table>
+			<hr>
+			<h2 style="text-align:right;">運費:<%=orderlistVO.getO_shippingfee()%></h2>
+<%-- 			<h2>堃幣回饋:<%=Math.round(orderlistVO.getO_total()*0.01) %></h2> --%>
+			<h2 style="text-align:right;">堃幣折抵:<%=orderlistVO.getO_pm()-Math.round(orderlistVO.getO_total()*0.01)%></h2>
+			<hr>
+			<h2 style="size:50px;text-align:right;">總金額:<%=orderlistVO.getO_total()%></h2>
+
+
+
 		</div>
 	</div>
 
@@ -310,5 +315,7 @@ body {
 		//maxDate:           '+1970-01-01'  // 去除今日(不含)之後
 		});
 	});
+	
+
 </script>
 </html>

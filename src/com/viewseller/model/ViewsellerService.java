@@ -48,7 +48,9 @@ public class ViewsellerService {
 		return dao.getOneViewbyoid(o_id);
 	}
 	
-	
+	public List<ViewsellerVO> searchDate(String m_id,String time1, String time2){
+	         return dao.searchDate(m_id,time1,time2);
+	}
 	public List<ViewsellerVO> findBysellid(String m_sellid) {
 		return dao.findBysellid(m_sellid);
 	}

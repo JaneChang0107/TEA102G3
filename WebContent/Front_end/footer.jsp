@@ -20,7 +20,7 @@
 #icon {
 	position: fixed;
 	right: 20px;
-	bottom: 80px;
+	bottom: 70px;
 	height: 75px;
 	z-index: 2;
 }
