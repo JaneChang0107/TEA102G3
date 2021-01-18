@@ -897,8 +897,8 @@ display:inline-block;}
     	           var value3= value1-value2
     	       		$('#o_total3').val(value3);
     	           document.getElementById("deliverymoney").innerHTML = c;	
-    	           document.getElementById("o_kun2").innerHTML=Math.floor(value3*0.01);
-    	    	   document.getElementById("o_kun").innerHTML=Math.floor(value3*0.01);
+    	           document.getElementById("o_kun2").innerHTML=Math.round(value3*0.01);
+    	    	   document.getElementById("o_kun").innerHTML=Math.round(value3*0.01);
     	        });
     	     });  
     });
