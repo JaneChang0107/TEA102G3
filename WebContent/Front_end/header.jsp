@@ -460,7 +460,7 @@ border-color:rgb(23 154 184);
     onclick="window.location='<%=request.getContextPath()%>/ProductServlet?ptype=no&name=&action=findByName';" /> 
     <br>
      <input type="submit" value="我要賣" class="btn btn-primary btn-lg" id="buttongroup"
-    onclick="window.location='<%=request.getContextPath()%>/member/controller/MemberServlet?action=goSellerIndex"  class="btn btn-primary btn-lg"/>   
+    onclick="window.location='<%=request.getContextPath()%>/member/controller/MemberServlet?action=goSellerIndex';"  class="btn btn-primary btn-lg"/>   
 	<br> 
 	<input type="submit" value="關於遊戲堃" class="btn btn-primary btn-lg" id="buttongroup"
     onclick="" />
