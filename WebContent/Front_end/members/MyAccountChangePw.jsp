@@ -77,7 +77,7 @@
     width: 800px;
     height: 900px;
     font-size: 24px;
-    background-color: lightblue;
+    background-color: whitesmoke;
     color: #8d8a8a;
     border-radius: 30px;
     font-weight: bold;
@@ -259,20 +259,7 @@
 
 
 </body>
-<!-- <script type="text/javascript"> -->
-//  $(document).ready(function(){
-//     $("#revise").click(function JSalert(){
-//         if($("#m_password").val()==""){
-//             swal("舊密碼尚未填寫");       
-//         }
-//     })
-//  })
-<!-- </script> -->
-<!-- <!-- <script type="text/javascript"> --> -->
-<!-- // function JSalert(){ -->
-<!-- // 	swal("A Basic JS alert by a plug-in"); -->
-<!-- // } -->
-<!-- <!-- </script> --> -->
+
 
 
 

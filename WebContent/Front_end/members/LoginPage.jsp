@@ -101,7 +101,7 @@
 				<br>
 			</div>
 
-			<div id="forget">忘記密碼?</div>
+<!-- 			<div id="forget">忘記密碼?</div> -->
 
 		</form>
 	</div>
