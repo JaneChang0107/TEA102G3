@@ -37,11 +37,15 @@ public class Forget_password extends HttpServlet {
 		String e_password = service.random();
 		
 		service.updateEmployee_pwd(e_id, e_password);
-		try {
-			EmployeeService.sendEmail(e_password, e_email);
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		}
+		Runnable send = () -> {
+			try {
+				EmployeeService.sendEmail(e_password, e_email);
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
+		};
+		
+		new Thread(send).start();
 		
 		String url = "Back_end/employee/login.jsp";
 		RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp

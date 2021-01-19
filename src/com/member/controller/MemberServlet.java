@@ -731,8 +731,14 @@ public class MemberServlet extends HttpServlet {
 			String url= "/Front_end/members/addSuccess.jsp";
 			RequestDispatcher successView =req.getRequestDispatcher(url);
 			successView.forward(req, res);
-			SendEmail.openMail("1",m_email);
-				
+			Runnable send = () -> {
+				try {
+					SendEmail.openMail("1",m_email);
+				} catch (MessagingException e) {
+					e.printStackTrace();
+				}
+			};
+			new Thread(send).start();
 			
 			
 			// 抓到其他例外
